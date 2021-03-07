@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using BugFablesSaveEditor.BugFablesEnums;
+using BugFablesSaveEditor.BugFablesSave;
 using System.Runtime.InteropServices;
 
 namespace BugFablesSaveEditor.Views
@@ -10,9 +12,9 @@ namespace BugFablesSaveEditor.Views
     public MainWindow()
     {
       InitializeComponent();
-      #if DEBUG
+#if DEBUG
       this.AttachDevTools();
-      #endif
+#endif
 
       if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
       {
