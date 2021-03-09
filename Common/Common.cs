@@ -11,6 +11,8 @@ namespace BugFablesSaveEditor
 {
   public static class Common
   {
+    public const string FieldSeparator = ",";
+    public const string ElementSeparator = "@";
     public static Window MainWindow { get => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow; }
   }
 }

@@ -12,6 +12,6 @@
 
   <DockPanel>
     <views:WindowsTitleBar IsVisible="False" Name="windowsTitleBar" />
-    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Greeting}"/>
+    <Button Command="{Binding CmdTest}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Test"/>
   </DockPanel>
 </Window>

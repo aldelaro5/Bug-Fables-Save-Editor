@@ -6,6 +6,29 @@ using System.Threading.Tasks;
 
 namespace BugFablesSaveEditor.BugFablesEnums
 {
+  public enum SaveFileSection
+  {
+    Header = 0,
+    PartyMembers,
+    Global,
+    MedalShopsPools,
+    MedalShopsAvailables,
+    Quests,
+    Items,
+    Medals,
+    SamiraSongs,
+    StatBonuses,
+    Library,
+    Flags,
+    Flagstrings,
+    Flagvars,
+    RegionalFlags,
+    CrystalBerries,
+    Followers,
+    EnemyEncounters,
+    COUNT
+  }
+
   public enum Medal
   {
     HPPlus = 0,
@@ -87,17 +110,18 @@ namespace BugFablesSaveEditor.BugFablesEnums
     LuckierDay,
     FirstPlating,
     SeedlingAffinity,
-    BerryFinder
+    BerryFinder,
+    COUNT
   }
 
   public enum Quest
   {
     NOQUEST = 0,
     InnReviewRequired,
-    IWantaNewTaste,
+    IWantANewTaste,
     TheaterHelpWanted,
     LostToy,
-    MyBrotherisGone,
+    MyBrotherIsGone,
     RequestingAssistance,
     CableCarBodyguard,
     BountySeedlingKing,
@@ -124,21 +148,21 @@ namespace BugFablesSaveEditor.BugFablesEnums
     TeamSnakemouth,
     ViRequest,
     PowerPlantInvestigation,
-    CardMastersofBugaria,
+    CardMastersOfBugaria,
     BookReturn,
-    IWantaSouvenir,
+    IWantASouvenir,
     HelpersNeededAtOnce,
     StolenItem,
     RareItemWanted,
-    DroppedmyHat,
+    DroppedMyHat,
     ButlerMissingAgain,
     ExplorerCheck,
-    HelpMeGetitBack,
+    HelpMeGetItBack,
     BanditHunt,
-    InSearchofPaint,
+    InSearchOfPaint,
     LunchDelivery,
     ItsTime,
-    WanttoReliveMemories,
+    WantToReliveMemories,
     SeedlingHunt,
     BestFriendInTheFog,
     PartsDelivery,
@@ -152,7 +176,11 @@ namespace BugFablesSaveEditor.BugFablesEnums
     TheyTookHer,
     MyMechaClaw,
     CantSleep,
-    KabbuRequest
+    KabbuRequest,
+    LooseEnds,
+    ANewHope,
+    GettingBored,
+    COUNT
   };
 
   public enum Item
@@ -198,7 +226,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     ChomperSeed,
     BerryJuice,
     NumbnailDart,
-    MapofBugaria,
+    MapOfBugaria,
     MagicIce,
     ShockBerry,
     FrostBomb,
@@ -225,7 +253,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     BakedYam,
     SpicyFries,
     BurlyChips,
-    BagofFlour,
+    BagOfFlour,
     YamBread,
     SpicyCandy,
     BurlyCandy,
@@ -320,10 +348,10 @@ namespace BugFablesSaveEditor.BugFablesEnums
     LabCard,
     PrisonKey,
     HustleBerry,
-    HistoryBook1,
-    HistoryBook2,
-    HistoryBook3,
-    HistoryBook4,
+    HistoryBookBlue,
+    HistoryBookGreen,
+    HistoryBookYellow,
+    HistoryBookRed,
     LeafUmbrella,
     VenomRibbon,
     ShockingRibbon,
@@ -342,13 +370,14 @@ namespace BugFablesSaveEditor.BugFablesEnums
     HoneyPancakes,
     FlameRock,
     CardTrophy,
-    TeamRibbo,
+    TeamRibbon,
+    COUNT
   };
 
   public enum Song
   {
     Outskirts = 0,
-    LetSfightteam,
+    LetsFightTeam,
     SnakemouthDen,
     TheyCallHimSpuder,
     TheEverlastingSapling,
@@ -362,7 +391,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     BugFables,
     BlessedGoldenLands,
     DodgyBusiness,
-    InTheCourtofTheAntQueen,
+    InTheCourtOfTheAntQueen,
     TheSacredHills,
     MothivaSUPERSTAR,
     HarvestFestival,
@@ -373,31 +402,31 @@ namespace BugFablesSaveEditor.BugFablesEnums
     TeamThisOnesStronger,
     LostSands,
     OhnoWASPS,
-    Windambient,
-    Waterambient,
-    WorkthatHoney,
-    KutitUp,
-    MakeitCrisbee,
+    WindAmbient,
+    WaterAmbient,
+    WorkThatHoney,
+    KutItUp,
+    MakeItCrisbee,
     BeeKingdomMilesAbove,
     MechaBeeDestroyerBlastlord,
-    StorethatHoney,
+    StoreThatHoney,
     TheOnesWho,
     BugariaLatestSensation,
     BiancaQueenOfAllBees,
     DrumsofWar,
     MachineHumAmbient,
     TheWatcher,
-    LostCastleofAncientWorship,
+    LostCastleOfAncientWorship,
     SwampWhereDreamsDrown,
     ForsakenLands,
     TeamItsGettingSerious,
     Caves,
     ElizantIIPromise,
-    CruelBeastDevourerofJourneys,
+    CruelBeastDevourerOfJourneys,
     LandsUntamed,
-    SnugasaBuginaSub,
+    SnugAsABugInASub,
     TermiteCapitol,
-    Breathingambient,
+    BreathingAmbient,
     DineMiteBeats,
     WaspKingdom,
     RubberPrison,
@@ -414,13 +443,14 @@ namespace BugFablesSaveEditor.BugFablesEnums
     UNUSEDGiant,
     UNUSEDGiant2,
     TheUsurperGraspingForPower,
-    TrascendedOverpoweringEverlasting,
+    TranscendingOverpoweringEverlasting,
     MiteKnight,
     TeamWeVeDoneIt,
     TheSailorsPier,
     ALongJourneysEnd,
     TheUsurper,
     BustlingAntKingdom,
+    COUNT
   };
 
   public enum Discovery
@@ -437,7 +467,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     TheWasps,
     QueenElizantI,
     TheAnthillPalace,
-    AphidsandCochinaels,
+    AphidsAndCochinaels,
     TheGoldenFestival,
     TheGoddessStatue,
     HonouredEmployee,
@@ -474,7 +504,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     SpyCard,
     PeacockIsland,
     RubberPrison,
-    GiantLair
+    GiantLair,
+    COUNT
   };
 
   public enum Enemy
@@ -589,6 +620,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     FireCape,
     IceKrawler,
     IceWarden,
+    COUNT
   };
 
   public enum Recipe
@@ -662,7 +694,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     TangyCarpaccio,
     CrisbeeDoughnut,
     QueenDinner,
-    BigMistake
+    BigMistake,
+    COUNT
   };
 
   public enum Record
@@ -695,7 +728,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     Reconcillation,
     OurJobsDone,
     ABetterBugaria,
-    Gamer
+    Gamer,
+    COUNT
   };
 
   public enum Area
@@ -724,7 +758,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     StreamMountain,
     ChomperCaves,
     FishingVillage,
-    UpperSnakemouth
+    UpperSnakemouth,
+    COUNT
   };
 
   public enum SpyCard
@@ -818,7 +853,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     WaspBomber,
     WaspDriller,
     Plumpling,
-    Flowerling
+    Flowerling,
+    COUNT
   };
 
   public enum Map
@@ -1068,7 +1104,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     BugariaEndThrone,
     WaspKingdomDrillRoom,
     GiantLairBeforeBoss,
-    GiantLairBeforeBoss2
+    GiantLairBeforeBoss2,
+    COUNT
   };
 
   public enum AnimID
@@ -1477,7 +1514,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     FireWarden,
     TermiteGirl3,
     Cerise,
-    WoodenPPlate2
+    WoodenPPlate2,
+    COUNT
   };
 
   public enum SaveProgressIcon
@@ -1489,7 +1527,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     AncientHalf,
     Elizant,
     FlameBrooch,
-    WaspKingCrown
+    WaspKingCrown,
+    COUNT
   };
 
   public enum MedalShop
@@ -1521,7 +1560,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     Party,
     Vi,
     Kabbu,
-    Leif
+    Leif,
+    COUNT
   };
 
   public enum StatBonusType
@@ -1530,15 +1570,17 @@ namespace BugFablesSaveEditor.BugFablesEnums
     Attack,
     Defense,
     TP,
-    MP
+    MP,
+    COUNT
   };
 
   public enum StatBonusTarget
   {
-    Party = 1,
+    Party = -1,
     Vi,
     Kabbu,
-    Leif
+    Leif,
+    COUNT
   };
 
   public enum LibrarySection
@@ -1556,7 +1598,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     Unavalable = 0,
     AvailableArtis,
     AvailableCaravan,
-    Obtained
+    Obtained,
+    COUNT
   };
 
   public enum IWannaGetBetterProgress
@@ -1565,6 +1608,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     CookedYamBread,
     CookedSucculentPlatter,
     CookedAbomination,
-    WonBattleAbomihoneys
+    WonBattleAbomihoneys,
+    COUNT
   };
 }
