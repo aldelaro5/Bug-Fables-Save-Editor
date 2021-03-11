@@ -21,7 +21,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       public int BerryCount { get; set; }
       public Map CurrentMap { get; set; }
       public Area CurrentArea { get; set; }
-      
+
       private int _mp;
       public int MP { get { return _mp; } set { _mp = value; NotifyPropertyChanged(); } }
 

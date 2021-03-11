@@ -40,22 +40,31 @@
         </StackPanel>
         <TabControl IsEnabled="{Binding SaveInUse}">
           <TabItem Header="Global">
+            <views:GlobalView />
           </TabItem>
           <TabItem Header="Party">
+            <views:PartyView />
           </TabItem>
           <TabItem Header="Stats">
+            <views:StatsView />
           </TabItem>
           <TabItem Header="Quests">
+            <views:QuestsView />
           </TabItem>
           <TabItem Header="Items">
+            <views:ItemsView />
           </TabItem>
           <TabItem Header="Medals">
+            <views:MedalsView />
           </TabItem>
           <TabItem Header="Library">
+            <views:LibraryView />
           </TabItem>
           <TabItem Header="Flags">
+            <views:FlagsView />
           </TabItem>
           <TabItem Header="Songs">
+            <views:SongsView />
           </TabItem>
         </TabControl>
       </DockPanel>

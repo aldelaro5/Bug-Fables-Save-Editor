@@ -110,12 +110,12 @@ namespace BugFablesSaveEditor.Views
           hostWindow.Padding = new Thickness(7, 7, 7, 7);
           maximizeToolTip.Content = "Restore Down";
 
-                // This should be a more universal approach in both cases, but I found it to be less reliable, when for example double-clicking the title bar.
-                /*hostWindow.Padding = new Thickness(
-                        hostWindow.OffScreenMargin.Left,
-                        hostWindow.OffScreenMargin.Top,
-                        hostWindow.OffScreenMargin.Right,
-                        hostWindow.OffScreenMargin.Bottom);*/
+          // This should be a more universal approach in both cases, but I found it to be less reliable, when for example double-clicking the title bar.
+          /*hostWindow.Padding = new Thickness(
+                  hostWindow.OffScreenMargin.Left,
+                  hostWindow.OffScreenMargin.Top,
+                  hostWindow.OffScreenMargin.Right,
+                  hostWindow.OffScreenMargin.Bottom);*/
         }
       });
     }

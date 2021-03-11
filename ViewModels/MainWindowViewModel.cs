@@ -33,9 +33,9 @@ namespace BugFablesSaveEditor.ViewModels
       {
         return Common.saveData;
       }
-      set 
-      { 
-        Common.saveData = value; 
+      set
+      {
+        Common.saveData = value;
         this.RaisePropertyChanged();
         this.RaisePropertyChanged(nameof(SaveInUse));
       }
@@ -75,7 +75,7 @@ namespace BugFablesSaveEditor.ViewModels
           catch (Exception ex)
           {
             SaveData = null;
-            var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file", 
+            var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
                         "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
             await msg.ShowDialog(Common.MainWindow);
           }

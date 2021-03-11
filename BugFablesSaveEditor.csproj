@@ -16,4 +16,9 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="1.0.5" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\GlobalView.axaml.cs">
+      <DependentUpon>GlobalView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     {
       private Song _song;
       public Song Song { get { return _song; } set { _song = value; NotifyPropertyChanged(); } }
-      
+
       private bool _isBought;
       public bool IsBought { get { return _isBought; } set { _isBought = value; NotifyPropertyChanged(); } }
 

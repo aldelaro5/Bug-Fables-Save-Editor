@@ -15,10 +15,10 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     {
       private StatBonusType _type;
       public StatBonusType Type { get { return _type; } set { _type = value; NotifyPropertyChanged(); } }
-      
+
       private int _amount;
       public int Amount { get { return _amount; } set { _amount = value; NotifyPropertyChanged(); } }
-      
+
       private StatBonusTarget _target;
       public StatBonusTarget Target { get { return _target; } set { _target = value; NotifyPropertyChanged(); } }
 

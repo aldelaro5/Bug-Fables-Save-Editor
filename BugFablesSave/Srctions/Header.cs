@@ -14,28 +14,28 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     {
       private float _positionX;
       public float PositionX { get { return _positionX; } set { _positionX = value; NotifyPropertyChanged(); } }
-      
+
       private float _positionY;
       public float PositionY { get { return _positionY; } set { _positionY = value; NotifyPropertyChanged(); } }
-      
+
       private float _positionZ;
       public float PositionZ { get { return _positionZ; } set { _positionZ = value; NotifyPropertyChanged(); } }
 
       private bool _isRuigee;
       public bool IsRuigee { get { return _isRuigee; } set { _isRuigee = value; NotifyPropertyChanged(); } }
-      
+
       private bool _isHardest;
       public bool IsHardest { get { return _isHardest; } set { _isHardest = value; NotifyPropertyChanged(); } }
-      
-      private bool _isFrameone; 
+
+      private bool _isFrameone;
       public bool IsFrameone { get { return _isFrameone; } set { _isFrameone = value; NotifyPropertyChanged(); } }
-      
+
       private bool _isPushrock;
       public bool IsPushrock { get { return _isPushrock; } set { _isPushrock = value; NotifyPropertyChanged(); } }
-      
+
       private bool _isMorefarm;
       public bool IsMorefarm { get { return _isMorefarm; } set { _isMorefarm = value; NotifyPropertyChanged(); } }
-      
+
       private bool _isMystery;
       public bool IsMystery { get { return _isMystery; } set { _isMystery = value; NotifyPropertyChanged(); } }
 

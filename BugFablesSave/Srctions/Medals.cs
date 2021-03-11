@@ -15,7 +15,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     {
       private Medal _medal;
       public Medal Medal { get { return _medal; } set { _medal = value; NotifyPropertyChanged(); } }
-      
+
       private MedalEquipTarget _medalEquipTarget;
       public MedalEquipTarget MedalEquipTarget { get { return _medalEquipTarget; } set { _medalEquipTarget = value; NotifyPropertyChanged(); } }
 

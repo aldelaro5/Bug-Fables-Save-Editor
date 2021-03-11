@@ -14,25 +14,25 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     {
       private int _trueid;
       public int Trueid { get { return _trueid; } set { _trueid = value; NotifyPropertyChanged(); } }
-      
+
       private int _hp;
       public int HP { get { return _hp; } set { _hp = value; NotifyPropertyChanged(); } }
-      
+
       private int _maxHp;
       public int MaxHP { get { return _maxHp; } set { _maxHp = value; NotifyPropertyChanged(); } }
-      
+
       private int _baseHp;
       public int BaseHP { get { return _baseHp; } set { _baseHp = value; NotifyPropertyChanged(); } }
-      
+
       private int _attack;
       public int Attack { get { return _attack; } set { _attack = value; NotifyPropertyChanged(); } }
-      
+
       private int _baseAttack;
       public int BaseAttack { get { return _baseAttack; } set { _baseAttack = value; NotifyPropertyChanged(); } }
-      
+
       private int _defense;
       public int Defense { get { return _defense; } set { _defense = value; NotifyPropertyChanged(); } }
-      
+
       private int _baseDefense;
       public int BaseDefense { get { return _baseDefense; } set { _baseDefense = value; NotifyPropertyChanged(); } }
 
