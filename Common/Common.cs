@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using BugFablesSaveEditor.BugFablesSave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace BugFablesSaveEditor
   {
     public const string FieldSeparator = ",";
     public const string ElementSeparator = "@";
+
+    public static SaveData saveData;
+
     public static Window MainWindow { get => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow; }
   }
 }

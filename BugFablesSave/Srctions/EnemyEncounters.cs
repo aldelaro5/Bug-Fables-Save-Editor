@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,10 +12,19 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
   {
     private const int nbrSlots = 256;
 
-    public class EnemyEncounterInfo
+    public class EnemyEncounterInfo : INotifyPropertyChanged
     {
-      public int NbrSeen { get; set; }
-      public int NbrDefeated { get; set; }
+      private int _nbrSeen;
+      public int NbrSeen { get { return _nbrSeen; } set { _nbrSeen = value; NotifyPropertyChanged(); } }
+
+      private int _nbrDefeated;
+      public int NbrDefeated { get { return _nbrDefeated; } set { _nbrDefeated = value; NotifyPropertyChanged(); } }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
     }
 
     public object Data { get; set; } = new EnemyEncounterInfo[nbrSlots];

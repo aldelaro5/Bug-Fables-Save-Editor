@@ -1,7 +1,9 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +14,19 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     private const int songNotBought = -1;
     private const int songBought = 1;
 
-    public class AvailableSong
+    public class AvailableSong : INotifyPropertyChanged
     {
-      public Song Song { get; set; }
-      public bool IsBought { get; set; }
+      private Song _song;
+      public Song Song { get { return _song; } set { _song = value; NotifyPropertyChanged(); } }
+      
+      private bool _isBought;
+      public bool IsBought { get { return _isBought; } set { _isBought = value; NotifyPropertyChanged(); } }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
     }
 
     public object Data { get; set; } = new List<AvailableSong>();

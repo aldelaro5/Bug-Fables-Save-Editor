@@ -1,21 +1,38 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
-  public class Medals : IBugFablesSaveSection
+  public class Medals : IBugFablesSaveSection, INotifyPropertyChanged
   {
-    public class MedalEquip
+    public class MedalEquip : INotifyPropertyChanged
     {
-      public Medal Medal { get; set; }
-      public MedalEquipTarget MedalEquipTarget { get; set; }
+      private Medal _medal;
+      public Medal Medal { get { return _medal; } set { _medal = value; NotifyPropertyChanged(); } }
+      
+      private MedalEquipTarget _medalEquipTarget;
+      public MedalEquipTarget MedalEquipTarget { get { return _medalEquipTarget; } set { _medalEquipTarget = value; NotifyPropertyChanged(); } }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
     }
 
     public object Data { get; set; } = new List<MedalEquip>();
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     public void ParseFromSaveLine(string saveLine)
     {

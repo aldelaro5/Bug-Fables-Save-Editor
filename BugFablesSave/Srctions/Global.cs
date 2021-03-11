@@ -1,7 +1,9 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +11,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Global : IBugFablesSaveSection
   {
-    public class GlobalInfo
+    public class GlobalInfo : INotifyPropertyChanged
     {
       public int Rank { get; set; }
       public int Exp { get; set; }
@@ -19,7 +21,16 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       public int BerryCount { get; set; }
       public Map CurrentMap { get; set; }
       public Area CurrentArea { get; set; }
-      public int MP { get; set; }
+      
+      private int _mp;
+      public int MP { get { return _mp; } set { _mp = value; NotifyPropertyChanged(); } }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
+
       public int MaxMP { get; set; }
       public int NbrMaxItemsInventory { get; set; }
       public int NbrMaxItemsStorage { get; set; }

@@ -20,7 +20,7 @@
                  VerticalAlignment="Center"
                  Margin="8,0,3,0"
                  Name="WindowIcon"></Image>
-          <TextBlock Text="AvalonApplication1"
+          <TextBlock Text="Bug Fables Save Editor"
                      FontSize="12"                    
                      VerticalAlignment="Center"
                      IsHitTestVisible="False"

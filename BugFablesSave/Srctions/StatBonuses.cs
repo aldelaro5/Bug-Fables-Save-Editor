@@ -1,7 +1,9 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +11,22 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class StatBonuses : IBugFablesSaveSection
   {
-    public class StatBonusInfo
+    public class StatBonusInfo : INotifyPropertyChanged
     {
-      public StatBonusType Type { get; set; }
-      public int Amount { get; set; }
-      public StatBonusTarget Target { get; set; }
+      private StatBonusType _type;
+      public StatBonusType Type { get { return _type; } set { _type = value; NotifyPropertyChanged(); } }
+      
+      private int _amount;
+      public int Amount { get { return _amount; } set { _amount = value; NotifyPropertyChanged(); } }
+      
+      private StatBonusTarget _target;
+      public StatBonusTarget Target { get { return _target; } set { _target = value; NotifyPropertyChanged(); } }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
     }
 
     public object Data { get; set; } = new List<StatBonusInfo>();
