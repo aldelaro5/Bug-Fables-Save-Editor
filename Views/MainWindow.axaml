@@ -38,7 +38,7 @@
             <Button Command="{Binding CmdSaveFile}" Content="Save file..." Margin="5"/>
           </StackPanel>
         </StackPanel>
-        <TabControl IsEnabled="{Binding SaveInUse}">
+        <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">
           <TabItem Header="Global">
             <views:GlobalView />
           </TabItem>
