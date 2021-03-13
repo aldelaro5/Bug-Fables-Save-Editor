@@ -1901,8 +1901,11 @@ namespace BugFablesSaveEditor.BugFablesEnums
 
   public enum AnimID
   {
+    [Description("Vi")]
     Bee = 0,
+    [Description("Kabbu")]
     Beetle,
+    [Description("Leif")]
     Moth,
     LadybugKnight,
     ButterflyGirl,
@@ -1931,6 +1934,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     AntKid,
     MothKid,
     Pillbug,
+    [Description("Eetl")]
     OGBeetle,
     GenericAnt,
     AntSoldier1,
@@ -2306,6 +2310,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     TermiteGirl3,
     Cerise,
     WoodenPPlate2,
+    RecupeGuy,
+    Roy,
     COUNT
   };
 
