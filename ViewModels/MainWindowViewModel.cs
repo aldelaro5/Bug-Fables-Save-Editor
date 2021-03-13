@@ -27,31 +27,27 @@ namespace BugFablesSaveEditor.ViewModels
       set { _currentFilePath = value; this.RaisePropertyChanged(); }
     }
 
+    private SaveData _saveData;
     public SaveData SaveData
     {
-      get
-      {
-        return Common.saveData;
-      }
-      set
-      {
-        Common.saveData = value;
-        this.RaisePropertyChanged();
-        this.RaisePropertyChanged(nameof(SaveInUse));
-      }
+      get { return _saveData; }
+      set { _saveData = value; this.RaisePropertyChanged(); }
     }
 
+    private bool _saveInUse = false;
     public bool SaveInUse
     {
-      get { return SaveData != null; }
+      get { return _saveInUse; }
+      set { _saveInUse = value; this.RaisePropertyChanged(); }
     }
 
     public ReactiveCommand<Unit, Unit> CmdNewFile
     {
       get => ReactiveCommand.Create(() =>
       {
-        SaveData = new SaveData();
+        //SaveData = new SaveData();
         CurrentFilePath = "New file being created, save it to store it";
+        SaveInUse = true;
       });
     }
 
@@ -66,15 +62,16 @@ namespace BugFablesSaveEditor.ViewModels
         string[] filePaths = await dlg.ShowAsync(Common.MainWindow);
         if (filePaths.Length == 1)
         {
-          SaveData = new SaveData();
           try
           {
             SaveData.LoadFromFile(filePaths.First());
             CurrentFilePath = filePaths.First();
+            SaveInUse = true;
+            //MessageBus.Current.SendMessage(new Global());
           }
           catch (Exception ex)
           {
-            SaveData = null;
+            //SaveData = new SaveData();
             var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
                         "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
             await msg.ShowDialog(Common.MainWindow);
@@ -117,8 +114,97 @@ namespace BugFablesSaveEditor.ViewModels
       });
     }
 
+    private GlobalViewModel _globalViewModel;
+    public GlobalViewModel GlobalViewModel
+    {
+      get { return _globalViewModel; }
+      set { _globalViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private PartyViewModel _partyViewModel;
+    public PartyViewModel PartyViewModel
+    {
+      get { return _partyViewModel; }
+      set { _partyViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private StatsViewModel _statsViewModel;
+    public StatsViewModel StatsViewModel
+    {
+      get { return _statsViewModel; }
+      set { _statsViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private QuestsViewModel _questsViewModel;
+    public QuestsViewModel QuestsViewModel
+    {
+      get { return _questsViewModel; }
+      set { _questsViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private ItemsViewModel _itemsViewModel;
+    public ItemsViewModel ItemsViewModel
+    {
+      get { return _itemsViewModel; }
+      set { _itemsViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private MedalsViewModel _medalsViewModel;
+    public MedalsViewModel MedalsViewModel
+    {
+      get { return _medalsViewModel; }
+      set { _medalsViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private LibraryViewModel _libraryViewModel;
+    public LibraryViewModel LibraryViewModel
+    {
+      get { return _libraryViewModel; }
+      set { _libraryViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private FlagsViewModel _flagsViewModel;
+    public FlagsViewModel FlagsViewModel
+    {
+      get { return _flagsViewModel; }
+      set { _flagsViewModel = value; this.RaisePropertyChanged(); }
+    }
+
+    private SongsViewModel _songsViewModel;
+    public SongsViewModel SongsViewModel
+    {
+      get { return _songsViewModel; }
+      set { _songsViewModel = value; this.RaisePropertyChanged(); }
+    }
+
     public MainWindowViewModel()
     {
+      SaveData saveData = new SaveData();
+      SaveData = saveData;
+
+      GlobalViewModel = new GlobalViewModel(saveData);
+      PartyViewModel = new PartyViewModel(saveData);
+      StatsViewModel = new StatsViewModel(saveData);
+      QuestsViewModel = new QuestsViewModel(saveData);
+      ItemsViewModel = new ItemsViewModel(saveData);
+      MedalsViewModel = new MedalsViewModel(saveData);
+      LibraryViewModel = new LibraryViewModel(saveData);
+      FlagsViewModel = new FlagsViewModel(saveData);
+      SongsViewModel = new SongsViewModel(saveData);
+    }
+
+    public MainWindowViewModel(SaveData saveData)
+    {
+      SaveData = saveData;
+      GlobalViewModel = new GlobalViewModel(saveData);
+      PartyViewModel = new PartyViewModel(saveData);
+      StatsViewModel = new StatsViewModel(saveData);
+      QuestsViewModel = new QuestsViewModel(saveData);
+      ItemsViewModel = new ItemsViewModel(saveData);
+      MedalsViewModel = new MedalsViewModel(saveData);
+      LibraryViewModel = new LibraryViewModel(saveData);
+      FlagsViewModel = new FlagsViewModel(saveData);
+      SongsViewModel = new SongsViewModel(saveData);
     }
   }
 }

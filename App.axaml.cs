@@ -8,6 +8,7 @@ using ReactiveUI;
 using System.Reactive;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
+using BugFablesSaveEditor.BugFablesSave;
 
 namespace BugFablesSaveEditor
 {
@@ -24,7 +25,7 @@ namespace BugFablesSaveEditor
       {
         desktop.MainWindow = new MainWindow
         {
-          DataContext = new MainWindowViewModel(),
+          DataContext = new MainWindowViewModel(new SaveData()),
         };
       }
 

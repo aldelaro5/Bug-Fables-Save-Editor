@@ -13,31 +13,51 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
   {
     public class GlobalInfo : INotifyPropertyChanged
     {
-      public int Rank { get; set; }
-      public int Exp { get; set; }
-      public int NeededExp { get; set; }
-      public int MaxTP { get; set; }
-      public int TP { get; set; }
-      public int BerryCount { get; set; }
-      public Map CurrentMap { get; set; }
-      public Area CurrentArea { get; set; }
+      private int _rank;
+      public int Rank { get { return _rank; } set { _rank = value; NotifyPropertyChanged(); } }
+      private int _exp;
+      public int Exp { get { return _exp; } set { _exp = value; NotifyPropertyChanged(); } }
+      private int _neededExp;
+      public int NeededExp { get { return _neededExp; } set { _neededExp = value; NotifyPropertyChanged(); } }
+
+      private int _maxTp;
+      public int MaxTP { get { return _maxTp; } set { _maxTp = value; NotifyPropertyChanged(); } }
+      private int _tp;
+      public int TP { get { return _tp; } set { _tp = value; NotifyPropertyChanged(); } }
+
+      private int _berryCount;
+      public int BerryCount { get { return _berryCount; } set { _berryCount = value; NotifyPropertyChanged(); } }
+
+      private Map _currentMap;
+      public Map CurrentMap { get { return _currentMap; } set { _currentMap = value; NotifyPropertyChanged(); } }
+      private Area _currentArea;
+      public Area CurrentArea { get { return _currentArea; } set { _currentArea = value; NotifyPropertyChanged(); } }
 
       private int _mp;
       public int MP { get { return _mp; } set { _mp = value; NotifyPropertyChanged(); } }
+      private int _maxMp;
+      public int MaxMP { get { return _maxMp; } set { _maxMp = value; NotifyPropertyChanged(); } }
+
+      private int _nbrMaxItemsInventory;
+      public int NbrMaxItemsInventory { get { return _nbrMaxItemsInventory; } set { _nbrMaxItemsInventory = value; NotifyPropertyChanged(); } }
+      private int _nbrMaxItemsStoreage;
+      public int NbrMaxItemsStorage { get { return _nbrMaxItemsStoreage; } set { _nbrMaxItemsStoreage = value; NotifyPropertyChanged(); } }
+
+      private int _playTimeHours;
+      public int PlayTimeHours { get { return _playTimeHours; } set { _playTimeHours = value; NotifyPropertyChanged(); } }
+      private int _playTimeMinutes;
+      public int PlayTimeMinutes { get { return _playTimeMinutes; } set { _playTimeMinutes = value; NotifyPropertyChanged(); } }
+      private int _playTimeSeconds;
+      public int PlayTimeSeconds { get { return _playTimeSeconds; } set { _playTimeSeconds = value; NotifyPropertyChanged(); } }
+
+      private SaveProgressIcon _saveProgressIcon;
+      public SaveProgressIcon SaveProgressIcons { get { return _saveProgressIcon; } set { _saveProgressIcon = value; NotifyPropertyChanged(); } }
 
       public event PropertyChangedEventHandler? PropertyChanged;
       private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
       {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
-
-      public int MaxMP { get; set; }
-      public int NbrMaxItemsInventory { get; set; }
-      public int NbrMaxItemsStorage { get; set; }
-      public int PlayTimeHours { get; set; }
-      public int PlayTimeMinutes { get; set; }
-      public int PlayTimeSeconds { get; set; }
-      public SaveProgressIcon SaveProgressIcons { get; set; }
     }
 
     public object Data { get; set; } = new GlobalInfo();

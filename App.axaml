@@ -2,12 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App">
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
+  <Application.DataTemplates>
+    <local:ViewLocator/>
+  </Application.DataTemplates>
 
-    <Application.Styles>
-        <FluentTheme Mode="Dark"/>
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
-    </Application.Styles>
+  <Application.Resources>
+    <local:EnumValueConverter x:Key="EnumConverter"/>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme Mode="Dark"/>
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
+  </Application.Styles>
 </Application>

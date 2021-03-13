@@ -6,7 +6,7 @@
         xmlns:views="using:BugFablesSaveEditor.Views"
         mc:Ignorable="d" d:DesignWidth="860" d:DesignHeight="450"
         x:Class="BugFablesSaveEditor.Views.MainWindow"
-        Title="Bug Fables Save Edtiro"
+        Title="Bug Fables Save Editor"
         Icon="/Assets/avalonia-logo.ico">
   <Design.DataContext>
     <vm:MainWindowViewModel/>
@@ -39,33 +39,15 @@
           </StackPanel>
         </StackPanel>
         <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">
-          <TabItem Header="Global">
-            <views:GlobalView />
-          </TabItem>
-          <TabItem Header="Party">
-            <views:PartyView />
-          </TabItem>
-          <TabItem Header="Stats">
-            <views:StatsView />
-          </TabItem>
-          <TabItem Header="Quests">
-            <views:QuestsView />
-          </TabItem>
-          <TabItem Header="Items">
-            <views:ItemsView />
-          </TabItem>
-          <TabItem Header="Medals">
-            <views:MedalsView />
-          </TabItem>
-          <TabItem Header="Library">
-            <views:LibraryView />
-          </TabItem>
-          <TabItem Header="Flags">
-            <views:FlagsView />
-          </TabItem>
-          <TabItem Header="Songs">
-            <views:SongsView />
-          </TabItem>
+          <TabItem Header="Global" Content="{Binding GlobalViewModel}" />
+          <TabItem Header="Party" Content="{Binding PartyViewModel}" />
+          <TabItem Header="Stats" Content="{Binding StatsViewModel}" />
+          <TabItem Header="Quests" Content="{Binding QuestsViewModel}" />
+          <TabItem Header="Items" Content="{Binding ItemsViewModel}" />
+          <TabItem Header="Medals" Content="{Binding MedalsViewModel}" />
+          <TabItem Header="Library" Content="{Binding LibraryViewModel}" />
+          <TabItem Header="Flags" Content="{Binding FlagsViewModel}" />
+          <TabItem Header="Songs" Content="{Binding SongsViewModel}" />
         </TabControl>
       </DockPanel>
     </DockPanel>
