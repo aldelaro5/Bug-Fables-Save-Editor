@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BugFablesSaveEditor.BugFablesEnums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
   {
     public class PartyMemberInfo : INotifyPropertyChanged
     {
-      private int _trueid;
-      public int Trueid { get { return _trueid; } set { _trueid = value; NotifyPropertyChanged(); } }
+      private AnimID _trueid;
+      public AnimID Trueid { get { return _trueid; } set { _trueid = value; NotifyPropertyChanged(); } }
 
       private int _hp;
       public int HP { get { return _hp; } set { _hp = value; NotifyPropertyChanged(); } }
@@ -65,7 +66,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           throw new Exception(nameof(PartyMembers) + "[" + i + "]." +
                               nameof(PartyMemberInfo.Trueid) + " failed to parse");
         }
-        newMemberInfo.Trueid = intOut;
+        if (intOut < 0 || intOut >= (int)AnimID.COUNT)
+        {
+          throw new Exception(nameof(PartyMembers) + "[" + i + "]." +
+                              nameof(PartyMemberInfo.Trueid) + ": " + intOut + " is not a valid Anim ID");
+        }
+        newMemberInfo.Trueid = (AnimID)intOut;
         if (!int.TryParse(data[1], out intOut))
         {
           throw new Exception(nameof(PartyMembers) + "[" + i + "]." +
@@ -120,7 +126,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       for (int i = 0; i < partyMemberInfos.Count; i++)
       {
-        sb.Append(partyMemberInfos[i].Trueid);
+        sb.Append((int)partyMemberInfos[i].Trueid);
         sb.Append(Common.FieldSeparator);
         sb.Append(partyMemberInfos[i].HP);
         sb.Append(Common.FieldSeparator);
