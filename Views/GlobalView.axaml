@@ -10,76 +10,110 @@
     <vm:DesignSaveDataViewModel/>
   </Design.DataContext>
 
-  <StackPanel Margin="10" HorizontalAlignment="Center" Orientation="Vertical">
-    <Label Content="Position"/>
+  <StackPanel Margin="10" VerticalAlignment="Top" Orientation="Vertical">
     <StackPanel Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="X"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Header].Data.PositionX}" ParsingNumberStyle="Float" Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
-      <Label VerticalContentAlignment="Center" Content="Y"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Header].Data.PositionY}" ParsingNumberStyle="Float" Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
-      <Label VerticalContentAlignment="Center" Content="Z"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Header].Data.PositionZ}" ParsingNumberStyle="Float" Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
-      <Button Command="{Binding Test}" Margin="50,0,0,0" Content="TEST" />
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Current area"/>
-      <ComboBox SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentArea, 
+      <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+          <StackPanel Orientation="Vertical">
+            <Label Content="Position in map"/>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="X"/>
+              <NumericUpDown Value="{Binding SaveData.Sections[Header].Data.PositionX}" ParsingNumberStyle="Float" Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Y"/>
+              <NumericUpDown Value="{Binding SaveData.Sections[Header].Data.PositionY}" ParsingNumberStyle="Float" Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Z"/>
+              <NumericUpDown Value="{Binding SaveData.Sections[Header].Data.PositionZ}" ParsingNumberStyle="Float" Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+            <Label Content="Location"/>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Current area"/>
+              <ComboBox SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentArea, 
                                Converter={StaticResource EnumConverter}, 
                                ConverterParameter={x:Type bf:Area}}" Items="{Binding Areas}" Width="200" />
-      <Label VerticalContentAlignment="Center" Content="Current map"/>
-      <ComboBox SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentMap, 
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Current map"/>
+              <ComboBox SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentMap, 
                                Converter={StaticResource EnumConverter}, 
                                ConverterParameter={x:Type bf:Map}}" Items="{Binding Maps}" Width="200" />
-    </StackPanel>
-    <Label Content="File select code icons" Margin="0,5,0,0"/>
-    <StackPanel Orientation="Horizontal">
-      <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsRuigee}" Content="RUIGEE"/>
-      <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsHardest}" Content="HARDEST"/>
-      <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsFrameone}" Content="FRAMEONE"/>
-    </StackPanel>
-    <StackPanel Orientation="Horizontal">
-      <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsMorefarm}" Content="MOREFARM"/>
-      <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsMystery}" Content="MYSTERY?"/>
-      <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsPushrock}" Content="PUSHROCK"/>
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Filename on file select"/>
-      <TextBox Text="{Binding SaveData.Sections[Header].Data.Filename}" Width="200" />
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Rank"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.Rank}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
-      <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Exploration points"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.Exp}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
-      <Label VerticalContentAlignment="Center" Content="/"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NeededExp}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Berry count"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.BerryCount}" Increment="1" ParsingNumberStyle="Integer"/>
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Max amount of items in inventory"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NbrMaxItemsInventory}" Increment="1" ParsingNumberStyle="Integer"/>
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Max amount of items in storage"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NbrMaxItemsStorage}" Increment="1" ParsingNumberStyle="Integer"/>
-    </StackPanel>
-    <Label VerticalContentAlignment="Center" Content="Play time"/>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Hours"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.PlayTimeHours}" Increment="1" ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-      <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content="Minutes"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.PlayTimeMinutes}" Increment="1" ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-      <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content="Seconds"/>
-      <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.PlayTimeSeconds}" Increment="1" ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-    </StackPanel>
-    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-      <Label VerticalContentAlignment="Center" Content="Rightmost progress icon"/>
-      <ComboBox SelectedIndex="{Binding SaveData.Sections[Global].Data.SaveProgressIcons, 
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <StackPanel Orientation="Vertical">
+            <Label Margin="0,10,0,0" VerticalContentAlignment="Center" Content="Play time"/>
+            <StackPanel Orientation="Horizontal">
+              <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.PlayTimeHours}" Increment="1" ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+              <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content=":"/>
+              <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.PlayTimeMinutes}" Increment="1" ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+              <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content=":"/>
+              <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.PlayTimeSeconds}" Increment="1" ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Margin="40,10,10,10" Orientation="Vertical">
+            <Label VerticalContentAlignment="Center" Content="Berry count"/>
+            <NumericUpDown Width="150" Value="{Binding SaveData.Sections[Global].Data.BerryCount}" Increment="1" ParsingNumberStyle="Integer"/>
+          </StackPanel>
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+        <Label Content="Information on the file select screen"/>
+        <StackPanel Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Filename"/>
+          <TextBox Text="{Binding SaveData.Sections[Header].Data.Filename}" Width="270"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <Label Content="Code icons" Margin="0,5,0,0"/>
+          <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+              <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsRuigee}" Content="RUIGEE"/>
+              <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsHardest}" Content="HARDEST"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsFrameone}" Content="FRAMEONE"/>
+              <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsMorefarm}" Content="MOREFARM"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsMystery}" Content="MYSTERY?"/>
+              <CheckBox IsChecked="{Binding SaveData.Sections[Header].Data.IsPushrock}" Content="PUSHROCK"/>
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Rightmost progress icon"/>
+          <ComboBox SelectedIndex="{Binding SaveData.Sections[Global].Data.SaveProgressIcons, 
                                Converter={StaticResource EnumConverter}, 
-                               ConverterParameter={x:Type bf:SaveProgressIcon}}" Items="{Binding SaveProgressIcons}" Width="200" />
+                               ConverterParameter={x:Type bf:SaveProgressIcon}}" Items="{Binding SaveProgressIcons}" Width="170" />
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Vertical">
+        <Label Content="Rank progress"/>
+        <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Rank"/>
+          <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.Rank}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
+          <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Exploration points"/>
+          <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.Exp}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
+          <Label VerticalContentAlignment="Center" Content="/"/>
+          <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NeededExp}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+        <Label Content="Max amount of items"/>
+        <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Inventory"/>
+          <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NbrMaxItemsInventory}" Increment="1" ParsingNumberStyle="Integer"/>
+          <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Storage"/>
+          <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NbrMaxItemsStorage}" Increment="1" ParsingNumberStyle="Integer"/>
+        </StackPanel>
+      </StackPanel>
     </StackPanel>
   </StackPanel>
 </UserControl>

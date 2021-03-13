@@ -17,52 +17,37 @@ namespace BugFablesSaveEditor.ViewModels
     private SaveData _saveData;
     public SaveData SaveData
     {
-      get
-      {
-        return _saveData;
-      }
-      set
-      {
-        _saveData = value;
-        this.RaisePropertyChanged();
-      }
+      get { return _saveData; }
+      set { _saveData = value; this.RaisePropertyChanged(); }
     }
 
+    private string[] _areas;
     public string[] Areas
     {
-      get
-      {
-        return Common.GetEnumDescriptions<Area>();
-      }
+      get { return _areas; }
+      set { _areas = value; this.RaisePropertyChanged(); }
     }
 
+    private string[] _maps;
     public string[] Maps
     {
-      get
-      {
-        return Common.GetEnumDescriptions<Map>();
-      }
+      get { return _maps; }
+      set { _maps = value; this.RaisePropertyChanged(); }
     }
 
+    private string[] _saveProgressIcons;
     public string[] SaveProgressIcons
     {
-      get
-      {
-        return Common.GetEnumDescriptions<SaveProgressIcon>();
-      }
+      get { return _saveProgressIcons; }
+      set { _saveProgressIcons = value; this.RaisePropertyChanged(); }
     }
 
     public GlobalViewModel(SaveData saveData)
     {
       SaveData = saveData;
-    }
-
-    public ReactiveCommand<Unit, Unit> CmdNewFile
-    {
-      get => ReactiveCommand.Create(() =>
-      {
-        int vgfr = 0;
-      });
+      Areas = Common.GetEnumDescriptions<Area>();
+      Maps = Common.GetEnumDescriptions<Map>();
+      SaveProgressIcons = Common.GetEnumDescriptions<SaveProgressIcon>();
     }
   }
 }
