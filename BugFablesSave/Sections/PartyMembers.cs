@@ -1,6 +1,7 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -44,13 +45,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       }
     }
 
-    public object Data { get; set; } = new List<PartyMemberInfo>();
+    public object Data { get; set; } = new ObservableCollection<PartyMemberInfo>();
 
     public void ParseFromSaveLine(string saveLine)
     {
       string[] membersInfo = saveLine.Split(Common.ElementSeparator);
 
-      List<PartyMemberInfo> headerInfo = (List<PartyMemberInfo>)Data;
+      ObservableCollection<PartyMemberInfo> headerInfo = (ObservableCollection<PartyMemberInfo>)Data;
 
       for (int i = 0; i < membersInfo.Length; i++)
       {
@@ -121,7 +122,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public string EncodeToSaveLine()
     {
-      List<PartyMemberInfo> partyMemberInfos = (List<PartyMemberInfo>)Data;
+      ObservableCollection<PartyMemberInfo> partyMemberInfos = (ObservableCollection<PartyMemberInfo>)Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < partyMemberInfos.Count; i++)

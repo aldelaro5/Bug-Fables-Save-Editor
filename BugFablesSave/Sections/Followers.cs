@@ -1,6 +1,7 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Followers : IBugFablesSaveSection
   {
-    public object Data { get; set; } = new List<AnimID>();
+    public object Data { get; set; } = new ObservableCollection<AnimID>();
 
     public string EncodeToSaveLine()
     {
-      List<AnimID> followers = (List<AnimID>)Data;
+      ObservableCollection<AnimID> followers = (ObservableCollection<AnimID>)Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < followers.Count; i++)
@@ -30,7 +31,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     public void ParseFromSaveLine(string saveLine)
     {
       string[] followersData = saveLine.Split(Common.FieldSeparator);
-      List<AnimID> followers = (List<AnimID>)Data;
+      ObservableCollection<AnimID> followers = (ObservableCollection<AnimID>)Data;
 
       for (int i = 0; i < followersData.Length; i++)
       {
