@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using BugFablesSaveEditor.BugFablesEnums;
+﻿using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave.Sections;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave

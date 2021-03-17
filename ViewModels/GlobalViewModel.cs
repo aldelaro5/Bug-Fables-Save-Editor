@@ -1,14 +1,6 @@
-﻿using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesSaveEditor.BugFablesEnums;
+using BugFablesSaveEditor.BugFablesSave;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia;
-using BugFablesSaveEditor.BugFablesEnums;
-using BugFablesSaveEditor.BugFablesSave.Sections;
 
 namespace BugFablesSaveEditor.ViewModels
 {

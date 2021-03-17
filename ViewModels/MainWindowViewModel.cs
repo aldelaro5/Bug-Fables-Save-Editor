@@ -1,20 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Reactive;
-using System.Text;
-using ReactiveUI;
+using Avalonia.Controls;
+using BugFablesSaveEditor.BugFablesSave;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
-using Avalonia.Controls;
-using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Collections.ObjectModel;
+using ReactiveUI;
+using System;
 using System.Linq;
-using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.BugFablesSave.Sections;
-using BugFablesSaveEditor.BugFablesEnums;
+using System.Reactive;
 
 namespace BugFablesSaveEditor.ViewModels
 {

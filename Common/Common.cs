@@ -1,14 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using ReactiveUI;
-using BugFablesSaveEditor.BugFablesSave;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Linq;
 
 namespace BugFablesSaveEditor
 {

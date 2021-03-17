@@ -1,14 +1,14 @@
-using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
-using ReactiveUI;
-using System.Reactive;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
-using BugFablesSaveEditor.BugFablesSave;
+using ReactiveUI;
+using System;
+using System.Reactive;
 
 namespace BugFablesSaveEditor
 {

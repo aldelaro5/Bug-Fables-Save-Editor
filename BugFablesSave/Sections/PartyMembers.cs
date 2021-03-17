@@ -1,12 +1,9 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
@@ -14,11 +11,19 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
   {
     public class PartyMemberInfo : INotifyPropertyChanged
     {
-      private int _index;
-      public int Index { get { return _index; } set { _index = value; NotifyPropertyChanged(); } }
-
       private AnimID _trueid;
-      public AnimID Trueid { get { return _trueid; } set { _trueid = value; NotifyPropertyChanged(); } }
+      public AnimID Trueid
+      {
+        get { return _trueid; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _trueid = value;
+          NotifyPropertyChanged();
+        }
+      }
 
       private int _hp;
       public int HP { get { return _hp; } set { _hp = value; NotifyPropertyChanged(); } }

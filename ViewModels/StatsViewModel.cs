@@ -2,16 +2,11 @@
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Global;
 using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
 using static BugFablesSaveEditor.BugFablesSave.Sections.StatBonuses;
@@ -170,9 +165,9 @@ namespace BugFablesSaveEditor.ViewModels
       SaveData = new SaveData();
       Initialise();
       SetupViews();
-      savePartyMembers.Add(new PartyMemberInfo { Index = 0, Trueid = AnimID.Bee });
-      savePartyMembers.Add(new PartyMemberInfo { Index = 1, Trueid = AnimID.Beetle });
-      savePartyMembers.Add(new PartyMemberInfo { Index = 2, Trueid = AnimID.Moth });
+      savePartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
+      savePartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
+      savePartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
 
       saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party });
       saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party });

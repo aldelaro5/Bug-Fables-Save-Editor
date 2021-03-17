@@ -22,23 +22,24 @@
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddPartyMember}"/>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding OrderedPartyMembers}">
+        <DataGrid AutoGenerateColumns="False" Items="{Binding PartyMembers}"
+                  HeadersVisibility="None">
           <DataGrid.Columns>
             <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <ComboBox SelectedIndex="{Binding AnimID, 
+                  <ComboBox SelectedIndex="{Binding Trueid, 
                                             Converter={StaticResource EnumConverter}, 
                                             ConverterParameter={x:Type bf:AnimID}}"
                             Items="{Binding $parent[DataGrid].DataContext.AnimIDs}" Width="200"/>
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <Button Margin="5,0,0,0" IsEnabled="True" Content="Remove" Command="{Binding $parent[DataGrid].DataContext.RemovePartyMember}"
-                          CommandParameter="{Binding Index}" HorizontalContentAlignment="Center" Width="75" />
+                  <Button Margin="5,0,0,0" IsEnabled="True" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemovePartyMember}"
+                          CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -57,7 +58,8 @@
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddFollower}"/>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding OrderedFollowers}">
+        <DataGrid AutoGenerateColumns="False" Items="{Binding Followers}"
+                  HeadersVisibility="None">
           <DataGrid.Columns>
             <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
@@ -69,11 +71,11 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <Button IsEnabled="True" Content="Remove" Command="{Binding $parent[DataGrid].DataContext.RemoveFollower}"
-                          CommandParameter="{Binding Index}" Width="75" Margin="5,0,0,0" HorizontalContentAlignment="Center" />
+                  <Button IsEnabled="True" Content="-" Command="{Binding $parent[DataGrid].DataContext.RemoveFollower}"
+                          CommandParameter="{Binding }" Width="25" Background="DarkRed" Margin="5,0,0,0" HorizontalContentAlignment="Center" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
