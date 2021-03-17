@@ -1,6 +1,7 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,21 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     public class StatBonusInfo : INotifyPropertyChanged
     {
       private StatBonusType _type;
-      public StatBonusType Type { get { return _type; } set { _type = value; NotifyPropertyChanged(); } }
+      public StatBonusType Type
+      {
+        get
+        {
+          return _type;
+        }
+        set
+        {
+          // This workaround an issue where changing tabs sets this to -1???
+          if ((int)value == -1)
+            return;
+          _type = value;
+          NotifyPropertyChanged();
+        }
+      }
 
       private int _amount;
       public int Amount { get { return _amount; } set { _amount = value; NotifyPropertyChanged(); } }
@@ -29,12 +44,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       }
     }
 
-    public object Data { get; set; } = new List<StatBonusInfo>();
+    public object Data { get; set; } = new ObservableCollection<StatBonusInfo>();
 
     public void ParseFromSaveLine(string saveLine)
     {
       string[] statsBonusesData = saveLine.Split(Common.ElementSeparator);
-      List<StatBonusInfo> statBonuses = (List<StatBonusInfo>)Data;
+      ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
 
       for (int i = 0; i < statsBonusesData.Length; i++)
       {
@@ -66,7 +81,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public string EncodeToSaveLine()
     {
-      List<StatBonusInfo> statBonuses = (List<StatBonusInfo>)Data;
+      ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < statBonuses.Count; i++)

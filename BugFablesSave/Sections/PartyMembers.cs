@@ -14,6 +14,9 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
   {
     public class PartyMemberInfo : INotifyPropertyChanged
     {
+      private int _index;
+      public int Index { get { return _index; } set { _index = value; NotifyPropertyChanged(); } }
+
       private AnimID _trueid;
       public AnimID Trueid { get { return _trueid; } set { _trueid = value; NotifyPropertyChanged(); } }
 

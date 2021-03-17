@@ -8,10 +8,15 @@
 
   <Application.Resources>
     <local:EnumValueConverter x:Key="EnumConverter"/>
+    <local:EnumToDescriptionConverter x:Key="EnumDescriptionConverter"/>
   </Application.Resources>
 
   <Application.Styles>
     <FluentTheme Mode="Dark"/>
-    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    <Style Selector="DataGridColumnHeader TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap">
+      </Setter>
+    </Style>
   </Application.Styles>
 </Application>

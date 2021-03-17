@@ -4,6 +4,8 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
+using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace BugFablesSaveEditor.Views
@@ -26,6 +28,9 @@ namespace BugFablesSaveEditor.Views
         var windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
         windowsTitleBar.IsVisible = true;
       }
+
+      Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+      Trace.AutoFlush = true;
     }
 
     private void InitializeComponent()

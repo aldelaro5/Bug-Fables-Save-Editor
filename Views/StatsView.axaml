@@ -1,8 +1,153 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.StatsView">
-  Welcome to Avalonia!
+  <Design.DataContext>
+    <vm:StatsViewModel />
+  </Design.DataContext>
+
+  <DockPanel>
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+      <DockPanel>
+        <Label DockPanel.Dock="Top" Content="Party base stats"/>
+        <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+          <StackPanel Orientation="Horizontal">
+            <Label VerticalContentAlignment="Center" Content="TP" Width="30"/>
+            <NumericUpDown ShowButtonSpinner="False" Value="{Binding SaveData.Sections[Global].Data.TP}"/>
+            <Label VerticalContentAlignment="Center" Content="/"/>
+            <NumericUpDown ShowButtonSpinner="False" Value="{Binding SaveData.Sections[Global].Data.MaxTP}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label VerticalContentAlignment="Center" Content="MP" Width="30"/>
+            <NumericUpDown ShowButtonSpinner="False" Value="{Binding SaveData.Sections[Global].Data.MP}"/>
+            <Label VerticalContentAlignment="Center" Content="/"/>
+            <NumericUpDown ShowButtonSpinner="False" Value="{Binding SaveData.Sections[Global].Data.MaxMP}"/>
+          </StackPanel>
+        </StackPanel>
+      </DockPanel>
+      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+        <Label DockPanel.Dock="Top" Content="Party members stats"/>
+        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"  Height="130"
+                  Items="{Binding PartyMembers}" SelectionMode="Single" SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Trueid,
+                                          Converter={StaticResource EnumDescriptionConverter}, 
+                                          ConverterParameter={x:Type bf:AnimID}}" IsReadOnly="True" Header="Member" />
+            <DataGridTextColumn Header="Base HP" Binding="{Binding BaseHP}" Width="75"/>
+            <DataGridTextColumn Header="HP" Binding="{Binding HP}"/>
+            <DataGridTextColumn Header="Max HP" Binding="{Binding MaxHP}" Width="70"/>
+            <DataGridTextColumn Header="Base Attack" Binding="{Binding BaseAttack}" Width="85"/>
+            <DataGridTextColumn Header="Attack" Binding="{Binding Attack}"/>
+            <DataGridTextColumn Header="Base Defense" Binding="{Binding BaseDefense}" Width="95"/>
+            <DataGridTextColumn Header="Defense" Binding="{Binding Defense}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+      </StackPanel>
+    </StackPanel>
+    <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
+      <DockPanel>
+        <Label DockPanel.Dock="Top" Content="Party stats bonuses"/>
+        <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
+          <ComboBox SelectedIndex="{Binding StatBonusTypePartySelectedForAdd, 
+                               Converter={StaticResource EnumConverter}, 
+                               ConverterParameter={x:Type bf:StatBonusType}}"
+                    Items="{Binding StatBonusTypes}" Width="100"/>
+          <NumericUpDown ShowButtonSpinner="False" Value="{Binding StatsBonusAmountPartySelectedForAdd}"/>
+          <Button Command="{Binding AddPartyStatBonus}" VerticalContentAlignment="Center" Content="Add"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" SelectionMode="Single"
+                  Items="{Binding ViewPartyStatsBonuses}" >
+          <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Type" Width="100">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <ComboBox SelectedIndex="{Binding Type, 
+                                            Converter={StaticResource EnumConverter}, 
+                                            ConverterParameter={x:Type bf:StatBonusType}}"
+                            Items="{Binding $parent[DataGrid].DataContext.StatBonusTypes}"
+                            Width="100"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"/>
+            <DataGridTemplateColumn Width="35">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <Button Margin="5,0,0,0" Content="-" Command="{Binding $parent[DataGrid].DataContext.CmdRemovePartyStatBonus}"
+                          CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" Background="DarkRed" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
+      <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
+        <Label Content="Total party bonuses"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max TP"/>
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="{Binding TotalPartyMaxTPBonus}"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max MP"/>
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="{Binding TotalPartyMaxMPBonus}"/>
+        </StackPanel>
+      </StackPanel>
+      <DockPanel Margin="10,0,0,0">
+        <Label DockPanel.Dock="Top" Content="Selected member stats bonuses"/>
+        <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
+          <ComboBox SelectedIndex="{Binding StatBonusTypeMemberSelectedForAdd, 
+                               Converter={StaticResource EnumConverter}, 
+                               ConverterParameter={x:Type bf:StatBonusType}}"
+                    Items="{Binding StatBonusTypes}" Width="100" />
+          <NumericUpDown ShowButtonSpinner="False" Value="{Binding StatsBonusAmountMemberSelectedForAdd}"/>
+          <Button Command="{Binding AddMemberStatBonus}" VerticalContentAlignment="Center" Content="Add"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"
+                  Items="{Binding ViewMemberStatsBonuses}">
+          <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Type" Width="100">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <ComboBox SelectedIndex="{Binding Type, 
+                                            Converter={StaticResource EnumConverter}, 
+                                            ConverterParameter={x:Type bf:StatBonusType}}"
+                            Items="{Binding $parent[DataGrid].DataContext.StatBonusTypes}"
+                            Width="100"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
+            <DataGridTemplateColumn Width="35">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <Button Margin="5,0,0,0" IsEnabled="True" Content="-" Command="{Binding $parent[DataGrid].DataContext.CmdRemoveMemberStatBonus}"
+                          CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" Background="DarkRed" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </DockPanel>
+      <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
+        <Label Content="Total selected member bonuses"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max HP"/>
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="{Binding TotalMemberMaxHPBonus}"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Attack"/>
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="{Binding TotalMemberAttackBonus}"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Defense"/>
+          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="{Binding TotalMemberDefenseBonus}"/>
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
+  </DockPanel>
 </UserControl>

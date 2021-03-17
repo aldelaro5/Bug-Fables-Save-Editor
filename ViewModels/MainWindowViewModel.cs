@@ -67,7 +67,6 @@ namespace BugFablesSaveEditor.ViewModels
             SaveData.LoadFromFile(filePaths.First());
             CurrentFilePath = filePaths.First();
             SaveInUse = true;
-            //MessageBus.Current.SendMessage(new Global());
           }
           catch (Exception ex)
           {
