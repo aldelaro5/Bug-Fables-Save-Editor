@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -42,6 +43,27 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     }
 
     public object Data { get; set; } = new ObservableCollection<StatBonusInfo>();
+
+    /// <summary>
+    /// Get the total amount of bonuses for a given type and target, -1 for party only
+    /// </summary>
+    /// <param name="target">The target as int</param>
+    /// <param name="type">The bonus type</param>
+    /// <returns>The sum of the total bonus amount</returns>
+    public int GetTotalBonusesForTargetAndType(int target, StatBonusType type)
+    {
+      ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
+      if (target == -1)
+      {
+        return statBonuses.Where(x => x.Target == StatBonusTarget.Party && x.Type == type)
+                          .Sum(x => x.Amount);
+      }
+      else
+      {
+        return statBonuses.Where(x => ((int)x.Target == target || x.Target == StatBonusTarget.Party) && x.Type == type)
+                          .Sum(x => x.Amount);
+      }
+    }
 
     public void ParseFromSaveLine(string saveLine)
     {

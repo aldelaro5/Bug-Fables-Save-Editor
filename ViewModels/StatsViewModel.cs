@@ -1,6 +1,7 @@
 ﻿using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
+using BugFablesSaveEditor.BugFablesSave.Sections;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -15,6 +16,8 @@ namespace BugFablesSaveEditor.ViewModels
 {
   public class StatsViewModel : ViewModelBase
   {
+    private StatBonuses statBonusesSection;
+
     private SaveData _saveData;
     public SaveData SaveData
     {
@@ -71,10 +74,6 @@ namespace BugFablesSaveEditor.ViewModels
     public ReactiveCommand<StatBonusInfo, Unit> CmdRemovePartyStatBonus { get; set; }
     public ReactiveCommand<StatBonusInfo, Unit> CmdRemoveMemberStatBonus { get; set; }
 
-    private GlobalInfo saveGlobalInfo;
-    private ObservableCollection<PartyMemberInfo> savePartyMembers;
-    private ObservableCollection<StatBonusInfo> saveStatsBonuses;
-
     private ObservableCollection<PartyMemberInfo> _partyMembers = new ObservableCollection<PartyMemberInfo>();
     public ObservableCollection<PartyMemberInfo> PartyMembers
     {
@@ -107,8 +106,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       get
       {
-        return saveStatsBonuses.Where(x => x.Target == StatBonusTarget.Party && x.Type == StatBonusType.TP)
-                               .Sum(x => x.Amount);
+        return statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.TP);
       }
     }
 
@@ -116,8 +114,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       get
       {
-        return saveStatsBonuses.Where(x => x.Target == StatBonusTarget.Party && x.Type == StatBonusType.MP)
-                               .Sum(x => x.Amount);
+        return statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.MP);
       }
     }
 
@@ -128,9 +125,7 @@ namespace BugFablesSaveEditor.ViewModels
         if (SelectedMember == null)
           return 0;
 
-        return saveStatsBonuses.Where(x => ((int)x.Target == (int)SelectedMember.Trueid || x.Target == StatBonusTarget.Party) &&
-                                            x.Type == StatBonusType.HP)
-                               .Sum(x => x.Amount);
+        return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.HP);
       }
     }
 
@@ -141,9 +136,7 @@ namespace BugFablesSaveEditor.ViewModels
         if (SelectedMember == null)
           return 0;
 
-        return saveStatsBonuses.Where(x => ((int)x.Target == (int)SelectedMember.Trueid || x.Target == StatBonusTarget.Party) &&
-                                            x.Type == StatBonusType.Attack)
-                               .Sum(x => x.Amount);
+        return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Attack);
       }
     }
 
@@ -154,9 +147,7 @@ namespace BugFablesSaveEditor.ViewModels
         if (SelectedMember == null)
           return 0;
 
-        return saveStatsBonuses.Where(x => ((int)x.Target == (int)SelectedMember.Trueid || x.Target == StatBonusTarget.Party) &&
-                                            x.Type == StatBonusType.Defense)
-                               .Sum(x => x.Amount);
+        return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Defense);
       }
     }
 
@@ -165,16 +156,16 @@ namespace BugFablesSaveEditor.ViewModels
       SaveData = new SaveData();
       Initialise();
       SetupViews();
-      savePartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
-      savePartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
-      savePartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
+      PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
+      PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
+      PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
 
-      saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party });
-      saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party });
-      saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 5, Target = StatBonusTarget.Party });
-      saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.HP, Amount = 3, Target = StatBonusTarget.Vi });
-      saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Attack, Amount = 4, Target = StatBonusTarget.Kabbu });
-      saveStatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Defense, Amount = 5, Target = StatBonusTarget.Leif });
+      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party });
+      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party });
+      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 5, Target = StatBonusTarget.Party });
+      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.HP, Amount = 3, Target = StatBonusTarget.Vi });
+      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Attack, Amount = 4, Target = StatBonusTarget.Kabbu });
+      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Defense, Amount = 5, Target = StatBonusTarget.Leif });
     }
 
     public StatsViewModel(SaveData saveData)
@@ -187,11 +178,10 @@ namespace BugFablesSaveEditor.ViewModels
     private void Initialise()
     {
       StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
-      saveGlobalInfo = (GlobalInfo)SaveData.Sections[SaveFileSection.Global].Data;
-      savePartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
-      saveStatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
-      savePartyMembers.CollectionChanged += OnSaveDataPartyChanged;
-      saveStatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
+      statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
+      PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+      StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
+      StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
 
       CmdRemovePartyStatBonus = ReactiveCommand.Create<StatBonusInfo>(x =>
       {
@@ -204,24 +194,14 @@ namespace BugFablesSaveEditor.ViewModels
         ViewMemberStatsBonuses.Remove(x);
         RefreshViews();
       }, this.WhenAnyValue(x => x.ViewMemberStatsBonuses.IsEditingItem, x => !x));
-
-      saveGlobalInfo.PropertyChanged += GlobalInfoChanged;
     }
 
     private void SetupViews()
     {
-      ViewPartyStatsBonuses = new DataGridCollectionView(saveStatsBonuses);
+      ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
       ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
-      ViewMemberStatsBonuses = new DataGridCollectionView(saveStatsBonuses);
+      ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
       ViewMemberStatsBonuses.Filter = FilterMemberStatsBonuses;
-    }
-
-    private void GlobalInfoChanged(object? sender, PropertyChangedEventArgs e)
-    {
-      if (e.PropertyName == nameof(saveGlobalInfo.MaxTP))
-        this.RaisePropertyChanged(nameof(TotalPartyMaxTPBonus));
-      if (e.PropertyName == nameof(saveGlobalInfo.MaxMP))
-        this.RaisePropertyChanged(nameof(TotalPartyMaxMPBonus));
     }
 
     private bool FilterMemberStatsBonuses(object arg)
@@ -244,7 +224,7 @@ namespace BugFablesSaveEditor.ViewModels
       statBonusInfo.Target = StatBonusTarget.Party;
       statBonusInfo.Type = StatBonusTypePartySelectedForAdd;
       statBonusInfo.Amount = StatsBonusAmountPartySelectedForAdd;
-      saveStatsBonuses.Add(statBonusInfo);
+      StatsBonuses.Add(statBonusInfo);
       RefreshViews();
     }
 
@@ -254,7 +234,7 @@ namespace BugFablesSaveEditor.ViewModels
       statBonusInfo.Target = (StatBonusTarget)(int)SelectedMember.Trueid;
       statBonusInfo.Type = StatBonusTypeMemberSelectedForAdd;
       statBonusInfo.Amount = StatsBonusAmountMemberSelectedForAdd;
-      saveStatsBonuses.Add(statBonusInfo);
+      StatsBonuses.Add(statBonusInfo);
       RefreshViews();
     }
 
@@ -264,67 +244,8 @@ namespace BugFablesSaveEditor.ViewModels
       ViewPartyStatsBonuses.Refresh();
     }
 
-    private void OnSaveDataPartyChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-      if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null)
-      {
-        foreach (PartyMemberInfo item in e.NewItems)
-          PartyMembers.Add(item);
-      }
-      else if (e.Action == NotifyCollectionChangedAction.Remove && e.OldItems != null)
-      {
-        foreach (PartyMemberInfo item in e.OldItems)
-          PartyMembers.Remove(item);
-      }
-      else if (e.Action == NotifyCollectionChangedAction.Reset)
-      {
-        PartyMembers.Clear();
-
-        if (e.NewItems != null)
-        {
-          foreach (PartyMemberInfo item in e.NewItems)
-            PartyMembers.Add(item);
-        }
-      }
-
-      RefreshViews();
-    }
-
     private void OnSaveStatsBonusesChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-      if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null)
-      {
-        foreach (StatBonusInfo item in e.NewItems)
-        {
-          item.PropertyChanged += StatBonusChanged;
-          StatsBonuses.Add(item);
-        }
-      }
-      else if (e.Action == NotifyCollectionChangedAction.Remove && e.OldItems != null)
-      {
-        foreach (StatBonusInfo item in e.OldItems)
-        {
-          item.PropertyChanged -= StatBonusChanged;
-          StatsBonuses.Remove(item);
-        }
-      }
-      else if (e.Action == NotifyCollectionChangedAction.Reset)
-      {
-        foreach (var item in StatsBonuses)
-          item.PropertyChanged -= StatBonusChanged;
-
-        StatsBonuses.Clear();
-
-        if (e.NewItems != null)
-        {
-          foreach (StatBonusInfo item in e.NewItems)
-          {
-            item.PropertyChanged += StatBonusChanged;
-            StatsBonuses.Add(item);
-          }
-        }
-      }
-
       RaiseTotalBonusesChanged();
       RefreshViews();
     }
