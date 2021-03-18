@@ -12,7 +12,6 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     public class Follower : INotifyPropertyChanged
     {
       private AnimID _animId;
-
       public AnimID AnimID
       {
         get { return _animId; }
