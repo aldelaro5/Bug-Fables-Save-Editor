@@ -250,7 +250,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     LostBooks,
     [Description("Butler Missing!")]
     ButlerMissing,
-    [Description("Team Snakemouth... ")]
+    [Description("Team Snakemouth...")]
     TeamSnakemouth,
     [Description("Vi's Request")]
     ViRequest,
@@ -260,7 +260,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     CardMastersOfBugaria,
     [Description("Book Return!")]
     BookReturn,
-    [Description("I Want a Souvenir... ")]
+    [Description("I Want a Souvenir...")]
     IWantASouvenir,
     [Description("Helpers Needed At Once!")]
     HelpersNeededAtOnce,
@@ -278,13 +278,13 @@ namespace BugFablesSaveEditor.BugFablesEnums
     HelpMeGetItBack,
     [Description("Bandit Hunt")]
     BanditHunt,
-    [Description("In Search of Paint... ")]
+    [Description("In Search of Paint...")]
     InSearchOfPaint,
     [Description("Lunch Delivery!")]
     LunchDelivery,
     [Description("It's Time...!")]
     ItsTime,
-    [Description("Want to Relive Memories... ")]
+    [Description("Want to Relive Memories...")]
     WantToReliveMemories,
     [Description("Seedling Hunt")]
     SeedlingHunt,
@@ -316,9 +316,9 @@ namespace BugFablesSaveEditor.BugFablesEnums
     KabbuRequest,
     [Description("Loose Ends")]
     LooseEnds,
-    [Description("A New Hope ")]
+    [Description("A New Hope")]
     ANewHope,
-    [Description("Getting Bored ")]
+    [Description("Getting Bored")]
     GettingBored,
     COUNT
   };
