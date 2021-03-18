@@ -1,20 +1,45 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Quests : IBugFablesSaveSection
   {
-    public object Data { get; set; } = new List<Quest>[(int)QuestState.COUNT];
+    public class QuestInfo : INotifyPropertyChanged
+    {
+      private Quest _quest;
+      public Quest Quest
+      {
+        get { return _quest; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _quest = value;
+          NotifyPropertyChanged();
+        }
+      }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
+    }
+
+    public object Data { get; set; } = new ObservableCollection<QuestInfo>[(int)QuestState.COUNT];
 
     public Quests()
     {
-      List<Quest>[] quests = (List<Quest>[])Data;
+      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
 
       for (int i = 0; i < quests.Length; i++)
-        quests[i] = new List<Quest>();
+        quests[i] = new ObservableCollection<QuestInfo>();
     }
 
     public void ParseFromSaveLine(string saveLine)
@@ -23,7 +48,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       if (questsData.Length != (int)QuestState.COUNT)
         throw new Exception(nameof(Quests) + " is in an invalid format");
 
-      List<Quest>[] quests = (List<Quest>[])Data;
+      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
 
       for (int i = 0; i < questsData.Length; i++)
       {
@@ -42,21 +67,21 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           if (intOut < 0 || intOut >= (int)Quest.COUNT)
             throw new Exception(nameof(Quests) + "[" + Enum.GetNames(typeof(QuestState))[i] +
                                 "][" + j + "]: " + intOut + " is not a valid quest ID");
-          quests[i].Add((Quest)intOut);
+          quests[i].Add(new QuestInfo { Quest = (Quest)intOut });
         }
       }
     }
 
     public string EncodeToSaveLine()
     {
-      List<Quest>[] quests = (List<Quest>[])Data;
+      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < quests.Length; i++)
       {
         for (int j = 0; j < quests[i].Count; j++)
         {
-          sb.Append((int)quests[i][j]);
+          sb.Append((int)quests[i][j].Quest);
 
           if (j != quests[i].Count - 1)
             sb.Append(Common.FieldSeparator);

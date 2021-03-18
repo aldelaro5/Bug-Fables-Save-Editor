@@ -1,8 +1,108 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.QuestsView">
-  Welcome to Avalonia!
+  <Design.DataContext>
+    <vm:QuestsViewModel />
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="50*,50*,50*">
+    <DockPanel Grid.Column="0">
+      <Label DockPanel.Dock="Top" Content="Open quests"/>
+      <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <DropDown SelectedIndex="{Binding SelectedOpenQuestForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Quest}}"
+                            Items="{Binding QuestsNames}" Width="250" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddOpenQuest}"/>
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+        <Button Content="↑" Command="{Binding CmdReorderOpenQuestUp}" />
+        <Button Content="↓" Command="{Binding CmdReorderOpenQuestDown}" />
+      </StackPanel>
+      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
+                Items="{Binding OpenQuests}" IsReadOnly="True"
+                SelectedItem="{Binding SelectedOpenQuest, Mode=TwoWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Quest, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Quest}}" Width="*"/>
+          <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveOpenQuest}"
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </DockPanel>
+    <DockPanel Grid.Column="1">
+      <Label DockPanel.Dock="Top" Content="Taken quests"/>
+      <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <DropDown SelectedIndex="{Binding SelectedTakenQuestForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Quest}}"
+                            Items="{Binding QuestsNames}" Width="250" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddTakenQuest}"/>
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+        <Button Content="↑" Command="{Binding CmdReorderTakenQuestUp}" />
+        <Button Content="↓" Command="{Binding CmdReorderTakenQuestDown}" />
+      </StackPanel>
+      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
+                Items="{Binding TakenQuests}" IsReadOnly="True"
+                SelectedItem="{Binding SelectedTakenQuest, Mode=TwoWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Quest, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Quest}}" Width="*"/>
+          <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveTakenQuest}"
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </DockPanel>
+    <DockPanel Grid.Column="2">
+      <Label DockPanel.Dock="Top" Content="Completed quests"/>
+      <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <DropDown SelectedIndex="{Binding SelectedCompletedQuestForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Quest}}"
+                          Items="{Binding QuestsNames}" Width="250" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddCompletedQuest}"/>
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+        <Button Content="↑" Command="{Binding CmdReorderCompletedQuestUp}" />
+        <Button Content="↓" Command="{Binding CmdReorderCompletedQuestDown}" />
+      </StackPanel>
+      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
+                Items="{Binding CompletedQuests}" IsReadOnly="True"
+                SelectedItem="{Binding SelectedCompletedQuest, Mode=TwoWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Quest, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Quest}}" Width="*"/>
+          <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveCompletedQuest}"
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </DockPanel>
+  </Grid>
 </UserControl>
