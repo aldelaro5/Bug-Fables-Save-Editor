@@ -7,6 +7,12 @@ using System.Linq;
 
 namespace BugFablesSaveEditor
 {
+  public enum ReorderDirection
+  {
+    Up,
+    Down
+  }
+
   public static class Common
   {
     public const string FieldSeparator = ",";
