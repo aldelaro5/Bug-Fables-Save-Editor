@@ -6,9 +6,7 @@ using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 using System.Reactive;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Global;
 using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
 using static BugFablesSaveEditor.BugFablesSave.Sections.StatBonuses;
 
