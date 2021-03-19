@@ -1,20 +1,45 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class MedalShopsPools : IBugFablesSaveSection
   {
-    public object Data { get; set; } = new List<Medal>[(int)MedalShop.COUNT];
+    public class MedalShopPool : INotifyPropertyChanged
+    {
+      private Medal _medal;
+      public Medal Medal
+      {
+        get { return _medal; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _medal = value;
+          NotifyPropertyChanged();
+        }
+      }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
+    }
+
+    public object Data { get; set; } = new ObservableCollection<MedalShopPool>[(int)MedalShop.COUNT];
 
     public MedalShopsPools()
     {
-      List<Medal>[] medals = (List<Medal>[])Data;
+      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
 
       for (int i = 0; i < medals.Length; i++)
-        medals[i] = new List<Medal>();
+        medals[i] = new ObservableCollection<MedalShopPool>();
     }
 
     public void ParseFromSaveLine(string saveLine)
@@ -23,7 +48,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       if (medalPools.Length != (int)MedalShop.COUNT)
         throw new Exception(nameof(MedalShopsPools) + " is in an invalid format");
 
-      List<Medal>[] medals = (List<Medal>[])Data;
+      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
 
       for (int i = 0; i < medalPools.Length; i++)
       {
@@ -44,21 +69,21 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
             throw new Exception(nameof(MedalShopsPools) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
                                 "][" + j + "]: " + intOut + " is not a valid medal ID");
           }
-          medals[i].Add((Medal)intOut);
+          medals[i].Add(new MedalShopPool { Medal = (Medal)intOut });
         }
       }
     }
 
     public string EncodeToSaveLine()
     {
-      List<Medal>[] medals = (List<Medal>[])Data;
+      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < medals.Length; i++)
       {
         for (int j = 0; j < medals[i].Count; j++)
         {
-          sb.Append((int)medals[i][j]);
+          sb.Append((int)medals[i][j].Medal);
 
           if (j != medals[i].Count - 1)
             sb.Append(Common.FieldSeparator);

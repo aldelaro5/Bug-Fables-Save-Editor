@@ -2354,9 +2354,10 @@ namespace BugFablesSaveEditor.BugFablesEnums
     COUNT
   };
 
+  // This is off by 2 to make it ComboBox compatible, starts at -2
   public enum MedalEquipTarget
   {
-    Unequipped = -2,
+    Unequipped = 0,
     Party,
     Vi,
     Kabbu,

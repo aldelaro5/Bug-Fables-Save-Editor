@@ -1,21 +1,43 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
-  public class Medals : IBugFablesSaveSection, INotifyPropertyChanged
+  public class Medals : IBugFablesSaveSection
   {
-    public class MedalEquip : INotifyPropertyChanged
+    public class MedalInfo : INotifyPropertyChanged
     {
       private Medal _medal;
-      public Medal Medal { get { return _medal; } set { _medal = value; NotifyPropertyChanged(); } }
+      public Medal Medal
+      {
+        get { return _medal; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _medal = value;
+          NotifyPropertyChanged();
+        }
+      }
 
       private MedalEquipTarget _medalEquipTarget;
-      public MedalEquipTarget MedalEquipTarget { get { return _medalEquipTarget; } set { _medalEquipTarget = value; NotifyPropertyChanged(); } }
+      public MedalEquipTarget MedalEquipTarget
+      {
+        get { return _medalEquipTarget; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _medalEquipTarget = value;
+          NotifyPropertyChanged();
+        }
+      }
 
       public event PropertyChangedEventHandler? PropertyChanged;
       private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -24,18 +46,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       }
     }
 
-    public object Data { get; set; } = new List<MedalEquip>();
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    public object Data { get; set; } = new ObservableCollection<MedalInfo>();
 
     public void ParseFromSaveLine(string saveLine)
     {
       string[] medalsData = saveLine.Split(Common.ElementSeparator);
-      List<MedalEquip> medals = (List<MedalEquip>)Data;
+      ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
 
       for (int i = 0; i < medalsData.Length; i++)
       {
@@ -44,18 +60,20 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
         string[] data = medalsData[i].Split(Common.FieldSeparator);
 
-        MedalEquip newMedalEquip = new MedalEquip();
+        MedalInfo newMedalEquip = new MedalInfo();
 
         int intOut = 0;
         if (!int.TryParse(data[0], out intOut))
-          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalEquip.Medal) + " failed to parse");
+          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) + " failed to parse");
         if (intOut < 0 || intOut >= (int)Medal.COUNT)
-          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalEquip.Medal) + ": " + intOut + " is not a valid medal ID");
+          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) + ": " + intOut + " is not a valid medal ID");
         newMedalEquip.Medal = (Medal)intOut;
         if (!int.TryParse(data[1], out intOut))
-          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalEquip.MedalEquipTarget) + " failed to parse");
-        if (intOut < -2 || intOut >= (int)MedalEquipTarget.COUNT)
-          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalEquip.MedalEquipTarget) + ": " + intOut + " is not a valid medal equip target value");
+          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) + " failed to parse");
+        // Convert from save to our enum
+        intOut += 2;
+        if (intOut < 0 || intOut >= (int)MedalEquipTarget.COUNT)
+          throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) + ": " + intOut + " is not a valid medal equip target value");
         newMedalEquip.MedalEquipTarget = (MedalEquipTarget)intOut;
 
         medals.Add(newMedalEquip);
@@ -64,14 +82,15 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public string EncodeToSaveLine()
     {
-      List<MedalEquip> medals = (List<MedalEquip>)Data;
+      ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < medals.Count; i++)
       {
         sb.Append((int)medals[i].Medal);
         sb.Append(Common.FieldSeparator);
-        sb.Append((int)medals[i].MedalEquipTarget);
+        // the -2 is to convert from our enum to save
+        sb.Append((int)medals[i].MedalEquipTarget - 2);
 
         if (i != medals.Count - 1)
           sb.Append(Common.ElementSeparator);
