@@ -15,6 +15,7 @@ namespace BugFablesSaveEditor.ViewModels
       get { return _saveData; }
       set { _saveData = value; this.RaisePropertyChanged(); }
     }
+
     private string[] _itemsNames;
     public string[] ItemsNames
     {
