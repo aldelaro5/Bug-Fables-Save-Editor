@@ -1,8 +1,108 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.ItemsView">
-  Welcome to Avalonia!
+  <Design.DataContext>
+    <vm:ItemsViewModel />
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="50*,50*,50*">
+    <DockPanel Grid.Column="0">
+      <Label DockPanel.Dock="Top" Content="Items"/>
+      <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <DropDown SelectedIndex="{Binding SelectedItemForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Item}}"
+                            Items="{Binding ItemsNames}" Width="250" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItem}"/>
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+        <Button Content="↑" Command="{Binding CmdReorderItemsUp}" />
+        <Button Content="↓" Command="{Binding CmdReorderItemsDown}" />
+      </StackPanel>
+      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
+                Items="{Binding Items}" IsReadOnly="True"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Item}}" Width="*"/>
+          <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveItem}"
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </DockPanel>
+    <DockPanel Grid.Column="1">
+      <Label DockPanel.Dock="Top" Content="Key items"/>
+      <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <DropDown SelectedIndex="{Binding SelectedKeyItemForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Item}}"
+                            Items="{Binding ItemsNames}" Width="250" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItem}"/>
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+        <Button Content="↑" Command="{Binding CmdReorderKeyItemsUp}" />
+        <Button Content="↓" Command="{Binding CmdReorderKeyItemsDown}" />
+      </StackPanel>
+      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
+                Items="{Binding KeyItems}" IsReadOnly="True"
+                SelectedItem="{Binding SelectedKeyItem, Mode=TwoWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Item}}" Width="*"/>
+          <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveKeyItem}"
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </DockPanel>
+    <DockPanel Grid.Column="2">
+      <Label DockPanel.Dock="Top" Content="Stored items"/>
+      <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <DropDown SelectedIndex="{Binding SelectedStoredItemForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Item}}"
+                          Items="{Binding ItemsNames}" Width="250" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItem}"/>
+      </StackPanel>
+      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+        <Button Content="↑" Command="{Binding CmdReorderStoredItemsUp}" />
+        <Button Content="↓" Command="{Binding CmdReorderStoredItemsDown}" />
+      </StackPanel>
+      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
+                Items="{Binding StoredItems}" IsReadOnly="True"
+                SelectedItem="{Binding SelectedStoredItem, Mode=TwoWay}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Item}}" Width="*"/>
+          <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveStoredItem}"
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </DockPanel>
+  </Grid>
 </UserControl>

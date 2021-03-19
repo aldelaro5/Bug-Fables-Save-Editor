@@ -1,20 +1,44 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Items : IBugFablesSaveSection
   {
-    public object Data { get; set; } = new List<Item>[(int)ItemPossessionType.COUNT];
+    public class ItemInfo : INotifyPropertyChanged
+    {
+      private Item _item;
+      public Item Item
+      {
+        get { return _item; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _item = value;
+          NotifyPropertyChanged();
+        }
+      }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
+    }
+    public object Data { get; set; } = new ObservableCollection<ItemInfo>[(int)ItemPossessionType.COUNT];
 
     public Items()
     {
-      List<Item>[] items = (List<Item>[])Data;
+      ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
 
       for (int i = 0; i < items.Length; i++)
-        items[i] = new List<Item>();
+        items[i] = new ObservableCollection<ItemInfo>();
     }
 
     public void ParseFromSaveLine(string saveLine)
@@ -23,7 +47,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       if (itemsData.Length != (int)ItemPossessionType.COUNT)
         throw new Exception(nameof(Items) + " is in an invalid format");
 
-      List<Item>[] items = (List<Item>[])Data;
+      ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
 
       for (int i = 0; i < itemsData.Length; i++)
       {
@@ -42,21 +66,21 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           if (intOut < 0 || intOut >= (int)Item.COUNT)
             throw new Exception(nameof(Items) + "[" + Enum.GetNames(typeof(ItemPossessionType))[i] +
                                 "][" + j + "]: " + intOut + " is not a valid item ID");
-          items[i].Add((Item)intOut);
+          items[i].Add(new ItemInfo { Item = (Item)intOut });
         }
       }
     }
 
     public string EncodeToSaveLine()
     {
-      List<Item>[] items = (List<Item>[])Data;
+      ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < items.Length; i++)
       {
         for (int j = 0; j < items[i].Count; j++)
         {
-          sb.Append((int)items[i][j]);
+          sb.Append((int)items[i][j].Item);
 
           if (j != items[i].Count - 1)
             sb.Append(Common.FieldSeparator);
