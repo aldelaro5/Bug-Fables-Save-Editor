@@ -1,8 +1,49 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.SongsView">
-  Welcome to Avalonia!
+  <Design.DataContext>
+    <vm:SongsViewModel />
+  </Design.DataContext>
+  <DockPanel>
+    <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+      <ComboBox SelectedIndex="{Binding SelectedSongForAdd, 
+                                  Converter={StaticResource EnumConverter}, 
+                                  ConverterParameter={x:Type bf:Song}}"
+                          Items="{Binding SongsNames}" Width="325" />
+      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding SongForAddIsBought}"/>
+      <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddSong}"/>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+      <Button Content="↑" Command="{Binding CmdReorderSongsUp}" />
+      <Button Content="↓" Command="{Binding CmdReorderSongsDown}" />
+    </StackPanel>
+    <DataGrid AutoGenerateColumns="False" Items="{Binding Songs}" CanUserSortColumns="False"
+              SelectedItem="{Binding SelectedSong, Mode=TwoWay}">
+      <DataGrid.Columns>
+        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Song, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Song}}" Header="Song" Width="*"/>
+        <DataGridTemplateColumn Header="Is Bought">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <CheckBox IsChecked="{Binding IsBought}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Width="35">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveSong}"
+                      CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
 </UserControl>

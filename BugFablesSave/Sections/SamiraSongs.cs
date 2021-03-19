@@ -1,6 +1,6 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,10 +12,21 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     private const int songNotBought = -1;
     private const int songBought = 1;
 
-    public class AvailableSong : INotifyPropertyChanged
+    public class SongInfo : INotifyPropertyChanged
     {
       private Song _song;
-      public Song Song { get { return _song; } set { _song = value; NotifyPropertyChanged(); } }
+      public Song Song
+      {
+        get { return _song; }
+        set
+        {
+          if ((int)value == -1)
+            return;
+
+          _song = value;
+          NotifyPropertyChanged();
+        }
+      }
 
       private bool _isBought;
       public bool IsBought { get { return _isBought; } set { _isBought = value; NotifyPropertyChanged(); } }
@@ -27,12 +38,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       }
     }
 
-    public object Data { get; set; } = new List<AvailableSong>();
+    public object Data { get; set; } = new ObservableCollection<SongInfo>();
 
     public void ParseFromSaveLine(string saveLine)
     {
       string[] songsData = saveLine.Split(Common.ElementSeparator);
-      List<AvailableSong> songs = (List<AvailableSong>)Data;
+      ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
 
       for (int i = 0; i < songsData.Length; i++)
       {
@@ -41,18 +52,18 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
         string[] data = songsData[i].Split(Common.FieldSeparator);
 
-        AvailableSong newSong = new AvailableSong();
+        SongInfo newSong = new SongInfo();
 
         int intOut = 0;
         if (!int.TryParse(data[0], out intOut))
-          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(AvailableSong.Song) + " failed to parse");
+          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) + " failed to parse");
         if (intOut < 0 || intOut >= (int)Song.COUNT)
-          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(AvailableSong.Song) + ": " + intOut + " is not a valid song ID");
+          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) + ": " + intOut + " is not a valid song ID");
         newSong.Song = (Song)intOut;
         if (!int.TryParse(data[1], out intOut))
-          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(AvailableSong.IsBought) + " failed to parse");
+          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) + " failed to parse");
         if (intOut != songNotBought && intOut != songBought)
-          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(AvailableSong.IsBought) + ": " + intOut + " is not a valid song availability value");
+          throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) + ": " + intOut + " is not a valid song availability value");
         newSong.IsBought = intOut == songBought;
 
         songs.Add(newSong);
@@ -61,7 +72,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public string EncodeToSaveLine()
     {
-      List<AvailableSong> songs = (List<AvailableSong>)Data;
+      ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < songs.Count; i++)
