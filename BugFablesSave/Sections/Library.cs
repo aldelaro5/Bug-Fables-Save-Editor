@@ -8,8 +8,6 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Library : IBugFablesSaveSection
   {
-    private const int nbrSlotsPerSection = 256;
-
     public class LibraryFlag : INotifyPropertyChanged
     {
       private int _index;
@@ -32,6 +30,8 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
     }
+
+    private const int nbrSlotsPerSection = 256;
 
     public object Data { get; set; } = new LibraryFlag[(int)LibrarySection.COUNT][];
 

@@ -1,23 +1,55 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Flagstrings : IBugFablesSaveSection
   {
+    public class FlagstringInfo : INotifyPropertyChanged
+    {
+      private int _index;
+      public int Index
+      {
+        get { return _index; }
+        set { _index = value; NotifyPropertyChanged(); }
+      }
+
+      private string _str;
+      public string Str
+      {
+        get { return _str; }
+        set { _str = value; NotifyPropertyChanged(); }
+      }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
+    }
+
     private const int NbrSlots = 15;
     private const string separator = "|SPLIT|";
 
-    public object Data { get; set; } = new string[NbrSlots];
+    public object Data { get; set; } = new FlagstringInfo[NbrSlots];
+
+    public Flagstrings()
+    {
+      var array = (FlagstringInfo[])Data;
+      for (int i = 0; i < array.Length; i++)
+        array[i] = new FlagstringInfo { Index = i };
+    }
 
     public string EncodeToSaveLine()
     {
-      string[] flagstrings = (string[])Data;
+      FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < flagstrings.Length; i++)
       {
-        sb.Append(flagstrings[i]);
+        sb.Append(flagstrings[i].Str);
 
         if (i != flagstrings.Length - 1)
           sb.Append(separator);
@@ -32,10 +64,10 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       if (flagstringData.Length != NbrSlots)
         throw new Exception(nameof(Flagstrings) + " is in an invalid format");
 
-      string[] flagstrings = (string[])Data;
+      FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
 
       for (int i = 0; i < flagstringData.Length; i++)
-        flagstrings[i] = flagstringData[i];
+        flagstrings[i].Str = flagstringData[i];
     }
   }
 }

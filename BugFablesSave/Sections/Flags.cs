@@ -1,22 +1,54 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections
 {
   public class Flags : IBugFablesSaveSection
   {
+    public class FlagInfo : INotifyPropertyChanged
+    {
+      private int _index;
+      public int Index
+      {
+        get { return _index; }
+        set { _index = value; NotifyPropertyChanged(); }
+      }
+
+      private bool _enabled;
+      public bool Enabled
+      {
+        get { return _enabled; }
+        set { _enabled = value; NotifyPropertyChanged(); }
+      }
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      }
+    }
+
     private const int NbrSlots = 750;
 
-    public object Data { get; set; } = new bool[NbrSlots];
+    public object Data { get; set; } = new FlagInfo[NbrSlots];
+
+    public Flags()
+    {
+      var array = (FlagInfo[])Data;
+      for (int i = 0; i < array.Length; i++)
+        array[i] = new FlagInfo { Index = i };
+    }
 
     public string EncodeToSaveLine()
     {
-      bool[] flags = (bool[])Data;
+      FlagInfo[] flags = (FlagInfo[])Data;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i < flags.Length; i++)
       {
-        sb.Append(flags[i]);
+        sb.Append(flags[i].Enabled);
 
         if (i != flags.Length - 1)
           sb.Append(Common.FieldSeparator);
@@ -31,14 +63,14 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       if (flagsData.Length != NbrSlots)
         throw new Exception(nameof(Flags) + " is in an invalid format");
 
-      bool[] flags = (bool[])Data;
+      FlagInfo[] flags = (FlagInfo[])Data;
 
       for (int i = 0; i < flagsData.Length; i++)
       {
         bool boolOut = false;
         if (!bool.TryParse(flagsData[i], out boolOut))
           throw new Exception(nameof(Flags) + "[" + i + "] failed to parse");
-        flags[i] = boolOut;
+        flags[i].Enabled = boolOut;
       }
     }
   }

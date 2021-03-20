@@ -4,5 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.FlagsView">
-  Welcome to Avalonia!
+  <TabControl HorizontalAlignment="Center">
+    <TabItem Header="Flags">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Flags}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Flagvars">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Flagvars}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Var}"/>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Flagstrings">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Flagstrings}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Str}"/>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Regionals">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Regionals}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+  </TabControl>
 </UserControl>
