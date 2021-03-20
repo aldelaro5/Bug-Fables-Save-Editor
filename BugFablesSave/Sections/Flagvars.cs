@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -14,6 +15,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       {
         get { return _index; }
         set { _index = value; NotifyPropertyChanged(); }
+      }
+
+      private string _description = "";
+      public string Description
+      {
+        get { return _description; }
+        set { _description = value; NotifyPropertyChanged(); }
       }
 
       private int _var;
@@ -36,9 +44,17 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public Flagvars()
     {
+      string[] lines = File.ReadAllLines("Data/Flagvars.csv");
+
+      string[][] data = new string[lines.Length][];
+      for (int i = 0; i < lines.Length; i++)
+        data[i] = lines[i].Split(';');
+
       var array = (FlagvarInfo[])Data;
       for (int i = 0; i < array.Length; i++)
-        array[i] = new FlagvarInfo { Index = i };
+      {
+        array[i] = new FlagvarInfo { Index = i, Description = data[i][1].Replace('~', '\n') };
+      }
     }
 
     public string EncodeToSaveLine()
