@@ -18,23 +18,20 @@
           <ComboBox SelectedIndex="{Binding SelectedPartyMemberAnimIDForAdd, 
                                     Converter={StaticResource EnumConverter}, 
                                     ConverterParameter={x:Type bf:AnimID}}"
-                            Items="{Binding AnimIDs}" Width="200"/>
+                            Items="{Binding AnimIDs}" Width="200" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddPartyMember}"/>
         </StackPanel>
+        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+          <Button Content="↑" Command="{Binding CmdReorderPartyMembersUp}" />
+          <Button Content="↓" Command="{Binding CmdReorderPartyMembersDown}" />
+        </StackPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding PartyMembers}"
-                  HeadersVisibility="None">
+                  HeadersVisibility="None" SelectedItem="{Binding SelectedPartyMember, Mode=TwoWay}">
           <DataGrid.Columns>
-            <DataGridTemplateColumn>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ComboBox SelectedIndex="{Binding Trueid, 
-                                            Converter={StaticResource EnumConverter}, 
-                                            ConverterParameter={x:Type bf:AnimID}}"
-                            Items="{Binding $parent[DataGrid].DataContext.AnimIDs}" Width="200"/>
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Trueid, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:AnimID}}" Width="200" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
@@ -54,23 +51,20 @@
           <ComboBox SelectedIndex="{Binding SelectedFollowerAnimIDForAdd, 
                                     Converter={StaticResource EnumConverter}, 
                                     ConverterParameter={x:Type bf:AnimID}}"
-                            Items="{Binding AnimIDs}" Width="200"/>
+                            Items="{Binding AnimIDs}" Width="200" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddFollower}"/>
         </StackPanel>
+        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+          <Button Content="↑" Command="{Binding CmdReorderFollowersUp}" />
+          <Button Content="↓" Command="{Binding CmdReorderFollowersDown}" />
+        </StackPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding Followers}"
-                  HeadersVisibility="None">
+                  HeadersVisibility="None" SelectedItem="{Binding SelectedFollower, Mode=TwoWay}">
           <DataGrid.Columns>
-            <DataGridTemplateColumn>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ComboBox SelectedIndex="{Binding AnimID, 
-                                            Converter={StaticResource EnumConverter}, 
-                                            ConverterParameter={x:Type bf:AnimID}}"
-                            Items="{Binding $parent[DataGrid].DataContext.AnimIDs}" Width="200"/>
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+            <DataGridTextColumn IsReadOnly="True" Binding="{Binding AnimID, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:AnimID}}" Width="200" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>

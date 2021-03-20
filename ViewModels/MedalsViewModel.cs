@@ -156,13 +156,13 @@ namespace BugFablesSaveEditor.ViewModels
       SaveData = new SaveData();
       Initialize();
 
+      Medals.Add(new MedalInfo { Medal = (Medal)7 });
       Medals.Add(new MedalInfo { Medal = (Medal)51 });
-      Medals.Add(new MedalInfo { Medal = (Medal)27 });
-      Medals.Add(new MedalInfo { Medal = (Medal)43 });
+      Medals.Add(new MedalInfo { Medal = (Medal)78 });
 
       MedalsMerabPools.Add(new MedalShopPool { Medal = (Medal)62 });
-      MedalsMerabPools.Add(new MedalShopPool { Medal = (Medal)7 });
-      MedalsMerabPools.Add(new MedalShopPool { Medal = (Medal)28 });
+      MedalsMerabPools.Add(new MedalShopPool { Medal = (Medal)51 });
+      MedalsMerabPools.Add(new MedalShopPool { Medal = (Medal)78 });
 
       MedalsShadesPools.Add(new MedalShopPool { Medal = (Medal)35 });
       MedalsShadesPools.Add(new MedalShopPool { Medal = (Medal)52 });
@@ -245,12 +245,14 @@ namespace BugFablesSaveEditor.ViewModels
     {
       object selectedItem;
       Medal medal;
+      MedalEquipTarget medalEquipTarget = MedalEquipTarget.Unequipped;
       IList itemsCollection;
       switch (dataType)
       {
         case MedalsDataType.Medals:
           selectedItem = SelectedMedal;
           medal = ((MedalInfo)selectedItem).Medal;
+          medalEquipTarget = ((MedalInfo)selectedItem).MedalEquipTarget;
           itemsCollection = Medals;
           break;
         case MedalsDataType.MerabPool:
@@ -288,7 +290,7 @@ namespace BugFablesSaveEditor.ViewModels
       switch (dataType)
       {
         case MedalsDataType.Medals:
-          itemsCollection.Insert(newIndex, new MedalInfo { Medal = medal });
+          itemsCollection.Insert(newIndex, new MedalInfo { Medal = medal, MedalEquipTarget = medalEquipTarget });
           SelectedMedal = Medals[newIndex];
           break;
         case MedalsDataType.MerabPool:

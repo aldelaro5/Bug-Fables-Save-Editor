@@ -96,7 +96,7 @@ namespace BugFablesSaveEditor.ViewModels
 
       OpenQuests.Add(new QuestInfo { Quest = (Quest)51 });
       OpenQuests.Add(new QuestInfo { Quest = (Quest)27 });
-      OpenQuests.Add(new QuestInfo { Quest = (Quest)43 });
+      OpenQuests.Add(new QuestInfo { Quest = (Quest)16 });
 
       TakenQuests.Add(new QuestInfo { Quest = (Quest)62 });
       TakenQuests.Add(new QuestInfo { Quest = (Quest)7 });

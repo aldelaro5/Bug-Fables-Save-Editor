@@ -59,7 +59,7 @@ namespace BugFablesSaveEditor.ViewModels
       Initialize();
 
       Songs.Add(new SongInfo { Song = (Song)51, IsBought = true });
-      Songs.Add(new SongInfo { Song = (Song)27, IsBought = false });
+      Songs.Add(new SongInfo { Song = (Song)67, IsBought = false });
       Songs.Add(new SongInfo { Song = (Song)43, IsBought = true });
     }
 

@@ -651,11 +651,11 @@ namespace BugFablesSaveEditor.BugFablesEnums
     PrisonKey,
     [Description("Hustle Berry")]
     HustleBerry,
-    [Description("History Book (Blue))")]
+    [Description("History Book (Blue)")]
     HistoryBookBlue,
     [Description("History Book (Green)")]
     HistoryBookGreen,
-    [Description("History Book (Yellow))")]
+    [Description("History Book (Yellow)")]
     HistoryBookYellow,
     [Description("History Book (Red)")]
     HistoryBookRed,

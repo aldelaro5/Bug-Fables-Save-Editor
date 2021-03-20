@@ -94,8 +94,8 @@ namespace BugFablesSaveEditor.ViewModels
       SaveData = new SaveData();
       Initialize();
 
-      Items.Add(new ItemInfo { Item = (Item)51 });
-      Items.Add(new ItemInfo { Item = (Item)27 });
+      Items.Add(new ItemInfo { Item = (Item)61 });
+      Items.Add(new ItemInfo { Item = (Item)165 });
       Items.Add(new ItemInfo { Item = (Item)43 });
 
       KeyItems.Add(new ItemInfo { Item = (Item)62 });

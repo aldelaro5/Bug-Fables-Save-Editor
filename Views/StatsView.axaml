@@ -60,19 +60,11 @@
           <Button Command="{Binding AddPartyStatBonus}" VerticalContentAlignment="Center" Content="Add"/>
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" SelectionMode="Single"
-                  Items="{Binding ViewPartyStatsBonuses}" >
+                  Items="{Binding ViewPartyStatsBonuses}" CanUserSortColumns="True">
           <DataGrid.Columns>
-            <DataGridTemplateColumn Header="Type" Width="100">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ComboBox SelectedIndex="{Binding Type, 
-                                            Converter={StaticResource EnumConverter}, 
-                                            ConverterParameter={x:Type bf:StatBonusType}}"
-                            Items="{Binding $parent[DataGrid].DataContext.StatBonusTypes}"
-                            Width="100"/>
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Type, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:StatBonusType}}" Header="Type" Width="85"/>
             <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"/>
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
@@ -109,17 +101,9 @@
         <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"
                   Items="{Binding ViewMemberStatsBonuses}">
           <DataGrid.Columns>
-            <DataGridTemplateColumn Header="Type" Width="100">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ComboBox SelectedIndex="{Binding Type, 
-                                            Converter={StaticResource EnumConverter}, 
-                                            ConverterParameter={x:Type bf:StatBonusType}}"
-                            Items="{Binding $parent[DataGrid].DataContext.StatBonusTypes}"
-                            Width="100"/>
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Type, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:StatBonusType}}" Header="Type" Width="85"/>
             <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
