@@ -12,7 +12,21 @@ namespace BugFablesSaveEditor
       if (value == null)
         return "";
 
-      var memberInfo = ((Type)parameter).GetMember(value.ToString());
+      string enumValueName = "";
+      if (value is int)
+      {
+        string[] values = Enum.GetNames((Type)parameter);
+        if ((int)value >= values.Length - 1)
+          return "UNUSED " + (int)value;
+        else
+          enumValueName = values[(int)value];
+      }
+      else
+      {
+        enumValueName = value.ToString();
+      }
+
+      var memberInfo = ((Type)parameter).GetMember(enumValueName);
       if (memberInfo.Length > 0)
       {
         var attrs = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);

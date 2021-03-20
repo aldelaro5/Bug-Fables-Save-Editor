@@ -1,8 +1,100 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.LibraryView">
-  Welcome to Avalonia!
+  <Design.DataContext>
+    <vm:LibraryViewModel />
+  </Design.DataContext>
+
+  <TabControl HorizontalAlignment="Center">
+    <TabItem Header="Discoveries">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Discoveries}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Discovery}}" Width="200"/>
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Bestiary">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Enemies}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Enemy}}" Width="200"/>
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Recipes">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Recipes}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Recipe}}" Width="200"/>
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Records">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding Records}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Record}}" Width="200"/>
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+    <TabItem Header="Seen areas">
+      <DataGrid AutoGenerateColumns="False" Items="{Binding SeenAreas}"
+                HeadersVisibility="None">
+        <DataGrid.Columns>
+          <DataGridTemplateColumn Width="50">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        ConverterParameter={x:Type bf:Area}}" Width="200"/>
+        </DataGrid.Columns>
+      </DataGrid>
+    </TabItem>
+  </TabControl>
 </UserControl>
