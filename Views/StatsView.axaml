@@ -34,7 +34,7 @@
         <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"  Height="130"
                   Items="{Binding PartyMembers}" SelectionMode="Single" SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
           <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding Trueid,
+            <DataGridTextColumn Binding="{Binding Trueid, Mode=OneWay,
                                           Converter={StaticResource EnumDescriptionConverter}, 
                                           ConverterParameter={x:Type bf:AnimID}}" IsReadOnly="True" Header="Member" />
             <DataGridTextColumn Header="Base HP" Binding="{Binding BaseHP}" Width="75"/>
