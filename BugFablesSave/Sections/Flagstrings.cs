@@ -45,7 +45,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public Flagstrings()
     {
-      string[] lines = File.ReadAllLines("Data/Flagstrings.csv");
+      string[] lines = File.ReadAllLines("FlagsData/Flagstrings.csv");
 
       string[][] data = new string[lines.Length][];
       for (int i = 0; i < lines.Length; i++)

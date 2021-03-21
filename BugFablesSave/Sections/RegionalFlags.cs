@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BugFablesSaveEditor.BugFablesEnums;
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -14,6 +16,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       {
         get { return _index; }
         set { _index = value; NotifyPropertyChanged(); }
+      }
+
+      private string _description = "";
+      public string Description
+      {
+        get { return _description; }
+        set { _description = value; NotifyPropertyChanged(); }
       }
 
       private bool _enabled;
@@ -34,11 +43,37 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public object Data { get; set; } = new RegionalInfo[NbrSlots];
 
+    private string[][] Descriptions = new string[(int)Area.COUNT][];
+
     public RegionalFlags()
     {
+      string[] areas = Enum.GetNames(typeof(Area));
+      // Don't consider the last one which is the COUNT
+      for (int i = 0; i < areas.Length - 1; i++)
+      {
+        Descriptions[i] = new string[NbrSlots];
+        Array.Fill(Descriptions[i], "UNUSED");
+
+        string[] lines = File.ReadAllLines("FlagsData/Regionals/" + areas[i] + ".csv");
+        string[][] data = new string[lines.Length][];
+        for (int j = 0; j < lines.Length; j++)
+          data[j] = lines[j].Split(';');
+
+        for (int j = 0; j < data.Length; j++)
+          Descriptions[i][int.Parse(data[j][0])] = data[j][1].Replace('~', '\n');
+      }
+
       var array = (RegionalInfo[])Data;
       for (int i = 0; i < array.Length; i++)
-        array[i] = new RegionalInfo { Index = i };
+        array[i] = new RegionalInfo { Index = i, Description = "" };
+    }
+
+    public void ChangeCurrentRegionalsArea(Area area)
+    {
+      RegionalInfo[] regionals = (RegionalInfo[])Data;
+
+      for (int i = 0; i < NbrSlots; i++)
+        regionals[i].Description = Descriptions[(int)area][i];
     }
 
     public string EncodeToSaveLine()

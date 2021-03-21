@@ -53,6 +53,7 @@
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
+          <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
         </DataGrid.Columns>
       </DataGrid>
     </TabItem>
