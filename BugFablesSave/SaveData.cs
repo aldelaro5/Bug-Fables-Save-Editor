@@ -62,7 +62,8 @@ namespace BugFablesSaveEditor.BugFablesSave
       {
         sb.Append(Sections[i].EncodeToSaveLine());
 
-        sb.Append('\n');
+        if (i != SaveFileSection.COUNT - 1)
+          sb.Append('\n');
       }
 
       try
