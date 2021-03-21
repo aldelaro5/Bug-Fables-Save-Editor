@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="using:BugFablesSaveEditor.Views"
-        mc:Ignorable="d" d:DesignWidth="860" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BugFablesSaveEditor.Views.MainWindow"
         Title="Bug Fables Save Editor"
         Icon="/Assets/avalonia-logo.ico">
@@ -47,6 +47,7 @@
           <TabItem Header="Medals" Content="{Binding MedalsViewModel}" />
           <TabItem Header="Library" Content="{Binding LibraryViewModel}" />
           <TabItem Header="Flags" Content="{Binding FlagsViewModel}" />
+          <TabItem Header="Crystal Berries" Content="{Binding CrystalBerriesViewModel}" />
           <TabItem Header="Songs" Content="{Binding SongsViewModel}" />
         </TabControl>
       </DockPanel>

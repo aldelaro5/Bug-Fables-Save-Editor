@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BugFablesSaveEditor.Views.CrystalBerriesView">
+  <Design.DataContext>
+    <vm:CrystalBerriesViewModel/>
+  </Design.DataContext>
+
+  <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerries}"
+            CanUserReorderColumns="True" CanUserResizeColumns="True">
+    <DataGrid.Columns>
+      <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+      <DataGridTemplateColumn Header="Obtained" Width="100">
+        <DataGridTemplateColumn.CellTemplate>
+          <DataTemplate>
+            <CheckBox Margin="30,0,0,0" IsChecked="{Binding Obtained}"/>
+          </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+      </DataGridTemplateColumn>
+      <DataGridTextColumn Binding="{Binding Area, Mode=OneWay,
+                                    Converter={StaticResource EnumDescriptionConverter}, 
+                                    ConverterParameter={x:Type bf:Area}}" Header="Area" Width="160"/>
+      <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+    </DataGrid.Columns>
+  </DataGrid>
+</UserControl>

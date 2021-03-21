@@ -9,6 +9,12 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="FlagsData\CrystalBerries.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FlagsData\CrystalBerries.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="FlagsData\Flags.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -167,25 +167,28 @@ namespace BugFablesSaveEditor.ViewModels
       set { _songsViewModel = value; this.RaisePropertyChanged(); }
     }
 
+    private CrystalBerriesViewModel _crystalBerriesViewModel;
+    public CrystalBerriesViewModel CrystalBerriesViewModel
+    {
+      get { return _crystalBerriesViewModel; }
+      set { _crystalBerriesViewModel = value; this.RaisePropertyChanged(); }
+    }
+
     public MainWindowViewModel()
     {
       SaveData saveData = new SaveData();
       SaveData = saveData;
-
-      GlobalViewModel = new GlobalViewModel(saveData);
-      PartyViewModel = new PartyViewModel(saveData);
-      StatsViewModel = new StatsViewModel(saveData);
-      QuestsViewModel = new QuestsViewModel(saveData);
-      ItemsViewModel = new ItemsViewModel(saveData);
-      MedalsViewModel = new MedalsViewModel(saveData);
-      LibraryViewModel = new LibraryViewModel(saveData);
-      FlagsViewModel = new FlagsViewModel(saveData);
-      SongsViewModel = new SongsViewModel(saveData);
+      Initialise(saveData);
     }
 
     public MainWindowViewModel(SaveData saveData)
     {
       SaveData = saveData;
+      Initialise(saveData);
+    }
+
+    private void Initialise(SaveData saveData)
+    {
       GlobalViewModel = new GlobalViewModel(saveData);
       PartyViewModel = new PartyViewModel(saveData);
       StatsViewModel = new StatsViewModel(saveData);
@@ -195,6 +198,7 @@ namespace BugFablesSaveEditor.ViewModels
       LibraryViewModel = new LibraryViewModel(saveData);
       FlagsViewModel = new FlagsViewModel(saveData);
       SongsViewModel = new SongsViewModel(saveData);
+      CrystalBerriesViewModel = new CrystalBerriesViewModel(saveData);
     }
   }
 }
