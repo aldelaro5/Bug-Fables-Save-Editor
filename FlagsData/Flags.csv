@@ -1,185 +1,185 @@
 0;Chapter 1, went northwest on the map with Chuck at the Outskirt~Set to false at the start of Chapter 2, then to true when getting into the mines 
 1;Talked to Utter for the first time in the City plaza
-2;Checked the new quests available (false when new unchecked quests are available, set to true when talking to Utter about new quests or checking the board)
+2;False when new unchecked quests are available, set to true when talking to Utter about new quests or checking the board
 3;Took the Inn Review Required quest
-4;Slept at the Inn for the first time after taking the Inn Review Required quest at Ant City Plaza
+4;Slept at the Inn for the first time at Ant Kingdom City plaza after taking the Inn Review Required quest
 5;Completed the Inn Review Required quest
 6;Talked to Samira for the first time
 7;Chapter 1, fixed the bridge in Snakemouth Den by hitting the switch
-8;Examined the Underground Bar entrance for the first time at Ant City commercial area
-9;
-10;Chapter 1, received tattle tutorial (set to false in Chapter 3 when the Overseer is following you at the Honey Factory, set to true afterwards)
-11;Chapter 1, got Vi’s Beemerang as field skill
+8;Examined the Underground Bar entrance for the first time at Ant Kingdom City commercial area
+9;UNKNOWN
+10;Chapter 1, received tattle tutorial~Set to false in Chapter 3 when the Overseer is following you at the Honey Factory, set to true afterwards
+11;Chapter 1, got Vi’s Beemerang Toss
 12;Set to true when giving the first of the 2 ingredients to a chef, set to false afterwards (confirming or talking after cancelling)
 13;Chapter 1, pushed both pressure plates in Snakemouth Den in front of the door
 14;Chapter 1, opened the door behind 2 pressure plates at Snakemouth Den
 15;Chapter 1, started (after combat tutorial)
-16;Chapter 1, Leif is now able to fight in battle (also use ice as field skill) 
-17;Chapter 1, got Kabbu’s horn as field skill
-18;Chapter 4, got Kabbu’s dig as field skill
-19;Chapter 6, got Vi’s fly as field skill
-20;Chapter 3, hit the switch on the first room of the Honey Factory
-21;Chapter 2, got Vi’s Beemerang upgraded
+16;Chapter 1, Leif is now able to fight in battle (also got Freeze) 
+17;Chapter 1, got Kabbu’s Horn Slash
+18;Chapter 4, got Kabbu’s Beetle Dig
+19;Chapter 6, got Vi’s Bee Fly
+20;Chapter 3, hit the switch on the first room of the Honey Factory (also got Shield)
+21;Chapter 2, got Vi’s Beemerang Halt
 22;Chapter 1, after pan-in cutscene when arriving at the entrance of Snakemouth Den
-23;Got the HP Plus medal in Snakemouth Depths
-24;Received the turn relay tutorial
-25;Chapter 1, read an ancient tablet in Snakemouth Depths (after Leif said they can decipher the text)
-26;Chapter 1, talked for the first time to Gen and Eri after combat tutorial
+23;Got the HP Plus medal in Snakemouth Den
+24;Received the Turn Relay tutorial
+25;Chapter 1, read an ancient tablet in Snakemouth Den (after Leif said they can decipher the text)
+26;Chapter 1, talked for the first time to Gen and Eri after combat tutorial at the Explorers' Association
 27;Chapter 1, met Leif (after the cutscene is done)
-28;Chapter 1, Outskirt’s gate opened
-29;Chapter 1, hit the switch in Snakemouth Depth, map before the door
-30;Approached the first yellow crystal in Chapter 1
-31;Received medal tutorial
-32;Received hard mode and done talking to Artis
-33;Chapter 1, hit the big switch on the left path of Snakemouth Depths (for the door)
-34;Chapter 1, hit the big switch on the right path of Snakemouth Depths (for the door)
-35;Chapter 1, unlocked the door in Snakemouth Depths
-36;Chapter 1, arrived at the map with the door in Snakemouth Depths (water drops explanation cutscene)
-37;Used the B.O.S.S system for the first time in H.B’s room at the Bee Kingdom Hive~Also used (set to false) when doing EX mode, set back to true once done 
+28;Chapter 1, opened the gate near the Explorers' Association
+29;Chapter 1, hit the switch to raise the platform in Snakemouth Den
+30;Chapter 1, Approached the first yellow crystal (or after save tutorial?)
+31;Received medals tutorial
+32;Received Hard Mode after talking to Artis
+33;Chapter 1, hit the big switch on the left path of Snakemouth Den (for the door)
+34;Chapter 1, hit the big switch on the right path of Snakemouth Den (for the door)
+35;Chapter 1, unlocked the door in Snakemouth Den after hitting both big switches
+36;Chapter 1, arrived at the map with the door in Snakemouth Den (water droplets explanation cutscene)
+37;Used the B.O.S.S. system for the first time~Also set to false when doing EX mode, set back to true once done 
 38;Chapter 4, beaten the Watcher at the Ancient Castle
-39;Chapter 5, got Kabbu’s horn dash as a field skill
-40;UNKNOWN used in event 25
+39;Chapter 5, got Kabbu’s upgraded Horn Dash
+40;UNKNOWN used in event 25?
 41;End of Chapter 1
-42;Got the Poison Resistance medal at Snakemouth Depths
+42;Got the Poison Resistance medal at Snakemouth Den
 43;Talked to Samira for the second time (after she’s happy you are back)
 44;Took the I Want a New Taste quest
 45;Completed the I Want a New Taste quest
-46;
+46;UNKNOWN
 47;Took the Theater Help Wanted! quest
-48;Talked to Chubee at the Theater for the Theater Help Wanted! quest
+48;Talked to Chubee at the Theater after taking the Theater Help Wanted! quest
 49;Completed the Theater Help Wanted! quest
 50;Took the Lost Toy quest
-51;UNKNONW used in event 32
-52;Gave the Dotted ball to Tod, thus completing the Lost Toy quest
+51;UNKNOWN used in event 32
+52;Gave the Dotted Ball to Tod, completing the Lost Toy quest
 53;Took the My Brother is Gone! quest
 54;Talked to Leby after taking the My Brother is Gone! quest
 55;Completed the My Brother is Gone! quest
-56;A hard mode boss is available for turn-in to Artis for a medal (set to false once turned in)
-57;Talked to the merchant guy in the Theater for the first time (Green Bug Ranger cutscene)
-58;Bought the Green Bug Ranger at the Theater
-59;Got the Bug Me Not medal on the roof of the gray house at Ant city residential area
-60;Got the poison defender medal in Snakemouth Depths, map with the door
-61;Talked to Kina for the first time at the Association
-62;
+56;A hard mode boss is available for turn-in to Artis for a prize medal (set to false once turned in)
+57;Talked to the Fuzzo in the Theater for the first time (Bug Ranger Plushie cutscene)
+58;Bought the Bug Ranger Plushie in the Theater
+59;Got the Bug Me Not! medal on the roof of the gray house at Ant Kingdom City residential area
+60;Got the Poison Defender medal in Snakemouth Den
+61;Talked to Kina for the first time at the Explorers' Association
+62;UNKNOWN
 63;Completed the game
-64;Received quest board tutorial
-65;Talked to the spy data selling guy at the Underground Bar
-66;Got to the Ant city bridge for the first time after the end of Chapter 1 (after the cutscene)
-67;Start of Chapter 2 (after the cutscene in the throne room)
-68;Chapter 2, after the Leif’s memory cutscene after getting out of the throne room
+64;Received quest board tutorial from Utter
+65;Talked to Tatel at the Underground Bar
+66;Got to the Ant Kingdom City bridge for the first time after the end of Chapter 1 (after the cutscene)
+67;Start of Chapter 2 (after the cutscene in the throne room of the Ant Palace)
+68;Chapter 2, after the Leif’s memory cutscene when getting out of the throne room of the Ant Palace
 69;Talked to the closest miner of the entrance of the mine for the first time
-70;Took the Lost Books quest from Brooke in the Ant city castle library
+70;Took the Lost Books quest
 71;Got the Lore Book at the Ant Palace library
-72;Talked to Gen & Eri after the end of Chapter 1
+72;Talked to Gen & Eri after the end of Chapter 1 at the Explorers' Association
 73;Chapter 2, rescued Neolith (after all cutscenes)
-74;
+74;UNKNOWN
 75;Opened the tunnel from Defiant Root to the mines
-76;Opened the tunnel from the Golden Settlement to the mines
-77;Opened the tunnel from the Forsaken Lands to the mines
+76;Opened the tunnel from Golden Settlement to the mines
+77;Opened the tunnel from Forsaken Lands to the mines
 78;Opened the tunnel from Metal Island to the mines
 79;Opened the tunnel from Rubber Prison to the mines
-80;Opened the tunnel from the Far Grasslands to the mines
-81;Talked to Diana for the first time at the Golden Settlement
-82;Got the Dotted Ball in the Golden Path tunnel after taking the Lost Toy quest
-83;Opened the door to the Golden Settlement that leads to the Lost Sands
-84;Chapter 2, after the cutscene when approaching Aria at the center of Golden Settlement
+80;Opened the tunnel from Far Grasslands to the mines
+81;Talked to Diana for the first time at Golden Settlement
+82;Got the Dotted Ball in the Golden Path tunnel
+83;Opened the door to Golden Settlement that leads to Lost Sands
+84;Chapter 2, after the cutscene when approaching Aria at the center of Golden Settlement before the festival
 85;Chapter 2, waited for nightfall
-86;Chapter 2, beaten Aria
-87;Got the Lore Book behind the Sunset Inn at the Golden Settlement
+86;Chapter 2, beaten Acolyte Aria
+87;Got the Lore Book behind the Sunset Inn at Golden Settlement
 88;End of Chapter 2 (after all the cutscenes)
-89;
-90;Chapter 2, opened the windmill doors at the Golden Settlement
-91;Chapter 2, got the hard seed from the person in front of the windmill at the Golden Settlement after opening its door
-92;Chapter 1, talked for the first time to Zasp after combat tutorial
-93;Chapter 2, talked to Zasp about the eating competition at the Golden Settlement
-94;Chapter 2, talked to Chubee for the first time at the Golden Settlement
-95;Chapter 2, finished the eating competition (win or loose) during the festival
-96;Chapter 2, got 15+ points at Whack-a-mole during the festival at the Golden Settlement to get the Sun Offering
-97;Chapter 2, arrived at the center map of the Golden Settlement after getting both Offerings (after cutscene)
-98;Chapter 2, got Kabbu’s pep talk as battle skill
+89;UNKNOWN
+90;Chapter 2, opened the windmill doors at Golden Settlement
+91;Chapter 2, got the Hard Seed from the worker in front of the windmill at Golden Settlement after opening its door
+92;Chapter 1, talked to Zasp for the first time after combat tutorial
+93;Chapter 2, talked to Zasp about the eating competition at Golden Settlement
+94;Chapter 2, talked to Chubee about the eating competition at Golden Settlement
+95;Chapter 2, finished the eating competition (win or lose) during the festival
+96;Chapter 2, got 15+ points at Whack-A-Worm during the festival at Golden Settlement to get the Sun Offering
+97;Chapter 2, arrived at the center map of Golden Settlement after getting both Offerings (after the cutscene)
+98;Chapter 2, got Kabbu’s Pep Talk
 99;Chapter 2, lost the eating competition during the festival
 100;Chapter 2, won the eating competition during the festival
 101;Chapter 2, got the Moon Offering during the festival
-102;Chapter 2, got the Weak Stomack medal from loosing at the eating competition during the festival
+102;Chapter 2, got the Weak Stomach medal from losing at the eating competition during the festival
 103;Chapter 2, after the cutscene where the path to the Golden Hills has opened
-104;Chapter 2, talked to the mayor for the first time at the Golden Settlement
-105;Chapter 2, talked to Chubee after loosing against her in the eating competition during the festival
-106;Got the Mothiva Doll at the Golden Settlement
-107;Got to the plaza for the first time after the end of Chapter 1 (after the cutscene)
-108;Received the crystal berry tutorial
+104;Chapter 2, talked to The Mayor for the first time at Golden Settlement
+105;Chapter 2, talked to Chubee after losing against her in the eating competition during the festival
+106;Got the Mothiva Doll at Golden Settlement
+107;Got to the Ant Kingdom City plaza for the first time after the end of Chapter 1 (after the cutscene)
+108;Received the Crystal Berry tutorial
 109;Chapter 2, placed the Wooden Crank on the right hole at the entrance of Golden Hills
 110;Chapter 2, placed the Wooden Crank on the hole at the left path from the entrance of Golden Hills
-111;Chapter 2, talked to Venus after arriving at the entrance of the Golden Hills
-112;Chapter 2, got the Wooden Crank on the left path from the entrance of the Golden Hills
+111;Chapter 2, talked to Venus after arriving at the entrance of Golden Hills
+112;Chapter 2, got the Wooden Crank on the left path from the entrance of Golden Hills
 113;Chapter 2, got the Big Crank Top Half at the Golden Hills
-114;Approached Eetl at the association after the end of Chapter 1
-115;Chapter 2, after the hungry cutscene at the Ant city plaza
-116;Chapter 2, got the Wooden Crank on the right path from the entrance of the Golden Hills
-117;Chapter 2, got the Big Crank Bottom Half at the Golden Hills
-118;Chapter 2, beaten Mothiva and Zasp at the Golden Hills
+114;Approached Eetl at the Explorers' Association after the end of Chapter 1
+115;Chapter 2, after the hungry cutscene at the Ant Kingdom City plaza
+116;Chapter 2, got the Wooden Crank on the right path from the entrance of Golden Hills
+117;Chapter 2, got the Big Crank Bottom Half at Golden Hills
+118;Chapter 2, beaten Zasp & Mothiva at Golden Hills
 119;Chapter 2, cooked for the first time
-120;Chapter 2, after the eating cutscene at Ant city commercial area
-121;Got the Back Support medal on the map with the Big Crank Bottom Half at the Golden Hills
-122;Chapter 2, beaten the 2 Venus buds on the backside of the map with the Big Crank Bottom Half at the Golden Hills
-123;Talked to the Fortune Teller for the first time at the Golden Settlement
-124;Chapter 2, arrived at the top of the Golden Hills (after the cutscene)
-125;Chapter 2, gave the Sun Offering at the top of the Golden Hills
-126;Chapter 2, gave the Moon Offering at the top of the Golden Hills
-127;Chapter 2, pulled the level at the top of the Golden Hills
-128;Chapter 2, placed the Wooden Crank at the top of the Golden Hills
-129;Chapter 2, got the Wooden Crank at the top of the Golden Hills
+120;Chapter 2, after the eating cutscene at Ant Kingdom City commercial area
+121;Got the Back Support medal on the map with the Big Crank Bottom Half at Golden Hills
+122;Chapter 2, beaten the 2 Venus Buds on the backside of the map with the Big Crank Bottom Half at Golden Hills
+123;Talked to the Fortune Teller for the first time at Golden Settlement
+124;Chapter 2, arrived at the top of Golden Hills (after the cutscene)
+125;Chapter 2, gave the Sun Offering at the top of Golden Hills
+126;Chapter 2, gave the Moon Offering at the top of Golden Hills
+127;Chapter 2, pulled the lever at the top of Golden Hills
+128;Chapter 2, placed the Wooden Crank at the top of Golden Hills
+129;Chapter 2, got the Wooden Crank at the top of Golden Hills
 130;Start of Chapter 3 (after all the cutscenes at the throne room of the Ant Palace)
 131;Took the Requesting Assistance quest (set to false upon completion)
 132;Talked to Team Slacker for the first time
-133;Arrived at the Golden Settlement after the end of Chapter 2 (after the cutscene)
+133;Arrived at Golden Settlement after the end of Chapter 2 (after the cutscene)
 134;Talked to Levi after taking the Requesting Assistance quest
 135;Completed the Requesting Assistance quest
-136;Talked to Rebecca for the first time in the Ant Palace
-137;Got the HP Plus at the Outskirt waterfall neat the Cave Of Trials
-138;Chapter 3, lowered the bridge to the Lost Sands entrance at the Outskirt
+136;Talked to Rebecca for the first time at the Ant Palace
+137;Got the HP Plus at the Bugaria Outskirts waterfall near the Cave of Trials
+138;Chapter 3, lowered the bridge to the Lost Sands entrance at the Bugaria Outskirts
 139;Talked to Tanjerin for the first time
-140;Gained access to the Underground Bar at Ant City commercial area
+140;Gained access to the Underground Bar at Ant Kingdom City commercial area
 141;Talked to Shades for the first time at the Underground Bar
 142;Got the Lore Book behind a wooden box at Defiant Root
 143;Got the Crystal Fruit after beating the Seedling King
-144;
-145;
+144;UNKNOWN
+145;UNKNOWN
 146;Took the Peacock Spider bounty quest
-147;
-148;
+147;UNKNOWN
+148;UNKNOWN
 149;Got the Fortify medal at Defiant Root
-150;Set to true when getting a Bed Bug at Defiant Root, set to false after using it
-151;Talked to the merchant guy at Defiant Root for the first time
-152;Talked to the permanent upgrade berry guy for the first time at Defiant Root
-153;Got the Heart Berry from the merchant at Defiant Root
-154;Got the Bond Berry from the merchant at Defiant Root
-155;Got the Super Pepper from the merchant at Defiant Root
-156;Got the Iron Seed from the merchant at Defiant Root
+150;Rented a Bed Bug at Defiant Root, set to false after using it
+151;Talked to the Fuzzo at Defiant Root for the first time
+152;Talked to the Sun for the first time at Defiant Root
+153;Got the Heart Berry from Sun at Defiant Root
+154;Got the Bond Berry from Sun at Defiant Root
+155;Got the Super Pepper from Sun at Defiant Root
+156;Got the Iron Seed from Sun at Defiant Root
 157;Received the first free Bed Bug at Defiant Root
 158;Talked to Doppel for the first time (or checked the bounty quest board) at the Underground Bar
 159;Chapter 3, got scanned at the Bee Kingdom Hive entrance
-160;Chapter 3, after getting welcomed at the Bee Kingdom Hive (before getting to H.B’s room, also allows the use of Bubble Shield as field skill)
-161;Showed the Explorer Permit to H.B at the Bee Kingdom Hive which unlocks the B.O.S.S system
-162;Logged in to the B.O.S.S system (set to false when logging off)~Also used when starting Cave of Trials (set to false when ending) 
-163;Unlocked the EX mode from the B.O.S.S system
-164;Got the Spy Specs medal from the B.O.S.S system
-165;Got the Detector medal from the B.O.S.S system
-166;EX mode active on the B.O.S.S system
-167;Chapter 3, told Gen & Eri to go to the meeting point at the Bee Kingdom Hive
-168;Chapter 3, told Zasp to go to the meeting point at the Bee Kingdom Hive
-169;Chapter 3, met the Bee Queen for the first time in her room at the Bee Kingdom Hive (after all cutscenes)
+160;Chapter 3, after getting welcomed at Bee Kingdom Hive (before getting to Dr. HB’s room)~Also allows the use of Bubble Shield Lite
+161;Showed the Explorer Permit to Dr. HB at Bee Kingdom Hive which unlocks the B.O.S.S. system
+162;Logged in to the B.O.S.S. system (set to false when logging off)~Also used when starting Cave of Trials (set to false when ending) 
+163;Unlocked the EX mode from the B.O.S.S. system
+164;Got the Spy Specs medal from the B.O.S.S. system
+165;Got the Detector medal from the B.O.S.S. system
+166;EX mode active on the B.O.S.S. system
+167;Chapter 3, told Gen & Eri to go to the meeting point at Bee Kingdom Hive
+168;Chapter 3, told Zasp to go to the meeting point at Bee Kingdom Hive
+169;Chapter 3, met the Queen Bianca for the first time in her room at Bee Kingdom Hive (after all cutscenes)
 170;Chapter 3, arrived at Defiant Root for the first time
-171;Got Leif’s Icicle as a field skill
-172;Chapter 3, used the Defiant Root elevator for the first time
-173;Chapter 3, told Mothiva to go to the meeting point at the Bee Kingdom Hive
-174;Chapter 3, after the cutscene after exiting the throne room at the Ant Palace
-175;Got in Professor Honeycomb’s room for the first time at the Bee Kingdom Hive
+171;Got Leif’s Icicle
+172;Chapter 3, used the elevator at Defiant Root for the first time
+173;Chapter 3, told Mothiva to go to the meeting point at Bee Kingdom Hive
+174;Chapter 3, after the cutscene when exiting the throne room at the Ant Palace
+175;Got in Professor Honeycomb’s room for the first time at Bee Kingdom Hive
 176;Chapter 3, the shop in Honey Factory is unlocked
-177;Chapter 3, arrived at the Honey Factory for the first time
+177;Chapter 3, arrived at Honey Factory for the first time
 178;Chapter 3, got the Factory Pass in the Overseer’s office
-179;Chapter 3, unlocked the factory door at the Honey Factory
-180;Talked to Ant storage guy for the first time
-181;Tutorial on the Spy Cards active (set to false when the tutorial is done)
+179;Chapter 3, unlocked the factory door at the Honey Factory lobby
+180;Talked to Ms. Amber for the first time
+181;Set to true when the tutorial on Spy Cards starts (set to false when the tutorial is done)
 182;Took the Cable Car Bodyguard quest
 183;Completed the Cable Car Bodyguard quest
 184;Took the Team Snakemouth… quest
@@ -189,9 +189,9 @@
 188;Took the Lost Item quest
 189;Completed the Lost Item quest
 190;Took the Butler Missing! quest
-191;Crisbee can cook the Crisbee Donut (also marks the completion of I Wanna Get Better! quest
-192;Gave the Tangy Berry to Kut, marks the completion of the My Specialty quest
-193;Gave the Crisbee Donut and the Tangy Carpaccio to Fry which marks the completion of the A Smiling Dish quest
+191;Crisbee can cook the Crisbee Donut, marking the completion of I Wanna Get Better! quest)
+192;Gave the Tangy Berry to Kut, marking the completion of the My Specialty quest
+193;Gave the Crisbee Donut and the Tangy Carpaccio to Fry, marking the completion of the A Smiling Dish quest
 194;Gave the correct ingredients to Crisbee after taking the I Wanna Get Better! quest, set to false after the cutscene~Also used similarly for Kut after taking the My Specialty quest~Also used similarly for Fry after taking the A Smiling Dish quest
 195;Talked to Kut after taking the My Specialty quest
 196;Talked to Fry after taking the A Smiling Dish quest (set to false after cooking the Queen’s Dinner)
@@ -199,156 +199,156 @@
 198;Talked to Madeleine for the first time after taking the Butler Missing! quest
 199;Found Seb after taking the Butler Missing! quest
 200;Completed the Butler Missing! quest
-201;Chapter 3, rescued the merchants at the Lost Sands
-202;hit the tree near the south exit at the platforming map of the Lost Sands
-203;hit the tree leading north to the northeast exit at the platforming map of the Lost Sands
-204;hit the tree near the east exit at the platforming map of the Lost Sands
-205;hit the tree near the northeast exit at the platforming map of the Lost Sands
-206;hit the tree leading north to the north exit at the platforming map of the Lost Sands
-207;Hit the tree leading northeast near the west exit at the platforming map of the Lost Sands
-208;Hit the tree leading south near the west exit at the platforming map of the Lost Sands
-209;hit the second tree leading west from the south exit at the platforming map of the Lost Sands
-210;Chapter 3, rescued the Overseer at the Honey Factory
+201;Chapter 3, rescued the merchants at Lost Sands
+202;hit the tree near the south exit at the platforming map of Lost Sands
+203;hit the tree leading north to the northeast exit at the platforming map of Lost Sands
+204;hit the tree near the east exit at the platforming map of Lost Sands
+205;hit the tree near the northeast exit at the platforming map of Lost Sands
+206;hit the tree leading north to the north exit at the platforming map of Lost Sands
+207;hit the tree leading northeast near the west exit at the platforming map of Lost Sands
+208;hit the tree leading south near the west exit at the platforming map of Lost Sands
+209;hit the second tree leading west from the south exit at the platforming map of Lost Sands
+210;UKNOWN
 211;Chapter 3, rescued Malbee at the Honey Factory
 212;Chapter 3, got the Factory Pass in the room on the upper north side of the Honey Factory
 213;Chapter 3, got the Factory Pass in the room with Gen & Eri using the switch at the Honey Factory
 214;Hit the lever in the room with Gen & Eri using a switch at the Honey Factory
 215;Chapter 3, got the Factory Pass in the room on the upper west side at the Honey Factory
-216;Chapter 3, beaten the Bee-Boop that was harassing Gen & Eri at the Honey Factory
+216;Chapter 3, beaten the Bee-Boops that were harassing Gen & Eri at the Honey Factory
 217;Chapter 3, unlocked the door with the 3 Factory Pass at the Honey Factory
 218;Chapter 3, rescued the Overseer (after the cutscene)
-219;Talked to H.B after the end of Chapter 3 at the Bee Kingdom Hive
+219;Talked to Dr. HB after the end of Chapter 3 at Bee Kingdom Hive
 220;Chapter 3, got the Shock Trooper medal in the first storage room at the Honey Factory
 221;Chapter 3, beaten Ahoneynation (after all the cutscenes)
 222;Chapter 3, unlocked the door in the storage room at the Honey Factory
 223;Examined the Overseer portrait at the Honey Factory for the first time
 224;After the cutscene that occurs when exiting the Honey Factory after the end of Chapter 3
-225;Talked to the Bee Queen after the end of Chapter 3 at the Bee Kingdom Hive
+225;Talked to Queen Bianca after the end of Chapter 3 at Bee Kingdom Hive
 226;Took the Power Plant Investigation quest
-227;Talked to the bee that is selling her house at the Bee Kingdom Hive residential area
-228;Got the Flower Key from the bee that is selling it at Bee Kingdom Hive residential area
-229;Unlocked the red house with the Flower Key at Ant City Plaza
-230;Got the Charge Up medal on the roof of the Inn at Ant City Plaza
+227;Talked to the bee that is selling her house at Bee Kingdom Hive residential area
+228;Got the Flower Key from Beette at the Bee Kingdom Hive residential area
+229;Unlocked the red house with the Flower Key at Ant Kingdom City plaza
+230;Got the Charge Up medal on the roof of the inn at Ant Kingdom City Plaza
 231;Got the Blank Card from Carmina at the Underground Bar
-232;Got the Suit Card from Chuck at the Outskirt
-233;Got the Suit Card from the blue Card Master at Defiant Root
-234;Got the Suit Card from Crow at the Bee Kingdom Hive
-235;Got the Suit Card from the Card Master at the Golden Settlement
+232;Got the Suit Card from Chuck at Bugaria Outskirts
+233;Got the Suit Card from Shay at Defiant Root
+234;Got the Suit Card from Crow at Bee Kingdom Hive
+235;Got the Suit Card from Arie at Golden Settlement
 236;Talked to Carmina for the first time at the Underground Bar
 237;Talked to Carmina after gathering the required Spy Cards
 238;Received the Mysterious Piece from Neolith after starting Chapter 4
-239;Chapter 4, got the Rusty Key from the guy in the well of Defiant Root
+239;Chapter 4, got the Rusty Key from Astotheles at Defiant Root
 240;Took the Book Return! quest
-241;Received the Overdue Book from Ali at Ant city residential area
-242;Delivered the Overdue book at the Ant Palace library
+241;Received the Overdue Book from Ali at the Ant Kingdom City residential area
+242;Delivered the Overdue Book at the Ant Palace library
 243;Completed the Book Return! quest
-244;Talked to the blue Card Master at Defiant Root for the first time after getting the Blank Card
+244;Talked to Shay at Defiant Root for the first time after getting the Blank Card
 245;Got the Full Suit Card
-246;
-247;Talked to Crow about Spy cards for the first time at the Bee Kingdom Hive after getting the Blank Card
-248;Talked to Chuck about Spy Cards for the first time at the Outskirt after getting the Blank Card
-249;Talked to the Card Master at the Golden Settlement for the first time after getting the Blank Card
-250;
-251;Bought the Bee Hat at the Bee Kingdom hive
-252;Bought the Pretty Ribbon at the Bee Kingdom Hive
-253;After getting introduced to the berry bank services at Ant city residential area
-254;After signing up for a berry bank account at the Ant city residential area
-255;Hit the switch at the top of Stream Mountain at the Lost Sands
+246;UNKNOWN
+247;Talked to Crow about Spy Cards for the first time at Bee Kingdom Hive after getting the Blank Card
+248;Talked to Chuck about Spy Cards for the first time at Bugaria Outskirts after getting the Blank Card
+249;Talked to Arie about Spy Cards for the first time at Golden Settlement after getting the Blank Card
+250;UNKNOWN
+251;Bought the Bee Hat at Bee Kingdom hive
+252;Bought the Pretty Ribbon at Bee Kingdom Hive
+253;After getting introduced to the Bank of Bugaria at Ant Kingdom City residential area
+254;After signing up for a bank account at the Ant Kingdom City residential area
+255;Hit the switch at the top of Stream Mountain at Lost Sands
 256;Took the I Want a Souvenir… quest
 257;Completed the I Want a Souvenir… quest
-258;Chapter 4, unlocked the red lock of the Bandit Hideout entrance at Lost Sands
-259;Chapter 4, arrived at the map south of the dungeon for the first time at Bandit Hideout
+258;Chapter 4, used the Rusty Key on the Bandit Hideout entrance at Lost Sands
+259;Chapter 4, arrived at the map south of the prison for the first time at Bandit Hideout
 260;Chapter 4, after the cutscene of the bandits talking with the wasps near the large item chest at Bandit Hideout
 261;Hit the tree leading west at the map with the orange spike floor at Lost Sands
-262;Got the Meditation medal at the Lost Sands
-263;Talked to the bee in front of the Far Grasslands border gate for the first time at the Lost Sands (set to false at the start of Chapter 5, then to tru when talking to him again)
-264;Talked to the bandit at the map with the waterfall and the save point for the first time at Lost Sands
+262;Got the Meditation medal at Lost Sands
+263;Talked to the bee in front of the Far Grasslands border gate for the first time at Lost Sands~Set to false at the start of Chapter 5, then to true when talking to him again
+264;Talked to the Burglar at the map with the waterfall and the save point for the first time at Lost Sands
 265;Took the Stolen Item quest
 266;Took the Rare Item Wanted! quest
-267;Got the Bond Berry at the Bandit Hideout
-268;Got the Orange Horn at the Bandit Hideout
-269;Chapter 4, retrieved your inventory as well as the Beemerang at the Bandit Hideout
-270;Got the Stolen Silk at Bandits Hideout
+267;Got the Bond Berry at Bandit Hideout
+268;Got the Orange Horn at Bandit Hideout
+269;Chapter 4, retrieved your inventory as well as the Beemerang at Bandit Hideout
+270;Got the Stolen Silk at Bandit Hideout
 271;Got the Lore Book near the large item chest at Bandit Hideout
 272;Took the Huuuuuuuuuu…!!! quest
 273;Talked to Tanjerin after taking the Huuuuuuuuuu…!!! quest
 274;Gave the Orange Horn to Tanjerin after taking the Huuuuuuuuuu…!!! quest
 275;Completed the Huuuuuuuuuu…!!! quest
-276;Got introduced to the Wack-A-Worm minigame at the Wacka Farms for the first time
-277;
-278;Talked to a healing Venus bud for the first time
-279;Talked to Team Slacker in front of the Sand Castle’s receptacle
-280;Chapter 4, placed the Sand Castle Key in its receptacle at the Lost Sands, thus opening the way to the Ancient Castle
-281;Got the Agaric Shroom at the map with the green spike floor at the Lost Sands
-282;Hit the tree leading east at the map with the green spike floor at the Lost Sands
-283;Chapter 4, hit the switch in the rolling rocks room for the shortcut at the Ancient Castle
-284;Chapter 4, opened the upper left door in the west room on the first floor of the Ancient Castle
-285;Got the Frostbite medal at the Ancient Castle
+276;Got introduced to the Whack-A-Worm minigame at the Whacka Farms for the first time
+277;UNKNOWN
+278;Talked to a healing Venus Bud for the first time
+279;Talked to Team Slacker in front of the Ancient Castle’s receptacle
+280;Chapter 4, placed the Sand Castle Key in its receptacle at Lost Sands
+281;Got the Agaric Shroom at the map with the green spike floor at Lost Sands
+282;Hit the tree leading east at the map with the green spike floor at Lost Sands
+283;Chapter 4, hit the switch in the rolling rocks room for the shortcut at Ancient Castle
+284;Chapter 4, opened the upper left door in the west room on the first floor of Ancient Castle
+285;Got the Frostbite medal at Ancient Castle
 286;Approached Leif’s family’s house after the start of Chapter 3 (after the cutscene)
-287;Talked to Levi after taking the Requesting Assistance quest, set to false when talking to them after completing the quest near the Underground Bar entrance
-288;Chapter 4, got the Ancient Key behind the spike bars at the Sand Castle
-289;Chapter 4, got the Ancient Key in the 4 pressure plates room at the Sand Castle
-290;Chapter 4, hit the switch on the first floor of the main room for the shortcut at the Ancient Castle
-291;Chapter 4, hit the switch on the second floor of the main room for the shortcut at the Ancient Castle
-292;Chapter 4, unlocked the door on the first floor of the main room of the Ancient Castle
-293;Chapter 4, unlocked the door on the second floor of the main room of the Ancient Castle
-294;Chapter 4, got the Big Ancient Key at the Ancient Castle
-295;Chapter 4, unlocked the door with the Big Ancient Key at the Ancient Castle
-296;Chapter 4, opened the door in the 4 pressure plates room at the Ancient Castle
-297;Chapter 4, destroyed the rocks on west of the rolling rocks room at the Ancient Castle
-298;Chapter 4, approached the Dune Scorpion at the Lost Sands (when the cutscene starts)
+287;Talked to Levi after taking the Requesting Assistance quest~Set to false when talking to them after completing the quest near the Underground Bar entrance
+288;Chapter 4, got the Ancient Key behind the spike bars at Ancient Castle
+289;Chapter 4, got the Ancient Key in the 4 pressure plates room at the Ancient Castle
+290;Chapter 4, hit the switch on the first floor of the main room for the shortcut at Ancient Castle
+291;Chapter 4, hit the switch on the second floor of the main room for the shortcut at Ancient Castle
+292;Chapter 4, unlocked the door on the first floor of the main room of Ancient Castle
+293;Chapter 4, unlocked the door on the second floor of the main room of Ancient Castle
+294;Chapter 4, got the Big Ancient Key at Ancient Castle
+295;Chapter 4, unlocked the door with the Big Ancient Key at Ancient Castle
+296;Chapter 4, opened the door in the 4 pressure plates room at Ancient Castle
+297;Chapter 4, destroyed the rocks on the west side of the rolling rocks room at Ancient Castle
+298;Chapter 4, approached the Dune Scorpion at Lost Sands (when the cutscene starts)
 299;End of Chapter 3 (after all the cutscenes)
 300;Start of Chapter 4 (after all the cutscenes)
-301;Chapter 4, got the Earth Key from Astotheles at the Bandit Hideout (after all cutscenes)
-302;Chapter 4, got the Heaven Key from Hawk at the Lost Sands
+301;Chapter 4, got the Earth Key from Astotheles at Bandit Hideout (after all cutscenes)
+302;Chapter 4, got the Heaven Key from Hawk at Lost Sands
 303;Chapter 4, got the Sand Castle Key
 304;Start of Chapter 5 (same as 348???)
-305;Got the Heart Berry at the Wacka Farms by getting 25+ points at Wack-A-Worm
-306;Examined the mural on the second floor of the Ancient Castle for the first time
+305;Got the Heart Berry at the Whacka Farms by getting 25+ points at Whack-A-Worm
+306;Examined the mural on the second floor of Ancient Castle for the first time
 307;Took the Dropped My Hat! Quest
 308;Completed the Dropped My Hat! quest
-309;Found the Top Hat at the Golden Settlement
+309;Found the Top Hat at Golden Settlement
 310;Bought the Empower+ medal at the Termacade
 311;Bought the Break+ medal at the Termacade
 312;Bought the Enfeeble+ medal at the Termacade
 313;Bought the Fortify+ medal at the Termacade
 314;Bought the Charge Up+ medal at the Termacade
-315;Showed the Full Suit Card at the knight in front of the entrance to the Spy Cards tournament at Metal Island
-316;The first water crystal switch encountered in Stream Mountain is activated at the Lost Sands
-317;Hit the tree on the right of the map with the first water crystal switch in Stream Mountain at the Lost Sands
-318;Hit the tree on the left of the map with the first water crystal switch in Stream Mountain at the Lost Sands
-319;Got the Crimson Ore at the top of Stream Mountain at the Lost Sands
+315;Showed the Full Suit Card at the Card Guard in front of the entrance to the Spy Cards tournament at Metal Island
+316;The first water crystal switch encountered at Stream Mountain is activated
+317;Hit the tree on the right of the map with the first water crystal switch at Stream Mountain
+318;Hit the tree on the left of the map with the first water crystal switch at Stream Mountain
+319;Got the Crimson Ore at the top of Stream Mountain at Lost Sands
 320;Took the Ore Wanted quest
 321;Completed the Ore Wanted quest
-322;Chapter 5, talked to Maki near the Far Grasslands entrance at the Lost Sands
-323;Chapter 5, talked to Maki at the entrance of the Far Grasslands
+322;Chapter 5, talked to Maki near the Far Grasslands entrance at Lost Sands
+323;Chapter 5, talked to Maki at the entrance of Far Grasslands
 324;Took the Helpers Needed At Once! quest
 325;Talked to Malbee after taking the Helpers Needed At Once! quest
-326;Performed the reset on the Mender near the pump at the Honey Factory after taking the Helpers Needed At Once! quest
-327;Performed the reset on the Mender at the room before the pump at the Honey Factory after taking the Helpers Needed At Once! quest
-328;Performed the reset on the Mender near the crank in a glass enclosure at the Honey Factory after taking the Helpers Needed At Once! quest
-329;Performed the reset on all three Meders at the Honey Factory after taking the Helpers Needed At Once! quest
+326;Performed the reset on the Mender near the pump at the Honey Factory
+327;Performed the reset on the Mender at the room before the pump at the Honey Factory
+328;Performed the reset on the Mender near the crank in a glass enclosure at the Honey Factory
+329;Performed the reset on all three Menders at the Honey Factory
 330;Completed the Helpers Needed At Once! quest
 331;Got the Lore Book at the Fishing Village
-332;Destroyed the breakable rock at the entrance of the Power Plant / Far Grasslands passage at the Far Grasslands
-333;
-334;Chapter 5, beaten the Leafbug tribes at the north exit of the second map at the Wild Swamplands
-335;Chapter 5, used Kabbu’s horn on a rock at the Wild Swamplands
-336;Chapter 5, got ambushed by the Leafbug tribes at the wooden bridge at the Wild Swamplands
+332;Destroyed the breakable rock at the entrance of the Power Plant / Far Grasslands passage at Far Grasslands
+333;UNKNOWN
+334;Chapter 5, beaten the Leafbug tribes at the north exit of the second map at Wild Swamplands
+335;Chapter 5, used Kabbu’s horn on a rock that falls to open a path at Wild Swamplands
+336;Chapter 5, got ambushed by the Leafbug tribes at the wooden bridge at Wild Swamplands
 337;Hit a tree at the destroyed wooden bridge room at the Wild Swamplands
-338;Got the Berserker medal at the Chomper Caves
-339;Beaten the Mother Chomper at the Chomper Caves
-340;Got the Chomper Seed at the Chomper Caves
+338;Got the Berserker medal at Chomper Caves
+339;Beaten the Mother Chomper at Chomper Caves
+340;Got the Chomper Seed at Chomper Caves
 341;Hatched the Chomper Seed at Bee Kingdom Hive
-342;Hit the donut shaped stone with Kabbu’s horn at the Lost Sands
-343;Got the Tardigrade Shield medal at the Lost Sands
-344;Got the A.D.B.P Enhancer medal from Professor Honeycomb at the Bee Hive Kingdom (set after all cutscenes)
+342;Hit the donut shaped stone with Kabbu’s horn at Lost Sands
+343;Got the Tardigrade Shield medal at Lost Sands
+344;Got the A.D.B.P Enhancer medal from Professor Honeycomb at Bee Hive Kingdom (after all cutscenes)
 345;End of Chapter 4 (after all the cutscenes)
-346;Chapter 6, got the Flame Brooch from Vanessa II at the Rubber Prison (after all the cutscenes)
+346;Chapter 6, got the Flame Brooch from Queen Vanessa II at Rubber Prison (after all the cutscenes)
 347;Start of Chapter 6 (after all the cutscenes)
 348;Start of Chapter 5 (same as 304???)
 349;UNUSED checked in event 155
-350;Chapter 6, dropped Elizant II at the Outskirt (after all the cutscenes)
+350;Chapter 6, dropped Queen Elizant II at the Bugaria Outskirts (after all the cutscenes)
 351;Talked to the person in front of the Termacade for the first time
 352;Got the A.D.B.P Enhancer medal from Professor Honeycomb at the Bee Hive Kingdom (set when receiving it)
 353;Talked to Crow after helping him at the Roach Village ruins at the Bee Kingdom Hive
@@ -396,7 +396,7 @@
 395;Talked to Isau for the first time after taking the Rare Item Wanted! quest
 396;Gave the Sophie Petal to Isau, completing the Rare Item Wanted! quest
 397;Got the Dark Cherries at Golden Path
-398;
+398;UNKNOWN
 399;UNUSED Got the second Heart Berry from the merchant at Defiant Root
 400;Gave the correct ingredients to Crisbee after taking the I Wanna Get Better! quest, set to false after the cutscene~Also used similarly with Fry after taking the A Smiling Dish quest~Also for Chapter 3, when it is possible to signal Gen & Eri to use a switch at the Honey Factory~Also set to true then false when talking to Crow about Spy Cards~Also used in the Spy Cards tournament (true after the first match, false when the tournament is over)~Chapter 6, also used when the fight against Mothiva & Zasp starts at the Colosseum (set to false when the fight is won)~Chapter 7, also used when the Wasp King is about to turn into Everlasting King (set to false when the transformation is complete)
 401;Chapter 4, arrived at the map south of the dungeon for the first time at Bandit Hideout, set to false when exiting the map~Chapter 5, also used when arrived at the first room of the Wasp Kingdom (set to false after leaving the Wasp Kingdom HiveChapter 7, also used when arriving in a room with an eye at Giant’s Lair (set to false when leaving to a room with no eyes)
@@ -406,7 +406,7 @@
 405;Chompy is at the Bee Kingdom Hive
 406;UNUSED Got the second Bond Berry from the merchant at Defiant Root
 407;Asked the Innkeeper if they are okay at Defiant Root
-408;
+408;UNKNOWN
 409;Chapter 6, after winning all three rounds at the Colosseum
 410;Gave the Bug Ranger Plushie at the child near the Colosseum entrance at Termite Capital
 411;Placed the Mysterious Piece in the receptacle at the Cave of Trials room
@@ -451,7 +451,7 @@
 450;Talked to The Wizard at the Wizard Tower for the first time at the Far Grasslands
 451;Got the Crystal Berry from the pink spider at the Forsaken Lands
 452;Arrived at the last map before the save point for the first time at the Forsaken Lands
-453;
+453;UNKNOWN
 454;Got the Crystal Crown by beating the False Monarch
 455;Got the Lore Book at the map with the wind blowers at the Forsaken Lands
 456;Unlocked the door at the Power Plant after taking the Power Plant Investigation quest
@@ -491,7 +491,7 @@
 490;Got the Dark Cherries in the locked room at Defiant Root
 491;Hit the tree in the map before Tydal Wyrm in Stream Mountain at the Lost Sands
 492;The water crystal switch on the way to the Tydal Wyrm in Stream Mountain is activated at the Lost Sands
-493;
+493;UNKNOWN
 494;Got the Crystal Fang by beating the Devourer
 495;Talked to Team Slacker about the Tydal Wyrm at Lost Sands
 496;Got the Coal Crystal by beating Tydal Wyrm
@@ -587,7 +587,7 @@
 586;Chapter 7, arrived at the Roach Village for the first time at Giant’s Lair (after all the cutscenes)
 587;Bought all medals at the shop at Ant City commercial area
 588;Bought all of Shade’s medals
-589;
+589;UNKNOWN
 590;Bought the Venom Ribbon at the Termacade
 591;Bought the Shocking Ribbon at the Termacade
 592;Bought the Drowsy Ribbon at the Termacade
@@ -631,7 +631,7 @@
 630;Reached a balance of 500 or above at the bank for the first time
 631;Got the Dry Bread at Rubber Prison
 632;Got the Dark Cherries at the south of the Wasp Kingdom entrance at the Far Grasslands
-633;
+633;UNKNOWN
 634;Took the My Mecha Claw! quest
 635;Talked to Engira for the first time after taking the My Mecha Claw! quest
 636;Completed the Mecha Claw! quest
@@ -651,7 +651,7 @@
 650;Talked to Neolith after the start of Chapter 5
 651;Got the mushroom in the first room of Snakemouth Den
 652;It is now possible to quick travel to Snakemouth Den from the mines
-653;
+653;UNKNOWN
 654;Examined the steering wheel statue at the Outskirt Piers
 655;Examined the view of the Colosseum for the first time at the Termite Capital
 656;MOREFARM code active
@@ -667,22 +667,22 @@
 666;Chapter 7, turned the dial on the right stove at Giant’s Lair
 667;Chapter 7, turned the right dial on the left stove at Giant’s Lair
 668;Chapter 7, turned the left dial on the left stove at Giant’s Lair
-669;
+669;UNKNOWN
 670;Chapter 7, turned all the dials in the oven room at Giant’s Lair (after all the cutscenes)
 671;Completed all quests
-672;
+672;UNKNOWN
 673;Completed the Cave of Trials for the first time
 674;Dug Cerise out of the soft soil in her cell at the Bandits Hideout
-675;
+675;UNKNOWN
 676;Talked to Patton about his services for the first time at the Forsaken Lands
 677;Got the Squash on the map located west of the Forsaken Lands entrance by cutting a leaf located on the leftmost part of the map
 678;Got the Squash on the map located west of the Forsaken Lands entrance by cutting the leaf near the dead tree
 679;Took the mistake in the tent at the map with the Explorer Association
-680;
+680;UNKNOWN
 681;MYSTERY? code active
 682;Talked to Cerise for the first time at the Bandits Hideout
 683;Got the Spicy Berry at the entrance of Snakemouth Den at the Outskirt
-684;
+684;UNKNOWN
 685;Got 30+ points at Wack-A-Worm at the Wacka Farms for the first time
 686;Got the Burly Tea in Madeleined’s house at the Explorer Association area
 687;Talked to Elizant II for the first time in post game at the throne room of the Ant Palace
