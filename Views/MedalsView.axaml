@@ -13,16 +13,19 @@
   <TabControl HorizontalAlignment="Center" HorizontalContentAlignment="Center">
     <TabItem Header="On hand">
       <DockPanel>
-        <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding SelectedMedalForAdd, 
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10,0,5">
+          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ComboBox SelectedIndex="{Binding SelectedMedalForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Medal}}"
-                              Items="{Binding MedalsNames}" Width="180" />
-          <ComboBox SelectedIndex="{Binding SelectedMedalEquipTargetForAdd, 
+                                Items="{Binding MedalsNames}" Width="180" />
+            <ComboBox SelectedIndex="{Binding SelectedMedalEquipTargetForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:MedalEquipTarget}}"
-                              Items="{Binding MedalsEquipTargetNames}" Width="125" />
-          <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedal}"/>
+                                Items="{Binding MedalsEquipTargetNames}" Width="125" />
+            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedal}"/>
+          </StackPanel>
+          <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals" Command="{Binding UnequipAllMedals}" />
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
           <Button Content="↑" Command="{Binding CmdReorderMedalsUp}" />

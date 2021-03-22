@@ -39,7 +39,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
     {
       var array = (LibraryFlag[][])Data;
       for (int i = 0; i < (int)LibrarySection.COUNT; i++)
+      {
         array[i] = new LibraryFlag[nbrSlotsPerSection];
+        for (int j = 0; j < array[i].Length; j++)
+        {
+          array[i][j] = new LibraryFlag { Index = j };
+        }
+      }
     }
 
     public string EncodeToSaveLine()
@@ -83,7 +89,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         {
           if (!bool.TryParse(data[j], out boolOut))
             throw new Exception(nameof(Library) + "[" + Enum.GetNames(typeof(LibrarySection))[i] + "][" + j + "] failed to parse");
-          flags[i][j] = new LibraryFlag { Index = j, Enabled = boolOut };
+          flags[i][j].Enabled = boolOut;
         }
       }
     }

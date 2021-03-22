@@ -361,5 +361,11 @@ namespace BugFablesSaveEditor.ViewModels
     {
       MedalsShadesAvailables.Add(new MedalShopAvailable { Medal = SelectedMedalShadesAvailableForAdd });
     }
+
+    public void UnequipAllMedals()
+    {
+      foreach (var medal in Medals)
+        medal.MedalEquipTarget = MedalEquipTarget.Unequipped;
+    }
   }
 }

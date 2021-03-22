@@ -12,56 +12,80 @@
 
   <TabControl HorizontalAlignment="Center">
     <TabItem Header="Flags">
-      <DataGrid AutoGenerateColumns="False" Items="{Binding Flags}"
-                CanUserReorderColumns="True" CanUserResizeColumns="True">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-          <DataGridTemplateColumn Header="Value" Width="80">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
-        </DataGrid.Columns>
-      </DataGrid>
+      <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlags}"/>
+        </DockPanel>
+        <DataGrid AutoGenerateColumns="False" Items="{Binding FlagsFiltered}"
+                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+            <DataGridTemplateColumn Header="Value" Width="80">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
     </TabItem>
     <TabItem Header="Flagvars">
-      <DataGrid AutoGenerateColumns="False" Items="{Binding Flagvars}"
-                CanUserReorderColumns="True" CanUserResizeColumns="True">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-          <DataGridTextColumn Header="Value" Binding="{Binding Var}"/>
-          <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
-        </DataGrid.Columns>
-      </DataGrid>
+      <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagvars}"/>
+        </DockPanel>
+        <DataGrid AutoGenerateColumns="False" Items="{Binding FlagvarsFiltered}"
+                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+            <DataGridTextColumn Header="Value" Binding="{Binding Var}"/>
+            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
     </TabItem>
     <TabItem Header="Flagstrings">
-      <DataGrid AutoGenerateColumns="False" Items="{Binding Flagstrings}"
-                CanUserReorderColumns="True" CanUserResizeColumns="True">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-          <DataGridTextColumn Header="Value" Binding="{Binding Str}"/>
-          <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
-        </DataGrid.Columns>
-      </DataGrid>
+      <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagstrings}"/>
+        </DockPanel>
+        <DataGrid AutoGenerateColumns="False" Items="{Binding FlagstringsFiltered}"
+                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+            <DataGridTextColumn Header="Value" Binding="{Binding Str}"/>
+            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
     </TabItem>
     <TabItem Header="Regionals">
-      <DataGrid AutoGenerateColumns="False" Items="{Binding Regionals}"
-                CanUserReorderColumns="True" CanUserResizeColumns="True">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-          <DataGridTemplateColumn Header="Value" Width="80">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
-        </DataGrid.Columns>
-      </DataGrid>
+      <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRegionals}"/>
+        </DockPanel>
+        <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalsFiltered}"
+                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+            <DataGridTemplateColumn Header="Value" Width="80">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
     </TabItem>
   </TabControl>
 </UserControl>

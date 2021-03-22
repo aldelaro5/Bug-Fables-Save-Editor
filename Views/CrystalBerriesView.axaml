@@ -10,21 +10,30 @@
     <vm:CrystalBerriesViewModel/>
   </Design.DataContext>
 
-  <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerries}"
-            CanUserReorderColumns="True" CanUserResizeColumns="True">
-    <DataGrid.Columns>
-      <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-      <DataGridTemplateColumn Header="Obtained" Width="100">
-        <DataGridTemplateColumn.CellTemplate>
-          <DataTemplate>
-            <CheckBox Margin="30,0,0,0" IsChecked="{Binding Obtained}"/>
-          </DataTemplate>
-        </DataGridTemplateColumn.CellTemplate>
-      </DataGridTemplateColumn>
-      <DataGridTextColumn Binding="{Binding Area, Mode=OneWay,
+  <DockPanel>
+    <DockPanel DockPanel.Dock="Top">
+      <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+      <Button DockPanel.Dock="Right" Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFiltered}"/>
+      <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilter}"/>
+    </DockPanel>
+    <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerriesFiltered}"
+              CanUserReorderColumns="True" CanUserResizeColumns="True"
+              SelectionMode="Extended">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+        <DataGridTemplateColumn Header="Obtained" Width="100">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Obtained}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn Binding="{Binding Area, Mode=OneWay,
                                     Converter={StaticResource EnumDescriptionConverter}, 
-                                    ConverterParameter={x:Type bf:Area}}" Header="Area" Width="160"/>
-      <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
-    </DataGrid.Columns>
-  </DataGrid>
+                                    ConverterParameter={x:Type bf:Area}}"
+                            Header="Area" IsReadOnly="True" Width="160"/>
+        <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
 </UserControl>
