@@ -10,7 +10,7 @@
 9;TEMP number of battles left at the current attempt of boss rush on the B.O.S.S system
 10;TEMP
 11;TEMP
-12;Number of big switches hit at Snakemouth Depth (the ones that unlockes the large door)
+12;Number of big switches hit at Snakemouth Den (the ones that unlockes the large door)
 13;Prize medal: Quick Flea, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 14;Crysal berry count (in possession)
 15;Number of Lore Book on the library shelf
@@ -23,8 +23,8 @@
 22;Number of charms left
 23;Marks the state of the I Wanna Get Better! quest, 0 = no progress, 1 = cooked the Yam Bread, 2 = cooked the Succulent Platter, 3 = cooked the Abomination, 4 = Won the battle against the Abomihoney
 24;Number of Factory Pass used on the door to the pump roomm at the Honey Factory
-25;Prize Empower, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-26;Berry bank balance
+25;Prize medal Empower, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
+26;Bugaria Bank balance
 27;Token count
 28;Mite Knight high score
 29;Flower Journey high score
@@ -54,13 +54,13 @@
 53;Number of rewards obtained from Librem by turning in discoveries
 54;Last amount of discoveries turned in to Librem
 55;Number of prize medals available or obtained
-56;Item ID (refer to Appendix C) of the ribbon that Chompy has on (0 if no ribbon)
+56;Item ID of the ribbon that Chompy has on (0 if no ribbon)
 57;Prize medal: HP Plus, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 58;UNUSED
 59;UNUSED
 60;UNUSED
 61;Prize medal: Antlion Jaws, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-62;Number of items bought from the leftmost Metal Island merchant
+62;Number of items bought from Yale at Metal Island
 63;Prize medal: Miracle Matter, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 64;Prize medal: Triumph Buzz, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 65;UNUSED

@@ -348,45 +348,45 @@
 347;Start of Chapter 6 (after all the cutscenes)
 348;Start of Chapter 5 (same as 304???)
 349;UNUSED checked in event 155
-350;Chapter 6, dropped Queen Elizant II at the Bugaria Outskirts (after all the cutscenes)
+350;Chapter 6, dropped off Queen Elizant II at the Bugaria Outskirts (after all the cutscenes)
 351;Talked to the person in front of the Termacade for the first time
-352;Got the A.D.B.P Enhancer medal from Professor Honeycomb at the Bee Hive Kingdom (set when receiving it)
-353;Talked to Crow after helping him at the Roach Village ruins at the Bee Kingdom Hive
-354;Hit a lever to create a shortcut at the Wild Swamplands
-355;Got the Eternal Venom medal at the Wild Swamplands
+352;Got the A.D.B.P Enhancer medal from Professor Honeycomb at Bee Hive Kingdom (set when receiving it)
+353;Talked to Crow after helping him at the Roach Village ruins at Bee Kingdom Hive
+354;Hit a lever to create a shortcut at Wild Swamplands
+355;Got the Eternal Venom medal at Wild Swamplands
 356;Chapter 5, lowered the wooden cage by hitting a level at the Wild Swamplands
-357;Chapter 5, arrived at the Wild Swamplands for the first time
-358;Chapter 5, talked to Maki for the first time after getting back to her after he injury at the Wild Swamplands
-359;Chapter 5, beaten The Beast at the Wild Swamplands
-360;Chapter 5, met with Maki after exiting the Wild Swamplands at the Far Grasslands (after the fade out)
+357;Chapter 5, arrived at Wild Swamplands for the first time
+358;Chapter 5, talked to Maki for the first time after getting back to him after his injury at Wild Swamplands
+359;Chapter 5, beaten The Beast at Wild Swamplands
+360;Chapter 5, met with Maki after exiting Wild Swamplands at Far Grasslands (after the fade out)
 361;Opened the east gate at the Power Plant / Far Grasslands passage
 362;Opened the west gate at the Power Plant / Far Grasslands passage
-363;Chapter 5, unlocked the first door at the Wasp Kingdom Hive
-364;Chapter 5, got the Wasp Key in the room with the foutain (set to false if spotted without first exiting the room with it)
-365;Chapter 5, unlocked the door in the food storage room at the Wasp Kingdom Hive
-366;Chapter 5, arrived at Jayde’s room for the first time at the Wasp Kingdom Hive (when the cutscene starts)
-367;Chapter 5, arrived at the first room for the first time at the Wasp Kingdom Hive
+363;Chapter 5, unlocked the first door at Wasp Kingdom Hive
+364;Chapter 5, got the Wasp Key in the room with the fountain at Wasp Kingdom Hive (set to false if spotted without first exiting the room with it)
+365;Chapter 5, unlocked the door in the food storage room at Wasp Kingdom Hive
+366;Chapter 5, arrived at Jayde’s room for the first time at Wasp Kingdom Hive (when the cutscene starts)
+367;Chapter 5, arrived at the first room for the first time at Wasp Kingdom Hive
 368;Chapter 5, arrived at the food storage room for the first time at the Wasp Kingdom Hive
 369;Got the dark cherries in the prison room at the Wasp Kingdom Hive
-370;Chapter 5, approached the back of the throne room for the first time at the Wasp Kingdom Hive (when the cutscene starts)
-371;Chapter 5, met with Vanessa II for the first time at the Wasp Kingdom Hive (after all the cutscenes)
-372;Chapter 5, returned to the Ant Kingdom after leaving the Wasp Kingdom Hive
-373;Received the Ant Compass from the miner at the mines
+370;Chapter 5, approached the back of the throne room for the first time at Wasp Kingdom Hive (when the cutscene starts)
+371;Chapter 5, met with Queen Vanessa II for the first time at Wasp Kingdom Hive (after all the cutscenes)
+372;Chapter 5, returned to the Ant Kingdom after leaving Wasp Kingdom Hive
+373;Received the Ant Compass from the miner at the Ant Mines
 374;Chapter 6, left the throne room of the Ant Palace after the start of Chapter 6 (after all the cutscenes)
 375;Took the Butler Missing Again! quest
-376;Chapter 6, talked to Elizant II at the Golden Path tunnel
+376;Chapter 6, talked to Queen Elizant II at the Golden Path tunnel
 377;It is now possible to buy Dark Cherries at the Underground Bar
-378;Talked to the Dark Cherries seller for the first time at the Underground Bar
-379;Chapter 6, talked about the Subaquatic Maritime Neotransport to the royal couple at the Termite Capital
-380;Got the Lore Book at the Golden Path by digging under a rock
-381;Got the Lore Book at the Colosseum entrance at the Termite Capital
-382;Hit the red thing with Kabbu’s horn at the Forsaken Lands
-383;Chapter 5, arrived at the map where the Beast silhouette appears (at the beginning of the cutscene)
-384;Chapter 5, got the Wasp Key in the west room at the Wasp Kingdom~Chapter 6, arrived at the Termite Capital for the first time??? (error?) 
+378;Talked to Cherry Guy for the first time at the Underground Bar
+379;Chapter 6, talked about the Subaquatic Maritime Neotransport to the royal couple at Termite Capital
+380;Got the Lore Book at the Golden Path by digging under a rock at the map located east from Golden Settlement
+381;Got the Lore Book at the Colosseum entrance at Termite Capital
+382;Hit the red ruler with Kabbu’s horn at the Forsaken Lands
+383;Chapter 5, arrived at the map where The Beast silhouette appears (at the beginning of the cutscene)
+384;Chapter 5, got the Wasp Key in the west room at Wasp Kingdom~Chapter 6, arrived at Termite Capital for the first time??? (error?) 
 385;Chapter 6, beaten the Primal Weevil (after all the cutscenes)
-386;Chapter 6, talked to the royal couple of the Termite Capital for the first time
-387;Talked to Team Slacker about the False Monarch for the first time at the Termite Capital
-388;Got the Lore Book near the Underground Bar entrance at Ant City commercial area
+386;Chapter 6, talked to the royal couple at Termite Capital for the first time
+387;Talked to Team Slacker about the False Monarch for the first time at Termite Capital
+388;Got the Lore Book near the Underground Bar entrance at Ant Kingdom City commercial area
 389;Talked to Madeleine after taking the Butler Missing Again! quest
 390;Talked to Seb after taking the Butler Missing Again! quest
 391;Completed the Butler Missing Again! quest
@@ -397,78 +397,78 @@
 396;Gave the Sophie Petal to Isau, completing the Rare Item Wanted! quest
 397;Got the Dark Cherries at Golden Path
 398;UNKNOWN
-399;UNUSED Got the second Heart Berry from the merchant at Defiant Root
-400;Gave the correct ingredients to Crisbee after taking the I Wanna Get Better! quest, set to false after the cutscene~Also used similarly with Fry after taking the A Smiling Dish quest~Also for Chapter 3, when it is possible to signal Gen & Eri to use a switch at the Honey Factory~Also set to true then false when talking to Crow about Spy Cards~Also used in the Spy Cards tournament (true after the first match, false when the tournament is over)~Chapter 6, also used when the fight against Mothiva & Zasp starts at the Colosseum (set to false when the fight is won)~Chapter 7, also used when the Wasp King is about to turn into Everlasting King (set to false when the transformation is complete)
-401;Chapter 4, arrived at the map south of the dungeon for the first time at Bandit Hideout, set to false when exiting the map~Chapter 5, also used when arrived at the first room of the Wasp Kingdom (set to false after leaving the Wasp Kingdom HiveChapter 7, also used when arriving in a room with an eye at Giant’s Lair (set to false when leaving to a room with no eyes)
+399;UNKNOWN
+400;Gave the correct ingredients to Crisbee after taking the I Wanna Get Better! quest, set to false after the cutscene~Also used similarly with Fry after taking the A Smiling Dish quest~Also for Chapter 3, when it is possible to signal Gen & Eri to use a switch at the Honey Factory~Also set to true then false when talking to Crow about Spy Cards~Also used in the Spy Cards tournament (true after the first match, false when the tournament is over)~Chapter 6, also used when the fight against Zasp & Mothiva starts at the Colosseum (set to false when the fight is won)~Chapter 7, also used when the Wasp King is about to turn into Everlasting King (set to false when the transformation is complete)
+401;Chapter 4, arrived at the map south of the prison for the first time at Bandit Hideout, set to false when exiting the map~Chapter 5, also used after arriving at the first room of Wasp Kingdom Hive (set to false after leaving Wasp Kingdom HiveChapter 7, also used when arriving in a room with an eye at Giant’s Lair (set to false when leaving to a room with no eyes)
 402;Chompy is with Team Snakemouth
-403;Chompy is at the red house at Ant City Plaza
+403;Chompy is at the red house at Ant Kingdom City Plaza
 404;Chompy has a ribbon on
-405;Chompy is at the Bee Kingdom Hive
-406;UNUSED Got the second Bond Berry from the merchant at Defiant Root
-407;Asked the Innkeeper if they are okay at Defiant Root
+405;Chompy is at Bee Kingdom Hive
+406;UNKNOWN
+407;Asked Wayde if they are okay at Defiant Root
 408;UNKNOWN
 409;Chapter 6, after winning all three rounds at the Colosseum
 410;Gave the Bug Ranger Plushie at the child near the Colosseum entrance at Termite Capital
-411;Placed the Mysterious Piece in the receptacle at the Cave of Trials room
-412;Talked to the Holo Assistant for the first time at the Cave of Trials room
-413;Got the HP Plus medal at the Lost Sands near the Bandits Hideout entrance
-414;Showed the Explorer Permit to the Holo Assistant at the Cave of Trials room
-415;Got the Strong Start medal at the Lost Sands
-416;Hit an ice crystal switch for the first time at the Ancient Castle
+411;Placed the Mysterious Piece in the receptacle at the Cave of Trials
+412;Talked to the Holo Assistant for the first time at the Cave of Trials
+413;Got the HP Plus medal at Lost Sands near the Bandit Hideout entrance
+414;Showed the Explorer Permit to the Holo Assistant at the Cave of Trials
+415;Got the Strong Start medal at Lost Sands
+416;Hit an ice crystal switch for the first time at Ancient Castle
 417;UNKNOWN used in event 158
-418;Got the Antlion Jaws medal in Stream Mountain at the Lost Sands
+418;Got the Antlion Jaws medal at Stream Mountain
 419;Arrived at Metal Island for the first time
-420;Chapter 6, arrived at the Forsaken Lands for the first time
+420;Chapter 6, arrived at Forsaken Lands for the first time
 421;Got the Sophie Petal at the top of Snakemouth Den
 422;Took the Help Me Get it Back! quest
 423;Took the Explorer Check! Quest (set to false upon completion)
 424;Took the Bandit Hunt quest
 425;Took the In Search of Paint… quest
 426;Took the Lunch Delivery! quest
-427;Saw Mun get his Leaf Mask stolen by bandits at the Outskirt
+427;Saw Mun get his Leaf Mask stolen by bandits at Bugaria Outskirts
 428;Took the It’s Time…! quest
 429;Talked to Ven after taking the Bandit Hunt quest
 430;Completed the Bandit Hunt quest
 431;Talked to Artia for the first time after taking the In Search of Paint… quest
 432;Got the Shady note from Reed at the Underground Bar
-433;Talked to the shady person after taking the In Search of Paint… quest at the Termite Capital
-434;Got the Blackest Paint from the shady person at Termite Capital
+433;Talked to Edgy after taking the In Search of Paint… quest at Termite Capital
+434;Got the Blackest Paint from Edgy at Termite Capital
 435;Completed the In Search of Paint… quest
-436;Talked to Artia about the shady person of Termite Capital after taking the In Search of Paint… quest
-437;Talked to Jaune for the first time at the Bee Kingdom Hive
-438;Talked to the bee who has Red Paint at the Golden Settlement
+436;Talked to Artia at Bee Kingdom Hive about Edgy after taking the In Search of Paint… quest
+437;Talked to Madame Jaune for the first time at Bee Kingdom Hive
+438;Talked to Dashy about the Red Paint at Golden Settlement
 439;Talked to Genow at Defiant Root about the Root Cloth
-440;Talked to Ann at Ant City Plaza about the Ant Doll
-441;Got the Eastern Doll from the merchant at Metal Island
-442;Gave the Eastern Doll to Ann in exchange for the Ant Doll at Ant City Plaza
+440;Talked to Ann at the Ant Kingdom City plaza about the Ant Doll
+441;Got the Eastern Doll from Jug at Metal Island
+442;Gave the Eastern Doll to Ann in exchange for the Ant Doll at the Ant Kingdom City plaza
 443;Gave the Ant Doll to Genow in exchange for the Root Cloth at Defiant Root
-444;Gave the Root Cloth in exchange for the Red Paint to the bee at Golden Settlement
+444;Gave the Root Cloth in exchange for the Red Paint to Dashy at Golden Settlement
 445;Got the Vi’s Sharing Stash battle skill
-446;Gave the Red Paint to Jaune at the Bee Kingdom Hive
-447;Chapter 6, talked about the Subaquatic Maritime Neotransport to the scientist near it at the Termite Capital
-448;Chapter 6, disembarked from the Subaquatic Maritime Neotransport at the Outskirt piers
-449;Fell into the pit near the Wizard Tower for the first time at the Far Grasslands
-450;Talked to The Wizard at the Wizard Tower for the first time at the Far Grasslands
-451;Got the Crystal Berry from the pink spider at the Forsaken Lands
-452;Arrived at the last map before the save point for the first time at the Forsaken Lands
+446;Gave the Red Paint to Madame Jaune at Bee Kingdom Hive
+447;Chapter 6, talked about the Subaquatic Maritime Neotransport to Biggs near it at the Termite Capital
+448;Chapter 6, disembarked from the Subaquatic Maritime Neotransport at Bugaria Outskirts Piers
+449;Fell into the pit near the Wizard Tower for the first time at Far Grasslands
+450;Talked to The Wizard at the Wizard Tower for the first time at Far Grasslands
+451;Got the Crystal Berry from the pink spider at Forsaken Lands
+452;Arrived at the map located east from the pumpkin map for the first time at Forsaken Lands (the crate disappears when this turns on)
 453;UNKNOWN
 454;Got the Crystal Crown by beating the False Monarch
-455;Got the Lore Book at the map with the wind blowers at the Forsaken Lands
+455;Got the Lore Book at the map with the wind blowers at Forsaken Lands
 456;Unlocked the door at the Power Plant after taking the Power Plant Investigation quest
 457;Approached the back exit of the Power Plant after taking the Power Plant Investigation quest
 458;Examined the Power Plant for the first time
 459;Arrived at the Broodmother map after taking the Power Plant Investigation quest (this also marks completing the quest after the battle)
-460;Got the Lore Book at the map with the wasps’s border of the Far Grasslands
-461;Talked to Jayde for the first time at the Golden Settlement
+460;Got the Lore Book at the map with the wasps’s border at Far Grasslands
+461;Talked to Jayde for the first time at Golden Settlement
 462;Got the Life Cast medal at the top of the Golden Path tunnel
-463;Got the Lore Book on the map located west from Patton’s hut at the Forsaken Lands
+463;Got the Lore Book on the map located west from Patton’s hut at Forsaken Lands
 464;Took the Best Friend In The Fog! quest
 465;Talked to Layna after taking the Best Friend In The Fog! quest
 466;Arrived at the area located north of Layra’s friend for the first time after taking the Best Friend In The Fog! quest
-467;Talked about fireflies with Layra at the firefly map after taking the Best Friend In The Fog! quest
+467;Talked about fireflies with Layra at the foggy map after taking the Best Friend In The Fog! quest
 468;Completed the Best Friend In The Fog! quest
-469;Got the Lore Book in a room located high up at the Termite Capital
-470;Examined the view of the Termite Capital for the first time at the Forsaken Lands
+469;Got the Lore Book in an apartment room located high up at Termite Capital
+470;Examined the view of Termite Capital for the first time at the Forsaken Lands
 471;Completed the Stolen Item quest
 472;Talked to Kali after taking the Stolen Item quest
 473;Took the Seedling Hunt quest
@@ -476,29 +476,29 @@
 475;Received the Wrapped Lunch from Yatanta after taking the Lunch Delivery! quest
 476;Completed the Lunch Delivery! quest
 477;Completed the Seedling Hunt quest
-478;Talked to Team Slacker about the Seedling King
+478;Talked to Team Slacker about the Seedling King for the first time
 479;Took the Parts Delivery quest
 480;Received the Package from Eetl after taking the Parts Delivery quest
 481;Completed the Parts Delivery quest
 482;Took the Hydration Crisis! quest
-483;Talked to the farmer for the first time at the Golden Settlement (Hydration Crisis! quest)
+483;Talked to the farmer for the first time at Golden Settlement (Hydration Crisis! quest)
 484;Completed the Hydration Crisis! quest
 485;Talked to Alex for the first time after taking the It’s Time…! quest
 486;Completed the It’s Time…! quest
-487;Got the Danger Spud at the Explorer Association Area
-488;Talked to the Defiant Root’s innkeeper’s wife at the Termite Capital after asking the innkeeper if he was okay Also used when got the Lore Book at Monsieur Scarlet’s place??? (error???)
+487;Got the Danger Spud at the Explorers' Association area
+488;Talked to Tynn at the Termite Capital after asking Wayde if he was okay~Also used after getting the Lore Book at Monsieur Scarlet’s place??? (error???)
 489;Got the Lore Book in the locked room at Defiant Root
 490;Got the Dark Cherries in the locked room at Defiant Root
-491;Hit the tree in the map before Tydal Wyrm in Stream Mountain at the Lost Sands
-492;The water crystal switch on the way to the Tydal Wyrm in Stream Mountain is activated at the Lost Sands
+491;Hit the tree in the map before Tidal Wyrm at Stream Mountain
+492;The water crystal switch on the way to the Tidal Wyrm at Stream Mountain is activated
 493;UNKNOWN
 494;Got the Crystal Fang by beating the Devourer
-495;Talked to Team Slacker about the Tydal Wyrm at Lost Sands
-496;Got the Coal Crystal by beating Tydal Wyrm
-497;Beaten Cenn and Pisci after taking the Explorer Check! quest at Ant City commercial area
+495;Talked to Team Slacker about the Tidal Wyrm at Lost Sands for the first time
+496;Got the Coal Crystal by beating Tidal Wyrm
+497;Beat Cenn & Pisci after taking the Explorer Check! quest at Ant Kingdom City commercial area
 498;Completed the Explorer Check! quest
-499;Got the Lore Book at the fake Ant Village at the Forsaken Lands
-500;Talked to Team Slacker about the Devourer for the first time at the Golden Settlement
+499;Got the Lore Book at the fake Ant Village at Forsaken Lands
+500;Talked to Team Slacker about the Devourer for the first time at Golden Settlement
 501;Talked to Team Slacker about the Peacock Spider for the first time at Metal Island
 502;Got the Crystal Feather after beating the Peacock Spider
 503;Beaten battle 10 of the Cave of Trials for the first time
@@ -507,36 +507,36 @@
 506;Beaten battle 40 of the Cave of Trials for the first time and getting the TP Saver medal
 507;Got the Tangy Berry at the Cave of Trials
 508;Got the Dark Cherries at the Cave of Trials
-509;Beaten Riz (after all the cutscenes)
+509;Beat Riz (after all the cutscenes)
 510;Took the Sweets from Outside! quest by Rizza at the Fishing Village
 511;Completed the Sweets from Outside! quest
 512;Talked to Mun for the first time after taking the Help Me Get it Back! quest
-513;Beaten the bandits that took Mun’s mask after taking the Help Me Get it Back! quest
+513;Beat the bandits that took Mun’s mask after taking the Help Me Get it Back! quest
 514;Completed the Help Me Get it Back! quest
-515;Talked to the child at the Colosseum entrance for the first time at the Termite Capital
-516;Talked to the child at the Colosseum entrance for the first time after winning the Colosseum at the Termite Capital
+515;Talked to the child at the Colosseum entrance for the first time at Termite Capital
+516;Talked to the child at the Colosseum entrance for the first time after winning the Colosseum at Termite Capital
 517;Placed the Peculiar Gem in its receptacle at Snakemouth Den
-518;Hit the switch to open the door in the first room of Snakemouth Lab
-519;Solved the switches puzzle at Snakemouth Lab
-520;Got the Medium Gear in the room with the switches puzzle at Snakemouth Lab
-521;Got the Small Gear in the room with 4 pressure plates at Snakemouth Lab
-522;Got the Extra Freeze medal at Snakemouth Lab
-523;Got the Lab Card in the room located south from the main room at Snakemouth Lab
-524;Opened the northeast door from the main room in Snakemouth Lab
-525;Opened the northwest door from the main room in Snakemouth Lab
-526;Got the Lab Card in the room located southwest from the main room at Snakemouth Lab
-527;Got the Big Gear in the room located northwest from the main room at Snakemouth Lab
-528;Placed all gears and opening the door in the room located west from the main room at Snakemouth Lab
-529;Placed the Medium Gear in the room located west from the main room at Snakemouth Lab
-530;Placed the Small Gear in the room located west from the main room at Snakemouth Lab
-531;Placed the Big Gear in the room located west from the main room at Snakemouth Lab
-532;Beaten Zommoth at Snakemouth Lab (during the cutscenes)
-533;Met Leif’s family at their house in Ant City residential area (after the first cutscene of meeting them)
-534;Got the Super Block+ medal at the Golden Path
+518;Hit the switch to open the door in the first room of Upper Snakemouth
+519;Solved the switches puzzle at Upper Snakemouth
+520;Got the Medium Gear in the room with the switch puzzle at Upper Snakemouth
+521;Got the Small Gear in the room with 4 pressure plates at Upper Snakemouth
+522;Got the Extra Freeze medal at Upper Snakemouth
+523;Got the Lab Card in the room located south from the main room at Upper Snakemouth
+524;Opened the northeast door from the main room in Upper Snakemouth
+525;Opened the northwest door from the main room in Upper Snakemouth
+526;Got the Lab Card in the room located southwest from the main room at Upper Snakemouth
+527;Got the Big Gear in the room located northwest from the main room at Upper Snakemouth
+528;Placed all gears and opened the door in the room located west from the main room at Upper Snakemouth
+529;Placed the Medium Gear in the room located west from the main room at Upper Snakemouth
+530;Placed the Small Gear in the room located west from the main room at Upper Snakemouth
+531;Placed the Big Gear in the room located west from the main room at Upper Snakemouth
+532;Beat Zommoth at Upper Snakemouth (during the cutscenes)
+533;Met Leif’s family at their house in Ant Kingdom City residential area (after the first cutscene of meeting them)
+534;Got the Super Block+ medal at Golden Path
 535;Chapter 6, gray levers at Rubber Prison engaged (this is a toggle)
 536;Chapter 6, got the Prison Key in the spike floor room of the first floor at Rubber Prison
 537;Chapter 6, unlocked the door in the spike floor room of the first floor at Rubber Prison
-538;Chapter 6, opened the door in the west room of the first floor at Rubber Prison
+538;Chapter 6, opened the door by presenting the Explorer Permit in the west room of the first floor at Rubber Prison
 539;Chapter 6, opened the door to the cafeteria at the Rubber Prison
 540;Chapter 6, hit the east wooden lever in the room with the save point on the second floor at Rubber Prison
 541;Chapter 6, hit the lever for a shortcut to the third floor on the second floor of Rubber Prison
@@ -544,23 +544,23 @@
 543;Taking the Find The Ingredients! quest from The Wizard
 544;Completed the Find The Ingredients! quest from The Wizard
 545;Chapter 6, got the Prison Key in the cell on the second floor of Rubber Prison
-546;Examined the Wizard Tower for the first time at the Far Grasslands
+546;Examined the Wizard Tower from the front for the first time at the Far Grasslands
 547;Got the Burly Tea in the Wizard Tower at the Far Grasslands
 548;Chapter 6, got the blue History Book at the Rubber Prison
-549;Chapter 6, hit the level in the cafeteria to stop the rolling rocks at the Rubber Prison (this is a toggle)
+549;Chapter 6, hit the lever in the cafeteria to stop the rolling rocks at the Rubber Prison (this is a toggle)
 550;Chapter 6, changed the position of the cafeteria tables at the Rubber Prison (this is a toggle)
 551;Chapter 6, got the Prison Key on the third floor of Rubber Prison
 552;Chapter 6, turned on the backup power at the Rubber Prison
 553;Chapter 6, toggles between true and false a bunch of time when turning on the computer at the Rubber Prison
 554;Chapter 6, solved the history books puzzle at the Rubber Prison
-555;Chapter 7, the Everlasting Sapling’s container is opened (set during the cutscene of it opening, set to false once the fight is done after the fade out)~Chapter 7, also used when arrived at Ant City after beating Everlasting King 
+555;Chapter 7, the Everlasting Sapling’s container is opened (set during the cutscene of it opening, set to false once the fight is done after the fade out)~Chapter 7, also used when arrived at Ant Kingdom City after beating Everlasting King~This is the post game flag 
 556;Took the Want to Relive Memories… quest
-557;Talked to the Mayor after taking the Want to Relive Memories… quest
-558;Brought the Mayor to Wacka Farms after taking the Want to Relive Memories… quest
+557;Talked to The Mayor after taking the Want to Relive Memories… quest
+558;Brought The Mayor to Whacka Farms after taking the Want to Relive Memories… quest
 559;Completed the Want to Relive Memories… quest
 560;Unlocked the door at Defiant Root
 561;Chapter 6, got the Wooden Crank at the Rubber Prison
-562;Beaten Carmina at Metal island (after all the cutscenes)
+562;Beat Carmina at Metal island (after all the cutscenes)
 563;Chapter 6, got the green History Book at the Rubber Prison
 564;Chapter 6, got the yellow History Book at the Rubber Prison
 565;Chapter 6, placed the Wooden Crank at the Rubber Prison
@@ -571,35 +571,35 @@
 570;Took the It’s Too Hot! quest
 571;Talked to Eremi for the first time after taking the It’s Too Hot! quest
 572;Got the Leaf Umbrella from Madeleine
-573;Completed the It’s Too Hot! quest by giving the magic ice
+573;Completed the It’s Too Hot! quest by giving a Magic Ice or a Shell Ointment 
 574;Gave the Leaf Umbrella to Eremi at Defiant Root after taking (or completing) the It’s Too Hot! quest
-575;Got the Heal Plus medal at the Fishing Village by talking to the brown thing with eyes
-576;Took the In Search of Something quest from Elom at the west cave at the Outskirt
-577;Talked to Tekci at the top of the Golden Hills after taking the In Search of Something quest
+575;Got the Heal Plus medal at the Fishing Village by talking to the Stickbug
+576;Took the In Search of Something quest from Elom at the west cave at the Bugaria Outskirts
+577;Talked to Tekci at the top of Golden Hills after taking the In Search of Something quest
 578;Completed the In Search of Something quest
 579;Talked to Librem in the Ant Palace library for the first time
-580;Talked to Diana at the back room of the mines for the first time
-581;Talked to Patton for the first time in post game at the Forsaken Lands (right when the cutscene starts)
+580;Talked to Diana at the break room of the Ant Mines for the first time
+581;Talked to Patton for the first time in post game at Forsaken Lands (right when the cutscene starts)
 582;Chapter 6, got the red History Book at the Rubber Prison
 583;Chapter 6, broke the bridge on the second floor of Rubber Prison
 584;Chapter 6, beat ULTIMAX Tank (after the cutscene)
 585;Got spotted by an eye at Giant’s Lair for the first time
 586;Chapter 7, arrived at the Roach Village for the first time at Giant’s Lair (after all the cutscenes)
-587;Bought all medals at the shop at Ant City commercial area
-588;Bought all of Shade’s medals
+587;Bought all medals at the shop at Ant Kingdom City commercial area
+588;Bought all of Shades’s medals
 589;UNKNOWN
 590;Bought the Venom Ribbon at the Termacade
 591;Bought the Shocking Ribbon at the Termacade
 592;Bought the Drowsy Ribbon at the Termacade
-593;Chapter 7, beaten the Dead Landers trio near the refrigerator at Giant’s Lair
+593;Chapter 7, beat the Dead Landers trio near the refrigerator at Giant’s Lair
 594;Chapter 7, approached the refrigerator for the first time at Giant’s Lair (as soon as the cutscene starts, set to false after the fight)~Chapter 7, also used similarly with the fire constructs
 595;Chapter 7, convinced the roach elder to destroy the Everlasting Sapling at Giant’s Lair
 596;UNKNOWN checked in UpdateArea
 597;UNKNONW used in UpdateArea
 598;Talked to Kenny at Golden Settlement
-599;Talked to Kenny at the Bee Kingdom Hive residential area
+599;Talked to Kenny at Bee Kingdom Hive residential area
 600;Talked to Kenny at Defiant Root
-601;Talked to Kenny at Ant City commercial area
+601;Talked to Kenny at Ant Kingdom City commercial area
 602;Talked to Kenny at Termite Capital
 603;Got the Lore Book by Kenny after talking to him at the end of his travel at Golden Settlement
 604;Got the Lore Book in the room above the inn at Defiant Root
@@ -618,19 +618,19 @@
 617;Took the Awful’s Beauty quest
 618;Talked to Reeves for the first time after taking the Awful’s Beauty quest
 619;Completed the Awful’s Beauty quest
-620;Got the Bad Book in the Wizard Tower at the Far Grasslands
-621;Got the Bad Book on the roof of Leif’s family’s house at Ant city residential area
-622;Got the Bad Book in Jaune’s room at the Bee Kingdom Hive
-623;Got the Mechanical Claw at the Far Grasslands
+620;Got the Bad Book in the Wizard Tower at Far Grasslands
+621;Got the Bad Book on the roof of Leif’s family’s house at Ant Kingdom city residential area
+622;Got the Bad Book in Madame Jaune’s room at Bee Kingdom Hive
+623;Got the Mechanical Claw at Far Grasslands
 624;Took the Can’t Sleep…! quest
 625;Talked to Tarar after taking the Can’t Sleep…! quest
 626;Gave the Drowsy Cake to Tarar after taking the Can’t Sleep…! quest
 627;Gave the Shock Candy to Tarar, completing the Can’t Sleep…! quest
 628;Talked to Maki for the first time after completing the Confidential quest
 629;Got introduced to RUIGEE by Eetl for the first time
-630;Reached a balance of 500 or above at the bank for the first time
+630;Reached a balance of 500 or above at the Bugaria Bank for the first time
 631;Got the Dry Bread at Rubber Prison
-632;Got the Dark Cherries at the south of the Wasp Kingdom entrance at the Far Grasslands
+632;Got the Dark Cherries at the map located south of the Wasp Kingdom Hive entrance at Far Grasslands
 633;UNKNOWN
 634;Took the My Mecha Claw! quest
 635;Talked to Engira for the first time after taking the My Mecha Claw! quest
@@ -639,30 +639,30 @@
 638;Talked to Bumble after taking the They Took Her…! quest at Metal Island
 639;Talked to Bumble after taking the They Took Her…! quest at the Far Grasslands entrance
 640;Completed the They Took Her…! quest
-641;Got the Cold Salad at the Ancient Castle
-642;Got the Dark Cherries at the Explorers Association area
-643;Talked to Jayde for the first time in post game at the Wasp Kingdom
-644;Talked to Vanessa for the first time in post game at the Wasp Kingdom
+641;Got the Cold Salad at Ancient Castle
+642;Got the Dark Cherries at the Explorers' Association area
+643;Talked to Jayde for the first time in post game at the Wasp Kingdom Hive
+644;Talked to Queen Vanessa II for the first time in post game at the Wasp Kingdom Hive
 645;Examined the spot where The Beast was beaten for the first time in post game (when the cutscene starts)
 646;Talked to the Spy Cards tournament organizer for the first time at Metal Island
 647;Won the Spy Cards tournament for the first time, set when all cutscenes are done
 648;Won the Spy Cards tournament for the first time, set when the final match is won
-649;Gave a berry to the homeless person at the Termite Capital
+649;Gave a berry to the homeless person at Termite Capital
 650;Talked to Neolith after the start of Chapter 5
 651;Got the mushroom in the first room of Snakemouth Den
 652;It is now possible to quick travel to Snakemouth Den from the mines
 653;UNKNOWN
 654;Examined the steering wheel statue at the Outskirt Piers
-655;Examined the view of the Colosseum for the first time at the Termite Capital
+655;Examined the view of the Colosseum for the first time at Termite Capital
 656;MOREFARM code active
 657;Chapter 5, exited the west room with the Wasp Key at the Wasp Kingdom
 658;Bought all the songs from Samira
 659;Chapter 6, incorectly placed the books on the bookshelf for the first time in the library room at Rubber Prison
 660;Chapter 3, after the cutscene of Vi telling to get ready before entering the Honey Factory at its entrance
 661;UNKNOWN used in event 215
-662;Talked to the cricket at the Golden Hills for the first time
+662;Talked to the cricket at Golden Hills for the first time
 663;Chapter 2, came back to the entrance of Golden Hills after getting the Big Crank
-664;Chapter 7, approached the oven for the first time at Giant’s Lair (as soon as the cutscene starts, set to false after beating the Everlasting King)~Chapter 7, also used when arrived at Ant City after beating Everlasting King
+664;Chapter 7, approached the oven for the first time at Giant’s Lair (as soon as the cutscene starts, set to false after beating the Everlasting King)~Chapter 7, also used when arrived at Ant Kingdom City after beating Everlasting King
 665;Chapter 7, destroyed breakable rocks above the wind blower in the oven room at Giant’s Lair
 666;Chapter 7, turned the dial on the right stove at Giant’s Lair
 667;Chapter 7, turned the right dial on the left stove at Giant’s Lair
@@ -672,32 +672,32 @@
 671;Completed all quests
 672;UNKNOWN
 673;Completed the Cave of Trials for the first time
-674;Dug Cerise out of the soft soil in her cell at the Bandits Hideout
+674;Dug Cerise out of the dig spot in her cell at Bandit Hideout
 675;UNKNOWN
 676;Talked to Patton about his services for the first time at the Forsaken Lands
-677;Got the Squash on the map located west of the Forsaken Lands entrance by cutting a leaf located on the leftmost part of the map
-678;Got the Squash on the map located west of the Forsaken Lands entrance by cutting the leaf near the dead tree
+677;Got the Squash on the map located west of the Forsaken Lands entrance by cutting a bush located on the leftmost part of the map
+678;Got the Squash on the map located west of the Forsaken Lands entrance by cutting the bush near the dead tree
 679;Took the mistake in the tent at the map with the Explorer Association
 680;UNKNOWN
 681;MYSTERY? code active
-682;Talked to Cerise for the first time at the Bandits Hideout
-683;Got the Spicy Berry at the entrance of Snakemouth Den at the Outskirt
+682;Talked to Cerise for the first time at Bandit Hideout
+683;Got the Spicy Berry at the entrance of Snakemouth Den at the Bugaria Outskirts
 684;UNKNOWN
-685;Got 30+ points at Wack-A-Worm at the Wacka Farms for the first time
-686;Got the Burly Tea in Madeleined’s house at the Explorer Association area
-687;Talked to Elizant II for the first time in post game at the throne room of the Ant Palace
-688;Got the Berry juice on the roof of Morthy’s stand at Defiant Root
+685;Got 30+ points at Whack-A-Worm at the Whacka Farms for the first time
+686;Got the Burly Tea in Madeleine’s house to the right of the Explorers' Association
+687;Talked to Queen Elizant II for the first time in post game at the throne room of the Ant Palace
+688;Got the Berry Juice on the roof of Morthy’s stand at Defiant Root
 689;Hit the tree at the Chomper Caves
-690;Hit the tree leading west at the map directly north of the Golden Settlement at the Lost Sands
+690;Hit the tree leading west at the map directly north of Golden Settlement at Lost Sands
 691;New game started
-692;Got the trophy at the house for B.O.S.S Mini Boss rush mode
-693;Got the trophy at the house for B.O.S.S Boss rush mode EX
-694;File is a 1.1 save
+692;Got the trophy at the house for B.O.S.S. Mini Boss rush mode
+693;Got the trophy at the house for B.O.S.S. Boss rush mode EX
+694;File is a 1.1.x save
 695;UNUSED
 696;UNUSED
 697;UNUSED
 698;UNUSED
-699;1.1 Dash
+699;After getting Kabbu's overworld dash (1.1.x)
 700;UNUSED
 701;UNUSED
 702;UNUSED
