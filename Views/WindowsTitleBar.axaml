@@ -14,9 +14,9 @@
         <StackPanel Orientation="Horizontal"
                     DockPanel.Dock="Left"
                     Spacing="0">
-          <Image Source="/Assets/avalonia-logo.ico"
-                 Height="16"
-                 Width="16"
+          <Image Source="/Assets/icon.png"
+                 Height="22"
+                 Width="22"
                  VerticalAlignment="Center"
                  Margin="8,0,3,0"
                  Name="WindowIcon"></Image>
