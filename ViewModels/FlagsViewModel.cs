@@ -34,6 +34,18 @@ namespace BugFablesSaveEditor.ViewModels
       set { _saveData = value; this.RaisePropertyChanged(); }
     }
 
+    private bool _filterUnusedRegionals;
+    public bool FilterUnusedRegionals
+    {
+      get { return _filterUnusedRegionals; }
+      set
+      {
+        _filterUnusedRegionals = value;
+        this.RaisePropertyChanged();
+        RegionalsFiltered.Refresh();
+      }
+    }
+
     private FlagInfo[] _flags;
     public FlagInfo[] Flags
     {
@@ -213,6 +225,8 @@ namespace BugFablesSaveEditor.ViewModels
         case FlagsType.Regionals:
           textFilter = TextFilterRegionals;
           var regional = (RegionalInfo)arg;
+          if (regional.Description == "UNUSED" && !FilterUnusedRegionals)
+            return false;
           flagIndex = regional.Index;
           flagDescription = regional.Description;
           break;

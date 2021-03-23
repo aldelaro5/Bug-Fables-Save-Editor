@@ -69,6 +69,7 @@
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <CheckBox DockPanel.Dock="Right" VerticalContentAlignment="Center" Content="Show Unused" IsChecked="{Binding FilterUnusedRegionals}"/>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRegionals}"/>
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalsFiltered}"
