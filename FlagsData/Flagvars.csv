@@ -1,7 +1,7 @@
 0;TEMP
 1;TEMP
 2;TEMP
-3;UNUSED
+3;Allows fast cooking if its value is 5353, 0 otherwise
 4;TEMP
 5;TEMP
 6;TEMP
@@ -56,7 +56,7 @@
 55;Number of prize medals available or obtained
 56;Item ID of the ribbon that Chompy has on (0 if no ribbon)
 57;Prize medal: HP Plus, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-58;UNUSED
+58;Number of Bad Books given to Reeves at the Ant Palace library
 59;UNUSED
 60;UNUSED
 61;Prize medal: Antlion Jaws, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
@@ -64,7 +64,7 @@
 63;Prize medal: Miracle Matter, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 64;Prize medal: Triumph Buzz, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 65;UNUSED
-66;UNUSED
-67;UNUSED
+66;Amount of medals bought at Shades's medals shop
+67;Seed used in MYSTERY?, 0 if not using MYSTERY?
 68;UNUSED
 69;UNUSED
