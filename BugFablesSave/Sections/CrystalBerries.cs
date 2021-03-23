@@ -101,5 +101,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         crystalBerries[i].Obtained = boolOut;
       }
     }
+
+    public void ResetToDefault()
+    {
+      CrystalBerry[] crystalBerries = (CrystalBerry[])Data;
+      foreach (var cb in crystalBerries)
+        cb.Obtained = false;
+    }
   }
 }

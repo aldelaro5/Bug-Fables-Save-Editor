@@ -89,5 +89,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         flagsvars[i].Var = intOut;
       }
     }
+
+    public void ResetToDefault()
+    {
+      FlagvarInfo[] flagvars = (FlagvarInfo[])Data;
+      foreach (var flagvar in flagvars)
+        flagvar.Var = 0;
+    }
   }
 }

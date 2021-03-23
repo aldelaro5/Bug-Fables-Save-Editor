@@ -77,5 +77,15 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      EnemyEncounterInfo[] enemyEncounters = (EnemyEncounterInfo[])Data;
+      foreach (var enemyEncounter in enemyEncounters)
+      {
+        enemyEncounter.NbrDefeated = 0;
+        enemyEncounter.NbrSeen = 0;
+      }
+    }
   }
 }

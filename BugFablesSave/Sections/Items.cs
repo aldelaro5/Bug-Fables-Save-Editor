@@ -92,5 +92,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
+      foreach (var collection in items)
+        collection.Clear();
+    }
   }
 }

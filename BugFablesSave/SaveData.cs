@@ -75,5 +75,11 @@ namespace BugFablesSaveEditor.BugFablesSave
         throw new Exception("Couldn't write the save file: " + ex.Message);
       }
     }
+
+    public void ResetToDefault()
+    {
+      for (SaveFileSection i = 0; i < SaveFileSection.COUNT; i++)
+        Sections[i].ResetToDefault();
+    }
   }
 }

@@ -87,5 +87,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
+      songs.Clear();
+    }
   }
 }

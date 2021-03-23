@@ -36,7 +36,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       get => ReactiveCommand.Create(() =>
       {
-        //SaveData = new SaveData();
+        SaveData.ResetToDefault();
         CurrentFilePath = "New file being created, save it to store it";
         SaveInUse = true;
       });
@@ -61,7 +61,7 @@ namespace BugFablesSaveEditor.ViewModels
           }
           catch (Exception ex)
           {
-            //SaveData = new SaveData();
+            SaveData.ResetToDefault();
             var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
                         "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
             await msg.ShowDialog(Common.MainWindow);

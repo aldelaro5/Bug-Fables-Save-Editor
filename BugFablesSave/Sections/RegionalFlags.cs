@@ -108,5 +108,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         regionalFlags[i].Enabled = boolOut;
       }
     }
+
+    public void ResetToDefault()
+    {
+      RegionalInfo[] regionalFlags = (RegionalInfo[])Data;
+      foreach (var flag in regionalFlags)
+        flag.Enabled = false;
+    }
   }
 }

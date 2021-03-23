@@ -85,5 +85,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       for (int i = 0; i < flagstringData.Length; i++)
         flagstrings[i].Str = flagstringData[i];
     }
+
+    public void ResetToDefault()
+    {
+      FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
+      foreach (var str in flagstrings)
+        str.Str = "";
+    }
   }
 }

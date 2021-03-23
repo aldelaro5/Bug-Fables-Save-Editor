@@ -118,5 +118,21 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       headerInfo.Filename = data[9];
     }
+
+    public void ResetToDefault()
+    {
+      HeaderInfo headerInfo = (HeaderInfo)Data;
+
+      headerInfo.PositionX = 0f;
+      headerInfo.PositionY = 0f;
+      headerInfo.PositionZ = 0f;
+      headerInfo.IsRuigee = false;
+      headerInfo.IsHardest = false;
+      headerInfo.IsFrameone = false;
+      headerInfo.IsPushrock = false;
+      headerInfo.IsMorefarm = false;
+      headerInfo.IsMystery = false;
+      headerInfo.Filename = "";
+    }
   }
 }

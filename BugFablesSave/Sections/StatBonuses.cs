@@ -117,5 +117,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
+      statBonuses.Clear();
+    }
   }
 }

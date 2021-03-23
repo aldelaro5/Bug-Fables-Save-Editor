@@ -95,5 +95,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
+      foreach (var collection in medals)
+        collection.Clear();
+    }
   }
 }

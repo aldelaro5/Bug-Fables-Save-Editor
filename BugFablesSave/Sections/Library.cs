@@ -93,5 +93,15 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         }
       }
     }
+
+    public void ResetToDefault()
+    {
+      LibraryFlag[][] flags = (LibraryFlag[][])Data;
+      foreach (var section in flags)
+      {
+        foreach (var flag in section)
+          flag.Enabled = false;
+      }
+    }
   }
 }

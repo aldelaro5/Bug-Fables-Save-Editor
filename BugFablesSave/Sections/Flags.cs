@@ -89,5 +89,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         flags[i].Enabled = boolOut;
       }
     }
+
+    public void ResetToDefault()
+    {
+      FlagInfo[] flags = (FlagInfo[])Data;
+      foreach (var flag in flags)
+        flag.Enabled = false;
+    }
   }
 }

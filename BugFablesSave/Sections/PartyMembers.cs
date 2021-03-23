@@ -157,5 +157,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<PartyMemberInfo> partyMemberInfos = (ObservableCollection<PartyMemberInfo>)Data;
+      partyMemberInfos.Clear();
+    }
   }
 }

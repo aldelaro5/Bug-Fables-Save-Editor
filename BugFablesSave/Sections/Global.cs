@@ -177,5 +177,27 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       }
       globalInfo.SaveProgressIcons = (SaveProgressIcon)intOut;
     }
+
+    public void ResetToDefault()
+    {
+      GlobalInfo globalInfo = (GlobalInfo)Data;
+
+      globalInfo.Rank = 0;
+      globalInfo.Exp = 0;
+      globalInfo.NeededExp = 0;
+      globalInfo.MaxTP = 0;
+      globalInfo.TP = 0;
+      globalInfo.BerryCount = 0;
+      globalInfo.CurrentMap = 0;
+      globalInfo.CurrentArea = 0;
+      globalInfo.MP = 0;
+      globalInfo.MaxMP = 0;
+      globalInfo.NbrMaxItemsInventory = 0;
+      globalInfo.NbrMaxItemsStorage = 0;
+      globalInfo.PlayTimeHours = 0;
+      globalInfo.PlayTimeMinutes = 0;
+      globalInfo.PlayTimeSeconds = 0;
+      globalInfo.SaveProgressIcons = 0;
+    }
   }
 }

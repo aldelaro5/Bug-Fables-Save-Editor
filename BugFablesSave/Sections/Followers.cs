@@ -69,5 +69,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         followers.Add(new Follower { AnimID = (AnimID)intOut });
       }
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<Follower> followers = (ObservableCollection<Follower>)Data;
+      followers.Clear();
+    }
   }
 }

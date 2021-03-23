@@ -98,5 +98,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       return sb.ToString();
     }
+
+    public void ResetToDefault()
+    {
+      ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
+      medals.Clear();
+    }
   }
 }
