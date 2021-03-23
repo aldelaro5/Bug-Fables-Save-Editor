@@ -4,13 +4,13 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:bf="using:BugFablesSaveEditor.BugFablesEnums"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="550"
              x:Class="BugFablesSaveEditor.Views.GlobalView">
   <Design.DataContext>
     <vm:DesignSaveDataViewModel/>
   </Design.DataContext>
 
-  <StackPanel Margin="10" VerticalAlignment="Top" Orientation="Vertical">
+  <StackPanel HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Orientation="Vertical">
     <StackPanel Orientation="Horizontal">
       <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
@@ -45,7 +45,7 @@
             </StackPanel>
           </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
           <StackPanel Orientation="Vertical">
             <Label Margin="0,10,0,0" VerticalContentAlignment="Center" Content="Play time"/>
             <StackPanel Orientation="Horizontal">
@@ -62,7 +62,7 @@
           </StackPanel>
         </StackPanel>
       </StackPanel>
-      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+      <StackPanel Margin="75,0,0,0" Orientation="Vertical">
         <Label Content="Information on the file select screen"/>
         <StackPanel Orientation="Horizontal">
           <Label VerticalContentAlignment="Center" Content="Filename"/>
@@ -93,7 +93,7 @@
         </StackPanel>
       </StackPanel>
     </StackPanel>
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
       <StackPanel Orientation="Vertical">
         <Label Content="Rank progress"/>
         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
@@ -105,7 +105,7 @@
           <NumericUpDown Value="{Binding SaveData.Sections[Global].Data.NeededExp}" ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer"/>
         </StackPanel>
       </StackPanel>
-      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+      <StackPanel Margin="135,0,0,0" Orientation="Vertical">
         <Label Content="Max amount of items"/>
         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
           <Label VerticalContentAlignment="Center" Content="Inventory"/>
