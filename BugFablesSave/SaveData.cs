@@ -53,7 +53,7 @@ namespace BugFablesSaveEditor.BugFablesSave
         throw new Exception("Couldn't read the save file: " + ex.Message);
       }
 
-      for (int i = 0; i < saveSections.Length; i++)
+      for (int i = 0; i < Sections.Count; i++)
         Sections[(SaveFileSection)i].ParseFromSaveLine(saveSections[i]);
     }
 
