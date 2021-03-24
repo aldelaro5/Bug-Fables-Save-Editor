@@ -72,6 +72,7 @@ namespace BugFablesSaveEditor.ViewModels
       {
         try
         {
+          SaveData.ResetToDefault();
           SaveData.LoadFromFile(filePaths.First());
           CurrentFilePath = filePaths.First();
           SaveInUse = true;
