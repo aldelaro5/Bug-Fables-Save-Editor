@@ -13,6 +13,8 @@ namespace BugFablesSaveEditor.ViewModels
 {
   public class MainWindowViewModel : ViewModelBase
   {
+    private bool fileSaved = false;  
+
     private string _currentFilePath = "No save file, open an existing file or create a new one";
     public string CurrentFilePath
     {
@@ -34,15 +36,36 @@ namespace BugFablesSaveEditor.ViewModels
       set { _saveInUse = value; this.RaisePropertyChanged(); }
     }
 
-    public void NewFile()
+    public async void NewFile()
     {
+      if (SaveInUse && !fileSaved)
+      {
+        var msg = Common.GetMessageBox("File in use", "An unsaed file is currently in use, " +
+                  "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?", 
+                  ButtonEnum.YesNo, Icon.Warning);
+        await msg.ShowDialog(Common.MainWindow);
+        if (msg.ButtonResult == ButtonResult.No)
+          return;
+      }
+
       SaveData.ResetToDefault();
       CurrentFilePath = "New file being created, save it to store it";
       SaveInUse = true;
+      fileSaved = false;
     }
 
     public async void OpenFile()
     {
+      if (SaveInUse && !fileSaved)
+      {
+        var msg = Common.GetMessageBox("File in use", "An unsaed file is currently in use, " +
+                  "opening a file will loose all unsaved changes,\nare you sure you want to proceed?",
+                  ButtonEnum.YesNo, Icon.Warning);
+        await msg.ShowDialog(Common.MainWindow);
+        if (msg.ButtonResult == ButtonResult.No)
+          return;
+      }
+
       OpenFileDialog dlg = new OpenFileDialog();
       dlg.Title = "Select a Bug Fables save file";
       dlg.Filters.Add(new FileDialogFilter() { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
@@ -55,6 +78,7 @@ namespace BugFablesSaveEditor.ViewModels
           SaveData.LoadFromFile(filePaths.First());
           CurrentFilePath = filePaths.First();
           SaveInUse = true;
+          fileSaved = true;
         }
         catch (Exception ex)
         {
@@ -182,6 +206,10 @@ namespace BugFablesSaveEditor.ViewModels
           {
             SaveData.SaveToFile(filePath);
             CurrentFilePath = filePath;
+            var msg = Common.GetMessageBox("File saved", "The file was saved sucessfully at " + CurrentFilePath, 
+                                           ButtonEnum.Ok, Icon.Warning);
+            await msg.ShowDialog(Common.MainWindow);
+            fileSaved = true;
           }
           catch (Exception ex)
           {

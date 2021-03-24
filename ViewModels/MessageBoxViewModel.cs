@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Threading;
+using BugFablesSaveEditor.Views;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.ViewModels;
@@ -15,8 +16,7 @@ namespace BugFablesSaveEditor.ViewModels
 {
   public class MessageBoxViewModel : AbstractMsBoxViewModel
   {
-    private Window _parentWindow;
-    public ButtonResult ButtonResult { get; set; }
+    private MessageBoxView _parentWindow;
     public string ContentMessage { get; }
     public bool IsOkShowed { get; private set; }
     public bool IsYesShowed { get; private set; }
@@ -27,7 +27,7 @@ namespace BugFablesSaveEditor.ViewModels
     public RelayCommand EnterClickCommand { get; }
     public RelayCommand EscClickCommand { get; }
 
-    public MessageBoxViewModel(MessageBoxStandardParams @params, Window parent) :
+    public MessageBoxViewModel(MessageBoxStandardParams @params, MessageBoxView parent) :
         base(@params, @params.Icon)
     {
       ContentMessage = @params.ContentMessage;
@@ -97,7 +97,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       await Dispatcher.UIThread.InvokeAsync(() =>
       {
-        ButtonResult = (ButtonResult)Enum.Parse(typeof(ButtonResult), parameter.Trim(), true);
+        _parentWindow.ButtonResult = (ButtonResult)Enum.Parse(typeof(ButtonResult), parameter.Trim(), true);
         _parentWindow.Close();
       });
     }

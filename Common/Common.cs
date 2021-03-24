@@ -28,7 +28,7 @@ namespace BugFablesSaveEditor
 
     public static Window MainWindow { get => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow; }
 
-    public static Window GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
+    public static MessageBoxView GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
     {
       var msg = MessageBoxManager.GetMessageBoxStandardWindow(title, text, buttons, icon);
       Type type = msg.GetType();
