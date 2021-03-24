@@ -10,7 +10,7 @@
     <vm:StatsViewModel />
   </Design.DataContext>
 
-  <DockPanel>
+  <DockPanel HorizontalAlignment="Center">
     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party base stats"/>
