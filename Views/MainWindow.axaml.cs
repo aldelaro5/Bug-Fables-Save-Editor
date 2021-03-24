@@ -2,12 +2,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
-using MessageBox.Avalonia.Views;
 using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace BugFablesSaveEditor.Views
@@ -20,6 +17,8 @@ namespace BugFablesSaveEditor.Views
 #if DEBUG
       this.AttachDevTools();
 #endif
+
+      SettingsManager.Load();
 
       if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
       {
@@ -46,6 +45,21 @@ namespace BugFablesSaveEditor.Views
       view.Width = 500;
       view.Height = 350;
       await view.ShowDialog(Common.MainWindow);
+    }
+
+    public async void OnLoaded(object sender, EventArgs e)
+    {
+      if (SettingsManager.Settings.ShowStartupWarning)
+      {
+        var msg = Common.GetMessageBox("Warning", "This save editor is in beta and thus, " +
+                  "may lead to data losses due to instability.\n" +
+                  "It is HIGHLY recommended to backup your save files before usage.",
+                  ButtonEnum.Ok, MessageBox.Avalonia.Enums.Icon.Warning);
+        await msg.ShowDialog(Common.MainWindow);
+
+        SettingsManager.Settings.ShowStartupWarning = false;
+        SettingsManager.Save();
+      }
     }
   }
 }
