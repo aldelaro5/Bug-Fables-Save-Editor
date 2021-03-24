@@ -1,16 +1,10 @@
-﻿using Avalonia.Controls;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
 using BugFablesSaveEditor.Views;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.ViewModels;
 using MessageBox.Avalonia.ViewModels.Commands;
-using MessageBox.Avalonia.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugFablesSaveEditor.ViewModels
 {

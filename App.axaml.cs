@@ -4,7 +4,6 @@ using Avalonia.Markup.Xaml;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
-using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
 using ReactiveUI;
 using System;

@@ -1,19 +1,16 @@
 using Avalonia.Controls;
 using BugFablesSaveEditor.BugFablesSave;
-using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
-using MessageBox.Avalonia.Views;
 using ReactiveUI;
 using System;
 using System.Linq;
 using System.Reactive;
-using System.Reflection;
 
 namespace BugFablesSaveEditor.ViewModels
 {
   public class MainWindowViewModel : ViewModelBase
   {
-    private bool fileSaved = false;  
+    private bool fileSaved = false;
 
     private string _currentFilePath = "No save file, open an existing file or create a new one";
     public string CurrentFilePath
@@ -41,7 +38,7 @@ namespace BugFablesSaveEditor.ViewModels
       if (SaveInUse && !fileSaved)
       {
         var msg = Common.GetMessageBox("File in use", "An unsaed file is currently in use, " +
-                  "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?", 
+                  "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
                   ButtonEnum.YesNo, Icon.Warning);
         await msg.ShowDialog(Common.MainWindow);
         if (msg.ButtonResult == ButtonResult.No)
@@ -206,7 +203,7 @@ namespace BugFablesSaveEditor.ViewModels
           {
             SaveData.SaveToFile(filePath);
             CurrentFilePath = filePath;
-            var msg = Common.GetMessageBox("File saved", "The file was saved sucessfully at " + CurrentFilePath, 
+            var msg = Common.GetMessageBox("File saved", "The file was saved sucessfully at " + CurrentFilePath,
                                            ButtonEnum.Ok, Icon.Warning);
             await msg.ShowDialog(Common.MainWindow);
             fileSaved = true;

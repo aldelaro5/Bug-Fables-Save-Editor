@@ -1,11 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.LogicalTree;
-using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
 using MessageBox.Avalonia;
-using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.Views;
 using System;
@@ -36,7 +33,7 @@ namespace BugFablesSaveEditor
       MsBoxStandardWindow standardMsgBox = (MsBoxStandardWindow)fields[0].GetValue(msg);
 
       MessageBoxView view = new MessageBoxView(title, text, buttons, icon, standardMsgBox);
-      
+
       return view;
     }
 
