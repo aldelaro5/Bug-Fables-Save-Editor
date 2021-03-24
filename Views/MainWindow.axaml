@@ -7,7 +7,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BugFablesSaveEditor.Views.MainWindow"
         Title="Bug Fables Save Editor"
-        Icon="/Assets/icon.png">
+        Icon="/Assets/icon.png"
+        WindowStartupLocation="CenterScreen">
   <Design.DataContext>
     <vm:MainWindowViewModel/>
   </Design.DataContext>
@@ -22,11 +23,8 @@
           <Separator/>
           <MenuItem Command="{Binding CmdExit}" Header="Exit"/>
         </MenuItem>
-        <MenuItem Header="Edit">
-          <MenuItem Header="Settings"/>
-        </MenuItem>
         <MenuItem Header="Help">
-          <MenuItem Header="About"/>
+          <MenuItem Header="About" Click="OnAbout_Click" />
         </MenuItem>
       </Menu>
       <DockPanel>

@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System;
 using System.Diagnostics;
@@ -33,6 +34,14 @@ namespace BugFablesSaveEditor.Views
     private void InitializeComponent()
     {
       AvaloniaXamlLoader.Load(this);
+    }
+
+    public async void OnAbout_Click(object sender, RoutedEventArgs e)
+    {
+      AboutView view = new AboutView();
+      view.Width = 500;
+      view.Height = 350;
+      await view.ShowDialog(Common.MainWindow);
     }
   }
 }
