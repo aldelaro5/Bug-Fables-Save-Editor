@@ -110,6 +110,9 @@
     <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\MessageBoxView.axaml.cs">
+      <DependentUpon>MessageBoxView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\GlobalView.axaml.cs">
       <DependentUpon>GlobalView.axaml</DependentUpon>
     </Compile>

@@ -2,10 +2,12 @@ using Avalonia.Controls;
 using BugFablesSaveEditor.BugFablesSave;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
+using MessageBox.Avalonia.Views;
 using ReactiveUI;
 using System;
 using System.Linq;
 using System.Reactive;
+using System.Reflection;
 
 namespace BugFablesSaveEditor.ViewModels
 {
@@ -32,76 +34,43 @@ namespace BugFablesSaveEditor.ViewModels
       set { _saveInUse = value; this.RaisePropertyChanged(); }
     }
 
-    public ReactiveCommand<Unit, Unit> CmdNewFile
+    public void NewFile()
     {
-      get => ReactiveCommand.Create(() =>
-      {
-        SaveData.ResetToDefault();
-        CurrentFilePath = "New file being created, save it to store it";
-        SaveInUse = true;
-      });
+      SaveData.ResetToDefault();
+      CurrentFilePath = "New file being created, save it to store it";
+      SaveInUse = true;
     }
 
-    public ReactiveCommand<Unit, Unit> CmdOpenFile
+    public async void OpenFile()
     {
-      get => ReactiveCommand.CreateFromTask(async () =>
+      OpenFileDialog dlg = new OpenFileDialog();
+      dlg.Title = "Select a Bug Fables save file";
+      dlg.Filters.Add(new FileDialogFilter() { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
+      dlg.AllowMultiple = false;
+      string[] filePaths = await dlg.ShowAsync(Common.MainWindow);
+      if (filePaths.Length == 1)
       {
-        OpenFileDialog dlg = new OpenFileDialog();
-        dlg.Title = "Select a Bug Fables save file";
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
-        dlg.AllowMultiple = false;
-        string[] filePaths = await dlg.ShowAsync(Common.MainWindow);
-        if (filePaths.Length == 1)
+        try
         {
-          try
-          {
-            SaveData.LoadFromFile(filePaths.First());
-            CurrentFilePath = filePaths.First();
-            SaveInUse = true;
-          }
-          catch (Exception ex)
-          {
-            SaveData.ResetToDefault();
-            var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-                        "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
-            await msg.ShowDialog(Common.MainWindow);
-          }
+          SaveData.LoadFromFile(filePaths.First());
+          CurrentFilePath = filePaths.First();
+          SaveInUse = true;
         }
-      });
-    }
-
-    public ReactiveCommand<Unit, Unit> CmdSaveFile
-    {
-      get => ReactiveCommand.CreateFromTask(async () =>
-      {
-        SaveFileDialog dlg = new SaveFileDialog();
-        dlg.Title = "Select the location to save the file";
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
-        dlg.DefaultExtension = "dat";
-        string filePath = await dlg.ShowAsync(Common.MainWindow);
-        if (!string.IsNullOrEmpty(filePath))
+        catch (Exception ex)
         {
-          try
-          {
-            SaveData.SaveToFile(filePath);
-            CurrentFilePath = filePath;
-          }
-          catch (Exception ex)
-          {
-            var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-                        "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
-            await msg.ShowDialog(Common.MainWindow);
-          }
+          SaveData.ResetToDefault();
+          var msg = Common.GetMessageBox("Error opening save file",
+                      "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
+          await msg.ShowDialog(Common.MainWindow);
         }
-      }, this.WhenAnyValue(x => x.SaveInUse));
+      }
     }
 
-    public ReactiveCommand<Unit, Unit> CmdExit
+    public ReactiveCommand<Unit, Unit> CmdSaveFile { get; set; }
+
+    public void Exit()
     {
-      get => ReactiveCommand.Create(() =>
-      {
-        Common.MainWindow.Close();
-      });
+      Common.MainWindow.Close();
     }
 
     private GlobalViewModel _globalViewModel;
@@ -199,6 +168,29 @@ namespace BugFablesSaveEditor.ViewModels
       FlagsViewModel = new FlagsViewModel(saveData);
       SongsViewModel = new SongsViewModel(saveData);
       CrystalBerriesViewModel = new CrystalBerriesViewModel(saveData);
+
+      CmdSaveFile = ReactiveCommand.CreateFromTask(async () =>
+      {
+        SaveFileDialog dlg = new SaveFileDialog();
+        dlg.Title = "Select the location to save the file";
+        dlg.Filters.Add(new FileDialogFilter() { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
+        dlg.DefaultExtension = "dat";
+        string filePath = await dlg.ShowAsync(Common.MainWindow);
+        if (!string.IsNullOrEmpty(filePath))
+        {
+          try
+          {
+            SaveData.SaveToFile(filePath);
+            CurrentFilePath = filePath;
+          }
+          catch (Exception ex)
+          {
+            var msg = Common.GetMessageBox("Error opening save file",
+                        "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
+            await msg.ShowDialog(Common.MainWindow);
+          }
+        }
+      }, this.WhenAnyValue(x => x.SaveInUse));
     }
   }
 }

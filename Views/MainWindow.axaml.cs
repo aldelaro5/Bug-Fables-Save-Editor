@@ -2,8 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using MessageBox.Avalonia;
+using MessageBox.Avalonia.Enums;
+using MessageBox.Avalonia.Views;
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace BugFablesSaveEditor.Views

@@ -11,7 +11,7 @@ namespace BugFablesSaveEditor.Views
 {
   public class AboutView : Window
   {
-    Label lblVersion;
+    private Label lblVersion;
 
     public AboutView()
     {

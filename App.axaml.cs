@@ -33,7 +33,7 @@ namespace BugFablesSaveEditor
 
       RxApp.DefaultExceptionHandler = Observer.Create<Exception>((ex) =>
       {
-        MessageBoxManager.GetMessageBoxStandardWindow("Unexpected error", "An unexpected error occured: " +
+        Common.GetMessageBox("Unexpected error", "An unexpected error occured: " +
             ex.Message, ButtonEnum.Ok, Icon.Error).ShowDialog(Common.MainWindow);
       });
     }

@@ -17,11 +17,11 @@
     <DockPanel>
       <Menu DockPanel.Dock="Top">
         <MenuItem Header="File">
-          <MenuItem Command="{Binding CmdNewFile}" Header="New"/>
-          <MenuItem Command="{Binding CmdOpenFile}" Header="Open..."/>
+          <MenuItem Command="{Binding NewFile}" Header="New"/>
+          <MenuItem Command="{Binding OpenFile}" Header="Open..."/>
           <MenuItem Command="{Binding CmdSaveFile}" Header="Save as..."/>
           <Separator/>
-          <MenuItem Command="{Binding CmdExit}" Header="Exit"/>
+          <MenuItem Command="{Binding Exit}" Header="Exit"/>
         </MenuItem>
         <MenuItem Header="Help">
           <MenuItem Header="About" Click="OnAbout_Click" />
@@ -31,8 +31,8 @@
         <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Vertical">
           <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" HorizontalContentAlignment="Center"/>
           <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Command="{Binding CmdNewFile}" Content="New file" Margin="5"/>
-            <Button Command="{Binding CmdOpenFile}" Content="Open file..." Margin="5"/>
+            <Button Command="{Binding NewFile}" Content="New file" Margin="5"/>
+            <Button Command="{Binding OpenFile}" Content="Open file..." Margin="5"/>
             <Button Command="{Binding CmdSaveFile}" Content="Save file..." Margin="5"/>
           </StackPanel>
         </StackPanel>

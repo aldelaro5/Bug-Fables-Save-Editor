@@ -1,9 +1,17 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.LogicalTree;
+using BugFablesSaveEditor.ViewModels;
+using BugFablesSaveEditor.Views;
+using MessageBox.Avalonia;
+using MessageBox.Avalonia.DTO;
+using MessageBox.Avalonia.Enums;
+using MessageBox.Avalonia.Views;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 
 namespace BugFablesSaveEditor
 {
@@ -19,6 +27,18 @@ namespace BugFablesSaveEditor
     public const string ElementSeparator = "@";
 
     public static Window MainWindow { get => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow; }
+
+    public static Window GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
+    {
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow(title, text, buttons, icon);
+      Type type = msg.GetType();
+      FieldInfo[] fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+      MsBoxStandardWindow standardMsgBox = (MsBoxStandardWindow)fields[0].GetValue(msg);
+
+      MessageBoxView view = new MessageBoxView(title, text, buttons, icon, standardMsgBox);
+      
+      return view;
+    }
 
     public static string[] GetEnumDescriptions<T>()
       where T : struct, Enum
