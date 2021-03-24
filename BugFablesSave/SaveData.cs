@@ -42,7 +42,11 @@ namespace BugFablesSaveEditor.BugFablesSave
       string[] saveSections;
       try
       {
-        saveSections = File.ReadAllLines(fileName);
+        StringBuilder data = new StringBuilder(File.ReadAllText(fileName));
+        for (int i = 0; i < data.Length; i++)
+          data[i] = (char)(data[i] ^ 543);
+
+        saveSections = data.ToString().Split('\n');
       }
       catch (Exception ex)
       {
@@ -50,9 +54,7 @@ namespace BugFablesSaveEditor.BugFablesSave
       }
 
       for (int i = 0; i < saveSections.Length; i++)
-      {
         Sections[(SaveFileSection)i].ParseFromSaveLine(saveSections[i]);
-      }
     }
 
     public void SaveToFile(string fileName)
@@ -68,6 +70,9 @@ namespace BugFablesSaveEditor.BugFablesSave
 
       try
       {
+        for (int i = 0; i < sb.Length; i++)
+          sb[i] = (char)(sb[i] ^ 543);
+
         File.WriteAllText(fileName, sb.ToString());
       }
       catch (Exception ex)
