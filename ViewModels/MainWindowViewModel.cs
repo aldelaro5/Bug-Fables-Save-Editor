@@ -204,7 +204,7 @@ namespace BugFablesSaveEditor.ViewModels
           {
             SaveData.SaveToFile(filePath);
             CurrentFilePath = filePath;
-            var msg = Common.GetMessageBox("File saved", "The file was saved sucessfully at " + CurrentFilePath,
+            var msg = Common.GetMessageBox("File saved", "The file was saved successfully at " + CurrentFilePath,
                                            ButtonEnum.Ok, Icon.Warning);
             await msg.ShowDialog(Common.MainWindow);
             fileSaved = true;
