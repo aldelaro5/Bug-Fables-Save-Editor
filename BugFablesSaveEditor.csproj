@@ -9,6 +9,9 @@
     <Product>Bug Fables Save Editor</Product>
     <Description>A save editor for the game Bug Fables: The Everlasting Sapling </Description>
   </PropertyGroup>
+  <PropertyGroup>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
