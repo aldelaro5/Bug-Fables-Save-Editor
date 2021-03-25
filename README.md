@@ -3,9 +3,8 @@
   <img src="https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Assets/icon.png" />
 </p>
 
-| | |
+| ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/global.png) | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/items.png) |
 ------------ | -------------
-![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/global.png) | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/items.png)
 ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/stats.png) | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/library.png)
 
 A save editor for the game [Bug Fables: The Everlasting Sapling](https://store.steampowered.com/app/1082710/Bug_Fables_The_Everlasting_Sapling/) made in .NET 5. This program is made to support modification of any elements inside a Bug Fables save while being efficent and easy to use. Only saving to PC save files is supported for now.
