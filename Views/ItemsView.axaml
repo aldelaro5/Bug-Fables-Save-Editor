@@ -17,7 +17,7 @@
         <ComboBox SelectedIndex="{Binding SelectedItemForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Item}}"
-                            Items="{Binding ItemsNames}" Width="185" />
+                            Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItem}"/>
       </StackPanel>
       <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
@@ -30,7 +30,7 @@
         <DataGrid.Columns>
           <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Item}}" Width="185"/>
+                                        ConverterParameter={x:Type bf:Item}}" Width="205"/>
           <DataGridTemplateColumn Width="50">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
@@ -48,7 +48,7 @@
         <ComboBox SelectedIndex="{Binding SelectedKeyItemForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Item}}"
-                            Items="{Binding ItemsNames}" Width="185" />
+                            Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItem}"/>
       </StackPanel>
       <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
@@ -61,7 +61,7 @@
         <DataGrid.Columns>
           <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Item}}" Width="185"/>
+                                        ConverterParameter={x:Type bf:Item}}" Width="205"/>
           <DataGridTemplateColumn Width="50">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
@@ -79,7 +79,7 @@
         <ComboBox SelectedIndex="{Binding SelectedStoredItemForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Item}}"
-                          Items="{Binding ItemsNames}" Width="185" />
+                          Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItem}"/>
       </StackPanel>
       <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
@@ -92,7 +92,7 @@
         <DataGrid.Columns>
           <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Item}}" Width="185"/>
+                                        ConverterParameter={x:Type bf:Item}}" Width="205"/>
           <DataGridTemplateColumn Width="50">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>

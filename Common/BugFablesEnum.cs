@@ -337,9 +337,9 @@ namespace BugFablesSaveEditor.BugFablesEnums
     SuperPepper,
     [Description("Iron Seed")]
     IronSeed,
-    [Description("RESERVED")]
+    [Description("RESERVED (Blue Berry)")]
     RESERVED1,
-    [Description("RESERVED")]
+    [Description("RESERVED (Red Berry)")]
     RESERVED2,
     [Description("Mistake")]
     Mistake,
@@ -697,6 +697,8 @@ namespace BugFablesSaveEditor.BugFablesEnums
     CardTrophy,
     [Description("Team Ribbon")]
     TeamRibbon,
+    [Description("RESERVED (Yellow Berry)")]
+    MoneyBig,
     COUNT
   };
 
