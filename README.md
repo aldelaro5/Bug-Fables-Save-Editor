@@ -1,27 +1,31 @@
 # Bug-Fables-Save-Editor
-![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/global.png)
-![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/items.png)
-![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/stats.png)
-![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/library.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Assets/icon.png" />
+</p>
 
-A save editor for the game [Bug Fables: The Everlasting Sapling](https://store.steampowered.com/app/1082710/Bug_Fables_The_Everlasting_Sapling/) made in .NET 5. This program is made in the goal to support modification of any elements the Bug Fables save format allows while being efficent and easy to use. Only saving to PC compatible files is supported for now.
+| | |
+------------ | -------------
+![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/global.png) | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/items.png)
+![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/stats.png) | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/library.png)
+
+A save editor for the game [Bug Fables: The Everlasting Sapling](https://store.steampowered.com/app/1082710/Bug_Fables_The_Everlasting_Sapling/) made in .NET 5. This program is made to support modification of any elements inside a Bug Fables save while being efficent and easy to use. Only saving to PC save files is supported for now.
 
 This program is supported on Windows and Linux. It uses the [Avalonia UI](http://avaloniaui.net/) framework which offers a rich UI and many features to make developing very comfortable for WPF and .NET developers.
 
-NOTE: THIS SAVE EDITOR IS CURRENTLY IN BETA. IT IS _HIGHLY_ RECOMMENCED TO BACKUP YOUR SAVE FILES BEFORE USAGE.
+NOTE: THIS SAVE EDITOR IS CURRENTLY IN BETA. IT IS _HIGHLY_ RECOMMENDED TO BACKUP YOUR SAVE FILES BEFORE USAGE.
 
 ## Features
-- Supports modifications of all the save sections
+- Supports modification of all the save sections
 - Encode and decode the save automatically (no need for a standalone decrypter!)
-- The flags, flagvars, flagstrings, regionals and crystal berries flags have a custom description attached for each of them based on research work done on the game
-- Allows to quickly filters by text libraries element, flags and songs
+- The flags, flagvars, flagstrings, regionals and crystal berry flags each have a custom description attached based on the research that has been done on the game
+- Allows to quickly filter by search in sections with a lot of elements
 - NO MANUAL TEXT EDITS NEEDED!
 
-## System requirements
-The only requirement is to have the .NET 5 runtime installed. For Windows, you can install the lattest version of .NET by following [this link](https://dotnet.microsoft.com/download) (note, you ideally want to install .NET, not .NET Core or .NET Framework). For Linux, refer to your distribution's documentation for proper installation of the runtime.
+## System Requirements
+The only requirement is to have the .NET runtime installed. For Windows, you can install the latest version of .NET by following [this link](https://dotnet.microsoft.com/download) (note, you ideally want to install .NET, not .NET Core or .NET Framework). For Linux, refer to your distribution's documentation for proper installation of the runtime.
 
 ## Installation
-Simply download the lattest zip from [the release page](https://github.com/aldelaro5/Bug-Fables-Save-Editor/releases) that corresponds to your OS. To launch it, launch the executable insie the zip. This is a portable software, its directory can be moved and placed whereever you want.
+Simply download the latest zip from [the release page](https://github.com/aldelaro5/Bug-Fables-Save-Editor/releases) that corresponds to your OS. To launch it, launch the executable inside the zip. This is a portable software, its directory can be moved and placed wherever you want.
 
 ## How to Build
 This section is intended ***only for developers***. You do not need to do this if you only want to use the program. Refer to the ***Installation*** section for this purpose.
@@ -40,30 +44,30 @@ To build, simply run the following command from the root directory:
 
 	dotnet build BugFablesSaveEditor.csproj
 
-The compiled binaries should be appear in the directory named `bin`.
+The compiled binaries should appear in the directory named `bin`.
 
-## General usage
-When launched, the program presents multiple tabs corresponding to each sections of the save. 
+## General Usage
+When launched, the program presents multiple tabs corresponding to each section of the save. 
 
 You must either open an existing file or create a new blank one before using these tabs. Once done, you will be able to browse the different sections with the correct information and the ability to edit all of them. When you are done making your changes, you can save the file. 
 
-Please note that to load your file in the game, you MUST respect the filename scheme (save0.dat for file 1, save1.dat for file 2 and save3.dat for file 3).
+Please note that to load your file in the game, you MUST respect the filename scheme (save0.dat for file 1, save1.dat for file 2 and save2.dat for file 3).
 
 Here's a general overview of the different tabs:
 
-- Global: contains header and important information that affects the whole save such as rank, icons on the file select screen as well as where you are at which location.
-- Party: contains the list of party members and the list of followers. NOTE: the followers list will only be used when the game allows it in specific situations.
-- Stats: contains all base stats and all the stats bonuses applied to the party and each party members. This tab allows very granular control over your bonuses.
-- Quests: contains the ordered 3 quests lists associated with their state (open, taken and completed). NOTE: it is normal to have a single NO QUEST entry in these lists as the game does this in normal gameplay.
-- Items: contains the ordered items in possesion (inventory and key itmes) as well as the items in storage.
+- Global: contains header and important information that affects the whole save such as rank, icons on the file select screen, as well as your location.
+- Party: contains the list of party members and the list of followers. NOTE: the follower list will only be used when the game allows it in specific situations.
+- Stats: contains all base stats and all the stats bonuses applied to the party and each party member. This tab allows very granular control over your bonuses.
+- Quests: contains the ordered 3 quest lists associated with their state (open, taken and completed). NOTE: it is normal to have a single NO QUEST entry in these lists as the game does this in normal gameplay.
+- Items: contains the ordered items in possesion (inventory and key items) as well as the items in storage.
 - Medals: contains the list of the medals in possession (and who they are equipped to) as well as the ability to manage what medals the shops have in stock and in their pool (as well as their order).
-- Library: contains all the library flags (as well as the seen areas flags for the map) which can be toggled at will. NOTE: all library sections have more flags than used under normal gameplay.
-- Flags: contains the different flags in the game grouped by their categories. They all have a description attached to search among them. NOTE: the regionals are tied to the current area in the global tab.
-- Crystal Berries: contains the flags for having obtained each of the crystal berries in the game. They have a description attached to them that tells the location to find each of them.
+- Library: contains all the library flags (as well as the seen areas flags for the map) which can be toggled at will. NOTE: all library sections have more flags than are used under normal gameplay.
+- Flags: contains the different flags in the game grouped by their categories. They all have a searchable description attached. NOTE: the regionals are tied to the current area in the global tab.
+- Crystal Berries: contains the flags for having obtained each of the crystal berries in the game. They have a description attached to them that says where they are located.
 - Songs: contains the ordered list of all the songs Samira can play as well as the flag to tell if each song is bought.
 
-## Contributions, issue reports and feature requests
-All contributions via pull requests are welcome as well as issue reports on this issue tracker. You may also request features with this issue tracker.
+## Contributions, Issue Reports and Feature Requests
+All contributions via pull requests are welcome as well as issue reports on this repository's issue tracker. You may also request features within this issue tracker.
 
 If you submit a pull request, make sure it meets the coding standards of the project.
 
@@ -72,3 +76,5 @@ This program is licensed under the MIT license which grants you the permission t
 
 ## Special Thanks
 I would like to thank everyone from Moonsprout Games for making this amazing game as it brought inspiration to me and to everyone in the community it sparked.
+
+Small thanks to [Cyawn](https://github.com/Cyan627) for the proofreading of the flag descriptions and this README.
