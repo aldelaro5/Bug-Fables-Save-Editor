@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
     <StartupObject>BugFablesSaveEditor.Program</StartupObject>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Aldelaro5</Authors>
     <Product>Bug Fables Save Editor</Product>
     <Description>A save editor for the game Bug Fables: The Everlasting Sapling </Description>
