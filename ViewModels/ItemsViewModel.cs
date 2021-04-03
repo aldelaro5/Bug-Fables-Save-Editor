@@ -115,7 +115,7 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialize()
     {
-      ItemsNames = Common.GetEnumDescriptions<Item>();
+      ItemsNames = CommonUtils.GetEnumDescriptions<Item>();
       var itemsArray = (ObservableCollection<ItemInfo>[])SaveData.Sections[SaveFileSection.Items].Data;
       Items = itemsArray[(int)ItemPossessionType.Inventory];
       KeyItems = itemsArray[(int)ItemPossessionType.KeyItem];

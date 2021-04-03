@@ -14,6 +14,10 @@
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets\MessageBox\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\MessageBox\info.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FlagsData\CrystalBerries.csv">
@@ -110,7 +114,6 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
-    <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\MessageBoxView.axaml.cs">
@@ -118,6 +121,9 @@
     </Compile>
     <Compile Update="Views\GlobalView.axaml.cs">
       <DependentUpon>GlobalView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TitleBars\WindowsMsgBoxTitleBar.axaml.cs">
+      <DependentUpon>WindowsMsgBoxTitleBar.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

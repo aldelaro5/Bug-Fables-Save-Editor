@@ -65,35 +65,35 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       StringBuilder sb = new StringBuilder();
 
       sb.Append(globalInfo.Rank);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.Exp);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.NeededExp);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.MaxTP);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.TP);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.BerryCount);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append((int)globalInfo.CurrentMap);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append((int)globalInfo.CurrentArea);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.MP);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.MaxMP);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.NbrMaxItemsInventory);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.NbrMaxItemsStorage);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.PlayTimeHours);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.PlayTimeMinutes);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(globalInfo.PlayTimeSeconds);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append((int)globalInfo.SaveProgressIcons);
 
       return sb.ToString();
@@ -101,7 +101,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] data = saveLine.Split(Common.FieldSeparator);
+      string[] data = saveLine.Split(CommonUtils.FieldSeparator);
 
       if (data.Length != 16)
         throw new Exception(nameof(GlobalInfo) + " is in an invalid format");

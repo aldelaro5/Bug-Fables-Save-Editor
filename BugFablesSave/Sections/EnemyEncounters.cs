@@ -36,7 +36,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] enemyEncountersData = saveLine.Split(Common.ElementSeparator);
+      string[] enemyEncountersData = saveLine.Split(CommonUtils.ElementSeparator);
       if (enemyEncountersData.Length != nbrSlots)
         throw new Exception(nameof(EnemyEncounters) + " is in an invalid format");
 
@@ -44,7 +44,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       for (int i = 0; i < enemyEncountersData.Length; i++)
       {
-        string[] data = enemyEncountersData[i].Split(Common.FieldSeparator);
+        string[] data = enemyEncountersData[i].Split(CommonUtils.FieldSeparator);
 
         EnemyEncounterInfo newEnemyEncounterInfo = new EnemyEncounterInfo();
 
@@ -68,11 +68,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       for (int i = 0; i < enemyEncounters.Length; i++)
       {
         sb.Append(enemyEncounters[i].NbrSeen);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(enemyEncounters[i].NbrDefeated);
 
         if (i != enemyEncounters.Length - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

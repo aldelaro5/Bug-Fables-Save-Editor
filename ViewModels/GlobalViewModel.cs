@@ -37,9 +37,9 @@ namespace BugFablesSaveEditor.ViewModels
     public GlobalViewModel(SaveData saveData)
     {
       SaveData = saveData;
-      Areas = Common.GetEnumDescriptions<Area>();
-      Maps = Common.GetEnumDescriptions<Map>();
-      SaveProgressIcons = Common.GetEnumDescriptions<SaveProgressIcon>();
+      Areas = CommonUtils.GetEnumDescriptions<Area>();
+      Maps = CommonUtils.GetEnumDescriptions<Map>();
+      SaveProgressIcons = CommonUtils.GetEnumDescriptions<SaveProgressIcon>();
     }
   }
 }

@@ -67,7 +67,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] statsBonusesData = saveLine.Split(Common.ElementSeparator);
+      string[] statsBonusesData = saveLine.Split(CommonUtils.ElementSeparator);
       ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
 
       for (int i = 0; i < statsBonusesData.Length; i++)
@@ -75,7 +75,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         if (statsBonusesData[i] == string.Empty)
           continue;
 
-        string[] data = statsBonusesData[i].Split(Common.FieldSeparator);
+        string[] data = statsBonusesData[i].Split(CommonUtils.FieldSeparator);
 
         StatBonusInfo newStatBonus = new StatBonusInfo();
 
@@ -106,13 +106,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       for (int i = 0; i < statBonuses.Count; i++)
       {
         sb.Append((int)statBonuses[i].Type);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(statBonuses[i].Amount);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append((int)statBonuses[i].Target);
 
         if (i != statBonuses.Count - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

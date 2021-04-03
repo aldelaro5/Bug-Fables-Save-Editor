@@ -44,7 +44,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] medalPools = saveLine.Split(Common.ElementSeparator);
+      string[] medalPools = saveLine.Split(CommonUtils.ElementSeparator);
       if (medalPools.Length != (int)MedalShop.COUNT)
         throw new Exception(nameof(MedalShopsPools) + " is in an invalid format");
 
@@ -55,7 +55,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         if (medalPools[i] == string.Empty)
           continue;
 
-        string[] data = medalPools[i].Split(Common.FieldSeparator);
+        string[] data = medalPools[i].Split(CommonUtils.FieldSeparator);
         for (int j = 0; j < data.Length; j++)
         {
           int intOut = 0;
@@ -86,11 +86,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           sb.Append((int)medals[i][j].Medal);
 
           if (j != medals[i].Count - 1)
-            sb.Append(Common.FieldSeparator);
+            sb.Append(CommonUtils.FieldSeparator);
         }
 
         if (i != medals.Length - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

@@ -45,7 +45,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         sb.Append((int)followers[i].AnimID);
 
         if (i != followers.Count - 1)
-          sb.Append(Common.FieldSeparator);
+          sb.Append(CommonUtils.FieldSeparator);
       }
 
       return sb.ToString();
@@ -53,7 +53,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] followersData = saveLine.Split(Common.FieldSeparator);
+      string[] followersData = saveLine.Split(CommonUtils.FieldSeparator);
       ObservableCollection<Follower> followers = (ObservableCollection<Follower>)Data;
 
       for (int i = 0; i < followersData.Length; i++)

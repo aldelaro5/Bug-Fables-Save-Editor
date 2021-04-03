@@ -2,27 +2,17 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using BugFablesSaveEditor.ViewModels;
-using MessageBox.Avalonia.DTO;
-using MessageBox.Avalonia.Enums;
-using MessageBox.Avalonia.Views;
+using Common.MessageBox;
+using Common.MessageBox.Enums;
 using System.Runtime.InteropServices;
 
 namespace BugFablesSaveEditor.Views
 {
   public class MessageBoxView : Window
   {
-    private DockPanel mainContainer;
     public ButtonResult ButtonResult { get; set; } = ButtonResult.None;
 
     public MessageBoxView()
-    {
-      InitializeComponent();
-#if DEBUG
-      this.AttachDevTools();
-#endif
-    }
-
-    public MessageBoxView(string title, string text, ButtonEnum buttons, Icon icon, MsBoxStandardWindow messageContent)
     {
       InitializeComponent();
 #if DEBUG
@@ -35,31 +25,53 @@ namespace BugFablesSaveEditor.Views
         ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
         ExtendClientAreaTitleBarHeightHint = -1;
 
-        var windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
+        var windowsTitleBar = this.FindControl<WindowsMsgBoxTitleBar>("windowsTitleBar");
         windowsTitleBar.IsVisible = true;
       }
 
-      mainContainer = this.FindControl<DockPanel>("mainContainer");
-      mainContainer.Children.Add((Grid)messageContent.Content);
+      var vm = new MessageBoxViewModel(new MessageBoxParams
+      {
+        ContentMessage = "This is a test message box message that can go for long and long, " +
+                         "please read this message to understand what is happening in this message box." +
+                         "The brown fox jumps over the lazy dog",
+        ContentTitle = "Test nessage box",
+        Icon = Common.MessageBox.Enums.Icon.Warning,
+        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+        MaxWidth = 600,
+        ButtonDefinitions = ButtonEnum.Ok
+      }, this);
+      DataContext = vm;
+    }
 
-      var vm = new MessageBoxViewModel(new MessageBoxStandardParams
+    public MessageBoxView(string title, string text, ButtonEnum buttons, Icon icon)
+    {
+      InitializeComponent();
+#if DEBUG
+      this.AttachDevTools();
+#endif
+
+      if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+      {
+        ExtendClientAreaToDecorationsHint = true;
+        ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
+        ExtendClientAreaTitleBarHeightHint = -1;
+
+        var windowsTitleBar = this.FindControl<WindowsMsgBoxTitleBar>("windowsTitleBar");
+        windowsTitleBar.IsVisible = true;
+      }
+
+      var vm = new MessageBoxViewModel(new MessageBoxParams
       {
         ContentMessage = text,
         ContentTitle = title,
         Icon = icon,
+        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+        MaxWidth = 600,
         ButtonDefinitions = buttons
       }, this);
-      ((IControl)messageContent).DataContext = vm;
-
-      SizeToContent = messageContent.SizeToContent;
-      MinWidth = messageContent.MinWidth;
-      MaxWidth = messageContent.MaxWidth;
-      Icon = messageContent.Icon;
-      MinHeight = messageContent.MinHeight;
-      CanResize = messageContent.CanResize;
-      FontFamily = messageContent.FontFamily;
-      Title = messageContent.Title;
-      KeyBindings.AddRange(messageContent.KeyBindings);
+      DataContext = vm;
+      // Workaround a layout issue
+      Width = 600;
     }
 
     private void InitializeComponent()

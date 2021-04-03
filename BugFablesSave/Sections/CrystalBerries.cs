@@ -79,7 +79,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         sb.Append(crystalBerries[i].Obtained);
 
         if (i != crystalBerries.Length - 1)
-          sb.Append(Common.FieldSeparator);
+          sb.Append(CommonUtils.FieldSeparator);
       }
 
       return sb.ToString();
@@ -87,7 +87,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] crystalBerriesData = saveLine.Split(Common.FieldSeparator);
+      string[] crystalBerriesData = saveLine.Split(CommonUtils.FieldSeparator);
       if (crystalBerriesData.Length != NbrCrystalBerries)
         throw new Exception(nameof(CrystalBerries) + " is in an invalid format");
 

@@ -185,8 +185,8 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialize()
     {
-      MedalsNames = Common.GetEnumDescriptions<Medal>();
-      MedalsEquipTargetNames = Common.GetEnumDescriptions<MedalEquipTarget>();
+      MedalsNames = CommonUtils.GetEnumDescriptions<Medal>();
+      MedalsEquipTargetNames = CommonUtils.GetEnumDescriptions<MedalEquipTarget>();
       Medals = (ObservableCollection<MedalInfo>)SaveData.Sections[SaveFileSection.Medals].Data;
       var medalsPoolArray = (ObservableCollection<MedalShopPool>[])SaveData.Sections[SaveFileSection.MedalShopsPools].Data;
       var medalsAvailableArray = (ObservableCollection<MedalShopAvailable>[])SaveData.Sections[SaveFileSection.MedalShopsAvailables].Data;

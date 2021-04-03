@@ -57,13 +57,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] membersInfo = saveLine.Split(Common.ElementSeparator);
+      string[] membersInfo = saveLine.Split(CommonUtils.ElementSeparator);
 
       ObservableCollection<PartyMemberInfo> headerInfo = (ObservableCollection<PartyMemberInfo>)Data;
 
       for (int i = 0; i < membersInfo.Length; i++)
       {
-        string[] data = membersInfo[i].Split(Common.FieldSeparator);
+        string[] data = membersInfo[i].Split(CommonUtils.FieldSeparator);
         if (data.Length != 8)
           throw new Exception(nameof(PartyMembers) + "[" + i + "] is in an invalid format");
 
@@ -136,23 +136,23 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       for (int i = 0; i < partyMemberInfos.Count; i++)
       {
         sb.Append((int)partyMemberInfos[i].Trueid);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].HP);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].MaxHP);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].BaseHP);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].Attack);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].BaseAttack);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].Defense);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(partyMemberInfos[i].BaseDefense);
 
         if (i != partyMemberInfos.Count - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

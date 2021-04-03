@@ -42,7 +42,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] songsData = saveLine.Split(Common.ElementSeparator);
+      string[] songsData = saveLine.Split(CommonUtils.ElementSeparator);
       ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
 
       for (int i = 0; i < songsData.Length; i++)
@@ -50,7 +50,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         if (songsData[i] == string.Empty)
           continue;
 
-        string[] data = songsData[i].Split(Common.FieldSeparator);
+        string[] data = songsData[i].Split(CommonUtils.FieldSeparator);
 
         SongInfo newSong = new SongInfo();
 
@@ -78,11 +78,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       for (int i = 0; i < songs.Count; i++)
       {
         sb.Append((int)songs[i].Song);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         sb.Append(songs[i].IsBought ? songBought : songNotBought);
 
         if (i != songs.Count - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

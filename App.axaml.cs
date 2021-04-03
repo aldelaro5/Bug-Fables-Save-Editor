@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
-using MessageBox.Avalonia.Enums;
+using Common.MessageBox.Enums;
 using ReactiveUI;
 using System;
 using System.Reactive;
@@ -32,8 +32,8 @@ namespace BugFablesSaveEditor
 
       RxApp.DefaultExceptionHandler = Observer.Create<Exception>((ex) =>
       {
-        Common.GetMessageBox("Unexpected error", "An unexpected error occured: " +
-            ex.Message, ButtonEnum.Ok, Icon.Error).ShowDialog(Common.MainWindow);
+        CommonUtils.GetMessageBox("Unexpected error", "An unexpected error occured: " +
+            ex.Message, ButtonEnum.Ok, Icon.Error).ShowDialog(CommonUtils.MainWindow);
       });
     }
   }

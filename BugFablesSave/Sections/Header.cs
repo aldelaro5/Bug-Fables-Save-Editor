@@ -54,23 +54,23 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       StringBuilder sb = new StringBuilder();
 
       sb.Append(headerInfo.PositionX);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.PositionY);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.PositionZ);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.IsRuigee);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.IsHardest);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.IsFrameone);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.IsPushrock);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.IsMorefarm);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.IsMystery);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(CommonUtils.FieldSeparator);
       sb.Append(headerInfo.Filename);
 
       return sb.ToString();
@@ -78,7 +78,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] data = saveLine.Split(Common.FieldSeparator);
+      string[] data = saveLine.Split(CommonUtils.FieldSeparator);
 
       if (data.Length != 10)
         throw new Exception(nameof(Header) + " is in an invalid format");

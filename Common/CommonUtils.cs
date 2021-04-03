@@ -2,13 +2,10 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using BugFablesSaveEditor.Views;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.Enums;
-using MessageBox.Avalonia.Views;
+using Common.MessageBox.Enums;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 
 namespace BugFablesSaveEditor
 {
@@ -18,7 +15,7 @@ namespace BugFablesSaveEditor
     Down
   }
 
-  public static class Common
+  public static class CommonUtils
   {
     public const string FieldSeparator = ",";
     public const string ElementSeparator = "@";
@@ -27,12 +24,7 @@ namespace BugFablesSaveEditor
 
     public static MessageBoxView GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
     {
-      var msg = MessageBoxManager.GetMessageBoxStandardWindow(title, text, buttons, icon);
-      Type type = msg.GetType();
-      FieldInfo[] fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-      MsBoxStandardWindow standardMsgBox = (MsBoxStandardWindow)fields[0].GetValue(msg);
-
-      MessageBoxView view = new MessageBoxView(title, text, buttons, icon, standardMsgBox);
+      MessageBoxView view = new MessageBoxView(title, text, buttons, icon);
 
       return view;
     }

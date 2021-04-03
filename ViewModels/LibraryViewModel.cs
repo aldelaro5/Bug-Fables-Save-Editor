@@ -211,11 +211,11 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialise()
     {
-      discoveriesNames = Common.GetEnumDescriptions<Discovery>();
-      enemiesNames = Common.GetEnumDescriptions<Enemy>();
-      recipessNames = Common.GetEnumDescriptions<Recipe>();
-      recordsNames = Common.GetEnumDescriptions<Record>();
-      areasNames = Common.GetEnumDescriptions<Area>();
+      discoveriesNames = CommonUtils.GetEnumDescriptions<Discovery>();
+      enemiesNames = CommonUtils.GetEnumDescriptions<Enemy>();
+      recipessNames = CommonUtils.GetEnumDescriptions<Recipe>();
+      recordsNames = CommonUtils.GetEnumDescriptions<Record>();
+      areasNames = CommonUtils.GetEnumDescriptions<Area>();
 
       var wholeLibrary = (LibraryFlag[][])SaveData.Sections[SaveFileSection.Library].Data;
       Discoveries = wholeLibrary[(int)LibrarySection.Discovery];

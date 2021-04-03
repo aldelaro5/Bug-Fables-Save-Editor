@@ -115,7 +115,7 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialize()
     {
-      QuestsNames = Common.GetEnumDescriptions<Quest>();
+      QuestsNames = CommonUtils.GetEnumDescriptions<Quest>();
       var questsArray = (ObservableCollection<QuestInfo>[])SaveData.Sections[SaveFileSection.Quests].Data;
       OpenQuests = questsArray[(int)QuestState.Open];
       TakenQuests = questsArray[(int)QuestState.Taken];

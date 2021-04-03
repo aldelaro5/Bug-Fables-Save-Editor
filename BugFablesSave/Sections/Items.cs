@@ -43,7 +43,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] itemsData = saveLine.Split(Common.ElementSeparator);
+      string[] itemsData = saveLine.Split(CommonUtils.ElementSeparator);
       if (itemsData.Length != (int)ItemPossessionType.COUNT)
         throw new Exception(nameof(Items) + " is in an invalid format");
 
@@ -54,7 +54,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         if (itemsData[i] == string.Empty)
           continue;
 
-        string[] data = itemsData[i].Split(Common.FieldSeparator);
+        string[] data = itemsData[i].Split(CommonUtils.FieldSeparator);
         for (int j = 0; j < data.Length; j++)
         {
           int intOut = 0;
@@ -83,11 +83,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           sb.Append((int)items[i][j].Item);
 
           if (j != items[i].Count - 1)
-            sb.Append(Common.FieldSeparator);
+            sb.Append(CommonUtils.FieldSeparator);
         }
 
         if (i != items.Length - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

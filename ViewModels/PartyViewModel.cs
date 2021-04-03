@@ -98,7 +98,7 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialise()
     {
-      AnimIDs = Common.GetEnumDescriptions<AnimID>();
+      AnimIDs = CommonUtils.GetEnumDescriptions<AnimID>();
       PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
       Followers = (ObservableCollection<Follower>)SaveData.Sections[SaveFileSection.Followers].Data;
 

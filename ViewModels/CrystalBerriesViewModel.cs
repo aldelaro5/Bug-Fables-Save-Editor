@@ -59,7 +59,7 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialise()
     {
-      Areas = Common.GetEnumDescriptions<Area>();
+      Areas = CommonUtils.GetEnumDescriptions<Area>();
       CrystalBerries = (CrystalBerry[])SaveData.Sections[SaveFileSection.CrystalBerries].Data;
       CrystalBerriesFiltered = new DataGridCollectionView(CrystalBerries);
       CrystalBerriesFiltered.Filter = FilterCrystalBerries;

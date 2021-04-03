@@ -86,7 +86,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         sb.Append(regionals[i].Enabled);
 
         if (i != regionals.Length - 1)
-          sb.Append(Common.FieldSeparator);
+          sb.Append(CommonUtils.FieldSeparator);
       }
 
       return sb.ToString();
@@ -94,7 +94,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] regionalFlagsData = saveLine.Split(Common.FieldSeparator);
+      string[] regionalFlagsData = saveLine.Split(CommonUtils.FieldSeparator);
       if (regionalFlagsData.Length != NbrSlots)
         throw new Exception(nameof(RegionalFlags) + " is in an invalid format");
 

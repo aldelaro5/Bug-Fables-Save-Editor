@@ -60,11 +60,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           sb.Append(flags[i][j].Enabled);
 
           if (j != nbrSlotsPerSection - 1)
-            sb.Append(Common.FieldSeparator);
+            sb.Append(CommonUtils.FieldSeparator);
         }
 
         if (i != (int)LibrarySection.COUNT - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();
@@ -72,7 +72,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] libraryData = saveLine.Split(Common.ElementSeparator);
+      string[] libraryData = saveLine.Split(CommonUtils.ElementSeparator);
       if (libraryData.Length != (int)LibrarySection.COUNT)
         throw new Exception(nameof(Library) + " is in an invalid format");
 
@@ -80,7 +80,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
       for (int i = 0; i < libraryData.Length; i++)
       {
-        string[] data = libraryData[i].Split(Common.FieldSeparator);
+        string[] data = libraryData[i].Split(CommonUtils.FieldSeparator);
         if (data.Length != nbrSlotsPerSection)
           throw new Exception(nameof(Library) + "[" + Enum.GetNames(typeof(LibrarySection))[i] + "] is in an invalid format");
 

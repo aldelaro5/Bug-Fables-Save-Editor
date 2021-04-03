@@ -1,37 +1,58 @@
-﻿using Avalonia.Threading;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input.Platform;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia.Threading;
 using BugFablesSaveEditor.Views;
-using MessageBox.Avalonia.DTO;
-using MessageBox.Avalonia.Enums;
-using MessageBox.Avalonia.ViewModels;
-using MessageBox.Avalonia.ViewModels.Commands;
+using Common.MessageBox;
+using Common.MessageBox.Enums;
+using DynamicData.Annotations;
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace BugFablesSaveEditor.ViewModels
 {
-  public class MessageBoxViewModel : AbstractMsBoxViewModel
+  public class MessageBoxViewModel : ViewModelBase, INotifyPropertyChanged
   {
     private MessageBoxView _parentWindow;
+    public bool HasIcon => !(ImagePath is null);
+    public FontFamily FontFamily { get; }
+    public string ContentTitle { get; }
     public string ContentMessage { get; }
+    public WindowIcon WindowIconPath { get; } = null;
+    public Bitmap ImagePath { get; } = null;
+    public int? MaxWidth { get; }
+    public WindowStartupLocation LocationOfMyWindow { get; }
     public bool IsOkShowed { get; private set; }
     public bool IsYesShowed { get; private set; }
     public bool IsNoShowed { get; private set; }
     public bool IsAbortShowed { get; private set; }
     public bool IsCancelShowed { get; private set; }
-    public RelayCommand ButtonClickCommand { get; }
-    public RelayCommand EnterClickCommand { get; }
-    public RelayCommand EscClickCommand { get; }
 
-    public MessageBoxViewModel(MessageBoxStandardParams @params, MessageBoxView parent) :
-        base(@params, @params.Icon)
+    public MessageBoxViewModel(MessageBoxParams @params, MessageBoxView parent)
     {
+      if (@params.Icon != Icon.None)
+      {
+        ImagePath = new Bitmap(AvaloniaLocator.Current.GetService<IAssetLoader>()
+            .Open(new Uri(
+                $" avares://BugFablesSaveEditor/Assets/MessageBox/{@params.Icon.ToString().ToLowerInvariant()}.png")));
+      }
+
+      MaxWidth = @params.MaxWidth;
+      FontFamily = @params.FontFamily;
+      ContentTitle = @params.ContentTitle;
+      ContentMessage = @params.ContentMessage;
+      WindowIconPath = @params.WindowIcon;
+      LocationOfMyWindow = @params.WindowStartupLocation;
+
       ContentMessage = @params.ContentMessage;
       _parentWindow = parent;
       SetButtons(@params.ButtonDefinitions);
-      ButtonClickCommand = new RelayCommand(o => ButtonClick(o.ToString()));
-      EnterClickCommand = new RelayCommand(o => EnterClick());
-      EscClickCommand = new RelayCommand(o => EscClick());
     }
-
 
     private void SetButtons(ButtonEnum paramsButtonDefinitions)
     {
@@ -68,6 +89,11 @@ namespace BugFablesSaveEditor.ViewModels
       }
     }
 
+    public async Task Copy()
+    {
+      await AvaloniaLocator.Current.GetService<IClipboard>().SetTextAsync(ContentMessage);
+    }
+
     private void EnterClick()
     {
       if (IsOkShowed)
@@ -81,12 +107,6 @@ namespace BugFablesSaveEditor.ViewModels
       }
     }
 
-    private async void EscClick()
-    {
-      await Dispatcher.UIThread.InvokeAsync(() => _parentWindow.Close());
-
-    }
-
     public async void ButtonClick(string parameter)
     {
       await Dispatcher.UIThread.InvokeAsync(() =>
@@ -94,6 +114,14 @@ namespace BugFablesSaveEditor.ViewModels
         _parentWindow.ButtonResult = (ButtonResult)Enum.Parse(typeof(ButtonResult), parameter.Trim(), true);
         _parentWindow.Close();
       });
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    [NotifyPropertyChangedInvocator]
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

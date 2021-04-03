@@ -50,7 +50,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] medalsData = saveLine.Split(Common.ElementSeparator);
+      string[] medalsData = saveLine.Split(CommonUtils.ElementSeparator);
       ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
 
       for (int i = 0; i < medalsData.Length; i++)
@@ -58,7 +58,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         if (medalsData[i] == string.Empty)
           continue;
 
-        string[] data = medalsData[i].Split(Common.FieldSeparator);
+        string[] data = medalsData[i].Split(CommonUtils.FieldSeparator);
 
         MedalInfo newMedalEquip = new MedalInfo();
 
@@ -88,12 +88,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       for (int i = 0; i < medals.Count; i++)
       {
         sb.Append((int)medals[i].Medal);
-        sb.Append(Common.FieldSeparator);
+        sb.Append(CommonUtils.FieldSeparator);
         // the -2 is to convert from our enum to save
         sb.Append((int)medals[i].MedalEquipTarget - 2);
 
         if (i != medals.Count - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

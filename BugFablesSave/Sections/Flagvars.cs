@@ -67,7 +67,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         sb.Append(flagvars[i].Var);
 
         if (i != flagvars.Length - 1)
-          sb.Append(Common.FieldSeparator);
+          sb.Append(CommonUtils.FieldSeparator);
       }
 
       return sb.ToString();
@@ -75,7 +75,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] flagsvarsData = saveLine.Split(Common.FieldSeparator);
+      string[] flagsvarsData = saveLine.Split(CommonUtils.FieldSeparator);
       if (flagsvarsData.Length != NbrSlots)
         throw new Exception(nameof(Flagvars) + " is in an invalid format");
 

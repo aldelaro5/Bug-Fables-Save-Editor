@@ -71,7 +71,7 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialize()
     {
-      SongsNames = Common.GetEnumDescriptions<Song>();
+      SongsNames = CommonUtils.GetEnumDescriptions<Song>();
       Songs = (ObservableCollection<SongInfo>)SaveData.Sections[SaveFileSection.SamiraSongs].Data;
 
       CmdReorderSongsUp = ReactiveCommand.Create(() =>

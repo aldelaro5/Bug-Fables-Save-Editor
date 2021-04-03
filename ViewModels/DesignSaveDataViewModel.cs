@@ -17,7 +17,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       get
       {
-        return Common.GetEnumDescriptions<Area>();
+        return CommonUtils.GetEnumDescriptions<Area>();
       }
     }
 
@@ -25,7 +25,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       get
       {
-        return Common.GetEnumDescriptions<Map>();
+        return CommonUtils.GetEnumDescriptions<Map>();
       }
     }
 
@@ -33,7 +33,7 @@ namespace BugFablesSaveEditor.ViewModels
     {
       get
       {
-        return Common.GetEnumDescriptions<SaveProgressIcon>();
+        return CommonUtils.GetEnumDescriptions<SaveProgressIcon>();
       }
     }
 

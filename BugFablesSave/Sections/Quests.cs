@@ -44,7 +44,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
 
     public void ParseFromSaveLine(string saveLine)
     {
-      string[] questsData = saveLine.Split(Common.ElementSeparator);
+      string[] questsData = saveLine.Split(CommonUtils.ElementSeparator);
       if (questsData.Length != (int)QuestState.COUNT)
         throw new Exception(nameof(Quests) + " is in an invalid format");
 
@@ -55,7 +55,7 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
         if (questsData[i] == string.Empty)
           continue;
 
-        string[] data = questsData[i].Split(Common.FieldSeparator);
+        string[] data = questsData[i].Split(CommonUtils.FieldSeparator);
         for (int j = 0; j < data.Length; j++)
         {
           int intOut = 0;
@@ -84,14 +84,14 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
           sb.Append((int)quests[i][j].Quest);
 
           if (j != quests[i].Count - 1)
-            sb.Append(Common.FieldSeparator);
+            sb.Append(CommonUtils.FieldSeparator);
         }
 
         if (quests[i].Count == 0)
           sb.Append((int)Quest.NOQUEST);
 
         if (i != quests.Length - 1)
-          sb.Append(Common.ElementSeparator);
+          sb.Append(CommonUtils.ElementSeparator);
       }
 
       return sb.ToString();

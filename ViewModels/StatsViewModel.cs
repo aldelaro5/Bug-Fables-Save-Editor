@@ -175,7 +175,7 @@ namespace BugFablesSaveEditor.ViewModels
 
     private void Initialise()
     {
-      StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
+      StatBonusTypes = CommonUtils.GetEnumDescriptions<StatBonusType>();
       statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
       PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
       StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
