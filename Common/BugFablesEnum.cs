@@ -726,7 +726,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     LetsFrywithFry,
     [Description("The One Left Behind")]
     TheOneLeftBehind,
-    [Description(".")]
+    [Description(". [UNUSED Beetle]")]
     UNUSEDBeetle,
     [Description("Bug Fables")]
     BugFables,
@@ -756,9 +756,9 @@ namespace BugFablesSaveEditor.BugFablesEnums
     LostSands,
     [Description("Oh no! WASPS!")]
     OhnoWASPS,
-    [Description(".")]
+    [Description(". [Wind Ambient]")]
     WindAmbient,
-    [Description(".")]
+    [Description(". [Water Ambient]")]
     WaterAmbient,
     [Description("Work that Honey")]
     WorkThatHoney,
@@ -780,7 +780,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     BiancaQueenOfAllBees,
     [Description("Drums of War")]
     DrumsofWar,
-    [Description(".")]
+    [Description(". [Machine Ambient]")]
     MachineHumAmbient,
     [Description("The Watcher")]
     TheWatcher,
@@ -804,7 +804,7 @@ namespace BugFablesSaveEditor.BugFablesEnums
     SnugAsABugInASub,
     [Description("Termite Capitol")]
     TermiteCapitol,
-    [Description(".")]
+    [Description(". [Breathing Ambient]")]
     BreathingAmbient,
     [Description("DineMite Beats")]
     DineMiteBeats,
@@ -832,9 +832,9 @@ namespace BugFablesSaveEditor.BugFablesEnums
     DeadLanderGammaChase,
     [Description("The Giant's Lair")]
     TheGiantsLair,
-    [Description(".")]
+    [Description(". [UNUSED Giant 1]")]
     UNUSEDGiant,
-    [Description(".")]
+    [Description(". [UNUSED Giant 2]")]
     UNUSEDGiant2,
     [Description("The Usurper, Grasping for Power ")]
     TheUsurperGraspingForPower,
