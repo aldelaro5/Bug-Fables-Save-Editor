@@ -20,7 +20,7 @@
                  VerticalAlignment="Center"
                  Margin="8,0,3,0"
                  Name="WindowIcon"></Image>
-          <TextBlock Text="{Binding $parent[Window].Title}"
+          <TextBlock Text=""
                      FontSize="12"
                      VerticalAlignment="Center"
                      IsHitTestVisible="False"

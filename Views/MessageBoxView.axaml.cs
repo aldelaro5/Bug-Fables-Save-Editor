@@ -58,6 +58,8 @@ namespace BugFablesSaveEditor.Views
 
         var windowsTitleBar = this.FindControl<WindowsMsgBoxTitleBar>("windowsTitleBar");
         windowsTitleBar.IsVisible = true;
+        TextBlock systemChromeTitle = windowsTitleBar.FindControl<TextBlock>("SystemChromeTitle");
+        systemChromeTitle.Text = title;
       }
 
       var vm = new MessageBoxViewModel(new MessageBoxParams

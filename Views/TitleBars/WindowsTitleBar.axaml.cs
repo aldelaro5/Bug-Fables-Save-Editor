@@ -17,12 +17,6 @@ namespace BugFablesSaveEditor.Views
     private Button closeButton;
     private Image windowIcon;
 
-    private DockPanel titleBar;
-    private DockPanel titleBarBackground;
-    private TextBlock systemChromeTitle;
-    private NativeMenuBar seamlessMenuBar;
-    private NativeMenuBar defaultMenuBar;
-
     public WindowsTitleBar()
     {
       this.InitializeComponent();
@@ -44,12 +38,6 @@ namespace BugFablesSaveEditor.Views
         maximizeButton.Click += MaximizeWindow;
         closeButton.Click += CloseWindow;
         windowIcon.DoubleTapped += CloseWindow;
-
-        titleBar = this.FindControl<DockPanel>("TitleBar");
-        titleBarBackground = this.FindControl<DockPanel>("TitleBarBackground");
-        systemChromeTitle = this.FindControl<TextBlock>("SystemChromeTitle");
-        seamlessMenuBar = this.FindControl<NativeMenuBar>("SeamlessMenuBar");
-        defaultMenuBar = this.FindControl<NativeMenuBar>("DefaultMenuBar");
 
         SubscribeToWindowState();
       }

@@ -6,6 +6,7 @@ using Common.MessageBox.Enums;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace BugFablesSaveEditor.Views
 {
@@ -28,6 +29,8 @@ namespace BugFablesSaveEditor.Views
 
         var windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
         windowsTitleBar.IsVisible = true;
+        TextBlock systemChromeTitle = windowsTitleBar.FindControl<TextBlock>("SystemChromeTitle");
+        systemChromeTitle.Text = "Bug Fables Save Editor";
       }
 
       Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
@@ -49,6 +52,7 @@ namespace BugFablesSaveEditor.Views
 
     public async void OnLoaded(object sender, EventArgs e)
     {
+      await Task.Delay(500);
       if (SettingsManager.Settings.ShowStartupWarning)
       {
         var msg = CommonUtils.GetMessageBox("Warning", "This save editor is in beta and thus, " +
