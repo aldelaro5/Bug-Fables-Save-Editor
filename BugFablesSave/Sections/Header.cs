@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -86,13 +87,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       HeaderInfo headerInfo = (HeaderInfo)Data;
 
       float floatOut = 0;
-      if (!float.TryParse(data[0], out floatOut))
+      if (!float.TryParse(data[0], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out floatOut))
         throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.PositionX) + " failed to parse");
       headerInfo.PositionX = floatOut;
-      if (!float.TryParse(data[1], out floatOut))
+      if (!float.TryParse(data[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out floatOut))
         throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.PositionY) + " failed to parse");
       headerInfo.PositionY = floatOut;
-      if (!float.TryParse(data[2], out floatOut))
+      if (!float.TryParse(data[2], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out floatOut))
         throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.PositionZ) + " failed to parse");
       headerInfo.PositionZ = floatOut;
 
