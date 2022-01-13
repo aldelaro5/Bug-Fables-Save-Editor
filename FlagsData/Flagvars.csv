@@ -35,7 +35,7 @@
 34;Prize medal: Enfeeble, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 35;Number of crystal turned in to Doppel by completing a bounty
 36;Prize medal: Reverse Toxin, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-37;TEMP? (used on DoClock and event 154)
+37;Venus's healing price
 38;Number of completed Cave of Trials run
 39;Current streak count of completed Cave of Trials run
 40;Number of battles fought
