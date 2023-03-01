@@ -24,4 +24,20 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Source\BugFablesSaveEditor.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="SaveFiles\ValidSave.dat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="SaveFiles\InvalidSave.dat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="SaveFiles\DecodedTextSave.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
