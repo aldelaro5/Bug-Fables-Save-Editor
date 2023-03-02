@@ -14,8 +14,8 @@ public class SaveData
     Sections.Add(SaveFileSection.Header, new Header());
     Sections.Add(SaveFileSection.PartyMembers, new PartyMembers());
     Sections.Add(SaveFileSection.Global, new Global());
-    Sections.Add(SaveFileSection.MedalShopsPools, new MedalShopsPools());
     Sections.Add(SaveFileSection.MedalShopsAvailables, new MedalShopsAvailables());
+    Sections.Add(SaveFileSection.MedalShopsPools, new MedalShopsPools());
     Sections.Add(SaveFileSection.Quests, new Quests());
     Sections.Add(SaveFileSection.Items, new Items());
     Sections.Add(SaveFileSection.Medals, new Medals());
