@@ -49,14 +49,10 @@ public class SaveDataTests
     string textBefore = File.ReadAllText(ValidSaveFileName);
     _sud.LoadFromFile(ValidSaveFileName);
     string tempFilePath = Path.GetTempFileName();
-    string textAfter;
-    using (File.CreateText(tempFilePath))
-    {
-      _sud.SaveToFile(tempFilePath);
-      textAfter = File.ReadAllText(tempFilePath);
-    }
-
+    _sud.SaveToFile(tempFilePath);
+    string textAfter = File.ReadAllText(tempFilePath);
     Assert.Equal(textBefore, textAfter);
+    File.Delete(tempFilePath);
   }
 
   [Fact]
