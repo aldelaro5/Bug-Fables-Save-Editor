@@ -22,30 +22,30 @@ jobs:
           rid: linux-x64
           buildName: Linux
 
-    runs-on: ${{ matrix.os }}
+  runs-on: ${{ matrix.os }}
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 7.0.x
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --no-restore
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
-      - name: Publish
-        run: dotnet publish src -c Release -o publish -r ${{ matrix.rid }} --no-self-contained --verbosity normal
-      - name: Prepare Publish Directory
-        run: |
-          cp LICENSE publish
-          cp README.md publish
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: ${{ github.event.repository.name }}-${{ matrix.buildName }}
-          path: |
-            publish
-            !publish/*.pdb
+  steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish src -c Release -o publish -r ${{ matrix.rid }} --no-self-contained --verbosity normal
+    - name: Prepare Publish Directory
+      run: |
+        cp LICENSE publish
+        cp README.md publish
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: ${{ github.event.repository.name }}-${{ matrix.buildName }}
+        path: |
+          publish
+          !publish/*.pdb
