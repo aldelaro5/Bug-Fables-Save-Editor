@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -53,11 +54,11 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       HeaderInfo headerInfo = (HeaderInfo)Data;
       StringBuilder sb = new StringBuilder();
 
-      sb.Append(headerInfo.PositionX);
+      sb.Append(headerInfo.PositionX.ToString(NumberFormatInfo.InvariantInfo));
       sb.Append(Common.FieldSeparator);
-      sb.Append(headerInfo.PositionY);
+      sb.Append(headerInfo.PositionY.ToString(NumberFormatInfo.InvariantInfo));
       sb.Append(Common.FieldSeparator);
-      sb.Append(headerInfo.PositionZ);
+      sb.Append(headerInfo.PositionZ.ToString(NumberFormatInfo.InvariantInfo));
       sb.Append(Common.FieldSeparator);
       sb.Append(headerInfo.IsRuigee);
       sb.Append(Common.FieldSeparator);
@@ -86,13 +87,13 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections
       HeaderInfo headerInfo = (HeaderInfo)Data;
 
       float floatOut = 0;
-      if (!float.TryParse(data[0], out floatOut))
+      if (!float.TryParse(data[0], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out floatOut))
         throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.PositionX) + " failed to parse");
       headerInfo.PositionX = floatOut;
-      if (!float.TryParse(data[1], out floatOut))
+      if (!float.TryParse(data[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out floatOut))
         throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.PositionY) + " failed to parse");
       headerInfo.PositionY = floatOut;
-      if (!float.TryParse(data[2], out floatOut))
+      if (!float.TryParse(data[2], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out floatOut))
         throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.PositionZ) + " failed to parse");
       headerInfo.PositionZ = floatOut;
 
