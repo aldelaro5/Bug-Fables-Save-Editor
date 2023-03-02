@@ -34,6 +34,8 @@ public class EnemyEncounters : IBugFablesSaveSection
     for (int i = 0; i < enemyEncountersData.Length; i++)
     {
       string[] data = enemyEncountersData[i].Split(Common.FieldSeparator);
+      if (data.Length != 2)
+        throw new Exception($"The enemy encounter at index {i} is not well formatted");
 
       EnemyEncounterInfo newEnemyEncounterInfo = new();
 

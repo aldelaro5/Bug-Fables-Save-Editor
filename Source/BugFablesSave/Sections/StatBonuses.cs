@@ -25,6 +25,8 @@ public class StatBonuses : IBugFablesSaveSection
       }
 
       string[] data = statsBonusesData[i].Split(Common.FieldSeparator);
+      if (data.Length != 3)
+        throw new Exception($"The stat bonus at index {i} is not well formatted");
 
       StatBonusInfo newStatBonus = new();
 

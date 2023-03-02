@@ -27,6 +27,8 @@ public class SamiraSongs : IBugFablesSaveSection
       }
 
       string[] data = songsData[i].Split(Common.FieldSeparator);
+      if (data.Length != 2)
+        throw new Exception($"The Samira song at index {i} is not well formatted");
 
       SongInfo newSong = new();
 

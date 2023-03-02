@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -50,10 +51,6 @@ public class Flags : IBugFablesSaveSection
   public void ParseFromSaveLine(string saveLine)
   {
     string[] flagsData = saveLine.Split(Common.FieldSeparator);
-    if (flagsData.Length != NbrSlots)
-    {
-      throw new Exception(nameof(Flags) + " is in an invalid format");
-    }
 
     FlagInfo[] flags = (FlagInfo[])Data;
 

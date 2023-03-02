@@ -24,6 +24,8 @@ public class Medals : IBugFablesSaveSection
       }
 
       string[] data = medalsData[i].Split(Common.FieldSeparator);
+      if (data.Length != 2)
+        throw new Exception($"The medal at index {i} is not well formatted");
 
       MedalInfo newMedalEquip = new();
 
