@@ -48,7 +48,7 @@ public class SaveDataTests
   {
     string textBefore = File.ReadAllText(ValidSaveFileName);
     _sud.LoadFromFile(ValidSaveFileName);
-    string tempFilePath = Path.GetTempFileName();
+    string tempFilePath = "test.dat";
     _sud.SaveToFile(tempFilePath);
     string textAfter = File.ReadAllText(tempFilePath);
     Assert.Equal(textBefore, textAfter);
