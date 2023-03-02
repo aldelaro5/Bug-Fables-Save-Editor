@@ -1,82 +1,82 @@
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.InteropServices;
+using Avalonia.Platform;
 
-namespace BugFablesSaveEditor.Views
+namespace BugFablesSaveEditor.Views;
+
+public class AboutView : Window
 {
-  public class AboutView : Window
-  {
-    private Label lblVersion;
+  private readonly Label lblVersion;
 
-    public AboutView()
-    {
-      InitializeComponent();
+  public AboutView()
+  {
+    InitializeComponent();
 #if DEBUG
-      this.AttachDevTools();
+    this.AttachDevTools();
 #endif
 
-      lblVersion = this.FindControl<Label>("lblVersion");
-      lblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
+    lblVersion = this.FindControl<Label>("lblVersion");
+    lblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
 
-      if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+      ExtendClientAreaToDecorationsHint = true;
+      ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
+      ExtendClientAreaTitleBarHeightHint = -1;
+
+      WindowsTitleBar? windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
+      windowsTitleBar.IsVisible = true;
+    }
+  }
+
+  private void InitializeComponent()
+  {
+    AvaloniaXamlLoader.Load(this);
+  }
+
+  public void OpenURL(string url)
+  {
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+      //https://stackoverflow.com/a/2796367/241446
+      using (Process proc = new() { StartInfo = { UseShellExecute = true, FileName = url } })
       {
-        ExtendClientAreaToDecorationsHint = true;
-        ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
-        ExtendClientAreaTitleBarHeightHint = -1;
-
-        var windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
-        windowsTitleBar.IsVisible = true;
+        proc.Start();
       }
     }
-
-    private void InitializeComponent()
+    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
     {
-      AvaloniaXamlLoader.Load(this);
+      Process.Start("x-www-browser", url);
     }
-
-    public void OpenURL(string url)
+    else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
     {
-      if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-      {
-        //https://stackoverflow.com/a/2796367/241446
-        using (Process proc = new Process { StartInfo = { UseShellExecute = true, FileName = url } })
-        {
-          proc.Start();
-        }
-      }
-      else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-      {
-        Process.Start("x-www-browser", url);
-      }
-      else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-      {
-        Process.Start("open", url);
-      }
+      Process.Start("open", url);
     }
+  }
 
-    public void OnWikiLink_Click(object sender, PointerPressedEventArgs e)
-    {
-      OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/wiki");
-    }
+  public void OnWikiLink_Click(object sender, PointerPressedEventArgs e)
+  {
+    OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/wiki");
+  }
 
-    public void OnGitHubLink_Click(object sender, PointerPressedEventArgs e)
-    {
-      OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor");
-    }
+  public void OnGitHubLink_Click(object sender, PointerPressedEventArgs e)
+  {
+    OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor");
+  }
 
-    public void OnLicenseLink_Click(object sender, PointerPressedEventArgs e)
-    {
-      OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/blob/main/LICENSE");
-    }
+  public void OnLicenseLink_Click(object sender, PointerPressedEventArgs e)
+  {
+    OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/blob/main/LICENSE");
+  }
 
-    public void OnOkButton_Click(object sender, RoutedEventArgs e)
-    {
-      Close();
-    }
+  public void OnOkButton_Click(object sender, RoutedEventArgs e)
+  {
+    Close();
   }
 }

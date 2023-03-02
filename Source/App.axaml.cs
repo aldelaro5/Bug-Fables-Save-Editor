@@ -1,3 +1,5 @@
+using System;
+using System.Reactive;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -6,35 +8,29 @@ using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
 using MessageBox.Avalonia.Enums;
 using ReactiveUI;
-using System;
-using System.Reactive;
 
-namespace BugFablesSaveEditor
+namespace BugFablesSaveEditor;
+
+public class App : Application
 {
-  public class App : Application
+  public override void Initialize()
   {
-    public override void Initialize()
+    AvaloniaXamlLoader.Load(this);
+  }
+
+  public override void OnFrameworkInitializationCompleted()
+  {
+    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
-      AvaloniaXamlLoader.Load(this);
+      desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel(new SaveData()) };
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    base.OnFrameworkInitializationCompleted();
+
+    RxApp.DefaultExceptionHandler = Observer.Create<Exception>(ex =>
     {
-      if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-      {
-        desktop.MainWindow = new MainWindow
-        {
-          DataContext = new MainWindowViewModel(new SaveData()),
-        };
-      }
-
-      base.OnFrameworkInitializationCompleted();
-
-      RxApp.DefaultExceptionHandler = Observer.Create<Exception>((ex) =>
-      {
-        Common.GetMessageBox("Unexpected error", "An unexpected error occured: " +
-            ex.Message, ButtonEnum.Ok, Icon.Error).ShowDialog(Common.MainWindow);
-      });
-    }
+      Common.GetMessageBox("Unexpected error", "An unexpected error occured: " +
+                                               ex.Message, ButtonEnum.Ok, Icon.Error).ShowDialog(Common.MainWindow);
+    });
   }
 }

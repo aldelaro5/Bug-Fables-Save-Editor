@@ -1,106 +1,123 @@
-﻿using BugFablesSaveEditor.BugFablesEnums;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using BugFablesSaveEditor.BugFablesEnums;
 
-namespace BugFablesSaveEditor.BugFablesSave.Sections
+namespace BugFablesSaveEditor.BugFablesSave.Sections;
+
+public class MedalShopsAvailables : IBugFablesSaveSection
 {
-  public class MedalShopsAvailables : IBugFablesSaveSection
+  public MedalShopsAvailables()
   {
-    public class MedalShopAvailable : INotifyPropertyChanged
-    {
-      private Medal _medal;
-      public Medal Medal
-      {
-        get { return _medal; }
-        set
-        {
-          if ((int)value == -1)
-            return;
+    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
 
-          _medal = value;
-          NotifyPropertyChanged();
+    for (int i = 0; i < medals.Length; i++)
+    {
+      medals[i] = new ObservableCollection<MedalShopAvailable>();
+    }
+  }
+
+  public object Data { get; set; } = new ObservableCollection<MedalShopAvailable>[(int)MedalShop.COUNT];
+
+  public void ParseFromSaveLine(string saveLine)
+  {
+    string[] medalsAvailable = saveLine.Split(Common.ElementSeparator);
+    if (medalsAvailable.Length != (int)MedalShop.COUNT)
+    {
+      throw new Exception(nameof(MedalShopsAvailables) + " is in an invalid format");
+    }
+
+    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+
+    for (int i = 0; i < medalsAvailable.Length; i++)
+    {
+      if (medalsAvailable[i] == string.Empty)
+      {
+        continue;
+      }
+
+      string[] data = medalsAvailable[i].Split(Common.FieldSeparator);
+      for (int j = 0; j < data.Length; j++)
+      {
+        int intOut = 0;
+        if (!int.TryParse(data[j], out intOut))
+        {
+          throw new Exception(nameof(MedalShopsAvailables) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
+                              "][" + j + "] failed to parse");
+        }
+
+        if (intOut < 0 || intOut >= (int)Medal.COUNT)
+        {
+          throw new Exception(nameof(MedalShopsAvailables) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
+                              "][" + j + "]: " + intOut + " is not a valid medal ID");
+        }
+
+        medals[i].Add(new MedalShopAvailable { Medal = (Medal)intOut });
+      }
+    }
+  }
+
+  public string EncodeToSaveLine()
+  {
+    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+    StringBuilder sb = new();
+
+    for (int i = 0; i < medals.Length; i++)
+    {
+      for (int j = 0; j < medals[i].Count; j++)
+      {
+        sb.Append((int)medals[i][j].Medal);
+
+        if (j != medals[i].Count - 1)
+        {
+          sb.Append(Common.FieldSeparator);
         }
       }
 
-      public event PropertyChangedEventHandler? PropertyChanged;
-      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      if (i != medals.Length - 1)
       {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        sb.Append(Common.ElementSeparator);
       }
     }
 
-    public object Data { get; set; } = new ObservableCollection<MedalShopAvailable>[(int)MedalShop.COUNT];
+    return sb.ToString();
+  }
 
-    public MedalShopsAvailables()
+  public void ResetToDefault()
+  {
+    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+    foreach (ObservableCollection<MedalShopAvailable> collection in medals)
     {
-      ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
-
-      for (int i = 0; i < medals.Length; i++)
-        medals[i] = new ObservableCollection<MedalShopAvailable>();
+      collection.Clear();
     }
+  }
 
-    public void ParseFromSaveLine(string saveLine)
+  public class MedalShopAvailable : INotifyPropertyChanged
+  {
+    private Medal _medal;
+
+    public Medal Medal
     {
-      string[] medalsAvailable = saveLine.Split(Common.ElementSeparator);
-      if (medalsAvailable.Length != (int)MedalShop.COUNT)
-        throw new Exception(nameof(MedalShopsAvailables) + " is in an invalid format");
-
-      ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
-
-      for (int i = 0; i < medalsAvailable.Length; i++)
+      get => _medal;
+      set
       {
-        if (medalsAvailable[i] == string.Empty)
-          continue;
-
-        string[] data = medalsAvailable[i].Split(Common.FieldSeparator);
-        for (int j = 0; j < data.Length; j++)
+        if ((int)value == -1)
         {
-          int intOut = 0;
-          if (!int.TryParse(data[j], out intOut))
-          {
-            throw new Exception(nameof(MedalShopsAvailables) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
-                                "][" + j + "] failed to parse");
-          }
-          if (intOut < 0 || intOut >= (int)Medal.COUNT)
-          {
-            throw new Exception(nameof(MedalShopsAvailables) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
-                                "][" + j + "]: " + intOut + " is not a valid medal ID");
-          }
-          medals[i].Add(new MedalShopAvailable { Medal = (Medal)intOut });
-        }
-      }
-    }
-
-    public string EncodeToSaveLine()
-    {
-      ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
-      StringBuilder sb = new StringBuilder();
-
-      for (int i = 0; i < medals.Length; i++)
-      {
-        for (int j = 0; j < medals[i].Count; j++)
-        {
-          sb.Append((int)medals[i][j].Medal);
-
-          if (j != medals[i].Count - 1)
-            sb.Append(Common.FieldSeparator);
+          return;
         }
 
-        if (i != medals.Length - 1)
-          sb.Append(Common.ElementSeparator);
+        _medal = value;
+        NotifyPropertyChanged();
       }
-
-      return sb.ToString();
     }
 
-    public void ResetToDefault()
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
-      ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
-      foreach (var collection in medals)
-        collection.Clear();
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

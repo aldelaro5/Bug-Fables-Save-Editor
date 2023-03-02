@@ -1,255 +1,309 @@
-﻿using Avalonia.Collections;
+﻿using System;
+using System.ComponentModel;
+using System.Text;
+using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
 using ReactiveUI;
-using System;
-using System.ComponentModel;
-using System.Text;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flags;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagstrings;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagvars;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Global;
 using static BugFablesSaveEditor.BugFablesSave.Sections.RegionalFlags;
 
-namespace BugFablesSaveEditor.ViewModels
+namespace BugFablesSaveEditor.ViewModels;
+
+public class FlagsViewModel : ViewModelBase
 {
-  public class FlagsViewModel : ViewModelBase
+  private bool _filterUnusedRegionals;
+
+  private FlagInfo[] _flags;
+
+  private DataGridCollectionView _flagsFiltered;
+
+  private FlagstringInfo[] _flagstrings;
+  private DataGridCollectionView _flagstringsFiltered;
+
+  private FlagvarInfo[] _flagvars;
+  private DataGridCollectionView _flagvarsFiltered;
+
+  private RegionalInfo[] _regionals;
+  private DataGridCollectionView _regionalsFiltered;
+
+  private SaveData _saveData;
+
+  private string _textFilterFlags;
+  private string _textFilterFlagstrings;
+  private string _textFilterFlagvars;
+  private string _textFilterRegionals;
+
+  private GlobalInfo globalInfo;
+  private RegionalFlags regionalFlags;
+
+  public FlagsViewModel()
   {
-    private enum FlagsType
-    {
-      Flags,
-      Flagvars,
-      Flagstrings,
-      Regionals
-    }
+    SaveData = new SaveData();
+    Initialise();
+  }
 
-    private GlobalInfo globalInfo;
-    private RegionalFlags regionalFlags;
+  public FlagsViewModel(SaveData saveData)
+  {
+    SaveData = saveData;
+    Initialise();
+  }
 
-    private SaveData _saveData;
-    public SaveData SaveData
+  public SaveData SaveData
+  {
+    get => _saveData;
+    set
     {
-      get { return _saveData; }
-      set { _saveData = value; this.RaisePropertyChanged(); }
+      _saveData = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private bool _filterUnusedRegionals;
-    public bool FilterUnusedRegionals
+  public bool FilterUnusedRegionals
+  {
+    get => _filterUnusedRegionals;
+    set
     {
-      get { return _filterUnusedRegionals; }
-      set
-      {
-        _filterUnusedRegionals = value;
-        this.RaisePropertyChanged();
-        RegionalsFiltered.Refresh();
-      }
+      _filterUnusedRegionals = value;
+      this.RaisePropertyChanged();
+      RegionalsFiltered.Refresh();
     }
+  }
 
-    private FlagInfo[] _flags;
-    public FlagInfo[] Flags
+  public FlagInfo[] Flags
+  {
+    get => _flags;
+    set
     {
-      get { return _flags; }
-      set { _flags = value; this.RaisePropertyChanged(); }
+      _flags = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private FlagvarInfo[] _flagvars;
-    public FlagvarInfo[] Flagvars
+  public FlagvarInfo[] Flagvars
+  {
+    get => _flagvars;
+    set
     {
-      get { return _flagvars; }
-      set { _flagvars = value; this.RaisePropertyChanged(); }
+      _flagvars = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private FlagstringInfo[] _flagstrings;
-    public FlagstringInfo[] Flagstrings
+  public FlagstringInfo[] Flagstrings
+  {
+    get => _flagstrings;
+    set
     {
-      get { return _flagstrings; }
-      set { _flagstrings = value; this.RaisePropertyChanged(); }
+      _flagstrings = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private RegionalInfo[] _regionals;
-    public RegionalInfo[] Regionals
+  public RegionalInfo[] Regionals
+  {
+    get => _regionals;
+    set
     {
-      get { return _regionals; }
-      set { _regionals = value; this.RaisePropertyChanged(); }
+      _regionals = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private DataGridCollectionView _flagsFiltered;
-    public DataGridCollectionView FlagsFiltered
+  public DataGridCollectionView FlagsFiltered
+  {
+    get => _flagsFiltered;
+    set
     {
-      get { return _flagsFiltered; }
-      set { _flagsFiltered = value; this.RaisePropertyChanged(); }
+      _flagsFiltered = value;
+      this.RaisePropertyChanged();
     }
-    private DataGridCollectionView _flagvarsFiltered;
-    public DataGridCollectionView FlagvarsFiltered
-    {
-      get { return _flagvarsFiltered; }
-      set { _flagvarsFiltered = value; this.RaisePropertyChanged(); }
-    }
-    private DataGridCollectionView _flagstringsFiltered;
-    public DataGridCollectionView FlagstringsFiltered
-    {
-      get { return _flagstringsFiltered; }
-      set { _flagstringsFiltered = value; this.RaisePropertyChanged(); }
-    }
-    private DataGridCollectionView _regionalsFiltered;
-    public DataGridCollectionView RegionalsFiltered
-    {
-      get { return _regionalsFiltered; }
-      set { _regionalsFiltered = value; this.RaisePropertyChanged(); }
-    }
+  }
 
-    private string _textFilterFlags;
-    public string TextFilterFlags
+  public DataGridCollectionView FlagvarsFiltered
+  {
+    get => _flagvarsFiltered;
+    set
     {
-      get { return _textFilterFlags; }
-      set
-      {
-        _textFilterFlags = value;
-        this.RaisePropertyChanged();
-        FlagsFiltered.Refresh();
-      }
+      _flagvarsFiltered = value;
+      this.RaisePropertyChanged();
     }
-    private string _textFilterFlagvars;
-    public string TextFilterFlagvars
-    {
-      get { return _textFilterFlagvars; }
-      set
-      {
-        _textFilterFlagvars = value;
-        this.RaisePropertyChanged();
-        FlagvarsFiltered.Refresh();
-      }
-    }
-    private string _textFilterFlagstrings;
-    public string TextFilterFlagstrings
-    {
-      get { return _textFilterFlagstrings; }
-      set
-      {
-        _textFilterFlagstrings = value;
-        this.RaisePropertyChanged();
-        FlagstringsFiltered.Refresh();
-      }
-    }
-    private string _textFilterRegionals;
-    public string TextFilterRegionals
-    {
-      get { return _textFilterRegionals; }
-      set
-      {
-        _textFilterRegionals = value;
-        this.RaisePropertyChanged();
-        RegionalsFiltered.Refresh();
-      }
-    }
+  }
 
-    public FlagsViewModel()
+  public DataGridCollectionView FlagstringsFiltered
+  {
+    get => _flagstringsFiltered;
+    set
     {
-      SaveData = new SaveData();
-      Initialise();
+      _flagstringsFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    public FlagsViewModel(SaveData saveData)
+  public DataGridCollectionView RegionalsFiltered
+  {
+    get => _regionalsFiltered;
+    set
     {
-      SaveData = saveData;
-      Initialise();
+      _regionalsFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private void Initialise()
+  public string TextFilterFlags
+  {
+    get => _textFilterFlags;
+    set
     {
-      Flags = (FlagInfo[])SaveData.Sections[SaveFileSection.Flags].Data;
-      Flagvars = (FlagvarInfo[])SaveData.Sections[SaveFileSection.Flagvars].Data;
-      Flagstrings = (FlagstringInfo[])SaveData.Sections[SaveFileSection.Flagstrings].Data;
-      Regionals = (RegionalInfo[])SaveData.Sections[SaveFileSection.RegionalFlags].Data;
-
-      regionalFlags = (RegionalFlags)SaveData.Sections[SaveFileSection.RegionalFlags];
-      globalInfo = (GlobalInfo)SaveData.Sections[SaveFileSection.Global].Data;
-      globalInfo.PropertyChanged += GlobalInfoChanged;
-
-      FlagsFiltered = new DataGridCollectionView(Flags);
-      FlagsFiltered.Filter = FilterFlags;
-      FlagvarsFiltered = new DataGridCollectionView(Flagvars);
-      FlagvarsFiltered.Filter = FilterFlagvars;
-      FlagstringsFiltered = new DataGridCollectionView(Flagstrings);
-      FlagstringsFiltered.Filter = FilterFlagstrings;
-      RegionalsFiltered = new DataGridCollectionView(Regionals);
-      RegionalsFiltered.Filter = FilterRegionals;
+      _textFilterFlags = value;
+      this.RaisePropertyChanged();
+      FlagsFiltered.Refresh();
     }
+  }
 
-    private bool FilterFlags(object arg)
+  public string TextFilterFlagvars
+  {
+    get => _textFilterFlagvars;
+    set
     {
-      return FilterFlag(FlagsType.Flags, arg);
+      _textFilterFlagvars = value;
+      this.RaisePropertyChanged();
+      FlagvarsFiltered.Refresh();
     }
+  }
 
-    private bool FilterFlagvars(object arg)
+  public string TextFilterFlagstrings
+  {
+    get => _textFilterFlagstrings;
+    set
     {
-      return FilterFlag(FlagsType.Flagvars, arg);
+      _textFilterFlagstrings = value;
+      this.RaisePropertyChanged();
+      FlagstringsFiltered.Refresh();
     }
+  }
 
-    private bool FilterFlagstrings(object arg)
+  public string TextFilterRegionals
+  {
+    get => _textFilterRegionals;
+    set
     {
-      return FilterFlag(FlagsType.Flagstrings, arg);
+      _textFilterRegionals = value;
+      this.RaisePropertyChanged();
+      RegionalsFiltered.Refresh();
     }
+  }
 
-    private bool FilterRegionals(object arg)
-    {
-      return FilterFlag(FlagsType.Regionals, arg);
-    }
+  private void Initialise()
+  {
+    Flags = (FlagInfo[])SaveData.Sections[SaveFileSection.Flags].Data;
+    Flagvars = (FlagvarInfo[])SaveData.Sections[SaveFileSection.Flagvars].Data;
+    Flagstrings = (FlagstringInfo[])SaveData.Sections[SaveFileSection.Flagstrings].Data;
+    Regionals = (RegionalInfo[])SaveData.Sections[SaveFileSection.RegionalFlags].Data;
 
-    private bool FilterFlag(FlagsType type, object arg)
+    regionalFlags = (RegionalFlags)SaveData.Sections[SaveFileSection.RegionalFlags];
+    globalInfo = (GlobalInfo)SaveData.Sections[SaveFileSection.Global].Data;
+    globalInfo.PropertyChanged += GlobalInfoChanged;
+
+    FlagsFiltered = new DataGridCollectionView(Flags);
+    FlagsFiltered.Filter = FilterFlags;
+    FlagvarsFiltered = new DataGridCollectionView(Flagvars);
+    FlagvarsFiltered.Filter = FilterFlagvars;
+    FlagstringsFiltered = new DataGridCollectionView(Flagstrings);
+    FlagstringsFiltered.Filter = FilterFlagstrings;
+    RegionalsFiltered = new DataGridCollectionView(Regionals);
+    RegionalsFiltered.Filter = FilterRegionals;
+  }
+
+  private bool FilterFlags(object arg)
+  {
+    return FilterFlag(FlagsType.Flags, arg);
+  }
+
+  private bool FilterFlagvars(object arg)
+  {
+    return FilterFlag(FlagsType.Flagvars, arg);
+  }
+
+  private bool FilterFlagstrings(object arg)
+  {
+    return FilterFlag(FlagsType.Flagstrings, arg);
+  }
+
+  private bool FilterRegionals(object arg)
+  {
+    return FilterFlag(FlagsType.Regionals, arg);
+  }
+
+  private bool FilterFlag(FlagsType type, object arg)
+  {
+    int flagIndex;
+    string flagDescription;
+    string textFilter;
+    switch (type)
     {
-      int flagIndex;
-      string flagDescription;
-      string textFilter;
-      switch (type)
-      {
-        case FlagsType.Flags:
-          textFilter = TextFilterFlags;
-          var flag = (FlagInfo)arg;
-          flagIndex = flag.Index;
-          flagDescription = flag.Description;
-          break;
-        case FlagsType.Flagvars:
-          textFilter = TextFilterFlagvars;
-          var flagvar = (FlagvarInfo)arg;
-          flagIndex = flagvar.Index;
-          flagDescription = flagvar.Description;
-          break;
-        case FlagsType.Flagstrings:
-          textFilter = TextFilterFlagstrings;
-          var flagstring = (FlagstringInfo)arg;
-          flagIndex = flagstring.Index;
-          flagDescription = flagstring.Description;
-          break;
-        case FlagsType.Regionals:
-          textFilter = TextFilterRegionals;
-          var regional = (RegionalInfo)arg;
-          if (regional.Description == "UNUSED" && !FilterUnusedRegionals)
-            return false;
-          flagIndex = regional.Index;
-          flagDescription = regional.Description;
-          break;
-        default:
+      case FlagsType.Flags:
+        textFilter = TextFilterFlags;
+        FlagInfo flag = (FlagInfo)arg;
+        flagIndex = flag.Index;
+        flagDescription = flag.Description;
+        break;
+      case FlagsType.Flagvars:
+        textFilter = TextFilterFlagvars;
+        FlagvarInfo flagvar = (FlagvarInfo)arg;
+        flagIndex = flagvar.Index;
+        flagDescription = flagvar.Description;
+        break;
+      case FlagsType.Flagstrings:
+        textFilter = TextFilterFlagstrings;
+        FlagstringInfo flagstring = (FlagstringInfo)arg;
+        flagIndex = flagstring.Index;
+        flagDescription = flagstring.Description;
+        break;
+      case FlagsType.Regionals:
+        textFilter = TextFilterRegionals;
+        RegionalInfo regional = (RegionalInfo)arg;
+        if (regional.Description == "UNUSED" && !FilterUnusedRegionals)
+        {
           return false;
-      }
+        }
 
-      if (string.IsNullOrEmpty(textFilter))
-        return true;
-
-      StringBuilder sb = new StringBuilder();
-      sb.Append(flagIndex).Append(' ');
-      sb.Append(flagDescription);
-      return sb.ToString().Contains(textFilter, StringComparison.OrdinalIgnoreCase);
+        flagIndex = regional.Index;
+        flagDescription = regional.Description;
+        break;
+      default:
+        return false;
     }
 
-    private void GlobalInfoChanged(object? sender, PropertyChangedEventArgs e)
+    if (string.IsNullOrEmpty(textFilter))
     {
-      if (e.PropertyName == nameof(GlobalInfo.CurrentArea))
-      {
-        regionalFlags.ChangeCurrentRegionalsArea(globalInfo.CurrentArea);
-        RegionalsFiltered.Refresh();
-      }
+      return true;
     }
+
+    StringBuilder sb = new();
+    sb.Append(flagIndex).Append(' ');
+    sb.Append(flagDescription);
+    return sb.ToString().Contains(textFilter, StringComparison.OrdinalIgnoreCase);
+  }
+
+  private void GlobalInfoChanged(object? sender, PropertyChangedEventArgs e)
+  {
+    if (e.PropertyName == nameof(GlobalInfo.CurrentArea))
+    {
+      regionalFlags.ChangeCurrentRegionalsArea(globalInfo.CurrentArea);
+      RegionalsFiltered.Refresh();
+    }
+  }
+
+  private enum FlagsType
+  {
+    Flags,
+    Flagvars,
+    Flagstrings,
+    Regionals
   }
 }

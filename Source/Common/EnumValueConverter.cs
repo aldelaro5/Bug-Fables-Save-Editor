@@ -1,30 +1,32 @@
-﻿using Avalonia.Data.Converters;
-using System;
+﻿using System;
+using System.Globalization;
+using Avalonia.Data.Converters;
 
-namespace BugFablesSaveEditor
+namespace BugFablesSaveEditor;
+
+public class EnumValueConverter : IValueConverter
 {
-  public class EnumValueConverter : IValueConverter
+  public object Convert(object value, Type targetType, object parameter,
+    CultureInfo culture)
   {
-    public object Convert(object value, Type targetType, object parameter,
-                          System.Globalization.CultureInfo culture)
+    int intValue = 0;
+    if (parameter is Type)
     {
-      int intValue = 0;
-      if (parameter is Type)
-      {
-        intValue = (int)Enum.Parse((Type)parameter, value.ToString());
-      }
-      return intValue;
+      intValue = (int)Enum.Parse((Type)parameter, value.ToString());
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter,
-                              System.Globalization.CultureInfo culture)
+    return intValue;
+  }
+
+  public object ConvertBack(object value, Type targetType, object parameter,
+    CultureInfo culture)
+  {
+    Enum enumValue = default;
+    if (parameter is Type)
     {
-      Enum enumValue = default(Enum);
-      if (parameter is Type)
-      {
-        enumValue = (Enum)Enum.Parse((Type)parameter, value.ToString());
-      }
-      return enumValue;
+      enumValue = (Enum)Enum.Parse((Type)parameter, value.ToString());
     }
+
+    return enumValue;
   }
 }

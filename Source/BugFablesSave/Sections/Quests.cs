@@ -1,107 +1,128 @@
-﻿using BugFablesSaveEditor.BugFablesEnums;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using BugFablesSaveEditor.BugFablesEnums;
 
-namespace BugFablesSaveEditor.BugFablesSave.Sections
+namespace BugFablesSaveEditor.BugFablesSave.Sections;
+
+public class Quests : IBugFablesSaveSection
 {
-  public class Quests : IBugFablesSaveSection
+  public Quests()
   {
-    public class QuestInfo : INotifyPropertyChanged
-    {
-      private Quest _quest;
-      public Quest Quest
-      {
-        get { return _quest; }
-        set
-        {
-          if ((int)value == -1)
-            return;
+    ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
 
-          _quest = value;
-          NotifyPropertyChanged();
+    for (int i = 0; i < quests.Length; i++)
+    {
+      quests[i] = new ObservableCollection<QuestInfo>();
+    }
+  }
+
+  public object Data { get; set; } = new ObservableCollection<QuestInfo>[(int)QuestState.COUNT];
+
+  public void ParseFromSaveLine(string saveLine)
+  {
+    string[] questsData = saveLine.Split(Common.ElementSeparator);
+    if (questsData.Length != (int)QuestState.COUNT)
+    {
+      throw new Exception(nameof(Quests) + " is in an invalid format");
+    }
+
+    ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
+
+    for (int i = 0; i < questsData.Length; i++)
+    {
+      if (questsData[i] == string.Empty)
+      {
+        continue;
+      }
+
+      string[] data = questsData[i].Split(Common.FieldSeparator);
+      for (int j = 0; j < data.Length; j++)
+      {
+        int intOut = 0;
+        if (!int.TryParse(data[j], out intOut))
+        {
+          throw new Exception(nameof(Quests) + "[" + Enum.GetNames(typeof(QuestState))[i] +
+                              "][" + j + "] failed to parse");
+        }
+
+        if (intOut < 0 || intOut >= (int)Quest.COUNT)
+        {
+          throw new Exception(nameof(Quests) + "[" + Enum.GetNames(typeof(QuestState))[i] +
+                              "][" + j + "]: " + intOut + " is not a valid quest ID");
+        }
+
+        quests[i].Add(new QuestInfo { Quest = (Quest)intOut });
+      }
+    }
+  }
+
+  public string EncodeToSaveLine()
+  {
+    ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
+    StringBuilder sb = new();
+
+    for (int i = 0; i < quests.Length; i++)
+    {
+      for (int j = 0; j < quests[i].Count; j++)
+      {
+        sb.Append((int)quests[i][j].Quest);
+
+        if (j != quests[i].Count - 1)
+        {
+          sb.Append(Common.FieldSeparator);
         }
       }
 
-      public event PropertyChangedEventHandler? PropertyChanged;
-      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      if (quests[i].Count == 0)
       {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        sb.Append((int)Quest.NOQUEST);
+      }
+
+      if (i != quests.Length - 1)
+      {
+        sb.Append(Common.ElementSeparator);
       }
     }
 
-    public object Data { get; set; } = new ObservableCollection<QuestInfo>[(int)QuestState.COUNT];
+    return sb.ToString();
+  }
 
-    public Quests()
+  public void ResetToDefault()
+  {
+    ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
+    foreach (ObservableCollection<QuestInfo> collection in quests)
     {
-      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
-
-      for (int i = 0; i < quests.Length; i++)
-        quests[i] = new ObservableCollection<QuestInfo>();
+      collection.Clear();
     }
+  }
 
-    public void ParseFromSaveLine(string saveLine)
+  public class QuestInfo : INotifyPropertyChanged
+  {
+    private Quest _quest;
+
+    public Quest Quest
     {
-      string[] questsData = saveLine.Split(Common.ElementSeparator);
-      if (questsData.Length != (int)QuestState.COUNT)
-        throw new Exception(nameof(Quests) + " is in an invalid format");
-
-      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
-
-      for (int i = 0; i < questsData.Length; i++)
+      get => _quest;
+      set
       {
-        if (questsData[i] == string.Empty)
-          continue;
-
-        string[] data = questsData[i].Split(Common.FieldSeparator);
-        for (int j = 0; j < data.Length; j++)
+        if ((int)value == -1)
         {
-          int intOut = 0;
-          if (!int.TryParse(data[j], out intOut))
-          {
-            throw new Exception(nameof(Quests) + "[" + Enum.GetNames(typeof(QuestState))[i] +
-                                "][" + j + "] failed to parse");
-          }
-          if (intOut < 0 || intOut >= (int)Quest.COUNT)
-            throw new Exception(nameof(Quests) + "[" + Enum.GetNames(typeof(QuestState))[i] +
-                                "][" + j + "]: " + intOut + " is not a valid quest ID");
-          quests[i].Add(new QuestInfo { Quest = (Quest)intOut });
-        }
-      }
-    }
-
-    public string EncodeToSaveLine()
-    {
-      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
-      StringBuilder sb = new StringBuilder();
-
-      for (int i = 0; i < quests.Length; i++)
-      {
-        for (int j = 0; j < quests[i].Count; j++)
-        {
-          sb.Append((int)quests[i][j].Quest);
-
-          if (j != quests[i].Count - 1)
-            sb.Append(Common.FieldSeparator);
+          return;
         }
 
-        if (quests[i].Count == 0)
-          sb.Append((int)Quest.NOQUEST);
-
-        if (i != quests.Length - 1)
-          sb.Append(Common.ElementSeparator);
+        _quest = value;
+        NotifyPropertyChanged();
       }
-
-      return sb.ToString();
     }
 
-    public void ResetToDefault()
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
-      ObservableCollection<QuestInfo>[] quests = (ObservableCollection<QuestInfo>[])Data;
-      foreach (var collection in quests)
-        collection.Clear();
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

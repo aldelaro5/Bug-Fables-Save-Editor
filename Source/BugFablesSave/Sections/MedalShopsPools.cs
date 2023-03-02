@@ -1,106 +1,123 @@
-﻿using BugFablesSaveEditor.BugFablesEnums;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using BugFablesSaveEditor.BugFablesEnums;
 
-namespace BugFablesSaveEditor.BugFablesSave.Sections
+namespace BugFablesSaveEditor.BugFablesSave.Sections;
+
+public class MedalShopsPools : IBugFablesSaveSection
 {
-  public class MedalShopsPools : IBugFablesSaveSection
+  public MedalShopsPools()
   {
-    public class MedalShopPool : INotifyPropertyChanged
-    {
-      private Medal _medal;
-      public Medal Medal
-      {
-        get { return _medal; }
-        set
-        {
-          if ((int)value == -1)
-            return;
+    ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
 
-          _medal = value;
-          NotifyPropertyChanged();
+    for (int i = 0; i < medals.Length; i++)
+    {
+      medals[i] = new ObservableCollection<MedalShopPool>();
+    }
+  }
+
+  public object Data { get; set; } = new ObservableCollection<MedalShopPool>[(int)MedalShop.COUNT];
+
+  public void ParseFromSaveLine(string saveLine)
+  {
+    string[] medalPools = saveLine.Split(Common.ElementSeparator);
+    if (medalPools.Length != (int)MedalShop.COUNT)
+    {
+      throw new Exception(nameof(MedalShopsPools) + " is in an invalid format");
+    }
+
+    ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
+
+    for (int i = 0; i < medalPools.Length; i++)
+    {
+      if (medalPools[i] == string.Empty)
+      {
+        continue;
+      }
+
+      string[] data = medalPools[i].Split(Common.FieldSeparator);
+      for (int j = 0; j < data.Length; j++)
+      {
+        int intOut = 0;
+        if (!int.TryParse(data[j], out intOut))
+        {
+          throw new Exception(nameof(MedalShopsPools) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
+                              "][" + j + "] failed to parse");
+        }
+
+        if (intOut < 0 || intOut >= (int)Medal.COUNT)
+        {
+          throw new Exception(nameof(MedalShopsPools) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
+                              "][" + j + "]: " + intOut + " is not a valid medal ID");
+        }
+
+        medals[i].Add(new MedalShopPool { Medal = (Medal)intOut });
+      }
+    }
+  }
+
+  public string EncodeToSaveLine()
+  {
+    ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
+    StringBuilder sb = new();
+
+    for (int i = 0; i < medals.Length; i++)
+    {
+      for (int j = 0; j < medals[i].Count; j++)
+      {
+        sb.Append((int)medals[i][j].Medal);
+
+        if (j != medals[i].Count - 1)
+        {
+          sb.Append(Common.FieldSeparator);
         }
       }
 
-      public event PropertyChangedEventHandler? PropertyChanged;
-      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+      if (i != medals.Length - 1)
       {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        sb.Append(Common.ElementSeparator);
       }
     }
 
-    public object Data { get; set; } = new ObservableCollection<MedalShopPool>[(int)MedalShop.COUNT];
+    return sb.ToString();
+  }
 
-    public MedalShopsPools()
+  public void ResetToDefault()
+  {
+    ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
+    foreach (ObservableCollection<MedalShopPool> collection in medals)
     {
-      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
-
-      for (int i = 0; i < medals.Length; i++)
-        medals[i] = new ObservableCollection<MedalShopPool>();
+      collection.Clear();
     }
+  }
 
-    public void ParseFromSaveLine(string saveLine)
+  public class MedalShopPool : INotifyPropertyChanged
+  {
+    private Medal _medal;
+
+    public Medal Medal
     {
-      string[] medalPools = saveLine.Split(Common.ElementSeparator);
-      if (medalPools.Length != (int)MedalShop.COUNT)
-        throw new Exception(nameof(MedalShopsPools) + " is in an invalid format");
-
-      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
-
-      for (int i = 0; i < medalPools.Length; i++)
+      get => _medal;
+      set
       {
-        if (medalPools[i] == string.Empty)
-          continue;
-
-        string[] data = medalPools[i].Split(Common.FieldSeparator);
-        for (int j = 0; j < data.Length; j++)
+        if ((int)value == -1)
         {
-          int intOut = 0;
-          if (!int.TryParse(data[j], out intOut))
-          {
-            throw new Exception(nameof(MedalShopsPools) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
-                                "][" + j + "] failed to parse");
-          }
-          if (intOut < 0 || intOut >= (int)Medal.COUNT)
-          {
-            throw new Exception(nameof(MedalShopsPools) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
-                                "][" + j + "]: " + intOut + " is not a valid medal ID");
-          }
-          medals[i].Add(new MedalShopPool { Medal = (Medal)intOut });
-        }
-      }
-    }
-
-    public string EncodeToSaveLine()
-    {
-      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
-      StringBuilder sb = new StringBuilder();
-
-      for (int i = 0; i < medals.Length; i++)
-      {
-        for (int j = 0; j < medals[i].Count; j++)
-        {
-          sb.Append((int)medals[i][j].Medal);
-
-          if (j != medals[i].Count - 1)
-            sb.Append(Common.FieldSeparator);
+          return;
         }
 
-        if (i != medals.Length - 1)
-          sb.Append(Common.ElementSeparator);
+        _medal = value;
+        NotifyPropertyChanged();
       }
-
-      return sb.ToString();
     }
 
-    public void ResetToDefault()
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
-      ObservableCollection<MedalShopPool>[] medals = (ObservableCollection<MedalShopPool>[])Data;
-      foreach (var collection in medals)
-        collection.Clear();
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

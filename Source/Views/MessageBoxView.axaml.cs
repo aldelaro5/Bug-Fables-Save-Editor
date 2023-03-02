@@ -1,72 +1,74 @@
+using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
 using BugFablesSaveEditor.ViewModels;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.Views;
-using System.Runtime.InteropServices;
 
-namespace BugFablesSaveEditor.Views
+namespace BugFablesSaveEditor.Views;
+
+public class MessageBoxView : Window
 {
-  public class MessageBoxView : Window
+  private readonly DockPanel mainContainer;
+
+  public MessageBoxView()
   {
-    private DockPanel mainContainer;
-    public ButtonResult ButtonResult { get; set; } = ButtonResult.None;
-
-    public MessageBoxView()
-    {
-      InitializeComponent();
+    InitializeComponent();
 #if DEBUG
-      this.AttachDevTools();
+    this.AttachDevTools();
 #endif
+  }
+
+  public MessageBoxView(string title, string text, ButtonEnum buttons, Icon icon, MsBoxStandardWindow messageContent)
+  {
+    InitializeComponent();
+#if DEBUG
+    this.AttachDevTools();
+#endif
+
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+      ExtendClientAreaToDecorationsHint = true;
+      ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
+      ExtendClientAreaTitleBarHeightHint = -1;
+
+      WindowsTitleBar? windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
+      windowsTitleBar.IsVisible = true;
     }
 
-    public MessageBoxView(string title, string text, ButtonEnum buttons, Icon icon, MsBoxStandardWindow messageContent)
-    {
-      InitializeComponent();
-#if DEBUG
-      this.AttachDevTools();
-#endif
+    mainContainer = this.FindControl<DockPanel>("mainContainer");
+    mainContainer.Children.Add((Grid)messageContent.Content);
 
-      if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    MessageBoxViewModel vm = new(
+      new MessageBoxStandardParams
       {
-        ExtendClientAreaToDecorationsHint = true;
-        ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
-        ExtendClientAreaTitleBarHeightHint = -1;
-
-        var windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
-        windowsTitleBar.IsVisible = true;
-      }
-
-      mainContainer = this.FindControl<DockPanel>("mainContainer");
-      mainContainer.Children.Add((Grid)messageContent.Content);
-
-      var vm = new MessageBoxViewModel(new MessageBoxStandardParams
-      {
-        ContentMessage = text,
-        ContentTitle = title,
-        Icon = icon,
-        ButtonDefinitions = buttons
+        ContentMessage = text, ContentTitle = title, Icon = icon, ButtonDefinitions = buttons
       }, this);
-      ((IControl)messageContent).DataContext = vm;
+    ((IControl)messageContent).DataContext = vm;
 
-      SizeToContent = messageContent.SizeToContent;
-      MinWidth = messageContent.MinWidth;
-      MaxWidth = messageContent.MaxWidth;
-      Icon = messageContent.Icon;
-      MinHeight = messageContent.MinHeight;
-      CanResize = messageContent.CanResize;
-      FontFamily = messageContent.FontFamily;
-      Title = messageContent.Title;
-      KeyBindings.AddRange(messageContent.KeyBindings);
-    }
+    SizeToContent = messageContent.SizeToContent;
+    MinWidth = messageContent.MinWidth;
+    MaxWidth = messageContent.MaxWidth;
+    Icon = messageContent.Icon;
+    MinHeight = messageContent.MinHeight;
+    CanResize = messageContent.CanResize;
+    FontFamily = messageContent.FontFamily;
+    Title = messageContent.Title;
+    KeyBindings.AddRange(messageContent.KeyBindings);
+  }
 
-    private void InitializeComponent()
-    {
-      AvaloniaXamlLoader.Load(this);
-    }
+  public ButtonResult ButtonResult { get; set; } = ButtonResult.None;
 
-    public ButtonResult GetResult() => ButtonResult;
+  private void InitializeComponent()
+  {
+    AvaloniaXamlLoader.Load(this);
+  }
+
+  public ButtonResult GetResult()
+  {
+    return ButtonResult;
   }
 }

@@ -8,7 +8,6 @@
         WindowStartupLocation="CenterScreen">
   <DockPanel>
     <views:WindowsTitleBar IsVisible="False" Name="windowsTitleBar" />
-    <DockPanel x:Name="mainContainer">
-    </DockPanel>
+    <DockPanel x:Name="mainContainer" />
   </DockPanel>
 </Window>

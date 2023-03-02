@@ -3,22 +3,22 @@
              xmlns:local="using:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App">
   <Application.DataTemplates>
-    <local:ViewLocator/>
+    <local:ViewLocator />
   </Application.DataTemplates>
 
   <Application.Resources>
-    <local:EnumValueConverter x:Key="EnumConverter"/>
-    <local:EnumToDescriptionConverter x:Key="EnumDescriptionConverter"/>
+    <local:EnumValueConverter x:Key="EnumConverter" />
+    <local:EnumToDescriptionConverter x:Key="EnumDescriptionConverter" />
   </Application.Resources>
 
   <Application.Styles>
-    <FluentTheme Mode="Dark"/>
-    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    <FluentTheme Mode="Dark" />
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <Style Selector="DataGridColumnHeader TextBlock">
-      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
     <Style Selector="TabControl WrapPanel">
-      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
   </Application.Styles>
 </Application>

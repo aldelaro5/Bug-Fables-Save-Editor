@@ -12,13 +12,14 @@
 
   <Grid ColumnDefinitions="50*,50*,50*">
     <DockPanel Grid.Column="0">
-      <Label DockPanel.Dock="Top" Content="Items"/>
+      <Label DockPanel.Dock="Top" Content="Items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-        <ComboBox SelectedIndex="{Binding SelectedItemForAdd, 
+        <ComboBox
+          SelectedIndex="{Binding SelectedItemForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Item}}"
-                            Items="{Binding ItemsNames}" Width="210" />
-        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItem}"/>
+          Items="{Binding ItemsNames}" Width="210" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItem}" />
       </StackPanel>
       <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
         <Button Content="↑" Command="{Binding CmdReorderItemsUp}" />
@@ -28,13 +29,16 @@
                 Items="{Binding Items}" IsReadOnly="True"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
         <DataGrid.Columns>
-          <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
+          <DataGridTextColumn
+            Binding="{Binding Item, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Item}}" Width="205"/>
+                                        ConverterParameter={x:Type bf:Item}}"
+            Width="205" />
           <DataGridTemplateColumn Width="50">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveItem}"
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
+                        Command="{Binding $parent[DataGrid].DataContext.RemoveItem}"
                         CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -43,13 +47,14 @@
       </DataGrid>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
-      <Label DockPanel.Dock="Top" Content="Key items"/>
+      <Label DockPanel.Dock="Top" Content="Key items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-        <ComboBox SelectedIndex="{Binding SelectedKeyItemForAdd, 
+        <ComboBox
+          SelectedIndex="{Binding SelectedKeyItemForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Item}}"
-                            Items="{Binding ItemsNames}" Width="210" />
-        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItem}"/>
+          Items="{Binding ItemsNames}" Width="210" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItem}" />
       </StackPanel>
       <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
         <Button Content="↑" Command="{Binding CmdReorderKeyItemsUp}" />
@@ -59,13 +64,16 @@
                 Items="{Binding KeyItems}" IsReadOnly="True"
                 SelectedItem="{Binding SelectedKeyItem, Mode=TwoWay}">
         <DataGrid.Columns>
-          <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
+          <DataGridTextColumn
+            Binding="{Binding Item, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Item}}" Width="205"/>
+                                        ConverterParameter={x:Type bf:Item}}"
+            Width="205" />
           <DataGridTemplateColumn Width="50">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveKeyItem}"
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
+                        Command="{Binding $parent[DataGrid].DataContext.RemoveKeyItem}"
                         CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -74,13 +82,14 @@
       </DataGrid>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
-      <Label DockPanel.Dock="Top" Content="Stored items"/>
+      <Label DockPanel.Dock="Top" Content="Stored items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-        <ComboBox SelectedIndex="{Binding SelectedStoredItemForAdd, 
+        <ComboBox
+          SelectedIndex="{Binding SelectedStoredItemForAdd, 
                                   Converter={StaticResource EnumConverter}, 
                                   ConverterParameter={x:Type bf:Item}}"
-                          Items="{Binding ItemsNames}" Width="210" />
-        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItem}"/>
+          Items="{Binding ItemsNames}" Width="210" />
+        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItem}" />
       </StackPanel>
       <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
         <Button Content="↑" Command="{Binding CmdReorderStoredItemsUp}" />
@@ -90,13 +99,16 @@
                 Items="{Binding StoredItems}" IsReadOnly="True"
                 SelectedItem="{Binding SelectedStoredItem, Mode=TwoWay}">
         <DataGrid.Columns>
-          <DataGridTextColumn Binding="{Binding Item, Mode=OneWay,
+          <DataGridTextColumn
+            Binding="{Binding Item, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Item}}" Width="205"/>
+                                        ConverterParameter={x:Type bf:Item}}"
+            Width="205" />
           <DataGridTemplateColumn Width="50">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <Button Margin="5,0,0,0" Content="-" Background="DarkRed" Command="{Binding $parent[DataGrid].DataContext.RemoveStoredItem}"
+                <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
+                        Command="{Binding $parent[DataGrid].DataContext.RemoveStoredItem}"
                         CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>

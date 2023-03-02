@@ -1,8 +1,7 @@
 ﻿using ReactiveUI;
 
-namespace BugFablesSaveEditor.ViewModels
+namespace BugFablesSaveEditor.ViewModels;
+
+public class ViewModelBase : ReactiveObject
 {
-  public class ViewModelBase : ReactiveObject
-  {
-  }
 }

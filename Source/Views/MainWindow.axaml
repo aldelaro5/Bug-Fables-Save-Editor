@@ -10,18 +10,18 @@
         Icon="/Assets/icon.png" Opened="OnLoaded"
         WindowStartupLocation="CenterScreen">
   <Design.DataContext>
-    <vm:MainWindowViewModel/>
+    <vm:MainWindowViewModel />
   </Design.DataContext>
   <DockPanel>
     <views:WindowsTitleBar IsVisible="False" Name="windowsTitleBar" />
     <DockPanel>
       <Menu DockPanel.Dock="Top">
         <MenuItem Header="File">
-          <MenuItem Command="{Binding NewFile}" Header="New"/>
-          <MenuItem Command="{Binding OpenFile}" Header="Open..."/>
-          <MenuItem Command="{Binding CmdSaveFile}" Header="Save as..."/>
-          <Separator/>
-          <MenuItem Command="{Binding Exit}" Header="Exit"/>
+          <MenuItem Command="{Binding NewFile}" Header="New" />
+          <MenuItem Command="{Binding OpenFile}" Header="Open..." />
+          <MenuItem Command="{Binding CmdSaveFile}" Header="Save as..." />
+          <Separator />
+          <MenuItem Command="{Binding Exit}" Header="Exit" />
         </MenuItem>
         <MenuItem Header="Help">
           <MenuItem Header="About" Click="OnAbout_Click" />
@@ -29,11 +29,12 @@
       </Menu>
       <DockPanel>
         <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Vertical">
-          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" HorizontalContentAlignment="Center"/>
+          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}"
+                 HorizontalContentAlignment="Center" />
           <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Command="{Binding NewFile}" Content="New file" Margin="5"/>
-            <Button Command="{Binding OpenFile}" Content="Open file..." Margin="5"/>
-            <Button Command="{Binding CmdSaveFile}" Content="Save file..." Margin="5"/>
+            <Button Command="{Binding NewFile}" Content="New file" Margin="5" />
+            <Button Command="{Binding OpenFile}" Content="Open file..." Margin="5" />
+            <Button Command="{Binding CmdSaveFile}" Content="Save file..." Margin="5" />
           </StackPanel>
         </StackPanel>
         <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">

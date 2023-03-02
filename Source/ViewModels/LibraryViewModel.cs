@@ -1,382 +1,455 @@
-﻿using Avalonia.Collections;
+﻿using System;
+using System.Text;
+using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
 using ReactiveUI;
-using System;
-using System.Text;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Library;
 
-namespace BugFablesSaveEditor.ViewModels
+namespace BugFablesSaveEditor.ViewModels;
+
+public class LibraryViewModel : ViewModelBase
 {
-  public class LibraryViewModel : ViewModelBase
+  private LibraryFlag[] _discoveries;
+
+  private DataGridCollectionView _discoveriesFiltered;
+  private LibraryFlag[] _enemies;
+  private DataGridCollectionView _enemiesFiltered;
+
+  private bool _filterUnusedDiscoveries;
+  private bool _filterUnusedEnemiess;
+  private bool _filterUnusedRecipes;
+  private bool _filterUnusedRecords;
+  private bool _filterUnusedSeenAreas;
+  private LibraryFlag[] _recipes;
+  private DataGridCollectionView _recipesFiltered;
+  private LibraryFlag[] _records;
+  private DataGridCollectionView _recordsFiltered;
+  private SaveData _saveData;
+  private LibraryFlag[] _seenAreas;
+  private DataGridCollectionView _seenAreasFiltered;
+
+  private string _textFilterDiscoveries;
+  private string _textFilterEnemies;
+  private string _textFilterRecipes;
+  private string _textFilterRecords;
+  private string _textFilterSeenAreas;
+  private string[] areasNames;
+
+  private string[] discoveriesNames;
+  private string[] enemiesNames;
+  private string[] recipessNames;
+  private string[] recordsNames;
+
+  public LibraryViewModel()
   {
-    private SaveData _saveData;
-    public SaveData SaveData
-    {
-      get { return _saveData; }
-      set { _saveData = value; this.RaisePropertyChanged(); }
-    }
+    SaveData = new SaveData();
+    Initialise();
+  }
 
-    private string[] discoveriesNames;
-    private string[] enemiesNames;
-    private string[] recipessNames;
-    private string[] recordsNames;
-    private string[] areasNames;
+  public LibraryViewModel(SaveData saveData)
+  {
+    SaveData = saveData;
+    Initialise();
+  }
 
-    private LibraryFlag[] _discoveries;
-    public LibraryFlag[] Discoveries
+  public SaveData SaveData
+  {
+    get => _saveData;
+    set
     {
-      get { return _discoveries; }
-      set { _discoveries = value; this.RaisePropertyChanged(); }
+      _saveData = value;
+      this.RaisePropertyChanged();
     }
-    private LibraryFlag[] _enemies;
-    public LibraryFlag[] Enemies
-    {
-      get { return _enemies; }
-      set { _enemies = value; this.RaisePropertyChanged(); }
-    }
-    private LibraryFlag[] _recipes;
-    public LibraryFlag[] Recipes
-    {
-      get { return _recipes; }
-      set { _recipes = value; this.RaisePropertyChanged(); }
-    }
-    private LibraryFlag[] _records;
-    public LibraryFlag[] Records
-    {
-      get { return _records; }
-      set { _records = value; this.RaisePropertyChanged(); }
-    }
-    private LibraryFlag[] _seenAreas;
-    public LibraryFlag[] SeenAreas
-    {
-      get { return _seenAreas; }
-      set { _seenAreas = value; this.RaisePropertyChanged(); }
-    }
+  }
 
-    private DataGridCollectionView _discoveriesFiltered;
-    public DataGridCollectionView DiscoveriesFiltered
+  public LibraryFlag[] Discoveries
+  {
+    get => _discoveries;
+    set
     {
-      get { return _discoveriesFiltered; }
-      set { _discoveriesFiltered = value; this.RaisePropertyChanged(); }
+      _discoveries = value;
+      this.RaisePropertyChanged();
     }
-    private DataGridCollectionView _enemiesFiltered;
-    public DataGridCollectionView EnemiesFiltered
-    {
-      get { return _enemiesFiltered; }
-      set { _enemiesFiltered = value; this.RaisePropertyChanged(); }
-    }
-    private DataGridCollectionView _recipesFiltered;
-    public DataGridCollectionView RecipesFiltered
-    {
-      get { return _recipesFiltered; }
-      set { _recipesFiltered = value; this.RaisePropertyChanged(); }
-    }
-    private DataGridCollectionView _recordsFiltered;
-    public DataGridCollectionView RecordsFiltered
-    {
-      get { return _recordsFiltered; }
-      set { _recordsFiltered = value; this.RaisePropertyChanged(); }
-    }
-    private DataGridCollectionView _seenAreasFiltered;
-    public DataGridCollectionView SeenAreasFiltered
-    {
-      get { return _seenAreasFiltered; }
-      set { _seenAreasFiltered = value; this.RaisePropertyChanged(); }
-    }
+  }
 
-    private string _textFilterDiscoveries;
-    public string TextFilterDiscoveries
+  public LibraryFlag[] Enemies
+  {
+    get => _enemies;
+    set
     {
-      get { return _textFilterDiscoveries; }
-      set
-      {
-        _textFilterDiscoveries = value;
-        this.RaisePropertyChanged();
-        DiscoveriesFiltered.Refresh();
-      }
+      _enemies = value;
+      this.RaisePropertyChanged();
     }
-    private string _textFilterEnemies;
-    public string TextFilterEnemies
-    {
-      get { return _textFilterEnemies; }
-      set
-      {
-        _textFilterEnemies = value;
-        this.RaisePropertyChanged();
-        EnemiesFiltered.Refresh();
-      }
-    }
-    private string _textFilterRecipes;
-    public string TextFilterRecipes
-    {
-      get { return _textFilterRecipes; }
-      set
-      {
-        _textFilterRecipes = value;
-        this.RaisePropertyChanged();
-        RecipesFiltered.Refresh();
-      }
-    }
-    private string _textFilterRecords;
-    public string TextFilterRecords
-    {
-      get { return _textFilterRecords; }
-      set
-      {
-        _textFilterRecords = value;
-        this.RaisePropertyChanged();
-        RecordsFiltered.Refresh();
-      }
-    }
-    private string _textFilterSeenAreas;
-    public string TextFilterSeenAreas
-    {
-      get { return _textFilterSeenAreas; }
-      set
-      {
-        _textFilterSeenAreas = value;
-        this.RaisePropertyChanged();
-        SeenAreasFiltered.Refresh();
-      }
-    }
+  }
 
-    private bool _filterUnusedDiscoveries;
-    public bool FilterUnusedDiscoveries
+  public LibraryFlag[] Recipes
+  {
+    get => _recipes;
+    set
     {
-      get { return _filterUnusedDiscoveries; }
-      set
-      {
-        _filterUnusedDiscoveries = value;
-        this.RaisePropertyChanged();
-        DiscoveriesFiltered.Refresh();
-      }
+      _recipes = value;
+      this.RaisePropertyChanged();
     }
-    private bool _filterUnusedEnemiess;
-    public bool FilterUnusedEnemiess
-    {
-      get { return _filterUnusedEnemiess; }
-      set
-      {
-        _filterUnusedEnemiess = value;
-        this.RaisePropertyChanged();
-        EnemiesFiltered.Refresh();
-      }
-    }
-    private bool _filterUnusedRecipes;
-    public bool FilterUnusedRecipes
-    {
-      get { return _filterUnusedRecipes; }
-      set
-      {
-        _filterUnusedRecipes = value;
-        this.RaisePropertyChanged();
-        RecipesFiltered.Refresh();
-      }
-    }
-    private bool _filterUnusedRecords;
-    public bool FilterUnusedRecords
-    {
-      get { return _filterUnusedRecords; }
-      set
-      {
-        _filterUnusedRecords = value;
-        this.RaisePropertyChanged();
-        RecordsFiltered.Refresh();
-      }
-    }
-    private bool _filterUnusedSeenAreas;
-    public bool FilterUnusedSeenAreas
-    {
-      get { return _filterUnusedSeenAreas; }
-      set
-      {
-        _filterUnusedSeenAreas = value;
-        this.RaisePropertyChanged();
-        SeenAreasFiltered.Refresh();
-      }
-    }
+  }
 
-    public LibraryViewModel()
+  public LibraryFlag[] Records
+  {
+    get => _records;
+    set
     {
-      SaveData = new SaveData();
-      Initialise();
+      _records = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    public LibraryViewModel(SaveData saveData)
+  public LibraryFlag[] SeenAreas
+  {
+    get => _seenAreas;
+    set
     {
-      SaveData = saveData;
-      Initialise();
+      _seenAreas = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private void Initialise()
+  public DataGridCollectionView DiscoveriesFiltered
+  {
+    get => _discoveriesFiltered;
+    set
     {
-      discoveriesNames = Common.GetEnumDescriptions<Discovery>();
-      enemiesNames = Common.GetEnumDescriptions<Enemy>();
-      recipessNames = Common.GetEnumDescriptions<Recipe>();
-      recordsNames = Common.GetEnumDescriptions<Record>();
-      areasNames = Common.GetEnumDescriptions<Area>();
-
-      var wholeLibrary = (LibraryFlag[][])SaveData.Sections[SaveFileSection.Library].Data;
-      Discoveries = wholeLibrary[(int)LibrarySection.Discovery];
-      Enemies = wholeLibrary[(int)LibrarySection.Bestiary];
-      Recipes = wholeLibrary[(int)LibrarySection.Recipe];
-      Records = wholeLibrary[(int)LibrarySection.Record];
-      SeenAreas = wholeLibrary[(int)LibrarySection.SeenMapLocation];
-
-      DiscoveriesFiltered = new DataGridCollectionView(Discoveries);
-      DiscoveriesFiltered.Filter = FilterDiscoveries;
-      EnemiesFiltered = new DataGridCollectionView(Enemies);
-      EnemiesFiltered.Filter = FilterEnemies;
-      RecipesFiltered = new DataGridCollectionView(Recipes);
-      RecipesFiltered.Filter = FilterRecipes;
-      RecordsFiltered = new DataGridCollectionView(Records);
-      RecordsFiltered.Filter = FilterRecords;
-      SeenAreasFiltered = new DataGridCollectionView(SeenAreas);
-      SeenAreasFiltered.Filter = FilterSeenAreas;
+      _discoveriesFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private bool FilterDiscoveries(object arg)
+  public DataGridCollectionView EnemiesFiltered
+  {
+    get => _enemiesFiltered;
+    set
     {
-      return FilterLibrary(LibrarySection.Discovery, arg);
+      _enemiesFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private bool FilterEnemies(object arg)
+  public DataGridCollectionView RecipesFiltered
+  {
+    get => _recipesFiltered;
+    set
     {
-      return FilterLibrary(LibrarySection.Bestiary, arg);
+      _recipesFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private bool FilterRecipes(object arg)
+  public DataGridCollectionView RecordsFiltered
+  {
+    get => _recordsFiltered;
+    set
     {
-      return FilterLibrary(LibrarySection.Recipe, arg);
+      _recordsFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private bool FilterRecords(object arg)
+  public DataGridCollectionView SeenAreasFiltered
+  {
+    get => _seenAreasFiltered;
+    set
     {
-      return FilterLibrary(LibrarySection.Record, arg);
+      _seenAreasFiltered = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private bool FilterSeenAreas(object arg)
+  public string TextFilterDiscoveries
+  {
+    get => _textFilterDiscoveries;
+    set
     {
-      return FilterLibrary(LibrarySection.SeenMapLocation, arg);
+      _textFilterDiscoveries = value;
+      this.RaisePropertyChanged();
+      DiscoveriesFiltered.Refresh();
     }
+  }
 
-    private bool FilterLibrary(LibrarySection section, object arg)
+  public string TextFilterEnemies
+  {
+    get => _textFilterEnemies;
+    set
     {
-      LibraryFlag flag = (LibraryFlag)arg;
-      string textFilter;
-      string[] enumValues;
-      bool filterUnused;
-      switch (section)
-      {
-        case LibrarySection.Discovery:
-          textFilter = TextFilterDiscoveries;
-          enumValues = discoveriesNames;
-          filterUnused = FilterUnusedDiscoveries;
-          break;
-        case LibrarySection.Bestiary:
-          textFilter = TextFilterEnemies;
-          enumValues = enemiesNames;
-          filterUnused = FilterUnusedEnemiess;
-          break;
-        case LibrarySection.Recipe:
-          textFilter = TextFilterRecipes;
-          enumValues = recipessNames;
-          filterUnused = FilterUnusedRecipes;
-          break;
-        case LibrarySection.Record:
-          textFilter = TextFilterRecords;
-          enumValues = recordsNames;
-          filterUnused = FilterUnusedRecords;
-          break;
-        case LibrarySection.SeenMapLocation:
-          textFilter = TextFilterSeenAreas;
-          enumValues = areasNames;
-          filterUnused = FilterUnusedSeenAreas;
-          break;
-        default:
-          return false;
-      }
+      _textFilterEnemies = value;
+      this.RaisePropertyChanged();
+      EnemiesFiltered.Refresh();
+    }
+  }
 
-      if (!filterUnused && flag.Index >= enumValues.Length)
+  public string TextFilterRecipes
+  {
+    get => _textFilterRecipes;
+    set
+    {
+      _textFilterRecipes = value;
+      this.RaisePropertyChanged();
+      RecipesFiltered.Refresh();
+    }
+  }
+
+  public string TextFilterRecords
+  {
+    get => _textFilterRecords;
+    set
+    {
+      _textFilterRecords = value;
+      this.RaisePropertyChanged();
+      RecordsFiltered.Refresh();
+    }
+  }
+
+  public string TextFilterSeenAreas
+  {
+    get => _textFilterSeenAreas;
+    set
+    {
+      _textFilterSeenAreas = value;
+      this.RaisePropertyChanged();
+      SeenAreasFiltered.Refresh();
+    }
+  }
+
+  public bool FilterUnusedDiscoveries
+  {
+    get => _filterUnusedDiscoveries;
+    set
+    {
+      _filterUnusedDiscoveries = value;
+      this.RaisePropertyChanged();
+      DiscoveriesFiltered.Refresh();
+    }
+  }
+
+  public bool FilterUnusedEnemiess
+  {
+    get => _filterUnusedEnemiess;
+    set
+    {
+      _filterUnusedEnemiess = value;
+      this.RaisePropertyChanged();
+      EnemiesFiltered.Refresh();
+    }
+  }
+
+  public bool FilterUnusedRecipes
+  {
+    get => _filterUnusedRecipes;
+    set
+    {
+      _filterUnusedRecipes = value;
+      this.RaisePropertyChanged();
+      RecipesFiltered.Refresh();
+    }
+  }
+
+  public bool FilterUnusedRecords
+  {
+    get => _filterUnusedRecords;
+    set
+    {
+      _filterUnusedRecords = value;
+      this.RaisePropertyChanged();
+      RecordsFiltered.Refresh();
+    }
+  }
+
+  public bool FilterUnusedSeenAreas
+  {
+    get => _filterUnusedSeenAreas;
+    set
+    {
+      _filterUnusedSeenAreas = value;
+      this.RaisePropertyChanged();
+      SeenAreasFiltered.Refresh();
+    }
+  }
+
+  private void Initialise()
+  {
+    discoveriesNames = Common.GetEnumDescriptions<Discovery>();
+    enemiesNames = Common.GetEnumDescriptions<Enemy>();
+    recipessNames = Common.GetEnumDescriptions<Recipe>();
+    recordsNames = Common.GetEnumDescriptions<Record>();
+    areasNames = Common.GetEnumDescriptions<Area>();
+
+    LibraryFlag[][] wholeLibrary = (LibraryFlag[][])SaveData.Sections[SaveFileSection.Library].Data;
+    Discoveries = wholeLibrary[(int)LibrarySection.Discovery];
+    Enemies = wholeLibrary[(int)LibrarySection.Bestiary];
+    Recipes = wholeLibrary[(int)LibrarySection.Recipe];
+    Records = wholeLibrary[(int)LibrarySection.Record];
+    SeenAreas = wholeLibrary[(int)LibrarySection.SeenMapLocation];
+
+    DiscoveriesFiltered = new DataGridCollectionView(Discoveries);
+    DiscoveriesFiltered.Filter = FilterDiscoveries;
+    EnemiesFiltered = new DataGridCollectionView(Enemies);
+    EnemiesFiltered.Filter = FilterEnemies;
+    RecipesFiltered = new DataGridCollectionView(Recipes);
+    RecipesFiltered.Filter = FilterRecipes;
+    RecordsFiltered = new DataGridCollectionView(Records);
+    RecordsFiltered.Filter = FilterRecords;
+    SeenAreasFiltered = new DataGridCollectionView(SeenAreas);
+    SeenAreasFiltered.Filter = FilterSeenAreas;
+  }
+
+  private bool FilterDiscoveries(object arg)
+  {
+    return FilterLibrary(LibrarySection.Discovery, arg);
+  }
+
+  private bool FilterEnemies(object arg)
+  {
+    return FilterLibrary(LibrarySection.Bestiary, arg);
+  }
+
+  private bool FilterRecipes(object arg)
+  {
+    return FilterLibrary(LibrarySection.Recipe, arg);
+  }
+
+  private bool FilterRecords(object arg)
+  {
+    return FilterLibrary(LibrarySection.Record, arg);
+  }
+
+  private bool FilterSeenAreas(object arg)
+  {
+    return FilterLibrary(LibrarySection.SeenMapLocation, arg);
+  }
+
+  private bool FilterLibrary(LibrarySection section, object arg)
+  {
+    LibraryFlag flag = (LibraryFlag)arg;
+    string textFilter;
+    string[] enumValues;
+    bool filterUnused;
+    switch (section)
+    {
+      case LibrarySection.Discovery:
+        textFilter = TextFilterDiscoveries;
+        enumValues = discoveriesNames;
+        filterUnused = FilterUnusedDiscoveries;
+        break;
+      case LibrarySection.Bestiary:
+        textFilter = TextFilterEnemies;
+        enumValues = enemiesNames;
+        filterUnused = FilterUnusedEnemiess;
+        break;
+      case LibrarySection.Recipe:
+        textFilter = TextFilterRecipes;
+        enumValues = recipessNames;
+        filterUnused = FilterUnusedRecipes;
+        break;
+      case LibrarySection.Record:
+        textFilter = TextFilterRecords;
+        enumValues = recordsNames;
+        filterUnused = FilterUnusedRecords;
+        break;
+      case LibrarySection.SeenMapLocation:
+        textFilter = TextFilterSeenAreas;
+        enumValues = areasNames;
+        filterUnused = FilterUnusedSeenAreas;
+        break;
+      default:
         return false;
-      if (string.IsNullOrEmpty(textFilter))
-        return true;
-
-      StringBuilder sb = new StringBuilder();
-      sb.Append(flag.Index).Append(' ');
-      if (flag.Index >= enumValues.Length)
-        sb.Append("UNUSED " + flag.Index);
-      else
-        sb.Append(enumValues[flag.Index]);
-      return sb.ToString().Contains(textFilter, StringComparison.OrdinalIgnoreCase);
     }
 
-    public void ToggleAllFilteredDiscoveries()
+    if (!filterUnused && flag.Index >= enumValues.Length)
     {
-      ToggleAllShownLibrary(LibrarySection.Discovery);
+      return false;
     }
 
-    public void ToggleAllFilteredEnemies()
+    if (string.IsNullOrEmpty(textFilter))
     {
-      ToggleAllShownLibrary(LibrarySection.Bestiary);
+      return true;
     }
 
-    public void ToggleAllFilteredRecipes()
+    StringBuilder sb = new();
+    sb.Append(flag.Index).Append(' ');
+    if (flag.Index >= enumValues.Length)
     {
-      ToggleAllShownLibrary(LibrarySection.Recipe);
+      sb.Append("UNUSED " + flag.Index);
+    }
+    else
+    {
+      sb.Append(enumValues[flag.Index]);
     }
 
-    public void ToggleAllFilteredRecords()
+    return sb.ToString().Contains(textFilter, StringComparison.OrdinalIgnoreCase);
+  }
+
+  public void ToggleAllFilteredDiscoveries()
+  {
+    ToggleAllShownLibrary(LibrarySection.Discovery);
+  }
+
+  public void ToggleAllFilteredEnemies()
+  {
+    ToggleAllShownLibrary(LibrarySection.Bestiary);
+  }
+
+  public void ToggleAllFilteredRecipes()
+  {
+    ToggleAllShownLibrary(LibrarySection.Recipe);
+  }
+
+  public void ToggleAllFilteredRecords()
+  {
+    ToggleAllShownLibrary(LibrarySection.Record);
+  }
+
+  public void ToggleAllFilteredSeenAreas()
+  {
+    ToggleAllShownLibrary(LibrarySection.SeenMapLocation);
+  }
+
+  private void ToggleAllShownLibrary(LibrarySection section)
+  {
+    bool newEnabled = true;
+    DataGridCollectionView dg;
+    switch (section)
     {
-      ToggleAllShownLibrary(LibrarySection.Record);
+      case LibrarySection.Discovery:
+        dg = DiscoveriesFiltered;
+        break;
+      case LibrarySection.Bestiary:
+        dg = EnemiesFiltered;
+        break;
+      case LibrarySection.Recipe:
+        dg = RecipesFiltered;
+        break;
+      case LibrarySection.Record:
+        dg = RecordsFiltered;
+        break;
+      case LibrarySection.SeenMapLocation:
+        dg = SeenAreasFiltered;
+        break;
+      default:
+        return;
     }
 
-    public void ToggleAllFilteredSeenAreas()
+    foreach (object? item in dg)
     {
-      ToggleAllShownLibrary(LibrarySection.SeenMapLocation);
-    }
-
-    private void ToggleAllShownLibrary(LibrarySection section)
-    {
-      bool newEnabled = true;
-      DataGridCollectionView dg;
-      switch (section)
+      LibraryFlag flag = (LibraryFlag)item;
+      if (flag.Enabled)
       {
-        case LibrarySection.Discovery:
-          dg = DiscoveriesFiltered;
-          break;
-        case LibrarySection.Bestiary:
-          dg = EnemiesFiltered;
-          break;
-        case LibrarySection.Recipe:
-          dg = RecipesFiltered;
-          break;
-        case LibrarySection.Record:
-          dg = RecordsFiltered;
-          break;
-        case LibrarySection.SeenMapLocation:
-          dg = SeenAreasFiltered;
-          break;
-        default:
-          return;
+        newEnabled = false;
+        break;
       }
+    }
 
-      foreach (var item in dg)
-      {
-        LibraryFlag flag = (LibraryFlag)item;
-        if (flag.Enabled)
-        {
-          newEnabled = false;
-          break;
-        }
-      }
-
-      foreach (var item in dg)
-      {
-        LibraryFlag flag = (LibraryFlag)item;
-        flag.Enabled = newEnabled;
-      }
+    foreach (object? item in dg)
+    {
+      LibraryFlag flag = (LibraryFlag)item;
+      flag.Enabled = newEnabled;
     }
   }
 }

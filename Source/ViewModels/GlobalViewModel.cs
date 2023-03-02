@@ -2,44 +2,62 @@
 using BugFablesSaveEditor.BugFablesSave;
 using ReactiveUI;
 
-namespace BugFablesSaveEditor.ViewModels
+namespace BugFablesSaveEditor.ViewModels;
+
+public class GlobalViewModel : ViewModelBase
 {
-  public class GlobalViewModel : ViewModelBase
+  private string[] _areas;
+
+  private string[] _maps;
+  private SaveData _saveData;
+
+  private string[] _saveProgressIcons;
+
+  public GlobalViewModel(SaveData saveData)
   {
-    private SaveData _saveData;
-    public SaveData SaveData
-    {
-      get { return _saveData; }
-      set { _saveData = value; this.RaisePropertyChanged(); }
-    }
+    SaveData = saveData;
+    Areas = Common.GetEnumDescriptions<Area>();
+    Maps = Common.GetEnumDescriptions<Map>();
+    SaveProgressIcons = Common.GetEnumDescriptions<SaveProgressIcon>();
+  }
 
-    private string[] _areas;
-    public string[] Areas
+  public SaveData SaveData
+  {
+    get => _saveData;
+    set
     {
-      get { return _areas; }
-      set { _areas = value; this.RaisePropertyChanged(); }
+      _saveData = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private string[] _maps;
-    public string[] Maps
+  public string[] Areas
+  {
+    get => _areas;
+    set
     {
-      get { return _maps; }
-      set { _maps = value; this.RaisePropertyChanged(); }
+      _areas = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private string[] _saveProgressIcons;
-    public string[] SaveProgressIcons
+  public string[] Maps
+  {
+    get => _maps;
+    set
     {
-      get { return _saveProgressIcons; }
-      set { _saveProgressIcons = value; this.RaisePropertyChanged(); }
+      _maps = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    public GlobalViewModel(SaveData saveData)
+  public string[] SaveProgressIcons
+  {
+    get => _saveProgressIcons;
+    set
     {
-      SaveData = saveData;
-      Areas = Common.GetEnumDescriptions<Area>();
-      Maps = Common.GetEnumDescriptions<Map>();
-      SaveProgressIcons = Common.GetEnumDescriptions<SaveProgressIcon>();
+      _saveProgressIcons = value;
+      this.RaisePropertyChanged();
     }
   }
 }

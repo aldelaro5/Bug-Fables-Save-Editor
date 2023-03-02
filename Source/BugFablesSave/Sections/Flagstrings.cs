@@ -4,93 +4,117 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace BugFablesSaveEditor.BugFablesSave.Sections
+namespace BugFablesSaveEditor.BugFablesSave.Sections;
+
+public class Flagstrings : IBugFablesSaveSection
 {
-  public class Flagstrings : IBugFablesSaveSection
+  private const int NbrSlots = 15;
+  private const string separator = "|SPLIT|";
+
+  public Flagstrings()
   {
-    public class FlagstringInfo : INotifyPropertyChanged
+    string[] lines = File.ReadAllLines("FlagsData/Flagstrings.csv");
+
+    string[][] data = new string[lines.Length][];
+    for (int i = 0; i < lines.Length; i++)
     {
-      private int _index;
-      public int Index
-      {
-        get { return _index; }
-        set { _index = value; NotifyPropertyChanged(); }
-      }
+      data[i] = lines[i].Split(';');
+    }
 
-      private string _description = "";
-      public string Description
-      {
-        get { return _description; }
-        set { _description = value; NotifyPropertyChanged(); }
-      }
+    FlagstringInfo[] array = (FlagstringInfo[])Data;
+    for (int i = 0; i < array.Length; i++)
+    {
+      array[i] = new FlagstringInfo { Index = i, Description = data[i][1].Replace('~', '\n') };
+    }
+  }
 
-      private string _str;
-      public string Str
-      {
-        get { return _str; }
-        set { _str = value; NotifyPropertyChanged(); }
-      }
+  public object Data { get; set; } = new FlagstringInfo[NbrSlots];
 
-      public event PropertyChangedEventHandler? PropertyChanged;
-      private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+  public string EncodeToSaveLine()
+  {
+    FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
+    StringBuilder sb = new();
+
+    for (int i = 0; i < flagstrings.Length; i++)
+    {
+      sb.Append(flagstrings[i].Str);
+
+      if (i != flagstrings.Length - 1)
       {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        sb.Append(separator);
       }
     }
 
-    private const int NbrSlots = 15;
-    private const string separator = "|SPLIT|";
+    return sb.ToString();
+  }
 
-    public object Data { get; set; } = new FlagstringInfo[NbrSlots];
-
-    public Flagstrings()
+  public void ParseFromSaveLine(string saveLine)
+  {
+    string[] flagstringData = saveLine.Split(separator);
+    if (flagstringData.Length != NbrSlots)
     {
-      string[] lines = File.ReadAllLines("FlagsData/Flagstrings.csv");
+      throw new Exception(nameof(Flagstrings) + " is in an invalid format");
+    }
 
-      string[][] data = new string[lines.Length][];
-      for (int i = 0; i < lines.Length; i++)
-        data[i] = lines[i].Split(';');
+    FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
 
-      var array = (FlagstringInfo[])Data;
-      for (int i = 0; i < array.Length; i++)
+    for (int i = 0; i < flagstringData.Length; i++)
+    {
+      flagstrings[i].Str = flagstringData[i];
+    }
+  }
+
+  public void ResetToDefault()
+  {
+    FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
+    foreach (FlagstringInfo str in flagstrings)
+    {
+      str.Str = "";
+    }
+  }
+
+  public class FlagstringInfo : INotifyPropertyChanged
+  {
+    private string _description = "";
+    private int _index;
+
+    private string _str;
+
+    public int Index
+    {
+      get => _index;
+      set
       {
-        array[i] = new FlagstringInfo { Index = i, Description = data[i][1].Replace('~', '\n') };
+        _index = value;
+        NotifyPropertyChanged();
       }
     }
 
-    public string EncodeToSaveLine()
+    public string Description
     {
-      FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
-      StringBuilder sb = new StringBuilder();
-
-      for (int i = 0; i < flagstrings.Length; i++)
+      get => _description;
+      set
       {
-        sb.Append(flagstrings[i].Str);
-
-        if (i != flagstrings.Length - 1)
-          sb.Append(separator);
+        _description = value;
+        NotifyPropertyChanged();
       }
-
-      return sb.ToString();
     }
 
-    public void ParseFromSaveLine(string saveLine)
+    public string Str
     {
-      string[] flagstringData = saveLine.Split(separator);
-      if (flagstringData.Length != NbrSlots)
-        throw new Exception(nameof(Flagstrings) + " is in an invalid format");
-
-      FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
-
-      for (int i = 0; i < flagstringData.Length; i++)
-        flagstrings[i].Str = flagstringData[i];
+      get => _str;
+      set
+      {
+        _str = value;
+        NotifyPropertyChanged();
+      }
     }
 
-    public void ResetToDefault()
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
-      FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
-      foreach (var str in flagstrings)
-        str.Str = "";
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

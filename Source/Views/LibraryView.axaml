@@ -14,12 +14,12 @@
     <TabItem Header="Discoveries">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedDiscoveries}"/>
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredDiscoveries}"/>
+            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedDiscoveries}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredDiscoveries}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterDiscoveries}"/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterDiscoveries}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding DiscoveriesFiltered}"
                   HeadersVisibility="None">
@@ -27,13 +27,15 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+            <DataGridTextColumn IsReadOnly="True"
+                                Binding="{Binding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Discovery}}" Width="200"/>
+                                        ConverterParameter={x:Type bf:Discovery}}"
+                                Width="200" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -41,12 +43,12 @@
     <TabItem Header="Bestiary">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedEnemiess}"/>
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredEnemies}"/>
+            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedEnemiess}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredEnemies}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterEnemies}"/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterEnemies}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding EnemiesFiltered}"
                   HeadersVisibility="None">
@@ -54,13 +56,15 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+            <DataGridTextColumn IsReadOnly="True"
+                                Binding="{Binding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Enemy}}" Width="200"/>
+                                        ConverterParameter={x:Type bf:Enemy}}"
+                                Width="200" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -68,12 +72,12 @@
     <TabItem Header="Recipes">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecipes}"/>
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecipes}"/>
+            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecipes}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecipes}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecipes}"/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecipes}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding RecipesFiltered}"
                   HeadersVisibility="None">
@@ -81,13 +85,15 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+            <DataGridTextColumn IsReadOnly="True"
+                                Binding="{Binding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Recipe}}" Width="200"/>
+                                        ConverterParameter={x:Type bf:Recipe}}"
+                                Width="200" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -95,12 +101,12 @@
     <TabItem Header="Records">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecords}"/>
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecords}"/>
+            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecords}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecords}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecords}"/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecords}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding RecordsFiltered}"
                   HeadersVisibility="None">
@@ -108,13 +114,15 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+            <DataGridTextColumn IsReadOnly="True"
+                                Binding="{Binding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Record}}" Width="200"/>
+                                        ConverterParameter={x:Type bf:Record}}"
+                                Width="200" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -122,12 +130,12 @@
     <TabItem Header="Seen areas">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter "/>
+          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedSeenAreas}"/>
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredSeenAreas}"/>
+            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedSeenAreas}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredSeenAreas}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterSeenAreas}"/>
+          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterSeenAreas}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding SeenAreasFiltered}"
                   HeadersVisibility="None">
@@ -135,13 +143,15 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}"/>
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Index, Mode=OneWay,
+            <DataGridTextColumn IsReadOnly="True"
+                                Binding="{Binding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter}, 
-                                        ConverterParameter={x:Type bf:Area}}" Width="200"/>
+                                        ConverterParameter={x:Type bf:Area}}"
+                                Width="200" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>

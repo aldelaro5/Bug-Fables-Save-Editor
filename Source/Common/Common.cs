@@ -1,65 +1,68 @@
-﻿using Avalonia;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using BugFablesSaveEditor.Views;
 using MessageBox.Avalonia;
+using MessageBox.Avalonia.BaseWindows.Base;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.Views;
-using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 
-namespace BugFablesSaveEditor
+namespace BugFablesSaveEditor;
+
+public enum ReorderDirection
 {
-  public enum ReorderDirection
+  Up,
+  Down
+}
+
+public static class Common
+{
+  public const string FieldSeparator = ",";
+  public const string ElementSeparator = "@";
+
+  public static Window MainWindow =>
+    ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+
+  public static MessageBoxView GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
   {
-    Up,
-    Down
+    IMsBoxWindow<ButtonResult>? msg = MessageBoxManager.GetMessageBoxStandardWindow(title, text, buttons, icon);
+    Type type = msg.GetType();
+    FieldInfo[] fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+    MsBoxStandardWindow standardMsgBox = (MsBoxStandardWindow)fields[0].GetValue(msg);
+
+    MessageBoxView view = new(title, text, buttons, icon, standardMsgBox);
+
+    return view;
   }
 
-  public static class Common
+  public static string[] GetEnumDescriptions<T>()
+    where T : struct, Enum
   {
-    public const string FieldSeparator = ",";
-    public const string ElementSeparator = "@";
-
-    public static Window MainWindow { get => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow; }
-
-    public static MessageBoxView GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
+    Type type = typeof(T);
+    List<T> values = Enum.GetValues<T>().ToList();
+    values.Remove(values.Last());
+    string[] descriptions = new string[values.Count];
+    for (int i = 0; i < values.Count; i++)
     {
-      var msg = MessageBoxManager.GetMessageBoxStandardWindow(title, text, buttons, icon);
-      Type type = msg.GetType();
-      FieldInfo[] fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-      MsBoxStandardWindow standardMsgBox = (MsBoxStandardWindow)fields[0].GetValue(msg);
-
-      MessageBoxView view = new MessageBoxView(title, text, buttons, icon, standardMsgBox);
-
-      return view;
-    }
-
-    public static string[] GetEnumDescriptions<T>()
-      where T : struct, Enum
-    {
-      var type = typeof(T);
-      var values = Enum.GetValues<T>().ToList();
-      values.Remove(values.Last());
-      string[] descriptions = new string[values.Count];
-      for (int i = 0; i < values.Count; i++)
+      MemberInfo[] memberInfo = type.GetMember(values[i].ToString());
+      if (memberInfo.Length > 0)
       {
-        var memberInfo = type.GetMember(values[i].ToString());
-        if (memberInfo.Length > 0)
+        object[] attrs = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+        if (attrs.Length > 0)
         {
-          var attrs = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-          if (attrs.Length > 0)
-          {
-            descriptions[i] = ((DescriptionAttribute)attrs[0]).Description;
-            continue;
-          }
+          descriptions[i] = ((DescriptionAttribute)attrs[0]).Description;
+          continue;
         }
-        descriptions[i] = values[i].ToString();
       }
 
-      return descriptions;
+      descriptions[i] = values[i].ToString();
     }
+
+    return descriptions;
   }
 }

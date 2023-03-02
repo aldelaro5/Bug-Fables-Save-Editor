@@ -1,265 +1,311 @@
-﻿using Avalonia.Collections;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Reactive;
+using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
 using ReactiveUI;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Reactive;
 using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
 using static BugFablesSaveEditor.BugFablesSave.Sections.StatBonuses;
 
-namespace BugFablesSaveEditor.ViewModels
+namespace BugFablesSaveEditor.ViewModels;
+
+public class StatsViewModel : ViewModelBase
 {
-  public class StatsViewModel : ViewModelBase
+  private ObservableCollection<PartyMemberInfo> _partyMembers = new();
+
+  private SaveData _saveData;
+
+  private PartyMemberInfo _selectedMember;
+
+  private StatBonusType _statBonusTypeMemberSelectedForAdd;
+
+  private StatBonusType _statBonusTypePartySelectedForAdd;
+
+  private string[] _statBonusTypes;
+  private int _statsBonusAmountMemberSelectedForAdd;
+  private int _statsBonusAmountPartySelectedForAdd;
+
+  private ObservableCollection<StatBonusInfo> _statsBonuses = new();
+
+  private DataGridCollectionView _viewMemberStatsBonuses;
+
+  private DataGridCollectionView _viewPartyStatsBonuses;
+  private StatBonuses statBonusesSection;
+
+  public StatsViewModel()
   {
-    private StatBonuses statBonusesSection;
+    SaveData = new SaveData();
+    Initialise();
+    SetupViews();
+    PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
+    PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
+    PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
 
-    private SaveData _saveData;
-    public SaveData SaveData
+    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party });
+    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party });
+    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 5, Target = StatBonusTarget.Party });
+    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.HP, Amount = 3, Target = StatBonusTarget.Vi });
+    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Attack, Amount = 4, Target = StatBonusTarget.Kabbu });
+    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Defense, Amount = 5, Target = StatBonusTarget.Leif });
+  }
+
+  public StatsViewModel(SaveData saveData)
+  {
+    SaveData = saveData;
+    Initialise();
+    SetupViews();
+  }
+
+  public SaveData SaveData
+  {
+    get => _saveData;
+    set
     {
-      get { return _saveData; }
-      set { _saveData = value; this.RaisePropertyChanged(); }
+      _saveData = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private string[] _statBonusTypes;
-    public string[] StatBonusTypes
+  public string[] StatBonusTypes
+  {
+    get => _statBonusTypes;
+    set
     {
-      get { return _statBonusTypes; }
-      set { _statBonusTypes = value; this.RaisePropertyChanged(); }
+      _statBonusTypes = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private StatBonusType _statBonusTypePartySelectedForAdd;
-    public StatBonusType StatBonusTypePartySelectedForAdd
+  public StatBonusType StatBonusTypePartySelectedForAdd
+  {
+    get => _statBonusTypePartySelectedForAdd;
+    set
     {
-      get { return _statBonusTypePartySelectedForAdd; }
-      set { _statBonusTypePartySelectedForAdd = value; this.RaisePropertyChanged(); }
+      _statBonusTypePartySelectedForAdd = value;
+      this.RaisePropertyChanged();
     }
-    private int _statsBonusAmountPartySelectedForAdd;
-    public int StatsBonusAmountPartySelectedForAdd
+  }
+
+  public int StatsBonusAmountPartySelectedForAdd
+  {
+    get => _statsBonusAmountPartySelectedForAdd;
+    set
     {
-      get { return _statsBonusAmountPartySelectedForAdd; }
-      set { _statsBonusAmountPartySelectedForAdd = value; this.RaisePropertyChanged(); }
+      _statsBonusAmountPartySelectedForAdd = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private StatBonusType _statBonusTypeMemberSelectedForAdd;
-    public StatBonusType StatBonusTypeMemberSelectedForAdd
+  public StatBonusType StatBonusTypeMemberSelectedForAdd
+  {
+    get => _statBonusTypeMemberSelectedForAdd;
+    set
     {
-      get { return _statBonusTypeMemberSelectedForAdd; }
-      set { _statBonusTypeMemberSelectedForAdd = value; this.RaisePropertyChanged(); }
+      _statBonusTypeMemberSelectedForAdd = value;
+      this.RaisePropertyChanged();
     }
-    private int _statsBonusAmountMemberSelectedForAdd;
-    public int StatsBonusAmountMemberSelectedForAdd
+  }
+
+  public int StatsBonusAmountMemberSelectedForAdd
+  {
+    get => _statsBonusAmountMemberSelectedForAdd;
+    set
     {
-      get { return _statsBonusAmountMemberSelectedForAdd; }
-      set { _statsBonusAmountMemberSelectedForAdd = value; this.RaisePropertyChanged(); }
+      _statsBonusAmountMemberSelectedForAdd = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private PartyMemberInfo _selectedMember;
-    public PartyMemberInfo SelectedMember
+  public PartyMemberInfo SelectedMember
+  {
+    get => _selectedMember;
+    set
     {
-      get { return _selectedMember; }
-      set
-      {
-        _selectedMember = value;
-        this.RaisePropertyChanged();
-        RaiseTotalBonusesChanged();
-        RefreshViews();
-      }
+      _selectedMember = value;
+      this.RaisePropertyChanged();
+      RaiseTotalBonusesChanged();
+      RefreshViews();
     }
+  }
 
-    public ReactiveCommand<StatBonusInfo, Unit> CmdRemovePartyStatBonus { get; set; }
-    public ReactiveCommand<StatBonusInfo, Unit> CmdRemoveMemberStatBonus { get; set; }
+  public ReactiveCommand<StatBonusInfo, Unit> CmdRemovePartyStatBonus { get; set; }
+  public ReactiveCommand<StatBonusInfo, Unit> CmdRemoveMemberStatBonus { get; set; }
 
-    private ObservableCollection<PartyMemberInfo> _partyMembers = new ObservableCollection<PartyMemberInfo>();
-    public ObservableCollection<PartyMemberInfo> PartyMembers
+  public ObservableCollection<PartyMemberInfo> PartyMembers
+  {
+    get => _partyMembers;
+    set
     {
-      get { return _partyMembers; }
-      set { _partyMembers = value; this.RaisePropertyChanged(); }
+      _partyMembers = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private ObservableCollection<StatBonusInfo> _statsBonuses = new ObservableCollection<StatBonusInfo>();
-    public ObservableCollection<StatBonusInfo> StatsBonuses
+  public ObservableCollection<StatBonusInfo> StatsBonuses
+  {
+    get => _statsBonuses;
+    set
     {
-      get { return _statsBonuses; }
-      set { _statsBonuses = value; this.RaisePropertyChanged(); }
+      _statsBonuses = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private DataGridCollectionView _viewPartyStatsBonuses;
-    public DataGridCollectionView ViewPartyStatsBonuses
+  public DataGridCollectionView ViewPartyStatsBonuses
+  {
+    get => _viewPartyStatsBonuses;
+    set
     {
-      get { return _viewPartyStatsBonuses; }
-      set { _viewPartyStatsBonuses = value; this.RaisePropertyChanged(); }
+      _viewPartyStatsBonuses = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    private DataGridCollectionView _viewMemberStatsBonuses;
-    public DataGridCollectionView ViewMemberStatsBonuses
+  public DataGridCollectionView ViewMemberStatsBonuses
+  {
+    get => _viewMemberStatsBonuses;
+    set
     {
-      get { return _viewMemberStatsBonuses; }
-      set { _viewMemberStatsBonuses = value; this.RaisePropertyChanged(); }
+      _viewMemberStatsBonuses = value;
+      this.RaisePropertyChanged();
     }
+  }
 
-    public int TotalPartyMaxTPBonus
+  public int TotalPartyMaxTPBonus => statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.TP);
+
+  public int TotalPartyMaxMPBonus => statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.MP);
+
+  public int TotalMemberMaxHPBonus
+  {
+    get
     {
-      get
-      {
-        return statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.TP);
-      }
-    }
-
-    public int TotalPartyMaxMPBonus
-    {
-      get
-      {
-        return statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.MP);
-      }
-    }
-
-    public int TotalMemberMaxHPBonus
-    {
-      get
-      {
-        if (SelectedMember == null)
-          return 0;
-
-        return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.HP);
-      }
-    }
-
-    public int TotalMemberAttackBonus
-    {
-      get
-      {
-        if (SelectedMember == null)
-          return 0;
-
-        return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Attack);
-      }
-    }
-
-    public int TotalMemberDefenseBonus
-    {
-      get
-      {
-        if (SelectedMember == null)
-          return 0;
-
-        return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Defense);
-      }
-    }
-
-    public StatsViewModel()
-    {
-      SaveData = new SaveData();
-      Initialise();
-      SetupViews();
-      PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
-      PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
-      PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
-
-      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party });
-      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party });
-      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 5, Target = StatBonusTarget.Party });
-      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.HP, Amount = 3, Target = StatBonusTarget.Vi });
-      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Attack, Amount = 4, Target = StatBonusTarget.Kabbu });
-      StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Defense, Amount = 5, Target = StatBonusTarget.Leif });
-    }
-
-    public StatsViewModel(SaveData saveData)
-    {
-      SaveData = saveData;
-      Initialise();
-      SetupViews();
-    }
-
-    private void Initialise()
-    {
-      StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
-      statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
-      PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
-      StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
-      StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
-
-      CmdRemovePartyStatBonus = ReactiveCommand.Create<StatBonusInfo>(x =>
-      {
-        ViewPartyStatsBonuses.Remove(x);
-        RefreshViews();
-      }, this.WhenAnyValue(x => x.ViewPartyStatsBonuses.IsEditingItem, x => !x));
-
-      CmdRemoveMemberStatBonus = ReactiveCommand.Create<StatBonusInfo>(x =>
-      {
-        ViewMemberStatsBonuses.Remove(x);
-        RefreshViews();
-      }, this.WhenAnyValue(x => x.ViewMemberStatsBonuses.IsEditingItem, x => !x));
-    }
-
-    private void SetupViews()
-    {
-      ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
-      ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
-      ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
-      ViewMemberStatsBonuses.Filter = FilterMemberStatsBonuses;
-    }
-
-    private bool FilterMemberStatsBonuses(object arg)
-    {
-      StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
       if (SelectedMember == null)
-        return false;
-      return (int)statBonusInfo.Target == (int)SelectedMember.Trueid;
-    }
+      {
+        return 0;
+      }
 
-    private bool FilterPartyStatsBonuses(object arg)
-    {
-      StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
-      return statBonusInfo.Target == StatBonusTarget.Party;
+      return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.HP);
     }
+  }
 
-    public void AddPartyStatBonus()
+  public int TotalMemberAttackBonus
+  {
+    get
     {
-      StatBonusInfo statBonusInfo = new StatBonusInfo();
-      statBonusInfo.Target = StatBonusTarget.Party;
-      statBonusInfo.Type = StatBonusTypePartySelectedForAdd;
-      statBonusInfo.Amount = StatsBonusAmountPartySelectedForAdd;
-      StatsBonuses.Add(statBonusInfo);
+      if (SelectedMember == null)
+      {
+        return 0;
+      }
+
+      return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Attack);
+    }
+  }
+
+  public int TotalMemberDefenseBonus
+  {
+    get
+    {
+      if (SelectedMember == null)
+      {
+        return 0;
+      }
+
+      return statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Defense);
+    }
+  }
+
+  private void Initialise()
+  {
+    StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
+    statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
+    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+    StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
+    StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
+
+    CmdRemovePartyStatBonus = ReactiveCommand.Create<StatBonusInfo>(x =>
+    {
+      ViewPartyStatsBonuses.Remove(x);
       RefreshViews();
-    }
+    }, this.WhenAnyValue(x => x.ViewPartyStatsBonuses.IsEditingItem, x => !x));
 
-    public void AddMemberStatBonus()
+    CmdRemoveMemberStatBonus = ReactiveCommand.Create<StatBonusInfo>(x =>
     {
-      StatBonusInfo statBonusInfo = new StatBonusInfo();
-      statBonusInfo.Target = (StatBonusTarget)(int)SelectedMember.Trueid;
-      statBonusInfo.Type = StatBonusTypeMemberSelectedForAdd;
-      statBonusInfo.Amount = StatsBonusAmountMemberSelectedForAdd;
-      StatsBonuses.Add(statBonusInfo);
+      ViewMemberStatsBonuses.Remove(x);
       RefreshViews();
+    }, this.WhenAnyValue(x => x.ViewMemberStatsBonuses.IsEditingItem, x => !x));
+  }
+
+  private void SetupViews()
+  {
+    ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
+    ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
+    ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
+    ViewMemberStatsBonuses.Filter = FilterMemberStatsBonuses;
+  }
+
+  private bool FilterMemberStatsBonuses(object arg)
+  {
+    StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
+    if (SelectedMember == null)
+    {
+      return false;
     }
 
-    private void RefreshViews()
-    {
-      ViewMemberStatsBonuses.Refresh();
-      ViewPartyStatsBonuses.Refresh();
-    }
+    return (int)statBonusInfo.Target == (int)SelectedMember.Trueid;
+  }
 
-    private void OnSaveStatsBonusesChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-      RaiseTotalBonusesChanged();
-      RefreshViews();
-    }
+  private bool FilterPartyStatsBonuses(object arg)
+  {
+    StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
+    return statBonusInfo.Target == StatBonusTarget.Party;
+  }
 
-    private void StatBonusChanged(object? sender, PropertyChangedEventArgs e)
-    {
-      RaiseTotalBonusesChanged();
-    }
+  public void AddPartyStatBonus()
+  {
+    StatBonusInfo statBonusInfo = new();
+    statBonusInfo.Target = StatBonusTarget.Party;
+    statBonusInfo.Type = StatBonusTypePartySelectedForAdd;
+    statBonusInfo.Amount = StatsBonusAmountPartySelectedForAdd;
+    StatsBonuses.Add(statBonusInfo);
+    RefreshViews();
+  }
 
-    private void RaiseTotalBonusesChanged()
-    {
-      this.RaisePropertyChanged(nameof(TotalPartyMaxTPBonus));
-      this.RaisePropertyChanged(nameof(TotalPartyMaxMPBonus));
-      this.RaisePropertyChanged(nameof(TotalMemberMaxHPBonus));
-      this.RaisePropertyChanged(nameof(TotalMemberAttackBonus));
-      this.RaisePropertyChanged(nameof(TotalMemberDefenseBonus));
-    }
+  public void AddMemberStatBonus()
+  {
+    StatBonusInfo statBonusInfo = new();
+    statBonusInfo.Target = (StatBonusTarget)(int)SelectedMember.Trueid;
+    statBonusInfo.Type = StatBonusTypeMemberSelectedForAdd;
+    statBonusInfo.Amount = StatsBonusAmountMemberSelectedForAdd;
+    StatsBonuses.Add(statBonusInfo);
+    RefreshViews();
+  }
+
+  private void RefreshViews()
+  {
+    ViewMemberStatsBonuses.Refresh();
+    ViewPartyStatsBonuses.Refresh();
+  }
+
+  private void OnSaveStatsBonusesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+  {
+    RaiseTotalBonusesChanged();
+    RefreshViews();
+  }
+
+  private void StatBonusChanged(object? sender, PropertyChangedEventArgs e)
+  {
+    RaiseTotalBonusesChanged();
+  }
+
+  private void RaiseTotalBonusesChanged()
+  {
+    this.RaisePropertyChanged(nameof(TotalPartyMaxTPBonus));
+    this.RaisePropertyChanged(nameof(TotalPartyMaxMPBonus));
+    this.RaisePropertyChanged(nameof(TotalMemberMaxHPBonus));
+    this.RaisePropertyChanged(nameof(TotalMemberAttackBonus));
+    this.RaisePropertyChanged(nameof(TotalMemberDefenseBonus));
   }
 }

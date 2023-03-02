@@ -9,7 +9,7 @@
   <StackPanel>
     <Grid Height="32">
       <DockPanel IsHitTestVisible="False"
-                 Name="TitleBarBackground"></DockPanel>
+                 Name="TitleBarBackground" />
       <DockPanel Name="TitleBar">
         <StackPanel Orientation="Horizontal"
                     DockPanel.Dock="Left"
@@ -19,12 +19,12 @@
                  Width="22"
                  VerticalAlignment="Center"
                  Margin="8,0,3,0"
-                 Name="WindowIcon"></Image>
+                 Name="WindowIcon" />
           <TextBlock Text="Bug Fables Save Editor"
                      FontSize="12"
                      VerticalAlignment="Center"
                      IsHitTestVisible="False"
-                     Name="SystemChromeTitle"></TextBlock>
+                     Name="SystemChromeTitle" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Right"
                     Orientation="Horizontal"
@@ -37,20 +37,19 @@
                   Name="MinimizeButton"
                   ToolTip.Tip="Minimize">
             <Button.Resources>
-              <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
             </Button.Resources>
             <Button.Styles>
               <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Background" Value="#44AAAAAA"/>
+                <Setter Property="Background" Value="#44AAAAAA" />
               </Style>
               <Style Selector="Button:not(:pointerover) /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
               </Style>
             </Button.Styles>
             <Path Margin="10,0,10,0"
                   Stretch="Uniform"
                   Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
-                  Data="M2048 1229v-205h-2048v205h2048z"></Path>
+                  Data="M2048 1229v-205h-2048v205h2048z" />
           </Button>
 
           <Button Width="46"
@@ -61,25 +60,24 @@
                   Name="MaximizeButton">
             <ToolTip.Tip>
               <ToolTip Content="Maximize"
-                       Name="MaximizeToolTip"></ToolTip>
+                       Name="MaximizeToolTip" />
             </ToolTip.Tip>
 
             <Button.Resources>
-              <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
             </Button.Resources>
             <Button.Styles>
               <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Background" Value="#44AAAAAA"/>
+                <Setter Property="Background" Value="#44AAAAAA" />
               </Style>
               <Style Selector="Button:not(:pointerover) /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
               </Style>
             </Button.Styles>
             <Path Margin="10,0,10,0"
                   Stretch="Uniform"
                   Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
                   Name="MaximizeIcon"
-                  Data="M2048 2048v-2048h-2048v2048h2048zM1843 1843h-1638v-1638h1638v1638z"></Path>
+                  Data="M2048 2048v-2048h-2048v2048h2048zM1843 1843h-1638v-1638h1638v1638z" />
           </Button>
 
           <Button Width="46"
@@ -90,25 +88,24 @@
                   Name="CloseButton"
                   ToolTip.Tip="Close">
             <Button.Resources>
-              <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
             </Button.Resources>
             <Button.Styles>
               <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Background" Value="Red"/>
+                <Setter Property="Background" Value="Red" />
               </Style>
               <Style Selector="Button:not(:pointerover) /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
               </Style>
               <Style Selector="Button:pointerover > Path">
-                <Setter Property="Fill" Value="White"/>
+                <Setter Property="Fill" Value="White" />
               </Style>
               <Style Selector="Button:not(:pointerover) > Path">
-                <Setter Property="Fill" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                <Setter Property="Fill" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
               </Style>
             </Button.Styles>
             <Path Margin="10,0,10,0"
                   Stretch="Uniform"
-                  Data="M1169 1024l879 -879l-145 -145l-879 879l-879 -879l-145 145l879 879l-879 879l145 145l879 -879l879 879l145 -145z"></Path>
+                  Data="M1169 1024l879 -879l-145 -145l-879 879l-879 -879l-145 145l879 879l-879 879l145 145l879 -879l879 879l145 -145z" />
           </Button>
 
         </StackPanel>
