@@ -36,7 +36,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish src -c Release -o publish -r ${{ matrix.rid }} --no-self-contained --verbosity normal
+      run: dotnet publish Source -c Release -o publish -r ${{ matrix.rid }} --no-self-contained --verbosity normal
     - name: Prepare Publish Directory
       run: |
         cp LICENSE publish
