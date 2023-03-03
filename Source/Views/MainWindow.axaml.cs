@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
+using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Views;
@@ -52,9 +53,10 @@ public class MainWindow : Window
   {
     if (SettingsManager.Settings.ShowStartupWarning)
     {
-      MessageBoxView msg = Common.GetMessageBox("Warning", "This save editor is in beta and thus, " +
-                                                           "may lead to data losses due to instability.\n" +
-                                                           "It is HIGHLY recommended to backup your save files before usage.",
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("Warning",
+        "This save editor is in beta and thus, " +
+        "may lead to data losses due to instability.\n" +
+        "It is HIGHLY recommended to backup your save files before usage.",
         ButtonEnum.Ok, MessageBox.Avalonia.Enums.Icon.Warning);
       await msg.ShowDialog(Common.MainWindow);
 

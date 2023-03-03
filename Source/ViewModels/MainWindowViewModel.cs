@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reactive;
 using Avalonia.Controls;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Views;
+using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
 using ReactiveUI;
 
@@ -187,11 +187,11 @@ public class MainWindowViewModel : ViewModelBase
   {
     if (SaveInUse && !fileSaved)
     {
-      MessageBoxView msg = Common.GetMessageBox("File in use", "An unsaed file is currently in use, " +
-                                                               "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use", "An unsaed file is currently in use, " +
+                                                                             "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
         ButtonEnum.YesNo, Icon.Warning);
-      await msg.ShowDialog(Common.MainWindow);
-      if (msg.ButtonResult == ButtonResult.No)
+      var result = await msg.ShowDialog(Common.MainWindow);
+      if (result == ButtonResult.No)
       {
         return;
       }
@@ -207,11 +207,11 @@ public class MainWindowViewModel : ViewModelBase
   {
     if (SaveInUse && !fileSaved)
     {
-      MessageBoxView msg = Common.GetMessageBox("File in use", "An unsaed file is currently in use, " +
-                                                               "opening a file will loose all unsaved changes,\nare you sure you want to proceed?",
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use", "An unsaed file is currently in use, " +
+                                                                             "opening a file will loose all unsaved changes,\nare you sure you want to proceed?",
         ButtonEnum.YesNo, Icon.Warning);
-      await msg.ShowDialog(Common.MainWindow);
-      if (msg.ButtonResult == ButtonResult.No)
+      var reuslt = await msg.ShowDialog(Common.MainWindow);
+      if (reuslt == ButtonResult.No)
       {
         return;
       }
@@ -235,7 +235,7 @@ public class MainWindowViewModel : ViewModelBase
       catch (Exception ex)
       {
         SaveData.ResetToDefault();
-        MessageBoxView msg = Common.GetMessageBox("Error opening save file",
+        var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
           "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
         await msg.ShowDialog(Common.MainWindow);
       }
@@ -273,7 +273,7 @@ public class MainWindowViewModel : ViewModelBase
         {
           SaveData.SaveToFile(filePath);
           CurrentFilePath = filePath;
-          MessageBoxView msg = Common.GetMessageBox("File saved",
+          var msg = MessageBoxManager.GetMessageBoxStandardWindow("File saved",
             "The file was saved successfully at " + CurrentFilePath,
             ButtonEnum.Ok, Icon.Warning);
           await msg.ShowDialog(Common.MainWindow);
@@ -281,7 +281,7 @@ public class MainWindowViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-          MessageBoxView msg = Common.GetMessageBox("Error opening save file",
+          var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
             "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
           await msg.ShowDialog(Common.MainWindow);
         }

@@ -28,18 +28,6 @@ public static class Common
   public static Window MainWindow =>
     ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
 
-  public static MessageBoxView GetMessageBox(string title, string text, ButtonEnum buttons, Icon icon)
-  {
-    IMsBoxWindow<ButtonResult>? msg = MessageBoxManager.GetMessageBoxStandardWindow(title, text, buttons, icon);
-    Type type = msg.GetType();
-    FieldInfo[] fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-    MsBoxStandardWindow standardMsgBox = (MsBoxStandardWindow)fields[0].GetValue(msg);
-
-    MessageBoxView view = new(title, text, buttons, icon, standardMsgBox);
-
-    return view;
-  }
-
   public static string[] GetEnumDescriptions<T>()
     where T : struct, Enum
   {
