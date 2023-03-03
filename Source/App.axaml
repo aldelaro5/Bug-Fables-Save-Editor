@@ -17,6 +17,10 @@
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <Style Selector="DataGridColumnHeader TextBlock">
       <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="White"></Setter>
+    </Style>
+    <Style Selector="DataGridColumnHeader">
+      <Setter Property="Background" Value="Black"></Setter>
     </Style>
     <Style Selector="TabControl WrapPanel">
       <Setter Property="HorizontalAlignment" Value="Center" />
