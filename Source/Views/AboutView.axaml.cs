@@ -42,22 +42,12 @@ public class AboutView : Window
 
   public void OpenURL(string url)
   {
-    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    ProcessStartInfo processInfo = new()
     {
-      //https://stackoverflow.com/a/2796367/241446
-      using (Process proc = new() { StartInfo = { UseShellExecute = true, FileName = url } })
-      {
-        proc.Start();
-      }
-    }
-    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-    {
-      Process.Start("x-www-browser", url);
-    }
-    else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-    {
-      Process.Start("open", url);
-    }
+      FileName = url,
+      UseShellExecute = true
+    };
+    Process.Start(processInfo);
   }
 
   public void OnWikiLink_Click(object sender, PointerPressedEventArgs e)
