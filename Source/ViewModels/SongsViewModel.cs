@@ -1,22 +1,29 @@
 ﻿using System.Collections.ObjectModel;
-using System.Reactive;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.SamiraSongs;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class SongsViewModel : ViewModelBase
+public partial class SongsViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private SaveData _saveData;
 
-  private SongInfo _selectedSong;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderSongsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderSongsDownCommand))]
+  private SongInfo? _selectedSong;
 
+  [ObservableProperty]
   private Song _selectedSongForAdd;
 
+  [ObservableProperty]
   private ObservableCollection<SongInfo> _songs;
 
+  [ObservableProperty]
   private string[] _songsNames;
 
   public SongsViewModel()
@@ -35,74 +42,33 @@ public class SongsViewModel : ViewModelBase
     Initialize();
   }
 
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string[] SongsNames
-  {
-    get => _songsNames;
-    set
-    {
-      _songsNames = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public Song SelectedSongForAdd
-  {
-    get => _selectedSongForAdd;
-    set
-    {
-      _selectedSongForAdd = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
   public bool SongForAddIsBought { get; set; }
 
-  public SongInfo SelectedSong
+  [RelayCommand(CanExecute = nameof(CanReorderSongsUp))]
+  private void CmdReorderSongsUp()
   {
-    get => _selectedSong;
-    set
-    {
-      _selectedSong = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderSong(ReorderDirection.Up);
   }
 
-  public ObservableCollection<SongInfo> Songs
+  private bool CanReorderSongsUp()
   {
-    get => _songs;
-    set
-    {
-      _songs = value;
-      this.RaisePropertyChanged();
-    }
+    return Songs.Count > 0 && SelectedSong is not null && Songs[0] != SelectedSong;
   }
 
-  public ReactiveCommand<Unit, Unit> CmdReorderSongsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderSongsDown { get; set; }
+  [RelayCommand(CanExecute = nameof(CanReorderSongsDown))]
+  private void CmdReorderSongsDown()
+  {
+    ReorderSong(ReorderDirection.Down);
+  }
+  private bool CanReorderSongsDown()
+  {
+    return Songs.Count > 0 && SelectedSong is not null && Songs[^1] != SelectedSong;
+  }
 
   private void Initialize()
   {
     SongsNames = Common.GetEnumDescriptions<Song>();
     Songs = (ObservableCollection<SongInfo>)SaveData.Sections[SaveFileSection.SamiraSongs].Data;
-
-    CmdReorderSongsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderSong(ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedSong, x => x != null && Songs[0] != x));
-    CmdReorderSongsDown = ReactiveCommand.Create(() =>
-    {
-      ReorderSong(ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedSong, x => x != null && Songs[Songs.Count - 1] != x));
   }
 
   private void ReorderSong(ReorderDirection direction)
@@ -125,12 +91,14 @@ public class SongsViewModel : ViewModelBase
     SelectedSong = Songs[newIndex];
   }
 
-  public void RemoveSong(SongInfo songInfo)
+  [RelayCommand]
+  private void RemoveSong(SongInfo songInfo)
   {
     Songs.Remove(songInfo);
   }
 
-  public void AddSong()
+  [RelayCommand]
+  private void AddSong()
   {
     Songs.Add(new SongInfo { Song = SelectedSongForAdd, IsBought = SongForAddIsBought });
   }

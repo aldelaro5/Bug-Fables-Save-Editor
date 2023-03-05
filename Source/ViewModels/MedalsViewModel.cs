@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
-using System.Reactive;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Medals;
 using static BugFablesSaveEditor.BugFablesSave.Sections.MedalShopsAvailables;
 using static BugFablesSaveEditor.BugFablesSave.Sections.MedalShopsPools;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class MedalsViewModel : ViewModelBase
+public partial class MedalsViewModel : ViewModelBase
 {
   public enum MedalsDataType
   {
@@ -21,27 +21,55 @@ public class MedalsViewModel : ViewModelBase
     ShadesAvailable
   }
 
+  [ObservableProperty]
   private ObservableCollection<MedalInfo> _medals;
+  [ObservableProperty]
   private string[] _medalsEquipTargetNames;
+  [ObservableProperty]
   private ObservableCollection<MedalShopAvailable> _MedalsMerabAvailables;
+  [ObservableProperty]
   private ObservableCollection<MedalShopPool> _medalsMerabPools;
 
+  [ObservableProperty]
   private string[] _medalsNames;
+  [ObservableProperty]
   private ObservableCollection<MedalShopAvailable> _MedalsShadesAvailables;
+  [ObservableProperty]
   private ObservableCollection<MedalShopPool> _medalsShadesPools;
 
+  [ObservableProperty]
   private SaveData _saveData;
 
-  private MedalInfo _selectedMedal;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsDownCommand))]
+  private MedalInfo? _selectedMedal;
 
+  [ObservableProperty]
   private Medal _selectedMedalForAdd;
-  private MedalShopAvailable _selectedMedalMerabAvailable;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsMerabAvailablesUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsMerabAvailablesDownCommand))]
+  private MedalShopAvailable? _selectedMedalMerabAvailable;
+  [ObservableProperty]
   private Medal _selectedMedalMerabAvailableForAdd;
-  private MedalShopPool _selectedMedalMerabPool;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsMerabPoolsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsMerabPoolsDownCommand))]
+  private MedalShopPool? _selectedMedalMerabPool;
+  [ObservableProperty]
   private Medal _selectedMedalMerabPoolForAdd;
-  private MedalShopAvailable _selectedMedalShadesAvailable;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsShadesAvailablesUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsShadesAvailablesDownCommand))]
+  private MedalShopAvailable? _selectedMedalShadesAvailable;
+  [ObservableProperty]
   private Medal _selectedMedalShadesAvailableForAdd;
-  private MedalShopPool _selectedMedalShadesPool;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsShadesPoolsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsShadesPoolsDownCommand))]
+  private MedalShopPool? _selectedMedalShadesPool;
+  [ObservableProperty]
   private Medal _selectedMedalShadesPoolForAdd;
 
   public MedalsViewModel()
@@ -76,198 +104,107 @@ public class MedalsViewModel : ViewModelBase
     Initialize();
   }
 
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string[] MedalsNames
-  {
-    get => _medalsNames;
-    set
-    {
-      _medalsNames = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string[] MedalsEquipTargetNames
-  {
-    get => _medalsEquipTargetNames;
-    set
-    {
-      _medalsEquipTargetNames = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public Medal SelectedMedalForAdd
-  {
-    get => _selectedMedalForAdd;
-    set
-    {
-      _selectedMedalForAdd = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
   public MedalEquipTarget SelectedMedalEquipTargetForAdd { get; set; }
 
-  public Medal SelectedMedalMerabPoolForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsUp))]
+  private void CmdReorderMedalsUp()
   {
-    get => _selectedMedalMerabPoolForAdd;
-    set
-    {
-      _selectedMedalMerabPoolForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.Medals, ReorderDirection.Up);
+  }
+  private bool CanReorderMedalsUp()
+  {
+    return Medals.Count > 0 && SelectedMedal is not null && Medals[0] != SelectedMedal;
   }
 
-  public Medal SelectedMedalMerabAvailableForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsDown))]
+  private void CmdReorderMedalsDown()
   {
-    get => _selectedMedalMerabAvailableForAdd;
-    set
-    {
-      _selectedMedalMerabAvailableForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.Medals, ReorderDirection.Down);
+  }
+  private bool CanReorderMedalsDown()
+  {
+    return Medals.Count > 0 && SelectedMedal is not null && Medals[^1] != SelectedMedal;
   }
 
-  public Medal SelectedMedalShadesPoolForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsMerabPoolsUp))]
+  private void CmdReorderMedalsMerabPoolsUp()
   {
-    get => _selectedMedalShadesPoolForAdd;
-    set
-    {
-      _selectedMedalShadesPoolForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.MerabPool, ReorderDirection.Up);
+  }
+  private bool CanReorderMedalsMerabPoolsUp()
+  {
+    return MedalsMerabPools.Count > 0 && SelectedMedalMerabPool is not null && MedalsMerabPools[0] != SelectedMedalMerabPool;
   }
 
-  public Medal SelectedMedalShadesAvailableForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsMerabPoolsDown))]
+  private void CmdReorderMedalsMerabPoolsDown()
   {
-    get => _selectedMedalShadesAvailableForAdd;
-    set
-    {
-      _selectedMedalShadesAvailableForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.MerabPool, ReorderDirection.Down);
+  }
+  private bool CanReorderMedalsMerabPoolsDown()
+  {
+    return MedalsMerabPools.Count > 0 && SelectedMedalMerabPool is not null && MedalsMerabPools[^1] != SelectedMedalMerabPool;
   }
 
-  public MedalInfo SelectedMedal
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsMerabAvailablesUp))]
+  private void CmdReorderMedalsMerabAvailablesUp()
   {
-    get => _selectedMedal;
-    set
-    {
-      _selectedMedal = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.MerabAvailable, ReorderDirection.Up);
+  }
+  private bool CanReorderMedalsMerabAvailablesUp()
+  {
+    return MedalsMerabAvailables.Count > 0 && SelectedMedalMerabAvailable is not null && MedalsMerabAvailables[0] != SelectedMedalMerabAvailable;
   }
 
-  public MedalShopPool SelectedMedalMerabPool
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsMerabAvailablesDown))]
+  private void CmdReorderMedalsMerabAvailablesDown()
   {
-    get => _selectedMedalMerabPool;
-    set
-    {
-      _selectedMedalMerabPool = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.MerabAvailable, ReorderDirection.Down);
+  }
+  private bool CanReorderMedalsMerabAvailablesDown()
+  {
+    return MedalsMerabAvailables.Count > 0 && SelectedMedalMerabAvailable is not null && MedalsMerabAvailables[^1] != SelectedMedalMerabAvailable;
   }
 
-  public MedalShopAvailable SelectedMedalMerabAvailable
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsShadesPoolsUp))]
+  private void CmdReorderMedalsShadesPoolsUp()
   {
-    get => _selectedMedalMerabAvailable;
-    set
-    {
-      _selectedMedalMerabAvailable = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.ShadesPool, ReorderDirection.Up);
+  }
+  private bool CanReorderMedalsShadesPoolsUp()
+  {
+    return MedalsShadesPools.Count > 0 && SelectedMedalShadesPool is not null && MedalsShadesPools[0] != SelectedMedalShadesPool;
   }
 
-  public MedalShopPool SelectedMedalShadesPool
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsShadesPoolsDown))]
+  private void CmdReorderMedalsShadesPoolsDown()
   {
-    get => _selectedMedalShadesPool;
-    set
-    {
-      _selectedMedalShadesPool = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.ShadesPool, ReorderDirection.Down);
+  }
+  private bool CanReorderMedalsShadesPoolsDown()
+  {
+    return MedalsShadesPools.Count > 0 && SelectedMedalShadesPool is not null && MedalsShadesPools[^1] != SelectedMedalShadesPool;
   }
 
-  public MedalShopAvailable SelectedMedalShadesAvailable
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsShadesAvailablesUp))]
+  private void CmdReorderMedalsShadesAvailablesUp()
   {
-    get => _selectedMedalShadesAvailable;
-    set
-    {
-      _selectedMedalShadesAvailable = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.ShadesAvailable, ReorderDirection.Up);
+  }
+  private bool CanReorderMedalsShadesAvailablesUp()
+  {
+    return MedalsShadesAvailables.Count > 0 && SelectedMedalShadesAvailable is not null && MedalsShadesAvailables[0] != SelectedMedalShadesAvailable;
   }
 
-  public ObservableCollection<MedalInfo> Medals
+  [RelayCommand(CanExecute = nameof(CanReorderMedalsShadesAvailablesDown))]
+  private void CmdReorderMedalsShadesAvailablesDown()
   {
-    get => _medals;
-    set
-    {
-      _medals = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderMedal(MedalsDataType.ShadesAvailable, ReorderDirection.Down);
   }
-
-  public ObservableCollection<MedalShopPool> MedalsMerabPools
+  private bool CanReorderMedalsShadesAvailablesDown()
   {
-    get => _medalsMerabPools;
-    set
-    {
-      _medalsMerabPools = value;
-      this.RaisePropertyChanged();
-    }
+    return MedalsShadesAvailables.Count > 0 && SelectedMedalShadesAvailable is not null && MedalsShadesAvailables[^1] != SelectedMedalShadesAvailable;
   }
-
-  public ObservableCollection<MedalShopAvailable> MedalsMerabAvailables
-  {
-    get => _MedalsMerabAvailables;
-    set
-    {
-      _MedalsMerabAvailables = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<MedalShopPool> MedalsShadesPools
-  {
-    get => _medalsShadesPools;
-    set
-    {
-      _medalsShadesPools = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<MedalShopAvailable> MedalsShadesAvailables
-  {
-    get => _MedalsShadesAvailables;
-    set
-    {
-      _MedalsShadesAvailables = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsMerabPoolsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsMerabPoolsDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsMerabAvailablesUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsMerabAvailablesDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsShadesPoolsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsShadesPoolsDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsShadesAvailablesUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderMedalsShadesAvailablesDown { get; set; }
 
   private void Initialize()
   {
@@ -282,59 +219,6 @@ public class MedalsViewModel : ViewModelBase
     MedalsMerabAvailables = medalsAvailableArray[(int)MedalShop.Merab];
     MedalsShadesPools = medalsPoolArray[(int)MedalShop.Shades];
     MedalsShadesAvailables = medalsAvailableArray[(int)MedalShop.Shades];
-
-    CmdReorderMedalsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderMedal(MedalsDataType.Medals, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedMedal, x => x != null && Medals[0] != x));
-    CmdReorderMedalsDown = ReactiveCommand.Create(() =>
-    {
-      ReorderMedal(MedalsDataType.Medals, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedMedal, x => x != null && Medals[Medals.Count - 1] != x));
-
-    CmdReorderMedalsMerabPoolsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderMedal(MedalsDataType.MerabPool, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedMedalMerabPool, x => x != null && MedalsMerabPools[0] != x));
-    CmdReorderMedalsMerabPoolsDown = ReactiveCommand.Create(() =>
-      {
-        ReorderMedal(MedalsDataType.MerabPool, ReorderDirection.Down);
-      },
-      this.WhenAnyValue(x => x.SelectedMedalMerabPool,
-        x => x != null && MedalsMerabPools[MedalsMerabPools.Count - 1] != x));
-
-    CmdReorderMedalsMerabAvailablesUp = ReactiveCommand.Create(() =>
-    {
-      ReorderMedal(MedalsDataType.MerabAvailable, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedMedalMerabAvailable, x => x != null && MedalsMerabAvailables[0] != x));
-    CmdReorderMedalsMerabAvailablesDown = ReactiveCommand.Create(() =>
-      {
-        ReorderMedal(MedalsDataType.MerabAvailable, ReorderDirection.Down);
-      },
-      this.WhenAnyValue(x => x.SelectedMedalMerabAvailable,
-        x => x != null && MedalsMerabAvailables[MedalsMerabAvailables.Count - 1] != x));
-
-    CmdReorderMedalsShadesPoolsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderMedal(MedalsDataType.ShadesPool, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedMedalShadesPool, x => x != null && MedalsShadesPools[0] != x));
-    CmdReorderMedalsShadesPoolsDown = ReactiveCommand.Create(() =>
-      {
-        ReorderMedal(MedalsDataType.ShadesPool, ReorderDirection.Down);
-      },
-      this.WhenAnyValue(x => x.SelectedMedalShadesPool,
-        x => x != null && MedalsShadesPools[MedalsShadesPools.Count - 1] != x));
-
-    CmdReorderMedalsShadesAvailablesUp = ReactiveCommand.Create(() =>
-    {
-      ReorderMedal(MedalsDataType.ShadesAvailable, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedMedalShadesAvailable, x => x != null && MedalsShadesAvailables[0] != x));
-    CmdReorderMedalsShadesAvailablesDown = ReactiveCommand.Create(() =>
-      {
-        ReorderMedal(MedalsDataType.ShadesAvailable, ReorderDirection.Down);
-      },
-      this.WhenAnyValue(x => x.SelectedMedalShadesAvailable,
-        x => x != null && MedalsShadesAvailables[MedalsShadesAvailables.Count - 1] != x));
   }
 
   private void ReorderMedal(MedalsDataType dataType, ReorderDirection direction)
@@ -413,57 +297,68 @@ public class MedalsViewModel : ViewModelBase
     }
   }
 
-  public void RemoveMedal(MedalInfo medalInfo)
+  [RelayCommand]
+  private void RemoveMedal(MedalInfo medalInfo)
   {
     Medals.Remove(medalInfo);
   }
 
-  public void RemoveMedalMerabPool(MedalShopPool medalInfo)
+  [RelayCommand]
+  private void RemoveMedalMerabPool(MedalShopPool medalInfo)
   {
     MedalsMerabPools.Remove(medalInfo);
   }
 
-  public void RemoveMedalMerabAvailable(MedalShopAvailable medalInfo)
+  [RelayCommand]
+  private  void RemoveMedalMerabAvailable(MedalShopAvailable medalInfo)
   {
     MedalsMerabAvailables.Remove(medalInfo);
   }
 
-  public void RemoveMedalShadesPool(MedalShopPool medalInfo)
+  [RelayCommand]
+  private void RemoveMedalShadesPool(MedalShopPool medalInfo)
   {
     MedalsShadesPools.Remove(medalInfo);
   }
 
-  public void RemoveMedalShadesAvailable(MedalShopAvailable medalInfo)
+  [RelayCommand]
+  private void RemoveMedalShadesAvailable(MedalShopAvailable medalInfo)
   {
     MedalsShadesAvailables.Remove(medalInfo);
   }
 
-  public void AddMedal()
+  [RelayCommand]
+  private void AddMedal()
   {
     Medals.Add(new MedalInfo { Medal = SelectedMedalForAdd, MedalEquipTarget = SelectedMedalEquipTargetForAdd });
   }
 
-  public void AddMedalMerabPool()
+  [RelayCommand]
+  private void AddMedalMerabPool()
   {
     MedalsMerabPools.Add(new MedalShopPool { Medal = SelectedMedalMerabPoolForAdd });
   }
 
-  public void AddMedalMerabAvailable()
+  [RelayCommand]
+  private void AddMedalMerabAvailable()
   {
     MedalsMerabAvailables.Add(new MedalShopAvailable { Medal = SelectedMedalMerabAvailableForAdd });
   }
 
-  public void AddMedalShadesPool()
+  [RelayCommand]
+  private void AddMedalShadesPool()
   {
     MedalsShadesPools.Add(new MedalShopPool { Medal = SelectedMedalShadesPoolForAdd });
   }
 
-  public void AddMedalShadesAvailable()
+  [RelayCommand]
+  private void AddMedalShadesAvailable()
   {
     MedalsShadesAvailables.Add(new MedalShopAvailable { Medal = SelectedMedalShadesAvailableForAdd });
   }
 
-  public void UnequipAllMedals()
+  [RelayCommand]
+  private void UnequipAllMedals()
   {
     foreach (MedalInfo medal in Medals)
     {

@@ -17,7 +17,7 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedDiscoveries}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredDiscoveries}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredDiscoveriesCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterDiscoveries}" />
         </DockPanel>
@@ -33,7 +33,7 @@
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Index, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Discovery}}"
                                 Width="200" />
           </DataGrid.Columns>
@@ -45,8 +45,8 @@
         <DockPanel DockPanel.Dock="Top">
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedEnemiess}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredEnemies}" />
+            <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedEnemies}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredEnemiesCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterEnemies}" />
         </DockPanel>
@@ -62,7 +62,7 @@
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Index, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Enemy}}"
                                 Width="200" />
           </DataGrid.Columns>
@@ -75,7 +75,7 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecipes}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecipes}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecipesCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecipes}" />
         </DockPanel>
@@ -91,7 +91,7 @@
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Index, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Recipe}}"
                                 Width="200" />
           </DataGrid.Columns>
@@ -104,7 +104,7 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecords}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecords}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecordsCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecords}" />
         </DockPanel>
@@ -120,7 +120,7 @@
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Index, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Record}}"
                                 Width="200" />
           </DataGrid.Columns>
@@ -133,7 +133,7 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedSeenAreas}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredSeenAreas}" />
+            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredSeenAreasCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterSeenAreas}" />
         </DockPanel>
@@ -149,7 +149,7 @@
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Index, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Area}}"
                                 Width="200" />
           </DataGrid.Columns>

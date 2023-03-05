@@ -12,23 +12,23 @@
   <DockPanel Width="505">
     <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
       <ComboBox
-        SelectedIndex="{Binding SelectedSongForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+        SelectedIndex="{Binding SelectedSongForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Song}}"
         Items="{Binding SongsNames}" Width="325" />
       <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding SongForAddIsBought}" />
-      <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddSong}" />
+      <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddSongCommand}" />
     </StackPanel>
     <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-      <Button Content="↑" Command="{Binding CmdReorderSongsUp}" />
-      <Button Content="↓" Command="{Binding CmdReorderSongsDown}" />
+      <Button Content="↑" Command="{Binding CmdReorderSongsUpCommand}" />
+      <Button Content="↓" Command="{Binding CmdReorderSongsDownCommand}" />
     </StackPanel>
     <DataGrid AutoGenerateColumns="False" Items="{Binding Songs}" CanUserSortColumns="False"
               SelectedItem="{Binding SelectedSong, Mode=TwoWay}" CanUserResizeColumns="False">
       <DataGrid.Columns>
         <DataGridTextColumn IsReadOnly="True"
                             Binding="{Binding Song, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Song}}"
                             Header="Song" Width="320" />
         <DataGridTemplateColumn Header="Is Bought" Width="100">
@@ -42,7 +42,7 @@
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                      Command="{Binding $parent[DataGrid].DataContext.RemoveSong}"
+                      Command="{Binding $parent[DataGrid].DataContext.RemoveSongCommand}"
                       CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>

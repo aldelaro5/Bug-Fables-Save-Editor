@@ -16,30 +16,30 @@
         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Party members" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
           <ComboBox
-            SelectedIndex="{Binding SelectedPartyMemberAnimIDForAdd, 
-                                    Converter={StaticResource EnumConverter}, 
+            SelectedIndex="{Binding SelectedPartyMemberAnimIDForAdd,
+                                    Converter={StaticResource EnumConverter},
                                     ConverterParameter={x:Type bf:AnimID}}"
             Items="{Binding AnimIDs}" Width="200" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
-                  Content="Add" Command="{Binding AddPartyMember}" />
+                  Content="Add" Command="{Binding AddPartyMemberCommand}" />
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-          <Button Content="↑" Command="{Binding CmdReorderPartyMembersUp}" />
-          <Button Content="↓" Command="{Binding CmdReorderPartyMembersDown}" />
+          <Button Content="↑" Command="{Binding CmdReorderPartyMembersUpCommand}" />
+          <Button Content="↓" Command="{Binding CmdReorderPartyMembersDownCommand}" />
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding PartyMembers}"
                   HeadersVisibility="None" SelectedItem="{Binding SelectedPartyMember, Mode=TwoWay}">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Trueid, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:AnimID}}"
                                 Width="200" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                   <Button Margin="5,0,0,0" IsEnabled="True" Content="-" Background="DarkRed"
-                          Command="{Binding $parent[DataGrid].DataContext.RemovePartyMember}"
+                          Command="{Binding $parent[DataGrid].DataContext.RemovePartyMemberCommand}"
                           CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
@@ -53,29 +53,29 @@
         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Followers" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
           <ComboBox
-            SelectedIndex="{Binding SelectedFollowerAnimIDForAdd, 
-                                    Converter={StaticResource EnumConverter}, 
+            SelectedIndex="{Binding SelectedFollowerAnimIDForAdd,
+                                    Converter={StaticResource EnumConverter},
                                     ConverterParameter={x:Type bf:AnimID}}"
             Items="{Binding AnimIDs}" Width="200" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
-                  Content="Add" Command="{Binding AddFollower}" />
+                  Content="Add" Command="{Binding AddFollowerCommand}" />
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-          <Button Content="↑" Command="{Binding CmdReorderFollowersUp}" />
-          <Button Content="↓" Command="{Binding CmdReorderFollowersDown}" />
+          <Button Content="↑" Command="{Binding CmdReorderFollowersUpCommand}" />
+          <Button Content="↓" Command="{Binding CmdReorderFollowersDownCommand}" />
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding Followers}"
                   HeadersVisibility="None" SelectedItem="{Binding SelectedFollower, Mode=TwoWay}">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding AnimID, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:AnimID}}"
                                 Width="200" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <Button IsEnabled="True" Content="-" Command="{Binding $parent[DataGrid].DataContext.RemoveFollower}"
+                  <Button IsEnabled="True" Content="-" Command="{Binding $parent[DataGrid].DataContext.RemoveFollowerCommand}"
                           CommandParameter="{Binding }" Width="25" Background="DarkRed" Margin="5,0,0,0"
                           HorizontalContentAlignment="Center" />
                 </DataTemplate>

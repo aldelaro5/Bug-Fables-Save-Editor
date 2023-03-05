@@ -1,5 +1,4 @@
 using System;
-using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -10,7 +9,6 @@ using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
-using ReactiveUI;
 
 namespace BugFablesSaveEditor;
 
@@ -33,11 +31,12 @@ public class App : Application
 
     base.OnFrameworkInitializationCompleted();
 
-    RxApp.DefaultExceptionHandler = Observer.Create<Exception>(ex =>
-    {
-      var msgBox = MessageBoxManager.GetMessageBoxStandardWindow("Unexpected error", "An unexpected error occured: " +
-                                                                              ex.Message, ButtonEnum.Ok, Icon.Error);
-      Task.Run(() => msgBox.ShowDialog(Common.MainWindow));
-    });
+    // TODO: Make this work
+    // RxApp.DefaultExceptionHandler = Observer.Create<Exception>(ex =>
+    // {
+    //   var msgBox = MessageBoxManager.GetMessageBoxStandardWindow("Unexpected error", "An unexpected error occured: " +
+    //                                                                           ex.Message, ButtonEnum.Ok, Icon.Error);
+    //   Task.Run(() => msgBox.ShowDialog(Common.MainWindow));
+    // });
   }
 }

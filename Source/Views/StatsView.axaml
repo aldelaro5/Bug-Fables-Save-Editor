@@ -37,7 +37,7 @@
           <DataGrid.Columns>
             <DataGridTextColumn
               Binding="{Binding Trueid, Mode=OneWay,
-                                          Converter={StaticResource EnumDescriptionConverter}, 
+                                          Converter={StaticResource EnumDescriptionConverter},
                                           ConverterParameter={x:Type bf:AnimID}}"
               IsReadOnly="True" Header="Member" />
             <DataGridTextColumn Header="Base HP" Binding="{Binding BaseHP}" Width="75" />
@@ -56,19 +56,19 @@
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
         <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
           <ComboBox
-            SelectedIndex="{Binding StatBonusTypePartySelectedForAdd, 
-                               Converter={StaticResource EnumConverter}, 
+            SelectedIndex="{Binding StatBonusTypePartySelectedForAdd,
+                               Converter={StaticResource EnumConverter},
                                ConverterParameter={x:Type bf:StatBonusType}}"
             Items="{Binding StatBonusTypes}" Width="100" />
           <NumericUpDown ShowButtonSpinner="False" Value="{Binding StatsBonusAmountPartySelectedForAdd}" />
-          <Button Command="{Binding AddPartyStatBonus}" VerticalContentAlignment="Center" Content="Add" />
+          <Button Command="{Binding AddPartyStatBonusCommand}" VerticalContentAlignment="Center" Content="Add" />
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" SelectionMode="Single"
                   Items="{Binding ViewPartyStatsBonuses}" CanUserSortColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Type, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:StatBonusType}}"
                                 Header="Type" Width="85" />
             <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
@@ -76,7 +76,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{Binding $parent[DataGrid].DataContext.CmdRemovePartyStatBonus}"
+                          Command="{Binding $parent[DataGrid].DataContext.CmdRemovePartyStatBonusCommand}"
                           CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
@@ -100,19 +100,19 @@
         <Label DockPanel.Dock="Top" Content="Selected member stats bonuses" />
         <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
           <ComboBox
-            SelectedIndex="{Binding StatBonusTypeMemberSelectedForAdd, 
-                               Converter={StaticResource EnumConverter}, 
+            SelectedIndex="{Binding StatBonusTypeMemberSelectedForAdd,
+                               Converter={StaticResource EnumConverter},
                                ConverterParameter={x:Type bf:StatBonusType}}"
             Items="{Binding StatBonusTypes}" Width="100" />
           <NumericUpDown ShowButtonSpinner="False" Value="{Binding StatsBonusAmountMemberSelectedForAdd}" />
-          <Button Command="{Binding AddMemberStatBonus}" VerticalContentAlignment="Center" Content="Add" />
+          <Button Command="{Binding AddMemberStatBonusCommand}" VerticalContentAlignment="Center" Content="Add" />
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"
                   Items="{Binding ViewMemberStatsBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Type, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:StatBonusType}}"
                                 Header="Type" Width="85" />
             <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
@@ -120,7 +120,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                   <Button Margin="5,0,0,0" IsEnabled="True" Content="-"
-                          Command="{Binding $parent[DataGrid].DataContext.CmdRemoveMemberStatBonus}"
+                          Command="{Binding $parent[DataGrid].DataContext.CmdRemoveMemberStatBonusCommand}"
                           CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25"
                           Background="DarkRed" />
                 </DataTemplate>

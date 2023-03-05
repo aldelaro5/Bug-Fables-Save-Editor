@@ -3,37 +3,109 @@ using System.Text;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Library;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class LibraryViewModel : ViewModelBase
+public partial class LibraryViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private LibraryFlag[] _discoveries;
 
+  [ObservableProperty]
   private DataGridCollectionView _discoveriesFiltered;
+  [ObservableProperty]
   private LibraryFlag[] _enemies;
+  [ObservableProperty]
   private DataGridCollectionView _enemiesFiltered;
 
+  [ObservableProperty]
   private bool _filterUnusedDiscoveries;
-  private bool _filterUnusedEnemiess;
+  partial void OnFilterUnusedDiscoveriesChanged(bool value)
+  {
+    DiscoveriesFiltered.Refresh();
+  }
+
+  [ObservableProperty]
+  private bool _filterUnusedEnemies;
+  partial void OnFilterUnusedEnemiesChanged(bool value)
+  {
+    EnemiesFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private bool _filterUnusedRecipes;
+  partial void OnFilterUnusedRecipesChanged(bool value)
+  {
+    RecipesFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private bool _filterUnusedRecords;
+  partial void OnFilterUnusedRecordsChanged(bool value)
+  {
+    RecordsFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private bool _filterUnusedSeenAreas;
+  partial void OnFilterUnusedSeenAreasChanged(bool value)
+  {
+    SeenAreasFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private LibraryFlag[] _recipes;
+  [ObservableProperty]
   private DataGridCollectionView _recipesFiltered;
+  [ObservableProperty]
   private LibraryFlag[] _records;
+  [ObservableProperty]
   private DataGridCollectionView _recordsFiltered;
+  [ObservableProperty]
   private SaveData _saveData;
+  [ObservableProperty]
   private LibraryFlag[] _seenAreas;
+  [ObservableProperty]
   private DataGridCollectionView _seenAreasFiltered;
 
+  [ObservableProperty]
   private string _textFilterDiscoveries;
+  partial void OnTextFilterDiscoveriesChanged(string value)
+  {
+    DiscoveriesFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterEnemies;
+  partial void OnTextFilterEnemiesChanged(string value)
+  {
+    EnemiesFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterRecipes;
+  partial void OnTextFilterRecipesChanged(string value)
+  {
+    RecipesFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterRecords;
+  partial void OnTextFilterRecordsChanged(string value)
+  {
+    RecordsFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterSeenAreas;
+  partial void OnTextFilterSeenAreasChanged(string value)
+  {
+    SeenAreasFiltered.Refresh();
+  }
+
   private string[] areasNames;
 
   private string[] discoveriesNames;
@@ -51,226 +123,6 @@ public class LibraryViewModel : ViewModelBase
   {
     SaveData = saveData;
     Initialise();
-  }
-
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public LibraryFlag[] Discoveries
-  {
-    get => _discoveries;
-    set
-    {
-      _discoveries = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public LibraryFlag[] Enemies
-  {
-    get => _enemies;
-    set
-    {
-      _enemies = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public LibraryFlag[] Recipes
-  {
-    get => _recipes;
-    set
-    {
-      _recipes = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public LibraryFlag[] Records
-  {
-    get => _records;
-    set
-    {
-      _records = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public LibraryFlag[] SeenAreas
-  {
-    get => _seenAreas;
-    set
-    {
-      _seenAreas = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView DiscoveriesFiltered
-  {
-    get => _discoveriesFiltered;
-    set
-    {
-      _discoveriesFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView EnemiesFiltered
-  {
-    get => _enemiesFiltered;
-    set
-    {
-      _enemiesFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView RecipesFiltered
-  {
-    get => _recipesFiltered;
-    set
-    {
-      _recipesFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView RecordsFiltered
-  {
-    get => _recordsFiltered;
-    set
-    {
-      _recordsFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView SeenAreasFiltered
-  {
-    get => _seenAreasFiltered;
-    set
-    {
-      _seenAreasFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string TextFilterDiscoveries
-  {
-    get => _textFilterDiscoveries;
-    set
-    {
-      _textFilterDiscoveries = value;
-      this.RaisePropertyChanged();
-      DiscoveriesFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterEnemies
-  {
-    get => _textFilterEnemies;
-    set
-    {
-      _textFilterEnemies = value;
-      this.RaisePropertyChanged();
-      EnemiesFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterRecipes
-  {
-    get => _textFilterRecipes;
-    set
-    {
-      _textFilterRecipes = value;
-      this.RaisePropertyChanged();
-      RecipesFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterRecords
-  {
-    get => _textFilterRecords;
-    set
-    {
-      _textFilterRecords = value;
-      this.RaisePropertyChanged();
-      RecordsFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterSeenAreas
-  {
-    get => _textFilterSeenAreas;
-    set
-    {
-      _textFilterSeenAreas = value;
-      this.RaisePropertyChanged();
-      SeenAreasFiltered.Refresh();
-    }
-  }
-
-  public bool FilterUnusedDiscoveries
-  {
-    get => _filterUnusedDiscoveries;
-    set
-    {
-      _filterUnusedDiscoveries = value;
-      this.RaisePropertyChanged();
-      DiscoveriesFiltered.Refresh();
-    }
-  }
-
-  public bool FilterUnusedEnemiess
-  {
-    get => _filterUnusedEnemiess;
-    set
-    {
-      _filterUnusedEnemiess = value;
-      this.RaisePropertyChanged();
-      EnemiesFiltered.Refresh();
-    }
-  }
-
-  public bool FilterUnusedRecipes
-  {
-    get => _filterUnusedRecipes;
-    set
-    {
-      _filterUnusedRecipes = value;
-      this.RaisePropertyChanged();
-      RecipesFiltered.Refresh();
-    }
-  }
-
-  public bool FilterUnusedRecords
-  {
-    get => _filterUnusedRecords;
-    set
-    {
-      _filterUnusedRecords = value;
-      this.RaisePropertyChanged();
-      RecordsFiltered.Refresh();
-    }
-  }
-
-  public bool FilterUnusedSeenAreas
-  {
-    get => _filterUnusedSeenAreas;
-    set
-    {
-      _filterUnusedSeenAreas = value;
-      this.RaisePropertyChanged();
-      SeenAreasFiltered.Refresh();
-    }
   }
 
   private void Initialise()
@@ -341,7 +193,7 @@ public class LibraryViewModel : ViewModelBase
       case LibrarySection.Bestiary:
         textFilter = TextFilterEnemies;
         enumValues = enemiesNames;
-        filterUnused = FilterUnusedEnemiess;
+        filterUnused = FilterUnusedEnemies;
         break;
       case LibrarySection.Recipe:
         textFilter = TextFilterRecipes;
@@ -386,27 +238,32 @@ public class LibraryViewModel : ViewModelBase
     return sb.ToString().Contains(textFilter, StringComparison.OrdinalIgnoreCase);
   }
 
-  public void ToggleAllFilteredDiscoveries()
+  [RelayCommand]
+  private void ToggleAllFilteredDiscoveries()
   {
     ToggleAllShownLibrary(LibrarySection.Discovery);
   }
 
-  public void ToggleAllFilteredEnemies()
+  [RelayCommand]
+  private void ToggleAllFilteredEnemies()
   {
     ToggleAllShownLibrary(LibrarySection.Bestiary);
   }
 
-  public void ToggleAllFilteredRecipes()
+  [RelayCommand]
+  private void ToggleAllFilteredRecipes()
   {
     ToggleAllShownLibrary(LibrarySection.Recipe);
   }
 
-  public void ToggleAllFilteredRecords()
+  [RelayCommand]
+  private void ToggleAllFilteredRecords()
   {
     ToggleAllShownLibrary(LibrarySection.Record);
   }
 
-  public void ToggleAllFilteredSeenAreas()
+  [RelayCommand]
+  private void ToggleAllFilteredSeenAreas()
   {
     ToggleAllShownLibrary(LibrarySection.SeenMapLocation);
   }

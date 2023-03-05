@@ -3,21 +3,32 @@ using System.Text;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.CrystalBerries;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class CrystalBerriesViewModel : ViewModelBase
+public partial class CrystalBerriesViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private CrystalBerry[] _crystalBerries;
 
+  [ObservableProperty]
   private DataGridCollectionView _crystalBerriesFiltered;
+
+  [ObservableProperty]
   private SaveData _saveData;
 
+  [ObservableProperty]
   private string _textFilter;
 
-  private string[] Areas;
+  partial void OnTextFilterChanged(string value)
+  {
+    _crystalBerriesFiltered.Refresh();
+  }
+
+  private string[] _areas;
 
   public CrystalBerriesViewModel()
   {
@@ -31,50 +42,9 @@ public class CrystalBerriesViewModel : ViewModelBase
     Initialise();
   }
 
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public CrystalBerry[] CrystalBerries
-  {
-    get => _crystalBerries;
-    set
-    {
-      _crystalBerries = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView CrystalBerriesFiltered
-  {
-    get => _crystalBerriesFiltered;
-    set
-    {
-      _crystalBerriesFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string TextFilter
-  {
-    get => _textFilter;
-    set
-    {
-      _textFilter = value;
-      this.RaisePropertyChanged();
-      CrystalBerriesFiltered.Refresh();
-    }
-  }
-
   private void Initialise()
   {
-    Areas = Common.GetEnumDescriptions<Area>();
+    _areas = Common.GetEnumDescriptions<Area>();
     CrystalBerries = (CrystalBerry[])SaveData.Sections[SaveFileSection.CrystalBerries].Data;
     CrystalBerriesFiltered = new DataGridCollectionView(CrystalBerries);
     CrystalBerriesFiltered.Filter = FilterCrystalBerries;
@@ -90,12 +60,13 @@ public class CrystalBerriesViewModel : ViewModelBase
     CrystalBerry crystalBerry = (CrystalBerry)arg;
     StringBuilder sb = new();
     sb.Append(crystalBerry.Index).Append(' ');
-    sb.Append(Areas[(int)crystalBerry.Area]).Append(' ');
+    sb.Append(_areas[(int)crystalBerry.Area]).Append(' ');
     sb.Append(crystalBerry.Description);
     return sb.ToString().Contains(TextFilter, StringComparison.OrdinalIgnoreCase);
   }
 
-  public void ToggleAllFiltered()
+  [RelayCommand]
+  private void ToggleAllFiltered()
   {
     bool newObtained = true;
     foreach (object? item in CrystalBerriesFiltered)

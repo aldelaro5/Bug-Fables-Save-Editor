@@ -1,40 +1,53 @@
 using System;
 using System.Linq;
-using System.Reactive;
 using Avalonia.Controls;
 using BugFablesSaveEditor.BugFablesSave;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
-using ReactiveUI;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private CrystalBerriesViewModel _crystalBerriesViewModel;
 
+  [ObservableProperty]
   private string _currentFilePath = "No save file, open an existing file or create a new one";
 
+  [ObservableProperty]
   private FlagsViewModel _flagsViewModel;
 
+  [ObservableProperty]
   private GlobalViewModel _globalViewModel;
 
+  [ObservableProperty]
   private ItemsViewModel _itemsViewModel;
 
+  [ObservableProperty]
   private LibraryViewModel _libraryViewModel;
 
+  [ObservableProperty]
   private MedalsViewModel _medalsViewModel;
 
+  [ObservableProperty]
   private PartyViewModel _partyViewModel;
 
+  [ObservableProperty]
   private QuestsViewModel _questsViewModel;
 
+  [ObservableProperty]
   private SaveData _saveData;
 
+  [ObservableProperty]
   private bool _saveInUse;
 
+  [ObservableProperty]
   private SongsViewModel _songsViewModel;
 
+  [ObservableProperty]
   private StatsViewModel _statsViewModel;
   private bool fileSaved;
 
@@ -51,139 +64,42 @@ public class MainWindowViewModel : ViewModelBase
     Initialise(saveData);
   }
 
-  public string CurrentFilePath
+  [RelayCommand(CanExecute = nameof(CanSaveFile))]
+  private async void CmdSaveFile()
   {
-    get => _currentFilePath;
-    set
+    SaveFileDialog dlg = new();
+    dlg.Title = "Select the location to save the file";
+    dlg.Filters.Add(new FileDialogFilter { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
+    dlg.DefaultExtension = "dat";
+    string filePath = await dlg.ShowAsync(Common.MainWindow);
+    if (!string.IsNullOrEmpty(filePath))
     {
-      _currentFilePath = value;
-      this.RaisePropertyChanged();
+      try
+      {
+        SaveData.SaveToFile(filePath);
+        CurrentFilePath = filePath;
+        var msg = MessageBoxManager.GetMessageBoxStandardWindow("File saved",
+          "The file was saved successfully at " + CurrentFilePath,
+          ButtonEnum.Ok, Icon.Warning);
+        await msg.ShowDialog(Common.MainWindow);
+        fileSaved = true;
+      }
+      catch (Exception ex)
+      {
+        var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
+          "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
+        await msg.ShowDialog(Common.MainWindow);
+      }
     }
   }
 
-  public SaveData SaveData
+  private bool CanSaveFile()
   {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
+    return SaveInUse;
   }
 
-  public bool SaveInUse
-  {
-    get => _saveInUse;
-    set
-    {
-      _saveInUse = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ReactiveCommand<Unit, Unit> CmdSaveFile { get; set; }
-
-  public GlobalViewModel GlobalViewModel
-  {
-    get => _globalViewModel;
-    set
-    {
-      _globalViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public PartyViewModel PartyViewModel
-  {
-    get => _partyViewModel;
-    set
-    {
-      _partyViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public StatsViewModel StatsViewModel
-  {
-    get => _statsViewModel;
-    set
-    {
-      _statsViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public QuestsViewModel QuestsViewModel
-  {
-    get => _questsViewModel;
-    set
-    {
-      _questsViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ItemsViewModel ItemsViewModel
-  {
-    get => _itemsViewModel;
-    set
-    {
-      _itemsViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public MedalsViewModel MedalsViewModel
-  {
-    get => _medalsViewModel;
-    set
-    {
-      _medalsViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public LibraryViewModel LibraryViewModel
-  {
-    get => _libraryViewModel;
-    set
-    {
-      _libraryViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public FlagsViewModel FlagsViewModel
-  {
-    get => _flagsViewModel;
-    set
-    {
-      _flagsViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public SongsViewModel SongsViewModel
-  {
-    get => _songsViewModel;
-    set
-    {
-      _songsViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public CrystalBerriesViewModel CrystalBerriesViewModel
-  {
-    get => _crystalBerriesViewModel;
-    set
-    {
-      _crystalBerriesViewModel = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public async void NewFile()
+  [RelayCommand]
+  private async void NewFile()
   {
     if (SaveInUse && !fileSaved)
     {
@@ -203,7 +119,8 @@ public class MainWindowViewModel : ViewModelBase
     fileSaved = false;
   }
 
-  public async void OpenFile()
+  [RelayCommand]
+  private async void OpenFile()
   {
     if (SaveInUse && !fileSaved)
     {
@@ -242,7 +159,8 @@ public class MainWindowViewModel : ViewModelBase
     }
   }
 
-  public void Exit()
+  [RelayCommand]
+  private void Exit()
   {
     Common.MainWindow.Close();
   }
@@ -259,33 +177,5 @@ public class MainWindowViewModel : ViewModelBase
     FlagsViewModel = new FlagsViewModel(saveData);
     SongsViewModel = new SongsViewModel(saveData);
     CrystalBerriesViewModel = new CrystalBerriesViewModel(saveData);
-
-    CmdSaveFile = ReactiveCommand.CreateFromTask(async () =>
-    {
-      SaveFileDialog dlg = new();
-      dlg.Title = "Select the location to save the file";
-      dlg.Filters.Add(new FileDialogFilter { Name = "Bug Fables save (.dat)", Extensions = { "dat" } });
-      dlg.DefaultExtension = "dat";
-      string filePath = await dlg.ShowAsync(Common.MainWindow);
-      if (!string.IsNullOrEmpty(filePath))
-      {
-        try
-        {
-          SaveData.SaveToFile(filePath);
-          CurrentFilePath = filePath;
-          var msg = MessageBoxManager.GetMessageBoxStandardWindow("File saved",
-            "The file was saved successfully at " + CurrentFilePath,
-            ButtonEnum.Ok, Icon.Warning);
-          await msg.ShowDialog(Common.MainWindow);
-          fileSaved = true;
-        }
-        catch (Exception ex)
-        {
-          var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-            "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
-          await msg.ShowDialog(Common.MainWindow);
-        }
-      }
-    }, this.WhenAnyValue(x => x.SaveInUse));
   }
 }

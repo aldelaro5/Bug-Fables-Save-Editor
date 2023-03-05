@@ -16,23 +16,23 @@
         <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10,0,5">
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
             <ComboBox
-              SelectedIndex="{Binding SelectedMedalForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+              SelectedIndex="{Binding SelectedMedalForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="180" />
             <ComboBox
-              SelectedIndex="{Binding SelectedMedalEquipTargetForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+              SelectedIndex="{Binding SelectedMedalEquipTargetForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:MedalEquipTarget}}"
               Items="{Binding MedalsEquipTargetNames}" Width="125" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedal}" />
+            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalCommand}" />
           </StackPanel>
           <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
-                  Command="{Binding UnequipAllMedals}" />
+                  Command="{Binding UnequipAllMedalsCommand}" />
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-          <Button Content="↑" Command="{Binding CmdReorderMedalsUp}" />
-          <Button Content="↓" Command="{Binding CmdReorderMedalsDown}" />
+          <Button Content="↑" Command="{Binding CmdReorderMedalsUpCommand}" />
+          <Button Content="↓" Command="{Binding CmdReorderMedalsDownCommand}" />
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
                   Items="{Binding Medals}" IsReadOnly="True"
@@ -40,7 +40,7 @@
           <DataGrid.Columns>
             <DataGridTextColumn
               Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Medal}}"
               Width="160" />
             <DataGridTemplateColumn>
@@ -48,7 +48,7 @@
                 <DataTemplate>
                   <ComboBox
                     SelectedIndex="{Binding MedalEquipTarget,
-                                      Converter={StaticResource EnumConverter}, 
+                                      Converter={StaticResource EnumConverter},
                                       ConverterParameter={x:Type bf:MedalEquipTarget}}"
                     Width="130"
                     Items="{Binding $parent[DataGrid].DataContext.MedalsEquipTargetNames}" />
@@ -59,7 +59,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                   <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                          Command="{Binding $parent[DataGrid].DataContext.RemoveMedal}"
+                          Command="{Binding $parent[DataGrid].DataContext.RemoveMedalCommand}"
                           CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
@@ -74,15 +74,15 @@
           <Label DockPanel.Dock="Top" Content="Merab" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
             <ComboBox
-              SelectedIndex="{Binding SelectedMedalMerabPoolForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+              SelectedIndex="{Binding SelectedMedalMerabPoolForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="185" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabPool}" />
+            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabPoolCommand}" />
           </StackPanel>
           <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsMerabPoolsUp}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsMerabPoolsDown}" />
+            <Button Content="↑" Command="{Binding CmdReorderMedalsMerabPoolsUpCommand}" />
+            <Button Content="↓" Command="{Binding CmdReorderMedalsMerabPoolsDownCommand}" />
           </StackPanel>
           <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
                     Items="{Binding MedalsMerabPools}" IsReadOnly="True"
@@ -90,14 +90,14 @@
             <DataGrid.Columns>
               <DataGridTextColumn
                 Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Medal}}"
                 Width="160" />
               <DataGridTemplateColumn Width="50">
                 <DataGridTemplateColumn.CellTemplate>
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabPool}"
+                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabPoolCommand}"
                             CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -109,15 +109,15 @@
           <Label DockPanel.Dock="Top" Content="Shades" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
             <ComboBox
-              SelectedIndex="{Binding SelectedMedalShadesPoolForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+              SelectedIndex="{Binding SelectedMedalShadesPoolForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="180" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesPool}" />
+            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesPoolCommand}" />
           </StackPanel>
           <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsShadesPoolsUp}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsShadesPoolsDown}" />
+            <Button Content="↑" Command="{Binding CmdReorderMedalsShadesPoolsUpCommand}" />
+            <Button Content="↓" Command="{Binding CmdReorderMedalsShadesPoolsDownCommand}" />
           </StackPanel>
           <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
                     Items="{Binding MedalsShadesPools}" IsReadOnly="True"
@@ -125,14 +125,14 @@
             <DataGrid.Columns>
               <DataGridTextColumn
                 Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Medal}}"
                 Width="160" />
               <DataGridTemplateColumn Width="50">
                 <DataGridTemplateColumn.CellTemplate>
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesPool}"
+                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesPoolCommand}"
                             CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -148,15 +148,15 @@
           <Label DockPanel.Dock="Top" Content="Merab" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
             <ComboBox
-              SelectedIndex="{Binding SelectedMedalMerabAvailableForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+              SelectedIndex="{Binding SelectedMedalMerabAvailableForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="180" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabAvailable}" />
+            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabAvailableCommand}" />
           </StackPanel>
           <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsMerabAvailablesUp}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsMerabAvailablesDown}" />
+            <Button Content="↑" Command="{Binding CmdReorderMedalsMerabAvailablesUpCommand}" />
+            <Button Content="↓" Command="{Binding CmdReorderMedalsMerabAvailablesDownCommand}" />
           </StackPanel>
           <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
                     Items="{Binding MedalsMerabAvailables}" IsReadOnly="True"
@@ -164,14 +164,14 @@
             <DataGrid.Columns>
               <DataGridTextColumn
                 Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Medal}}"
                 Width="160" />
               <DataGridTemplateColumn Width="50">
                 <DataGridTemplateColumn.CellTemplate>
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabAvailable}"
+                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabAvailableCommand}"
                             CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -183,15 +183,15 @@
           <Label DockPanel.Dock="Top" Content="Shades" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
             <ComboBox
-              SelectedIndex="{Binding SelectedMedalShadesAvailableForAdd, 
-                                  Converter={StaticResource EnumConverter}, 
+              SelectedIndex="{Binding SelectedMedalShadesAvailableForAdd,
+                                  Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="180" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesAvailable}" />
+            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesAvailableCommand}" />
           </StackPanel>
           <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsShadesAvailablesUp}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsShadesAvailablesDown}" />
+            <Button Content="↑" Command="{Binding CmdReorderMedalsShadesAvailablesUpCommand}" />
+            <Button Content="↓" Command="{Binding CmdReorderMedalsShadesAvailablesDownCommand}" />
           </StackPanel>
           <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
                     Items="{Binding MedalsShadesAvailables}" IsReadOnly="True"
@@ -199,14 +199,14 @@
             <DataGrid.Columns>
               <DataGridTextColumn
                 Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter}, 
+                                        Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Medal}}"
                 Width="160" />
               <DataGridTemplateColumn Width="50">
                 <DataGridTemplateColumn.CellTemplate>
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesAvailable}"
+                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesAvailableCommand}"
                             CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

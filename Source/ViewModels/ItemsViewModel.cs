@@ -1,29 +1,47 @@
 ﻿using System.Collections.ObjectModel;
-using System.Reactive;
+using Avalonia.Controls;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Items;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class ItemsViewModel : ViewModelBase
+public partial class ItemsViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private ObservableCollection<ItemInfo> _items;
 
+  [ObservableProperty]
   private string[] _itemsNames;
+  [ObservableProperty]
   private ObservableCollection<ItemInfo> _keyItems;
+  [ObservableProperty]
   private SaveData _saveData;
 
-  private ItemInfo _selectedItem;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderItemsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderItemsDownCommand))]
+  private ItemInfo? _selectedItem;
 
+  [ObservableProperty]
   private Item _selectedItemForAdd;
 
-  private ItemInfo _selectedKeyItem;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderKeyItemsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderKeyItemsDownCommand))]
+  private ItemInfo? _selectedKeyItem;
+  [ObservableProperty]
   private Item _selectedKeyItemForAdd;
 
-  private ItemInfo _selectedStoredItem;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderStoredItemsUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderStoredItemsDownCommand))]
+  private ItemInfo? _selectedStoredItem;
+  [ObservableProperty]
   private Item _selectedStoredItemForAdd;
+  [ObservableProperty]
   private ObservableCollection<ItemInfo> _storedItems;
 
   public ItemsViewModel()
@@ -50,122 +68,71 @@ public class ItemsViewModel : ViewModelBase
     Initialize();
   }
 
-  public SaveData SaveData
+  [RelayCommand(CanExecute = nameof(CanReorderItemsUp))]
+  private void CmdReorderItemsUp()
   {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderItem(ItemPossessionType.Inventory, ReorderDirection.Up);
   }
 
-  public string[] ItemsNames
+  private bool CanReorderItemsUp()
   {
-    get => _itemsNames;
-    set
-    {
-      _itemsNames = value;
-      this.RaisePropertyChanged();
-    }
+    return Items.Count > 0 && SelectedItem is not null && Items[0] != SelectedItem;
   }
 
-  public Item SelectedItemForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderItemsDown))]
+  private void CmdReorderItemsDown()
   {
-    get => _selectedItemForAdd;
-    set
-    {
-      _selectedItemForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderItem(ItemPossessionType.Inventory, ReorderDirection.Down);
   }
 
-  public Item SelectedKeyItemForAdd
+  private bool CanReorderItemsDown()
   {
-    get => _selectedKeyItemForAdd;
-    set
-    {
-      _selectedKeyItemForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    return Items.Count > 0 && SelectedItem is not null && Items[^1] != SelectedItem;
   }
 
-  public Item SelectedStoredItemForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderKeyItemsUp))]
+  private void CmdReorderKeyItemsUp()
   {
-    get => _selectedStoredItemForAdd;
-    set
-    {
-      _selectedStoredItemForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderItem(ItemPossessionType.KeyItem, ReorderDirection.Up);
   }
 
-  public ItemInfo SelectedItem
+  private bool CanReorderKeyItemsUp()
   {
-    get => _selectedItem;
-    set
-    {
-      _selectedItem = value;
-      this.RaisePropertyChanged();
-    }
+    return KeyItems.Count > 0 && SelectedKeyItem is not null && KeyItems[0] != SelectedKeyItem;
   }
 
-  public ItemInfo SelectedKeyItem
+  [RelayCommand(CanExecute = nameof(CanReorderKeyItemsDown))]
+  private void CmdReorderKeyItemsDown()
   {
-    get => _selectedKeyItem;
-    set
-    {
-      _selectedKeyItem = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderItem(ItemPossessionType.KeyItem, ReorderDirection.Down);
   }
 
-  public ItemInfo SelectedStoredItem
+  private bool CanReorderKeyItemsDown()
   {
-    get => _selectedStoredItem;
-    set
-    {
-      _selectedStoredItem = value;
-      this.RaisePropertyChanged();
-    }
+    return KeyItems.Count > 0 && SelectedKeyItem is not null && KeyItems[^1] != SelectedKeyItem;
   }
 
-  public ObservableCollection<ItemInfo> Items
+  [RelayCommand(CanExecute = nameof(CanReorderStoredItemsUp))]
+  private void CmdReorderStoredItemsUp()
   {
-    get => _items;
-    set
-    {
-      _items = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderItem(ItemPossessionType.Stored, ReorderDirection.Up);
   }
 
-  public ObservableCollection<ItemInfo> KeyItems
+  private bool CanReorderStoredItemsUp()
   {
-    get => _keyItems;
-    set
-    {
-      _keyItems = value;
-      this.RaisePropertyChanged();
-    }
+    return StoredItems.Count > 0 && SelectedStoredItem is not null && StoredItems[0] != SelectedStoredItem;
   }
 
-  public ObservableCollection<ItemInfo> StoredItems
+  [RelayCommand(CanExecute = nameof(CanReorderStoredItemsDown))]
+  private void CmdReorderStoredItemsDown()
   {
-    get => _storedItems;
-    set
-    {
-      _storedItems = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderItem(ItemPossessionType.Stored, ReorderDirection.Down);
   }
 
-  public ReactiveCommand<Unit, Unit> CmdReorderItemsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderItemsDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderKeyItemsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderKeyItemsDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderStoredItemsUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderStoredItemsDown { get; set; }
+  private bool CanReorderStoredItemsDown()
+  {
+    return StoredItems.Count > 0 && SelectedStoredItem is not null && StoredItems[^1] != SelectedStoredItem;
+  }
 
   private void Initialize()
   {
@@ -175,33 +142,6 @@ public class ItemsViewModel : ViewModelBase
     Items = itemsArray[(int)ItemPossessionType.Inventory];
     KeyItems = itemsArray[(int)ItemPossessionType.KeyItem];
     StoredItems = itemsArray[(int)ItemPossessionType.Stored];
-
-    CmdReorderItemsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderItem(ItemPossessionType.Inventory, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedItem, x => x != null && Items[0] != x));
-    CmdReorderItemsDown = ReactiveCommand.Create(() =>
-    {
-      ReorderItem(ItemPossessionType.Inventory, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedItem, x => x != null && Items[Items.Count - 1] != x));
-
-    CmdReorderKeyItemsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderItem(ItemPossessionType.KeyItem, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedKeyItem, x => x != null && KeyItems[0] != x));
-    CmdReorderKeyItemsDown = ReactiveCommand.Create(() =>
-    {
-      ReorderItem(ItemPossessionType.KeyItem, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedKeyItem, x => x != null && KeyItems[KeyItems.Count - 1] != x));
-
-    CmdReorderStoredItemsUp = ReactiveCommand.Create(() =>
-    {
-      ReorderItem(ItemPossessionType.Stored, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedStoredItem, x => x != null && StoredItems[0] != x));
-    CmdReorderStoredItemsDown = ReactiveCommand.Create(() =>
-    {
-      ReorderItem(ItemPossessionType.Stored, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedStoredItem, x => x != null && StoredItems[StoredItems.Count - 1] != x));
   }
 
   private void ReorderItem(ItemPossessionType possesionType, ReorderDirection direction)
@@ -255,32 +195,38 @@ public class ItemsViewModel : ViewModelBase
     }
   }
 
-  public void RemoveItem(ItemInfo itemInfo)
+  [RelayCommand]
+  private void RemoveItem(ItemInfo itemInfo)
   {
     Items.Remove(itemInfo);
   }
 
-  public void RemoveKeyItem(ItemInfo itemInfo)
+  [RelayCommand]
+  private void RemoveKeyItem(ItemInfo itemInfo)
   {
     KeyItems.Remove(itemInfo);
   }
 
-  public void RemoveStoredItem(ItemInfo itemInfo)
+  [RelayCommand]
+  private void RemoveStoredItem(ItemInfo itemInfo)
   {
     StoredItems.Remove(itemInfo);
   }
 
-  public void AddItem()
+  [RelayCommand]
+  private void AddItem()
   {
     Items.Add(new ItemInfo { Item = SelectedItemForAdd });
   }
 
-  public void AddKeyItem()
+  [RelayCommand]
+  private void AddKeyItem()
   {
     KeyItems.Add(new ItemInfo { Item = SelectedKeyItemForAdd });
   }
 
-  public void AddStoredItem()
+  [RelayCommand]
+  private void AddStoredItem()
   {
     StoredItems.Add(new ItemInfo { Item = SelectedStoredItemForAdd });
   }

@@ -1,16 +1,20 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class GlobalViewModel : ViewModelBase
+public partial class GlobalViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private string[] _areas;
 
+  [ObservableProperty]
   private string[] _maps;
+  [ObservableProperty]
   private SaveData _saveData;
 
+  [ObservableProperty]
   private string[] _saveProgressIcons;
 
   public GlobalViewModel(SaveData saveData)
@@ -19,45 +23,5 @@ public class GlobalViewModel : ViewModelBase
     Areas = Common.GetEnumDescriptions<Area>();
     Maps = Common.GetEnumDescriptions<Map>();
     SaveProgressIcons = Common.GetEnumDescriptions<SaveProgressIcon>();
-  }
-
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string[] Areas
-  {
-    get => _areas;
-    set
-    {
-      _areas = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string[] Maps
-  {
-    get => _maps;
-    set
-    {
-      _maps = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string[] SaveProgressIcons
-  {
-    get => _saveProgressIcons;
-    set
-    {
-      _saveProgressIcons = value;
-      this.RaisePropertyChanged();
-    }
   }
 }

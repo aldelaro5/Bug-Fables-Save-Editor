@@ -3,7 +3,6 @@
         xmlns:vm="using:BugFablesSaveEditor.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="using:BugFablesSaveEditor.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BugFablesSaveEditor.Views.MainWindow"
         Title="Bug Fables Save Editor"
@@ -17,11 +16,11 @@
     <DockPanel>
       <Menu DockPanel.Dock="Top">
         <MenuItem Header="File">
-          <MenuItem Command="{Binding NewFile}" Header="New" />
-          <MenuItem Command="{Binding OpenFile}" Header="Open..." />
-          <MenuItem Command="{Binding CmdSaveFile}" Header="Save as..." />
+          <MenuItem Command="{Binding NewFileCommand}" Header="New" />
+          <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
+          <MenuItem Command="{Binding CmdSaveFileCommand}" Header="Save as..." />
           <Separator />
-          <MenuItem Command="{Binding Exit}" Header="Exit" />
+          <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
         </MenuItem>
         <MenuItem Header="Help">
           <MenuItem Header="About" Click="OnAbout_Click" />
@@ -32,9 +31,9 @@
           <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}"
                  HorizontalContentAlignment="Center" />
           <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Command="{Binding NewFile}" Content="New file" Margin="5" />
-            <Button Command="{Binding OpenFile}" Content="Open file..." Margin="5" />
-            <Button Command="{Binding CmdSaveFile}" Content="Save file..." Margin="5" />
+            <Button Command="{Binding NewFileCommand}" Content="New file" Margin="5" />
+            <Button Command="{Binding OpenFileCommand}" Content="Open file..." Margin="5" />
+            <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." Margin="5" />
           </StackPanel>
         </StackPanel>
         <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">

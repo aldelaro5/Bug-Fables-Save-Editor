@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.ReactiveUI;
 
 namespace BugFablesSaveEditor;
 
@@ -19,7 +18,6 @@ internal class Program
   {
     return AppBuilder.Configure<App>()
       .UsePlatformDetect()
-      .LogToTrace()
-      .UseReactiveUI();
+      .LogToTrace();
   }
 }

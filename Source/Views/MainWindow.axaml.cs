@@ -1,11 +1,9 @@
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
 

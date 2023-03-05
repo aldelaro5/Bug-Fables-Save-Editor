@@ -1,27 +1,18 @@
 ﻿using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class DesignSaveDataViewModel : ViewModelBase
+public partial class DesignSaveDataViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private SaveData _saveData;
 
   public DesignSaveDataViewModel()
   {
     SaveData = new SaveData();
     SaveData.LoadFromFile(@"C:\Users\aldel\Documents\save1.dat");
-  }
-
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
   }
 
   public string[] Areas => Common.GetEnumDescriptions<Area>();

@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
-using System.Reactive;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Followers;
 using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class PartyViewModel : ViewModelBase
+public partial class PartyViewModel : ViewModelBase
 {
   public enum PartyType
   {
@@ -17,18 +17,30 @@ public class PartyViewModel : ViewModelBase
     Follower
   }
 
-  private string[] _animIds;
+  [ObservableProperty]
+  private string[] _animIDs;
+  [ObservableProperty]
   private ObservableCollection<Follower> _followers;
 
+  [ObservableProperty]
   private ObservableCollection<PartyMemberInfo> _partyMembers;
 
+  [ObservableProperty]
   private SaveData _saveData;
-  private Follower _selectedFollower;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderFollowersUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderFollowersDownCommand))]
+  private Follower? _selectedFollower;
 
+  [ObservableProperty]
   private AnimID _selectedFollowerAnimIDForAdd = 0;
 
-  private PartyMemberInfo _selectedPartyMember;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderPartyMembersUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderPartyMembersDownCommand))]
+  private PartyMemberInfo? _selectedPartyMember;
 
+  [ObservableProperty]
   private AnimID _selectedPartyMemberAnimIDForAdd = 0;
 
   public PartyViewModel()
@@ -51,114 +63,51 @@ public class PartyViewModel : ViewModelBase
     Initialise();
   }
 
-  public SaveData SaveData
+  [RelayCommand(CanExecute = nameof(CanReorderPartyMemberUp))]
+  private void CmdReorderPartyMembersUp()
   {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderAnimID(PartyType.PartyMember, ReorderDirection.Up);
+  }
+  private bool CanReorderPartyMemberUp()
+  {
+    return PartyMembers.Count > 0 && SelectedPartyMember is not null && PartyMembers.Count > 0 && PartyMembers[0] != SelectedPartyMember;
   }
 
-  public string[] AnimIDs
+  [RelayCommand(CanExecute = nameof(CanReorderPartyMemberDown))]
+  private void CmdReorderPartyMembersDown()
   {
-    get => _animIds;
-    set
-    {
-      _animIds = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderAnimID(PartyType.PartyMember, ReorderDirection.Down);
+  }
+  private bool CanReorderPartyMemberDown()
+  {
+    return PartyMembers.Count > 0 && SelectedPartyMember is not null && PartyMembers.Count > 0 && PartyMembers[^1] != SelectedPartyMember;
   }
 
-  public AnimID SelectedPartyMemberAnimIDForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderFollowerUp))]
+  private void CmdReorderFollowersUp()
   {
-    get => _selectedPartyMemberAnimIDForAdd;
-    set
-    {
-      _selectedPartyMemberAnimIDForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderAnimID(PartyType.Follower, ReorderDirection.Up);
+  }
+  private bool CanReorderFollowerUp()
+  {
+    return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 && Followers[0] != SelectedFollower;
   }
 
-  public AnimID SelectedFollowerAnimIDForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderFollowerDown))]
+  private void CmdReorderFollowersDown()
   {
-    get => _selectedFollowerAnimIDForAdd;
-    set
-    {
-      _selectedFollowerAnimIDForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderAnimID(PartyType.Follower, ReorderDirection.Down);
   }
-
-  public PartyMemberInfo SelectedPartyMember
+  private bool CanReorderFollowerDown()
   {
-    get => _selectedPartyMember;
-    set
-    {
-      _selectedPartyMember = value;
-      this.RaisePropertyChanged();
-    }
+    return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 && Followers[^1] != SelectedFollower;
   }
-
-  public Follower SelectedFollower
-  {
-    get => _selectedFollower;
-    set
-    {
-      _selectedFollower = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<PartyMemberInfo> PartyMembers
-  {
-    get => _partyMembers;
-    set
-    {
-      _partyMembers = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<Follower> Followers
-  {
-    get => _followers;
-    set
-    {
-      _followers = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ReactiveCommand<Unit, Unit> CmdReorderPartyMembersUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderPartyMembersDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderFollowersUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderFollowersDown { get; set; }
 
   private void Initialise()
   {
     AnimIDs = Common.GetEnumDescriptions<AnimID>();
     PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
     Followers = (ObservableCollection<Follower>)SaveData.Sections[SaveFileSection.Followers].Data;
-
-    CmdReorderPartyMembersUp = ReactiveCommand.Create(() =>
-    {
-      ReorderAnimID(PartyType.PartyMember, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedPartyMember, x => x != null && PartyMembers[0] != x));
-    CmdReorderPartyMembersDown = ReactiveCommand.Create(() =>
-    {
-      ReorderAnimID(PartyType.PartyMember, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedPartyMember, x => x != null && PartyMembers[PartyMembers.Count - 1] != x));
-
-    CmdReorderFollowersUp = ReactiveCommand.Create(() =>
-    {
-      ReorderAnimID(PartyType.Follower, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedFollower, x => x != null && Followers[0] != x));
-    CmdReorderFollowersDown = ReactiveCommand.Create(() =>
-    {
-      ReorderAnimID(PartyType.Follower, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedFollower, x => x != null && Followers[Followers.Count - 1] != x));
   }
 
   private void ReorderAnimID(PartyType type, ReorderDirection direction)
@@ -208,22 +157,26 @@ public class PartyViewModel : ViewModelBase
     }
   }
 
-  public void AddPartyMember()
+  [RelayCommand]
+  private void AddPartyMember()
   {
     PartyMembers.Add(new PartyMemberInfo { Trueid = SelectedPartyMemberAnimIDForAdd });
   }
 
-  public void RemovePartyMember(PartyMemberInfo partyMemberInfo)
+  [RelayCommand]
+  private void RemovePartyMember(PartyMemberInfo partyMemberInfo)
   {
     PartyMembers.Remove(partyMemberInfo);
   }
 
-  public void AddFollower()
+  [RelayCommand]
+  private void AddFollower()
   {
     Followers.Add(new Follower { AnimID = SelectedFollowerAnimIDForAdd });
   }
 
-  public void RemoveFollower(Follower follower)
+  [RelayCommand]
+  private void RemoveFollower(Follower follower)
   {
     Followers.Remove(follower);
   }

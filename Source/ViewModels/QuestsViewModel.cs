@@ -1,30 +1,47 @@
 ﻿using System.Collections.ObjectModel;
-using System.Reactive;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Quests;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class QuestsViewModel : ViewModelBase
+public partial class QuestsViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private ObservableCollection<QuestInfo> _completedQuests;
 
+  [ObservableProperty]
   private ObservableCollection<QuestInfo> _openQuests;
 
-  private string[] _questNames;
+  [ObservableProperty]
+  private string[] _questsNames;
+  [ObservableProperty]
   private SaveData _saveData;
 
-  private QuestInfo _selectedCompletedQuest;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderCompletedQuestUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderCompletedQuestDownCommand))]
+  private QuestInfo? _selectedCompletedQuest;
+  [ObservableProperty]
   private Quest _selectedCompletedQuestForAdd;
 
-  private QuestInfo _selectedOpenQuest;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderOpenQuestUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderOpenQuestDownCommand))]
+  private QuestInfo? _selectedOpenQuest;
 
+  [ObservableProperty]
   private Quest _selectedOpenQuestForAdd;
 
-  private QuestInfo _selectedTakenQuest;
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderTakenQuestUpCommand))]
+  [NotifyCanExecuteChangedFor(nameof(CmdReorderTakenQuestDownCommand))]
+  private QuestInfo? _selectedTakenQuest;
+  [ObservableProperty]
   private Quest _selectedTakenQuestForAdd;
+  [ObservableProperty]
   private ObservableCollection<QuestInfo> _takenQuests;
 
   public QuestsViewModel()
@@ -51,122 +68,65 @@ public class QuestsViewModel : ViewModelBase
     Initialize();
   }
 
-  public SaveData SaveData
+  [RelayCommand(CanExecute = nameof(CanReorderOpenQuestUp))]
+  private void CmdReorderOpenQuestUp()
   {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderQuest(QuestState.Open, ReorderDirection.Up);
+  }
+  private bool CanReorderOpenQuestUp()
+  {
+    return OpenQuests.Count > 0 && SelectedOpenQuest is not null && OpenQuests[0] != SelectedOpenQuest;
   }
 
-  public string[] QuestsNames
+  [RelayCommand(CanExecute = nameof(CanReorderOpenQuestDown))]
+  private void CmdReorderOpenQuestDown()
   {
-    get => _questNames;
-    set
-    {
-      _questNames = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderQuest(QuestState.Open, ReorderDirection.Down);
+  }
+  private bool CanReorderOpenQuestDown()
+  {
+    return OpenQuests.Count > 0 && SelectedOpenQuest is not null && OpenQuests[^1] != SelectedOpenQuest;
   }
 
-  public Quest SelectedOpenQuestForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderTakenQuestUp))]
+  private void CmdReorderTakenQuestUp()
   {
-    get => _selectedOpenQuestForAdd;
-    set
-    {
-      _selectedOpenQuestForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderQuest(QuestState.Taken, ReorderDirection.Up);
+  }
+  private bool CanReorderTakenQuestUp()
+  {
+    return TakenQuests.Count > 0 && SelectedTakenQuest is not null && TakenQuests[0] != SelectedTakenQuest;
   }
 
-  public Quest SelectedTakenQuestForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderTakenQuestDown))]
+  private void CmdReorderTakenQuestDown()
   {
-    get => _selectedTakenQuestForAdd;
-    set
-    {
-      _selectedTakenQuestForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderQuest(QuestState.Taken, ReorderDirection.Down);
+  }
+  private bool CanReorderTakenQuestDown()
+  {
+    return TakenQuests.Count > 0 && SelectedTakenQuest is not null && TakenQuests[^1] != SelectedTakenQuest;
   }
 
-  public Quest SelectedCompletedQuestForAdd
+  [RelayCommand(CanExecute = nameof(CanReorderCompletedQuestUp))]
+  private void CmdReorderCompletedQuestUp()
   {
-    get => _selectedCompletedQuestForAdd;
-    set
-    {
-      _selectedCompletedQuestForAdd = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderQuest(QuestState.Completed, ReorderDirection.Up);
+  }
+  private bool CanReorderCompletedQuestUp()
+  {
+    return CompletedQuests.Count > 0 && SelectedCompletedQuest is not null && CompletedQuests[0] != SelectedCompletedQuest;
   }
 
-  public QuestInfo SelectedOpenQuest
+  [RelayCommand(CanExecute = nameof(CanReorderCompletedQuestDown))]
+  private void CmdReorderCompletedQuestDown()
   {
-    get => _selectedOpenQuest;
-    set
-    {
-      _selectedOpenQuest = value;
-      this.RaisePropertyChanged();
-    }
+    ReorderQuest(QuestState.Completed, ReorderDirection.Down);
   }
-
-  public QuestInfo SelectedTakenQuest
+  private bool CanReorderCompletedQuestDown()
   {
-    get => _selectedTakenQuest;
-    set
-    {
-      _selectedTakenQuest = value;
-      this.RaisePropertyChanged();
-    }
+    return CompletedQuests.Count > 0 && SelectedCompletedQuest is not null && CompletedQuests[^1] != SelectedCompletedQuest;
   }
-
-  public QuestInfo SelectedCompletedQuest
-  {
-    get => _selectedCompletedQuest;
-    set
-    {
-      _selectedCompletedQuest = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<QuestInfo> OpenQuests
-  {
-    get => _openQuests;
-    set
-    {
-      _openQuests = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<QuestInfo> TakenQuests
-  {
-    get => _takenQuests;
-    set
-    {
-      _takenQuests = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ObservableCollection<QuestInfo> CompletedQuests
-  {
-    get => _completedQuests;
-    set
-    {
-      _completedQuests = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public ReactiveCommand<Unit, Unit> CmdReorderOpenQuestUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderOpenQuestDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderTakenQuestUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderTakenQuestDown { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderCompletedQuestUp { get; set; }
-  public ReactiveCommand<Unit, Unit> CmdReorderCompletedQuestDown { get; set; }
 
   private void Initialize()
   {
@@ -176,35 +136,6 @@ public class QuestsViewModel : ViewModelBase
     OpenQuests = questsArray[(int)QuestState.Open];
     TakenQuests = questsArray[(int)QuestState.Taken];
     CompletedQuests = questsArray[(int)QuestState.Completed];
-
-    CmdReorderOpenQuestUp = ReactiveCommand.Create(() =>
-    {
-      ReorderQuest(QuestState.Open, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedOpenQuest, x => x != null && OpenQuests[0] != x));
-    CmdReorderOpenQuestDown = ReactiveCommand.Create(() =>
-    {
-      ReorderQuest(QuestState.Open, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedOpenQuest, x => x != null && OpenQuests[OpenQuests.Count - 1] != x));
-
-    CmdReorderTakenQuestUp = ReactiveCommand.Create(() =>
-    {
-      ReorderQuest(QuestState.Taken, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedTakenQuest, x => x != null && TakenQuests[0] != x));
-    CmdReorderTakenQuestDown = ReactiveCommand.Create(() =>
-    {
-      ReorderQuest(QuestState.Taken, ReorderDirection.Down);
-    }, this.WhenAnyValue(x => x.SelectedTakenQuest, x => x != null && TakenQuests[TakenQuests.Count - 1] != x));
-
-    CmdReorderCompletedQuestUp = ReactiveCommand.Create(() =>
-    {
-      ReorderQuest(QuestState.Completed, ReorderDirection.Up);
-    }, this.WhenAnyValue(x => x.SelectedCompletedQuest, x => x != null && CompletedQuests[0] != x));
-    CmdReorderCompletedQuestDown = ReactiveCommand.Create(() =>
-      {
-        ReorderQuest(QuestState.Completed, ReorderDirection.Down);
-      },
-      this.WhenAnyValue(x => x.SelectedCompletedQuest,
-        x => x != null && CompletedQuests[CompletedQuests.Count - 1] != x));
   }
 
   private void ReorderQuest(QuestState questState, ReorderDirection direction)
@@ -258,32 +189,38 @@ public class QuestsViewModel : ViewModelBase
     }
   }
 
-  public void RemoveOpenQuest(QuestInfo questInfo)
+  [RelayCommand]
+  private void RemoveOpenQuest(QuestInfo questInfo)
   {
     OpenQuests.Remove(questInfo);
   }
 
-  public void RemoveTakenQuest(QuestInfo questInfo)
+  [RelayCommand]
+  private void RemoveTakenQuest(QuestInfo questInfo)
   {
     TakenQuests.Remove(questInfo);
   }
 
-  public void RemoveCompletedQuest(QuestInfo questInfo)
+  [RelayCommand]
+  private void RemoveCompletedQuest(QuestInfo questInfo)
   {
     CompletedQuests.Remove(questInfo);
   }
 
-  public void AddOpenQuest()
+  [RelayCommand]
+  private void AddOpenQuest()
   {
     OpenQuests.Add(new QuestInfo { Quest = SelectedOpenQuestForAdd });
   }
 
-  public void AddTakenQuest()
+  [RelayCommand]
+  private void AddTakenQuest()
   {
     TakenQuests.Add(new QuestInfo { Quest = SelectedTakenQuestForAdd });
   }
 
-  public void AddCompletedQuest()
+  [RelayCommand]
+  private void AddCompletedQuest()
   {
     CompletedQuests.Add(new QuestInfo { Quest = SelectedCompletedQuestForAdd });
   }

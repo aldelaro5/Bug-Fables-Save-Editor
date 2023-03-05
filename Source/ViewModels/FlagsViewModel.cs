@@ -5,7 +5,7 @@ using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flags;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagstrings;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagvars;
@@ -14,32 +14,75 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.RegionalFlags;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class FlagsViewModel : ViewModelBase
+public partial class FlagsViewModel : ViewModelBase
 {
+  [ObservableProperty]
   private bool _filterUnusedRegionals;
 
+  partial void OnFilterUnusedRegionalsChanged(bool value)
+  {
+    RegionalsFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private FlagInfo[] _flags;
 
+  [ObservableProperty]
   private DataGridCollectionView _flagsFiltered;
 
+  [ObservableProperty]
   private FlagstringInfo[] _flagstrings;
+  [ObservableProperty]
   private DataGridCollectionView _flagstringsFiltered;
 
+  [ObservableProperty]
   private FlagvarInfo[] _flagvars;
+  [ObservableProperty]
   private DataGridCollectionView _flagvarsFiltered;
 
+  [ObservableProperty]
   private RegionalInfo[] _regionals;
+  [ObservableProperty]
   private DataGridCollectionView _regionalsFiltered;
 
+  [ObservableProperty]
   private SaveData _saveData;
 
+  [ObservableProperty]
   private string _textFilterFlags;
+
+  partial void OnTextFilterFlagsChanged(string value)
+  {
+    _flagsFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterFlagstrings;
+
+  partial void OnTextFilterFlagstringsChanged(string value)
+  {
+    _flagstringsFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterFlagvars;
+
+  partial void OnTextFilterFlagvarsChanged(string value)
+  {
+    _flagvarsFiltered.Refresh();
+  }
+
+  [ObservableProperty]
   private string _textFilterRegionals;
 
-  private GlobalInfo globalInfo;
-  private RegionalFlags regionalFlags;
+
+  partial void OnTextFilterRegionalsChanged(string value)
+  {
+    _regionalsFiltered.Refresh();
+  }
+
+  private GlobalInfo _globalInfo;
+  private RegionalFlags _regionalFlags;
 
   public FlagsViewModel()
   {
@@ -53,151 +96,6 @@ public class FlagsViewModel : ViewModelBase
     Initialise();
   }
 
-  public SaveData SaveData
-  {
-    get => _saveData;
-    set
-    {
-      _saveData = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public bool FilterUnusedRegionals
-  {
-    get => _filterUnusedRegionals;
-    set
-    {
-      _filterUnusedRegionals = value;
-      this.RaisePropertyChanged();
-      RegionalsFiltered.Refresh();
-    }
-  }
-
-  public FlagInfo[] Flags
-  {
-    get => _flags;
-    set
-    {
-      _flags = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public FlagvarInfo[] Flagvars
-  {
-    get => _flagvars;
-    set
-    {
-      _flagvars = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public FlagstringInfo[] Flagstrings
-  {
-    get => _flagstrings;
-    set
-    {
-      _flagstrings = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public RegionalInfo[] Regionals
-  {
-    get => _regionals;
-    set
-    {
-      _regionals = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView FlagsFiltered
-  {
-    get => _flagsFiltered;
-    set
-    {
-      _flagsFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView FlagvarsFiltered
-  {
-    get => _flagvarsFiltered;
-    set
-    {
-      _flagvarsFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView FlagstringsFiltered
-  {
-    get => _flagstringsFiltered;
-    set
-    {
-      _flagstringsFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public DataGridCollectionView RegionalsFiltered
-  {
-    get => _regionalsFiltered;
-    set
-    {
-      _regionalsFiltered = value;
-      this.RaisePropertyChanged();
-    }
-  }
-
-  public string TextFilterFlags
-  {
-    get => _textFilterFlags;
-    set
-    {
-      _textFilterFlags = value;
-      this.RaisePropertyChanged();
-      FlagsFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterFlagvars
-  {
-    get => _textFilterFlagvars;
-    set
-    {
-      _textFilterFlagvars = value;
-      this.RaisePropertyChanged();
-      FlagvarsFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterFlagstrings
-  {
-    get => _textFilterFlagstrings;
-    set
-    {
-      _textFilterFlagstrings = value;
-      this.RaisePropertyChanged();
-      FlagstringsFiltered.Refresh();
-    }
-  }
-
-  public string TextFilterRegionals
-  {
-    get => _textFilterRegionals;
-    set
-    {
-      _textFilterRegionals = value;
-      this.RaisePropertyChanged();
-      RegionalsFiltered.Refresh();
-    }
-  }
-
   private void Initialise()
   {
     Flags = (FlagInfo[])SaveData.Sections[SaveFileSection.Flags].Data;
@@ -205,9 +103,9 @@ public class FlagsViewModel : ViewModelBase
     Flagstrings = (FlagstringInfo[])SaveData.Sections[SaveFileSection.Flagstrings].Data;
     Regionals = (RegionalInfo[])SaveData.Sections[SaveFileSection.RegionalFlags].Data;
 
-    regionalFlags = (RegionalFlags)SaveData.Sections[SaveFileSection.RegionalFlags];
-    globalInfo = (GlobalInfo)SaveData.Sections[SaveFileSection.Global].Data;
-    globalInfo.PropertyChanged += GlobalInfoChanged;
+    _regionalFlags = (RegionalFlags)SaveData.Sections[SaveFileSection.RegionalFlags];
+    _globalInfo = (GlobalInfo)SaveData.Sections[SaveFileSection.Global].Data;
+    _globalInfo.PropertyChanged += GlobalInfoChanged;
 
     FlagsFiltered = new DataGridCollectionView(Flags);
     FlagsFiltered.Filter = FilterFlags;
@@ -294,7 +192,7 @@ public class FlagsViewModel : ViewModelBase
   {
     if (e.PropertyName == nameof(GlobalInfo.CurrentArea))
     {
-      regionalFlags.ChangeCurrentRegionalsArea(globalInfo.CurrentArea);
+      _regionalFlags.ChangeCurrentRegionalsArea(_globalInfo.CurrentArea);
       RegionalsFiltered.Refresh();
     }
   }
