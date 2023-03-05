@@ -215,41 +215,44 @@ public partial class MedalsViewModel : ObservableObject
 
   private void ReorderMedal(MedalsDataType dataType, ReorderDirection direction)
   {
-    object selectedItem;
-    Medal medal;
-    MedalEquipTarget medalEquipTarget = MedalEquipTarget.Unequipped;
+    object? selectedItem;
+    Medal? medal;
+    MedalEquipTarget? medalEquipTarget = MedalEquipTarget.Unequipped;
     IList itemsCollection;
     switch (dataType)
     {
       case MedalsDataType.Medals:
         selectedItem = SelectedMedal;
-        medal = ((MedalInfo)selectedItem).Medal;
-        medalEquipTarget = ((MedalInfo)selectedItem).MedalEquipTarget;
+        medal = ((MedalInfo?)selectedItem)?.Medal;
+        medalEquipTarget = ((MedalInfo?)selectedItem)?.MedalEquipTarget;
         itemsCollection = Medals;
         break;
       case MedalsDataType.MerabPool:
         selectedItem = SelectedMedalMerabPool;
-        medal = ((MedalShopPool)selectedItem).Medal;
+        medal = ((MedalShopPool?)selectedItem)?.Medal;
         itemsCollection = MedalsMerabPools;
         break;
       case MedalsDataType.MerabAvailable:
         selectedItem = SelectedMedalMerabAvailable;
-        medal = ((MedalShopAvailable)selectedItem).Medal;
+        medal = ((MedalShopAvailable?)selectedItem)?.Medal;
         itemsCollection = MedalsMerabAvailables;
         break;
       case MedalsDataType.ShadesPool:
         selectedItem = SelectedMedalShadesPool;
-        medal = ((MedalShopPool)selectedItem).Medal;
+        medal = ((MedalShopPool?)selectedItem)?.Medal;
         itemsCollection = MedalsShadesPools;
         break;
       case MedalsDataType.ShadesAvailable:
         selectedItem = SelectedMedalShadesAvailable;
-        medal = ((MedalShopAvailable)selectedItem).Medal;
+        medal = ((MedalShopAvailable?)selectedItem)?.Medal;
         itemsCollection = MedalsShadesAvailables;
         break;
       default:
         return;
     }
+
+    if (medal is null || medalEquipTarget is null)
+      return;
 
     int index = itemsCollection.IndexOf(selectedItem);
     int newIndex = index;
@@ -263,23 +266,23 @@ public partial class MedalsViewModel : ObservableObject
     switch (dataType)
     {
       case MedalsDataType.Medals:
-        itemsCollection.Insert(newIndex, new MedalInfo { Medal = medal, MedalEquipTarget = medalEquipTarget });
+        itemsCollection.Insert(newIndex, new MedalInfo { Medal = medal.Value, MedalEquipTarget = medalEquipTarget.Value });
         SelectedMedal = Medals[newIndex];
         break;
       case MedalsDataType.MerabPool:
-        itemsCollection.Insert(newIndex, new MedalShopPool { Medal = medal });
+        itemsCollection.Insert(newIndex, new MedalShopPool { Medal = medal.Value });
         SelectedMedalMerabPool = MedalsMerabPools[newIndex];
         break;
       case MedalsDataType.MerabAvailable:
-        itemsCollection.Insert(newIndex, new MedalShopAvailable { Medal = medal });
+        itemsCollection.Insert(newIndex, new MedalShopAvailable { Medal = medal.Value });
         SelectedMedalMerabAvailable = MedalsMerabAvailables[newIndex];
         break;
       case MedalsDataType.ShadesPool:
-        itemsCollection.Insert(newIndex, new MedalShopPool { Medal = medal });
+        itemsCollection.Insert(newIndex, new MedalShopPool { Medal = medal.Value });
         SelectedMedalShadesPool = MedalsShadesPools[newIndex];
         break;
       case MedalsDataType.ShadesAvailable:
-        itemsCollection.Insert(newIndex, new MedalShopAvailable { Medal = medal });
+        itemsCollection.Insert(newIndex, new MedalShopAvailable { Medal = medal.Value });
         SelectedMedalShadesAvailable = MedalsShadesAvailables[newIndex];
         break;
     }

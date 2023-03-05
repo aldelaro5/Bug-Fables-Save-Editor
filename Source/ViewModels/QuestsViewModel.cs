@@ -136,7 +136,7 @@ public partial class QuestsViewModel : ObservableObject
 
   private void ReorderQuest(QuestState questState, ReorderDirection direction)
   {
-    QuestInfo selectedQuest;
+    QuestInfo? selectedQuest;
     ObservableCollection<QuestInfo> questsCollection;
     switch (questState)
     {
@@ -155,6 +155,9 @@ public partial class QuestsViewModel : ObservableObject
       default:
         return;
     }
+
+    if (selectedQuest is null)
+      return;
 
     int index = questsCollection.IndexOf(selectedQuest);
     int newIndex = index;

@@ -104,24 +104,27 @@ public partial class PartyViewModel : ObservableObject
 
   private void ReorderAnimID(PartyType type, ReorderDirection direction)
   {
-    object selectedItem;
-    AnimID animId;
+    object? selectedItem;
+    AnimID? animId;
     IList itemsCollection;
     switch (type)
     {
       case PartyType.PartyMember:
         selectedItem = SelectedPartyMember;
-        animId = ((PartyMemberInfo)selectedItem).Trueid;
+        animId = ((PartyMemberInfo?)selectedItem)?.Trueid;
         itemsCollection = PartyMembers;
         break;
       case PartyType.Follower:
         selectedItem = SelectedFollower;
-        animId = ((Follower)selectedItem).AnimID;
+        animId = ((Follower?)selectedItem)?.AnimID;
         itemsCollection = Followers;
         break;
       default:
         return;
     }
+
+    if (animId is null)
+      return;
 
     int index = itemsCollection.IndexOf(selectedItem);
     int newIndex = index;
@@ -135,11 +138,11 @@ public partial class PartyViewModel : ObservableObject
     switch (type)
     {
       case PartyType.PartyMember:
-        itemsCollection.Insert(newIndex, new PartyMemberInfo { Trueid = animId });
+        itemsCollection.Insert(newIndex, new PartyMemberInfo { Trueid = animId.Value });
         SelectedPartyMember = PartyMembers[newIndex];
         break;
       case PartyType.Follower:
-        itemsCollection.Insert(newIndex, new Follower { AnimID = animId });
+        itemsCollection.Insert(newIndex, new Follower { AnimID = animId.Value });
         SelectedFollower = Followers[newIndex];
         break;
     }

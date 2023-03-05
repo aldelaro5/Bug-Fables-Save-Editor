@@ -65,6 +65,9 @@ public partial class SongsViewModel : ObservableObject
 
   private void ReorderSong(ReorderDirection direction)
   {
+    if (SelectedSong is null)
+      return;
+
     int index = Songs.IndexOf(SelectedSong);
     int newIndex = index;
     if (direction == ReorderDirection.Up)

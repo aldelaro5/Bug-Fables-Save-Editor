@@ -142,7 +142,7 @@ public partial class ItemsViewModel : ObservableObject
 
   private void ReorderItem(ItemPossessionType possesionType, ReorderDirection direction)
   {
-    ItemInfo selectedItem;
+    ItemInfo? selectedItem;
     ObservableCollection<ItemInfo> itemsCollection;
     switch (possesionType)
     {
@@ -161,6 +161,9 @@ public partial class ItemsViewModel : ObservableObject
       default:
         return;
     }
+
+    if (selectedItem is null)
+      return;
 
     int index = itemsCollection.IndexOf(selectedItem);
     int newIndex = index;

@@ -177,8 +177,11 @@ public partial class StatsViewModel : ObservableObject
   [RelayCommand(CanExecute = nameof(CanAddMemberStatBonus))]
   private void AddMemberStatBonus()
   {
+    if (SelectedMember is null)
+      return;
+
     StatBonusInfo statBonusInfo = new();
-    statBonusInfo.Target = (StatBonusTarget)(int)SelectedMember.Trueid;
+    statBonusInfo.Target = (StatBonusTarget)SelectedMember.Trueid;
     statBonusInfo.Type = StatBonusTypeMemberSelectedForAdd;
     statBonusInfo.Amount = StatsBonusAmountMemberSelectedForAdd;
     StatsBonuses.Add(statBonusInfo);
