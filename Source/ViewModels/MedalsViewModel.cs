@@ -10,7 +10,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.MedalShopsPools;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class MedalsViewModel : ViewModelBase
+public partial class MedalsViewModel : ObservableObject
 {
   public enum MedalsDataType
   {

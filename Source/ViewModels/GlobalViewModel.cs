@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class GlobalViewModel : ViewModelBase
+public partial class GlobalViewModel : ObservableObject
 {
   [ObservableProperty]
   private string[] _areas;

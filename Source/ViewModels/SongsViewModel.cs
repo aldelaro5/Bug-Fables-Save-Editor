@@ -7,7 +7,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.SamiraSongs;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class SongsViewModel : ViewModelBase
+public partial class SongsViewModel : ObservableObject
 {
   [ObservableProperty]
   private SaveData _saveData;

@@ -8,7 +8,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.Items;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ItemsViewModel : ViewModelBase
+public partial class ItemsViewModel : ObservableObject
 {
   [ObservableProperty]
   private ObservableCollection<ItemInfo> _items;

@@ -9,7 +9,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class PartyViewModel : ViewModelBase
+public partial class PartyViewModel : ObservableObject
 {
   public enum PartyType
   {

@@ -9,7 +9,7 @@ using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ObservableObject
 {
   private readonly FilePickerFileType _saveFileFilter = new("Bug Fables save (.dat)") { Patterns = new[] { "*.dat" } };
 

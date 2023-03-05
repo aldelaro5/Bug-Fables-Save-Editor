@@ -14,7 +14,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.RegionalFlags;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class FlagsViewModel : ViewModelBase
+public partial class FlagsViewModel : ObservableObject
 {
   [ObservableProperty]
   private bool _filterUnusedRegionals;

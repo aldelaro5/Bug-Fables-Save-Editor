@@ -9,7 +9,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.CrystalBerries;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class CrystalBerriesViewModel : ViewModelBase
+public partial class CrystalBerriesViewModel : ObservableObject
 {
   [ObservableProperty]
   private CrystalBerry[] _crystalBerries;

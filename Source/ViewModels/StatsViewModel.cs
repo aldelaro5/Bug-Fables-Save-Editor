@@ -11,7 +11,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.StatBonuses;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class StatsViewModel : ViewModelBase
+public partial class StatsViewModel : ObservableObject
 {
   [ObservableProperty]
   private ObservableCollection<PartyMemberInfo> _partyMembers = new();

@@ -7,7 +7,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.Quests;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class QuestsViewModel : ViewModelBase
+public partial class QuestsViewModel : ObservableObject
 {
   [ObservableProperty]
   private ObservableCollection<QuestInfo> _completedQuests;

@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class DesignSaveDataViewModel : ViewModelBase
+public partial class DesignSaveDataViewModel : ObservableObject
 {
   [ObservableProperty]
   private SaveData _saveData;

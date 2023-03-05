@@ -9,7 +9,7 @@ using static BugFablesSaveEditor.BugFablesSave.Sections.Library;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class LibraryViewModel : ViewModelBase
+public partial class LibraryViewModel : ObservableObject
 {
   [ObservableProperty]
   private LibraryFlag[] _discoveries;
