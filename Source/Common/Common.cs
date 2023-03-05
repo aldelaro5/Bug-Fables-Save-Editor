@@ -6,11 +6,6 @@ using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using BugFablesSaveEditor.Views;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.BaseWindows.Base;
-using MessageBox.Avalonia.Enums;
-using MessageBox.Avalonia.Views;
 
 namespace BugFablesSaveEditor;
 
