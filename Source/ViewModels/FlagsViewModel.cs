@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Text;
 using Avalonia.Collections;
-using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
+using BugFablesSaveEditor.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flags;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagstrings;
@@ -23,7 +23,7 @@ public partial class FlagsViewModel : ObservableObject
     Flagstrings,
     Regionals
   }
-  
+
   [ObservableProperty]
   private bool _filterUnusedRegionals;
 
@@ -61,7 +61,7 @@ public partial class FlagsViewModel : ObservableObject
 
   partial void OnTextFilterFlagsChanged(string value)
   {
-    _flagsFiltered.Refresh();
+    FlagsFiltered.Refresh();
   }
 
   [ObservableProperty]
@@ -69,7 +69,7 @@ public partial class FlagsViewModel : ObservableObject
 
   partial void OnTextFilterFlagstringsChanged(string value)
   {
-    _flagstringsFiltered.Refresh();
+    FlagstringsFiltered.Refresh();
   }
 
   [ObservableProperty]
@@ -77,7 +77,7 @@ public partial class FlagsViewModel : ObservableObject
 
   partial void OnTextFilterFlagvarsChanged(string value)
   {
-    _flagvarsFiltered.Refresh();
+    FlagvarsFiltered.Refresh();
   }
 
   [ObservableProperty]
@@ -86,7 +86,7 @@ public partial class FlagsViewModel : ObservableObject
 
   partial void OnTextFilterRegionalsChanged(string value)
   {
-    _regionalsFiltered.Refresh();
+    RegionalsFiltered.Refresh();
   }
 
   private GlobalInfo _globalInfo;

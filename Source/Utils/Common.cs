@@ -7,7 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
-namespace BugFablesSaveEditor;
+namespace BugFablesSaveEditor.Utils;
 
 public enum ReorderDirection
 {
@@ -21,7 +21,7 @@ public static class Common
   public const string ElementSeparator = "@";
 
   public static Window MainWindow =>
-    ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+    ((IClassicDesktopStyleApplicationLifetime)Application.Current?.ApplicationLifetime!).MainWindow!;
 
   public static string[] GetEnumDescriptions<T>()
     where T : struct, Enum

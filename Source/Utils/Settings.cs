@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
 
-namespace BugFablesSaveEditor;
+namespace BugFablesSaveEditor.Utils;
 
 public class Settings
 {
@@ -24,7 +24,7 @@ public static class SettingsManager
     }
 
     string json = File.ReadAllText(settingsFilePath);
-    Settings = JsonSerializer.Deserialize<Settings>(json);
+    Settings = JsonSerializer.Deserialize<Settings>(json)!;
   }
 
   public static void Save()

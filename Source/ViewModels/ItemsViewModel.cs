@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
+using BugFablesSaveEditor.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Items;

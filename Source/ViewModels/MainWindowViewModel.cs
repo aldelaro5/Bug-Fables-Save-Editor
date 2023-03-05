@@ -71,7 +71,7 @@ public partial class MainWindowViewModel : ObservableObject
       FileTypeChoices = new[] { _saveFileFilter }
     };
 
-    var file = await Common.MainWindow.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
+    var file = await Utils.Common.MainWindow.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
     if (file is null)
       return;
 
@@ -82,14 +82,14 @@ public partial class MainWindowViewModel : ObservableObject
       CurrentFilePath = filePath;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
         "The file was saved successfully at " + CurrentFilePath,
-        ButtonEnum.Ok, Icon.Warning).ShowDialog(Common.MainWindow);
+        ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.Common.MainWindow);
       _fileSaved = true;
     }
     catch (Exception ex)
     {
       var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
         "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
-      await msg.ShowDialog(Common.MainWindow);
+      await msg.ShowDialog(Utils.Common.MainWindow);
     }
     finally
     {
@@ -110,7 +110,7 @@ public partial class MainWindowViewModel : ObservableObject
       var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use", "An unsaved file is currently in use, " +
                                                                              "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
         ButtonEnum.YesNo, Icon.Warning);
-      var result = await msg.ShowDialog(Common.MainWindow);
+      var result = await msg.ShowDialog(Utils.Common.MainWindow);
       if (result == ButtonResult.No)
         return;
     }
@@ -129,7 +129,7 @@ public partial class MainWindowViewModel : ObservableObject
       var result = await MessageBoxManager.GetMessageBoxStandardWindow("File in use",
         "An unsaved file is currently in use, " +
         "opening a file will loose all unsaved changes,\nare you sure you want to proceed?",
-        ButtonEnum.YesNo, Icon.Warning).ShowDialog(Common.MainWindow);
+        ButtonEnum.YesNo, Icon.Warning).ShowDialog(Utils.Common.MainWindow);
       if (result == ButtonResult.No)
         return;
     }
@@ -138,7 +138,7 @@ public partial class MainWindowViewModel : ObservableObject
     {
       Title = "Select a Bug Fables save file", AllowMultiple = false, FileTypeFilter = new[] { _saveFileFilter }
     };
-    var files = await Common.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
+    var files = await Utils.Common.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
     if (files.Count == 0)
       return;
 
@@ -156,7 +156,7 @@ public partial class MainWindowViewModel : ObservableObject
       SaveData.ResetToDefault();
       var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
         "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
-      await msg.ShowDialog(Common.MainWindow);
+      await msg.ShowDialog(Utils.Common.MainWindow);
     }
     finally
     {
@@ -167,6 +167,6 @@ public partial class MainWindowViewModel : ObservableObject
   [RelayCommand]
   private void Exit()
   {
-    Common.MainWindow.Close();
+    Utils.Common.MainWindow.Close();
   }
 }

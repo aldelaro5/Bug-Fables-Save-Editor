@@ -19,7 +19,7 @@ public class AboutView : Window
     this.AttachDevTools();
 #endif
 
-    lblVersion = this.FindControl<Label>("lblVersion");
+    lblVersion = this.FindControl<Label>("lblVersion")!;
     lblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
 
     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

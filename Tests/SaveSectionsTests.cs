@@ -1,6 +1,6 @@
 using System.Globalization;
-using BugFablesSaveEditor.BugFablesEnums;
 using BugFablesSaveEditor.BugFablesSave;
+using BugFablesSaveEditor.Utils;
 using Xunit;
 
 namespace BugFablesSaveEditor.Tests;

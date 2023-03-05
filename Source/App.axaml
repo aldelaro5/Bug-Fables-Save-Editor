@@ -1,6 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:BugFablesSaveEditor"
+             xmlns:common="clr-namespace:BugFablesSaveEditor.Utils"
              RequestedThemeVariant="Dark"
              x:Class="BugFablesSaveEditor.App">
   <Application.DataTemplates>
@@ -8,8 +9,8 @@
   </Application.DataTemplates>
 
   <Application.Resources>
-    <local:EnumValueConverter x:Key="EnumConverter" />
-    <local:EnumToDescriptionConverter x:Key="EnumDescriptionConverter" />
+    <common:EnumValueConverter x:Key="EnumConverter" />
+    <common:EnumToDescriptionConverter x:Key="EnumDescriptionConverter" />
   </Application.Resources>
 
   <Application.Styles>

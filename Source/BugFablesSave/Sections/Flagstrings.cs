@@ -78,7 +78,7 @@ public class Flagstrings : IBugFablesSaveSection
     private string _description = "";
     private int _index;
 
-    private string _str;
+    private string _str = "";
 
     public int Index
     {

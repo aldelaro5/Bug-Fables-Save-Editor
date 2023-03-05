@@ -16,23 +16,23 @@ public class Header : IBugFablesSaveSection
     StringBuilder sb = new();
 
     sb.Append(headerInfo.PositionX.ToString(NumberFormatInfo.InvariantInfo));
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.PositionY.ToString(NumberFormatInfo.InvariantInfo));
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.PositionZ.ToString(NumberFormatInfo.InvariantInfo));
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.IsRuigee);
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.IsHardest);
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.IsFrameone);
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.IsPushrock);
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.IsMorefarm);
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.IsMystery);
-    sb.Append(Common.FieldSeparator);
+    sb.Append(Utils.Common.FieldSeparator);
     sb.Append(headerInfo.Filename);
 
     return sb.ToString();
@@ -40,7 +40,7 @@ public class Header : IBugFablesSaveSection
 
   public void ParseFromSaveLine(string saveLine)
   {
-    string[] data = saveLine.Split(Common.FieldSeparator);
+    string[] data = saveLine.Split(Utils.Common.FieldSeparator);
 
     if (data.Length != 10)
     {

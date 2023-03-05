@@ -4,31 +4,29 @@ using System.Globalization;
 using System.Reflection;
 using Avalonia.Data.Converters;
 
-namespace BugFablesSaveEditor;
+namespace BugFablesSaveEditor.Utils;
 
 public class EnumToDescriptionConverter : IValueConverter
 {
-  public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+  public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
   {
-    if (value == null)
-    {
+    if (value is null || parameter is null)
       return "";
-    }
 
-    string enumValueName = "";
-    if (value is int)
+    string enumValueName;
+    if (value is int i)
     {
       string[] values = Enum.GetNames((Type)parameter);
-      if ((int)value >= values.Length - 1)
+      if (i >= values.Length - 1)
       {
-        return "UNUSED " + (int)value;
+        return "UNUSED " + i;
       }
 
-      enumValueName = values[(int)value];
+      enumValueName = values[i];
     }
     else
     {
-      enumValueName = value.ToString();
+      enumValueName = value.ToString() ?? string.Empty;
     }
 
     MemberInfo[] memberInfo = ((Type)parameter).GetMember(enumValueName);
@@ -41,10 +39,10 @@ public class EnumToDescriptionConverter : IValueConverter
       }
     }
 
-    return value.ToString();
+    return value.ToString() ?? string.Empty;
   }
 
-  public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+  public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
   {
     throw new NotSupportedException();
   }

@@ -40,7 +40,7 @@ public class Flags : IBugFablesSaveSection
 
       if (i != flags.Length - 1)
       {
-        sb.Append(Common.FieldSeparator);
+        sb.Append(Utils.Common.FieldSeparator);
       }
     }
 
@@ -49,7 +49,7 @@ public class Flags : IBugFablesSaveSection
 
   public void ParseFromSaveLine(string saveLine)
   {
-    string[] flagsData = saveLine.Split(Common.FieldSeparator);
+    string[] flagsData = saveLine.Split(Utils.Common.FieldSeparator);
 
     FlagInfo[] flags = (FlagInfo[])Data;
 

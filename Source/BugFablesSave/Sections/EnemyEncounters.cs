@@ -23,7 +23,7 @@ public class EnemyEncounters : IBugFablesSaveSection
 
   public void ParseFromSaveLine(string saveLine)
   {
-    string[] enemyEncountersData = saveLine.Split(Common.ElementSeparator);
+    string[] enemyEncountersData = saveLine.Split(Utils.Common.ElementSeparator);
     if (enemyEncountersData.Length != nbrSlots)
     {
       throw new Exception(nameof(EnemyEncounters) + " is in an invalid format");
@@ -33,7 +33,7 @@ public class EnemyEncounters : IBugFablesSaveSection
 
     for (int i = 0; i < enemyEncountersData.Length; i++)
     {
-      string[] data = enemyEncountersData[i].Split(Common.FieldSeparator);
+      string[] data = enemyEncountersData[i].Split(Utils.Common.FieldSeparator);
       if (data.Length != 2)
         throw new Exception($"The enemy encounter at index {i} is not well formatted");
 
@@ -67,12 +67,12 @@ public class EnemyEncounters : IBugFablesSaveSection
     for (int i = 0; i < enemyEncounters.Length; i++)
     {
       sb.Append(enemyEncounters[i].NbrSeen);
-      sb.Append(Common.FieldSeparator);
+      sb.Append(Utils.Common.FieldSeparator);
       sb.Append(enemyEncounters[i].NbrDefeated);
 
       if (i != enemyEncounters.Length - 1)
       {
-        sb.Append(Common.ElementSeparator);
+        sb.Append(Utils.Common.ElementSeparator);
       }
     }
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BugFablesSaveEditor.BugFablesEnums;
+namespace BugFablesSaveEditor.Utils;
 
 public enum SaveFileSection
 {

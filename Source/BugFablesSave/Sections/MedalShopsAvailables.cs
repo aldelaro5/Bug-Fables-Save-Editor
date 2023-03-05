@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using BugFablesSaveEditor.BugFablesEnums;
+using BugFablesSaveEditor.Utils;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 

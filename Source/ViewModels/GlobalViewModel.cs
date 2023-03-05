@@ -1,5 +1,5 @@
-﻿using BugFablesSaveEditor.BugFablesEnums;
-using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesSaveEditor.BugFablesSave;
+using BugFablesSaveEditor.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -11,7 +11,7 @@ public partial class GlobalViewModel : ObservableObject
 
   [ObservableProperty]
   private string[] _maps = null!;
-  
+
   [ObservableProperty]
   private SaveData _saveData = null!;
 
