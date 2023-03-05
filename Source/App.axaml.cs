@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
@@ -7,8 +5,6 @@ using Avalonia.Markup.Xaml;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor;
 
