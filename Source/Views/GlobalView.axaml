@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="550"
              x:Class="BugFablesSaveEditor.Views.GlobalView">
   <Design.DataContext>
-    <vm:DesignSaveDataViewModel />
+    <vm:GlobalViewModel />
   </Design.DataContext>
 
   <StackPanel HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Orientation="Vertical">
@@ -37,16 +37,16 @@
             <StackPanel Orientation="Horizontal">
               <Label VerticalContentAlignment="Center" Content="Current area" />
               <ComboBox
-                SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentArea, 
-                               Converter={StaticResource EnumConverter}, 
+                SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentArea,
+                               Converter={StaticResource EnumConverter},
                                ConverterParameter={x:Type bf:Area}}"
                 Items="{Binding Areas}" Width="200" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
               <Label VerticalContentAlignment="Center" Content="Current map" />
               <ComboBox
-                SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentMap, 
-                               Converter={StaticResource EnumConverter}, 
+                SelectedIndex="{Binding SaveData.Sections[Global].Data.CurrentMap,
+                               Converter={StaticResource EnumConverter},
                                ConverterParameter={x:Type bf:Map}}"
                 Items="{Binding Maps}" Width="200" />
             </StackPanel>
@@ -99,8 +99,8 @@
         <StackPanel Orientation="Horizontal">
           <Label VerticalContentAlignment="Center" Content="Rightmost progress icon" />
           <ComboBox
-            SelectedIndex="{Binding SaveData.Sections[Global].Data.SaveProgressIcons, 
-                               Converter={StaticResource EnumConverter}, 
+            SelectedIndex="{Binding SaveData.Sections[Global].Data.SaveProgressIcons,
+                               Converter={StaticResource EnumConverter},
                                ConverterParameter={x:Type bf:SaveProgressIcon}}"
             Items="{Binding SaveProgressIcons}" Width="170" />
         </StackPanel>

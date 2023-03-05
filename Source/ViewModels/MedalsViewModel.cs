@@ -22,23 +22,23 @@ public partial class MedalsViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private ObservableCollection<MedalInfo> _medals;
+  private ObservableCollection<MedalInfo> _medals = null!;
   [ObservableProperty]
-  private string[] _medalsEquipTargetNames;
+  private string[] _medalsEquipTargetNames = null!;
   [ObservableProperty]
-  private ObservableCollection<MedalShopAvailable> _MedalsMerabAvailables;
+  private ObservableCollection<MedalShopAvailable> _MedalsMerabAvailables = null!;
   [ObservableProperty]
-  private ObservableCollection<MedalShopPool> _medalsMerabPools;
+  private ObservableCollection<MedalShopPool> _medalsMerabPools = null!;
 
   [ObservableProperty]
-  private string[] _medalsNames;
+  private string[] _medalsNames = null!;
   [ObservableProperty]
-  private ObservableCollection<MedalShopAvailable> _MedalsShadesAvailables;
+  private ObservableCollection<MedalShopAvailable> _MedalsShadesAvailables = null!;
   [ObservableProperty]
-  private ObservableCollection<MedalShopPool> _medalsShadesPools;
+  private ObservableCollection<MedalShopPool> _medalsShadesPools = null!;
 
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderMedalsUpCommand))]
@@ -72,11 +72,8 @@ public partial class MedalsViewModel : ObservableObject
   [ObservableProperty]
   private Medal _selectedMedalShadesPoolForAdd;
 
-  public MedalsViewModel()
+  public MedalsViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialize();
-
     Medals.Add(new MedalInfo { Medal = (Medal)7 });
     Medals.Add(new MedalInfo { Medal = (Medal)51 });
     Medals.Add(new MedalInfo { Medal = (Medal)78 });
@@ -101,7 +98,17 @@ public partial class MedalsViewModel : ObservableObject
   public MedalsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialize();
+    MedalsNames = Common.GetEnumDescriptions<Medal>();
+    MedalsEquipTargetNames = Common.GetEnumDescriptions<MedalEquipTarget>();
+    Medals = (ObservableCollection<MedalInfo>)SaveData.Sections[SaveFileSection.Medals].Data;
+    ObservableCollection<MedalShopPool>[] medalsPoolArray =
+      (ObservableCollection<MedalShopPool>[])SaveData.Sections[SaveFileSection.MedalShopsPools].Data;
+    ObservableCollection<MedalShopAvailable>[] medalsAvailableArray =
+      (ObservableCollection<MedalShopAvailable>[])SaveData.Sections[SaveFileSection.MedalShopsAvailables].Data;
+    MedalsMerabPools = medalsPoolArray[(int)MedalShop.Merab];
+    MedalsMerabAvailables = medalsAvailableArray[(int)MedalShop.Merab];
+    MedalsShadesPools = medalsPoolArray[(int)MedalShop.Shades];
+    MedalsShadesAvailables = medalsAvailableArray[(int)MedalShop.Shades];
   }
 
   public MedalEquipTarget SelectedMedalEquipTargetForAdd { get; set; }
@@ -206,21 +213,6 @@ public partial class MedalsViewModel : ObservableObject
     return MedalsShadesAvailables.Count > 0 && SelectedMedalShadesAvailable is not null && MedalsShadesAvailables[^1] != SelectedMedalShadesAvailable;
   }
 
-  private void Initialize()
-  {
-    MedalsNames = Common.GetEnumDescriptions<Medal>();
-    MedalsEquipTargetNames = Common.GetEnumDescriptions<MedalEquipTarget>();
-    Medals = (ObservableCollection<MedalInfo>)SaveData.Sections[SaveFileSection.Medals].Data;
-    ObservableCollection<MedalShopPool>[] medalsPoolArray =
-      (ObservableCollection<MedalShopPool>[])SaveData.Sections[SaveFileSection.MedalShopsPools].Data;
-    ObservableCollection<MedalShopAvailable>[] medalsAvailableArray =
-      (ObservableCollection<MedalShopAvailable>[])SaveData.Sections[SaveFileSection.MedalShopsAvailables].Data;
-    MedalsMerabPools = medalsPoolArray[(int)MedalShop.Merab];
-    MedalsMerabAvailables = medalsAvailableArray[(int)MedalShop.Merab];
-    MedalsShadesPools = medalsPoolArray[(int)MedalShop.Shades];
-    MedalsShadesAvailables = medalsAvailableArray[(int)MedalShop.Shades];
-  }
-
   private void ReorderMedal(MedalsDataType dataType, ReorderDirection direction)
   {
     object selectedItem;
@@ -262,13 +254,9 @@ public partial class MedalsViewModel : ObservableObject
     int index = itemsCollection.IndexOf(selectedItem);
     int newIndex = index;
     if (direction == ReorderDirection.Up)
-    {
       newIndex--;
-    }
     else if (direction == ReorderDirection.Down)
-    {
       newIndex++;
-    }
 
     itemsCollection.Remove(selectedItem);
 

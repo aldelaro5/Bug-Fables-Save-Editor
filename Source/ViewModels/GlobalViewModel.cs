@@ -7,15 +7,20 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class GlobalViewModel : ObservableObject
 {
   [ObservableProperty]
-  private string[] _areas;
+  private string[] _areas = null!;
 
   [ObservableProperty]
-  private string[] _maps;
+  private string[] _maps = null!;
+  
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
-  private string[] _saveProgressIcons;
+  private string[] _saveProgressIcons = null!;
+
+  public GlobalViewModel() : this(new SaveData())
+  {
+  }
 
   public GlobalViewModel(SaveData saveData)
   {

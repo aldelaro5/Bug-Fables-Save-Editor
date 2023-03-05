@@ -18,15 +18,15 @@ public partial class PartyViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private string[] _animIDs;
+  private string[] _animIDs = null!;
   [ObservableProperty]
-  private ObservableCollection<Follower> _followers;
+  private ObservableCollection<Follower> _followers = null!;
 
   [ObservableProperty]
-  private ObservableCollection<PartyMemberInfo> _partyMembers;
+  private ObservableCollection<PartyMemberInfo> _partyMembers = null!;
 
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderFollowersUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderFollowersDownCommand))]
@@ -43,11 +43,8 @@ public partial class PartyViewModel : ObservableObject
   [ObservableProperty]
   private AnimID _selectedPartyMemberAnimIDForAdd = 0;
 
-  public PartyViewModel()
+  public PartyViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialise();
-
     PartyMembers.Add(new PartyMemberInfo { Trueid = (AnimID)198 });
     PartyMembers.Add(new PartyMemberInfo { Trueid = (AnimID)340 });
     PartyMembers.Add(new PartyMemberInfo { Trueid = (AnimID)297 });
@@ -60,7 +57,9 @@ public partial class PartyViewModel : ObservableObject
   public PartyViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialise();
+    AnimIDs = Common.GetEnumDescriptions<AnimID>();
+    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+    Followers = (ObservableCollection<Follower>)SaveData.Sections[SaveFileSection.Followers].Data;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderPartyMemberUp))]
@@ -103,13 +102,6 @@ public partial class PartyViewModel : ObservableObject
     return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 && Followers[^1] != SelectedFollower;
   }
 
-  private void Initialise()
-  {
-    AnimIDs = Common.GetEnumDescriptions<AnimID>();
-    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
-    Followers = (ObservableCollection<Follower>)SaveData.Sections[SaveFileSection.Followers].Data;
-  }
-
   private void ReorderAnimID(PartyType type, ReorderDirection direction)
   {
     object selectedItem;
@@ -134,13 +126,9 @@ public partial class PartyViewModel : ObservableObject
     int index = itemsCollection.IndexOf(selectedItem);
     int newIndex = index;
     if (direction == ReorderDirection.Up)
-    {
       newIndex--;
-    }
     else if (direction == ReorderDirection.Down)
-    {
       newIndex++;
-    }
 
     itemsCollection.Remove(selectedItem);
 

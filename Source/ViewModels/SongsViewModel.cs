@@ -10,7 +10,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class SongsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderSongsUpCommand))]
@@ -20,17 +20,16 @@ public partial class SongsViewModel : ObservableObject
   [ObservableProperty]
   private Song _selectedSongForAdd;
 
-  [ObservableProperty]
-  private ObservableCollection<SongInfo> _songs;
+  [ObservableProperty] private bool _songForAddIsBought;
 
   [ObservableProperty]
-  private string[] _songsNames;
+  private ObservableCollection<SongInfo> _songs = null!;
 
-  public SongsViewModel()
+  [ObservableProperty]
+  private string[] _songsNames = null!;
+
+  public SongsViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialize();
-
     Songs.Add(new SongInfo { Song = (Song)51, IsBought = true });
     Songs.Add(new SongInfo { Song = (Song)67, IsBought = false });
     Songs.Add(new SongInfo { Song = (Song)43, IsBought = true });
@@ -39,10 +38,9 @@ public partial class SongsViewModel : ObservableObject
   public SongsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialize();
+    SongsNames = Common.GetEnumDescriptions<Song>();
+    Songs = (ObservableCollection<SongInfo>)SaveData.Sections[SaveFileSection.SamiraSongs].Data;
   }
-
-  public bool SongForAddIsBought { get; set; }
 
   [RelayCommand(CanExecute = nameof(CanReorderSongsUp))]
   private void CmdReorderSongsUp()
@@ -65,24 +63,14 @@ public partial class SongsViewModel : ObservableObject
     return Songs.Count > 0 && SelectedSong is not null && Songs[^1] != SelectedSong;
   }
 
-  private void Initialize()
-  {
-    SongsNames = Common.GetEnumDescriptions<Song>();
-    Songs = (ObservableCollection<SongInfo>)SaveData.Sections[SaveFileSection.SamiraSongs].Data;
-  }
-
   private void ReorderSong(ReorderDirection direction)
   {
     int index = Songs.IndexOf(SelectedSong);
     int newIndex = index;
     if (direction == ReorderDirection.Up)
-    {
       newIndex--;
-    }
     else if (direction == ReorderDirection.Down)
-    {
       newIndex++;
-    }
 
     Song song = SelectedSong.Song;
     bool isBought = SelectedSong.IsBought;

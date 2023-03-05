@@ -17,7 +17,7 @@ public partial class StatsViewModel : ObservableObject
   private ObservableCollection<PartyMemberInfo> _partyMembers = new();
 
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
   [NotifyPropertyChangedFor(nameof(TotalPartyMaxTPBonus))]
@@ -40,7 +40,7 @@ public partial class StatsViewModel : ObservableObject
   private StatBonusType _statBonusTypePartySelectedForAdd;
 
   [ObservableProperty]
-  private string[] _statBonusTypes;
+  private string[] _statBonusTypes = null!;
   [ObservableProperty]
   private int _statsBonusAmountMemberSelectedForAdd;
   [ObservableProperty]
@@ -50,17 +50,14 @@ public partial class StatsViewModel : ObservableObject
   private ObservableCollection<StatBonusInfo> _statsBonuses = new();
 
   [ObservableProperty]
-  private DataGridCollectionView _viewMemberStatsBonuses;
+  private DataGridCollectionView _viewMemberStatsBonuses = null!;
 
   [ObservableProperty]
-  private DataGridCollectionView _viewPartyStatsBonuses;
+  private DataGridCollectionView _viewPartyStatsBonuses = null!;
   private StatBonuses _statBonusesSection;
 
-  public StatsViewModel()
+  public StatsViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialise();
-    SetupViews();
     PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
     PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
     PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
@@ -76,7 +73,11 @@ public partial class StatsViewModel : ObservableObject
   public StatsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialise();
+    StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
+    _statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
+    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+    StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
+    StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
     SetupViews();
   }
 
@@ -111,9 +112,7 @@ public partial class StatsViewModel : ObservableObject
     get
     {
       if (SelectedMember == null)
-      {
         return 0;
-      }
 
       return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.HP);
     }
@@ -124,9 +123,7 @@ public partial class StatsViewModel : ObservableObject
     get
     {
       if (SelectedMember == null)
-      {
         return 0;
-      }
 
       return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Attack);
     }
@@ -137,21 +134,10 @@ public partial class StatsViewModel : ObservableObject
     get
     {
       if (SelectedMember == null)
-      {
         return 0;
-      }
 
       return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Defense);
     }
-  }
-
-  private void Initialise()
-  {
-    StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
-    _statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
-    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
-    StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
-    StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
   }
 
   private void SetupViews()
@@ -166,9 +152,7 @@ public partial class StatsViewModel : ObservableObject
   {
     StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
     if (SelectedMember == null)
-    {
       return false;
-    }
 
     return (int)statBonusInfo.Target == (int)SelectedMember.Trueid;
   }

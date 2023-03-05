@@ -10,14 +10,16 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class ItemsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ObservableCollection<ItemInfo> _items;
+  private ObservableCollection<ItemInfo> _items = null!;
 
   [ObservableProperty]
-  private string[] _itemsNames;
+  private string[] _itemsNames = null!;
+
   [ObservableProperty]
-  private ObservableCollection<ItemInfo> _keyItems;
+  private ObservableCollection<ItemInfo> _keyItems = null!;
+
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderItemsUpCommand))]
@@ -31,6 +33,7 @@ public partial class ItemsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(CmdReorderKeyItemsUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderKeyItemsDownCommand))]
   private ItemInfo? _selectedKeyItem;
+
   [ObservableProperty]
   private Item _selectedKeyItemForAdd;
 
@@ -38,16 +41,15 @@ public partial class ItemsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(CmdReorderStoredItemsUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderStoredItemsDownCommand))]
   private ItemInfo? _selectedStoredItem;
+
   [ObservableProperty]
   private Item _selectedStoredItemForAdd;
+
   [ObservableProperty]
-  private ObservableCollection<ItemInfo> _storedItems;
+  private ObservableCollection<ItemInfo> _storedItems = null!;
 
-  public ItemsViewModel()
+  public ItemsViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialize();
-
     Items.Add(new ItemInfo { Item = (Item)61 });
     Items.Add(new ItemInfo { Item = (Item)165 });
     Items.Add(new ItemInfo { Item = (Item)43 });
@@ -64,7 +66,12 @@ public partial class ItemsViewModel : ObservableObject
   public ItemsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialize();
+    ItemsNames = Common.GetEnumDescriptions<Item>();
+    ObservableCollection<ItemInfo>[] itemsArray =
+      (ObservableCollection<ItemInfo>[])SaveData.Sections[SaveFileSection.Items].Data;
+    Items = itemsArray[(int)ItemPossessionType.Inventory];
+    KeyItems = itemsArray[(int)ItemPossessionType.KeyItem];
+    StoredItems = itemsArray[(int)ItemPossessionType.Stored];
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderItemsUp))]
@@ -133,16 +140,6 @@ public partial class ItemsViewModel : ObservableObject
     return StoredItems.Count > 0 && SelectedStoredItem is not null && StoredItems[^1] != SelectedStoredItem;
   }
 
-  private void Initialize()
-  {
-    ItemsNames = Common.GetEnumDescriptions<Item>();
-    ObservableCollection<ItemInfo>[] itemsArray =
-      (ObservableCollection<ItemInfo>[])SaveData.Sections[SaveFileSection.Items].Data;
-    Items = itemsArray[(int)ItemPossessionType.Inventory];
-    KeyItems = itemsArray[(int)ItemPossessionType.KeyItem];
-    StoredItems = itemsArray[(int)ItemPossessionType.Stored];
-  }
-
   private void ReorderItem(ItemPossessionType possesionType, ReorderDirection direction)
   {
     ItemInfo selectedItem;
@@ -168,13 +165,9 @@ public partial class ItemsViewModel : ObservableObject
     int index = itemsCollection.IndexOf(selectedItem);
     int newIndex = index;
     if (direction == ReorderDirection.Up)
-    {
       newIndex--;
-    }
     else if (direction == ReorderDirection.Down)
-    {
       newIndex++;
-    }
 
     Item item = selectedItem.Item;
     itemsCollection.Remove(selectedItem);

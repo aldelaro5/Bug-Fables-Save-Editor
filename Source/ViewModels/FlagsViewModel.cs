@@ -16,6 +16,14 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class FlagsViewModel : ObservableObject
 {
+  private enum FlagsType
+  {
+    Flags,
+    Flagvars,
+    Flagstrings,
+    Regionals
+  }
+  
   [ObservableProperty]
   private bool _filterUnusedRegionals;
 
@@ -25,31 +33,31 @@ public partial class FlagsViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private FlagInfo[] _flags;
+  private FlagInfo[] _flags = null!;
 
   [ObservableProperty]
-  private DataGridCollectionView _flagsFiltered;
+  private DataGridCollectionView _flagsFiltered = null!;
 
   [ObservableProperty]
-  private FlagstringInfo[] _flagstrings;
+  private FlagstringInfo[] _flagstrings = null!;
   [ObservableProperty]
-  private DataGridCollectionView _flagstringsFiltered;
+  private DataGridCollectionView _flagstringsFiltered = null!;
 
   [ObservableProperty]
-  private FlagvarInfo[] _flagvars;
+  private FlagvarInfo[] _flagvars = null!;
   [ObservableProperty]
-  private DataGridCollectionView _flagvarsFiltered;
+  private DataGridCollectionView _flagvarsFiltered = null!;
 
   [ObservableProperty]
-  private RegionalInfo[] _regionals;
+  private RegionalInfo[] _regionals = null!;
   [ObservableProperty]
-  private DataGridCollectionView _regionalsFiltered;
+  private DataGridCollectionView _regionalsFiltered = null!;
 
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
-  private string _textFilterFlags;
+  private string _textFilterFlags = null!;
 
   partial void OnTextFilterFlagsChanged(string value)
   {
@@ -57,7 +65,7 @@ public partial class FlagsViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private string _textFilterFlagstrings;
+  private string _textFilterFlagstrings = null!;
 
   partial void OnTextFilterFlagstringsChanged(string value)
   {
@@ -65,7 +73,7 @@ public partial class FlagsViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private string _textFilterFlagvars;
+  private string _textFilterFlagvars = null!;
 
   partial void OnTextFilterFlagvarsChanged(string value)
   {
@@ -73,7 +81,7 @@ public partial class FlagsViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private string _textFilterRegionals;
+  private string _textFilterRegionals = null!;
 
 
   partial void OnTextFilterRegionalsChanged(string value)
@@ -84,20 +92,13 @@ public partial class FlagsViewModel : ObservableObject
   private GlobalInfo _globalInfo;
   private RegionalFlags _regionalFlags;
 
-  public FlagsViewModel()
+  public FlagsViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialise();
   }
 
   public FlagsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialise();
-  }
-
-  private void Initialise()
-  {
     Flags = (FlagInfo[])SaveData.Sections[SaveFileSection.Flags].Data;
     Flagvars = (FlagvarInfo[])SaveData.Sections[SaveFileSection.Flagvars].Data;
     Flagstrings = (FlagstringInfo[])SaveData.Sections[SaveFileSection.Flagstrings].Data;
@@ -166,9 +167,7 @@ public partial class FlagsViewModel : ObservableObject
         textFilter = TextFilterRegionals;
         RegionalInfo regional = (RegionalInfo)arg;
         if (regional.Description == "UNUSED" && !FilterUnusedRegionals)
-        {
           return false;
-        }
 
         flagIndex = regional.Index;
         flagDescription = regional.Description;
@@ -178,9 +177,7 @@ public partial class FlagsViewModel : ObservableObject
     }
 
     if (string.IsNullOrEmpty(textFilter))
-    {
       return true;
-    }
 
     StringBuilder sb = new();
     sb.Append(flagIndex).Append(' ');
@@ -195,13 +192,5 @@ public partial class FlagsViewModel : ObservableObject
       _regionalFlags.ChangeCurrentRegionalsArea(_globalInfo.CurrentArea);
       RegionalsFiltered.Refresh();
     }
-  }
-
-  private enum FlagsType
-  {
-    Flags,
-    Flagvars,
-    Flagstrings,
-    Regionals
   }
 }

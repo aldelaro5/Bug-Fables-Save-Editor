@@ -10,15 +10,15 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class QuestsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ObservableCollection<QuestInfo> _completedQuests;
+  private ObservableCollection<QuestInfo> _completedQuests = null!;
 
   [ObservableProperty]
-  private ObservableCollection<QuestInfo> _openQuests;
+  private ObservableCollection<QuestInfo> _openQuests = null!;
 
   [ObservableProperty]
-  private string[] _questsNames;
+  private string[] _questsNames = null!;
   [ObservableProperty]
-  private SaveData _saveData;
+  private SaveData _saveData = null!;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderCompletedQuestUpCommand))]
@@ -42,13 +42,10 @@ public partial class QuestsViewModel : ObservableObject
   [ObservableProperty]
   private Quest _selectedTakenQuestForAdd;
   [ObservableProperty]
-  private ObservableCollection<QuestInfo> _takenQuests;
+  private ObservableCollection<QuestInfo> _takenQuests = null!;
 
-  public QuestsViewModel()
+  public QuestsViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialize();
-
     OpenQuests.Add(new QuestInfo { Quest = (Quest)51 });
     OpenQuests.Add(new QuestInfo { Quest = (Quest)27 });
     OpenQuests.Add(new QuestInfo { Quest = (Quest)16 });
@@ -65,7 +62,12 @@ public partial class QuestsViewModel : ObservableObject
   public QuestsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialize();
+    QuestsNames = Common.GetEnumDescriptions<Quest>();
+    ObservableCollection<QuestInfo>[] questsArray =
+      (ObservableCollection<QuestInfo>[])SaveData.Sections[SaveFileSection.Quests].Data;
+    OpenQuests = questsArray[(int)QuestState.Open];
+    TakenQuests = questsArray[(int)QuestState.Taken];
+    CompletedQuests = questsArray[(int)QuestState.Completed];
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderOpenQuestUp))]
@@ -130,12 +132,6 @@ public partial class QuestsViewModel : ObservableObject
 
   private void Initialize()
   {
-    QuestsNames = Common.GetEnumDescriptions<Quest>();
-    ObservableCollection<QuestInfo>[] questsArray =
-      (ObservableCollection<QuestInfo>[])SaveData.Sections[SaveFileSection.Quests].Data;
-    OpenQuests = questsArray[(int)QuestState.Open];
-    TakenQuests = questsArray[(int)QuestState.Taken];
-    CompletedQuests = questsArray[(int)QuestState.Completed];
   }
 
   private void ReorderQuest(QuestState questState, ReorderDirection direction)
@@ -163,13 +159,9 @@ public partial class QuestsViewModel : ObservableObject
     int index = questsCollection.IndexOf(selectedQuest);
     int newIndex = index;
     if (direction == ReorderDirection.Up)
-    {
       newIndex--;
-    }
     else if (direction == ReorderDirection.Down)
-    {
       newIndex++;
-    }
 
     Quest quest = selectedQuest.Quest;
     questsCollection.Remove(selectedQuest);

@@ -11,39 +11,32 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class CrystalBerriesViewModel : ObservableObject
 {
-  [ObservableProperty]
-  private CrystalBerry[] _crystalBerries;
+  private readonly string[] _areas;
 
   [ObservableProperty]
-  private DataGridCollectionView _crystalBerriesFiltered;
+  private CrystalBerry[] _crystalBerries = null!;
 
   [ObservableProperty]
-  private SaveData _saveData;
+  private DataGridCollectionView _crystalBerriesFiltered = null!;
 
   [ObservableProperty]
-  private string _textFilter;
+  private SaveData _saveData = null!;
+
+  [ObservableProperty]
+  private string _textFilter = null!;
 
   partial void OnTextFilterChanged(string value)
   {
-    _crystalBerriesFiltered.Refresh();
+    CrystalBerriesFiltered.Refresh();
   }
 
-  private string[] _areas;
-
-  public CrystalBerriesViewModel()
+  public CrystalBerriesViewModel() : this(new SaveData())
   {
-    SaveData = new SaveData();
-    Initialise();
   }
 
   public CrystalBerriesViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Initialise();
-  }
-
-  private void Initialise()
-  {
     _areas = Common.GetEnumDescriptions<Area>();
     CrystalBerries = (CrystalBerry[])SaveData.Sections[SaveFileSection.CrystalBerries].Data;
     CrystalBerriesFiltered = new DataGridCollectionView(CrystalBerries);
