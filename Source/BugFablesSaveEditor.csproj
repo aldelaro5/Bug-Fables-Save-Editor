@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <StartupObject>BugFablesSaveEditor.Program</StartupObject>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
     <Version>0.1.0</Version>
     <Authors>Aldelaro5</Authors>
     <Product>Bug Fables Save Editor</Product>
