@@ -1,24 +1,19 @@
 using System;
 using System.Diagnostics;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using BugFablesSaveEditor.Utils;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Views;
 
-public class MainWindow : Window
+public partial class MainWindow : Window
 {
   public MainWindow()
   {
     InitializeComponent();
-#if DEBUG
-    this.AttachDevTools();
-#endif
-
+    
     SettingsManager.Load();
 
     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -35,16 +30,9 @@ public class MainWindow : Window
     Trace.AutoFlush = true;
   }
 
-  private void InitializeComponent()
-  {
-    AvaloniaXamlLoader.Load(this);
-  }
-
   public async void OnAbout_Click(object sender, RoutedEventArgs e)
   {
-    AboutView view = new();
-    view.Width = 500;
-    view.Height = 350;
+    AboutView view = new() { Width = 500, Height = 350 };
     await view.ShowDialog(Common.MainWindow);
   }
 

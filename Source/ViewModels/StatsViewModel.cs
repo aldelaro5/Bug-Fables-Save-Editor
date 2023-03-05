@@ -28,7 +28,7 @@ public partial class StatsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(AddMemberStatBonusCommand))]
   private PartyMemberInfo? _selectedMember;
 
-  partial void OnSelectedMemberChanged(PartyMemberInfo value)
+  partial void OnSelectedMemberChanged(PartyMemberInfo? value)
   {
     RefreshViews();
   }
