@@ -80,8 +80,8 @@ public partial class MainWindowViewModel : ObservableObject
       if (!file.TryGetUri(out Uri? fileUri))
         return;
 
-      SaveData.SaveToFile(fileUri.AbsolutePath);
-      CurrentFilePath = fileUri.AbsolutePath;
+      SaveData.SaveToFile(fileUri.LocalPath);
+      CurrentFilePath = fileUri.LocalPath;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
         "The file was saved successfully at " + CurrentFilePath,
         ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.Common.MainWindow);
@@ -150,8 +150,8 @@ public partial class MainWindowViewModel : ObservableObject
         return;
 
       SaveData.ResetToDefault();
-      SaveData.LoadFromFile(fileUri.AbsolutePath);
-      CurrentFilePath = fileUri.AbsolutePath;
+      SaveData.LoadFromFile(fileUri.LocalPath);
+      CurrentFilePath = fileUri.LocalPath;
       SaveInUse = true;
       _fileSaved = true;
     }
