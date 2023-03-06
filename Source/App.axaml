@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:BugFablesSaveEditor"
              xmlns:common="clr-namespace:BugFablesSaveEditor.Utils"
-             RequestedThemeVariant="Dark"
              x:Class="BugFablesSaveEditor.App">
   <Application.DataTemplates>
     <local:ViewLocator />
@@ -14,17 +13,10 @@
   </Application.Resources>
 
   <Application.Styles>
-    <FluentTheme />
+    <FluentTheme Mode="Dark"/>
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <Style Selector="DataGridColumnHeader TextBlock">
       <Setter Property="TextWrapping" Value="Wrap" />
-      <Setter Property="Foreground" Value="White"></Setter>
-    </Style>
-    <Style Selector="DataGridColumnHeader">
-      <Setter Property="Background" Value="Black"></Setter>
-    </Style>
-    <Style Selector="TabControl WrapPanel">
-      <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
   </Application.Styles>
 </Application>

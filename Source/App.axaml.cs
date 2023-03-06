@@ -19,9 +19,10 @@ public class App : Application
   {
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
+      // TODO: Uncomment this whenever we upgrade to 11 preview 6 or later
       // Line below is needed to remove Avalonia data validation.
       // Without this line you will get duplicate validations from both Avalonia and CT
-      BindingPlugins.DataValidators.RemoveAt(0);
+      // BindingPlugins.DataValidators.RemoveAt(0);
       desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel(new SaveData()) };
     }
 

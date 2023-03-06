@@ -77,9 +77,11 @@ public partial class MainWindowViewModel : ObservableObject
 
     try
     {
-      string filePath = file.Path.AbsolutePath;
-      SaveData.SaveToFile(filePath);
-      CurrentFilePath = filePath;
+      if (!file.TryGetUri(out Uri? fileUri))
+        return;
+
+      SaveData.SaveToFile(fileUri.AbsolutePath);
+      CurrentFilePath = fileUri.AbsolutePath;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
         "The file was saved successfully at " + CurrentFilePath,
         ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.Common.MainWindow);
@@ -144,10 +146,12 @@ public partial class MainWindowViewModel : ObservableObject
 
     try
     {
-      string filePath = files.First().Path.AbsolutePath;
+      if (!files.First().TryGetUri(out Uri? fileUri))
+        return;
+
       SaveData.ResetToDefault();
-      SaveData.LoadFromFile(filePath);
-      CurrentFilePath = filePath;
+      SaveData.LoadFromFile(fileUri.AbsolutePath);
+      CurrentFilePath = fileUri.AbsolutePath;
       SaveInUse = true;
       _fileSaved = true;
     }

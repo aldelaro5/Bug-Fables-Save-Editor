@@ -7,7 +7,7 @@ namespace BugFablesSaveEditor;
 
 public class ViewLocator : IDataTemplate
 {
-  public Control Build(object? data)
+  public IControl Build(object? data)
   {
     string? name = data?.GetType().FullName!.Replace("ViewModel", "View");
     Type? type = name is not null ? Type.GetType(name) : null;
