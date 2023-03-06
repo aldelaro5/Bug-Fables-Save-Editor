@@ -16,16 +16,6 @@ public partial class MainWindow : Window
     
     SettingsManager.Load();
 
-    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-    {
-      ExtendClientAreaToDecorationsHint = true;
-      ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-      ExtendClientAreaTitleBarHeightHint = -1;
-
-      WindowsTitleBar? windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
-      windowsTitleBar.IsVisible = true;
-    }
-
     Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
     Trace.AutoFlush = true;
   }

@@ -10,7 +10,6 @@
         Title="About Bug Fables Save Editor"
         Icon="/Assets/icon.png">
   <DockPanel>
-    <views:WindowsTitleBar IsVisible="False" Name="windowsTitleBar" />
     <DockPanel>
       <Image DockPanel.Dock="Top" Source="/Assets/icon.png"
              Height="128"

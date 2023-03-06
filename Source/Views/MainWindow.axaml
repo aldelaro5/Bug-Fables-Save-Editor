@@ -12,7 +12,6 @@
     <vm:MainWindowViewModel />
   </Design.DataContext>
   <DockPanel>
-    <views:WindowsTitleBar IsVisible="False" Name="windowsTitleBar" />
     <DockPanel>
       <Menu DockPanel.Dock="Top">
         <MenuItem Header="File">

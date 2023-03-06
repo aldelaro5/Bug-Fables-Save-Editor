@@ -21,16 +21,6 @@ public class AboutView : Window
 
     lblVersion = this.FindControl<Label>("lblVersion")!;
     lblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
-
-    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-    {
-      ExtendClientAreaToDecorationsHint = true;
-      ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-      ExtendClientAreaTitleBarHeightHint = -1;
-
-      WindowsTitleBar? windowsTitleBar = this.FindControl<WindowsTitleBar>("windowsTitleBar");
-      windowsTitleBar.IsVisible = true;
-    }
   }
 
   private void InitializeComponent()
