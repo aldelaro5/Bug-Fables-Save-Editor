@@ -8,27 +8,16 @@ using Avalonia.Markup.Xaml;
 
 namespace BugFablesSaveEditor.Views;
 
-public class AboutView : Window
+public partial class AboutView : Window
 {
-  private readonly Label lblVersion;
-
   public AboutView()
   {
     InitializeComponent();
-#if DEBUG
-    this.AttachDevTools();
-#endif
 
-    lblVersion = this.FindControl<Label>("lblVersion")!;
-    lblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
+    LblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
   }
 
-  private void InitializeComponent()
-  {
-    AvaloniaXamlLoader.Load(this);
-  }
-
-  public void OpenURL(string url)
+  public void OpenUrl(string url)
   {
     ProcessStartInfo processInfo = new()
     {
@@ -40,17 +29,17 @@ public class AboutView : Window
 
   public void OnWikiLink_Click(object sender, PointerPressedEventArgs e)
   {
-    OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/wiki");
+    OpenUrl(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/wiki");
   }
 
   public void OnGitHubLink_Click(object sender, PointerPressedEventArgs e)
   {
-    OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor");
+    OpenUrl(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor");
   }
 
   public void OnLicenseLink_Click(object sender, PointerPressedEventArgs e)
   {
-    OpenURL(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/blob/main/LICENSE");
+    OpenUrl(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/blob/main/LICENSE");
   }
 
   public void OnOkButton_Click(object sender, RoutedEventArgs e)

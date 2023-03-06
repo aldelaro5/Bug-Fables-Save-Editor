@@ -19,102 +19,19 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FlagsData\CrystalBerries.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Flags.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Flagstrings.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Flagvars.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\AncientCastle.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\AntKingdomCity.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\BanditHideout.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\BeeKingdomHive.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\BugariaOutskirts.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\ChomperCaves.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\DefiantRoot.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\FarGrasslands.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\FishingVillage.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\ForsakenLands.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\GiantsLair.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\GoldenHills.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\GoldenPath.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\GoldenSettlement.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\HoneyFactory.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\LostSands.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\MetalIsland.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\MetalLake.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\RubberPrison.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\SnakemouthDen.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\StreamMountain.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\TermiteCapitol.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\UpperSnakemouth.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\WaspKingdomHive.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FlagsData\Regionals\WildSwamplands.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="FlagsData\**\*.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.0-preview5" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.0-preview5" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.0-preview5" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview5" />
+    <PackageReference Include="Avalonia" Version="11.0.0-preview4" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.0-preview4" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview4" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.0-preview4" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview4" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-prev5" />
+    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-prev2" />
+    <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\MessageBoxView.axaml.cs">

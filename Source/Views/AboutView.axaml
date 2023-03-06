@@ -20,7 +20,7 @@
       <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
           <Label HorizontalContentAlignment="Center" Content="Version " FontWeight="Bold" />
-          <Label x:Name="lblVersion" FontWeight="Bold" />
+          <Label x:Name="LblVersion" FontWeight="Bold" />
         </StackPanel>
         <Label HorizontalContentAlignment="Center" Content="By Aldelaro5" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
