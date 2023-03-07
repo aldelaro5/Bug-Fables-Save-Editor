@@ -37,7 +37,8 @@ public class PartyMembers : IBugFablesSaveSection
       if (intOut < 0 || intOut >= (int)AnimID.COUNT)
       {
         throw new Exception(nameof(PartyMembers) + "[" + i + "]." +
-                            nameof(PartyMemberInfo.Trueid) + ": " + intOut + " is not a valid Anim ID");
+                            nameof(PartyMemberInfo.Trueid) + ": " + intOut +
+                            " is not a valid Anim ID");
       }
 
       newMemberInfo.Trueid = (AnimID)intOut;
@@ -97,7 +98,8 @@ public class PartyMembers : IBugFablesSaveSection
 
   public string EncodeToSaveLine()
   {
-    ObservableCollection<PartyMemberInfo> partyMemberInfos = (ObservableCollection<PartyMemberInfo>)Data;
+    ObservableCollection<PartyMemberInfo> partyMemberInfos =
+      (ObservableCollection<PartyMemberInfo>)Data;
     StringBuilder sb = new();
 
     for (int i = 0; i < partyMemberInfos.Count; i++)
@@ -129,7 +131,8 @@ public class PartyMembers : IBugFablesSaveSection
 
   public void ResetToDefault()
   {
-    ObservableCollection<PartyMemberInfo> partyMemberInfos = (ObservableCollection<PartyMemberInfo>)Data;
+    ObservableCollection<PartyMemberInfo> partyMemberInfos =
+      (ObservableCollection<PartyMemberInfo>)Data;
     partyMemberInfos.Clear();
   }
 

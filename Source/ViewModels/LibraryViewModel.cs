@@ -16,13 +16,16 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private DataGridCollectionView _discoveriesFiltered = null!;
+
   [ObservableProperty]
   private LibraryFlag[] _enemies = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _enemiesFiltered = null!;
 
   [ObservableProperty]
   private bool _filterUnusedDiscoveries;
+
   partial void OnFilterUnusedDiscoveriesChanged(bool value)
   {
     DiscoveriesFiltered.Refresh();
@@ -30,6 +33,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private bool _filterUnusedEnemies;
+
   partial void OnFilterUnusedEnemiesChanged(bool value)
   {
     EnemiesFiltered.Refresh();
@@ -37,6 +41,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private bool _filterUnusedRecipes;
+
   partial void OnFilterUnusedRecipesChanged(bool value)
   {
     RecipesFiltered.Refresh();
@@ -44,6 +49,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private bool _filterUnusedRecords;
+
   partial void OnFilterUnusedRecordsChanged(bool value)
   {
     RecordsFiltered.Refresh();
@@ -51,6 +57,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private bool _filterUnusedSeenAreas;
+
   partial void OnFilterUnusedSeenAreasChanged(bool value)
   {
     SeenAreasFiltered.Refresh();
@@ -58,11 +65,13 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private LibraryFlag[] _recipes = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _recipesFiltered = null!;
 
   [ObservableProperty]
   private LibraryFlag[] _records = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _recordsFiltered = null!;
 
@@ -71,11 +80,13 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private LibraryFlag[] _seenAreas = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _seenAreasFiltered = null!;
 
   [ObservableProperty]
   private string _textFilterDiscoveries = null!;
+
   partial void OnTextFilterDiscoveriesChanged(string value)
   {
     DiscoveriesFiltered.Refresh();
@@ -83,6 +94,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private string _textFilterEnemies = null!;
+
   partial void OnTextFilterEnemiesChanged(string value)
   {
     EnemiesFiltered.Refresh();
@@ -90,6 +102,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private string _textFilterRecipes = null!;
+
   partial void OnTextFilterRecipesChanged(string value)
   {
     RecipesFiltered.Refresh();
@@ -97,6 +110,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private string _textFilterRecords = null!;
+
   partial void OnTextFilterRecordsChanged(string value)
   {
     RecordsFiltered.Refresh();
@@ -104,6 +118,7 @@ public partial class LibraryViewModel : ObservableObject
 
   [ObservableProperty]
   private string _textFilterSeenAreas = null!;
+
   partial void OnTextFilterSeenAreasChanged(string value)
   {
     SeenAreasFiltered.Refresh();

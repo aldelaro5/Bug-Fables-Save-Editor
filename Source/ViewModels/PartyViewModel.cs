@@ -19,6 +19,7 @@ public partial class PartyViewModel : ObservableObject
 
   [ObservableProperty]
   private string[] _animIDs = null!;
+
   [ObservableProperty]
   private ObservableCollection<Follower> _followers = null!;
 
@@ -27,6 +28,7 @@ public partial class PartyViewModel : ObservableObject
 
   [ObservableProperty]
   private SaveData _saveData = null!;
+
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderFollowersUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderFollowersDownCommand))]
@@ -58,7 +60,8 @@ public partial class PartyViewModel : ObservableObject
   {
     SaveData = saveData;
     AnimIDs = Common.GetEnumDescriptions<AnimID>();
-    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+    PartyMembers =
+      (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
     Followers = (ObservableCollection<Follower>)SaveData.Sections[SaveFileSection.Followers].Data;
   }
 
@@ -67,9 +70,11 @@ public partial class PartyViewModel : ObservableObject
   {
     ReorderAnimID(PartyType.PartyMember, ReorderDirection.Up);
   }
+
   private bool CanReorderPartyMemberUp()
   {
-    return PartyMembers.Count > 0 && SelectedPartyMember is not null && PartyMembers.Count > 0 && PartyMembers[0] != SelectedPartyMember;
+    return PartyMembers.Count > 0 && SelectedPartyMember is not null && PartyMembers.Count > 0 &&
+           PartyMembers[0] != SelectedPartyMember;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderPartyMemberDown))]
@@ -77,9 +82,11 @@ public partial class PartyViewModel : ObservableObject
   {
     ReorderAnimID(PartyType.PartyMember, ReorderDirection.Down);
   }
+
   private bool CanReorderPartyMemberDown()
   {
-    return PartyMembers.Count > 0 && SelectedPartyMember is not null && PartyMembers.Count > 0 && PartyMembers[^1] != SelectedPartyMember;
+    return PartyMembers.Count > 0 && SelectedPartyMember is not null && PartyMembers.Count > 0 &&
+           PartyMembers[^1] != SelectedPartyMember;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderFollowerUp))]
@@ -87,9 +94,11 @@ public partial class PartyViewModel : ObservableObject
   {
     ReorderAnimID(PartyType.Follower, ReorderDirection.Up);
   }
+
   private bool CanReorderFollowerUp()
   {
-    return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 && Followers[0] != SelectedFollower;
+    return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 &&
+           Followers[0] != SelectedFollower;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderFollowerDown))]
@@ -97,9 +106,11 @@ public partial class PartyViewModel : ObservableObject
   {
     ReorderAnimID(PartyType.Follower, ReorderDirection.Down);
   }
+
   private bool CanReorderFollowerDown()
   {
-    return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 && Followers[^1] != SelectedFollower;
+    return Followers.Count > 0 && SelectedFollower is not null && Followers.Count > 0 &&
+           Followers[^1] != SelectedFollower;
   }
 
   private void ReorderAnimID(PartyType type, ReorderDirection direction)

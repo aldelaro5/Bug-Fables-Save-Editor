@@ -35,24 +35,28 @@ public class SamiraSongs : IBugFablesSaveSection
       int intOut = 0;
       if (!int.TryParse(data[0], out intOut))
       {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) + " failed to parse");
+        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) +
+                            " failed to parse");
       }
 
       if (intOut < 0 || intOut >= (int)Song.COUNT)
       {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) + ": " + intOut +
+        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) + ": " +
+                            intOut +
                             " is not a valid song ID");
       }
 
       newSong.Song = (Song)intOut;
       if (!int.TryParse(data[1], out intOut))
       {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) + " failed to parse");
+        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) +
+                            " failed to parse");
       }
 
       if (intOut != songNotBought && intOut != songBought)
       {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) + ": " + intOut +
+        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) +
+                            ": " + intOut +
                             " is not a valid song availability value");
       }
 

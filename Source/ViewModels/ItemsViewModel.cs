@@ -126,7 +126,8 @@ public partial class ItemsViewModel : ObservableObject
 
   private bool CanReorderStoredItemsUp()
   {
-    return StoredItems.Count > 0 && SelectedStoredItem is not null && StoredItems[0] != SelectedStoredItem;
+    return StoredItems.Count > 0 && SelectedStoredItem is not null &&
+           StoredItems[0] != SelectedStoredItem;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderStoredItemsDown))]
@@ -137,7 +138,8 @@ public partial class ItemsViewModel : ObservableObject
 
   private bool CanReorderStoredItemsDown()
   {
-    return StoredItems.Count > 0 && SelectedStoredItem is not null && StoredItems[^1] != SelectedStoredItem;
+    return StoredItems.Count > 0 && SelectedStoredItem is not null &&
+           StoredItems[^1] != SelectedStoredItem;
   }
 
   private void ReorderItem(ItemPossessionType possesionType, ReorderDirection direction)

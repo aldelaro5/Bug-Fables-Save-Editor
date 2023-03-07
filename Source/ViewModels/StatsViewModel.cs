@@ -20,9 +20,9 @@ public partial class StatsViewModel : ObservableObject
   private SaveData _saveData = null!;
 
   [ObservableProperty]
-  [NotifyPropertyChangedFor(nameof(TotalPartyMaxTPBonus))]
-  [NotifyPropertyChangedFor(nameof(TotalPartyMaxMPBonus))]
-  [NotifyPropertyChangedFor(nameof(TotalMemberMaxHPBonus))]
+  [NotifyPropertyChangedFor(nameof(TotalPartyMaxTpBonus))]
+  [NotifyPropertyChangedFor(nameof(TotalPartyMaxMpBonus))]
+  [NotifyPropertyChangedFor(nameof(TotalMemberMaxHpBonus))]
   [NotifyPropertyChangedFor(nameof(TotalMemberAttackBonus))]
   [NotifyPropertyChangedFor(nameof(TotalMemberDefenseBonus))]
   [NotifyCanExecuteChangedFor(nameof(AddMemberStatBonusCommand))]
@@ -41,8 +41,10 @@ public partial class StatsViewModel : ObservableObject
 
   [ObservableProperty]
   private string[] _statBonusTypes = null!;
+
   [ObservableProperty]
   private int _statsBonusAmountMemberSelectedForAdd;
+
   [ObservableProperty]
   private int _statsBonusAmountPartySelectedForAdd;
 
@@ -54,6 +56,7 @@ public partial class StatsViewModel : ObservableObject
 
   [ObservableProperty]
   private DataGridCollectionView _viewPartyStatsBonuses = null!;
+
   private StatBonuses _statBonusesSection;
 
   public StatsViewModel() : this(new SaveData())
@@ -62,12 +65,30 @@ public partial class StatsViewModel : ObservableObject
     PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
     PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
 
-    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party });
-    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party });
-    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.MP, Amount = 5, Target = StatBonusTarget.Party });
-    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.HP, Amount = 3, Target = StatBonusTarget.Vi });
-    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Attack, Amount = 4, Target = StatBonusTarget.Kabbu });
-    StatsBonuses.Add(new StatBonusInfo { Type = StatBonusType.Defense, Amount = 5, Target = StatBonusTarget.Leif });
+    StatsBonuses.Add(new StatBonusInfo
+    {
+      Type = StatBonusType.MP, Amount = 3, Target = StatBonusTarget.Party
+    });
+    StatsBonuses.Add(new StatBonusInfo
+    {
+      Type = StatBonusType.TP, Amount = 4, Target = StatBonusTarget.Party
+    });
+    StatsBonuses.Add(new StatBonusInfo
+    {
+      Type = StatBonusType.MP, Amount = 5, Target = StatBonusTarget.Party
+    });
+    StatsBonuses.Add(new StatBonusInfo
+    {
+      Type = StatBonusType.HP, Amount = 3, Target = StatBonusTarget.Vi
+    });
+    StatsBonuses.Add(new StatBonusInfo
+    {
+      Type = StatBonusType.Attack, Amount = 4, Target = StatBonusTarget.Kabbu
+    });
+    StatsBonuses.Add(new StatBonusInfo
+    {
+      Type = StatBonusType.Defense, Amount = 5, Target = StatBonusTarget.Leif
+    });
   }
 
   public StatsViewModel(SaveData saveData)
@@ -75,8 +96,10 @@ public partial class StatsViewModel : ObservableObject
     SaveData = saveData;
     StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
     _statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
-    PartyMembers = (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
-    StatsBonuses = (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
+    PartyMembers =
+      (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+    StatsBonuses =
+      (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
     StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
     SetupViews();
   }
@@ -87,6 +110,7 @@ public partial class StatsViewModel : ObservableObject
     ViewPartyStatsBonuses.Remove(info);
     RefreshViews();
   }
+
   private bool CanRemovePartyStatBonus(StatBonusInfo info)
   {
     return !ViewPartyStatsBonuses.IsEditingItem;
@@ -98,23 +122,27 @@ public partial class StatsViewModel : ObservableObject
     ViewMemberStatsBonuses.Remove(info);
     RefreshViews();
   }
+
   private bool CanRemoveMemberStatBonus(StatBonusInfo info)
   {
     return !ViewMemberStatsBonuses.IsEditingItem;
   }
 
-  public int TotalPartyMaxTPBonus => _statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.TP);
+  public int TotalPartyMaxTpBonus =>
+    _statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.TP);
 
-  public int TotalPartyMaxMPBonus => _statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.MP);
+  public int TotalPartyMaxMpBonus =>
+    _statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.MP);
 
-  public int TotalMemberMaxHPBonus
+  public int TotalMemberMaxHpBonus
   {
     get
     {
       if (SelectedMember == null)
         return 0;
 
-      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.HP);
+      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
+        StatBonusType.HP);
     }
   }
 
@@ -125,7 +153,8 @@ public partial class StatsViewModel : ObservableObject
       if (SelectedMember == null)
         return 0;
 
-      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Attack);
+      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
+        StatBonusType.Attack);
     }
   }
 
@@ -136,7 +165,8 @@ public partial class StatsViewModel : ObservableObject
       if (SelectedMember == null)
         return 0;
 
-      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid, StatBonusType.Defense);
+      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
+        StatBonusType.Defense);
     }
   }
 
@@ -201,9 +231,9 @@ public partial class StatsViewModel : ObservableObject
 
   private void OnSaveStatsBonusesChanged(object? sender, NotifyCollectionChangedEventArgs e)
   {
-    OnPropertyChanged(nameof(TotalPartyMaxTPBonus));
-    OnPropertyChanged(nameof(TotalPartyMaxMPBonus));
-    OnPropertyChanged(nameof(TotalMemberMaxHPBonus));
+    OnPropertyChanged(nameof(TotalPartyMaxTpBonus));
+    OnPropertyChanged(nameof(TotalPartyMaxMpBonus));
+    OnPropertyChanged(nameof(TotalMemberMaxHpBonus));
     OnPropertyChanged(nameof(TotalMemberAttackBonus));
     OnPropertyChanged(nameof(TotalMemberDefenseBonus));
     RefreshViews();

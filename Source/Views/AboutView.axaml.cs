@@ -1,10 +1,8 @@
 using System.Diagnostics;
 using System.Reflection;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 
 namespace BugFablesSaveEditor.Views;
 
@@ -14,16 +12,12 @@ public partial class AboutView : Window
   {
     InitializeComponent();
 
-    LblVersion.Content = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(3);
+    LblVersion.Content = Assembly.GetExecutingAssembly().GetName().Version?.ToString(3);
   }
 
   public void OpenUrl(string url)
   {
-    ProcessStartInfo processInfo = new()
-    {
-      FileName = url,
-      UseShellExecute = true
-    };
+    ProcessStartInfo processInfo = new() { FileName = url, UseShellExecute = true };
     Process.Start(processInfo);
   }
 

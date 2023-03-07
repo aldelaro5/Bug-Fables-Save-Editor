@@ -11,7 +11,8 @@ public class MedalShopsAvailables : IBugFablesSaveSection
 {
   public MedalShopsAvailables()
   {
-    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+    ObservableCollection<MedalShopAvailable>[] medals =
+      (ObservableCollection<MedalShopAvailable>[])Data;
 
     for (int i = 0; i < medals.Length; i++)
     {
@@ -19,7 +20,8 @@ public class MedalShopsAvailables : IBugFablesSaveSection
     }
   }
 
-  public object Data { get; set; } = new ObservableCollection<MedalShopAvailable>[(int)MedalShop.COUNT];
+  public object Data { get; set; } =
+    new ObservableCollection<MedalShopAvailable>[(int)MedalShop.COUNT];
 
   public void ParseFromSaveLine(string saveLine)
   {
@@ -29,7 +31,8 @@ public class MedalShopsAvailables : IBugFablesSaveSection
       throw new Exception(nameof(MedalShopsAvailables) + " is in an invalid format");
     }
 
-    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+    ObservableCollection<MedalShopAvailable>[] medals =
+      (ObservableCollection<MedalShopAvailable>[])Data;
 
     for (int i = 0; i < medalsAvailable.Length; i++)
     {
@@ -44,13 +47,15 @@ public class MedalShopsAvailables : IBugFablesSaveSection
         int intOut = 0;
         if (!int.TryParse(data[j], out intOut))
         {
-          throw new Exception(nameof(MedalShopsAvailables) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
+          throw new Exception(nameof(MedalShopsAvailables) + "[" +
+                              Enum.GetNames(typeof(MedalShop))[i] +
                               "][" + j + "] failed to parse");
         }
 
         if (intOut < 0 || intOut >= (int)Medal.COUNT)
         {
-          throw new Exception(nameof(MedalShopsAvailables) + "[" + Enum.GetNames(typeof(MedalShop))[i] +
+          throw new Exception(nameof(MedalShopsAvailables) + "[" +
+                              Enum.GetNames(typeof(MedalShop))[i] +
                               "][" + j + "]: " + intOut + " is not a valid medal ID");
         }
 
@@ -61,7 +66,8 @@ public class MedalShopsAvailables : IBugFablesSaveSection
 
   public string EncodeToSaveLine()
   {
-    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+    ObservableCollection<MedalShopAvailable>[] medals =
+      (ObservableCollection<MedalShopAvailable>[])Data;
     StringBuilder sb = new();
 
     for (int i = 0; i < medals.Length; i++)
@@ -87,7 +93,8 @@ public class MedalShopsAvailables : IBugFablesSaveSection
 
   public void ResetToDefault()
   {
-    ObservableCollection<MedalShopAvailable>[] medals = (ObservableCollection<MedalShopAvailable>[])Data;
+    ObservableCollection<MedalShopAvailable>[] medals =
+      (ObservableCollection<MedalShopAvailable>[])Data;
     foreach (ObservableCollection<MedalShopAvailable> collection in medals)
     {
       collection.Clear();

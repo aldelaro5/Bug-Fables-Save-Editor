@@ -20,7 +20,8 @@ public partial class SongsViewModel : ObservableObject
   [ObservableProperty]
   private Song _selectedSongForAdd;
 
-  [ObservableProperty] private bool _songForAddIsBought;
+  [ObservableProperty]
+  private bool _songForAddIsBought;
 
   [ObservableProperty]
   private ObservableCollection<SongInfo> _songs = null!;
@@ -58,6 +59,7 @@ public partial class SongsViewModel : ObservableObject
   {
     ReorderSong(ReorderDirection.Down);
   }
+
   private bool CanReorderSongsDown()
   {
     return Songs.Count > 0 && SelectedSong is not null && Songs[^1] != SelectedSong;

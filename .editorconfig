@@ -1,7 +1,7 @@
-﻿# editorconfig.org
+root = true
+# editorconfig.org
 
 # top-most EditorConfig file
-root = true
 
 # Default settings:
 # A newline ending every file
@@ -10,7 +10,20 @@ root = true
 insert_final_newline = true
 indent_style = space
 indent_size = 2
+end_of_line = lf
+max_line_length = 100
 trim_trailing_whitespace = true
+
+# ReSharper properties
+resharper_align_multiline_parameter = true
+resharper_braces_for_dowhile = required_for_multiline
+resharper_braces_for_for = required_for_multiline
+resharper_braces_for_foreach = required_for_multiline
+resharper_braces_for_while = required_for_multiline
+resharper_braces_for_using = required_for_multiline
+resharper_place_accessorholder_attribute_on_same_line = false
+resharper_place_field_attribute_on_same_line = false
+resharper_use_roslyn_logic_for_evident_types = true
 
 # C# files
 [*.cs]
@@ -149,3 +162,6 @@ csharp_space_between_square_brackets = false
 
 [*.{csproj,vbproj,proj,nativeproj,locproj}]
 charset = utf-8
+
+[*.{appxmanifest,asax,ascx,aspx,axaml,build,c,c++,cc,cginc,compute,cp,cpp,cs,cshtml,cu,cuh,cxx,dtd,fs,fsi,fsscript,fsx,fx,fxh,h,hh,hlsl,hlsli,hlslinc,hpp,hxx,inc,inl,ino,ipp,ixx,master,ml,mli,mpp,mq4,mq5,mqh,nuspec,paml,razor,resw,resx,shader,skin,tpp,usf,ush,vb,xaml,xamlx,xoml,xsd}]
+tab_width = 2

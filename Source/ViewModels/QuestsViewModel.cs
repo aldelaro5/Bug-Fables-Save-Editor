@@ -17,6 +17,7 @@ public partial class QuestsViewModel : ObservableObject
 
   [ObservableProperty]
   private string[] _questsNames = null!;
+
   [ObservableProperty]
   private SaveData _saveData = null!;
 
@@ -24,6 +25,7 @@ public partial class QuestsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(CmdReorderCompletedQuestUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderCompletedQuestDownCommand))]
   private QuestInfo? _selectedCompletedQuest;
+
   [ObservableProperty]
   private Quest _selectedCompletedQuestForAdd;
 
@@ -39,8 +41,10 @@ public partial class QuestsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(CmdReorderTakenQuestUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(CmdReorderTakenQuestDownCommand))]
   private QuestInfo? _selectedTakenQuest;
+
   [ObservableProperty]
   private Quest _selectedTakenQuestForAdd;
+
   [ObservableProperty]
   private ObservableCollection<QuestInfo> _takenQuests = null!;
 
@@ -75,9 +79,11 @@ public partial class QuestsViewModel : ObservableObject
   {
     ReorderQuest(QuestState.Open, ReorderDirection.Up);
   }
+
   private bool CanReorderOpenQuestUp()
   {
-    return OpenQuests.Count > 0 && SelectedOpenQuest is not null && OpenQuests[0] != SelectedOpenQuest;
+    return OpenQuests.Count > 0 && SelectedOpenQuest is not null &&
+           OpenQuests[0] != SelectedOpenQuest;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderOpenQuestDown))]
@@ -85,9 +91,11 @@ public partial class QuestsViewModel : ObservableObject
   {
     ReorderQuest(QuestState.Open, ReorderDirection.Down);
   }
+
   private bool CanReorderOpenQuestDown()
   {
-    return OpenQuests.Count > 0 && SelectedOpenQuest is not null && OpenQuests[^1] != SelectedOpenQuest;
+    return OpenQuests.Count > 0 && SelectedOpenQuest is not null &&
+           OpenQuests[^1] != SelectedOpenQuest;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderTakenQuestUp))]
@@ -95,9 +103,11 @@ public partial class QuestsViewModel : ObservableObject
   {
     ReorderQuest(QuestState.Taken, ReorderDirection.Up);
   }
+
   private bool CanReorderTakenQuestUp()
   {
-    return TakenQuests.Count > 0 && SelectedTakenQuest is not null && TakenQuests[0] != SelectedTakenQuest;
+    return TakenQuests.Count > 0 && SelectedTakenQuest is not null &&
+           TakenQuests[0] != SelectedTakenQuest;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderTakenQuestDown))]
@@ -105,9 +115,11 @@ public partial class QuestsViewModel : ObservableObject
   {
     ReorderQuest(QuestState.Taken, ReorderDirection.Down);
   }
+
   private bool CanReorderTakenQuestDown()
   {
-    return TakenQuests.Count > 0 && SelectedTakenQuest is not null && TakenQuests[^1] != SelectedTakenQuest;
+    return TakenQuests.Count > 0 && SelectedTakenQuest is not null &&
+           TakenQuests[^1] != SelectedTakenQuest;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderCompletedQuestUp))]
@@ -115,9 +127,11 @@ public partial class QuestsViewModel : ObservableObject
   {
     ReorderQuest(QuestState.Completed, ReorderDirection.Up);
   }
+
   private bool CanReorderCompletedQuestUp()
   {
-    return CompletedQuests.Count > 0 && SelectedCompletedQuest is not null && CompletedQuests[0] != SelectedCompletedQuest;
+    return CompletedQuests.Count > 0 && SelectedCompletedQuest is not null &&
+           CompletedQuests[0] != SelectedCompletedQuest;
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderCompletedQuestDown))]
@@ -125,13 +139,11 @@ public partial class QuestsViewModel : ObservableObject
   {
     ReorderQuest(QuestState.Completed, ReorderDirection.Down);
   }
+
   private bool CanReorderCompletedQuestDown()
   {
-    return CompletedQuests.Count > 0 && SelectedCompletedQuest is not null && CompletedQuests[^1] != SelectedCompletedQuest;
-  }
-
-  private void Initialize()
-  {
+    return CompletedQuests.Count > 0 && SelectedCompletedQuest is not null &&
+           CompletedQuests[^1] != SelectedCompletedQuest;
   }
 
   private void ReorderQuest(QuestState questState, ReorderDirection direction)

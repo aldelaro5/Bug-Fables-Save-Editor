@@ -60,7 +60,8 @@
                 <DataTemplate>
                   <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                           Command="{Binding $parent[DataGrid].DataContext.RemoveMedalCommand}"
-                          CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                          CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                          Width="25" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -98,7 +99,8 @@
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                             Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabPoolCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                            Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
               </DataGridTemplateColumn>
@@ -133,7 +135,8 @@
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                             Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesPoolCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                            Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
               </DataGridTemplateColumn>
@@ -152,7 +155,8 @@
                                   Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="180" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabAvailableCommand}" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalMerabAvailableCommand}" />
           </StackPanel>
           <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
             <Button Content="↑" Command="{Binding CmdReorderMedalsMerabAvailablesUpCommand}" />
@@ -172,7 +176,8 @@
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                             Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabAvailableCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                            Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
               </DataGridTemplateColumn>
@@ -187,7 +192,8 @@
                                   Converter={StaticResource EnumConverter},
                                   ConverterParameter={x:Type bf:Medal}}"
               Items="{Binding MedalsNames}" Width="180" />
-            <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesAvailableCommand}" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalShadesAvailableCommand}" />
           </StackPanel>
           <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
             <Button Content="↑" Command="{Binding CmdReorderMedalsShadesAvailablesUpCommand}" />
@@ -207,7 +213,8 @@
                   <DataTemplate>
                     <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                             Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesAvailableCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                            Width="25" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
               </DataGridTemplateColumn>

@@ -84,19 +84,22 @@ public class Header : IBugFablesSaveSection
     headerInfo.IsHardest = boolOut;
     if (!bool.TryParse(data[5], out boolOut))
     {
-      throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.IsFrameone) + " failed to parse");
+      throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.IsFrameone) +
+                          " failed to parse");
     }
 
     headerInfo.IsFrameone = boolOut;
     if (!bool.TryParse(data[6], out boolOut))
     {
-      throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.IsPushrock) + " failed to parse");
+      throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.IsPushrock) +
+                          " failed to parse");
     }
 
     headerInfo.IsPushrock = boolOut;
     if (!bool.TryParse(data[7], out boolOut))
     {
-      throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.IsMorefarm) + " failed to parse");
+      throw new Exception(nameof(Header) + "." + nameof(HeaderInfo.IsMorefarm) +
+                          " failed to parse");
     }
 
     headerInfo.IsMorefarm = boolOut;

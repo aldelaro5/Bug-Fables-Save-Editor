@@ -42,14 +42,16 @@ public class EnemyEncounters : IBugFablesSaveSection
       int intOut = 0;
       if (!int.TryParse(data[0], out intOut))
       {
-        throw new Exception(nameof(EnemyEncounters) + "[" + i + "]." + nameof(EnemyEncounterInfo.NbrSeen) +
+        throw new Exception(nameof(EnemyEncounters) + "[" + i + "]." +
+                            nameof(EnemyEncounterInfo.NbrSeen) +
                             " failed to parse");
       }
 
       newEnemyEncounterInfo.NbrSeen = intOut;
       if (!int.TryParse(data[1], out intOut))
       {
-        throw new Exception(nameof(EnemyEncounters) + "[" + i + "]." + nameof(EnemyEncounterInfo.NbrDefeated) +
+        throw new Exception(nameof(EnemyEncounters) + "[" + i + "]." +
+                            nameof(EnemyEncounterInfo.NbrDefeated) +
                             " failed to parse");
       }
 

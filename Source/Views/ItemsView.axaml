@@ -13,7 +13,8 @@
   <Grid ColumnDefinitions="50*,50*,50*">
     <DockPanel Grid.Column="0">
       <Label DockPanel.Dock="Top" Content="Items" />
-      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                  Orientation="Horizontal">
         <ComboBox
           SelectedIndex="{Binding SelectedItemForAdd,
                                   Converter={StaticResource EnumConverter},
@@ -39,7 +40,8 @@
               <DataTemplate>
                 <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                         Command="{Binding $parent[DataGrid].DataContext.RemoveItemCommand}"
-                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                        Width="25" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
@@ -48,7 +50,8 @@
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
       <Label DockPanel.Dock="Top" Content="Key items" />
-      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                  Orientation="Horizontal">
         <ComboBox
           SelectedIndex="{Binding SelectedKeyItemForAdd,
                                   Converter={StaticResource EnumConverter},
@@ -74,7 +77,8 @@
               <DataTemplate>
                 <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                         Command="{Binding $parent[DataGrid].DataContext.RemoveKeyItemCommand}"
-                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                        Width="25" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
@@ -83,7 +87,8 @@
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
       <Label DockPanel.Dock="Top" Content="Stored items" />
-      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                  Orientation="Horizontal">
         <ComboBox
           SelectedIndex="{Binding SelectedStoredItemForAdd,
                                   Converter={StaticResource EnumConverter},
@@ -109,7 +114,8 @@
               <DataTemplate>
                 <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
                         Command="{Binding $parent[DataGrid].DataContext.RemoveStoredItemCommand}"
-                        CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                        CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                        Width="25" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>

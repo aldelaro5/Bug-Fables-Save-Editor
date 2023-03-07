@@ -33,30 +33,35 @@ public class StatBonuses : IBugFablesSaveSection
       int intOut = 0;
       if (!int.TryParse(data[0], out intOut))
       {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Type) + " failed to parse");
+        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Type) +
+                            " failed to parse");
       }
 
       if (intOut < 0 || intOut >= (int)StatBonusType.COUNT)
       {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Type) + ": " + intOut +
+        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Type) +
+                            ": " + intOut +
                             " is not a valid stat bonus type ID");
       }
 
       newStatBonus.Type = (StatBonusType)intOut;
       if (!int.TryParse(data[1], out intOut))
       {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Amount) + " failed to parse");
+        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Amount) +
+                            " failed to parse");
       }
 
       newStatBonus.Amount = intOut;
       if (!int.TryParse(data[2], out intOut))
       {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Target) + " failed to parse");
+        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Target) +
+                            " failed to parse");
       }
 
       if (intOut < -1 || intOut >= (int)StatBonusTarget.COUNT)
       {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Target) + ": " + intOut +
+        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Target) +
+                            ": " + intOut +
                             " is not a valid stat bonus target value");
       }
 
@@ -109,7 +114,8 @@ public class StatBonuses : IBugFablesSaveSection
         .Sum(x => x.Amount);
     }
 
-    return statBonuses.Where(x => ((int)x.Target == target || x.Target == StatBonusTarget.Party) && x.Type == type)
+    return statBonuses.Where(x =>
+        ((int)x.Target == target || x.Target == StatBonusTarget.Party) && x.Type == type)
       .Sum(x => x.Amount);
   }
 

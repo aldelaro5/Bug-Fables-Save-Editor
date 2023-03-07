@@ -27,7 +27,8 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+            <DataGridTextColumn Header="Description" IsReadOnly="True"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -43,7 +44,8 @@
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
             <DataGridTextColumn Header="Value" Binding="{Binding Var}" />
-            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+            <DataGridTextColumn Header="Description" IsReadOnly="True"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -52,14 +54,16 @@
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagstrings}" />
+          <TextBox VerticalContentAlignment="Center" Margin="5"
+                   Text="{Binding TextFilterFlagstrings}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagstringsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
             <DataGridTextColumn Header="Value" Binding="{Binding Str}" />
-            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+            <DataGridTextColumn Header="Description" IsReadOnly="True"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -70,7 +74,8 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <CheckBox DockPanel.Dock="Right" VerticalContentAlignment="Center" Content="Show Unused"
                     IsChecked="{Binding FilterUnusedRegionals}" />
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRegionals}" />
+          <TextBox VerticalContentAlignment="Center" Margin="5"
+                   Text="{Binding TextFilterRegionals}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
@@ -83,7 +88,8 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+            <DataGridTextColumn Header="Description" IsReadOnly="True"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>

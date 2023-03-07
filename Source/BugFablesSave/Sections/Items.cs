@@ -19,7 +19,8 @@ public class Items : IBugFablesSaveSection
     }
   }
 
-  public object Data { get; set; } = new ObservableCollection<ItemInfo>[(int)ItemPossessionType.COUNT];
+  public object Data { get; set; } =
+    new ObservableCollection<ItemInfo>[(int)ItemPossessionType.COUNT];
 
   public void ParseFromSaveLine(string saveLine)
   {

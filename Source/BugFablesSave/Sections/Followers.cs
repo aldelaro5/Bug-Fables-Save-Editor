@@ -49,7 +49,8 @@ public class Followers : IBugFablesSaveSection
 
       if (intOut < 0 || intOut >= (int)AnimID.COUNT)
       {
-        throw new Exception(nameof(Followers) + "[" + i + "]: " + intOut + " is not a valid anim ID");
+        throw new Exception(
+          nameof(Followers) + "[" + i + "]: " + intOut + " is not a valid anim ID");
       }
 
       followers.Add(new Follower { AnimID = (AnimID)intOut });

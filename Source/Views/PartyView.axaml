@@ -28,7 +28,8 @@
           <Button Content="↓" Command="{Binding CmdReorderPartyMembersDownCommand}" />
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding PartyMembers}"
-                  HeadersVisibility="None" SelectedItem="{Binding SelectedPartyMember, Mode=TwoWay}">
+                  HeadersVisibility="None"
+                  SelectedItem="{Binding SelectedPartyMember, Mode=TwoWay}">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
                                 Binding="{Binding Trueid, Mode=OneWay,
@@ -40,7 +41,8 @@
                 <DataTemplate>
                   <Button Margin="5,0,0,0" IsEnabled="True" Content="-" Background="DarkRed"
                           Command="{Binding $parent[DataGrid].DataContext.RemovePartyMemberCommand}"
-                          CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
+                          CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                          Width="25" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -75,8 +77,10 @@
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <Button IsEnabled="True" Content="-" Command="{Binding $parent[DataGrid].DataContext.RemoveFollowerCommand}"
-                          CommandParameter="{Binding }" Width="25" Background="DarkRed" Margin="5,0,0,0"
+                  <Button IsEnabled="True" Content="-"
+                          Command="{Binding $parent[DataGrid].DataContext.RemoveFollowerCommand}"
+                          CommandParameter="{Binding }" Width="25" Background="DarkRed"
+                          Margin="5,0,0,0"
                           HorizontalContentAlignment="Center" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>

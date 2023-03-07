@@ -76,7 +76,8 @@ public class Global : IBugFablesSaveSection
     globalInfo.Exp = intOut;
     if (!int.TryParse(data[2], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.NeededExp) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.NeededExp) +
+                          " failed to parse");
     }
 
     globalInfo.NeededExp = intOut;
@@ -94,14 +95,16 @@ public class Global : IBugFablesSaveSection
     globalInfo.TP = intOut;
     if (!int.TryParse(data[5], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.BerryCount) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.BerryCount) +
+                          " failed to parse");
     }
 
     globalInfo.BerryCount = intOut;
 
     if (!int.TryParse(data[6], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.CurrentMap) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.CurrentMap) +
+                          " failed to parse");
     }
 
     if (intOut < 0 || intOut >= (int)Map.COUNT)
@@ -114,7 +117,8 @@ public class Global : IBugFablesSaveSection
 
     if (!int.TryParse(data[7], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.CurrentArea) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.CurrentArea) +
+                          " failed to parse");
     }
 
     if (intOut < 0 || intOut >= (int)Area.COUNT)
@@ -139,38 +143,44 @@ public class Global : IBugFablesSaveSection
     globalInfo.MaxMP = intOut;
     if (!int.TryParse(data[10], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.NbrMaxItemsInventory) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.NbrMaxItemsInventory) +
+                          " failed to parse");
     }
 
     globalInfo.NbrMaxItemsInventory = intOut;
     if (!int.TryParse(data[11], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.NbrMaxItemsStorage) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.NbrMaxItemsStorage) +
+                          " failed to parse");
     }
 
     globalInfo.NbrMaxItemsStorage = intOut;
     if (!int.TryParse(data[12], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.PlayTimeHours) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.PlayTimeHours) +
+                          " failed to parse");
     }
 
     globalInfo.PlayTimeHours = intOut;
     if (!int.TryParse(data[13], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.PlayTimeMinutes) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.PlayTimeMinutes) +
+                          " failed to parse");
     }
 
     globalInfo.PlayTimeMinutes = intOut;
     if (!int.TryParse(data[14], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.PlayTimeSeconds) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.PlayTimeSeconds) +
+                          " failed to parse");
     }
 
     globalInfo.PlayTimeSeconds = intOut;
 
     if (!int.TryParse(data[15], out intOut))
     {
-      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.SaveProgressIcons) + " failed to parse");
+      throw new Exception(nameof(GlobalInfo) + "." + nameof(GlobalInfo.SaveProgressIcons) +
+                          " failed to parse");
     }
 
     if (intOut < 0 || intOut >= (int)SaveProgressIcon.COUNT)

@@ -10,7 +10,8 @@
     <vm:SongsViewModel />
   </Design.DataContext>
   <DockPanel Width="505">
-    <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+    <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                Orientation="Horizontal">
       <ComboBox
         SelectedIndex="{Binding SelectedSongForAdd,
                                   Converter={StaticResource EnumConverter},

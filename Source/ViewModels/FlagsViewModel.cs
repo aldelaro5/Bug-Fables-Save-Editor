@@ -40,16 +40,19 @@ public partial class FlagsViewModel : ObservableObject
 
   [ObservableProperty]
   private FlagstringInfo[] _flagstrings = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _flagstringsFiltered = null!;
 
   [ObservableProperty]
   private FlagvarInfo[] _flagvars = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _flagvarsFiltered = null!;
 
   [ObservableProperty]
   private RegionalInfo[] _regionals = null!;
+
   [ObservableProperty]
   private DataGridCollectionView _regionalsFiltered = null!;
 

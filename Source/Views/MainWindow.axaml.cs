@@ -13,7 +13,7 @@ public partial class MainWindow : Window
   public MainWindow()
   {
     InitializeComponent();
-    
+
     SettingsManager.Load();
 
     Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));

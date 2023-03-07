@@ -45,7 +45,8 @@ public class SaveSectionsTests
   [InlineData(SaveFileSection.StatBonuses, Common.ElementSeparator)]
   [InlineData(SaveFileSection.Library, Common.ElementSeparator)]
   [InlineData(SaveFileSection.EnemyEncounters, Common.ElementSeparator)]
-  public void HeaderParsing_ShouldThrow_WhenIncorrectFieldsAmount(SaveFileSection section, string separator)
+  public void HeaderParsing_ShouldThrow_WhenIncorrectFieldsAmount(
+    SaveFileSection section, string separator)
   {
     string sectionData = saveLines[(int)section];
     IBugFablesSaveSection sud = new SaveData().Sections[section];

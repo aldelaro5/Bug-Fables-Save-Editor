@@ -75,7 +75,8 @@ public class Library : IBugFablesSaveSection
       {
         if (!bool.TryParse(data[j], out boolOut))
         {
-          throw new Exception(nameof(Library) + "[" + Enum.GetNames(typeof(LibrarySection))[i] + "][" + j +
+          throw new Exception(nameof(Library) + "[" + Enum.GetNames(typeof(LibrarySection))[i] +
+                              "][" + j +
                               "] failed to parse");
         }
 

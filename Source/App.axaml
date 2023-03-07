@@ -13,7 +13,7 @@
   </Application.Resources>
 
   <Application.Styles>
-    <FluentTheme Mode="Dark"/>
+    <FluentTheme Mode="Dark" />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <Style Selector="DataGridColumnHeader TextBlock">
       <Setter Property="TextWrapping" Value="Wrap" />

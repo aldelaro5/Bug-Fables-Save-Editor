@@ -13,7 +13,8 @@
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
       <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-      <Button DockPanel.Dock="Right" Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredCommand}" />
+      <Button DockPanel.Dock="Right" Margin="5" Content="Toggle All Shown"
+              Command="{Binding ToggleAllFilteredCommand}" />
       <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilter}" />
     </DockPanel>
     <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerriesFiltered}"

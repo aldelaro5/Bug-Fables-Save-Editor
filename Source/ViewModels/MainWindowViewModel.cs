@@ -11,36 +11,50 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-  private readonly FilePickerFileType _saveFileFilter = new("Bug Fables save (.dat)") { Patterns = new[] { "*.dat" } };
+  private readonly FilePickerFileType _saveFileFilter =
+    new("Bug Fables save (.dat)") { Patterns = new[] { "*.dat" } };
 
   private bool _fileSaved;
 
-  [ObservableProperty] private CrystalBerriesViewModel _crystalBerriesViewModel = null!;
+  [ObservableProperty]
+  private CrystalBerriesViewModel _crystalBerriesViewModel = null!;
 
-  [ObservableProperty] private string _currentFilePath = "No save file, open an existing file or create a new one";
+  [ObservableProperty]
+  private string _currentFilePath = "No save file, open an existing file or create a new one";
 
-  [ObservableProperty] private FlagsViewModel _flagsViewModel = null!;
+  [ObservableProperty]
+  private FlagsViewModel _flagsViewModel = null!;
 
-  [ObservableProperty] private GlobalViewModel _globalViewModel = null!;
+  [ObservableProperty]
+  private GlobalViewModel _globalViewModel = null!;
 
-  [ObservableProperty] private ItemsViewModel _itemsViewModel = null!;
+  [ObservableProperty]
+  private ItemsViewModel _itemsViewModel = null!;
 
-  [ObservableProperty] private LibraryViewModel _libraryViewModel = null!;
+  [ObservableProperty]
+  private LibraryViewModel _libraryViewModel = null!;
 
-  [ObservableProperty] private MedalsViewModel _medalsViewModel = null!;
+  [ObservableProperty]
+  private MedalsViewModel _medalsViewModel = null!;
 
-  [ObservableProperty] private PartyViewModel _partyViewModel = null!;
+  [ObservableProperty]
+  private PartyViewModel _partyViewModel = null!;
 
-  [ObservableProperty] private QuestsViewModel _questsViewModel = null!;
+  [ObservableProperty]
+  private QuestsViewModel _questsViewModel = null!;
 
-  [ObservableProperty] private SaveData _saveData = null!;
+  [ObservableProperty]
+  private SaveData _saveData = null!;
 
-  [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(CmdSaveFileCommand))]
+  [ObservableProperty]
+  [NotifyCanExecuteChangedFor(nameof(CmdSaveFileCommand))]
   private bool _saveInUse;
 
-  [ObservableProperty] private SongsViewModel _songsViewModel = null!;
+  [ObservableProperty]
+  private SongsViewModel _songsViewModel = null!;
 
-  [ObservableProperty] private StatsViewModel _statsViewModel = null!;
+  [ObservableProperty]
+  private StatsViewModel _statsViewModel = null!;
 
   public MainWindowViewModel() : this(new SaveData())
   {
@@ -109,8 +123,9 @@ public partial class MainWindowViewModel : ObservableObject
   {
     if (SaveInUse && !_fileSaved)
     {
-      var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use", "An unsaved file is currently in use, " +
-                                                                             "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use",
+        "An unsaved file is currently in use, " +
+        "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
         ButtonEnum.YesNo, Icon.Warning);
       var result = await msg.ShowDialog(Utils.Common.MainWindow);
       if (result == ButtonResult.No)
@@ -138,9 +153,12 @@ public partial class MainWindowViewModel : ObservableObject
 
     FilePickerOpenOptions pickerOpenOptions = new()
     {
-      Title = "Select a Bug Fables save file", AllowMultiple = false, FileTypeFilter = new[] { _saveFileFilter }
+      Title = "Select a Bug Fables save file",
+      AllowMultiple = false,
+      FileTypeFilter = new[] { _saveFileFilter }
     };
-    var files = await Utils.Common.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
+    var files =
+      await Utils.Common.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
     if (files.Count == 0)
       return;
 

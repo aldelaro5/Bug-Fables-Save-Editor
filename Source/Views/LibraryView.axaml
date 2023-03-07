@@ -17,9 +17,11 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedDiscoveries}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredDiscoveriesCommand}" />
+            <Button Margin="5" Content="Toggle All Shown"
+                    Command="{Binding ToggleAllFilteredDiscoveriesCommand}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterDiscoveries}" />
+          <TextBox VerticalContentAlignment="Center" Margin="5"
+                   Text="{Binding TextFilterDiscoveries}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding DiscoveriesFiltered}"
                   HeadersVisibility="None">
@@ -46,7 +48,8 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedEnemies}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredEnemiesCommand}" />
+            <Button Margin="5" Content="Toggle All Shown"
+                    Command="{Binding ToggleAllFilteredEnemiesCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterEnemies}" />
         </DockPanel>
@@ -75,7 +78,8 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecipes}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecipesCommand}" />
+            <Button Margin="5" Content="Toggle All Shown"
+                    Command="{Binding ToggleAllFilteredRecipesCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecipes}" />
         </DockPanel>
@@ -104,7 +108,8 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecords}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredRecordsCommand}" />
+            <Button Margin="5" Content="Toggle All Shown"
+                    Command="{Binding ToggleAllFilteredRecordsCommand}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecords}" />
         </DockPanel>
@@ -133,9 +138,11 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedSeenAreas}" />
-            <Button Margin="5" Content="Toggle All Shown" Command="{Binding ToggleAllFilteredSeenAreasCommand}" />
+            <Button Margin="5" Content="Toggle All Shown"
+                    Command="{Binding ToggleAllFilteredSeenAreasCommand}" />
           </StackPanel>
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterSeenAreas}" />
+          <TextBox VerticalContentAlignment="Center" Margin="5"
+                   Text="{Binding TextFilterSeenAreas}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding SeenAreasFiltered}"
                   HeadersVisibility="None">

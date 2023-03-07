@@ -7,7 +7,7 @@ namespace BugFablesSaveEditor.Utils;
 public class EnumValueConverter : IValueConverter
 {
   public object Convert(object? value, Type targetType, object? parameter,
-    CultureInfo culture)
+                        CultureInfo culture)
   {
     int intValue = 0;
     if (parameter is Type)
@@ -19,7 +19,7 @@ public class EnumValueConverter : IValueConverter
   }
 
   public object? ConvertBack(object? value, Type targetType, object? parameter,
-    CultureInfo culture)
+                             CultureInfo culture)
   {
     Enum? enumValue = null;
     if (parameter is Type)

@@ -32,26 +32,30 @@ public class Medals : IBugFablesSaveSection
       int intOut = 0;
       if (!int.TryParse(data[0], out intOut))
       {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) + " failed to parse");
+        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) +
+                            " failed to parse");
       }
 
       if (intOut < 0 || intOut >= (int)Medal.COUNT)
       {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) + ": " + intOut +
+        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) + ": " +
+                            intOut +
                             " is not a valid medal ID");
       }
 
       newMedalEquip.Medal = (Medal)intOut;
       if (!int.TryParse(data[1], out intOut))
       {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) + " failed to parse");
+        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) +
+                            " failed to parse");
       }
 
       // Convert from save to our enum
       intOut += 2;
       if (intOut < 0 || intOut >= (int)MedalEquipTarget.COUNT)
       {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) + ": " + intOut +
+        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) +
+                            ": " + intOut +
                             " is not a valid medal equip target value");
       }
 
