@@ -1,7 +1,7 @@
 # Bug-Fables-Save-Editor
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Assets/icon.png" />
+  <img src="https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Source/Assets/icon.png"  alt="Bug Fables save editor icon"/>
 </p>
 
 | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/global.png) | ![Screenshot](https://raw.githubusercontent.com/aldelaro5/Bug-Fables-Save-Editor/main/Docs/items.png)   |
