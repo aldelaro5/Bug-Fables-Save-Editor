@@ -26,13 +26,5 @@ public class App : Application
     }
 
     base.OnFrameworkInitializationCompleted();
-
-    // TODO: Make this work
-    // RxApp.DefaultExceptionHandler = Observer.Create<Exception>(ex =>
-    // {
-    //   var msgBox = MessageBoxManager.GetMessageBoxStandardWindow("Unexpected error", "An unexpected error occured: " +
-    //                                                                           ex.Message, ButtonEnum.Ok, Icon.Error);
-    //   Task.Run(() => msgBox.ShowDialog(Common.MainWindow));
-    // });
   }
 }
