@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BugFablesSaveEditor.Views.MainWindow"
         Title="Bug Fables Save Editor"
-        Icon="/Assets/icon.png" Opened="OnLoaded"
+        Icon="/Assets/icon.png"
         WindowStartupLocation="CenterScreen">
   <Design.DataContext>
     <vm:MainWindowViewModel />
