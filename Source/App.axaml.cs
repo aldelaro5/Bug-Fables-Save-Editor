@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -26,5 +28,7 @@ public class App : Application
     }
 
     base.OnFrameworkInitializationCompleted();
+    Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+    Trace.AutoFlush = true;
   }
 }
