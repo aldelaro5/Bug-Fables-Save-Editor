@@ -4,7 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:bf="clr-namespace:BugFablesSaveEditor.Utils"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.ItemsView">
   <Design.DataContext>
     <vm:ItemsViewModel />
@@ -22,31 +22,7 @@
           Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItemCommand}" />
       </StackPanel>
-      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-        <Button Content="↑" Command="{Binding CmdReorderItemsUpCommand}" />
-        <Button Content="↓" Command="{Binding CmdReorderItemsDownCommand}" />
-      </StackPanel>
-      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                Items="{Binding Items}" IsReadOnly="True"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-        <DataGrid.Columns>
-          <DataGridTextColumn
-            Binding="{Binding Item, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Item}}"
-            Width="205" />
-          <DataGridTemplateColumn Width="50">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                        Command="{Binding $parent[DataGrid].DataContext.RemoveItemCommand}"
-                        CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                        Width="25" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        </DataGrid.Columns>
-      </DataGrid>
+      <UserControl Content="{Binding ItemsVm}"></UserControl>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
       <Label DockPanel.Dock="Top" Content="Key items" />
@@ -59,31 +35,7 @@
           Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItemCommand}" />
       </StackPanel>
-      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-        <Button Content="↑" Command="{Binding CmdReorderKeyItemsUpCommand}" />
-        <Button Content="↓" Command="{Binding CmdReorderKeyItemsDownCommand}" />
-      </StackPanel>
-      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                Items="{Binding KeyItems}" IsReadOnly="True"
-                SelectedItem="{Binding SelectedKeyItem, Mode=TwoWay}">
-        <DataGrid.Columns>
-          <DataGridTextColumn
-            Binding="{Binding Item, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Item}}"
-            Width="205" />
-          <DataGridTemplateColumn Width="50">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                        Command="{Binding $parent[DataGrid].DataContext.RemoveKeyItemCommand}"
-                        CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                        Width="25" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        </DataGrid.Columns>
-      </DataGrid>
+      <UserControl Content="{Binding KeyItemsVm}"></UserControl>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
       <Label DockPanel.Dock="Top" Content="Stored items" />
@@ -96,31 +48,7 @@
           Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItemCommand}" />
       </StackPanel>
-      <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-        <Button Content="↑" Command="{Binding CmdReorderStoredItemsUpCommand}" />
-        <Button Content="↓" Command="{Binding CmdReorderStoredItemsDownCommand}" />
-      </StackPanel>
-      <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                Items="{Binding StoredItems}" IsReadOnly="True"
-                SelectedItem="{Binding SelectedStoredItem, Mode=TwoWay}">
-        <DataGrid.Columns>
-          <DataGridTextColumn
-            Binding="{Binding Item, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Item}}"
-            Width="205" />
-          <DataGridTemplateColumn Width="50">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                        Command="{Binding $parent[DataGrid].DataContext.RemoveStoredItemCommand}"
-                        CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                        Width="25" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        </DataGrid.Columns>
-      </DataGrid>
+      <UserControl Content="{Binding StoredItemsVm}"></UserControl>
     </DockPanel>
   </Grid>
 </UserControl>

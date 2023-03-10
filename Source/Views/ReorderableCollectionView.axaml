@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BugFablesSaveEditor.Views.ReorderableCollectionView">
+  <DockPanel>
+    <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
+      <Button Content="↑" Command="{Binding ReorderSelectedElementUpCommand}" />
+      <Button Content="↓" Command="{Binding ReorderSelectedElementDownCommand}" />
+    </StackPanel>
+    <DataGrid AutoGenerateColumns="true" HeadersVisibility="Column"
+              Items="{Binding Collection}" IsReadOnly="True"
+              SelectedItem="{Binding SelectedElement, Mode=TwoWay}"
+              CanUserSortColumns="False" CanUserResizeColumns="True"
+              AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn"
+              LayoutUpdated="DataGrid_OnLayoutUpdated"
+              CellPointerPressed="DataGrid_OnCellPointerPressed">
+      <DataGrid.Columns>
+        <DataGridTemplateColumn Width="50">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
+                      Command="{Binding $parent[DataGrid].DataContext.RemoveElementCommand}"
+                      CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                      Width="25" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>

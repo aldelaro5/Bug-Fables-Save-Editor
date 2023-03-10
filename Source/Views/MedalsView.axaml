@@ -30,43 +30,7 @@
           <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
                   Command="{Binding UnequipAllMedalsCommand}" />
         </StackPanel>
-        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-          <Button Content="↑" Command="{Binding CmdReorderMedalsUpCommand}" />
-          <Button Content="↓" Command="{Binding CmdReorderMedalsDownCommand}" />
-        </StackPanel>
-        <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                  Items="{Binding Medals}" IsReadOnly="True"
-                  SelectedItem="{Binding SelectedMedal, Mode=TwoWay}">
-          <DataGrid.Columns>
-            <DataGridTextColumn
-              Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Medal}}"
-              Width="160" />
-            <DataGridTemplateColumn>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ComboBox
-                    SelectedIndex="{Binding MedalEquipTarget,
-                                      Converter={StaticResource EnumConverter},
-                                      ConverterParameter={x:Type bf:MedalEquipTarget}}"
-                    Width="130"
-                    Items="{Binding $parent[DataGrid].DataContext.MedalsEquipTargetNames}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Width="35">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                          Command="{Binding $parent[DataGrid].DataContext.RemoveMedalCommand}"
-                          CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                          Width="25" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-          </DataGrid.Columns>
-        </DataGrid>
+        <UserControl Content="{Binding MedalsVm}" />
       </DockPanel>
     </TabItem>
     <TabItem Header="Shop pools">
@@ -81,31 +45,7 @@
               Items="{Binding MedalsNames}" Width="185" />
             <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabPoolCommand}" />
           </StackPanel>
-          <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsMerabPoolsUpCommand}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsMerabPoolsDownCommand}" />
-          </StackPanel>
-          <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                    Items="{Binding MedalsMerabPools}" IsReadOnly="True"
-                    SelectedItem="{Binding SelectedMedalMerabPool, Mode=TwoWay}">
-            <DataGrid.Columns>
-              <DataGridTextColumn
-                Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Medal}}"
-                Width="160" />
-              <DataGridTemplateColumn Width="50">
-                <DataGridTemplateColumn.CellTemplate>
-                  <DataTemplate>
-                    <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabPoolCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                            Width="25" />
-                  </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-              </DataGridTemplateColumn>
-            </DataGrid.Columns>
-          </DataGrid>
+          <UserControl Content="{Binding MedalsMerabPoolsVm}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
           <Label DockPanel.Dock="Top" Content="Shades" />
@@ -117,31 +57,7 @@
               Items="{Binding MedalsNames}" Width="180" />
             <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesPoolCommand}" />
           </StackPanel>
-          <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsShadesPoolsUpCommand}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsShadesPoolsDownCommand}" />
-          </StackPanel>
-          <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                    Items="{Binding MedalsShadesPools}" IsReadOnly="True"
-                    SelectedItem="{Binding SelectedMedalShadesPool, Mode=TwoWay}">
-            <DataGrid.Columns>
-              <DataGridTextColumn
-                Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Medal}}"
-                Width="160" />
-              <DataGridTemplateColumn Width="50">
-                <DataGridTemplateColumn.CellTemplate>
-                  <DataTemplate>
-                    <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesPoolCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                            Width="25" />
-                  </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-              </DataGridTemplateColumn>
-            </DataGrid.Columns>
-          </DataGrid>
+          <UserControl Content="{Binding MedalsShadesPoolsVm}" />
         </DockPanel>
       </Grid>
     </TabItem>
@@ -158,31 +74,7 @@
             <Button Margin="5,0,0,0" Content="Add"
                     Command="{Binding AddMedalMerabAvailableCommand}" />
           </StackPanel>
-          <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsMerabAvailablesUpCommand}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsMerabAvailablesDownCommand}" />
-          </StackPanel>
-          <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                    Items="{Binding MedalsMerabAvailables}" IsReadOnly="True"
-                    SelectedItem="{Binding SelectedMedalMerabAvailable, Mode=TwoWay}">
-            <DataGrid.Columns>
-              <DataGridTextColumn
-                Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Medal}}"
-                Width="160" />
-              <DataGridTemplateColumn Width="50">
-                <DataGridTemplateColumn.CellTemplate>
-                  <DataTemplate>
-                    <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalMerabAvailableCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                            Width="25" />
-                  </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-              </DataGridTemplateColumn>
-            </DataGrid.Columns>
-          </DataGrid>
+          <UserControl Content="{Binding MedalsMerabAvailablesVm}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
           <Label DockPanel.Dock="Top" Content="Shades" />
@@ -195,31 +87,7 @@
             <Button Margin="5,0,0,0" Content="Add"
                     Command="{Binding AddMedalShadesAvailableCommand}" />
           </StackPanel>
-          <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-            <Button Content="↑" Command="{Binding CmdReorderMedalsShadesAvailablesUpCommand}" />
-            <Button Content="↓" Command="{Binding CmdReorderMedalsShadesAvailablesDownCommand}" />
-          </StackPanel>
-          <DataGrid AutoGenerateColumns="False" HeadersVisibility="None"
-                    Items="{Binding MedalsShadesAvailables}" IsReadOnly="True"
-                    SelectedItem="{Binding SelectedMedalShadesAvailable, Mode=TwoWay}">
-            <DataGrid.Columns>
-              <DataGridTextColumn
-                Binding="{Binding Medal, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Medal}}"
-                Width="160" />
-              <DataGridTemplateColumn Width="50">
-                <DataGridTemplateColumn.CellTemplate>
-                  <DataTemplate>
-                    <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                            Command="{Binding $parent[DataGrid].DataContext.RemoveMedalShadesAvailableCommand}"
-                            CommandParameter="{Binding }" HorizontalContentAlignment="Center"
-                            Width="25" />
-                  </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-              </DataGridTemplateColumn>
-            </DataGrid.Columns>
-          </DataGrid>
+          <UserControl Content="{Binding MedalsShadesAvailablesVm}" />
         </DockPanel>
       </Grid>
     </TabItem>

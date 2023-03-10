@@ -20,35 +20,6 @@
       <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding SongForAddIsBought}" />
       <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddSongCommand}" />
     </StackPanel>
-    <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left" Orientation="Vertical">
-      <Button Content="↑" Command="{Binding CmdReorderSongsUpCommand}" />
-      <Button Content="↓" Command="{Binding CmdReorderSongsDownCommand}" />
-    </StackPanel>
-    <DataGrid AutoGenerateColumns="False" Items="{Binding Songs}" CanUserSortColumns="False"
-              SelectedItem="{Binding SelectedSong, Mode=TwoWay}" CanUserResizeColumns="False">
-      <DataGrid.Columns>
-        <DataGridTextColumn IsReadOnly="True"
-                            Binding="{Binding Song, Mode=OneWay,
-                                        Converter={StaticResource EnumDescriptionConverter},
-                                        ConverterParameter={x:Type bf:Song}}"
-                            Header="Song" Width="320" />
-        <DataGridTemplateColumn Header="Is Bought" Width="100">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <CheckBox Margin="35,0,0,0" Content="" IsChecked="{Binding IsBought}" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <DataGridTemplateColumn Width="50">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <Button Margin="5,0,0,0" Content="-" Background="DarkRed"
-                      Command="{Binding $parent[DataGrid].DataContext.RemoveSongCommand}"
-                      CommandParameter="{Binding }" HorizontalContentAlignment="Center" Width="25" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-      </DataGrid.Columns>
-    </DataGrid>
+    <UserControl Content="{Binding SongsVm}" />
   </DockPanel>
 </UserControl>

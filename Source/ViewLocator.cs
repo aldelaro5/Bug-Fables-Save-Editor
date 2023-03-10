@@ -9,7 +9,7 @@ public class ViewLocator : IDataTemplate
 {
   public IControl Build(object? data)
   {
-    string? name = data?.GetType().FullName!.Replace("ViewModel", "View");
+    string? name = data?.GetType().FullName!.Split('`')[0].Replace("ViewModel", "View");
     Type? type = name is not null ? Type.GetType(name) : null;
     if (type != null)
       return (Control)Activator.CreateInstance(type)!;
