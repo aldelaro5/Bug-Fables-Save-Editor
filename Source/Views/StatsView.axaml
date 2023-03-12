@@ -49,9 +49,11 @@
             <DataGridTextColumn Header="Base HP" Binding="{ReflectionBinding BaseHP}" Width="75" />
             <DataGridTextColumn Header="HP" Binding="{ReflectionBinding HP}" />
             <DataGridTextColumn Header="Max HP" Binding="{ReflectionBinding MaxHP}" Width="70" />
-            <DataGridTextColumn Header="Base Attack" Binding="{ReflectionBinding BaseAttack}" Width="85" />
+            <DataGridTextColumn Header="Base Attack" Binding="{ReflectionBinding BaseAttack}"
+                                Width="85" />
             <DataGridTextColumn Header="Attack" Binding="{ReflectionBinding Attack}" />
-            <DataGridTextColumn Header="Base Defense" Binding="{ReflectionBinding BaseDefense}" Width="95" />
+            <DataGridTextColumn Header="Base Defense" Binding="{ReflectionBinding BaseDefense}"
+                                Width="95" />
             <DataGridTextColumn Header="Defense" Binding="{ReflectionBinding Defense}" />
           </DataGrid.Columns>
         </DataGrid>
@@ -85,7 +87,8 @@
                 <DataTemplate>
                   <Button Margin="5,0,0,0" Content="-"
                           Command="{ReflectionBinding $parent[DataGrid].DataContext.CmdRemovePartyStatBonusCommand}"
-                          CommandParameter="{ReflectionBinding }" HorizontalContentAlignment="Center"
+                          CommandParameter="{ReflectionBinding }"
+                          HorizontalContentAlignment="Center"
                           Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
@@ -134,7 +137,8 @@
                 <DataTemplate>
                   <Button Margin="5,0,0,0" IsEnabled="True" Content="-"
                           Command="{ReflectionBinding $parent[DataGrid].DataContext.CmdRemoveMemberStatBonusCommand}"
-                          CommandParameter="{ReflectionBinding }" HorizontalContentAlignment="Center"
+                          CommandParameter="{ReflectionBinding }"
+                          HorizontalContentAlignment="Center"
                           Width="25"
                           Background="DarkRed" />
                 </DataTemplate>

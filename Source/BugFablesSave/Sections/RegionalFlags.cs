@@ -25,6 +25,7 @@ public sealed class RegionalFlags : BugFablesDataList<RegionalFlags.RegionalInfo
       for (int j = 0; j < lines.Length; j++)
         _descriptions[i][j] = lines[j][1].Replace('~', '\n');
     }
+
     List.Add(new RegionalInfo());
   }
 

@@ -16,6 +16,7 @@ public partial class ReorderableCollectionView : UserControl
     AvaloniaProperty.Register<ReorderableCollectionView, List<string>?>(nameof(ShownColumns));
 
   private bool _setFirstColumnToEnd;
+
   public List<string>? ShownColumns
   {
     get { return GetValue(ShownColumnsProperty); }

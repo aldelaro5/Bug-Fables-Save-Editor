@@ -129,11 +129,16 @@ public sealed class Header : BugFablesData
     PositionY = ParseField<float>(data[1], nameof(PositionY));
     PositionZ = ParseField<float>(data[2], nameof(PositionZ));
     IsRuigee = ParseField<bool>(data[3], nameof(IsRuigee));
-    IsHardest = ParseField<bool>(data[4], nameof(IsHardest));;
-    IsFrameone = ParseField<bool>(data[5], nameof(IsFrameone));;
-    IsPushrock = ParseField<bool>(data[6], nameof(IsPushrock));;
-    IsMorefarm = ParseField<bool>(data[7], nameof(IsMorefarm));;
-    IsMystery = ParseField<bool>(data[8], nameof(IsMystery));;
+    IsHardest = ParseField<bool>(data[4], nameof(IsHardest));
+    ;
+    IsFrameone = ParseField<bool>(data[5], nameof(IsFrameone));
+    ;
+    IsPushrock = ParseField<bool>(data[6], nameof(IsPushrock));
+    ;
+    IsMorefarm = ParseField<bool>(data[7], nameof(IsMorefarm));
+    ;
+    IsMystery = ParseField<bool>(data[8], nameof(IsMystery));
+    ;
     Filename = data[9];
   }
 

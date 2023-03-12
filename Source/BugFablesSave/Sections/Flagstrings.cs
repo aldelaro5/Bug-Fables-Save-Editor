@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public sealed class Flagstrings :  BugFablesDataList<Flagstrings.FlagstringInfo>
+public sealed class Flagstrings : BugFablesDataList<Flagstrings.FlagstringInfo>
 {
   private readonly string[][] _flagstringsInfo;
 

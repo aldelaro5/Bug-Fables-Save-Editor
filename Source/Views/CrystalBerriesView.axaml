@@ -36,7 +36,8 @@
           Converter={StaticResource EnumDescriptionConverter},
           ConverterParameter={x:Type bf:Area}}"
           Header="Area" IsReadOnly="True" Width="160" />
-        <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{ReflectionBinding Description}" />
+        <DataGridTextColumn Header="Description" IsReadOnly="True"
+                            Binding="{ReflectionBinding Description}" />
       </DataGrid.Columns>
     </DataGrid>
   </DockPanel>

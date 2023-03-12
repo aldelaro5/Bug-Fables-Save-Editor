@@ -55,7 +55,8 @@ public partial class QuestsViewModel : ObservableObject
     var quests = SaveData.Quests.List;
 
     OpenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Open].List);
-    TakenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Taken].List);
+    TakenQuestsVm =
+      new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Taken].List);
     CompletedQuestsVm =
       new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Completed].List);
   }

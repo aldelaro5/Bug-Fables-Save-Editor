@@ -21,7 +21,8 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True"
+                                Binding="{ReflectionBinding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
@@ -44,7 +45,8 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagvarsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True"
+                                Binding="{ReflectionBinding Index}" />
             <DataGridTextColumn Header="Value" Binding="{ReflectionBinding Var}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
                                 Binding="{ReflectionBinding Description}" />
@@ -62,7 +64,8 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagstringsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True"
+                                Binding="{ReflectionBinding Index}" />
             <DataGridTextColumn Header="Value" Binding="{ReflectionBinding Str}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
                                 Binding="{ReflectionBinding Description}" />
@@ -82,7 +85,8 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True"
+                                Binding="{ReflectionBinding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>

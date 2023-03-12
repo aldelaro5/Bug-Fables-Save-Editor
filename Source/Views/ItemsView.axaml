@@ -25,7 +25,7 @@
           Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItemCommand}" />
       </StackPanel>
-      <v:ReorderableCollectionView DataContext="{Binding ItemsVm}"/>
+      <v:ReorderableCollectionView DataContext="{Binding ItemsVm}" />
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
       <Label DockPanel.Dock="Top" Content="Key items" />
@@ -38,7 +38,7 @@
           Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItemCommand}" />
       </StackPanel>
-      <v:ReorderableCollectionView DataContext="{Binding KeyItemsVm}"/>
+      <v:ReorderableCollectionView DataContext="{Binding KeyItemsVm}" />
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
       <Label DockPanel.Dock="Top" Content="Stored items" />
@@ -51,7 +51,7 @@
           Items="{Binding ItemsNames}" Width="210" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItemCommand}" />
       </StackPanel>
-      <v:ReorderableCollectionView DataContext="{Binding StoredItemsVm}"/>
+      <v:ReorderableCollectionView DataContext="{Binding StoredItemsVm}" />
     </DockPanel>
   </Grid>
 </UserControl>

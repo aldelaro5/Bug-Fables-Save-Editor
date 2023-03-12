@@ -26,7 +26,8 @@
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddPartyMemberCommand}" />
         </StackPanel>
-        <v:ReorderableCollectionView DataContext="{Binding PartyMembersVm}" ShownColumns="{Binding ExposedProperties}"/>
+        <v:ReorderableCollectionView DataContext="{Binding PartyMembersVm}"
+                                     ShownColumns="{Binding ExposedProperties}" />
       </DockPanel>
     </DockPanel>
     <DockPanel Margin="30,10,10,10" DockPanel.Dock="Right">
@@ -41,7 +42,7 @@
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddFollowerCommand}" />
         </StackPanel>
-        <v:ReorderableCollectionView DataContext="{Binding FollowersVm}"/>
+        <v:ReorderableCollectionView DataContext="{Binding FollowersVm}" />
       </DockPanel>
     </DockPanel>
   </DockPanel>
