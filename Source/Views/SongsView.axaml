@@ -4,6 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
+             xmlns:v="using:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:SongsViewModel"
              x:CompileBindings="True"
@@ -22,6 +23,6 @@
       <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding SongForAddIsBought}" />
       <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddSongCommand}" />
     </StackPanel>
-    <UserControl Content="{Binding SongsVm}" />
+    <v:ReorderableCollectionView DataContext="{Binding SongsVm}" />
   </DockPanel>
 </UserControl>

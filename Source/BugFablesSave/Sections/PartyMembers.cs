@@ -12,34 +12,6 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
     ElementSeparator = Utils.SecondarySeparator;
   }
 
-  public class PartyMember : INotifyPropertyChanged
-  {
-    private AnimID _animId;
-
-    public AnimID AnimID
-    {
-      get => _animId;
-      set
-      {
-        if ((int)value == -1)
-        {
-          return;
-        }
-
-        _animId = value;
-        NotifyPropertyChanged();
-      }
-    }
-
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-  }
-
   public class PartyMemberInfo : BugFablesData, INotifyPropertyChanged
   {
     private int _attack;

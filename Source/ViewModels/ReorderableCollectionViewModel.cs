@@ -16,12 +16,16 @@ public partial class ReorderableCollectionViewModel<T> : ObservableObject
   private DataGridCollectionView _collectionView;
 
   [ObservableProperty]
+  private List<string>? _exposedProperties;
+
+  [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(ReorderSelectedElementUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(ReorderSelectedElementDownCommand))]
   private T? _selectedElement;
 
-  public ReorderableCollectionViewModel(IList<T> collection)
+  public ReorderableCollectionViewModel(IList<T> collection, List<string>? exposedProperties = null)
   {
+    _exposedProperties = exposedProperties;
     _collection = collection;
     _collectionView = new DataGridCollectionView(collection);
   }

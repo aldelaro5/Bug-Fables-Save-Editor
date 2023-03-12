@@ -4,6 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
+             xmlns:v="using:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:MedalsViewModel"
              x:CompileBindings="True"
@@ -32,7 +33,7 @@
           <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
                   Command="{Binding UnequipAllMedalsCommand}" />
         </StackPanel>
-        <UserControl Content="{Binding MedalsVm}" />
+        <v:ReorderableCollectionView DataContext="{Binding MedalsVm}" />
       </DockPanel>
     </TabItem>
     <TabItem Header="Shop pools">
@@ -47,7 +48,7 @@
               Items="{Binding MedalsNames}" Width="185" />
             <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalMerabPoolCommand}" />
           </StackPanel>
-          <UserControl Content="{Binding MedalsMerabPoolsVm}" />
+          <v:ReorderableCollectionView DataContext="{Binding MedalsMerabPoolsVm}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
           <Label DockPanel.Dock="Top" Content="Shades" />
@@ -59,7 +60,7 @@
               Items="{Binding MedalsNames}" Width="180" />
             <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddMedalShadesPoolCommand}" />
           </StackPanel>
-          <UserControl Content="{Binding MedalsShadesPoolsVm}" />
+          <v:ReorderableCollectionView DataContext="{Binding MedalsShadesPoolsVm}" />
         </DockPanel>
       </Grid>
     </TabItem>
@@ -76,7 +77,7 @@
             <Button Margin="5,0,0,0" Content="Add"
                     Command="{Binding AddMedalMerabAvailableCommand}" />
           </StackPanel>
-          <UserControl Content="{Binding MedalsMerabAvailablesVm}" />
+          <v:ReorderableCollectionView DataContext="{Binding MedalsMerabAvailablesVm}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
           <Label DockPanel.Dock="Top" Content="Shades" />
@@ -89,7 +90,7 @@
             <Button Margin="5,0,0,0" Content="Add"
                     Command="{Binding AddMedalShadesAvailableCommand}" />
           </StackPanel>
-          <UserControl Content="{Binding MedalsShadesAvailablesVm}" />
+          <v:ReorderableCollectionView DataContext="{Binding MedalsShadesAvailablesVm}" />
         </DockPanel>
       </Grid>
     </TabItem>

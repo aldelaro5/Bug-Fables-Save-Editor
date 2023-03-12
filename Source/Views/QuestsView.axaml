@@ -4,6 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
+             xmlns:v="using:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              x:DataType="vm:QuestsViewModel"
              x:CompileBindings="True"
@@ -24,7 +25,7 @@
           Items="{Binding QuestsNames}" Width="250" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddOpenQuestCommand}" />
       </StackPanel>
-      <UserControl Content="{Binding OpenQuestsVm}" />
+      <v:ReorderableCollectionView DataContext="{Binding OpenQuestsVm}" />
     </DockPanel>
     <DockPanel Grid.Column="1" Margin="20,0,0,0">
       <Label DockPanel.Dock="Top" Content="Taken quests" />
@@ -37,7 +38,7 @@
           Items="{Binding QuestsNames}" Width="250" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddTakenQuestCommand}" />
       </StackPanel>
-      <UserControl Content="{Binding TakenQuestsVm}" />
+      <v:ReorderableCollectionView DataContext="{Binding TakenQuestsVm}" />
     </DockPanel>
     <DockPanel Grid.Column="2" Margin="20,0,0,0">
       <Label DockPanel.Dock="Top" Content="Completed quests" />
@@ -50,7 +51,7 @@
           Items="{Binding QuestsNames}" Width="250" />
         <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddCompletedQuestCommand}" />
       </StackPanel>
-      <UserControl Content="{Binding CompletedQuestsVm}" />
+      <v:ReorderableCollectionView DataContext="{Binding CompletedQuestsVm}" />
     </DockPanel>
   </Grid>
 </UserControl>

@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
+﻿using System.Collections.Generic;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,8 +10,6 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class PartyViewModel : ObservableObject
 {
-  private readonly ObservableCollection<PartyMemberInfo> _partyMemberInfos;
-
   [ObservableProperty]
   private string[] _animIDs = null!;
 
@@ -48,21 +44,11 @@ public partial class PartyViewModel : ObservableObject
     SaveData = saveData;
     AnimIDs = Utils.GetEnumDescriptions<AnimID>();
 
-    _partyMemberInfos = new ObservableCollection<PartyMemberInfo>(SaveData.PartyMembers.List);
+    List<string>? exposedProperties = new() { nameof(PartyMemberInfo.Trueid) };
     PartyMembersVm =
-      new ReorderableCollectionViewModel<PartyMemberInfo>(SaveData.PartyMembers.List);
-    _partyMemberInfos.CollectionChanged += CollectionOnCollectionChanged;
-
+      new ReorderableCollectionViewModel<PartyMemberInfo>(SaveData.PartyMembers.List,
+        exposedProperties);
     FollowersVm = new ReorderableCollectionViewModel<FollowerInfo>(SaveData.Followers.List);
-  }
-
-  private void CollectionOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-  {
-    if (e.Action == NotifyCollectionChangedAction.Add)
-      _partyMemberInfos.Insert(e.NewStartingIndex,
-        new PartyMemberInfo { Trueid = ((PartyMember)e.NewItems![0]!).AnimID });
-    else if (e.Action == NotifyCollectionChangedAction.Remove)
-      _partyMemberInfos.RemoveAt(e.OldStartingIndex);
   }
 
   [RelayCommand]

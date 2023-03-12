@@ -4,6 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
+             xmlns:v="using:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:PartyViewModel"
              x:CompileBindings="True"
@@ -25,7 +26,7 @@
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddPartyMemberCommand}" />
         </StackPanel>
-        <UserControl Content="{Binding PartyMembersVm}"></UserControl>
+        <v:ReorderableCollectionView DataContext="{Binding PartyMembersVm}" ShownColumns="{Binding ExposedProperties}"/>
       </DockPanel>
     </DockPanel>
     <DockPanel Margin="30,10,10,10" DockPanel.Dock="Right">
@@ -40,7 +41,7 @@
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding AddFollowerCommand}" />
         </StackPanel>
-        <UserControl Content="{Binding FollowersVm}"></UserControl>
+        <v:ReorderableCollectionView DataContext="{Binding FollowersVm}"/>
       </DockPanel>
     </DockPanel>
   </DockPanel>

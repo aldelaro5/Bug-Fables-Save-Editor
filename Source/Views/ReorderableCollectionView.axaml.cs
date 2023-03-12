@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -11,7 +12,15 @@ namespace BugFablesSaveEditor.Views;
 
 public partial class ReorderableCollectionView : UserControl
 {
+  public static readonly StyledProperty<List<string>?> ShownColumnsProperty =
+    AvaloniaProperty.Register<ReorderableCollectionView, List<string>?>(nameof(ShownColumns));
+
   private bool _setFirstColumnToEnd;
+  public List<string>? ShownColumns
+  {
+    get { return GetValue(ShownColumnsProperty); }
+    set { SetValue(ShownColumnsProperty, value); }
+  }
 
   public ReorderableCollectionView()
   {
@@ -24,6 +33,13 @@ public partial class ReorderableCollectionView : UserControl
     // If we are generating columns, we want to have LayoutUpdated move the first column
     // (delete) to the end, but only once
     _setFirstColumnToEnd = false;
+
+    if (ShownColumns?.Count > 0 && !ShownColumns.Contains(e.PropertyName))
+    {
+      e.Cancel = true;
+      return;
+    }
+
     // CheckBox for bool
     if (e.PropertyType == typeof(bool))
     {
