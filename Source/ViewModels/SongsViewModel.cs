@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -43,5 +42,6 @@ public partial class SongsViewModel : ObservableObject
   {
     SongsVm.Collection.Add(
       new SongInfo { Song = SelectedSongForAdd, IsBought = SongForAddIsBought });
+    SongsVm.CollectionView.Refresh();
   }
 }

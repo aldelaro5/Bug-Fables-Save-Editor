@@ -108,12 +108,14 @@ public partial class MedalsViewModel : ObservableObject
     {
       Medal = SelectedMedalForAdd, MedalEquipTarget = SelectedMedalEquipTargetForAdd
     });
+    MedalsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddMedalMerabPool()
   {
     MedalsMerabPoolsVm.Collection.Add(new MedalInShopPool { Medal = SelectedMedalMerabPoolForAdd });
+    MedalsMerabPoolsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
@@ -121,6 +123,7 @@ public partial class MedalsViewModel : ObservableObject
   {
     MedalsMerabAvailablesVm.Collection.Add(
       new MedalInShopAvailableInfo { Medal = SelectedMedalMerabAvailableForAdd });
+    MedalsMerabAvailablesVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
@@ -128,6 +131,7 @@ public partial class MedalsViewModel : ObservableObject
   {
     MedalsShadesPoolsVm.Collection.Add(
       new MedalInShopPool { Medal = SelectedMedalShadesPoolForAdd });
+    MedalsShadesPoolsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
@@ -135,6 +139,7 @@ public partial class MedalsViewModel : ObservableObject
   {
     MedalsShadesAvailablesVm.Collection.Add(
       new MedalInShopAvailableInfo { Medal = SelectedMedalShadesAvailableForAdd });
+    MedalsShadesAvailablesVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
@@ -142,5 +147,6 @@ public partial class MedalsViewModel : ObservableObject
   {
     foreach (MedalInfo medal in MedalsVm.Collection)
       medal.MedalEquipTarget = MedalEquipTarget.Unequipped;
+    MedalsVm.CollectionView.Refresh();
   }
 }

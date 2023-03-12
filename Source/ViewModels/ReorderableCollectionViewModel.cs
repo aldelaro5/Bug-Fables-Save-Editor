@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Avalonia.Collections;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -10,34 +10,38 @@ public partial class ReorderableCollectionViewModel<T> : ObservableObject
   where T : INotifyPropertyChanged
 {
   [ObservableProperty]
-  private ObservableCollection<T> _collection = null!;
+  private IList<T> _collection;
+
+  [ObservableProperty]
+  private DataGridCollectionView _collectionView;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(ReorderSelectedElementUpCommand))]
   [NotifyCanExecuteChangedFor(nameof(ReorderSelectedElementDownCommand))]
   private T? _selectedElement;
 
-  public ReorderableCollectionViewModel(IEnumerable<T> collection)
+  public ReorderableCollectionViewModel(IList<T> collection)
   {
-    Collection = new ObservableCollection<T>(collection);
+    _collection = collection;
+    _collectionView = new DataGridCollectionView(collection);
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderSelectedElementUp))]
   private void ReorderSelectedElementUp() => ReorderSelected(Utils.ReorderDirection.Up);
 
-  private bool CanReorderSelectedElementUp() => Collection.Count > 0 &&
+  private bool CanReorderSelectedElementUp() => CollectionView.Count > 0 &&
                                                 SelectedElement is not null &&
-                                                !Collection[0].Equals(SelectedElement);
+                                                !CollectionView[0].Equals(SelectedElement);
 
   [RelayCommand(CanExecute = nameof(CanReorderSelectedElementDown))]
   private void ReorderSelectedElementDown() => ReorderSelected(Utils.ReorderDirection.Down);
 
-  private bool CanReorderSelectedElementDown() => Collection.Count > 0 &&
+  private bool CanReorderSelectedElementDown() => CollectionView.Count > 0 &&
                                                   SelectedElement is not null &&
-                                                  !Collection[^1].Equals(SelectedElement);
+                                                  !CollectionView[^1].Equals(SelectedElement);
 
   [RelayCommand]
-  private void RemoveElement(T element) => Collection.Remove(element);
+  private void RemoveElement(T element) => CollectionView.Remove(element);
 
   private void ReorderSelected(Utils.ReorderDirection direction)
   {
@@ -54,7 +58,7 @@ public partial class ReorderableCollectionViewModel<T> : ObservableObject
     T item = Collection[index];
     Collection.RemoveAt(index);
     Collection.Insert(newIndex, item);
-
     SelectedElement = Collection[newIndex];
+    CollectionView.Refresh();
   }
 }

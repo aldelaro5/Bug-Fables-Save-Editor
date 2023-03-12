@@ -63,17 +63,20 @@ public partial class ItemsViewModel : ObservableObject
   private void AddItem()
   {
     ItemsVm.Collection.Add(new ItemInfo { Item = SelectedItemForAdd });
+    ItemsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddKeyItem()
   {
     KeyItemsVm.Collection.Add(new ItemInfo { Item = SelectedKeyItemForAdd });
+    KeyItemsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddStoredItem()
   {
     StoredItemsVm.Collection.Add(new ItemInfo { Item = SelectedStoredItemForAdd });
+    StoredItemsVm.CollectionView.Refresh();
   }
 }

@@ -64,17 +64,20 @@ public partial class QuestsViewModel : ObservableObject
   private void AddOpenQuest()
   {
     OpenQuestsVm.Collection.Add(new QuestInfo { Quest = SelectedOpenQuestForAdd });
+    OpenQuestsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddTakenQuest()
   {
     TakenQuestsVm.Collection.Add(new QuestInfo { Quest = SelectedTakenQuestForAdd });
+    TakenQuestsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddCompletedQuest()
   {
     CompletedQuestsVm.Collection.Add(new QuestInfo { Quest = SelectedCompletedQuestForAdd });
+    CompletedQuestsVm.CollectionView.Refresh();
   }
 }

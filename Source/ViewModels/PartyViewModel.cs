@@ -21,7 +21,7 @@ public partial class PartyViewModel : ObservableObject
   private ReorderableCollectionViewModel<FollowerInfo> _followersVm = null!;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<PartyMember> _partyMembersVm = null!;
+  private ReorderableCollectionViewModel<PartyMemberInfo> _partyMembersVm = null!;
 
   [ObservableProperty]
   private SaveData _saveData = null!;
@@ -34,9 +34,9 @@ public partial class PartyViewModel : ObservableObject
 
   public PartyViewModel() : this(new SaveData())
   {
-    PartyMembersVm.Collection.Add(new PartyMember { AnimID = (AnimID)198 });
-    PartyMembersVm.Collection.Add(new PartyMember { AnimID = (AnimID)340 });
-    PartyMembersVm.Collection.Add(new PartyMember { AnimID = (AnimID)297 });
+    PartyMembersVm.Collection.Add(new PartyMemberInfo { Trueid = (AnimID)198 });
+    PartyMembersVm.Collection.Add(new PartyMemberInfo { Trueid = (AnimID)340 });
+    PartyMembersVm.Collection.Add(new PartyMemberInfo { Trueid = (AnimID)297 });
 
     FollowersVm.Collection.Add(new FollowerInfo { AnimID = (AnimID)150 });
     FollowersVm.Collection.Add(new FollowerInfo { AnimID = (AnimID)268 });
@@ -50,8 +50,7 @@ public partial class PartyViewModel : ObservableObject
 
     _partyMemberInfos = new ObservableCollection<PartyMemberInfo>(SaveData.PartyMembers.List);
     PartyMembersVm =
-      new ReorderableCollectionViewModel<PartyMember>(
-        _partyMemberInfos.Select(x => new PartyMember { AnimID = x.Trueid }));
+      new ReorderableCollectionViewModel<PartyMemberInfo>(SaveData.PartyMembers.List);
     _partyMemberInfos.CollectionChanged += CollectionOnCollectionChanged;
 
     FollowersVm = new ReorderableCollectionViewModel<FollowerInfo>(SaveData.Followers.List);
@@ -69,12 +68,14 @@ public partial class PartyViewModel : ObservableObject
   [RelayCommand]
   private void AddPartyMember()
   {
-    PartyMembersVm.Collection.Add(new PartyMember { AnimID = SelectedPartyMemberAnimIdForAdd });
+    PartyMembersVm.Collection.Add(new PartyMemberInfo { Trueid = SelectedPartyMemberAnimIdForAdd });
+    PartyMembersVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddFollower()
   {
     FollowersVm.Collection.Add(new FollowerInfo { AnimID = SelectedFollowerAnimIdForAdd });
+    FollowersVm.CollectionView.Refresh();
   }
 }

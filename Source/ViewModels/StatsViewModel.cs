@@ -99,7 +99,10 @@ public partial class StatsViewModel : ObservableObject
     PartyMembers = new ObservableCollection<PartyMemberInfo>(SaveData.PartyMembers.List);
     StatsBonuses = new ObservableCollection<StatBonusInfo>(SaveData.StatBonuses.List);
     StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
-    SetupViews();
+    ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
+    ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
+    ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
+    ViewMemberStatsBonuses.Filter = FilterMemberStatsBonuses;
   }
 
   [RelayCommand(CanExecute = nameof(CanRemovePartyStatBonus))]
@@ -166,14 +169,6 @@ public partial class StatsViewModel : ObservableObject
       return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
         StatBonusType.Defense);
     }
-  }
-
-  private void SetupViews()
-  {
-    ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
-    ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
-    ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
-    ViewMemberStatsBonuses.Filter = FilterMemberStatsBonuses;
   }
 
   private bool FilterMemberStatsBonuses(object arg)
