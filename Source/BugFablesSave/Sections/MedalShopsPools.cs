@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BugFablesSaveEditor.Enums;
 
@@ -7,6 +8,9 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections;
 public sealed class
   MedalShopsPools : BugFablesDataList<MedalShopsPools.MedalsShopPoolInfo>
 {
+  public IList<MedalInShopPoolInfo> Merab { get => List[(int)MedalShop.Merab].List; }
+  public IList<MedalInShopPoolInfo> Shades { get => List[(int)MedalShop.Shades].List; }
+
   public MedalShopsPools()
   {
     ElementSeparator = Utils.SecondarySeparator;
@@ -15,11 +19,11 @@ public sealed class
       List.Add(new MedalsShopPoolInfo());
   }
 
-  public sealed class MedalsShopPoolInfo : BugFablesDataList<MedalInShopPool>
+  public sealed class MedalsShopPoolInfo : BugFablesDataList<MedalInShopPoolInfo>
   {
   }
 
-  public sealed class MedalInShopPool : BugFablesData, INotifyPropertyChanged
+  public sealed class MedalInShopPoolInfo : BugFablesData, INotifyPropertyChanged
   {
     private Medal _medal;
 

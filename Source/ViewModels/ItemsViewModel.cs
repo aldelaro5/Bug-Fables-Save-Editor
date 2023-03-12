@@ -51,12 +51,9 @@ public partial class ItemsViewModel : ObservableObject
   {
     SaveData = saveData;
     ItemsNames = Utils.GetEnumDescriptions<Item>();
-    var itemsArray = SaveData.Items.List[(int)ItemPossessionType.Inventory];
-    ItemsVm = new ReorderableCollectionViewModel<ItemInfo>(itemsArray.List);
-    var keyItemsArray = SaveData.Items.List[(int)ItemPossessionType.KeyItem];
-    var storedItemsArray = SaveData.Items.List[(int)ItemPossessionType.Stored];
-    KeyItemsVm = new ReorderableCollectionViewModel<ItemInfo>(keyItemsArray.List);
-    StoredItemsVm = new ReorderableCollectionViewModel<ItemInfo>(storedItemsArray.List);
+    ItemsVm = new ReorderableCollectionViewModel<ItemInfo>(SaveData.Items.Inventory);
+    KeyItemsVm = new ReorderableCollectionViewModel<ItemInfo>(SaveData.Items.Key);
+    StoredItemsVm = new ReorderableCollectionViewModel<ItemInfo>(SaveData.Items.Stored);
   }
 
   [RelayCommand]

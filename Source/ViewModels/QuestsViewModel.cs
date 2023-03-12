@@ -52,13 +52,10 @@ public partial class QuestsViewModel : ObservableObject
   {
     SaveData = saveData;
     QuestsNames = Utils.GetEnumDescriptions<Quest>();
-    var quests = SaveData.Quests.List;
 
-    OpenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Open].List);
-    TakenQuestsVm =
-      new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Taken].List);
-    CompletedQuestsVm =
-      new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Completed].List);
+    OpenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(SaveData.Quests.Opened);
+    TakenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(SaveData.Quests.Taken);
+    CompletedQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(SaveData.Quests.Completed);
   }
 
   [RelayCommand]

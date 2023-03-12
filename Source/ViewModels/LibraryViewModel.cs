@@ -144,22 +144,15 @@ public partial class LibraryViewModel : ObservableObject
     recordsNames = Utils.GetEnumDescriptions<Record>();
     areasNames = Utils.GetEnumDescriptions<Area>();
 
-    var wholeLibrary = SaveData.Library.List;
-    Discoveries = wholeLibrary[(int)LibrarySection.Discovery].List;
-    Enemies = wholeLibrary[(int)LibrarySection.Bestiary].List;
-    Recipes = wholeLibrary[(int)LibrarySection.Recipe].List;
-    Records = wholeLibrary[(int)LibrarySection.Record].List;
-    SeenAreas = wholeLibrary[(int)LibrarySection.SeenMapLocation].List;
-
-    DiscoveriesFiltered = new DataGridCollectionView(Discoveries);
+    DiscoveriesFiltered = new DataGridCollectionView(SaveData.Library.Discoveries);
     DiscoveriesFiltered.Filter = FilterDiscoveries;
-    EnemiesFiltered = new DataGridCollectionView(Enemies);
+    EnemiesFiltered = new DataGridCollectionView(SaveData.Library.Bestiary);
     EnemiesFiltered.Filter = FilterEnemies;
-    RecipesFiltered = new DataGridCollectionView(Recipes);
+    RecipesFiltered = new DataGridCollectionView(SaveData.Library.Recipes);
     RecipesFiltered.Filter = FilterRecipes;
-    RecordsFiltered = new DataGridCollectionView(Records);
+    RecordsFiltered = new DataGridCollectionView(SaveData.Library.Records);
     RecordsFiltered.Filter = FilterRecords;
-    SeenAreasFiltered = new DataGridCollectionView(SeenAreas);
+    SeenAreasFiltered = new DataGridCollectionView(SaveData.Library.SeenAreas);
     SeenAreasFiltered.Filter = FilterSeenAreas;
   }
 
@@ -185,7 +178,7 @@ public partial class LibraryViewModel : ObservableObject
 
   private bool FilterSeenAreas(object arg)
   {
-    return FilterLibrary(LibrarySection.SeenMapLocation, arg);
+    return FilterLibrary(LibrarySection.SeenAreas, arg);
   }
 
   private bool FilterLibrary(LibrarySection section, object arg)
@@ -216,7 +209,7 @@ public partial class LibraryViewModel : ObservableObject
         enumValues = recordsNames;
         filterUnused = FilterUnusedRecords;
         break;
-      case LibrarySection.SeenMapLocation:
+      case LibrarySection.SeenAreas:
         textFilter = TextFilterSeenAreas;
         enumValues = areasNames;
         filterUnused = FilterUnusedSeenAreas;
@@ -272,7 +265,7 @@ public partial class LibraryViewModel : ObservableObject
   [RelayCommand]
   private void ToggleAllFilteredSeenAreas()
   {
-    ToggleAllShownLibrary(LibrarySection.SeenMapLocation);
+    ToggleAllShownLibrary(LibrarySection.SeenAreas);
   }
 
   private void ToggleAllShownLibrary(LibrarySection section)
@@ -293,7 +286,7 @@ public partial class LibraryViewModel : ObservableObject
       case LibrarySection.Record:
         dg = RecordsFiltered;
         break;
-      case LibrarySection.SeenMapLocation:
+      case LibrarySection.SeenAreas:
         dg = SeenAreasFiltered;
         break;
       default:

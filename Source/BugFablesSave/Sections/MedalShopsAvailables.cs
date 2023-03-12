@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BugFablesSaveEditor.Enums;
 
@@ -7,6 +8,9 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections;
 public sealed class
   MedalShopsAvailables : BugFablesDataList<MedalShopsAvailables.MedalsShopAvailableInfo>
 {
+  public IList<MedalInShopAvailableInfo> Merab { get => List[(int)MedalShop.Merab].List; }
+  public IList<MedalInShopAvailableInfo> Shades { get => List[(int)MedalShop.Shades].List; }
+
   public MedalShopsAvailables()
   {
     ElementSeparator = Utils.SecondarySeparator;

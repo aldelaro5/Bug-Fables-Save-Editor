@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BugFablesSaveEditor.Enums;
 
@@ -6,6 +7,10 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
 public sealed class Items : BugFablesDataList<Items.ItemsPoessionTypeInfo>
 {
+  public IList<ItemInfo> Inventory { get => List[(int)ItemPossessionType.Inventory].List; }
+  public IList<ItemInfo> Key { get => List[(int)ItemPossessionType.KeyItem].List; }
+  public IList<ItemInfo> Stored { get => List[(int)ItemPossessionType.Stored].List; }
+
   public Items()
   {
     ElementSeparator = Utils.SecondarySeparator;

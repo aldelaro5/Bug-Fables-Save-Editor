@@ -15,7 +15,6 @@ public sealed class Medals : BugFablesDataList<Medals.MedalInfo>
   public sealed class MedalInfo : BugFablesData, INotifyPropertyChanged
   {
     private Medal _medal;
-
     private MedalEquipTarget _medalEquipTarget;
 
     public Medal Medal

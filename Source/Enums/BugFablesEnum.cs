@@ -3154,7 +3154,7 @@ public enum LibrarySection
   Bestiary,
   Recipe,
   Record,
-  SeenMapLocation,
+  SeenAreas,
   COUNT
 }
 

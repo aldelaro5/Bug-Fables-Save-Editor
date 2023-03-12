@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BugFablesSaveEditor.Enums;
 
@@ -6,6 +7,12 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
 public sealed class Library : BugFablesDataList<Library.LibrarySectionInfo>
 {
+  public IList<LibraryFlag> Discoveries { get => List[(int)LibrarySection.Discovery].List; }
+  public IList<LibraryFlag> Bestiary { get => List[(int)LibrarySection.Bestiary].List; }
+  public IList<LibraryFlag> Recipes { get => List[(int)LibrarySection.Recipe].List; }
+  public IList<LibraryFlag> Records { get => List[(int)LibrarySection.Record].List; }
+  public IList<LibraryFlag> SeenAreas { get => List[(int)LibrarySection.SeenAreas].List; }
+
   public Library()
   {
     ElementSeparator = Utils.SecondarySeparator;

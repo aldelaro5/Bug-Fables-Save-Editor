@@ -22,10 +22,10 @@ public partial class MedalsViewModel : ObservableObject
     _medalsShadesAvailablesVm = null!;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInShopPool> _medalsMerabPoolsVm = null!;
+  private ReorderableCollectionViewModel<MedalInShopPoolInfo> _medalsMerabPoolsVm = null!;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInShopPool> _medalsShadesPoolsVm = null!;
+  private ReorderableCollectionViewModel<MedalInShopPoolInfo> _medalsShadesPoolsVm = null!;
 
   [ObservableProperty]
   private string[] _medalsEquipTargetNames = null!;
@@ -60,13 +60,13 @@ public partial class MedalsViewModel : ObservableObject
     MedalsVm.Collection.Add(new MedalInfo { Medal = (Medal)51 });
     MedalsVm.Collection.Add(new MedalInfo { Medal = (Medal)78 });
 
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPool { Medal = (Medal)62 });
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPool { Medal = (Medal)51 });
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPool { Medal = (Medal)78 });
+    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)62 });
+    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)51 });
+    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)78 });
 
-    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPool { Medal = (Medal)35 });
-    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPool { Medal = (Medal)52 });
-    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPool { Medal = (Medal)13 });
+    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)35 });
+    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)52 });
+    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)13 });
 
     MedalsMerabAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)12 });
     MedalsMerabAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)25 });
@@ -84,21 +84,16 @@ public partial class MedalsViewModel : ObservableObject
     MedalsEquipTargetNames = Utils.GetEnumDescriptions<MedalEquipTarget>();
     MedalsVm = new ReorderableCollectionViewModel<MedalInfo>(SaveData.Medals.List);
 
-    var medalsPoolArray = SaveData.MedalShopsPools.List;
-    var medalsAvailableArray = SaveData.MedalShopsAvailables.List;
-
     MedalsMerabPoolsVm =
-      new ReorderableCollectionViewModel<MedalInShopPool>(
-        medalsPoolArray[(int)MedalShop.Merab].List);
+      new ReorderableCollectionViewModel<MedalInShopPoolInfo>(SaveData.MedalShopsPools.Merab);
     MedalsMerabAvailablesVm =
       new ReorderableCollectionViewModel<MedalInShopAvailableInfo>(
-        medalsAvailableArray[(int)MedalShop.Merab].List);
+        SaveData.MedalShopsAvailables.Merab);
     MedalsShadesPoolsVm =
-      new ReorderableCollectionViewModel<MedalInShopPool>(medalsPoolArray[(int)MedalShop.Shades]
-        .List);
+      new ReorderableCollectionViewModel<MedalInShopPoolInfo>(SaveData.MedalShopsPools.Shades);
     MedalsShadesAvailablesVm =
-      new ReorderableCollectionViewModel<MedalInShopAvailableInfo>(
-        medalsAvailableArray[(int)MedalShop.Shades].List);
+      new ReorderableCollectionViewModel<MedalInShopAvailableInfo>(SaveData.MedalShopsAvailables
+        .Shades);
   }
 
   [RelayCommand]
@@ -114,7 +109,10 @@ public partial class MedalsViewModel : ObservableObject
   [RelayCommand]
   private void AddMedalMerabPool()
   {
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPool { Medal = SelectedMedalMerabPoolForAdd });
+    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo
+    {
+      Medal = SelectedMedalMerabPoolForAdd
+    });
     MedalsMerabPoolsVm.CollectionView.Refresh();
   }
 
@@ -130,7 +128,7 @@ public partial class MedalsViewModel : ObservableObject
   private void AddMedalShadesPool()
   {
     MedalsShadesPoolsVm.Collection.Add(
-      new MedalInShopPool { Medal = SelectedMedalShadesPoolForAdd });
+      new MedalInShopPoolInfo { Medal = SelectedMedalShadesPoolForAdd });
     MedalsShadesPoolsVm.CollectionView.Refresh();
   }
 

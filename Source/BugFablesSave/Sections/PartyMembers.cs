@@ -15,17 +15,11 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
   public class PartyMemberInfo : BugFablesData, INotifyPropertyChanged
   {
     private int _attack;
-
     private int _baseAttack;
-
     private int _baseDefense;
-
     private int _baseHp;
-
     private int _defense;
-
     private int _hp;
-
     private int _maxHp;
     private AnimID _trueid;
 

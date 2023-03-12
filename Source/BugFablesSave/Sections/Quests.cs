@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BugFablesSaveEditor.Enums;
 
@@ -6,6 +7,10 @@ namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
 public sealed class Quests : BugFablesDataList<Quests.QuestsTypeInfo>
 {
+  public IList<QuestInfo> Opened { get => List[(int)QuestState.Open].List; }
+  public IList<QuestInfo> Taken { get => List[(int)QuestState.Taken].List; }
+  public IList<QuestInfo> Completed { get => List[(int)QuestState.Completed].List; }
+
   public Quests()
   {
     ElementSeparator = Utils.SecondarySeparator;
