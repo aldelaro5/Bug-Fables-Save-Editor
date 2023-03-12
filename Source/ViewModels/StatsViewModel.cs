@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+﻿using System.Collections.Generic;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
@@ -14,7 +13,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class StatsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ObservableCollection<PartyMemberInfo> _partyMembers = new();
+  private IList<PartyMemberInfo> _partyMembers;
 
   [ObservableProperty]
   private SaveData _saveData = null!;
@@ -49,7 +48,7 @@ public partial class StatsViewModel : ObservableObject
   private int _statsBonusAmountPartySelectedForAdd;
 
   [ObservableProperty]
-  private ObservableCollection<StatBonusInfo> _statsBonuses = new();
+  private IList<StatBonusInfo> _statsBonuses;
 
   [ObservableProperty]
   private DataGridCollectionView _viewMemberStatsBonuses = null!;
@@ -96,9 +95,8 @@ public partial class StatsViewModel : ObservableObject
     SaveData = saveData;
     StatBonusTypes = Utils.GetEnumDescriptions<StatBonusType>();
     _statBonusesSection = SaveData.StatBonuses;
-    PartyMembers = new ObservableCollection<PartyMemberInfo>(SaveData.PartyMembers.List);
-    StatsBonuses = new ObservableCollection<StatBonusInfo>(SaveData.StatBonuses.List);
-    StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
+    _partyMembers = SaveData.PartyMembers.List;
+    _statsBonuses = SaveData.StatBonuses.List;
     ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
     ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
     ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
@@ -218,17 +216,12 @@ public partial class StatsViewModel : ObservableObject
 
   private void RefreshViews()
   {
-    ViewMemberStatsBonuses.Refresh();
-    ViewPartyStatsBonuses.Refresh();
-  }
-
-  private void OnSaveStatsBonusesChanged(object? sender, NotifyCollectionChangedEventArgs e)
-  {
     OnPropertyChanged(nameof(TotalPartyMaxTpBonus));
     OnPropertyChanged(nameof(TotalPartyMaxMpBonus));
     OnPropertyChanged(nameof(TotalMemberMaxHpBonus));
     OnPropertyChanged(nameof(TotalMemberAttackBonus));
     OnPropertyChanged(nameof(TotalMemberDefenseBonus));
-    RefreshViews();
+    ViewMemberStatsBonuses.Refresh();
+    ViewPartyStatsBonuses.Refresh();
   }
 }
