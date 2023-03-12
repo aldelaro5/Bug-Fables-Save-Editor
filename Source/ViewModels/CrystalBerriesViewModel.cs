@@ -13,22 +13,28 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class CrystalBerriesViewModel : ObservableObject
 {
-  private readonly string[] _areas;
+  private readonly string[] _areas = Utils.GetEnumDescriptions<Area>();
 
   [ObservableProperty]
-  private IList<CrystalBerry> _crystalBerries = null!;
+  private IList<CrystalBerry> _crystalBerries;
 
   [ObservableProperty]
-  private DataGridCollectionView _crystalBerriesFiltered = null!;
+  private DataGridCollectionView _crystalBerriesFiltered;
 
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
-  private string _textFilter = null!;
+  private string _textFilter = "";
 
-  partial void OnTextFilterChanged(string value)
+  partial void OnTextFilterChanged(string value) => CrystalBerriesFiltered.Refresh();
+
+  [RelayCommand]
+  private void ToggleAllFiltered()
   {
+    bool newObtained = !CrystalBerries.Any(x => x.Obtained);
+    foreach (CrystalBerry cb in CrystalBerries)
+      cb.Obtained = newObtained;
     CrystalBerriesFiltered.Refresh();
   }
 
@@ -38,46 +44,20 @@ public partial class CrystalBerriesViewModel : ObservableObject
 
   public CrystalBerriesViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    _areas = Utils.GetEnumDescriptions<Area>();
-    CrystalBerries = SaveData.CrystalBerries.List;
-    CrystalBerriesFiltered = new DataGridCollectionView(CrystalBerries);
-    CrystalBerriesFiltered.Filter = FilterCrystalBerries;
-  }
-
-  private bool FilterCrystalBerries(object arg)
-  {
-    if (string.IsNullOrEmpty(TextFilter))
+    _saveData = saveData;
+    _crystalBerries = _saveData.CrystalBerries.List;
+    _crystalBerriesFiltered = new(_crystalBerries);
+    _crystalBerriesFiltered.Filter = arg =>
     {
-      return true;
-    }
+      if (string.IsNullOrEmpty(TextFilter))
+        return true;
 
-    CrystalBerry crystalBerry = (CrystalBerry)arg;
-    StringBuilder sb = new();
-    sb.Append(crystalBerry.Index).Append(' ');
-    sb.Append(_areas[(int)crystalBerry.Area]).Append(' ');
-    sb.Append(crystalBerry.Description);
-    return sb.ToString().Contains(TextFilter, StringComparison.OrdinalIgnoreCase);
-  }
-
-  [RelayCommand]
-  private void ToggleAllFiltered()
-  {
-    bool newObtained = true;
-    foreach (object? item in CrystalBerriesFiltered)
-    {
-      CrystalBerry cb = (CrystalBerry)item;
-      if (cb.Obtained)
-      {
-        newObtained = false;
-        break;
-      }
-    }
-
-    foreach (object? item in CrystalBerriesFiltered)
-    {
-      CrystalBerry cb = (CrystalBerry)item;
-      cb.Obtained = newObtained;
-    }
+      CrystalBerry crystalBerry = (CrystalBerry)arg;
+      StringBuilder sb = new();
+      sb.Append(crystalBerry.Index).Append(' ');
+      sb.Append(_areas[(int)crystalBerry.Area]).Append(' ');
+      sb.Append(crystalBerry.Description);
+      return sb.ToString().Contains(TextFilter, StringComparison.OrdinalIgnoreCase);
+    };
   }
 }

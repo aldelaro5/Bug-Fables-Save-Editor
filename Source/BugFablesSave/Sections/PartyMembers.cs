@@ -21,11 +21,11 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
     private int _defense;
     private int _hp;
     private int _maxHp;
-    private AnimID _trueid;
+    private AnimID _animId;
 
-    public AnimID Trueid
+    public AnimID AnimId
     {
-      get => _trueid;
+      get => _animId;
       set
       {
         if ((int)value == -1)
@@ -33,7 +33,7 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
           return;
         }
 
-        _trueid = value;
+        _animId = value;
         NotifyPropertyChanged();
       }
     }
@@ -110,7 +110,7 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
 
     public override void ResetToDefault()
     {
-      Trueid = 0;
+      AnimId = 0;
       HP = 0;
       MaxHP = 0;
       BaseHP = 0;
@@ -124,7 +124,7 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
     {
       string[] data = str.Split(Utils.PrimarySeparator);
 
-      Trueid = (AnimID)ParseField<int>(data[0], nameof(Trueid));
+      AnimId = (AnimID)ParseField<int>(data[0], nameof(AnimId));
       HP = ParseField<int>(data[1], nameof(HP));
       MaxHP = ParseField<int>(data[2], nameof(MaxHP));
       BaseHP = ParseField<int>(data[3], nameof(BaseHP));
@@ -138,7 +138,7 @@ public sealed class PartyMembers : BugFablesDataList<PartyMembers.PartyMemberInf
     {
       StringBuilder sb = new();
 
-      sb.Append((int)Trueid);
+      sb.Append((int)AnimId);
       sb.Append(Utils.PrimarySeparator);
       sb.Append(HP);
       sb.Append(Utils.PrimarySeparator);

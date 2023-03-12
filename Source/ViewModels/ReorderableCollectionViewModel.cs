@@ -27,7 +27,7 @@ public partial class ReorderableCollectionViewModel<T> : ObservableObject
   {
     _exposedProperties = exposedProperties;
     _collection = collection;
-    _collectionView = new DataGridCollectionView(collection);
+    _collectionView = new(collection);
   }
 
   [RelayCommand(CanExecute = nameof(CanReorderSelectedElementUp))]

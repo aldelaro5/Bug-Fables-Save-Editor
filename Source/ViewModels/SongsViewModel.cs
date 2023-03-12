@@ -9,7 +9,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class SongsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
   private Song _selectedSongForAdd;
@@ -18,10 +18,10 @@ public partial class SongsViewModel : ObservableObject
   private bool _songForAddIsBought;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<SongInfo> _songsVm = null!;
+  private ReorderableCollectionViewModel<SongInfo> _songsVm;
 
   [ObservableProperty]
-  private string[] _songsNames = null!;
+  private string[] _songsNames = Utils.GetEnumDescriptions<Song>();
 
   public SongsViewModel() : this(new SaveData())
   {
@@ -32,16 +32,17 @@ public partial class SongsViewModel : ObservableObject
 
   public SongsViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    SongsNames = Utils.GetEnumDescriptions<Song>();
-    SongsVm = new ReorderableCollectionViewModel<SongInfo>(SaveData.SamiraSongs.List);
+    _saveData = saveData;
+    _songsVm = new(_saveData.SamiraSongs.List);
   }
 
   [RelayCommand]
   private void AddSong()
   {
-    SongsVm.Collection.Add(
-      new SongInfo { Song = SelectedSongForAdd, IsBought = SongForAddIsBought });
+    SongInfo info = new();
+    info.Song = SelectedSongForAdd;
+    info.IsBought = SongForAddIsBought;
+    SongsVm.Collection.Add(info);
     SongsVm.CollectionView.Refresh();
   }
 }

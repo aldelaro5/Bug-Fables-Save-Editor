@@ -42,7 +42,7 @@
                   SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
           <DataGrid.Columns>
             <DataGridTextColumn
-              Binding="{ReflectionBinding Trueid, Mode=OneWay,
+              Binding="{ReflectionBinding AnimId, Mode=OneWay,
                                           Converter={StaticResource EnumDescriptionConverter},
                                           ConverterParameter={x:Type bf:AnimID}}"
               IsReadOnly="True" Header="Member" />

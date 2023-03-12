@@ -9,19 +9,19 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class ItemsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ReorderableCollectionViewModel<ItemInfo> _itemsVm = null!;
+  private ReorderableCollectionViewModel<ItemInfo> _itemsVm;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<ItemInfo> _keyItemsVm = null!;
+  private ReorderableCollectionViewModel<ItemInfo> _keyItemsVm;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<ItemInfo> _storedItemsVm = null!;
+  private ReorderableCollectionViewModel<ItemInfo> _storedItemsVm;
 
   [ObservableProperty]
-  private string[] _itemsNames = null!;
+  private string[] _itemsNames = Utils.GetEnumDescriptions<Item>();
 
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
   private Item _selectedItemForAdd;
@@ -49,11 +49,10 @@ public partial class ItemsViewModel : ObservableObject
 
   public ItemsViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    ItemsNames = Utils.GetEnumDescriptions<Item>();
-    ItemsVm = new ReorderableCollectionViewModel<ItemInfo>(SaveData.Items.Inventory);
-    KeyItemsVm = new ReorderableCollectionViewModel<ItemInfo>(SaveData.Items.Key);
-    StoredItemsVm = new ReorderableCollectionViewModel<ItemInfo>(SaveData.Items.Stored);
+    _saveData = saveData;
+    _itemsVm = new(_saveData.Items.Inventory);
+    _keyItemsVm = new(_saveData.Items.Key);
+    _storedItemsVm = new(_saveData.Items.Stored);
   }
 
   [RelayCommand]

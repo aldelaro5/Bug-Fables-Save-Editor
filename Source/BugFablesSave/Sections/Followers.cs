@@ -11,7 +11,7 @@ public sealed class Followers : BugFablesDataList<Followers.FollowerInfo>
   {
     private AnimID _animId;
 
-    public AnimID AnimID
+    public AnimID AnimId
     {
       get => _animId;
       set
@@ -28,17 +28,17 @@ public sealed class Followers : BugFablesDataList<Followers.FollowerInfo>
 
     public override void ResetToDefault()
     {
-      AnimID = 0;
+      AnimId = 0;
     }
 
     public override void Parse(string str)
     {
-      AnimID = (AnimID)ParseField<int>(str, nameof(AnimID));
+      AnimId = (AnimID)ParseField<int>(str, nameof(AnimId));
     }
 
     public override string ToString()
     {
-      return ((int)AnimID).ToString();
+      return ((int)AnimId).ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

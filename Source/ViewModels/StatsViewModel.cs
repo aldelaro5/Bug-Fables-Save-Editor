@@ -12,11 +12,13 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class StatsViewModel : ObservableObject
 {
-  [ObservableProperty]
-  private IList<PartyMemberInfo> _partyMembers;
+  private readonly StatBonuses _statBonusesSection;
 
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private SaveData _saveData;
+
+  [ObservableProperty]
+  private IList<PartyMemberInfo> _partyMembers;
 
   [ObservableProperty]
   [NotifyPropertyChangedFor(nameof(TotalPartyMaxTpBonus))]
@@ -27,10 +29,7 @@ public partial class StatsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(AddMemberStatBonusCommand))]
   private PartyMemberInfo? _selectedMember;
 
-  partial void OnSelectedMemberChanged(PartyMemberInfo? value)
-  {
-    RefreshViews();
-  }
+  partial void OnSelectedMemberChanged(PartyMemberInfo? value) => RefreshViews();
 
   [ObservableProperty]
   private StatBonusType _statBonusTypeMemberSelectedForAdd;
@@ -39,7 +38,7 @@ public partial class StatsViewModel : ObservableObject
   private StatBonusType _statBonusTypePartySelectedForAdd;
 
   [ObservableProperty]
-  private string[] _statBonusTypes = null!;
+  private string[] _statBonusTypes;
 
   [ObservableProperty]
   private int _statsBonusAmountMemberSelectedForAdd;
@@ -51,18 +50,16 @@ public partial class StatsViewModel : ObservableObject
   private IList<StatBonusInfo> _statsBonuses;
 
   [ObservableProperty]
-  private DataGridCollectionView _viewMemberStatsBonuses = null!;
+  private DataGridCollectionView _viewMemberStatsBonuses;
 
   [ObservableProperty]
-  private DataGridCollectionView _viewPartyStatsBonuses = null!;
-
-  private StatBonuses _statBonusesSection;
+  private DataGridCollectionView _viewPartyStatsBonuses;
 
   public StatsViewModel() : this(new SaveData())
   {
-    PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Bee });
-    PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Beetle });
-    PartyMembers.Add(new PartyMemberInfo { Trueid = AnimID.Moth });
+    PartyMembers.Add(new PartyMemberInfo { AnimId = AnimID.Bee });
+    PartyMembers.Add(new PartyMemberInfo { AnimId = AnimID.Beetle });
+    PartyMembers.Add(new PartyMemberInfo { AnimId = AnimID.Moth });
 
     StatsBonuses.Add(new StatBonusInfo
     {
@@ -92,15 +89,26 @@ public partial class StatsViewModel : ObservableObject
 
   public StatsViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    StatBonusTypes = Utils.GetEnumDescriptions<StatBonusType>();
-    _statBonusesSection = SaveData.StatBonuses;
-    _partyMembers = SaveData.PartyMembers.List;
-    _statsBonuses = SaveData.StatBonuses.List;
-    ViewPartyStatsBonuses = new DataGridCollectionView(StatsBonuses);
-    ViewPartyStatsBonuses.Filter = FilterPartyStatsBonuses;
-    ViewMemberStatsBonuses = new DataGridCollectionView(StatsBonuses);
-    ViewMemberStatsBonuses.Filter = FilterMemberStatsBonuses;
+    _saveData = saveData;
+    _statBonusTypes = Utils.GetEnumDescriptions<StatBonusType>();
+    _statBonusesSection = _saveData.StatBonuses;
+    _partyMembers = _saveData.PartyMembers.List;
+    _statsBonuses = _saveData.StatBonuses.List;
+    _viewPartyStatsBonuses = new(StatsBonuses);
+    _viewPartyStatsBonuses.Filter = arg =>
+    {
+      StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
+      return statBonusInfo.Target == StatBonusTarget.Party;
+    };
+    _viewMemberStatsBonuses = new(StatsBonuses);
+    _viewMemberStatsBonuses.Filter = arg =>
+    {
+      StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
+      if (SelectedMember == null)
+        return false;
+
+      return (int)statBonusInfo.Target == (int)SelectedMember.AnimId;
+    };
   }
 
   [RelayCommand(CanExecute = nameof(CanRemovePartyStatBonus))]
@@ -110,10 +118,7 @@ public partial class StatsViewModel : ObservableObject
     RefreshViews();
   }
 
-  private bool CanRemovePartyStatBonus(StatBonusInfo info)
-  {
-    return !ViewPartyStatsBonuses.IsEditingItem;
-  }
+  private bool CanRemovePartyStatBonus(StatBonusInfo info) => !ViewPartyStatsBonuses.IsEditingItem;
 
   [RelayCommand(CanExecute = nameof(CanRemoveMemberStatBonus))]
   private void CmdRemoveMemberStatBonus(StatBonusInfo info)
@@ -122,10 +127,8 @@ public partial class StatsViewModel : ObservableObject
     RefreshViews();
   }
 
-  private bool CanRemoveMemberStatBonus(StatBonusInfo info)
-  {
-    return !ViewMemberStatsBonuses.IsEditingItem;
-  }
+  private bool CanRemoveMemberStatBonus(StatBonusInfo info) =>
+    !ViewMemberStatsBonuses.IsEditingItem;
 
   public int TotalPartyMaxTpBonus =>
     _statBonusesSection.GetTotalBonusesForTargetAndType(-1, StatBonusType.TP);
@@ -140,7 +143,7 @@ public partial class StatsViewModel : ObservableObject
       if (SelectedMember == null)
         return 0;
 
-      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
+      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.AnimId,
         StatBonusType.HP);
     }
   }
@@ -152,7 +155,7 @@ public partial class StatsViewModel : ObservableObject
       if (SelectedMember == null)
         return 0;
 
-      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
+      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.AnimId,
         StatBonusType.Attack);
     }
   }
@@ -164,24 +167,9 @@ public partial class StatsViewModel : ObservableObject
       if (SelectedMember == null)
         return 0;
 
-      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.Trueid,
+      return _statBonusesSection.GetTotalBonusesForTargetAndType((int)SelectedMember.AnimId,
         StatBonusType.Defense);
     }
-  }
-
-  private bool FilterMemberStatsBonuses(object arg)
-  {
-    StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
-    if (SelectedMember == null)
-      return false;
-
-    return (int)statBonusInfo.Target == (int)SelectedMember.Trueid;
-  }
-
-  private bool FilterPartyStatsBonuses(object arg)
-  {
-    StatBonusInfo statBonusInfo = (StatBonusInfo)arg;
-    return statBonusInfo.Target == StatBonusTarget.Party;
   }
 
   [RelayCommand]
@@ -202,17 +190,14 @@ public partial class StatsViewModel : ObservableObject
       return;
 
     StatBonusInfo statBonusInfo = new();
-    statBonusInfo.Target = (StatBonusTarget)SelectedMember.Trueid;
+    statBonusInfo.Target = (StatBonusTarget)SelectedMember.AnimId;
     statBonusInfo.Type = StatBonusTypeMemberSelectedForAdd;
     statBonusInfo.Amount = StatsBonusAmountMemberSelectedForAdd;
     StatsBonuses.Add(statBonusInfo);
     RefreshViews();
   }
 
-  private bool CanAddMemberStatBonus()
-  {
-    return SelectedMember is not null;
-  }
+  private bool CanAddMemberStatBonus() => SelectedMember is not null;
 
   private void RefreshViews()
   {

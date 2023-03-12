@@ -17,44 +17,44 @@ public partial class MainWindowViewModel : ObservableObject
   private bool _fileSaved;
 
   [ObservableProperty]
-  private CrystalBerriesViewModel _crystalBerriesViewModel = null!;
-
-  [ObservableProperty]
-  private string _currentFilePath = "No save file, open an existing file or create a new one";
-
-  [ObservableProperty]
-  private FlagsViewModel _flagsViewModel = null!;
-
-  [ObservableProperty]
-  private GlobalViewModel _globalViewModel = null!;
-
-  [ObservableProperty]
-  private ItemsViewModel _itemsViewModel = null!;
-
-  [ObservableProperty]
-  private LibraryViewModel _libraryViewModel = null!;
-
-  [ObservableProperty]
-  private MedalsViewModel _medalsViewModel = null!;
-
-  [ObservableProperty]
-  private PartyViewModel _partyViewModel = null!;
-
-  [ObservableProperty]
-  private QuestsViewModel _questsViewModel = null!;
-
-  [ObservableProperty]
-  private SaveData _saveData = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdSaveFileCommand))]
   private bool _saveInUse;
 
   [ObservableProperty]
-  private SongsViewModel _songsViewModel = null!;
+  private string _currentFilePath = "No save file, open an existing file or create a new one";
 
   [ObservableProperty]
-  private StatsViewModel _statsViewModel = null!;
+  private CrystalBerriesViewModel _crystalBerriesViewModel;
+
+  [ObservableProperty]
+  private FlagsViewModel _flagsViewModel;
+
+  [ObservableProperty]
+  private GlobalViewModel _globalViewModel;
+
+  [ObservableProperty]
+  private ItemsViewModel _itemsViewModel;
+
+  [ObservableProperty]
+  private LibraryViewModel _libraryViewModel;
+
+  [ObservableProperty]
+  private MedalsViewModel _medalsViewModel;
+
+  [ObservableProperty]
+  private PartyViewModel _partyViewModel;
+
+  [ObservableProperty]
+  private QuestsViewModel _questsViewModel;
+
+  [ObservableProperty]
+  private SongsViewModel _songsViewModel;
+
+  [ObservableProperty]
+  private StatsViewModel _statsViewModel;
 
   public MainWindowViewModel() : this(new SaveData())
   {
@@ -62,17 +62,17 @@ public partial class MainWindowViewModel : ObservableObject
 
   public MainWindowViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    GlobalViewModel = new GlobalViewModel(saveData);
-    PartyViewModel = new PartyViewModel(saveData);
-    StatsViewModel = new StatsViewModel(saveData);
-    QuestsViewModel = new QuestsViewModel(saveData);
-    ItemsViewModel = new ItemsViewModel(saveData);
-    MedalsViewModel = new MedalsViewModel(saveData);
-    LibraryViewModel = new LibraryViewModel(saveData);
-    FlagsViewModel = new FlagsViewModel(saveData);
-    SongsViewModel = new SongsViewModel(saveData);
-    CrystalBerriesViewModel = new CrystalBerriesViewModel(saveData);
+    _saveData = saveData;
+    _globalViewModel = new(saveData);
+    _partyViewModel = new(saveData);
+    _statsViewModel = new(saveData);
+    _questsViewModel = new(saveData);
+    _itemsViewModel = new(saveData);
+    _medalsViewModel = new(saveData);
+    _libraryViewModel = new(saveData);
+    _flagsViewModel = new(saveData);
+    _songsViewModel = new(saveData);
+    _crystalBerriesViewModel = new(saveData);
   }
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
@@ -97,14 +97,14 @@ public partial class MainWindowViewModel : ObservableObject
       SaveData.SaveToFile(fileUri.LocalPath);
       CurrentFilePath = fileUri.LocalPath;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
-        "The file was saved successfully at " + CurrentFilePath,
+        $"The file was saved successfully at {CurrentFilePath}",
         ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.MainWindow);
       _fileSaved = true;
     }
     catch (Exception ex)
     {
       var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-        "An error occured while saving the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
+        $"An error occured while saving the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
       await msg.ShowDialog(Utils.MainWindow);
     }
     finally
@@ -124,8 +124,8 @@ public partial class MainWindowViewModel : ObservableObject
     if (SaveInUse && !_fileSaved)
     {
       var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use",
-        "An unsaved file is currently in use, " +
-        "creating a new file will loose all unsaved changes,\nare you sure you want to proceed?",
+        "An unsaved file is currently in use, creating a new file will loose all unsaved changes,\n" +
+        "are you sure you want to proceed?",
         ButtonEnum.YesNo, Icon.Warning);
       var result = await msg.ShowDialog(Utils.MainWindow);
       if (result == ButtonResult.No)
@@ -144,8 +144,8 @@ public partial class MainWindowViewModel : ObservableObject
     if (SaveInUse && !_fileSaved)
     {
       var result = await MessageBoxManager.GetMessageBoxStandardWindow("File in use",
-        "An unsaved file is currently in use, " +
-        "opening a file will loose all unsaved changes,\nare you sure you want to proceed?",
+        "An unsaved file is currently in use, opening a file will loose all unsaved changes,\n" +
+        "are you sure you want to proceed?",
         ButtonEnum.YesNo, Icon.Warning).ShowDialog(Utils.MainWindow);
       if (result == ButtonResult.No)
         return;
@@ -177,7 +177,7 @@ public partial class MainWindowViewModel : ObservableObject
     {
       SaveData.ResetToDefault();
       var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-        "An error occured while opening the save file: " + ex.Message, ButtonEnum.Ok, Icon.Error);
+        $"An error occured while opening the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
       await msg.ShowDialog(Utils.MainWindow);
     }
     finally
@@ -187,8 +187,5 @@ public partial class MainWindowViewModel : ObservableObject
   }
 
   [RelayCommand]
-  private void Exit()
-  {
-    Utils.MainWindow.Close();
-  }
+  private void Exit() => Utils.MainWindow.Close();
 }

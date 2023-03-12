@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -12,29 +11,28 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class MedalsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInfo> _medalsVm = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInShopAvailableInfo> _medalsMerabAvailablesVm = null!;
+  private ReorderableCollectionViewModel<MedalInfo> _medalsVm;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInShopAvailableInfo>
-    _medalsShadesAvailablesVm = null!;
+  private ReorderableCollectionViewModel<MedalInShopAvailableInfo> _medalsMerabAvailablesVm;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInShopPoolInfo> _medalsMerabPoolsVm = null!;
+  private ReorderableCollectionViewModel<MedalInShopAvailableInfo> _medalsShadesAvailablesVm;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<MedalInShopPoolInfo> _medalsShadesPoolsVm = null!;
+  private ReorderableCollectionViewModel<MedalInShopPoolInfo> _medalsMerabPoolsVm;
 
   [ObservableProperty]
-  private string[] _medalsEquipTargetNames = null!;
+  private ReorderableCollectionViewModel<MedalInShopPoolInfo> _medalsShadesPoolsVm;
 
   [ObservableProperty]
-  private string[] _medalsNames = null!;
+  private string[] _medalsEquipTargetNames = Utils.GetEnumDescriptions<MedalEquipTarget>();
 
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private string[] _medalsNames = Utils.GetEnumDescriptions<Medal>();
 
   [ObservableProperty]
   private Medal _selectedMedalForAdd;
@@ -56,87 +54,81 @@ public partial class MedalsViewModel : ObservableObject
 
   public MedalsViewModel() : this(new SaveData())
   {
-    MedalsVm.Collection.Add(new MedalInfo { Medal = (Medal)7 });
-    MedalsVm.Collection.Add(new MedalInfo { Medal = (Medal)51 });
-    MedalsVm.Collection.Add(new MedalInfo { Medal = (Medal)78 });
+    MedalsVm.Collection.Add(new() { Medal = (Medal)7 });
+    MedalsVm.Collection.Add(new() { Medal = (Medal)51 });
+    MedalsVm.Collection.Add(new() { Medal = (Medal)78 });
 
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)62 });
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)51 });
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)78 });
+    MedalsMerabPoolsVm.Collection.Add(new() { Medal = (Medal)62 });
+    MedalsMerabPoolsVm.Collection.Add(new() { Medal = (Medal)51 });
+    MedalsMerabPoolsVm.Collection.Add(new() { Medal = (Medal)78 });
 
-    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)35 });
-    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)52 });
-    MedalsShadesPoolsVm.Collection.Add(new MedalInShopPoolInfo { Medal = (Medal)13 });
+    MedalsShadesPoolsVm.Collection.Add(new() { Medal = (Medal)35 });
+    MedalsShadesPoolsVm.Collection.Add(new() { Medal = (Medal)52 });
+    MedalsShadesPoolsVm.Collection.Add(new() { Medal = (Medal)13 });
 
-    MedalsMerabAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)12 });
-    MedalsMerabAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)25 });
-    MedalsMerabAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)14 });
+    MedalsMerabAvailablesVm.Collection.Add(new() { Medal = (Medal)12 });
+    MedalsMerabAvailablesVm.Collection.Add(new() { Medal = (Medal)25 });
+    MedalsMerabAvailablesVm.Collection.Add(new() { Medal = (Medal)14 });
 
-    MedalsShadesAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)9 });
-    MedalsShadesAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)4 });
-    MedalsShadesAvailablesVm.Collection.Add(new MedalInShopAvailableInfo { Medal = (Medal)55 });
+    MedalsShadesAvailablesVm.Collection.Add(new() { Medal = (Medal)9 });
+    MedalsShadesAvailablesVm.Collection.Add(new() { Medal = (Medal)4 });
+    MedalsShadesAvailablesVm.Collection.Add(new() { Medal = (Medal)55 });
   }
 
   public MedalsViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    MedalsNames = Utils.GetEnumDescriptions<Medal>();
-    MedalsEquipTargetNames = Utils.GetEnumDescriptions<MedalEquipTarget>();
-    MedalsVm = new ReorderableCollectionViewModel<MedalInfo>(SaveData.Medals.List);
+    _saveData = saveData;
+    _medalsVm = new(_saveData.Medals.List);
 
-    MedalsMerabPoolsVm =
-      new ReorderableCollectionViewModel<MedalInShopPoolInfo>(SaveData.MedalShopsPools.Merab);
-    MedalsMerabAvailablesVm =
-      new ReorderableCollectionViewModel<MedalInShopAvailableInfo>(
-        SaveData.MedalShopsAvailables.Merab);
-    MedalsShadesPoolsVm =
-      new ReorderableCollectionViewModel<MedalInShopPoolInfo>(SaveData.MedalShopsPools.Shades);
-    MedalsShadesAvailablesVm =
-      new ReorderableCollectionViewModel<MedalInShopAvailableInfo>(SaveData.MedalShopsAvailables
-        .Shades);
+    _medalsMerabPoolsVm = new(_saveData.MedalShopsPools.Merab);
+    _medalsMerabAvailablesVm = new(_saveData.MedalShopsAvailables.Merab);
+    _medalsShadesPoolsVm = new(_saveData.MedalShopsPools.Shades);
+    _medalsShadesAvailablesVm = new(_saveData.MedalShopsAvailables.Shades);
   }
 
   [RelayCommand]
   private void AddMedal()
   {
-    MedalsVm.Collection.Add(new MedalInfo
-    {
-      Medal = SelectedMedalForAdd, MedalEquipTarget = SelectedMedalEquipTargetForAdd
-    });
+    MedalInfo? item = new();
+    item.Medal = SelectedMedalForAdd;
+    item.MedalEquipTarget = SelectedMedalEquipTargetForAdd;
+    MedalsVm.Collection.Add(item);
     MedalsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddMedalMerabPool()
   {
-    MedalsMerabPoolsVm.Collection.Add(new MedalInShopPoolInfo
-    {
-      Medal = SelectedMedalMerabPoolForAdd
-    });
+    MedalInShopPoolInfo? item = new();
+    item.Medal = SelectedMedalMerabPoolForAdd;
+    MedalsMerabPoolsVm.Collection.Add(item);
     MedalsMerabPoolsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddMedalMerabAvailable()
   {
-    MedalsMerabAvailablesVm.Collection.Add(
-      new MedalInShopAvailableInfo { Medal = SelectedMedalMerabAvailableForAdd });
+    MedalInShopAvailableInfo? item = new();
+    item.Medal = SelectedMedalMerabAvailableForAdd;
+    MedalsMerabAvailablesVm.Collection.Add(item);
     MedalsMerabAvailablesVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddMedalShadesPool()
   {
-    MedalsShadesPoolsVm.Collection.Add(
-      new MedalInShopPoolInfo { Medal = SelectedMedalShadesPoolForAdd });
+    MedalInShopPoolInfo? item = new();
+    item.Medal = SelectedMedalShadesPoolForAdd;
+    MedalsShadesPoolsVm.Collection.Add(item);
     MedalsShadesPoolsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddMedalShadesAvailable()
   {
-    MedalsShadesAvailablesVm.Collection.Add(
-      new MedalInShopAvailableInfo { Medal = SelectedMedalShadesAvailableForAdd });
+    MedalInShopAvailableInfo? item = new();
+    item.Medal = SelectedMedalShadesAvailableForAdd;
+    MedalsShadesAvailablesVm.Collection.Add(item);
     MedalsShadesAvailablesVm.CollectionView.Refresh();
   }
 

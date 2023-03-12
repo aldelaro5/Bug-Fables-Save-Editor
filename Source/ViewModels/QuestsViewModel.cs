@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -10,19 +9,19 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class QuestsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ReorderableCollectionViewModel<QuestInfo> _openQuestsVm = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<QuestInfo> _takenQuestsVm = null!;
+  private ReorderableCollectionViewModel<QuestInfo> _openQuestsVm;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<QuestInfo> _completedQuestsVm = null!;
+  private ReorderableCollectionViewModel<QuestInfo> _takenQuestsVm;
 
   [ObservableProperty]
-  private string[] _questsNames = null!;
+  private ReorderableCollectionViewModel<QuestInfo> _completedQuestsVm;
 
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private string[] _questsNames = Utils.GetEnumDescriptions<Quest>();
 
   [ObservableProperty]
   private Quest _selectedCompletedQuestForAdd;
@@ -50,32 +49,37 @@ public partial class QuestsViewModel : ObservableObject
 
   public QuestsViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    QuestsNames = Utils.GetEnumDescriptions<Quest>();
+    _saveData = saveData;
 
-    OpenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(SaveData.Quests.Opened);
-    TakenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(SaveData.Quests.Taken);
-    CompletedQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(SaveData.Quests.Completed);
+    _openQuestsVm = new(_saveData.Quests.Opened);
+    _takenQuestsVm = new(_saveData.Quests.Taken);
+    _completedQuestsVm = new(_saveData.Quests.Completed);
   }
 
   [RelayCommand]
   private void AddOpenQuest()
   {
-    OpenQuestsVm.Collection.Add(new QuestInfo { Quest = SelectedOpenQuestForAdd });
+    QuestInfo info = new();
+    info.Quest = SelectedOpenQuestForAdd;
+    OpenQuestsVm.Collection.Add(info);
     OpenQuestsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddTakenQuest()
   {
-    TakenQuestsVm.Collection.Add(new QuestInfo { Quest = SelectedTakenQuestForAdd });
+    QuestInfo info = new();
+    info.Quest = SelectedTakenQuestForAdd;
+    TakenQuestsVm.Collection.Add(info);
     TakenQuestsVm.CollectionView.Refresh();
   }
 
   [RelayCommand]
   private void AddCompletedQuest()
   {
-    CompletedQuestsVm.Collection.Add(new QuestInfo { Quest = SelectedCompletedQuestForAdd });
+    QuestInfo info = new();
+    info.Quest = SelectedCompletedQuestForAdd;
+    CompletedQuestsVm.Collection.Add(info);
     CompletedQuestsVm.CollectionView.Refresh();
   }
 }

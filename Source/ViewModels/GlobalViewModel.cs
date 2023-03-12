@@ -7,16 +7,16 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class GlobalViewModel : ObservableObject
 {
   [ObservableProperty]
-  private string[] _areas = null!;
+  private SaveData _saveData;
 
   [ObservableProperty]
-  private string[] _maps = null!;
+  private string[] _areas = Utils.GetEnumDescriptions<Area>();
 
   [ObservableProperty]
-  private SaveData _saveData = null!;
+  private string[] _maps = Utils.GetEnumDescriptions<Map>();
 
   [ObservableProperty]
-  private string[] _saveProgressIcons = null!;
+  private string[] _saveProgressIcons = Utils.GetEnumDescriptions<SaveProgressIcon>();
 
   public GlobalViewModel() : this(new SaveData())
   {
@@ -24,9 +24,6 @@ public partial class GlobalViewModel : ObservableObject
 
   public GlobalViewModel(SaveData saveData)
   {
-    SaveData = saveData;
-    Areas = Utils.GetEnumDescriptions<Area>();
-    Maps = Utils.GetEnumDescriptions<Map>();
-    SaveProgressIcons = Utils.GetEnumDescriptions<SaveProgressIcon>();
+    _saveData = saveData;
   }
 }
