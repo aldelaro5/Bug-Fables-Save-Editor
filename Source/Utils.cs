@@ -7,23 +7,22 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
-namespace BugFablesSaveEditor.Utils;
+namespace BugFablesSaveEditor;
 
-public enum ReorderDirection
+public static class Utils
 {
-  Up,
-  Down
-}
+  public enum ReorderDirection
+  {
+    Up,
+    Down
+  }
 
-public static class Common
-{
-  public const string FieldSeparator = ",";
-  public const string ElementSeparator = "@";
+  public const string PrimarySeparator = ",";
+  public const string SecondarySeparator = "@";
 
   public static Window MainWindow =>
     ((IClassicDesktopStyleApplicationLifetime)Application.Current?.ApplicationLifetime!)
     .MainWindow!;
-
 
   public static string[] GetEnumDescriptions(this Type type)
   {

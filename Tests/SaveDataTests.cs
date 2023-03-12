@@ -1,6 +1,4 @@
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.BugFablesSave.Sections;
-using BugFablesSaveEditor.Utils;
 using Xunit;
 
 namespace BugFablesSaveEditor.Tests;
@@ -60,7 +58,7 @@ public class SaveDataTests
   {
     string textBefore = File.ReadAllText(ValidSaveFileName);
     _sud.LoadFromFile(ValidSaveFileName);
-    ((Global.GlobalInfo)_sud.Sections[SaveFileSection.Global].Data).Rank = 50;
+    _sud.Global.Rank = 50;
     string tempFilePath = Path.GetTempFileName();
     _sud.SaveToFile(tempFilePath);
     string textAfter = File.ReadAllText(tempFilePath);

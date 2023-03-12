@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.SamiraSongs;
@@ -34,9 +34,8 @@ public partial class SongsViewModel : ObservableObject
   public SongsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    SongsNames = Common.GetEnumDescriptions<Song>();
-    SongsVm = new ReorderableCollectionViewModel<SongInfo>(
-      (IEnumerable<SongInfo>)SaveData.Sections[SaveFileSection.SamiraSongs].Data);
+    SongsNames = Utils.GetEnumDescriptions<Song>();
+    SongsVm = new ReorderableCollectionViewModel<SongInfo>(SaveData.SamiraSongs.List);
   }
 
   [RelayCommand]

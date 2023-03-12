@@ -1,79 +1,33 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class Flagstrings : IBugFablesSaveSection
+public sealed class Flagstrings :  BugFablesDataList<Flagstrings.FlagstringInfo>
 {
-  private const int NbrSlots = 15;
-  private const string separator = "|SPLIT|";
+  private readonly string[][] _flagstringsInfo;
 
   public Flagstrings()
   {
-    string[] lines = File.ReadAllLines("FlagsData/Flagstrings.csv");
-
-    string[][] data = new string[lines.Length][];
-    for (int i = 0; i < lines.Length; i++)
-    {
-      data[i] = lines[i].Split(';');
-    }
-
-    FlagstringInfo[] array = (FlagstringInfo[])Data;
-    for (int i = 0; i < array.Length; i++)
-    {
-      array[i] = new FlagstringInfo { Index = i, Description = data[i][1].Replace('~', '\n') };
-    }
+    ElementSeparator = "|SPLIT|";
+    _flagstringsInfo = LoadAdditionalData("FlagsData/Flagstrings.csv");
   }
 
-  public object Data { get; set; } = new FlagstringInfo[NbrSlots];
-
-  public string EncodeToSaveLine()
+  public override void Parse(string str)
   {
-    FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < flagstrings.Length; i++)
-    {
-      sb.Append(flagstrings[i].Str);
-
-      if (i != flagstrings.Length - 1)
-      {
-        sb.Append(separator);
-      }
-    }
-
-    return sb.ToString();
+    base.Parse(str);
+    for (int i = 0; i < List.Count; i++)
+      List[i].Index = i;
   }
 
-  public void ParseFromSaveLine(string saveLine)
+  protected override void MergeAdditionalData()
   {
-    string[] flagstringData = saveLine.Split(separator);
-    if (flagstringData.Length != NbrSlots)
-    {
-      throw new Exception(nameof(Flagstrings) + " is in an invalid format");
-    }
-
-    FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
-
-    for (int i = 0; i < flagstringData.Length; i++)
-    {
-      flagstrings[i].Str = flagstringData[i];
-    }
+    for (int i = 0; i < _flagstringsInfo.Length; i++)
+      List[i].Description = _flagstringsInfo[i][1].Replace('~', '\n');
   }
 
-  public void ResetToDefault()
-  {
-    FlagstringInfo[] flagstrings = (FlagstringInfo[])Data;
-    foreach (FlagstringInfo str in flagstrings)
-    {
-      str.Str = "";
-    }
-  }
-
-  public class FlagstringInfo : INotifyPropertyChanged
+  public sealed class FlagstringInfo : BugFablesData, INotifyPropertyChanged
   {
     private string _description = "";
     private int _index;
@@ -108,6 +62,21 @@ public class Flagstrings : IBugFablesSaveSection
         _str = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Str = string.Empty;
+    }
+
+    public override void Parse(string str)
+    {
+      Str = str;
+    }
+
+    public override string ToString()
+    {
+      return Str;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
-using BugFablesSaveEditor.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flags;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagstrings;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Flagvars;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Global;
 using static BugFablesSaveEditor.BugFablesSave.Sections.RegionalFlags;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -33,25 +32,25 @@ public partial class FlagsViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private FlagInfo[] _flags = null!;
+  private IList<FlagInfo> _flags = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _flagsFiltered = null!;
 
   [ObservableProperty]
-  private FlagstringInfo[] _flagstrings = null!;
+  private IList<FlagstringInfo> _flagstrings = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _flagstringsFiltered = null!;
 
   [ObservableProperty]
-  private FlagvarInfo[] _flagvars = null!;
+  private IList<FlagvarInfo> _flagvars = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _flagvarsFiltered = null!;
 
   [ObservableProperty]
-  private RegionalInfo[] _regionals = null!;
+  private IList<RegionalInfo> _regionals = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _regionalsFiltered = null!;
@@ -86,14 +85,13 @@ public partial class FlagsViewModel : ObservableObject
   [ObservableProperty]
   private string _textFilterRegionals = null!;
 
-
   partial void OnTextFilterRegionalsChanged(string value)
   {
     RegionalsFiltered.Refresh();
   }
 
-  private GlobalInfo _globalInfo;
-  private RegionalFlags _regionalFlags;
+  private readonly Global _globalInfo;
+  private readonly RegionalFlags _regionalFlags;
 
   public FlagsViewModel() : this(new SaveData())
   {
@@ -102,13 +100,13 @@ public partial class FlagsViewModel : ObservableObject
   public FlagsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Flags = (FlagInfo[])SaveData.Sections[SaveFileSection.Flags].Data;
-    Flagvars = (FlagvarInfo[])SaveData.Sections[SaveFileSection.Flagvars].Data;
-    Flagstrings = (FlagstringInfo[])SaveData.Sections[SaveFileSection.Flagstrings].Data;
-    Regionals = (RegionalInfo[])SaveData.Sections[SaveFileSection.RegionalFlags].Data;
+    Flags = SaveData.Flags.List;
+    Flagvars = SaveData.Flagvars.List;
+    Flagstrings = SaveData.Flagstrings.List;
+    Regionals = SaveData.RegionalFlags.List;
 
-    _regionalFlags = (RegionalFlags)SaveData.Sections[SaveFileSection.RegionalFlags];
-    _globalInfo = (GlobalInfo)SaveData.Sections[SaveFileSection.Global].Data;
+    _regionalFlags = SaveData.RegionalFlags;
+    _globalInfo = SaveData.Global;
     _globalInfo.PropertyChanged += GlobalInfoChanged;
 
     FlagsFiltered = new DataGridCollectionView(Flags);
@@ -190,7 +188,7 @@ public partial class FlagsViewModel : ObservableObject
 
   private void GlobalInfoChanged(object? sender, PropertyChangedEventArgs e)
   {
-    if (e.PropertyName == nameof(GlobalInfo.CurrentArea))
+    if (e.PropertyName == nameof(Global.CurrentArea))
     {
       _regionalFlags.ChangeCurrentRegionalsArea(_globalInfo.CurrentArea);
       RegionalsFiltered.Refresh();

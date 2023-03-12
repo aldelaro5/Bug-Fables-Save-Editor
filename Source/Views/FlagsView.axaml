@@ -4,6 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:FlagsViewModel"
+             x:CompileBindings="True"
              x:Class="BugFablesSaveEditor.Views.FlagsView">
   <Design.DataContext>
     <vm:FlagsViewModel />
@@ -19,16 +21,16 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{Binding Description}" />
+                                Binding="{ReflectionBinding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -42,10 +44,10 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagvarsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-            <DataGridTextColumn Header="Value" Binding="{Binding Var}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+            <DataGridTextColumn Header="Value" Binding="{ReflectionBinding Var}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{Binding Description}" />
+                                Binding="{ReflectionBinding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -60,10 +62,10 @@
         <DataGrid AutoGenerateColumns="False" Items="{Binding FlagstringsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
-            <DataGridTextColumn Header="Value" Binding="{Binding Str}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+            <DataGridTextColumn Header="Value" Binding="{ReflectionBinding Str}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{Binding Description}" />
+                                Binding="{ReflectionBinding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -75,21 +77,21 @@
           <CheckBox DockPanel.Dock="Right" VerticalContentAlignment="Center" Content="Show Unused"
                     IsChecked="{Binding FilterUnusedRegionals}" />
           <TextBox VerticalContentAlignment="Center" Margin="5"
-                   Text="{Binding TextFilterRegionals}" />
+                   Text="{ReflectionBinding TextFilterRegionals}" />
         </DockPanel>
         <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalsFiltered}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+            <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{Binding Description}" />
+                                Binding="{ReflectionBinding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.CrystalBerries;
@@ -14,7 +16,7 @@ public partial class CrystalBerriesViewModel : ObservableObject
   private readonly string[] _areas;
 
   [ObservableProperty]
-  private CrystalBerry[] _crystalBerries = null!;
+  private IList<CrystalBerry> _crystalBerries = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _crystalBerriesFiltered = null!;
@@ -37,8 +39,8 @@ public partial class CrystalBerriesViewModel : ObservableObject
   public CrystalBerriesViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    _areas = Common.GetEnumDescriptions<Area>();
-    CrystalBerries = (CrystalBerry[])SaveData.Sections[SaveFileSection.CrystalBerries].Data;
+    _areas = Utils.GetEnumDescriptions<Area>();
+    CrystalBerries = SaveData.CrystalBerries.List;
     CrystalBerriesFiltered = new DataGridCollectionView(CrystalBerries);
     CrystalBerriesFiltered.Filter = FilterCrystalBerries;
   }

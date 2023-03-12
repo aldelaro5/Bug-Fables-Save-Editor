@@ -7,6 +7,8 @@
         x:Class="BugFablesSaveEditor.Views.MainWindow"
         Title="Bug Fables Save Editor"
         Icon="/Assets/icon.png"
+        x:DataType="vm:MainWindowViewModel"
+        x:CompileBindings="True"
         WindowStartupLocation="CenterScreen">
   <Design.DataContext>
     <vm:MainWindowViewModel />

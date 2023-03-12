@@ -1,98 +1,21 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class SamiraSongs : IBugFablesSaveSection
+public sealed class SamiraSongs : BugFablesDataList<SamiraSongs.SongInfo>
 {
   private const int songNotBought = -1;
   private const int songBought = 1;
 
-  public object Data { get; set; } = new ObservableCollection<SongInfo>();
-
-  public void ParseFromSaveLine(string saveLine)
+  public SamiraSongs()
   {
-    string[] songsData = saveLine.Split(Common.ElementSeparator);
-    ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
-
-    for (int i = 0; i < songsData.Length; i++)
-    {
-      if (songsData[i] == string.Empty)
-      {
-        continue;
-      }
-
-      string[] data = songsData[i].Split(Common.FieldSeparator);
-      if (data.Length != 2)
-        throw new Exception($"The Samira song at index {i} is not well formatted");
-
-      SongInfo newSong = new();
-
-      int intOut = 0;
-      if (!int.TryParse(data[0], out intOut))
-      {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) +
-                            " failed to parse");
-      }
-
-      if (intOut < 0 || intOut >= (int)Song.COUNT)
-      {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.Song) + ": " +
-                            intOut +
-                            " is not a valid song ID");
-      }
-
-      newSong.Song = (Song)intOut;
-      if (!int.TryParse(data[1], out intOut))
-      {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) +
-                            " failed to parse");
-      }
-
-      if (intOut != songNotBought && intOut != songBought)
-      {
-        throw new Exception(nameof(SamiraSongs) + "[" + i + "]." + nameof(SongInfo.IsBought) +
-                            ": " + intOut +
-                            " is not a valid song availability value");
-      }
-
-      newSong.IsBought = intOut == songBought;
-
-      songs.Add(newSong);
-    }
+    ElementSeparator = Utils.SecondarySeparator;
   }
 
-  public string EncodeToSaveLine()
-  {
-    ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < songs.Count; i++)
-    {
-      sb.Append((int)songs[i].Song);
-      sb.Append(Common.FieldSeparator);
-      sb.Append(songs[i].IsBought ? songBought : songNotBought);
-
-      if (i != songs.Count - 1)
-      {
-        sb.Append(Common.ElementSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ResetToDefault()
-  {
-    ObservableCollection<SongInfo> songs = (ObservableCollection<SongInfo>)Data;
-    songs.Clear();
-  }
-
-  public class SongInfo : INotifyPropertyChanged
+  public sealed class SongInfo : BugFablesData, INotifyPropertyChanged
   {
     private bool _isBought;
     private Song _song;
@@ -120,6 +43,31 @@ public class SamiraSongs : IBugFablesSaveSection
         _isBought = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Song = 0;
+      IsBought = false;
+    }
+
+    public override void Parse(string str)
+    {
+      string[] data = str.Split(Utils.PrimarySeparator);
+
+      Song = (Song)ParseField<int>(data[0], nameof(Song));
+      IsBought = ParseField<int>(data[1], nameof(IsBought)) == songBought;
+    }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new();
+
+      sb.Append((int)Song);
+      sb.Append(Utils.PrimarySeparator);
+      sb.Append(IsBought ? songBought : songNotBought);
+
+      return sb.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

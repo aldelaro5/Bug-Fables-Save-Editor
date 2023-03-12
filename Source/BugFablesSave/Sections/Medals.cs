@@ -1,98 +1,18 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class Medals : IBugFablesSaveSection
+public sealed class Medals : BugFablesDataList<Medals.MedalInfo>
 {
-  public object Data { get; set; } = new ObservableCollection<MedalInfo>();
-
-  public void ParseFromSaveLine(string saveLine)
+  public Medals()
   {
-    string[] medalsData = saveLine.Split(Common.ElementSeparator);
-    ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
-
-    for (int i = 0; i < medalsData.Length; i++)
-    {
-      if (medalsData[i] == string.Empty)
-      {
-        continue;
-      }
-
-      string[] data = medalsData[i].Split(Common.FieldSeparator);
-      if (data.Length != 2)
-        throw new Exception($"The medal at index {i} is not well formatted");
-
-      MedalInfo newMedalEquip = new();
-
-      int intOut = 0;
-      if (!int.TryParse(data[0], out intOut))
-      {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) +
-                            " failed to parse");
-      }
-
-      if (intOut < 0 || intOut >= (int)Medal.COUNT)
-      {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.Medal) + ": " +
-                            intOut +
-                            " is not a valid medal ID");
-      }
-
-      newMedalEquip.Medal = (Medal)intOut;
-      if (!int.TryParse(data[1], out intOut))
-      {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) +
-                            " failed to parse");
-      }
-
-      // Convert from save to our enum
-      intOut += 2;
-      if (intOut < 0 || intOut >= (int)MedalEquipTarget.COUNT)
-      {
-        throw new Exception(nameof(Medals) + "[" + i + "]." + nameof(MedalInfo.MedalEquipTarget) +
-                            ": " + intOut +
-                            " is not a valid medal equip target value");
-      }
-
-      newMedalEquip.MedalEquipTarget = (MedalEquipTarget)intOut;
-
-      medals.Add(newMedalEquip);
-    }
+    ElementSeparator = Utils.SecondarySeparator;
   }
 
-  public string EncodeToSaveLine()
-  {
-    ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < medals.Count; i++)
-    {
-      sb.Append((int)medals[i].Medal);
-      sb.Append(Common.FieldSeparator);
-      // the -2 is to convert from our enum to save
-      sb.Append((int)medals[i].MedalEquipTarget - 2);
-
-      if (i != medals.Count - 1)
-      {
-        sb.Append(Common.ElementSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ResetToDefault()
-  {
-    ObservableCollection<MedalInfo> medals = (ObservableCollection<MedalInfo>)Data;
-    medals.Clear();
-  }
-
-  public class MedalInfo : INotifyPropertyChanged
+  public sealed class MedalInfo : BugFablesData, INotifyPropertyChanged
   {
     private Medal _medal;
 
@@ -126,6 +46,32 @@ public class Medals : IBugFablesSaveSection
         _medalEquipTarget = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Medal = 0;
+      MedalEquipTarget = 0;
+    }
+
+    public override void Parse(string str)
+    {
+      string[] data = str.Split(Utils.PrimarySeparator);
+
+      Medal = (Medal)ParseField<int>(data[0], nameof(Medal));
+      MedalEquipTarget = (MedalEquipTarget)ParseField<int>(data[1], nameof(MedalEquipTarget)) + 2;
+    }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new();
+
+      sb.Append((int)Medal);
+      sb.Append(Utils.PrimarySeparator);
+      // the -2 is to convert from our enum to save
+      sb.Append((int)MedalEquipTarget - 2);
+
+      return sb.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

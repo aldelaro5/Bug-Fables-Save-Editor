@@ -1,97 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class EnemyEncounters : IBugFablesSaveSection
+public sealed class EnemyEncounters : BugFablesDataList<EnemyEncounters.EnemyEncounterInfo>
 {
-  private const int nbrSlots = 256;
-
   public EnemyEncounters()
   {
-    EnemyEncounterInfo[] encounterList = (EnemyEncounterInfo[])Data;
-
-    for (int i = 0; i < encounterList.Length; i++)
-    {
-      encounterList[i] = new EnemyEncounterInfo();
-    }
+    ElementSeparator = Utils.SecondarySeparator;
   }
 
-  public object Data { get; set; } = new EnemyEncounterInfo[nbrSlots];
-
-  public void ParseFromSaveLine(string saveLine)
-  {
-    string[] enemyEncountersData = saveLine.Split(Utils.Common.ElementSeparator);
-    if (enemyEncountersData.Length != nbrSlots)
-    {
-      throw new Exception(nameof(EnemyEncounters) + " is in an invalid format");
-    }
-
-    EnemyEncounterInfo[] enemyEncounters = (EnemyEncounterInfo[])Data;
-
-    for (int i = 0; i < enemyEncountersData.Length; i++)
-    {
-      string[] data = enemyEncountersData[i].Split(Utils.Common.FieldSeparator);
-      if (data.Length != 2)
-        throw new Exception($"The enemy encounter at index {i} is not well formatted");
-
-      EnemyEncounterInfo newEnemyEncounterInfo = new();
-
-      int intOut = 0;
-      if (!int.TryParse(data[0], out intOut))
-      {
-        throw new Exception(nameof(EnemyEncounters) + "[" + i + "]." +
-                            nameof(EnemyEncounterInfo.NbrSeen) +
-                            " failed to parse");
-      }
-
-      newEnemyEncounterInfo.NbrSeen = intOut;
-      if (!int.TryParse(data[1], out intOut))
-      {
-        throw new Exception(nameof(EnemyEncounters) + "[" + i + "]." +
-                            nameof(EnemyEncounterInfo.NbrDefeated) +
-                            " failed to parse");
-      }
-
-      newEnemyEncounterInfo.NbrDefeated = intOut;
-
-      enemyEncounters[i] = newEnemyEncounterInfo;
-    }
-  }
-
-  public string EncodeToSaveLine()
-  {
-    EnemyEncounterInfo[] enemyEncounters = (EnemyEncounterInfo[])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < enemyEncounters.Length; i++)
-    {
-      sb.Append(enemyEncounters[i].NbrSeen);
-      sb.Append(Utils.Common.FieldSeparator);
-      sb.Append(enemyEncounters[i].NbrDefeated);
-
-      if (i != enemyEncounters.Length - 1)
-      {
-        sb.Append(Utils.Common.ElementSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ResetToDefault()
-  {
-    EnemyEncounterInfo[] enemyEncounters = (EnemyEncounterInfo[])Data;
-    foreach (EnemyEncounterInfo enemyEncounter in enemyEncounters)
-    {
-      enemyEncounter.NbrDefeated = 0;
-      enemyEncounter.NbrSeen = 0;
-    }
-  }
-
-  public class EnemyEncounterInfo : INotifyPropertyChanged
+  public sealed class EnemyEncounterInfo : BugFablesData, INotifyPropertyChanged
   {
     private int _nbrDefeated;
     private int _nbrSeen;
@@ -114,6 +36,33 @@ public class EnemyEncounters : IBugFablesSaveSection
         _nbrDefeated = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      NbrDefeated = 0;
+      NbrSeen = 0;
+    }
+
+    public override void Parse(string str)
+    {
+      string[] data = str.Split(Utils.PrimarySeparator);
+      if (data.Length != 2)
+        throw new Exception($"Expected 2 fields, but got {data.Length}");
+
+      NbrSeen = ParseField<int>(data[0], nameof(NbrSeen));
+      NbrDefeated = ParseField<int>(data[1], nameof(NbrDefeated));
+    }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new();
+
+      sb.Append(NbrSeen);
+      sb.Append(Utils.PrimarySeparator);
+      sb.Append(NbrDefeated);
+
+      return sb.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

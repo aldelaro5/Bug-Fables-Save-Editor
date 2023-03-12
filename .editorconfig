@@ -24,6 +24,7 @@ resharper_braces_for_using = required_for_multiline
 resharper_place_accessorholder_attribute_on_same_line = false
 resharper_place_field_attribute_on_same_line = false
 resharper_use_roslyn_logic_for_evident_types = true
+resharper_wrap_array_initializer_style = chop_if_long
 
 # C# files
 [*.cs]

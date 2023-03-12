@@ -1,102 +1,16 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class StatBonuses : IBugFablesSaveSection
+public sealed class StatBonuses : BugFablesDataList<StatBonuses.StatBonusInfo>
 {
-  public object Data { get; set; } = new ObservableCollection<StatBonusInfo>();
-
-  public void ParseFromSaveLine(string saveLine)
+  public StatBonuses()
   {
-    string[] statsBonusesData = saveLine.Split(Common.ElementSeparator);
-    ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
-
-    for (int i = 0; i < statsBonusesData.Length; i++)
-    {
-      if (statsBonusesData[i] == string.Empty)
-      {
-        continue;
-      }
-
-      string[] data = statsBonusesData[i].Split(Common.FieldSeparator);
-      if (data.Length != 3)
-        throw new Exception($"The stat bonus at index {i} is not well formatted");
-
-      StatBonusInfo newStatBonus = new();
-
-      int intOut = 0;
-      if (!int.TryParse(data[0], out intOut))
-      {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Type) +
-                            " failed to parse");
-      }
-
-      if (intOut < 0 || intOut >= (int)StatBonusType.COUNT)
-      {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Type) +
-                            ": " + intOut +
-                            " is not a valid stat bonus type ID");
-      }
-
-      newStatBonus.Type = (StatBonusType)intOut;
-      if (!int.TryParse(data[1], out intOut))
-      {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Amount) +
-                            " failed to parse");
-      }
-
-      newStatBonus.Amount = intOut;
-      if (!int.TryParse(data[2], out intOut))
-      {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Target) +
-                            " failed to parse");
-      }
-
-      if (intOut < -1 || intOut >= (int)StatBonusTarget.COUNT)
-      {
-        throw new Exception(nameof(StatBonuses) + "[" + i + "]." + nameof(StatBonusInfo.Target) +
-                            ": " + intOut +
-                            " is not a valid stat bonus target value");
-      }
-
-      newStatBonus.Target = (StatBonusTarget)intOut;
-
-      statBonuses.Add(newStatBonus);
-    }
-  }
-
-  public string EncodeToSaveLine()
-  {
-    ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < statBonuses.Count; i++)
-    {
-      sb.Append((int)statBonuses[i].Type);
-      sb.Append(Common.FieldSeparator);
-      sb.Append(statBonuses[i].Amount);
-      sb.Append(Common.FieldSeparator);
-      sb.Append((int)statBonuses[i].Target);
-
-      if (i != statBonuses.Count - 1)
-      {
-        sb.Append(Common.ElementSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ResetToDefault()
-  {
-    ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
-    statBonuses.Clear();
+    ElementSeparator = Utils.SecondarySeparator;
   }
 
   /// <summary>
@@ -107,19 +21,18 @@ public class StatBonuses : IBugFablesSaveSection
   /// <returns>The sum of the total bonus amount</returns>
   public int GetTotalBonusesForTargetAndType(int target, StatBonusType type)
   {
-    ObservableCollection<StatBonusInfo> statBonuses = (ObservableCollection<StatBonusInfo>)Data;
     if (target == -1)
     {
-      return statBonuses.Where(x => x.Target == StatBonusTarget.Party && x.Type == type)
+      return List.Where(x => x.Target == StatBonusTarget.Party && x.Type == type)
         .Sum(x => x.Amount);
     }
 
-    return statBonuses.Where(x =>
+    return List.Where(x =>
         ((int)x.Target == target || x.Target == StatBonusTarget.Party) && x.Type == type)
       .Sum(x => x.Amount);
   }
 
-  public class StatBonusInfo : INotifyPropertyChanged
+  public sealed class StatBonusInfo : BugFablesData, INotifyPropertyChanged
   {
     private int _amount;
 
@@ -160,6 +73,35 @@ public class StatBonuses : IBugFablesSaveSection
         _target = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Type = 0;
+      Amount = 0;
+      Target = 0;
+    }
+
+    public override void Parse(string str)
+    {
+      string[] data = str.Split(Utils.PrimarySeparator);
+
+      Type = (StatBonusType)ParseField<int>(data[0], nameof(Type));
+      Amount = ParseField<int>(data[1], nameof(Amount));
+      Target = (StatBonusTarget)ParseField<int>(data[2], nameof(Target));
+    }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new();
+
+      sb.Append((int)Type);
+      sb.Append(Utils.PrimarySeparator);
+      sb.Append(Amount);
+      sb.Append(Utils.PrimarySeparator);
+      sb.Append((int)Target);
+
+      return sb.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

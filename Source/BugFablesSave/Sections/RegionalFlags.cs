@@ -1,17 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class RegionalFlags : IBugFablesSaveSection
+public sealed class RegionalFlags : BugFablesDataList<RegionalFlags.RegionalInfo>
 {
-  private const int NbrSlots = 100;
-
-  private readonly string[][] Descriptions = new string[(int)Area.COUNT][];
+  private readonly string[][] _descriptions = new string[(int)Area.COUNT][];
 
   public RegionalFlags()
   {
@@ -19,91 +18,28 @@ public class RegionalFlags : IBugFablesSaveSection
     // Don't consider the last one which is the COUNT
     for (int i = 0; i < areas.Length - 1; i++)
     {
-      Descriptions[i] = new string[NbrSlots];
-      Array.Fill(Descriptions[i], "UNUSED");
+      string[][] lines = LoadAdditionalData($"FlagsData/Regionals/{areas[i]}.csv");
+      _descriptions[i] = new string[lines.Length];
+      Array.Fill(_descriptions[i], "UNUSED");
 
-      string[] lines = File.ReadAllLines("FlagsData/Regionals/" + areas[i] + ".csv");
-      string[][] data = new string[lines.Length][];
       for (int j = 0; j < lines.Length; j++)
-      {
-        data[j] = lines[j].Split(';');
-      }
-
-      for (int j = 0; j < data.Length; j++)
-      {
-        Descriptions[i][int.Parse(data[j][0])] = data[j][1].Replace('~', '\n');
-      }
+        _descriptions[i][j] = lines[j][1].Replace('~', '\n');
     }
-
-    RegionalInfo[] array = (RegionalInfo[])Data;
-    for (int i = 0; i < array.Length; i++)
-    {
-      array[i] = new RegionalInfo { Index = i, Description = "" };
-    }
-  }
-
-  public object Data { get; set; } = new RegionalInfo[NbrSlots];
-
-  public string EncodeToSaveLine()
-  {
-    RegionalInfo[] regionals = (RegionalInfo[])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < regionals.Length; i++)
-    {
-      sb.Append(regionals[i].Enabled);
-
-      if (i != regionals.Length - 1)
-      {
-        sb.Append(Common.FieldSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ParseFromSaveLine(string saveLine)
-  {
-    string[] regionalFlagsData = saveLine.Split(Common.FieldSeparator);
-    if (regionalFlagsData.Length != NbrSlots)
-    {
-      throw new Exception(nameof(RegionalFlags) + " is in an invalid format");
-    }
-
-    RegionalInfo[] regionalFlags = (RegionalInfo[])Data;
-
-    for (int i = 0; i < regionalFlagsData.Length; i++)
-    {
-      bool boolOut = false;
-      if (!bool.TryParse(regionalFlagsData[i], out boolOut))
-      {
-        throw new Exception(nameof(RegionalFlags) + "[" + i + "] failed to parse");
-      }
-
-      regionalFlags[i].Enabled = boolOut;
-    }
-  }
-
-  public void ResetToDefault()
-  {
-    RegionalInfo[] regionalFlags = (RegionalInfo[])Data;
-    foreach (RegionalInfo flag in regionalFlags)
-    {
-      flag.Enabled = false;
-    }
+    List.Add(new RegionalInfo());
   }
 
   public void ChangeCurrentRegionalsArea(Area area)
   {
-    RegionalInfo[] regionals = (RegionalInfo[])Data;
-
-    for (int i = 0; i < NbrSlots; i++)
+    for (int i = 0; i < _descriptions[1].Length; i++)
     {
-      regionals[i].Description = Descriptions[(int)area][i];
+      if (i >= List.Count)
+        break;
+
+      List[i].Description = _descriptions[(int)area][i];
     }
   }
 
-  public class RegionalInfo : INotifyPropertyChanged
+  public sealed class RegionalInfo : BugFablesData, INotifyPropertyChanged
   {
     private string _description = "";
 
@@ -138,6 +74,21 @@ public class RegionalFlags : IBugFablesSaveSection
         _enabled = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Enabled = false;
+    }
+
+    public override void Parse(string str)
+    {
+      Enabled = ParseField<bool>(str, nameof(Enabled));
+    }
+
+    public override string ToString()
+    {
+      return Enabled.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

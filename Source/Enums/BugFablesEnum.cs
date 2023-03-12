@@ -1,29 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BugFablesSaveEditor.Utils;
-
-public enum SaveFileSection
-{
-  Header = 0,
-  PartyMembers,
-  Global,
-  MedalShopsAvailables,
-  MedalShopsPools,
-  Quests,
-  Items,
-  Medals,
-  SamiraSongs,
-  StatBonuses,
-  Library,
-  Flags,
-  Flagstrings,
-  Flagvars,
-  RegionalFlags,
-  CrystalBerries,
-  Followers,
-  EnemyEncounters,
-  COUNT
-}
+namespace BugFablesSaveEditor.Enums;
 
 public enum Medal
 {

@@ -3,8 +3,10 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:bf="clr-namespace:BugFablesSaveEditor.Utils"
+             xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:LibraryViewModel"
+             x:CompileBindings="True"
              x:Class="BugFablesSaveEditor.Views.LibraryView">
   <Design.DataContext>
     <vm:LibraryViewModel />
@@ -29,12 +31,12 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Index, Mode=OneWay,
+                                Binding="{ReflectionBinding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Discovery}}"
                                 Width="200" />
@@ -59,12 +61,12 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Index, Mode=OneWay,
+                                Binding="{ReflectionBinding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Enemy}}"
                                 Width="200" />
@@ -89,12 +91,12 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Index, Mode=OneWay,
+                                Binding="{ReflectionBinding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Recipe}}"
                                 Width="200" />
@@ -119,12 +121,12 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Index, Mode=OneWay,
+                                Binding="{ReflectionBinding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Record}}"
                                 Width="200" />
@@ -150,12 +152,12 @@
             <DataGridTemplateColumn Width="50">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Index, Mode=OneWay,
+                                Binding="{ReflectionBinding Index, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:Area}}"
                                 Width="200" />

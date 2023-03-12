@@ -3,8 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:bf="clr-namespace:BugFablesSaveEditor.Utils"
+             xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:CrystalBerriesViewModel"
+             x:CompileBindings="True"
              x:Class="BugFablesSaveEditor.Views.CrystalBerriesView">
   <Design.DataContext>
     <vm:CrystalBerriesViewModel />
@@ -21,20 +23,20 @@
               CanUserReorderColumns="True" CanUserResizeColumns="True"
               SelectionMode="Extended">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{Binding Index}" />
+        <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
         <DataGridTemplateColumn Header="Obtained" Width="100">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
-              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Obtained}" />
+              <CheckBox Margin="30,0,0,0" IsChecked="{ReflectionBinding Obtained}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn
-          Binding="{Binding Area, Mode=OneWay,
+          Binding="{ReflectionBinding Area, Mode=OneWay,
           Converter={StaticResource EnumDescriptionConverter},
           ConverterParameter={x:Type bf:Area}}"
           Header="Area" IsReadOnly="True" Width="160" />
-        <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" />
+        <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{ReflectionBinding Description}" />
       </DataGrid.Columns>
     </DataGrid>
   </DockPanel>

@@ -3,8 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:bf="clr-namespace:BugFablesSaveEditor.Utils"
+             xmlns:bf="clr-namespace:BugFablesSaveEditor.Enums"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:StatsViewModel"
+             x:CompileBindings="True"
              x:Class="BugFablesSaveEditor.Views.StatsView">
   <Design.DataContext>
     <vm:StatsViewModel />
@@ -18,18 +20,18 @@
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="TP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding SaveData.Sections[Global].Data.TP}" />
+                           Value="{Binding SaveData.Global.TP}" />
             <Label VerticalContentAlignment="Center" Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding SaveData.Sections[Global].Data.MaxTP}" />
+                           Value="{Binding SaveData.Global.MaxTP}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="MP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding SaveData.Sections[Global].Data.MP}" />
+                           Value="{Binding SaveData.Global.MP}" />
             <Label VerticalContentAlignment="Center" Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding SaveData.Sections[Global].Data.MaxMP}" />
+                           Value="{Binding SaveData.Global.MaxMP}" />
           </StackPanel>
         </StackPanel>
       </DockPanel>
@@ -40,17 +42,17 @@
                   SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
           <DataGrid.Columns>
             <DataGridTextColumn
-              Binding="{Binding Trueid, Mode=OneWay,
+              Binding="{ReflectionBinding Trueid, Mode=OneWay,
                                           Converter={StaticResource EnumDescriptionConverter},
                                           ConverterParameter={x:Type bf:AnimID}}"
               IsReadOnly="True" Header="Member" />
-            <DataGridTextColumn Header="Base HP" Binding="{Binding BaseHP}" Width="75" />
-            <DataGridTextColumn Header="HP" Binding="{Binding HP}" />
-            <DataGridTextColumn Header="Max HP" Binding="{Binding MaxHP}" Width="70" />
-            <DataGridTextColumn Header="Base Attack" Binding="{Binding BaseAttack}" Width="85" />
-            <DataGridTextColumn Header="Attack" Binding="{Binding Attack}" />
-            <DataGridTextColumn Header="Base Defense" Binding="{Binding BaseDefense}" Width="95" />
-            <DataGridTextColumn Header="Defense" Binding="{Binding Defense}" />
+            <DataGridTextColumn Header="Base HP" Binding="{ReflectionBinding BaseHP}" Width="75" />
+            <DataGridTextColumn Header="HP" Binding="{ReflectionBinding HP}" />
+            <DataGridTextColumn Header="Max HP" Binding="{ReflectionBinding MaxHP}" Width="70" />
+            <DataGridTextColumn Header="Base Attack" Binding="{ReflectionBinding BaseAttack}" Width="85" />
+            <DataGridTextColumn Header="Attack" Binding="{ReflectionBinding Attack}" />
+            <DataGridTextColumn Header="Base Defense" Binding="{ReflectionBinding BaseDefense}" Width="95" />
+            <DataGridTextColumn Header="Defense" Binding="{ReflectionBinding Defense}" />
           </DataGrid.Columns>
         </DataGrid>
       </StackPanel>
@@ -73,17 +75,17 @@
                   Items="{Binding ViewPartyStatsBonuses}" CanUserSortColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Type, Mode=OneWay,
+                                Binding="{ReflectionBinding Type, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:StatBonusType}}"
                                 Header="Type" Width="85" />
-            <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
+            <DataGridTextColumn Header="Amount" Binding="{ReflectionBinding Amount}" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{Binding $parent[DataGrid].DataContext.CmdRemovePartyStatBonusCommand}"
-                          CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                          Command="{ReflectionBinding $parent[DataGrid].DataContext.CmdRemovePartyStatBonusCommand}"
+                          CommandParameter="{ReflectionBinding }" HorizontalContentAlignment="Center"
                           Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
@@ -122,17 +124,17 @@
                   Items="{Binding ViewMemberStatsBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn IsReadOnly="True"
-                                Binding="{Binding Type, Mode=OneWay,
+                                Binding="{ReflectionBinding Type, Mode=OneWay,
                                         Converter={StaticResource EnumDescriptionConverter},
                                         ConverterParameter={x:Type bf:StatBonusType}}"
                                 Header="Type" Width="85" />
-            <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" />
+            <DataGridTextColumn Header="Amount" Binding="{ReflectionBinding Amount}" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                   <Button Margin="5,0,0,0" IsEnabled="True" Content="-"
-                          Command="{Binding $parent[DataGrid].DataContext.CmdRemoveMemberStatBonusCommand}"
-                          CommandParameter="{Binding }" HorizontalContentAlignment="Center"
+                          Command="{ReflectionBinding $parent[DataGrid].DataContext.CmdRemoveMemberStatBonusCommand}"
+                          CommandParameter="{ReflectionBinding }" HorizontalContentAlignment="Center"
                           Width="25"
                           Background="DarkRed" />
                 </DataTemplate>

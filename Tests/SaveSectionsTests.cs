@@ -1,12 +1,34 @@
 using System.Globalization;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
 using Xunit;
 
 namespace BugFablesSaveEditor.Tests;
 
 public class SaveSectionsTests
 {
+  public enum SaveFileSection
+  {
+    Header = 0,
+    PartyMembers,
+    Global,
+    MedalShopsAvailables,
+    MedalShopsPools,
+    Quests,
+    Items,
+    Medals,
+    SamiraSongs,
+    StatBonuses,
+    Library,
+    Flags,
+    Flagstrings,
+    Flagvars,
+    RegionalFlags,
+    CrystalBerries,
+    Followers,
+    EnemyEncounters,
+    COUNT
+  }
+
   private const string DecodedSaveFileName = "SaveFiles/DecodedTextSave.txt";
 
   private readonly string[] saveLines = File.ReadAllLines(DecodedSaveFileName);
@@ -27,35 +49,35 @@ public class SaveSectionsTests
     CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
     Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-fr");
     string strBefore = saveLines[(int)section];
-    IBugFablesSaveSection sud = new SaveData().Sections[section];
-    sud.ParseFromSaveLine(saveLines[(int)section]);
-    string strAfter = sud.EncodeToSaveLine();
+    BugFablesData sud = new SaveData().Sections[(int)section];
+    sud.Parse(saveLines[(int)section]);
+    string strAfter = sud.ToString();
     Thread.CurrentThread.CurrentCulture = cultureInfo;
     Assert.Equal(strBefore, strAfter);
   }
 
   [Theory]
-  [InlineData(SaveFileSection.Header, Common.FieldSeparator)]
-  [InlineData(SaveFileSection.PartyMembers, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.Global, Common.FieldSeparator)]
-  [InlineData(SaveFileSection.Quests, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.Items, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.Medals, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.SamiraSongs, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.StatBonuses, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.Library, Common.ElementSeparator)]
-  [InlineData(SaveFileSection.EnemyEncounters, Common.ElementSeparator)]
-  public void HeaderParsing_ShouldThrow_WhenIncorrectFieldsAmount(
+  [InlineData(SaveFileSection.Header, Utils.PrimarySeparator)]
+  [InlineData(SaveFileSection.PartyMembers, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.Global, Utils.PrimarySeparator)]
+  [InlineData(SaveFileSection.Quests, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.Items, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.Medals, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.SamiraSongs, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.StatBonuses, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.Library, Utils.SecondarySeparator)]
+  [InlineData(SaveFileSection.EnemyEncounters, Utils.SecondarySeparator)]
+  public void SectionParsing_ShouldThrow_WhenIncorrectFieldsAmount(
     SaveFileSection section, string separator)
   {
     string sectionData = saveLines[(int)section];
-    IBugFablesSaveSection sud = new SaveData().Sections[section];
+    BugFablesData sud = new SaveData().Sections[(int)section];
     // One field too much
     sectionData += $"{separator}0";
-    Assert.ThrowsAny<Exception>(() => sud.ParseFromSaveLine(sectionData));
+    Assert.ThrowsAny<Exception>(() => sud.Parse(sectionData));
     // One field too low
     sectionData = sectionData.Split(separator).Skip(2)
       .Aggregate((acc, field) => $"{acc}{separator}{field}");
-    Assert.ThrowsAny<Exception>(() => sud.ParseFromSaveLine(sectionData));
+    Assert.ThrowsAny<Exception>(() => sud.Parse(sectionData));
   }
 }

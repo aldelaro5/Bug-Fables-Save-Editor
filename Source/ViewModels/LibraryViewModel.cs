@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Library;
@@ -12,13 +13,13 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class LibraryViewModel : ObservableObject
 {
   [ObservableProperty]
-  private LibraryFlag[] _discoveries = null!;
+  private IList<LibraryFlag> _discoveries = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _discoveriesFiltered = null!;
 
   [ObservableProperty]
-  private LibraryFlag[] _enemies = null!;
+  private IList<LibraryFlag> _enemies = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _enemiesFiltered = null!;
@@ -64,13 +65,13 @@ public partial class LibraryViewModel : ObservableObject
   }
 
   [ObservableProperty]
-  private LibraryFlag[] _recipes = null!;
+  private IList<LibraryFlag> _recipes = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _recipesFiltered = null!;
 
   [ObservableProperty]
-  private LibraryFlag[] _records = null!;
+  private IList<LibraryFlag> _records = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _recordsFiltered = null!;
@@ -79,7 +80,7 @@ public partial class LibraryViewModel : ObservableObject
   private SaveData _saveData = null!;
 
   [ObservableProperty]
-  private LibraryFlag[] _seenAreas = null!;
+  private IList<LibraryFlag> _seenAreas = null!;
 
   [ObservableProperty]
   private DataGridCollectionView _seenAreasFiltered = null!;
@@ -137,18 +138,18 @@ public partial class LibraryViewModel : ObservableObject
   public LibraryViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    discoveriesNames = Common.GetEnumDescriptions<Discovery>();
-    enemiesNames = Common.GetEnumDescriptions<Enemy>();
-    recipessNames = Common.GetEnumDescriptions<Recipe>();
-    recordsNames = Common.GetEnumDescriptions<Record>();
-    areasNames = Common.GetEnumDescriptions<Area>();
+    discoveriesNames = Utils.GetEnumDescriptions<Discovery>();
+    enemiesNames = Utils.GetEnumDescriptions<Enemy>();
+    recipessNames = Utils.GetEnumDescriptions<Recipe>();
+    recordsNames = Utils.GetEnumDescriptions<Record>();
+    areasNames = Utils.GetEnumDescriptions<Area>();
 
-    LibraryFlag[][] wholeLibrary = (LibraryFlag[][])SaveData.Sections[SaveFileSection.Library].Data;
-    Discoveries = wholeLibrary[(int)LibrarySection.Discovery];
-    Enemies = wholeLibrary[(int)LibrarySection.Bestiary];
-    Recipes = wholeLibrary[(int)LibrarySection.Recipe];
-    Records = wholeLibrary[(int)LibrarySection.Record];
-    SeenAreas = wholeLibrary[(int)LibrarySection.SeenMapLocation];
+    var wholeLibrary = SaveData.Library.List;
+    Discoveries = wholeLibrary[(int)LibrarySection.Discovery].List;
+    Enemies = wholeLibrary[(int)LibrarySection.Bestiary].List;
+    Recipes = wholeLibrary[(int)LibrarySection.Recipe].List;
+    Records = wholeLibrary[(int)LibrarySection.Record].List;
+    SeenAreas = wholeLibrary[(int)LibrarySection.SeenMapLocation].List;
 
     DiscoveriesFiltered = new DataGridCollectionView(Discoveries);
     DiscoveriesFiltered.Filter = FilterDiscoveries;

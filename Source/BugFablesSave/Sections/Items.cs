@@ -1,101 +1,24 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class Items : IBugFablesSaveSection
+public sealed class Items : BugFablesDataList<Items.ItemsPoessionTypeInfo>
 {
   public Items()
   {
-    ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
-
-    for (int i = 0; i < items.Length; i++)
-    {
-      items[i] = new ObservableCollection<ItemInfo>();
-    }
+    ElementSeparator = Utils.SecondarySeparator;
+    NbrExpectedElements = (int)ItemPossessionType.COUNT;
+    while (List.Count < (int)ItemPossessionType.COUNT)
+      List.Add(new ItemsPoessionTypeInfo());
   }
 
-  public object Data { get; set; } =
-    new ObservableCollection<ItemInfo>[(int)ItemPossessionType.COUNT];
-
-  public void ParseFromSaveLine(string saveLine)
+  public sealed class ItemsPoessionTypeInfo : BugFablesDataList<ItemInfo>
   {
-    string[] itemsData = saveLine.Split(Common.ElementSeparator);
-    if (itemsData.Length != (int)ItemPossessionType.COUNT)
-    {
-      throw new Exception(nameof(Items) + " is in an invalid format");
-    }
-
-    ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
-
-    for (int i = 0; i < itemsData.Length; i++)
-    {
-      if (itemsData[i] == string.Empty)
-      {
-        continue;
-      }
-
-      string[] data = itemsData[i].Split(Common.FieldSeparator);
-      for (int j = 0; j < data.Length; j++)
-      {
-        int intOut = 0;
-        if (!int.TryParse(data[j], out intOut))
-        {
-          throw new Exception(nameof(Items) + "[" + Enum.GetNames(typeof(ItemPossessionType))[i] +
-                              "][" + j + "] failed to parse");
-        }
-
-        if (intOut < 0 || intOut >= (int)Item.COUNT)
-        {
-          throw new Exception(nameof(Items) + "[" + Enum.GetNames(typeof(ItemPossessionType))[i] +
-                              "][" + j + "]: " + intOut + " is not a valid item ID");
-        }
-
-        items[i].Add(new ItemInfo { Item = (Item)intOut });
-      }
-    }
   }
 
-  public string EncodeToSaveLine()
-  {
-    ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < items.Length; i++)
-    {
-      for (int j = 0; j < items[i].Count; j++)
-      {
-        sb.Append((int)items[i][j].Item);
-
-        if (j != items[i].Count - 1)
-        {
-          sb.Append(Common.FieldSeparator);
-        }
-      }
-
-      if (i != items.Length - 1)
-      {
-        sb.Append(Common.ElementSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ResetToDefault()
-  {
-    ObservableCollection<ItemInfo>[] items = (ObservableCollection<ItemInfo>[])Data;
-    foreach (ObservableCollection<ItemInfo> collection in items)
-    {
-      collection.Clear();
-    }
-  }
-
-  public class ItemInfo : INotifyPropertyChanged
+  public sealed class ItemInfo : BugFablesData, INotifyPropertyChanged
   {
     private Item _item;
 
@@ -112,6 +35,21 @@ public class Items : IBugFablesSaveSection
         _item = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Item = 0;
+    }
+
+    public override void Parse(string str)
+    {
+      Item = (Item)ParseField<int>(str, nameof(Item));
+    }
+
+    public override string ToString()
+    {
+      return ((int)Item).ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

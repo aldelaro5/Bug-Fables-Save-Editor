@@ -1,80 +1,31 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class Flags : IBugFablesSaveSection
+public sealed class Flags : BugFablesDataList<Flags.FlagInfo>
 {
-  private const int NbrSlots = 750;
+  private readonly string[][] _flagsData;
 
   public Flags()
   {
-    string[] lines = File.ReadAllLines("FlagsData/Flags.csv");
-
-    string[][] data = new string[lines.Length][];
-    for (int i = 0; i < lines.Length; i++)
-    {
-      data[i] = lines[i].Split(';');
-    }
-
-    FlagInfo[] array = (FlagInfo[])Data;
-    for (int i = 0; i < array.Length; i++)
-    {
-      array[i] = new FlagInfo { Index = i, Description = data[i][1].Replace('~', '\n') };
-    }
+    _flagsData = LoadAdditionalData("FlagsData/Flags.csv");
   }
 
-  public object Data { get; set; } = new FlagInfo[NbrSlots];
-
-  public string EncodeToSaveLine()
+  public override void Parse(string str)
   {
-    FlagInfo[] flags = (FlagInfo[])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < flags.Length; i++)
-    {
-      sb.Append(flags[i].Enabled);
-
-      if (i != flags.Length - 1)
-      {
-        sb.Append(Utils.Common.FieldSeparator);
-      }
-    }
-
-    return sb.ToString();
+    base.Parse(str);
+    for (int i = 0; i < List.Count; i++)
+      List[i].Index = i;
   }
 
-  public void ParseFromSaveLine(string saveLine)
+  protected override void MergeAdditionalData()
   {
-    string[] flagsData = saveLine.Split(Utils.Common.FieldSeparator);
-
-    FlagInfo[] flags = (FlagInfo[])Data;
-
-    for (int i = 0; i < flagsData.Length; i++)
-    {
-      bool boolOut = false;
-      if (!bool.TryParse(flagsData[i], out boolOut))
-      {
-        throw new Exception(nameof(Flags) + "[" + i + "] failed to parse");
-      }
-
-      flags[i].Enabled = boolOut;
-    }
+    for (int i = 0; i < _flagsData.Length; i++)
+      List[i].Description = _flagsData[i][1].Replace('~', '\n');
   }
 
-  public void ResetToDefault()
-  {
-    FlagInfo[] flags = (FlagInfo[])Data;
-    foreach (FlagInfo flag in flags)
-    {
-      flag.Enabled = false;
-    }
-  }
-
-  public class FlagInfo : INotifyPropertyChanged
+  public sealed class FlagInfo : BugFablesData, INotifyPropertyChanged
   {
     private string _description = "";
 
@@ -109,6 +60,21 @@ public class Flags : IBugFablesSaveSection
         _enabled = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Enabled = false;
+    }
+
+    public override void Parse(string str)
+    {
+      Enabled = ParseField<bool>(str, nameof(Enabled));
+    }
+
+    public override string ToString()
+    {
+      return Enabled.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

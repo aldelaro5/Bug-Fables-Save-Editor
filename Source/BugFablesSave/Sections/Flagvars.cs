@@ -1,80 +1,34 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class Flagvars : IBugFablesSaveSection
+public sealed class Flagvars : BugFablesDataList<Flagvars.FlagvarInfo>
 {
-  private const int NbrSlots = 70;
+  private readonly string[][] _flagvarssInfo;
 
   public Flagvars()
   {
-    string[] lines = File.ReadAllLines("FlagsData/Flagvars.csv");
-
-    string[][] data = new string[lines.Length][];
-    for (int i = 0; i < lines.Length; i++)
-    {
-      data[i] = lines[i].Split(';');
-    }
-
-    FlagvarInfo[] array = (FlagvarInfo[])Data;
-    for (int i = 0; i < array.Length; i++)
-    {
-      array[i] = new FlagvarInfo { Index = i, Description = data[i][1].Replace('~', '\n') };
-    }
+    _flagvarssInfo = LoadAdditionalData("FlagsData/Flagvars.csv");
   }
 
-  public object Data { get; set; } = new FlagvarInfo[NbrSlots];
-
-  public string EncodeToSaveLine()
+  public override void Parse(string str)
   {
-    FlagvarInfo[] flagvars = (FlagvarInfo[])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < flagvars.Length; i++)
-    {
-      sb.Append(flagvars[i].Var);
-
-      if (i != flagvars.Length - 1)
-      {
-        sb.Append(Utils.Common.FieldSeparator);
-      }
-    }
-
-    return sb.ToString();
+    base.Parse(str);
+    for (int i = 0; i < List.Count; i++)
+      List[i].Index = i;
   }
 
-  public void ParseFromSaveLine(string saveLine)
+  protected override void MergeAdditionalData()
   {
-    string[] flagsvarsData = saveLine.Split(Utils.Common.FieldSeparator);
-
-    FlagvarInfo[] flagsvars = (FlagvarInfo[])Data;
-
-    for (int i = 0; i < flagsvarsData.Length; i++)
+    for (int i = 0; i < _flagvarssInfo.Length; i++)
     {
-      int intOut = 0;
-      if (!int.TryParse(flagsvarsData[i], out intOut))
-      {
-        throw new Exception(nameof(Flagvars) + "[" + i + "] failed to parse");
-      }
-
-      flagsvars[i].Var = intOut;
+      List[i].Description = _flagvarssInfo[i][1].Replace('~', '\n');
     }
   }
 
-  public void ResetToDefault()
-  {
-    FlagvarInfo[] flagvars = (FlagvarInfo[])Data;
-    foreach (FlagvarInfo flagvar in flagvars)
-    {
-      flagvar.Var = 0;
-    }
-  }
-
-  public class FlagvarInfo : INotifyPropertyChanged
+  public sealed class FlagvarInfo : BugFablesData, INotifyPropertyChanged
   {
     private string _description = "";
     private int _index;
@@ -109,6 +63,21 @@ public class Flagvars : IBugFablesSaveSection
         _var = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Var = 0;
+    }
+
+    public override void Parse(string str)
+    {
+      Var = ParseField<int>(str, nameof(Var));
+    }
+
+    public override string ToString()
+    {
+      return Var.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

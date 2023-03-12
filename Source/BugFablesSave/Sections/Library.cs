@@ -1,103 +1,30 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 
 namespace BugFablesSaveEditor.BugFablesSave.Sections;
 
-public class Library : IBugFablesSaveSection
+public sealed class Library : BugFablesDataList<Library.LibrarySectionInfo>
 {
-  private const int nbrSlotsPerSection = 256;
-
   public Library()
   {
-    LibraryFlag[][] array = (LibraryFlag[][])Data;
-    for (int i = 0; i < (int)LibrarySection.COUNT; i++)
-    {
-      array[i] = new LibraryFlag[nbrSlotsPerSection];
-      for (int j = 0; j < array[i].Length; j++)
-      {
-        array[i][j] = new LibraryFlag { Index = j };
-      }
-    }
+    ElementSeparator = Utils.SecondarySeparator;
+    NbrExpectedElements = (int)LibrarySection.COUNT;
+    while (List.Count < (int)LibrarySection.COUNT)
+      List.Add(new LibrarySectionInfo());
   }
 
-  public object Data { get; set; } = new LibraryFlag[(int)LibrarySection.COUNT][];
-
-  public string EncodeToSaveLine()
+  public sealed class LibrarySectionInfo : BugFablesDataList<LibraryFlag>
   {
-    LibraryFlag[][] flags = (LibraryFlag[][])Data;
-    StringBuilder sb = new();
-
-    for (int i = 0; i < (int)LibrarySection.COUNT; i++)
+    public override void Parse(string str)
     {
-      for (int j = 0; j < nbrSlotsPerSection; j++)
-      {
-        sb.Append(flags[i][j].Enabled);
-
-        if (j != nbrSlotsPerSection - 1)
-        {
-          sb.Append(Common.FieldSeparator);
-        }
-      }
-
-      if (i != (int)LibrarySection.COUNT - 1)
-      {
-        sb.Append(Common.ElementSeparator);
-      }
-    }
-
-    return sb.ToString();
-  }
-
-  public void ParseFromSaveLine(string saveLine)
-  {
-    string[] libraryData = saveLine.Split(Common.ElementSeparator);
-    if (libraryData.Length != (int)LibrarySection.COUNT)
-    {
-      throw new Exception(nameof(Library) + " is in an invalid format");
-    }
-
-    LibraryFlag[][] flags = (LibraryFlag[][])Data;
-
-    for (int i = 0; i < libraryData.Length; i++)
-    {
-      string[] data = libraryData[i].Split(Common.FieldSeparator);
-      if (data.Length != nbrSlotsPerSection)
-      {
-        throw new Exception(nameof(Library) + "[" + Enum.GetNames(typeof(LibrarySection))[i] +
-                            "] is in an invalid format");
-      }
-
-      bool boolOut = false;
-      for (int j = 0; j < data.Length; j++)
-      {
-        if (!bool.TryParse(data[j], out boolOut))
-        {
-          throw new Exception(nameof(Library) + "[" + Enum.GetNames(typeof(LibrarySection))[i] +
-                              "][" + j +
-                              "] failed to parse");
-        }
-
-        flags[i][j].Enabled = boolOut;
-      }
+      base.Parse(str);
+      for (int i = 0; i < List.Count; i++)
+        List[i].Index = i;
     }
   }
 
-  public void ResetToDefault()
-  {
-    LibraryFlag[][] flags = (LibraryFlag[][])Data;
-    foreach (LibraryFlag[] section in flags)
-    {
-      foreach (LibraryFlag flag in section)
-      {
-        flag.Enabled = false;
-      }
-    }
-  }
-
-  public class LibraryFlag : INotifyPropertyChanged
+  public sealed class LibraryFlag : BugFablesData, INotifyPropertyChanged
   {
     private bool _enabled;
     private int _index;
@@ -120,6 +47,21 @@ public class Library : IBugFablesSaveSection
         _enabled = value;
         NotifyPropertyChanged();
       }
+    }
+
+    public override void ResetToDefault()
+    {
+      Enabled = false;
+    }
+
+    public override void Parse(string str)
+    {
+      Enabled = ParseField<bool>(str, nameof(Enabled));
+    }
+
+    public override string ToString()
+    {
+      return Enabled.ToString();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

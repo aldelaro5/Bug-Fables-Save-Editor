@@ -2,7 +2,7 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 
-namespace BugFablesSaveEditor.Utils;
+namespace BugFablesSaveEditor.Enums;
 
 public class EnumValueConverter : IValueConverter
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Quests;
@@ -51,14 +51,13 @@ public partial class QuestsViewModel : ObservableObject
   public QuestsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    QuestsNames = Common.GetEnumDescriptions<Quest>();
-    var quests =
-      (IEnumerable<QuestInfo>[])SaveData.Sections[SaveFileSection.Quests].Data;
+    QuestsNames = Utils.GetEnumDescriptions<Quest>();
+    var quests = SaveData.Quests.List;
 
-    OpenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Open]);
-    TakenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Taken]);
+    OpenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Open].List);
+    TakenQuestsVm = new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Taken].List);
     CompletedQuestsVm =
-      new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Completed]);
+      new ReorderableCollectionViewModel<QuestInfo>(quests[(int)QuestState.Completed].List);
   }
 
   [RelayCommand]

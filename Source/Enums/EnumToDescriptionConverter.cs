@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using Avalonia.Data.Converters;
 
-namespace BugFablesSaveEditor.Utils;
+namespace BugFablesSaveEditor.Enums;
 
 public class EnumToDescriptionConverter : IValueConverter
 {

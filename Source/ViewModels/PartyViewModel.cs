@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Followers;
@@ -13,13 +12,13 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class PartyViewModel : ObservableObject
 {
-  private ObservableCollection<PartyMemberInfo> _partyMemberInfos;
+  private readonly ObservableCollection<PartyMemberInfo> _partyMemberInfos;
 
   [ObservableProperty]
   private string[] _animIDs = null!;
 
   [ObservableProperty]
-  private ReorderableCollectionViewModel<Follower> _followersVm = null!;
+  private ReorderableCollectionViewModel<FollowerInfo> _followersVm = null!;
 
   [ObservableProperty]
   private ReorderableCollectionViewModel<PartyMember> _partyMembersVm = null!;
@@ -39,25 +38,23 @@ public partial class PartyViewModel : ObservableObject
     PartyMembersVm.Collection.Add(new PartyMember { AnimID = (AnimID)340 });
     PartyMembersVm.Collection.Add(new PartyMember { AnimID = (AnimID)297 });
 
-    FollowersVm.Collection.Add(new Follower { AnimID = (AnimID)150 });
-    FollowersVm.Collection.Add(new Follower { AnimID = (AnimID)268 });
-    FollowersVm.Collection.Add(new Follower { AnimID = (AnimID)244 });
+    FollowersVm.Collection.Add(new FollowerInfo { AnimID = (AnimID)150 });
+    FollowersVm.Collection.Add(new FollowerInfo { AnimID = (AnimID)268 });
+    FollowersVm.Collection.Add(new FollowerInfo { AnimID = (AnimID)244 });
   }
 
   public PartyViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    AnimIDs = Common.GetEnumDescriptions<AnimID>();
+    AnimIDs = Utils.GetEnumDescriptions<AnimID>();
 
-    _partyMemberInfos =
-      (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
+    _partyMemberInfos = new ObservableCollection<PartyMemberInfo>(SaveData.PartyMembers.List);
     PartyMembersVm =
       new ReorderableCollectionViewModel<PartyMember>(
         _partyMemberInfos.Select(x => new PartyMember { AnimID = x.Trueid }));
-    PartyMembersVm.Collection.CollectionChanged += CollectionOnCollectionChanged;
+    _partyMemberInfos.CollectionChanged += CollectionOnCollectionChanged;
 
-    var followers = (IEnumerable<Follower>)SaveData.Sections[SaveFileSection.Followers].Data;
-    FollowersVm = new ReorderableCollectionViewModel<Follower>(followers);
+    FollowersVm = new ReorderableCollectionViewModel<FollowerInfo>(SaveData.Followers.List);
   }
 
   private void CollectionOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -78,6 +75,6 @@ public partial class PartyViewModel : ObservableObject
   [RelayCommand]
   private void AddFollower()
   {
-    FollowersVm.Collection.Add(new Follower { AnimID = SelectedFollowerAnimIdForAdd });
+    FollowersVm.Collection.Add(new FollowerInfo { AnimID = SelectedFollowerAnimIdForAdd });
   }
 }

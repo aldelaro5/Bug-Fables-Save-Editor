@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesSave;
 using BugFablesSaveEditor.BugFablesSave.Sections;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
@@ -94,12 +94,10 @@ public partial class StatsViewModel : ObservableObject
   public StatsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    StatBonusTypes = Common.GetEnumDescriptions<StatBonusType>();
-    _statBonusesSection = (StatBonuses)SaveData.Sections[SaveFileSection.StatBonuses];
-    PartyMembers =
-      (ObservableCollection<PartyMemberInfo>)SaveData.Sections[SaveFileSection.PartyMembers].Data;
-    StatsBonuses =
-      (ObservableCollection<StatBonusInfo>)SaveData.Sections[SaveFileSection.StatBonuses].Data;
+    StatBonusTypes = Utils.GetEnumDescriptions<StatBonusType>();
+    _statBonusesSection = SaveData.StatBonuses;
+    PartyMembers = new ObservableCollection<PartyMemberInfo>(SaveData.PartyMembers.List);
+    StatsBonuses = new ObservableCollection<StatBonusInfo>(SaveData.StatBonuses.List);
     StatsBonuses.CollectionChanged += OnSaveStatsBonusesChanged;
     SetupViews();
   }

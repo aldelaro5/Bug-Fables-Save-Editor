@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+﻿using BugFablesSaveEditor.BugFablesSave;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static BugFablesSaveEditor.BugFablesSave.Sections.Items;
@@ -51,15 +50,13 @@ public partial class ItemsViewModel : ObservableObject
   public ItemsViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    ItemsNames = Common.GetEnumDescriptions<Item>();
-    var itemsArray =
-      (IEnumerable<ItemInfo>[])SaveData.Sections[SaveFileSection.Items].Data;
-    ItemsVm = new ReorderableCollectionViewModel<ItemInfo>(
-      itemsArray[(int)ItemPossessionType.Inventory]);
-    KeyItemsVm =
-      new ReorderableCollectionViewModel<ItemInfo>(itemsArray[(int)ItemPossessionType.KeyItem]);
-    StoredItemsVm =
-      new ReorderableCollectionViewModel<ItemInfo>(itemsArray[(int)ItemPossessionType.Stored]);
+    ItemsNames = Utils.GetEnumDescriptions<Item>();
+    var itemsArray = SaveData.Items.List[(int)ItemPossessionType.Inventory];
+    ItemsVm = new ReorderableCollectionViewModel<ItemInfo>(itemsArray.List);
+    var keyItemsArray = SaveData.Items.List[(int)ItemPossessionType.KeyItem];
+    var storedItemsArray = SaveData.Items.List[(int)ItemPossessionType.Stored];
+    KeyItemsVm = new ReorderableCollectionViewModel<ItemInfo>(keyItemsArray.List);
+    StoredItemsVm = new ReorderableCollectionViewModel<ItemInfo>(storedItemsArray.List);
   }
 
   [RelayCommand]

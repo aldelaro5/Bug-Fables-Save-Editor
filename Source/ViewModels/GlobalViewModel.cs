@@ -1,5 +1,5 @@
 ﻿using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Utils;
+using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -25,8 +25,8 @@ public partial class GlobalViewModel : ObservableObject
   public GlobalViewModel(SaveData saveData)
   {
     SaveData = saveData;
-    Areas = Common.GetEnumDescriptions<Area>();
-    Maps = Common.GetEnumDescriptions<Map>();
-    SaveProgressIcons = Common.GetEnumDescriptions<SaveProgressIcon>();
+    Areas = Utils.GetEnumDescriptions<Area>();
+    Maps = Utils.GetEnumDescriptions<Map>();
+    SaveProgressIcons = Utils.GetEnumDescriptions<SaveProgressIcon>();
   }
 }
