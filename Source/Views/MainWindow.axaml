@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+        xmlns:v="using:BugFablesSaveEditor.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -38,16 +39,36 @@
           </StackPanel>
         </StackPanel>
         <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">
-          <TabItem Header="Global" Content="{Binding GlobalViewModel}" />
-          <TabItem Header="Party" Content="{Binding PartyViewModel}" />
-          <TabItem Header="Stats" Content="{Binding StatsViewModel}" />
-          <TabItem Header="Quests" Content="{Binding QuestsViewModel}" />
-          <TabItem Header="Items" Content="{Binding ItemsViewModel}" />
-          <TabItem Header="Medals" Content="{Binding MedalsViewModel}" />
-          <TabItem Header="Library" Content="{Binding LibraryViewModel}" />
-          <TabItem Header="Flags" Content="{Binding FlagsViewModel}" />
-          <TabItem Header="Crystal Berries" Content="{Binding CrystalBerriesViewModel}" />
-          <TabItem Header="Songs" Content="{Binding SongsViewModel}" />
+          <TabItem Header="Global">
+            <v:GlobalView DataContext="{Binding GlobalViewModel}" />
+          </TabItem>
+          <TabItem Header="Party">
+            <v:PartyView DataContext="{Binding PartyViewModel}" />
+          </TabItem>
+          <TabItem Header="Stats">
+            <v:StatsView DataContext="{Binding StatsViewModel}" />
+          </TabItem>
+          <TabItem Header="Quests">
+            <v:QuestsView DataContext="{Binding QuestsViewModel}" />
+          </TabItem>
+          <TabItem Header="Items">
+            <v:ItemsView DataContext="{Binding ItemsViewModel}" />
+          </TabItem>
+          <TabItem Header="Medals">
+            <v:MedalsView DataContext="{Binding MedalsViewModel}" />
+          </TabItem>
+          <TabItem Header="Library">
+            <v:LibraryView DataContext="{Binding LibraryViewModel}" />
+          </TabItem>
+          <TabItem Header="Flags">
+            <v:FlagsView DataContext="{Binding FlagsViewModel}" />
+          </TabItem>
+          <TabItem Header="Crystal Berries">
+            <v:CrystalBerriesView DataContext="{Binding CrystalBerriesViewModel}" />
+          </TabItem>
+          <TabItem Header="Songs">
+            <v:SongsView DataContext="{Binding SongsViewModel}" />
+          </TabItem>
         </TabControl>
       </DockPanel>
     </DockPanel>
