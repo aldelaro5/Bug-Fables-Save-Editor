@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Avalonia.Collections;
 using BugFablesSaveEditor.BugFablesSave;
@@ -197,43 +198,30 @@ public partial class LibraryViewModel : ObservableObject
 
   private void ToggleAllShownLibrary(LibrarySection section)
   {
-    bool newEnabled = true;
-    DataGridCollectionView dg;
+    IList<LibraryFlag> list;
     switch (section)
     {
       case LibrarySection.Discovery:
-        dg = DiscoveriesFiltered;
+        list = Discoveries;
         break;
       case LibrarySection.Bestiary:
-        dg = EnemiesFiltered;
+        list = Enemies;
         break;
       case LibrarySection.Recipe:
-        dg = RecipesFiltered;
+        list = Recipes;
         break;
       case LibrarySection.Record:
-        dg = RecordsFiltered;
+        list = Records;
         break;
       case LibrarySection.SeenAreas:
-        dg = SeenAreasFiltered;
+        list = SeenAreas;
         break;
       default:
         return;
     }
 
-    foreach (object? item in dg)
-    {
-      LibraryFlag flag = (LibraryFlag)item;
-      if (flag.Enabled)
-      {
-        newEnabled = false;
-        break;
-      }
-    }
-
-    foreach (object? item in dg)
-    {
-      LibraryFlag flag = (LibraryFlag)item;
+    bool newEnabled = !list.Any(x => x.Enabled);
+    foreach (LibraryFlag flag in list)
       flag.Enabled = newEnabled;
-    }
   }
 }
