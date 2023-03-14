@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Avalonia.Platform.Storage;
-using BugFablesSaveEditor.BugFablesSave;
+using BugFablesDataLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MessageBox.Avalonia;

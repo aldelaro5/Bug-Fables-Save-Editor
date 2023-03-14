@@ -1,4 +1,4 @@
-﻿using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesDataLib;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 

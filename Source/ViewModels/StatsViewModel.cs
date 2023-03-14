@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Avalonia.Collections;
-using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.BugFablesSave.Sections;
+using BugFablesDataLib;
+using BugFablesDataLib.Sections;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
-using static BugFablesSaveEditor.BugFablesSave.Sections.StatBonuses;
+using static BugFablesDataLib.Sections.PartyMembers;
+using static BugFablesDataLib.Sections.StatBonuses;
 
 namespace BugFablesSaveEditor.ViewModels;
 

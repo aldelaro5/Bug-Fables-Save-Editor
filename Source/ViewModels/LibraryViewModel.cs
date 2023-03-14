@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Avalonia.Collections;
-using BugFablesSaveEditor.BugFablesSave;
+using BugFablesDataLib;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Library;
+using static BugFablesDataLib.Sections.Library;
 
 namespace BugFablesSaveEditor.ViewModels;
 

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Avalonia.Collections;
-using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.BugFablesSave.Sections;
+using BugFablesDataLib;
+using BugFablesDataLib.Sections;
 using CommunityToolkit.Mvvm.ComponentModel;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Flags;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Flagstrings;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Flagvars;
-using static BugFablesSaveEditor.BugFablesSave.Sections.RegionalFlags;
+using static BugFablesDataLib.Sections.Flags;
+using static BugFablesDataLib.Sections.Flagstrings;
+using static BugFablesDataLib.Sections.Flagvars;
+using static BugFablesDataLib.Sections.RegionalFlags;
 
 namespace BugFablesSaveEditor.ViewModels;
 

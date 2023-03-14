@@ -1,8 +1,7 @@
-﻿using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Enums;
+﻿using BugFablesDataLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BugFablesSaveEditor.BugFablesSave.Sections.SamiraSongs;
+using static BugFablesDataLib.Sections.SamiraSongs;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -25,9 +24,9 @@ public partial class SongsViewModel : ObservableObject
 
   public SongsViewModel() : this(new SaveData())
   {
-    SongsVm.Collection.Add(new SongInfo { Song = (Song)51, IsBought = true });
-    SongsVm.Collection.Add(new SongInfo { Song = (Song)67, IsBought = false });
-    SongsVm.Collection.Add(new SongInfo { Song = (Song)43, IsBought = true });
+    SongsVm.Collection.Add(new SongInfo { Song = (Song)51, Bought = true });
+    SongsVm.Collection.Add(new SongInfo { Song = (Song)67, Bought = false });
+    SongsVm.Collection.Add(new SongInfo { Song = (Song)43, Bought = true });
   }
 
   public SongsViewModel(SaveData saveData)
@@ -41,7 +40,7 @@ public partial class SongsViewModel : ObservableObject
   {
     SongInfo info = new();
     info.Song = SelectedSongForAdd;
-    info.IsBought = SongForAddIsBought;
+    info.Bought = SongForAddIsBought;
     SongsVm.Collection.Add(info);
     SongsVm.CollectionView.Refresh();
   }

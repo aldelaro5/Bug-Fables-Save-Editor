@@ -3,14 +3,25 @@ using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using BugFablesSaveEditor.BugFablesSave;
+using BugFablesDataLib;
+using BugFablesSaveEditor.Data.Service;
 using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BugFablesSaveEditor;
 
 public class App : Application
 {
+  public App()
+  {
+    Ioc.Default.ConfigureServices(
+      new ServiceCollection()
+        .AddSingleton<IBugFablesDataService, BugFablesDataService>()
+        .BuildServiceProvider());
+  }
+
   public override void Initialize()
   {
     AvaloniaXamlLoader.Load(this);

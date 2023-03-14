@@ -1,8 +1,7 @@
-﻿using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Enums;
+﻿using BugFablesDataLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Quests;
+using static BugFablesDataLib.Sections.Quests;
 
 namespace BugFablesSaveEditor.ViewModels;
 

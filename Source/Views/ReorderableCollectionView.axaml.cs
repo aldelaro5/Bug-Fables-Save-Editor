@@ -5,7 +5,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
-using BugFablesSaveEditor.Enums;
 using Humanizer;
 
 namespace BugFablesSaveEditor.Views;

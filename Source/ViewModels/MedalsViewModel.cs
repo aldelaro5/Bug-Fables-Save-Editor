@@ -1,10 +1,10 @@
-﻿using BugFablesSaveEditor.BugFablesSave;
+﻿using BugFablesDataLib;
 using BugFablesSaveEditor.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Medals;
-using static BugFablesSaveEditor.BugFablesSave.Sections.MedalShopsAvailables;
-using static BugFablesSaveEditor.BugFablesSave.Sections.MedalShopsPools;
+using static BugFablesDataLib.Sections.Medals;
+using static BugFablesDataLib.Sections.MedalShopsAvailables;
+using static BugFablesDataLib.Sections.MedalShopsPools;
 
 namespace BugFablesSaveEditor.ViewModels;
 

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using BugFablesSaveEditor.BugFablesSave;
-using BugFablesSaveEditor.Enums;
+using BugFablesDataLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BugFablesSaveEditor.BugFablesSave.Sections.Followers;
-using static BugFablesSaveEditor.BugFablesSave.Sections.PartyMembers;
+using static BugFablesDataLib.Sections.Followers;
+using static BugFablesDataLib.Sections.PartyMembers;
 
 namespace BugFablesSaveEditor.ViewModels;
 
