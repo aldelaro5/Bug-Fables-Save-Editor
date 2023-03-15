@@ -7,48 +7,32 @@ public class SaveDataTests
   private const string ValidSaveFileName = "SaveFiles/ValidSave.dat";
   private const string InvalidSaveFileName = "SaveFiles/InvalidSave.dat";
 
-  private readonly BfSaveFile _sud = new();
+  private readonly BfPcSaveData _sud = new();
 
   [Fact]
-  public void LoadFromFile_ShouldThrow_WhenFileNameIsEmpty()
+  public void LoadFromFile_ShouldThrow_WhenFileDataIsEmpty()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromFile(""));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromString(""));
   }
 
   [Fact]
-  public void LoadFromFile_ShouldThrow_WhenFileNameDoesNotExist()
+  public void LoadFromFile_ShouldThrow_WhenDataIsInvalid()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromFile("NotExist.dat"));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromString(File.ReadAllText(InvalidSaveFileName)));
   }
 
   [Fact]
-  public void LoadFromFile_ShouldThrow_WhenFileIsInvalid()
+  public void LoadFromFile_ShouldLoadFile_WhenDataIsValid()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromFile(InvalidSaveFileName));
-  }
-
-  [Fact]
-  public void LoadFromFile_ShouldLoadFile_WhenFileIsValid()
-  {
-    _sud.LoadFromFile(ValidSaveFileName);
-  }
-
-  [Fact]
-  public void SaveToFile_ShouldThrow_WhenFileNameIsEmpty()
-  {
-    _sud.LoadFromFile(ValidSaveFileName);
-    Assert.ThrowsAny<Exception>(() => _sud.SaveToFile(""));
+    _sud.LoadFromString(File.ReadAllText(ValidSaveFileName));
   }
 
   [Fact]
   public void SaveToFile_ShouldNotChangeFile_WhenOverwritten()
   {
     string textBefore = File.ReadAllText(ValidSaveFileName);
-    _sud.LoadFromFile(ValidSaveFileName);
-    string tempFilePath = Path.GetTempFileName();
-    _sud.SaveToFile(tempFilePath);
-    string textAfter = File.ReadAllText(tempFilePath);
-    File.Delete(tempFilePath);
+    _sud.LoadFromString(textBefore);
+    string textAfter = _sud.EncodeToString();
     Assert.Equal(textBefore, textAfter);
   }
 
@@ -56,12 +40,9 @@ public class SaveDataTests
   public void SaveToFile_ShouldChangeFile_WhenOverwrittenWithChange()
   {
     string textBefore = File.ReadAllText(ValidSaveFileName);
-    _sud.LoadFromFile(ValidSaveFileName);
+    _sud.LoadFromString(textBefore);
     _sud.Global.Rank = 50;
-    string tempFilePath = Path.GetTempFileName();
-    _sud.SaveToFile(tempFilePath);
-    string textAfter = File.ReadAllText(tempFilePath);
+    string textAfter = _sud.EncodeToString();
     Assert.NotEqual(textBefore, textAfter);
-    File.Delete(tempFilePath);
   }
 }

@@ -1,7 +1,7 @@
 using System.Globalization;
 using BugFablesSaveEditor;
 using Xunit;
-using static BugFablesLib.BfSaveFile;
+using static BugFablesLib.BfSaveData.SaveFileSection;
 
 namespace BugFablesLib.Tests;
 
@@ -13,21 +13,21 @@ public class SaveSectionsTests
 
   public static IEnumerable<object[]> AllSaveFileSections()
   {
-    for (int i = 0; i < (int)SaveFileSection.COUNT; i++)
+    for (int i = 0; i < (int)COUNT; i++)
     {
-      yield return new object[] { (SaveFileSection)i };
+      yield return new object[] { (BfSaveData.SaveFileSection)i };
     }
   }
 
   [Theory]
   [MemberData(nameof(AllSaveFileSections))]
-  public void Section_ShouldNotChange_WhenOverWrittenWithoutChange(SaveFileSection section)
+  public void Section_ShouldNotChange_WhenOverWrittenWithoutChange(BfSaveData.SaveFileSection section)
   {
     // Test messing with the culture to make sure it doesn't break the parsing
     CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
     Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-fr");
     string strBefore = saveLines[(int)section];
-    var sud = new BfSaveFile().Sections[(int)section];
+    var sud = new BfPcSaveData().Data[(int)section];
     sud.Deserialize(saveLines[(int)section]);
     string strAfter = sud.Serialize();
     Thread.CurrentThread.CurrentCulture = cultureInfo;
@@ -35,21 +35,21 @@ public class SaveSectionsTests
   }
 
   [Theory]
-  [InlineData(SaveFileSection.Header, Utils.PrimarySeparator)]
-  [InlineData(SaveFileSection.PartyMembers, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.Global, Utils.PrimarySeparator)]
-  [InlineData(SaveFileSection.Quests, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.Items, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.Medals, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.SamiraSongs, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.StatBonuses, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.Library, Utils.SecondarySeparator)]
-  [InlineData(SaveFileSection.EnemyEncounters, Utils.SecondarySeparator)]
+  [InlineData(Header, Utils.PrimarySeparator)]
+  [InlineData(PartyMembers, Utils.SecondarySeparator)]
+  [InlineData(Global, Utils.PrimarySeparator)]
+  [InlineData(Quests, Utils.SecondarySeparator)]
+  [InlineData(Items, Utils.SecondarySeparator)]
+  [InlineData(Medals, Utils.SecondarySeparator)]
+  [InlineData(SamiraSongs, Utils.SecondarySeparator)]
+  [InlineData(StatBonuses, Utils.SecondarySeparator)]
+  [InlineData(Library, Utils.SecondarySeparator)]
+  [InlineData(EnemyEncounters, Utils.SecondarySeparator)]
   public void SectionParsing_ShouldThrow_WhenIncorrectFieldsAmount(
-    SaveFileSection section, string separator)
+    BfSaveData.SaveFileSection section, string separator)
   {
     string sectionData = saveLines[(int)section];
-    var sud = new BfSaveFile().Sections[(int)section];
+    var sud = new BfPcSaveData().Data[(int)section];
     // One field too much
     sectionData += $"{separator}0";
     Assert.ThrowsAny<Exception>(() => sud.Deserialize(sectionData));

@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Text;
 using BugFablesLib.BFSaveData;
 using static BugFablesLib.Utils;
 
 namespace BugFablesLib;
 
-public class BfSaveFile
+public abstract class BfSaveData : IBfDataContainer
 {
   public enum SaveFileSection
   {
@@ -33,7 +32,7 @@ public class BfSaveFile
 
   private const string FlagstringsSeparator = "|SPLIT|";
 
-  public readonly IBfData[] Sections;
+  public IList<IBfData> Data { get; }
 
   public BfDataList<CrystalBerryFlag> CrystalBerries { get; } = new(CommaSeparator);
   public BfDataList<EnemyEncounter> EnemyEncounters { get; } = new(AtSymbolSeparator);
@@ -54,9 +53,9 @@ public class BfSaveFile
   public BfDataList<Music> SamiraSongs { get; } = new(AtSymbolSeparator);
   public BfDataList<StatBonus> StatBonuses { get; } = new(AtSymbolSeparator);
 
-  public BfSaveFile()
+  public BfSaveData()
   {
-    Sections = new IBfData[]
+    Data = new List<IBfData>
     {
       Header,
       PartyMembers,
@@ -79,59 +78,30 @@ public class BfSaveFile
     };
   }
 
-  public void LoadFromFile(string fileName)
+  public virtual void LoadFromString(string data)
   {
-    if (!File.Exists(fileName))
-      throw new Exception("The file " + fileName + " does not exist");
-
-    string[] saveSections;
-    try
-    {
-      StringBuilder data = new(File.ReadAllText(fileName));
-      for (int i = 0; i < data.Length; i++)
-        data[i] = (char)(data[i] ^ 543);
-
-      saveSections = data.ToString().Split('\n');
-    }
-    catch (Exception ex)
-    {
-      string msg = $"Couldn't read the save file: {ex.Message}";
-      if (ex.InnerException != null)
-        msg += $": {ex.InnerException}";
-      throw new Exception(msg);
-    }
-
-    for (int i = 0; i < Sections.Length; i++)
-      Sections[i].Deserialize(saveSections[i]);
+    string[] saveSections = data.Split('\n');
+    for (int i = 0; i < Data.Count; i++)
+      Data[i].Deserialize(saveSections[i]);
   }
 
-  public void SaveToFile(string fileName)
+  public virtual string EncodeToString()
   {
     StringBuilder sb = new();
-    for (int i = 0; i < Sections.Length; i++)
+    for (int i = 0; i < Data.Count; i++)
     {
-      sb.Append(Sections[i].Serialize());
+      sb.Append(Data[i].Serialize());
 
-      if (i != Sections.Length - 1)
+      if (i != Data.Count - 1)
         sb.Append('\n');
     }
 
-    try
-    {
-      for (int i = 0; i < sb.Length; i++)
-        sb[i] = (char)(sb[i] ^ 543);
-
-      File.WriteAllText(fileName, sb.ToString());
-    }
-    catch (Exception ex)
-    {
-      throw new Exception("Couldn't write the save file: " + ex.Message);
-    }
+    return sb.ToString();
   }
 
   public void ResetToDefault()
   {
-    foreach (var s in Sections)
+    foreach (var s in Data)
       s.ResetToDefault();
   }
 }

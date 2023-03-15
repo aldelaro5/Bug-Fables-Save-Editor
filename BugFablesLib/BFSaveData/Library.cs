@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using static BugFablesLib.Utils;
+﻿using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
@@ -32,7 +31,10 @@ public sealed class LibrarySections : BfDataList<BfDataList<LibraryFlag>>
 public sealed class LibraryFlag : BfData
 {
   public bool Enabled { get; set; }
-  public override void Deserialize(string str) => Enabled = ParseValueType<bool>(str, nameof(Enabled));
+
+  public override void Deserialize(string str) =>
+    Enabled = ParseValueType<bool>(str, nameof(Enabled));
+
   public override string Serialize() => Enabled.ToString();
   public override void ResetToDefault() => Enabled = false;
 }
