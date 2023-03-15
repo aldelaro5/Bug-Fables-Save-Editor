@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using static BugFablesLib.Utils;
 
-namespace BugFablesLib.BFSaveData.Sections;
+namespace BugFablesLib.BFSaveData;
 
-public sealed class Header : BfData
+public sealed class Header : IBfData
 {
   public string Filename { get; set; } = "";
   public bool IsFrameone { get; set; }
@@ -17,52 +18,52 @@ public sealed class Header : BfData
   public float PositionY { get; set; }
   public float PositionZ { get; set; }
 
-  public override void Parse(string str)
+  public void Deserialize(string str)
   {
-    string[] data = str.Split(new[] {Utils.PrimarySeparator}, StringSplitOptions.None);
+    string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
     if (data.Length != 10)
       throw new Exception(nameof(Header) + " is in an invalid format");
 
-    PositionX = ParseField<float>(data[0], nameof(PositionX));
-    PositionY = ParseField<float>(data[1], nameof(PositionY));
-    PositionZ = ParseField<float>(data[2], nameof(PositionZ));
-    IsRuigee = ParseField<bool>(data[3], nameof(IsRuigee));
-    IsHardest = ParseField<bool>(data[4], nameof(IsHardest));
-    IsFrameone = ParseField<bool>(data[5], nameof(IsFrameone));
-    IsPushrock = ParseField<bool>(data[6], nameof(IsPushrock));
-    IsMorefarm = ParseField<bool>(data[7], nameof(IsMorefarm));
-    IsMystery = ParseField<bool>(data[8], nameof(IsMystery));
+    PositionX = ParseValueType<float>(data[0], nameof(PositionX));
+    PositionY = ParseValueType<float>(data[1], nameof(PositionY));
+    PositionZ = ParseValueType<float>(data[2], nameof(PositionZ));
+    IsRuigee = ParseValueType<bool>(data[3], nameof(IsRuigee));
+    IsHardest = ParseValueType<bool>(data[4], nameof(IsHardest));
+    IsFrameone = ParseValueType<bool>(data[5], nameof(IsFrameone));
+    IsPushrock = ParseValueType<bool>(data[6], nameof(IsPushrock));
+    IsMorefarm = ParseValueType<bool>(data[7], nameof(IsMorefarm));
+    IsMystery = ParseValueType<bool>(data[8], nameof(IsMystery));
     Filename = data[9];
   }
 
-  public override string ToString()
+  public string Serialize()
   {
     StringBuilder sb = new();
 
     sb.Append(PositionX.ToString(NumberFormatInfo.InvariantInfo));
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(PositionY.ToString(NumberFormatInfo.InvariantInfo));
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(PositionZ.ToString(NumberFormatInfo.InvariantInfo));
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(IsRuigee);
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(IsHardest);
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(IsFrameone);
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(IsPushrock);
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(IsMorefarm);
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(IsMystery);
-    sb.Append(Utils.PrimarySeparator);
+    sb.Append(CommaSeparator);
     sb.Append(Filename);
 
     return sb.ToString();
   }
 
-  public override void ResetToDefault()
+  public void ResetToDefault()
   {
     PositionX = 0f;
     PositionY = 0f;

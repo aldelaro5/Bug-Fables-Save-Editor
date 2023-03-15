@@ -1,36 +1,62 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using BugFablesLib.BFSaveData.Sections;
+using BugFablesLib.BFSaveData;
+using static BugFablesLib.Utils;
 
 namespace BugFablesLib;
 
 public class BfSaveFile
 {
-  public readonly BfData[] Sections;
+  public enum SaveFileSection
+  {
+    Header = 0,
+    PartyMembers,
+    Global,
+    MedalShopsAvailables,
+    MedalShopsPools,
+    Quests,
+    Items,
+    Medals,
+    SamiraSongs,
+    StatBonuses,
+    Library,
+    Flags,
+    Flagstrings,
+    Flagvars,
+    RegionalFlags,
+    CrystalBerries,
+    Followers,
+    EnemyEncounters,
+    COUNT
+  }
 
-  public CrystalBerries CrystalBerries { get; } = new();
-  public EnemyEncounters EnemyEncounters { get; } = new();
-  public Flags Flags { get; } = new();
-  public Flagstrings Flagstrings { get; } = new();
-  public Flagvars Flagvars { get; } = new();
-  public Followers Followers { get; } = new();
+  private const string FlagstringsSeparator = "|SPLIT|";
+
+  public readonly IBfData[] Sections;
+
+  public BfList<CrystalBerryFlag> CrystalBerries { get; } = new(CommaSeparator);
+  public BfList<EnemyEncounter> EnemyEncounters { get; } = new(AtSymbolSeparator);
+  public BfList<Flag> Flags { get; } = new(CommaSeparator);
+  public BfList<Flagstring> Flagstrings { get; } = new(FlagstringsSeparator);
+  public BfList<Flagvar> Flagvars { get; } = new(CommaSeparator);
+  public BfList<AnimId> Followers { get; } = new(CommaSeparator);
   public Global Global { get; } = new();
   public Header Header { get; } = new();
   public Items Items { get; } = new();
-  public Library Library { get; } = new();
-  public Medals Medals { get; } = new();
-  public MedalShopsAvailables MedalShopsAvailables { get; } = new();
-  public MedalShopsPools MedalShopsPools { get; } = new();
-  public PartyMembers PartyMembers { get; } = new();
-  public Quests Quests { get; } = new();
-  public RegionalFlags RegionalFlags { get; } = new();
-  public SamiraSongs SamiraSongs { get; } = new();
-  public StatBonuses StatBonuses { get; } = new();
+  public LibrarySections Library { get; } = new();
+  public BfList<MedalOnHand> Medals { get; } = new(AtSymbolSeparator);
+  public MedalShopsStock MedalShopsAvailables { get; } = new();
+  public MedalShopsStock MedalShopsPools { get; } = new();
+  public BfList<PartyMember> PartyMembers { get; } = new(AtSymbolSeparator);
+  public BoardQuests Quests { get; } = new();
+  public BfList<Flag> RegionalFlags { get; } = new(CommaSeparator);
+  public BfList<Music> SamiraSongs { get; } = new(AtSymbolSeparator);
+  public BfList<StatBonus> StatBonuses { get; } = new(AtSymbolSeparator);
 
   public BfSaveFile()
   {
-    Sections = new BfData[]
+    Sections = new IBfData[]
     {
       Header,
       PartyMembers,
@@ -76,7 +102,7 @@ public class BfSaveFile
     }
 
     for (int i = 0; i < Sections.Length; i++)
-      Sections[i].Parse(saveSections[i]);
+      Sections[i].Deserialize(saveSections[i]);
   }
 
   public void SaveToFile(string fileName)
@@ -84,7 +110,7 @@ public class BfSaveFile
     StringBuilder sb = new();
     for (int i = 0; i < Sections.Length; i++)
     {
-      sb.Append(Sections[i]);
+      sb.Append(Sections[i].Serialize());
 
       if (i != Sections.Length - 1)
         sb.Append('\n');

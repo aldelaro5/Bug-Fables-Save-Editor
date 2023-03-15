@@ -1,22 +1,24 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace BugFablesLib;
 
-public abstract class BfDataList<T> : BfData
-  where T : BfData, new()
+public class BfList<T> : Collection<T>, IBfData
+  where T : IBfData, new()
 {
-  private readonly IList<T> _list = new List<T>();
-  protected string ElementSeparator = Utils.PrimarySeparator;
+  protected string ElementSeparator = Utils.AtSymbolSeparator;
   protected int NbrExpectedElements = -1;
 
-  public IList<T> List
+  public BfList() { }
+
+  public BfList(string elementSeparator, int nbrExpectedElements = -1)
   {
-    get => _list;
+    ElementSeparator = elementSeparator;
+    NbrExpectedElements = nbrExpectedElements;
   }
 
-  public override void Parse(string str)
+  public void Deserialize(string str)
   {
     if (str == string.Empty)
       return;
@@ -34,15 +36,15 @@ public abstract class BfDataList<T> : BfData
     {
       for (i = 0; i < elements.Length; i++)
       {
-        if (i >= List.Count)
+        if (i >= Count)
         {
           T newElement = new();
-          newElement.Parse(elements[i]);
-          List.Add(newElement);
+          newElement.Deserialize(elements[i]);
+          Add(newElement);
         }
         else
         {
-          List[i].Parse(elements[i]);
+          this[i].Deserialize(elements[i]);
         }
       }
     }
@@ -54,23 +56,23 @@ public abstract class BfDataList<T> : BfData
     }
   }
 
-  public sealed override string ToString()
+  public string Serialize()
   {
     StringBuilder sb = new();
-    for (int i = 0; i < List.Count; i++)
+    for (int i = 0; i < Count; i++)
     {
-      T element = List[i];
-      sb.Append(element);
-      if (i != List.Count - 1)
+      T element = this[i];
+      sb.Append(element.Serialize());
+      if (i != Count - 1)
         sb.Append(ElementSeparator);
     }
 
     return sb.ToString();
   }
 
-  public sealed override void ResetToDefault()
+  public void ResetToDefault()
   {
-    foreach (T element in List)
+    foreach (var element in this)
       element.ResetToDefault();
   }
 }

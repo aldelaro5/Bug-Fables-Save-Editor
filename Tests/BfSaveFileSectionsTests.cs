@@ -1,33 +1,12 @@
 using System.Globalization;
+using BugFablesSaveEditor;
 using Xunit;
+using static BugFablesLib.BfSaveFile;
 
 namespace BugFablesLib.Tests;
 
 public class SaveSectionsTests
 {
-  public enum SaveFileSection
-  {
-    Header = 0,
-    PartyMembers,
-    Global,
-    MedalShopsAvailables,
-    MedalShopsPools,
-    Quests,
-    Items,
-    Medals,
-    SamiraSongs,
-    StatBonuses,
-    Library,
-    Flags,
-    Flagstrings,
-    Flagvars,
-    RegionalFlags,
-    CrystalBerries,
-    Followers,
-    EnemyEncounters,
-    COUNT
-  }
-
   private const string DecodedSaveFileName = "SaveFiles/DecodedTextSave.txt";
 
   private readonly string[] saveLines = File.ReadAllLines(DecodedSaveFileName);
@@ -49,8 +28,8 @@ public class SaveSectionsTests
     Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-fr");
     string strBefore = saveLines[(int)section];
     var sud = new BfSaveFile().Sections[(int)section];
-    sud.Parse(saveLines[(int)section]);
-    string strAfter = sud.ToString();
+    sud.Deserialize(saveLines[(int)section]);
+    string strAfter = sud.Serialize();
     Thread.CurrentThread.CurrentCulture = cultureInfo;
     Assert.Equal(strBefore, strAfter);
   }
@@ -73,10 +52,10 @@ public class SaveSectionsTests
     var sud = new BfSaveFile().Sections[(int)section];
     // One field too much
     sectionData += $"{separator}0";
-    Assert.ThrowsAny<Exception>(() => sud.Parse(sectionData));
+    Assert.ThrowsAny<Exception>(() => sud.Deserialize(sectionData));
     // One field too low
     sectionData = sectionData.Split(separator).Skip(2)
       .Aggregate((acc, field) => $"{acc}{separator}{field}");
-    Assert.ThrowsAny<Exception>(() => sud.Parse(sectionData));
+    Assert.ThrowsAny<Exception>(() => sud.Deserialize(sectionData));
   }
 }
