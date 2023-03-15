@@ -35,24 +35,24 @@ public class BfSaveFile
 
   public readonly IBfData[] Sections;
 
-  public BfList<CrystalBerryFlag> CrystalBerries { get; } = new(CommaSeparator);
-  public BfList<EnemyEncounter> EnemyEncounters { get; } = new(AtSymbolSeparator);
-  public BfList<Flag> Flags { get; } = new(CommaSeparator);
-  public BfList<Flagstring> Flagstrings { get; } = new(FlagstringsSeparator);
-  public BfList<Flagvar> Flagvars { get; } = new(CommaSeparator);
-  public BfList<AnimId> Followers { get; } = new(CommaSeparator);
+  public BfDataList<CrystalBerryFlag> CrystalBerries { get; } = new(CommaSeparator);
+  public BfDataList<EnemyEncounter> EnemyEncounters { get; } = new(AtSymbolSeparator);
+  public BfDataList<Flag> Flags { get; } = new(CommaSeparator);
+  public BfDataList<Flagstring> Flagstrings { get; } = new(FlagstringsSeparator);
+  public BfDataList<Flagvar> Flagvars { get; } = new(CommaSeparator);
+  public BfDataList<AnimId> Followers { get; } = new(CommaSeparator);
   public Global Global { get; } = new();
   public Header Header { get; } = new();
   public Items Items { get; } = new();
   public LibrarySections Library { get; } = new();
-  public BfList<MedalOnHand> Medals { get; } = new(AtSymbolSeparator);
+  public BfDataList<MedalOnHand> Medals { get; } = new(AtSymbolSeparator);
   public MedalShopsStock MedalShopsAvailables { get; } = new();
   public MedalShopsStock MedalShopsPools { get; } = new();
-  public BfList<PartyMember> PartyMembers { get; } = new(AtSymbolSeparator);
+  public BfDataList<PartyMember> PartyMembers { get; } = new(AtSymbolSeparator);
   public BoardQuests Quests { get; } = new();
-  public BfList<Flag> RegionalFlags { get; } = new(CommaSeparator);
-  public BfList<Music> SamiraSongs { get; } = new(AtSymbolSeparator);
-  public BfList<StatBonus> StatBonuses { get; } = new(AtSymbolSeparator);
+  public BfDataList<Flag> RegionalFlags { get; } = new(CommaSeparator);
+  public BfDataList<Music> SamiraSongs { get; } = new(AtSymbolSeparator);
+  public BfDataList<StatBonus> StatBonuses { get; } = new(AtSymbolSeparator);
 
   public BfSaveFile()
   {

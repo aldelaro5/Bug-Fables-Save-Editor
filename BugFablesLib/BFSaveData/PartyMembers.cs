@@ -4,7 +4,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public class PartyMember : IBfData
+public class PartyMember : BfData
 {
   public int Attack { get; set; }
   public int BaseAttack { get; set; }
@@ -15,7 +15,7 @@ public class PartyMember : IBfData
   public int MaxHp { get; set; }
   public AnimId AnimId { get; set; } = new();
 
-  public void Deserialize(string str)
+  public override void Deserialize(string str)
   {
     string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
 
@@ -29,7 +29,7 @@ public class PartyMember : IBfData
     BaseDefense = ParseValueType<int>(data[7], nameof(BaseDefense));
   }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -52,7 +52,7 @@ public class PartyMember : IBfData
     return sb.ToString();
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     AnimId.ResetToDefault();
     Hp = 0;

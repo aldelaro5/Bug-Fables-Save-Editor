@@ -4,12 +4,12 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class EnemyEncounter : IBfData
+public sealed class EnemyEncounter : BfData
 {
   public int NbrDefeated { get; set; }
   public int NbrSeen { get; set; }
 
-  public void Deserialize(string str)
+  public override void Deserialize(string str)
   {
     string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
     if (data.Length != 2)
@@ -19,7 +19,7 @@ public sealed class EnemyEncounter : IBfData
     NbrDefeated = ParseValueType<int>(data[1], nameof(NbrDefeated));
   }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -30,7 +30,7 @@ public sealed class EnemyEncounter : IBfData
     return sb.ToString();
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     NbrDefeated = 0;
     NbrSeen = 0;

@@ -4,19 +4,21 @@ using System.Text;
 
 namespace BugFablesLib;
 
-public class BfList<T> : Collection<T>, IBfData
+public class BfDataList<T> : Collection<T>, IBfData
   where T : IBfData, new()
 {
   protected string ElementSeparator = Utils.AtSymbolSeparator;
   protected int NbrExpectedElements = -1;
 
-  public BfList() { }
+  public BfDataList() { }
 
-  public BfList(string elementSeparator, int nbrExpectedElements = -1)
+  public BfDataList(string elementSeparator, int nbrExpectedElements = -1)
   {
     ElementSeparator = elementSeparator;
     NbrExpectedElements = nbrExpectedElements;
   }
+
+  public override string ToString() => Serialize();
 
   public void Deserialize(string str)
   {

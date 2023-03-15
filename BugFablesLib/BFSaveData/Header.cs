@@ -5,7 +5,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class Header : IBfData
+public sealed class Header : BfData
 {
   public string Filename { get; set; } = "";
   public bool IsFrameone { get; set; }
@@ -18,7 +18,7 @@ public sealed class Header : IBfData
   public float PositionY { get; set; }
   public float PositionZ { get; set; }
 
-  public void Deserialize(string str)
+  public override void Deserialize(string str)
   {
     string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
     if (data.Length != 10)
@@ -36,7 +36,7 @@ public sealed class Header : IBfData
     Filename = data[9];
   }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -63,7 +63,7 @@ public sealed class Header : IBfData
     return sb.ToString();
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     PositionX = 0f;
     PositionY = 0f;

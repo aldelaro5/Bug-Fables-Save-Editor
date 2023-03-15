@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class MedalShopsStock : BfList<BfList<Medal>>
+public sealed class MedalShopsStock : BfDataList<BfDataList<Medal>>
 {
   public enum MedalShop
   {
@@ -11,22 +11,22 @@ public sealed class MedalShopsStock : BfList<BfList<Medal>>
     COUNT
   }
 
-  public BfList<Medal> Merab { get => this[(int)MedalShop.Merab]; }
-  public BfList<Medal> Shades { get => this[(int)MedalShop.Shades]; }
+  public BfDataList<Medal> Merab { get => this[(int)MedalShop.Merab]; }
+  public BfDataList<Medal> Shades { get => this[(int)MedalShop.Shades]; }
 
   public MedalShopsStock()
   {
     ElementSeparator = AtSymbolSeparator;
     NbrExpectedElements = (int)MedalShop.COUNT;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfList<Medal>(CommaSeparator));
+      Add(new BfDataList<Medal>(CommaSeparator));
   }
 }
 
-public sealed class Medal : IBfData
+public sealed class Medal : BfData
 {
   public int Id { get; set; }
-  public void Deserialize(string str) => Id = ParseValueType<int>(str, nameof(Id));
-  public string Serialize() => Id.ToString();
-  public void ResetToDefault() => Id = 0;
+  public override void Deserialize(string str) => Id = ParseValueType<int>(str, nameof(Id));
+  public override string Serialize() => Id.ToString();
+  public override void ResetToDefault() => Id = 0;
 }

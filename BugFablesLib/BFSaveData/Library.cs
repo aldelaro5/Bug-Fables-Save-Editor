@@ -3,7 +3,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class LibrarySections : BfList<BfList<LibraryFlag>>
+public sealed class LibrarySections : BfDataList<BfDataList<LibraryFlag>>
 {
   public enum LibrarySection
   {
@@ -15,24 +15,24 @@ public sealed class LibrarySections : BfList<BfList<LibraryFlag>>
     COUNT
   }
 
-  public IList<LibraryFlag> Discoveries { get => this[(int)LibrarySection.Discovery]; }
-  public IList<LibraryFlag> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
-  public IList<LibraryFlag> Recipes { get => this[(int)LibrarySection.Recipe]; }
-  public IList<LibraryFlag> Records { get => this[(int)LibrarySection.Record]; }
-  public IList<LibraryFlag> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
+  public BfDataList<LibraryFlag> Discoveries { get => this[(int)LibrarySection.Discovery]; }
+  public BfDataList<LibraryFlag> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
+  public BfDataList<LibraryFlag> Recipes { get => this[(int)LibrarySection.Recipe]; }
+  public BfDataList<LibraryFlag> Records { get => this[(int)LibrarySection.Record]; }
+  public BfDataList<LibraryFlag> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
 
   public LibrarySections()
   {
     NbrExpectedElements = (int)LibrarySection.COUNT;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfList<LibraryFlag>(CommaSeparator));
+      Add(new BfDataList<LibraryFlag>(CommaSeparator));
   }
 }
 
-public sealed class LibraryFlag : IBfData
+public sealed class LibraryFlag : BfData
 {
   public bool Enabled { get; set; }
-  public void Deserialize(string str) => Enabled = ParseValueType<bool>(str, nameof(Enabled));
-  public string Serialize() => Enabled.ToString();
-  public void ResetToDefault() => Enabled = false;
+  public override void Deserialize(string str) => Enabled = ParseValueType<bool>(str, nameof(Enabled));
+  public override string Serialize() => Enabled.ToString();
+  public override void ResetToDefault() => Enabled = false;
 }

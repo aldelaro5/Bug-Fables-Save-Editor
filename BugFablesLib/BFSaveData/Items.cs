@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class Items : BfList<BfList<Item>>
+public sealed class Items : BfDataList<BfDataList<Item>>
 {
   public enum ItemPossessionType
   {
@@ -12,22 +12,22 @@ public sealed class Items : BfList<BfList<Item>>
     COUNT
   }
 
-  public BfList<Item> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
-  public BfList<Item> Key { get => this[(int)ItemPossessionType.KeyItem]; }
-  public BfList<Item> Stored { get => this[(int)ItemPossessionType.Stored]; }
+  public BfDataList<Item> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
+  public BfDataList<Item> Key { get => this[(int)ItemPossessionType.KeyItem]; }
+  public BfDataList<Item> Stored { get => this[(int)ItemPossessionType.Stored]; }
 
   public Items()
   {
     NbrExpectedElements = (int)ItemPossessionType.COUNT;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfList<Item>(CommaSeparator));
+      Add(new BfDataList<Item>(CommaSeparator));
   }
 }
 
-public sealed class Item : IBfData
+public sealed class Item : BfData
 {
   public int Id { get; set; }
-  public void Deserialize(string str) => Id = ParseValueType<int>(str, nameof(Id));
-  public string Serialize() => Id.ToString();
-  public void ResetToDefault() => Id = 0;
+  public override void Deserialize(string str) => Id = ParseValueType<int>(str, nameof(Id));
+  public override string Serialize() => Id.ToString();
+  public override void ResetToDefault() => Id = 0;
 }

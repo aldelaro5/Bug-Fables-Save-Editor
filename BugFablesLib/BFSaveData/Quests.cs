@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class BoardQuests : BfList<BfList<BoardQuest>>
+public sealed class BoardQuests : BfDataList<BfDataList<BoardQuest>>
 {
   public enum QuestState
   {
@@ -12,22 +12,22 @@ public sealed class BoardQuests : BfList<BfList<BoardQuest>>
     COUNT
   }
 
-  public BfList<BoardQuest> Opened { get => this[(int)QuestState.Open]; }
-  public BfList<BoardQuest> Taken { get => this[(int)QuestState.Taken]; }
-  public BfList<BoardQuest> Completed { get => this[(int)QuestState.Completed]; }
+  public BfDataList<BoardQuest> Opened { get => this[(int)QuestState.Open]; }
+  public BfDataList<BoardQuest> Taken { get => this[(int)QuestState.Taken]; }
+  public BfDataList<BoardQuest> Completed { get => this[(int)QuestState.Completed]; }
 
   public BoardQuests()
   {
     NbrExpectedElements = (int)QuestState.COUNT;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfList<BoardQuest>(CommaSeparator));
+      Add(new BfDataList<BoardQuest>(CommaSeparator));
   }
 }
 
-public sealed class BoardQuest : IBfData
+public sealed class BoardQuest : BfData
 {
   public int Id { get; set; }
-  public void Deserialize(string str) => Id = ParseValueType<int>(str, nameof(Id));
-  public string Serialize() => Id.ToString();
-  public void ResetToDefault() => Id = 0;
+  public override void Deserialize(string str) => Id = ParseValueType<int>(str, nameof(Id));
+  public override string Serialize() => Id.ToString();
+  public override void ResetToDefault() => Id = 0;
 }

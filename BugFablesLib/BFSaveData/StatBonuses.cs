@@ -4,7 +4,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class StatBonus : IBfData
+public sealed class StatBonus : BfData
 {
   public enum StatBonusType
   {
@@ -19,7 +19,7 @@ public sealed class StatBonus : IBfData
   public int Amount { get; set; }
   public AnimId Target { get; set; } = new();
 
-  public void Deserialize(string str)
+  public override void Deserialize(string str)
   {
     string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
 
@@ -28,7 +28,7 @@ public sealed class StatBonus : IBfData
     Target.Deserialize(data[2]);
   }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -41,7 +41,7 @@ public sealed class StatBonus : IBfData
     return sb.ToString();
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     Type = 0;
     Amount = 0;

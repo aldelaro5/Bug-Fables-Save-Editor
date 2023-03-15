@@ -4,7 +4,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class Music : IBfData
+public sealed class Music : BfData
 {
   public const int MusicNotBought = -1;
   public const int MusicBought = 1;
@@ -12,7 +12,7 @@ public sealed class Music : IBfData
   public bool Bought { get; set; }
   public int Song { get; set; }
 
-  public void Deserialize(string str)
+  public override void Deserialize(string str)
   {
     string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
 
@@ -20,7 +20,7 @@ public sealed class Music : IBfData
     Bought = ParseValueType<int>(data[1], nameof(Bought)) == MusicBought;
   }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -31,7 +31,7 @@ public sealed class Music : IBfData
     return sb.ToString();
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     Song = 0;
     Bought = false;

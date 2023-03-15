@@ -4,12 +4,12 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class MedalOnHand : IBfData
+public sealed class MedalOnHand : BfData
 {
   public Medal Medal { get; set; } = new();
   public int MedalEquipTarget { get; set; }
 
-  public void Deserialize(string str)
+  public override void Deserialize(string str)
   {
     string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
 
@@ -17,7 +17,7 @@ public sealed class MedalOnHand : IBfData
     MedalEquipTarget = ParseValueType<int>(data[1], nameof(MedalEquipTarget));
   }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -28,7 +28,7 @@ public sealed class MedalOnHand : IBfData
     return sb.ToString();
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     Medal.ResetToDefault();
     MedalEquipTarget = 0;

@@ -4,7 +4,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.BFSaveData;
 
-public sealed class Global : IBfData
+public sealed class Global : BfData
 {
   public enum SaveProgressIcon
   {
@@ -35,7 +35,7 @@ public sealed class Global : IBfData
   public SaveProgressIcon LastProgressIcon { get; set; }
   public int Tp { get; set; }
 
-  public string Serialize()
+  public override string Serialize()
   {
     StringBuilder sb = new();
 
@@ -74,7 +74,7 @@ public sealed class Global : IBfData
     return sb.ToString();
   }
 
-  public void Deserialize(string saveLine)
+  public override void Deserialize(string saveLine)
   {
     string[] data = saveLine.Split(new[] { CommaSeparator }, StringSplitOptions.None);
     if (data.Length != 16)
@@ -98,7 +98,7 @@ public sealed class Global : IBfData
     LastProgressIcon = (SaveProgressIcon)ParseValueType<int>(data[15], nameof(LastProgressIcon));
   }
 
-  public void ResetToDefault()
+  public override void ResetToDefault()
   {
     Rank = 0;
     Exp = 0;
