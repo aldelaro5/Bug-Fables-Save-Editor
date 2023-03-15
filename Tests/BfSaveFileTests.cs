@@ -1,48 +1,52 @@
+using System.Text;
 using Xunit;
 
 namespace BugFablesLib.Tests;
 
-public class SaveDataTests
+public class PcSaveDataTests
 {
   private const string ValidSaveFileName = "SaveFiles/ValidSave.dat";
-  private const string InvalidSaveFileName = "SaveFiles/InvalidSave.dat";
 
   private readonly BfPcSaveData _sud = new();
 
   [Fact]
-  public void LoadFromFile_ShouldThrow_WhenFileDataIsEmpty()
+  public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromString(""));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(new byte[] {}));
   }
 
   [Fact]
-  public void LoadFromFile_ShouldThrow_WhenDataIsInvalid()
+  public void LoadFromBytes_ShouldThrow_WhenDataIsInvalid()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromString(File.ReadAllText(InvalidSaveFileName)));
+    byte[] randomBytes = new byte[1_000_000];
+    Random.Shared.NextBytes(randomBytes);
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(randomBytes));
   }
 
   [Fact]
-  public void LoadFromFile_ShouldLoadFile_WhenDataIsValid()
+  public void LoadFromBytes_ShouldLoadFile_WhenDataIsValid()
   {
-    _sud.LoadFromString(File.ReadAllText(ValidSaveFileName));
+    _sud.LoadFromBytes(File.ReadAllBytes(ValidSaveFileName));
   }
 
   [Fact]
-  public void SaveToFile_ShouldNotChangeFile_WhenOverwritten()
+  public void EncodeToBytes_ShouldNotChangeData_WhenEncodedBack()
   {
-    string textBefore = File.ReadAllText(ValidSaveFileName);
-    _sud.LoadFromString(textBefore);
-    string textAfter = _sud.EncodeToString();
+    byte[] bytes = File.ReadAllBytes(ValidSaveFileName);
+    string textBefore = Encoding.UTF8.GetString(bytes);
+    _sud.LoadFromBytes(bytes);
+    string textAfter = Encoding.UTF8.GetString(_sud.EncodeToBytes());
     Assert.Equal(textBefore, textAfter);
   }
 
   [Fact]
-  public void SaveToFile_ShouldChangeFile_WhenOverwrittenWithChange()
+  public void EncodeToBytes_ShouldChangeData_WhenEncodedWithChange()
   {
-    string textBefore = File.ReadAllText(ValidSaveFileName);
-    _sud.LoadFromString(textBefore);
+    byte[] bytes = File.ReadAllBytes(ValidSaveFileName);
+    string textBefore = Encoding.UTF8.GetString(bytes);
+    _sud.LoadFromBytes(bytes);
     _sud.Global.Rank = 50;
-    string textAfter = _sud.EncodeToString();
+    string textAfter = Encoding.UTF8.GetString(_sud.EncodeToBytes());
     Assert.NotEqual(textBefore, textAfter);
   }
 }

@@ -4,19 +4,23 @@ namespace BugFablesLib;
 
 public class BfPcSaveData : BfSaveData
 {
-  public override void LoadFromString(string data)
+  public override void LoadFromBytes(byte[] data)
   {
-    StringBuilder sb = new(data);
-    for (int i = 0; i < sb.Length; i++)
-      sb[i] = (char)(sb[i] ^ 543);
-    base.LoadFromString(sb.ToString());
+    data = XorData(data);
+    base.LoadFromBytes(data);
   }
 
-  public override string EncodeToString()
+  public override byte[] EncodeToBytes()
   {
-    StringBuilder sb = new(base.EncodeToString());
+    byte[] data = base.EncodeToBytes();
+    return XorData(data);
+  }
+
+  private byte[] XorData(byte[] data)
+  {
+    StringBuilder sb = new(Encoding.UTF8.GetString(data));
     for (int i = 0; i < sb.Length; i++)
-      sb[i] = (char)(sb[i] ^ 543);
-    return sb.ToString();
+      sb[i] ^= (char)543;
+    return Encoding.UTF8.GetBytes(sb.ToString());
   }
 }

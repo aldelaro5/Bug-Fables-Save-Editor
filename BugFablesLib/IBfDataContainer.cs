@@ -5,7 +5,7 @@ namespace BugFablesLib;
 public interface IBfDataContainer
 {
   public IList<IBfData> Data { get; }
-  public void LoadFromString(string data);
-  public string EncodeToString();
+  public void LoadFromBytes(byte[] data);
+  public byte[] EncodeToBytes();
   public void ResetToDefault();
 }
