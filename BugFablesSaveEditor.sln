@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesSaveEditor", "Source\BugFablesSaveEditor.csproj", "{FF9C6A4C-3752-4279-9919-5666C7CAC55E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesSaveEditor", "Sources\BugFablesSaveEditor.csproj", "{FF9C6A4C-3752-4279-9919-5666C7CAC55E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib.Tests", "Tests\BugFablesLib.Tests.csproj", "{47D31870-73DA-4522-B394-946EB4FDEA6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib.Tests", "BugFablesLib\Tests\BugFablesLib.Tests.csproj", "{47D31870-73DA-4522-B394-946EB4FDEA6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib", "BugFablesLib\BugFablesLib.csproj", "{0C78F65B-E5DD-4185-A21A-A56D95C7BD89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib", "BugFablesLib\Sources\BugFablesLib.csproj", "{0C78F65B-E5DD-4185-A21A-A56D95C7BD89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
