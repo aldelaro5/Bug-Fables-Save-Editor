@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
-using BugFablesLib.BFSaveData;
+using BugFablesLib.SaveData;
+using BugFablesLib.NamedIds;
 using static BugFablesLib.Utils;
 
 namespace BugFablesLib;
@@ -34,24 +35,24 @@ public abstract class BfSaveData : IBfDataContainer
 
   public IList<IBfData> Data { get; }
 
-  public BfDataList<CrystalBerryFlag> CrystalBerries { get; } = new(CommaSeparator);
-  public BfDataList<EnemyEncounter> EnemyEncounters { get; } = new(AtSymbolSeparator);
-  public BfDataList<Flag> Flags { get; } = new(CommaSeparator);
-  public BfDataList<Flagstring> Flagstrings { get; } = new(FlagstringsSeparator);
-  public BfDataList<Flagvar> Flagvars { get; } = new(CommaSeparator);
-  public BfDataList<AnimId> Followers { get; } = new(CommaSeparator);
-  public Global Global { get; } = new();
-  public Header Header { get; } = new();
-  public Items Items { get; } = new();
-  public LibrarySections Library { get; } = new();
-  public BfDataList<MedalOnHand> Medals { get; } = new(AtSymbolSeparator);
-  public MedalShopsStock MedalShopsAvailables { get; } = new();
-  public MedalShopsStock MedalShopsPools { get; } = new();
-  public BfDataList<PartyMember> PartyMembers { get; } = new(AtSymbolSeparator);
-  public BoardQuests Quests { get; } = new();
-  public BfDataList<Flag> RegionalFlags { get; } = new(CommaSeparator);
-  public BfDataList<Music> SamiraSongs { get; } = new(AtSymbolSeparator);
-  public BfDataList<StatBonus> StatBonuses { get; } = new(AtSymbolSeparator);
+  public BfDataList<CrystalBerryFlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
+  public BfDataList<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
+  public BfDataList<FlagSaveData> Flags { get; } = new(CommaSeparator);
+  public BfDataList<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
+  public BfDataList<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
+  public BfDataList<BfAnimId> Followers { get; } = new(CommaSeparator);
+  public GlobalSaveData Global { get; } = new();
+  public HeaderSaveData Header { get; } = new();
+  public ItemsSaveData Items { get; } = new();
+  public LibrarySaveData Library { get; } = new();
+  public BfDataList<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
+  public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();
+  public MedalShopsStockSaveData MedalShopsPools { get; } = new();
+  public BfDataList<PartyMemberSaveData> PartyMembers { get; } = new(AtSymbolSeparator);
+  public BoardQuestsSaveData Quests { get; } = new();
+  public BfDataList<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
+  public BfDataList<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);
+  public BfDataList<StatBonusSaveData> StatBonuses { get; } = new(AtSymbolSeparator);
 
   public BfSaveData()
   {
