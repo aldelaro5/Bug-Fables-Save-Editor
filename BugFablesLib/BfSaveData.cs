@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
+using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using BugFablesLib.NamedIds;
 using static BugFablesLib.Utils;
 
 namespace BugFablesLib;

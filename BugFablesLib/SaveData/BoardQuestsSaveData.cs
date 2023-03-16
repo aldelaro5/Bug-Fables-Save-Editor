@@ -1,4 +1,4 @@
-﻿using BugFablesLib.NamedIds;
+﻿using BugFablesLib.Data;
 
 namespace BugFablesLib.SaveData;
 

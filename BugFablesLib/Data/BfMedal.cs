@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BugFablesLib.NamedIds;
+namespace BugFablesLib.Data;
 
 public class BfMedal : BfNamedIdData
 {

@@ -12,7 +12,7 @@ public class PcSaveDataTests
   [Fact]
   public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(new byte[] {}));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(new byte[] { }));
   }
 
   [Fact]

@@ -21,7 +21,8 @@ public class SaveSectionsTests
 
   [Theory]
   [MemberData(nameof(AllSaveFileSections))]
-  public void Section_ShouldNotChange_WhenOverWrittenWithoutChange(BfSaveData.SaveFileSection section)
+  public void Section_ShouldNotChange_WhenOverWrittenWithoutChange(
+    BfSaveData.SaveFileSection section)
   {
     // Test messing with the culture to make sure it doesn't break the parsing
     CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
