@@ -1,0 +1,15 @@
+0;TEMP Used for various temporary variables
+1;TEMP Used for various temporary variables
+2;TEMP Only used for letter prompts
+3;TEMP Only used for the prompt after each battle using the B.O.S.S system
+4;TEMP Only used when getting a medal from H.B using the B.O.S.S system
+5;UNUSED
+6;UNUSED
+7;TEMP Holds a comma separated list of the card ID corresponding to the current deck being built
+8;Holds some informmation about the items, key items and berries in possession before the bandit ambush in Chapter 4~The format is the following: comma separated list of the items ID followed by a "-", followed by the same list for key items, followed by a "-" followed by the berry count~This is only used when recalling the list once the locked chest at the Bandits Hideout is opened
+9;Chompy's name
+10;Filename
+11;TEMP Holds a comma separated list of the taken quest ID when the command Activateselectedquest is passed to SetText
+12;Holds a comma separated list of the card ID corresponding to the saved deck for Spy Cards
+13;Holds a comma separated list of the ordered medals ID in MYSTERY?, empty if the code is not active
+14;UNUSED

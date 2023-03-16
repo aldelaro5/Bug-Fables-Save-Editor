@@ -1,0 +1,60 @@
+using System.Collections.Generic;
+
+namespace BugFablesLib;
+
+internal static partial class Names
+{
+  internal static IList<string> s_discoveries = new List<string>
+  {
+    "Snakemouth Den",
+    "Snakemouth Depths",
+    "Explorer's Message",
+    "The Roaches' Village?",
+    "Inn Foremothers",
+    "The Settler Statue",
+    "The Ants",
+    "The Bees",
+    "The Termites",
+    "The Wasps",
+    "Queen Elizant I",
+    "The Anthill Palace",
+    "Aphids and Cochinaels",
+    "The Golden Festival",
+    "The Goddess' Statue",
+    "Honoured Employee",
+    "Sand Castle Mural",
+    "Snakemouth's Lab",
+    "Healing Sophie",
+    "Seedling Haven",
+    "Underground Tavern",
+    "The Ant Mines",
+    "Chomper Cavern",
+    "The Power Plant",
+    "The Bee Kingdom",
+    "Balcony Telescope",
+    "B.O.S.S.",
+    "Defiant Root",
+    "Relic Museum",
+    "The Lost Sands",
+    "Tardigrade Idol",
+    "Bandit Hideout",
+    "Stream Mountain",
+    "Far Grasslands",
+    "Fishing Village",
+    "Wizard's Tower",
+    "Far Swamplands",
+    "Wasp Kingdom",
+    "Forsaken Lands",
+    "Ancient City",
+    "Termite Kingdom",
+    "Termite Statue",
+    "Termite Coliseum",
+    "Termacade",
+    "Sailor's Statue",
+    "Metal Island",
+    "Spy Card",
+    "Peacock Island",
+    "Rubber Prison",
+    "Giant's Lair"
+  };
+}

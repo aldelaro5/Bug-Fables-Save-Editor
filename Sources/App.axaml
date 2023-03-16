@@ -1,0 +1,17 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="clr-namespace:BugFablesSaveEditor.Enums"
+             x:Class="BugFablesSaveEditor.App">
+  <Application.Resources>
+    <common:EnumValueConverter x:Key="EnumConverter" />
+    <common:EnumToDescriptionConverter x:Key="EnumDescriptionConverter" />
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme Mode="Dark" />
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+    <Style Selector="DataGridColumnHeader TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+  </Application.Styles>
+</Application>
