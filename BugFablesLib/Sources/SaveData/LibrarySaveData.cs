@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.SaveData;
 
-public sealed class LibrarySaveData : BfDataList<BfDataList<LibraryFlag>>
+public sealed class LibrarySaveData : BfDataCollection<BfDataCollection<LibraryFlag>>
 {
   public enum LibrarySection
   {
@@ -10,21 +10,20 @@ public sealed class LibrarySaveData : BfDataList<BfDataList<LibraryFlag>>
     Bestiary,
     Recipe,
     Record,
-    SeenAreas,
-    COUNT
+    SeenAreas
   }
 
-  public BfDataList<LibraryFlag> Discoveries { get => this[(int)LibrarySection.Discovery]; }
-  public BfDataList<LibraryFlag> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
-  public BfDataList<LibraryFlag> Recipes { get => this[(int)LibrarySection.Recipe]; }
-  public BfDataList<LibraryFlag> Records { get => this[(int)LibrarySection.Record]; }
-  public BfDataList<LibraryFlag> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
+  public BfDataCollection<LibraryFlag> Discoveries { get => this[(int)LibrarySection.Discovery]; }
+  public BfDataCollection<LibraryFlag> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
+  public BfDataCollection<LibraryFlag> Recipes { get => this[(int)LibrarySection.Recipe]; }
+  public BfDataCollection<LibraryFlag> Records { get => this[(int)LibrarySection.Record]; }
+  public BfDataCollection<LibraryFlag> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
 
   public LibrarySaveData()
   {
-    NbrExpectedElements = (int)LibrarySection.COUNT;
+    NbrExpectedElements = 5;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfDataList<LibraryFlag>(CommaSeparator));
+      Add(new BfDataCollection<LibraryFlag>(CommaSeparator));
   }
 }
 

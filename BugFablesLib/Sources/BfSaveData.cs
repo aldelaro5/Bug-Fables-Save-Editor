@@ -35,24 +35,24 @@ public abstract class BfSaveData : IBfDataContainer
 
   public IList<IBfData> Data { get; }
 
-  public BfDataList<CrystalBerryFlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
-  public BfDataList<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
-  public BfDataList<FlagSaveData> Flags { get; } = new(CommaSeparator);
-  public BfDataList<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
-  public BfDataList<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
-  public BfDataList<BfAnimId> Followers { get; } = new(CommaSeparator);
+  public BfDataCollection<CrystalBerryFlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
+  public BfDataCollection<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
+  public BfDataCollection<FlagSaveData> Flags { get; } = new(CommaSeparator);
+  public BfDataCollection<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
+  public BfDataCollection<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
+  public BfDataCollection<BfAnimId> Followers { get; } = new(CommaSeparator);
   public GlobalSaveData Global { get; } = new();
   public HeaderSaveData Header { get; } = new();
   public ItemsSaveData Items { get; } = new();
   public LibrarySaveData Library { get; } = new();
-  public BfDataList<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
+  public BfDataCollection<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
   public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();
   public MedalShopsStockSaveData MedalShopsPools { get; } = new();
-  public BfDataList<PartyMemberSaveData> PartyMembers { get; } = new(AtSymbolSeparator);
+  public BfDataCollection<PartyMemberSaveData> PartyMembers { get; } = new(AtSymbolSeparator);
   public BoardQuestsSaveData Quests { get; } = new();
-  public BfDataList<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
-  public BfDataList<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);
-  public BfDataList<StatBonusSaveData> StatBonuses { get; } = new(AtSymbolSeparator);
+  public BfDataCollection<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
+  public BfDataCollection<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);
+  public BfDataCollection<StatBonusSaveData> StatBonuses { get; } = new(AtSymbolSeparator);
 
   public BfSaveData()
   {

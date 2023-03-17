@@ -4,5 +4,5 @@ namespace BugFablesLib.Data;
 
 public class BfMap : BfNamedIdData
 {
-  public override IList<string> Names => BugFablesLib.Names.s_maps;
+  public override IList<string> Names => BugFablesLib.Names.Names.s_maps;
 }

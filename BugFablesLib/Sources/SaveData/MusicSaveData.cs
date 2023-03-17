@@ -7,8 +7,8 @@ namespace BugFablesLib.SaveData;
 
 public sealed class MusicSaveData : IBfData
 {
-  public const int MusicNotBought = -1;
-  public const int MusicBought = 1;
+  private const int MusicNotBought = -1;
+  private const int MusicBought = 1;
 
   public bool Bought { get; set; }
   public BfMusic Song { get; set; } = new();

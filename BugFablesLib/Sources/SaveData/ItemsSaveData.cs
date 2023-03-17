@@ -3,24 +3,23 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class ItemsSaveData : BfDataList<BfDataList<BfItem>>
+public sealed class ItemsSaveData : BfDataCollection<BfDataCollection<BfItem>>
 {
   public enum ItemPossessionType
   {
     Inventory = 0,
     KeyItem,
-    Stored,
-    COUNT
+    Stored
   }
 
-  public BfDataList<BfItem> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
-  public BfDataList<BfItem> Key { get => this[(int)ItemPossessionType.KeyItem]; }
-  public BfDataList<BfItem> Stored { get => this[(int)ItemPossessionType.Stored]; }
+  public BfDataCollection<BfItem> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
+  public BfDataCollection<BfItem> Key { get => this[(int)ItemPossessionType.KeyItem]; }
+  public BfDataCollection<BfItem> Stored { get => this[(int)ItemPossessionType.Stored]; }
 
   public ItemsSaveData()
   {
-    NbrExpectedElements = (int)ItemPossessionType.COUNT;
+    NbrExpectedElements = 3;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfDataList<BfItem>(CommaSeparator));
+      Add(new BfDataCollection<BfItem>(CommaSeparator));
   }
 }

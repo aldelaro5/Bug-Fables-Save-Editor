@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BugFablesLib;
+namespace BugFablesLib.Names;
 
 internal static partial class Names
 {

@@ -4,5 +4,5 @@ namespace BugFablesLib.Data;
 
 public class BfRecipe : BfNamedIdData
 {
-  public override IList<string> Names => BugFablesLib.Names.s_recipes;
+  public override IList<string> Names => BugFablesLib.Names.Names.s_recipes;
 }

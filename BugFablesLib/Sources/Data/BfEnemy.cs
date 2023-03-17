@@ -4,5 +4,5 @@ namespace BugFablesLib.Data;
 
 public class BfEnemy : BfNamedIdData
 {
-  public override IList<string> Names => BugFablesLib.Names.s_enemies;
+  public override IList<string> Names => BugFablesLib.Names.Names.s_enemies;
 }
