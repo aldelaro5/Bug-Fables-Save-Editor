@@ -33,30 +33,30 @@ public abstract class BfSaveData : IBfDataContainer
 
   private const string FlagstringsSeparator = "|SPLIT|";
 
-  public IList<IBfData> Data { get; }
+  public IList<IBfSerializable> Data { get; }
 
-  public BfDataCollection<CrystalBerryFlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
-  public BfDataCollection<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
-  public BfDataCollection<FlagSaveData> Flags { get; } = new(CommaSeparator);
-  public BfDataCollection<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
-  public BfDataCollection<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
-  public BfDataCollection<BfAnimId> Followers { get; } = new(CommaSeparator);
+  public BfSerializableDataCollection<CrystalBerryFlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
+  public BfSerializableDataCollection<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
+  public BfSerializableDataCollection<FlagSaveData> Flags { get; } = new(CommaSeparator);
+  public BfSerializableDataCollection<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
+  public BfSerializableDataCollection<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
+  public BfSerializableDataCollection<BfAnimId> Followers { get; } = new(CommaSeparator);
   public GlobalSaveData Global { get; } = new();
   public HeaderSaveData Header { get; } = new();
   public ItemsSaveData Items { get; } = new();
   public LibrarySaveData Library { get; } = new();
-  public BfDataCollection<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
+  public BfSerializableDataCollection<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
   public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();
   public MedalShopsStockSaveData MedalShopsPools { get; } = new();
-  public BfDataCollection<PartyMemberSaveData> PartyMembers { get; } = new(AtSymbolSeparator);
+  public BfSerializableDataCollection<PartyMemberSaveData> PartyMembers { get; } = new(AtSymbolSeparator);
   public BoardQuestsSaveData Quests { get; } = new();
-  public BfDataCollection<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
-  public BfDataCollection<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);
-  public BfDataCollection<StatBonusSaveData> StatBonuses { get; } = new(AtSymbolSeparator);
+  public BfSerializableDataCollection<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
+  public BfSerializableDataCollection<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);
+  public BfSerializableDataCollection<StatBonusSaveData> StatBonuses { get; } = new(AtSymbolSeparator);
 
   public BfSaveData()
   {
-    Data = new List<IBfData>
+    Data = new List<IBfSerializable>
     {
       Header,
       PartyMembers,

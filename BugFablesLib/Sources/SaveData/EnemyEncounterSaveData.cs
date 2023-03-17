@@ -4,7 +4,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class EnemyEncounterSaveData : IBfData
+public sealed class EnemyEncounterSaveData : IBfSerializable
 {
   public int NbrDefeated { get; set; }
   public int NbrSeen { get; set; }

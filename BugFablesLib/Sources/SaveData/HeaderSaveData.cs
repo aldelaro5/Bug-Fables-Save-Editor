@@ -5,7 +5,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class HeaderSaveData : IBfData
+public sealed class HeaderSaveData : IBfSerializable
 {
   public string Filename { get; set; } = "";
   public bool IsFrameone { get; set; }

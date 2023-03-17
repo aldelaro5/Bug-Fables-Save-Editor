@@ -5,7 +5,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class StatBonusSaveData : IBfData
+public sealed class StatBonusSaveData : IBfSerializable
 {
   public enum StatBonusType
   {

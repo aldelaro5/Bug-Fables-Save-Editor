@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.SaveData;
 
-public sealed class BoardQuestsSaveData : BfDataCollection<BfDataCollection<BfQuest>>
+public sealed class BoardQuestsSaveData : BfSerializableDataCollection<BfSerializableDataCollection<BfQuest>>
 {
   public enum QuestState
   {
@@ -11,14 +11,14 @@ public sealed class BoardQuestsSaveData : BfDataCollection<BfDataCollection<BfQu
     Completed
   }
 
-  public BfDataCollection<BfQuest> Opened { get => this[(int)QuestState.Open]; }
-  public BfDataCollection<BfQuest> Taken { get => this[(int)QuestState.Taken]; }
-  public BfDataCollection<BfQuest> Completed { get => this[(int)QuestState.Completed]; }
+  public BfSerializableDataCollection<BfQuest> Opened { get => this[(int)QuestState.Open]; }
+  public BfSerializableDataCollection<BfQuest> Taken { get => this[(int)QuestState.Taken]; }
+  public BfSerializableDataCollection<BfQuest> Completed { get => this[(int)QuestState.Completed]; }
 
   public BoardQuestsSaveData()
   {
     NbrExpectedElements = 3;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfDataCollection<BfQuest>(Utils.CommaSeparator));
+      Add(new BfSerializableDataCollection<BfQuest>(Utils.CommaSeparator));
   }
 }

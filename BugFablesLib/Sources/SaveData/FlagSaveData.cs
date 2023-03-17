@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.SaveData;
 
-public sealed class FlagSaveData : IBfData
+public sealed class FlagSaveData : IBfSerializable
 {
   public bool Enabled { get; set; }
 

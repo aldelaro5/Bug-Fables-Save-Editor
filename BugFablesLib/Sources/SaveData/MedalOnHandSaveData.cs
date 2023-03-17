@@ -5,7 +5,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class MedalOnHandSaveData : IBfData
+public sealed class MedalOnHandSaveData : IBfSerializable
 {
   public BfMedal Medal { get; set; } = new();
   public int MedalEquipTarget { get; set; }

@@ -4,15 +4,15 @@ using System.Text;
 
 namespace BugFablesLib;
 
-public class BfDataCollection<TBfData> : Collection<TBfData>, IBfData
-  where TBfData : IBfData, new()
+public class BfSerializableDataCollection<TBfSerializable> : Collection<TBfSerializable>, IBfSerializable
+  where TBfSerializable : IBfSerializable, new()
 {
   protected string ElementSeparator = Utils.AtSymbolSeparator;
   protected int NbrExpectedElements = -1;
 
-  public BfDataCollection() { }
+  public BfSerializableDataCollection() { }
 
-  public BfDataCollection(string elementSeparator, int nbrExpectedElements = -1)
+  public BfSerializableDataCollection(string elementSeparator, int nbrExpectedElements = -1)
   {
     ElementSeparator = elementSeparator;
     NbrExpectedElements = nbrExpectedElements;
@@ -29,7 +29,7 @@ public class BfDataCollection<TBfData> : Collection<TBfData>, IBfData
     if (NbrExpectedElements != -1 && elements.Length != NbrExpectedElements)
     {
       throw new FormatException(
-        $"Expected {NbrExpectedElements} {typeof(TBfData).Name} " +
+        $"Expected {NbrExpectedElements} {typeof(TBfSerializable).Name} " +
         $"elements, but got {elements.Length}");
     }
 
@@ -40,7 +40,7 @@ public class BfDataCollection<TBfData> : Collection<TBfData>, IBfData
       {
         if (i >= Count)
         {
-          TBfData newElement = new();
+          TBfSerializable newElement = new();
           newElement.Deserialize(elements[i]);
           Add(newElement);
         }
@@ -53,7 +53,7 @@ public class BfDataCollection<TBfData> : Collection<TBfData>, IBfData
     catch (FormatException e)
     {
       throw new FormatException(
-        $"The {typeof(TBfData).Name} at index {i} is in an invalid format",
+        $"The {typeof(TBfSerializable).Name} at index {i} is in an invalid format",
         e);
     }
   }
@@ -63,7 +63,7 @@ public class BfDataCollection<TBfData> : Collection<TBfData>, IBfData
     StringBuilder sb = new();
     for (int i = 0; i < Count; i++)
     {
-      TBfData element = this[i];
+      TBfSerializable element = this[i];
       sb.Append(element.Serialize());
       if (i != Count - 1)
         sb.Append(ElementSeparator);

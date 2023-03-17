@@ -5,7 +5,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public class PartyMemberSaveData : IBfData
+public class PartyMemberSaveData : IBfSerializable
 {
   public int Attack { get; set; }
   public int BaseAttack { get; set; }

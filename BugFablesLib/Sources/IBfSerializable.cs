@@ -1,6 +1,6 @@
 ﻿namespace BugFablesLib;
 
-public interface IBfData
+public interface IBfSerializable
 {
   public void ResetToDefault();
   public void Deserialize(string str);

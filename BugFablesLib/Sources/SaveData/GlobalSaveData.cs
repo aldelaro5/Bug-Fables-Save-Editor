@@ -5,7 +5,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class GlobalSaveData : IBfData
+public sealed class GlobalSaveData : IBfSerializable
 {
   public enum SaveProgressIcon
   {
