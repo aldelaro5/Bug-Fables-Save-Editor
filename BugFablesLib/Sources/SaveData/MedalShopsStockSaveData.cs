@@ -3,7 +3,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class MedalShopsStockSaveData : BfSerializableDataCollection<BfSerializableDataCollection<BfMedal>>
+public sealed class MedalShopsStockSaveData : BfSerializableCollection<BfSerializableCollection<BfMedal>>
 {
   public enum MedalShop
   {
@@ -11,14 +11,14 @@ public sealed class MedalShopsStockSaveData : BfSerializableDataCollection<BfSer
     Shades
   }
 
-  public BfSerializableDataCollection<BfMedal> Merab { get => this[(int)MedalShop.Merab]; }
-  public BfSerializableDataCollection<BfMedal> Shades { get => this[(int)MedalShop.Shades]; }
+  public BfSerializableCollection<BfMedal> Merab { get => this[(int)MedalShop.Merab]; }
+  public BfSerializableCollection<BfMedal> Shades { get => this[(int)MedalShop.Shades]; }
 
   public MedalShopsStockSaveData()
   {
     ElementSeparator = AtSymbolSeparator;
     NbrExpectedElements = 2;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableDataCollection<BfMedal>(CommaSeparator));
+      Add(new BfSerializableCollection<BfMedal>(CommaSeparator));
   }
 }

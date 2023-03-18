@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-namespace BugFablesLib.Names;
+namespace BugFablesLib;
 
 internal static partial class Names
 {
-  internal static IList<string> s_medals = new List<string>
+  internal static readonly List<string> s_medals = new()
   {
     "HP Plus",
     "TP Plus",

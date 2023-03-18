@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-namespace BugFablesLib.Names;
+namespace BugFablesLib;
 
 internal static partial class Names
 {
-  internal static IList<string> s_quests = new List<string>
+  internal static readonly List<string> s_quests = new()
   {
     "No Quests",
     "Inn Review Required",

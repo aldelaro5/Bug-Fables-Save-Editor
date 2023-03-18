@@ -2,7 +2,7 @@
 
 namespace BugFablesLib.SaveData;
 
-public sealed class LibrarySaveData : BfSerializableDataCollection<BfSerializableDataCollection<LibraryFlag>>
+public sealed class LibrarySaveData : BfSerializableCollection<BfSerializableCollection<LibraryFlag>>
 {
   public enum LibrarySection
   {
@@ -13,17 +13,17 @@ public sealed class LibrarySaveData : BfSerializableDataCollection<BfSerializabl
     SeenAreas
   }
 
-  public BfSerializableDataCollection<LibraryFlag> Discoveries { get => this[(int)LibrarySection.Discovery]; }
-  public BfSerializableDataCollection<LibraryFlag> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
-  public BfSerializableDataCollection<LibraryFlag> Recipes { get => this[(int)LibrarySection.Recipe]; }
-  public BfSerializableDataCollection<LibraryFlag> Records { get => this[(int)LibrarySection.Record]; }
-  public BfSerializableDataCollection<LibraryFlag> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
+  public BfSerializableCollection<LibraryFlag> Discoveries { get => this[(int)LibrarySection.Discovery]; }
+  public BfSerializableCollection<LibraryFlag> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
+  public BfSerializableCollection<LibraryFlag> Recipes { get => this[(int)LibrarySection.Recipe]; }
+  public BfSerializableCollection<LibraryFlag> Records { get => this[(int)LibrarySection.Record]; }
+  public BfSerializableCollection<LibraryFlag> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
 
   public LibrarySaveData()
   {
     NbrExpectedElements = 5;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableDataCollection<LibraryFlag>(CommaSeparator));
+      Add(new BfSerializableCollection<LibraryFlag>(CommaSeparator));
   }
 }
 

@@ -3,7 +3,7 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class ItemsSaveData : BfSerializableDataCollection<BfSerializableDataCollection<BfItem>>
+public sealed class ItemsSaveData : BfSerializableCollection<BfSerializableCollection<BfItem>>
 {
   public enum ItemPossessionType
   {
@@ -12,14 +12,14 @@ public sealed class ItemsSaveData : BfSerializableDataCollection<BfSerializableD
     Stored
   }
 
-  public BfSerializableDataCollection<BfItem> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
-  public BfSerializableDataCollection<BfItem> Key { get => this[(int)ItemPossessionType.KeyItem]; }
-  public BfSerializableDataCollection<BfItem> Stored { get => this[(int)ItemPossessionType.Stored]; }
+  public BfSerializableCollection<BfItem> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
+  public BfSerializableCollection<BfItem> Key { get => this[(int)ItemPossessionType.KeyItem]; }
+  public BfSerializableCollection<BfItem> Stored { get => this[(int)ItemPossessionType.Stored]; }
 
   public ItemsSaveData()
   {
     NbrExpectedElements = 3;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableDataCollection<BfItem>(CommaSeparator));
+      Add(new BfSerializableCollection<BfItem>(CommaSeparator));
   }
 }

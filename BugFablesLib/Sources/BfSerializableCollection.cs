@@ -4,15 +4,15 @@ using System.Text;
 
 namespace BugFablesLib;
 
-public class BfSerializableDataCollection<TBfSerializable> : Collection<TBfSerializable>, IBfSerializable
+public class BfSerializableCollection<TBfSerializable> : Collection<TBfSerializable>, IBfSerializable
   where TBfSerializable : IBfSerializable, new()
 {
   protected string ElementSeparator = Utils.AtSymbolSeparator;
   protected int NbrExpectedElements = -1;
 
-  public BfSerializableDataCollection() { }
+  public BfSerializableCollection() { }
 
-  public BfSerializableDataCollection(string elementSeparator, int nbrExpectedElements = -1)
+  public BfSerializableCollection(string elementSeparator, int nbrExpectedElements = -1)
   {
     ElementSeparator = elementSeparator;
     NbrExpectedElements = nbrExpectedElements;
