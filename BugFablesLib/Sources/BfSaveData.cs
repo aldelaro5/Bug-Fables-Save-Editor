@@ -35,7 +35,7 @@ public abstract class BfSaveData : IBfDataContainer
 
   public IList<IBfSerializable> Data { get; }
 
-  public BfSerializableCollection<CrystalBerryFlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
+  public BfSerializableCollection<FlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
   public BfSerializableCollection<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
   public BfSerializableCollection<FlagSaveData> Flags { get; } = new(CommaSeparator);
   public BfSerializableCollection<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
