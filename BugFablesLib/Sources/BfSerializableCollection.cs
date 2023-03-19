@@ -18,8 +18,6 @@ public class BfSerializableCollection<TBfSerializable> : Collection<TBfSerializa
     NbrExpectedElements = nbrExpectedElements;
   }
 
-  public override string ToString() => Serialize();
-
   public void Deserialize(string str)
   {
     if (str == string.Empty)
