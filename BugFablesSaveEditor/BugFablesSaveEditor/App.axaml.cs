@@ -1,12 +1,15 @@
+using System;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using BugFablesLib.Data;
 using BugFablesSaveEditor.ViewModels;
 using BugFablesSaveEditor.Views;
 
 namespace BugFablesSaveEditor;
 
-public partial class App : Application
+public class App : Application
 {
   public override void Initialize()
   {
@@ -15,6 +18,8 @@ public partial class App : Application
 
   public override void OnFrameworkInitializationCompleted()
   {
+    Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+    Trace.AutoFlush = true;
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
       desktop.MainWindow = new MainWindow { DataContext = new MainViewModel() };

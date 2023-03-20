@@ -8,7 +8,7 @@ using BugFablesSaveEditor;
 internal partial class Program
 {
   private static void Main(string[] args) => BuildAvaloniaApp()
-    .SetupBrowserApp("out");
+    .SetupBrowserAppAsync();
 
   public static AppBuilder BuildAvaloniaApp()
     => AppBuilder.Configure<App>();
