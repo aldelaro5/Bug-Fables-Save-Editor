@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
-using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MessageBox.Avalonia;
@@ -57,8 +56,8 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = SaveData._saveData.EncodeToBytes();
-      File.WriteAllBytes(path, data);
+      var data = SaveData._saveData.EncodeToString();
+      File.WriteAllText(path, data);
       CurrentFilePath = path;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
         $"The file was saved successfully at {CurrentFilePath}",
@@ -132,9 +131,9 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = File.ReadAllBytes(path);
+      var data = File.ReadAllText(path);
       var save = new BfPcSaveData();
-      save.LoadFromBytes(data);
+      save.LoadFromString(data);
       SaveData = new ObservableBfSaveData(save);
       CurrentFilePath = path;
       SaveInUse = true;

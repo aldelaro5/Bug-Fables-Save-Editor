@@ -10,43 +10,41 @@ public class PcSaveDataTests
   private readonly BfPcSaveData _sud = new();
 
   [Fact]
-  public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty()
+  public void LoadFromString_ShouldThrow_WhenFileDataIsEmpty()
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(new byte[] { }));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromString(string.Empty));
   }
 
   [Fact]
-  public void LoadFromBytes_ShouldThrow_WhenDataIsInvalid()
+  public void LoadFromString_ShouldThrow_WhenDataIsInvalid()
   {
     byte[] randomBytes = new byte[1_000_000];
     Random.Shared.NextBytes(randomBytes);
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(randomBytes));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromString(Encoding.UTF8.GetString(randomBytes)));
   }
 
   [Fact]
-  public void LoadFromBytes_ShouldLoadFile_WhenDataIsValid()
+  public void LoadFromString_ShouldLoadFile_WhenDataIsValid()
   {
-    _sud.LoadFromBytes(File.ReadAllBytes(ValidSaveFileName));
+    _sud.LoadFromString(File.ReadAllText(ValidSaveFileName));
   }
 
   [Fact]
-  public void EncodeToBytes_ShouldNotChangeData_WhenEncodedBack()
+  public void EncodeToString_ShouldNotChangeData_WhenEncodedBack()
   {
-    byte[] bytes = File.ReadAllBytes(ValidSaveFileName);
-    string textBefore = Encoding.UTF8.GetString(bytes);
-    _sud.LoadFromBytes(bytes);
-    string textAfter = Encoding.UTF8.GetString(_sud.EncodeToBytes());
+    string textBefore = File.ReadAllText(ValidSaveFileName);
+    _sud.LoadFromString(textBefore);
+    string textAfter = _sud.EncodeToString();
     Assert.Equal(textBefore, textAfter);
   }
 
   [Fact]
-  public void EncodeToBytes_ShouldChangeData_WhenEncodedWithChange()
+  public void EncodeToString_ShouldChangeData_WhenEncodedWithChange()
   {
-    byte[] bytes = File.ReadAllBytes(ValidSaveFileName);
-    string textBefore = Encoding.UTF8.GetString(bytes);
-    _sud.LoadFromBytes(bytes);
+    string textBefore = File.ReadAllText(ValidSaveFileName);
+    _sud.LoadFromString(textBefore);
     _sud.Global.Rank = 50;
-    string textAfter = Encoding.UTF8.GetString(_sud.EncodeToBytes());
+    string textAfter = _sud.EncodeToString();
     Assert.NotEqual(textBefore, textAfter);
   }
 }

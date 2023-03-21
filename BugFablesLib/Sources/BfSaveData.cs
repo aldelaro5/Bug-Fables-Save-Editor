@@ -79,15 +79,14 @@ public abstract class BfSaveData : IBfDataContainer
     };
   }
 
-  public virtual void LoadFromBytes(byte[] data)
+  public virtual void LoadFromString(string data)
   {
-    string strData = Encoding.UTF8.GetString(data);
-    string[] saveSections = strData.Split('\n');
+    string[] saveSections = data.Split('\n');
     for (int i = 0; i < Data.Count; i++)
       Data[i].Deserialize(saveSections[i]);
   }
 
-  public virtual byte[] EncodeToBytes()
+  public virtual string EncodeToString()
   {
     StringBuilder sb = new();
     for (int i = 0; i < Data.Count; i++)
@@ -98,7 +97,7 @@ public abstract class BfSaveData : IBfDataContainer
         sb.Append('\n');
     }
 
-    return Encoding.UTF8.GetBytes(sb.ToString());
+    return sb.ToString();
   }
 
   public void ResetToDefault()
