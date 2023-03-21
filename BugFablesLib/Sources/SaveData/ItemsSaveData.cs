@@ -13,7 +13,7 @@ public sealed class ItemsSaveData : BfSerializableCollection<BfSerializableColle
   }
 
   public BfSerializableCollection<BfItem> Inventory { get => this[(int)ItemPossessionType.Inventory]; }
-  public BfSerializableCollection<BfItem> Key { get => this[(int)ItemPossessionType.KeyItem]; }
+  public BfSerializableCollection<BfItem> KeyItems { get => this[(int)ItemPossessionType.KeyItem]; }
   public BfSerializableCollection<BfItem> Stored { get => this[(int)ItemPossessionType.Stored]; }
 
   public ItemsSaveData()

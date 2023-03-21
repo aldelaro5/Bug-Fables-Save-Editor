@@ -24,7 +24,7 @@ public partial class ObservableItemsSaveData : BfObservable
     _itemsQuestsSaveData = itemsSaveData;
     _inventory = new(_itemsQuestsSaveData.Inventory,
       x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
-    _key = new(_itemsQuestsSaveData.Key,
+    _key = new(_itemsQuestsSaveData.KeyItems,
       x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
     _stored = new(_itemsQuestsSaveData.Stored,
       x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
