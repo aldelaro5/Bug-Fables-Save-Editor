@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ObservableMedalOnHandSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableMedalOnHandSaveData : BfObservable
 {
   private readonly MedalOnHandSaveData _medalOnHandSaveData;
 
@@ -17,7 +18,8 @@ public partial class ObservableMedalOnHandSaveData : ObservableObject
       (medalOnHandSaveData, n) => medalOnHandSaveData.MedalEquipTarget = n);
   }
 
-  public ObservableMedalOnHandSaveData(MedalOnHandSaveData medalOnHandSaveData)
+  public ObservableMedalOnHandSaveData(MedalOnHandSaveData medalOnHandSaveData) :
+    base(medalOnHandSaveData)
   {
     _medalOnHandSaveData = medalOnHandSaveData;
     _medal = new ObservableBfResource(medalOnHandSaveData.Medal);

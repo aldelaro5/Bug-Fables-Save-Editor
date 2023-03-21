@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ObservableMusicSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableMusicSaveData : BfObservable
 {
   private readonly MusicSaveData _musicSaveData;
 
@@ -17,7 +18,8 @@ public partial class ObservableMusicSaveData : ObservableObject
       (music, n) => music.Bought = n);
   }
 
-  public ObservableMusicSaveData(MusicSaveData musicSaveData)
+  public ObservableMusicSaveData(MusicSaveData musicSaveData) :
+    base(musicSaveData)
   {
     _musicSaveData = musicSaveData;
     _music = new ObservableBfResource(musicSaveData.Song);

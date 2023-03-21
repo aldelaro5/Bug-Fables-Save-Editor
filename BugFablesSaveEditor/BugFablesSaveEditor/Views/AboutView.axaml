@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350"
+        x:Class="BugFablesSaveEditor.Views.AboutView"
+        Width="500"
+        Height="350"
+        WindowStartupLocation="CenterOwner"
+        Title="About Bug Fables Save Editor"
+        Icon="/Assets/icon.png">
+  <DockPanel>
+    <DockPanel>
+      <Image DockPanel.Dock="Top" Source="/Assets/icon.png"
+             Height="128"
+             Width="128"
+             VerticalAlignment="Center" />
+      <Button Margin="5" Width="100" HorizontalContentAlignment="Center" DockPanel.Dock="Bottom"
+              HorizontalAlignment="Center" Content="OK" Click="OnOkButton_Click" />
+      <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label HorizontalContentAlignment="Center" Content="Version " FontWeight="Bold" />
+          <Label x:Name="LblVersion" FontWeight="Bold" />
+        </StackPanel>
+        <Label HorizontalContentAlignment="Center" Content="By Aldelaro5" />
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <Label Cursor="Hand" PointerPressed="OnWikiLink_Click">
+            <TextBlock Text="Wiki" Foreground="DeepSkyBlue" TextDecorations="Underline" />
+          </Label>
+          <Label Cursor="Hand" PointerPressed="OnGitHubLink_Click">
+            <TextBlock Text="GitHub" Foreground="DeepSkyBlue" TextDecorations="Underline" />
+          </Label>
+          <Label Cursor="Hand" PointerPressed="OnLicenseLink_Click">
+            <TextBlock Text="License" Foreground="DeepSkyBlue" TextDecorations="Underline" />
+          </Label>
+        </StackPanel>
+        <Label HorizontalContentAlignment="Center"
+               Content="A save editor for the game Bug Fables: The Everlasting Sapling." />
+        <Label HorizontalContentAlignment="Center" Content="Program icon is from in-game assets." />
+        <Label HorizontalContentAlignment="Center"
+               Content="This project is not affiliated with Moonsprout Games." />
+      </StackPanel>
+    </DockPanel>
+  </DockPanel>
+</Window>

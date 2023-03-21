@@ -19,8 +19,9 @@
         <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0-preview1" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
         <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+        <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-prev5" />
     </ItemGroup>
 
     <ItemGroup>

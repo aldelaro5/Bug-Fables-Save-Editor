@@ -7,7 +7,8 @@ using static BugFablesLib.SaveData.StatBonusSaveData;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ObservableStatsBonusSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableStatsBonusSaveData : BfObservable
 {
   private readonly StatBonusSaveData _statBonusSaveData;
 
@@ -34,7 +35,8 @@ public partial class ObservableStatsBonusSaveData : ObservableObject
       (statBonusSaveData, n) => statBonusSaveData.Amount = n);
   }
 
-  public ObservableStatsBonusSaveData(StatBonusSaveData statBonusSaveData)
+  public ObservableStatsBonusSaveData(StatBonusSaveData statBonusSaveData) :
+    base(statBonusSaveData)
   {
     _statBonusSaveData = statBonusSaveData;
     _target = new ObservableBfResource(statBonusSaveData.Target);

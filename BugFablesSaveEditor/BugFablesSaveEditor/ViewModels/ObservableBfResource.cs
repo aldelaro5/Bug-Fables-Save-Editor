@@ -4,17 +4,19 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class ObservableBfResource : ObservableObject
+[ObservableObject]
+public partial class ObservableBfResource : BfObservable
 {
-  private readonly BfResource _resource;
+  public override BfSerializableResource UnderlyingData { get; }
 
   public int Id
   {
-    get => _resource.Id;
-    set => SetProperty(_resource.Id, value, _resource, (resource, n) => resource.Id = n);
+    get => UnderlyingData.Id;
+    set => SetProperty(UnderlyingData.Id, value, UnderlyingData, (resource, n) => resource.Id = n);
   }
 
-  public IReadOnlyList<string> AllResourceNames => _resource.AllNames;
+  public IReadOnlyList<string> AllResourceNames => UnderlyingData.AllNames;
 
-  public ObservableBfResource(BfResource resource) => _resource = resource;
+  public ObservableBfResource(BfSerializableResource resource) :
+    base(resource) => UnderlyingData = resource;
 }

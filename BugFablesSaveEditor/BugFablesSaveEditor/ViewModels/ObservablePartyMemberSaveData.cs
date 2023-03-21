@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ObservablePartyMemberSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservablePartyMemberSaveData : BfObservable
 {
   private readonly PartyMemberSaveData _partyMemberSaveData;
 
@@ -59,7 +60,8 @@ public partial class ObservablePartyMemberSaveData : ObservableObject
       (x, y) => x.MaxHp = y);
   }
 
-  public ObservablePartyMemberSaveData(PartyMemberSaveData partyMemberSaveData)
+  public ObservablePartyMemberSaveData(PartyMemberSaveData partyMemberSaveData) :
+    base(partyMemberSaveData)
   {
     _partyMemberSaveData = partyMemberSaveData;
     _animId = new(_partyMemberSaveData.AnimId);

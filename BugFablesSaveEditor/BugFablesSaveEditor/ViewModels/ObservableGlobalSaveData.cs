@@ -7,7 +7,8 @@ using static BugFablesLib.SaveData.GlobalSaveData;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ObservableGlobalSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableGlobalSaveData : BfObservable
 {
   private readonly GlobalSaveData _globalSaveData;
 
@@ -121,7 +122,8 @@ public partial class ObservableGlobalSaveData : ObservableObject
       (x, y) => x.Tp = y);
   }
 
-  public ObservableGlobalSaveData(GlobalSaveData globalSaveDatal)
+  public ObservableGlobalSaveData(GlobalSaveData globalSaveDatal) :
+    base(globalSaveDatal)
   {
     _globalSaveData = globalSaveDatal;
     _currentMap = new ObservableBfResource(_globalSaveData.CurrentMap);

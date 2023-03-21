@@ -4,14 +4,18 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using BugFablesLib;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class TrackedObservableCollection<T> : ObservableCollection<T>, IDisposable
+public class ObservableBfCollection<TSource, TObservable> :
+  ObservableCollection<TObservable>, IDisposable
+  where TSource : IBfSerializable
+  where TObservable : BfObservable
 {
-  private IList<T> _underCollection;
+  private IList<TSource> _underCollection;
 
-  public IList<T> UnderCollection
+  public IList<TSource> UnderCollection
   {
     get => _underCollection;
     set
@@ -21,7 +25,9 @@ public class TrackedObservableCollection<T> : ObservableCollection<T>, IDisposab
     }
   }
 
-  public TrackedObservableCollection(IList<T> collection) : base(collection)
+  public ObservableBfCollection(Collection<TSource> collection,
+                                Func<Collection<TSource>, IList<TObservable>> creator) :
+    base(creator(collection))
   {
     _underCollection = collection;
     base.CollectionChanged += OnCollectionChanged;
@@ -29,11 +35,11 @@ public class TrackedObservableCollection<T> : ObservableCollection<T>, IDisposab
 
   private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
   {
-    var newList = e.NewItems?.Cast<T>().ToList();
+    var newList = e.NewItems?.Cast<TObservable>().ToList();
     switch (e.Action)
     {
       case NotifyCollectionChangedAction.Add:
-        UnderCollection.Insert(e.NewStartingIndex, newList![0]);
+        UnderCollection.Insert(e.NewStartingIndex, (TSource)newList![0].UnderlyingData);
         break;
       case NotifyCollectionChangedAction.Remove:
         UnderCollection.RemoveAt(e.OldStartingIndex);
@@ -49,5 +55,8 @@ public class TrackedObservableCollection<T> : ObservableCollection<T>, IDisposab
     }
   }
 
-  public void Dispose() => base.CollectionChanged -= OnCollectionChanged;
+  public void Dispose()
+  {
+    base.CollectionChanged -= OnCollectionChanged;
+  }
 }

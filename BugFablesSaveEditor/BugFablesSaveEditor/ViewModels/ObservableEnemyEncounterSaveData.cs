@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class ObservableEnemyEncounterSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableEnemyEncounterSaveData : BfObservable
 {
   private readonly EnemyEncounterSaveData _enemyEncounterSaveData;
 
@@ -21,7 +22,8 @@ public class ObservableEnemyEncounterSaveData : ObservableObject
       (enemyEncounterSaveData, n) => enemyEncounterSaveData.NbrDefeated = n);
   }
 
-  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData)
+  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) :
+    base(enemyEncounterSaveData)
   {
     _enemyEncounterSaveData = enemyEncounterSaveData;
   }

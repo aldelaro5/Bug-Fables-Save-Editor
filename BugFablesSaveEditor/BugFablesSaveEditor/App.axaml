@@ -17,6 +17,10 @@
         <NumericUpDown Value="{Binding MedalEquipTarget}" />
       </StackPanel>
     </DataTemplate>
+
+    <DataTemplate DataType="vm:ObservableFlagSaveData">
+      <CheckBox IsChecked="{Binding Enabled}" />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <Application.Styles>

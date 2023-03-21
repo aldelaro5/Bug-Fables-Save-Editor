@@ -11,10 +11,53 @@
   <UserControl.DataContext>
     <vm:MainViewModel/>
   </UserControl.DataContext>
-  <StackPanel Orientation="Horizontal">
-    <Button CommandParameter="{Binding Index}" Content="vjrebhvb" Command="{Binding RemoveCommand}"/>
-    <ListBox SelectedIndex="{Binding Index}" Items="{Binding Test.Opened, Mode=TwoWay}"/>
-    <ListBox Items="{Binding Test.Taken}"/>
-    <ListBox Items="{Binding Test.Completed}"/>
-  </StackPanel>
+  <DockPanel>
+    <DockPanel>
+      <Menu DockPanel.Dock="Top">
+        <MenuItem Header="File">
+          <MenuItem Command="{Binding NewFileCommand}" Header="New" />
+          <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
+          <MenuItem Command="{Binding CmdSaveFileCommand}" Header="Save as..." />
+          <Separator />
+          <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
+        </MenuItem>
+        <MenuItem Header="Help">
+          <MenuItem Header="About" Click="OnAbout_Click" />
+        </MenuItem>
+      </Menu>
+      <DockPanel>
+        <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Vertical">
+          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}"
+                 HorizontalContentAlignment="Center" />
+          <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Command="{Binding NewFileCommand}" Content="New file" Margin="5" />
+            <Button Command="{Binding OpenFileCommand}" Content="Open file..." Margin="5" />
+            <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." Margin="5" />
+          </StackPanel>
+        </StackPanel>
+        <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">
+          <TabItem Header="Global">
+          </TabItem>
+          <TabItem Header="Party">
+          </TabItem>
+          <TabItem Header="Stats">
+          </TabItem>
+          <TabItem Header="Quests">
+          </TabItem>
+          <TabItem Header="Items">
+          </TabItem>
+          <TabItem Header="Medals">
+          </TabItem>
+          <TabItem Header="Library">
+          </TabItem>
+          <TabItem Header="Flags">
+          </TabItem>
+          <TabItem Header="Crystal Berries">
+          </TabItem>
+          <TabItem Header="Songs">
+          </TabItem>
+        </TabControl>
+      </DockPanel>
+    </DockPanel>
+  </DockPanel>
 </UserControl>

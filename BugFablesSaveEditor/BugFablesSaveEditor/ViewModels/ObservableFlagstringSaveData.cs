@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class ObservableFlagstringSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableFlagstringSaveData : BfObservable
 {
   private readonly FlagstringSaveData _flagstringSaveData;
 
@@ -14,8 +15,9 @@ public class ObservableFlagstringSaveData : ObservableObject
       (flagvarSaveData, n) => flagvarSaveData.Str = n);
   }
 
-  public ObservableFlagstringSaveData(FlagstringSaveData flagvarSaveData)
+  public ObservableFlagstringSaveData(FlagstringSaveData flagstringSaveData) :
+    base(flagstringSaveData)
   {
-    _flagstringSaveData = flagvarSaveData;
+    _flagstringSaveData = flagstringSaveData;
   }
 }

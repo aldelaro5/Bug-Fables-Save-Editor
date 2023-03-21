@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class ObservableHeaderSaveData : ObservableObject
+[ObservableObject]
+public partial class ObservableHeaderSaveData : BfObservable
 {
   private readonly HeaderSaveData _headerSaveData;
 
@@ -77,7 +78,8 @@ public class ObservableHeaderSaveData : ObservableObject
       (x, y) => x.PositionZ = y);
   }
 
-  public ObservableHeaderSaveData(HeaderSaveData headerSaveData)
+  public ObservableHeaderSaveData(HeaderSaveData headerSaveData) :
+    base(headerSaveData)
   {
     _headerSaveData = headerSaveData;
   }
