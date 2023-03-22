@@ -1,23 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
-        <WasmMainJSPath>AppBundle\main.js</WasmMainJSPath>
-        <OutputType>Exe</OutputType>
-        <WarningLevel>7</WarningLevel>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <WasmMainJSPath>AppBundle\main.js</WasmMainJSPath>
+    <OutputType>Exe</OutputType>
+    <WarningLevel>7</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <StripSymbols>true</StripSymbols>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <WasmExtraFilesToDeploy Include="AppBundle\**" />
-    </ItemGroup>
+  <ItemGroup>
+    <WasmExtraFilesToDeploy Include="AppBundle\**"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.2.23153.2" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.2.23153.2"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj"/>
+  </ItemGroup>
 </Project>

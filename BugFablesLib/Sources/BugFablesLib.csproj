@@ -5,5 +5,7 @@
     <Nullable>enable</Nullable>
     <WarningLevel>7</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PublishAot>true</PublishAot>
+    <StripSymbols>true</StripSymbols>
   </PropertyGroup>
 </Project>
