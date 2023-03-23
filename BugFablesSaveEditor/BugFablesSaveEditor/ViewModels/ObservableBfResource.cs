@@ -1,22 +1,18 @@
 using System.Collections.Generic;
 using BugFablesLib;
-using CommunityToolkit.Mvvm.ComponentModel;
+using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-[ObservableObject]
-public partial class ObservableBfResource : BfObservable
+public class ObservableBfResource : BfObservable
 {
-  public override BfSerializableResource UnderlyingData { get; }
-
-  public int Id
-  {
-    get => UnderlyingData.Id;
-    set => SetProperty(UnderlyingData.Id, value, UnderlyingData, (resource, n) => resource.Id = n);
-  }
-
+  public sealed override BfSerializableResource UnderlyingData { get; }
+  public ReactiveProperty<int> Id { get; }
   public IReadOnlyList<string> AllResourceNames => UnderlyingData.AllNames;
 
-  public ObservableBfResource(BfSerializableResource resource) :
-    base(resource) => UnderlyingData = resource;
+  public ObservableBfResource(BfSerializableResource resource) : base(resource)
+  {
+    UnderlyingData = resource;
+    Id = ReactiveProperty.FromObject(UnderlyingData, data => data.Id);
+  }
 }

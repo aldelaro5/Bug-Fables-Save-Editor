@@ -5,8 +5,6 @@ using Avalonia.Platform.Storage;
 using BugFablesLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.ViewModels;
 

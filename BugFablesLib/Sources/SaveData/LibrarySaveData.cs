@@ -2,7 +2,8 @@
 
 namespace BugFablesLib.SaveData;
 
-public sealed class LibrarySaveData : BfSerializableCollection<BfSerializableCollection<FlagSaveData>>
+public sealed class
+  LibrarySaveData : BfSerializableCollection<BfSerializableCollection<FlagSaveData>>
 {
   public enum LibrarySection
   {
@@ -13,11 +14,23 @@ public sealed class LibrarySaveData : BfSerializableCollection<BfSerializableCol
     SeenAreas
   }
 
-  public BfSerializableCollection<FlagSaveData> Discoveries { get => this[(int)LibrarySection.Discovery]; }
-  public BfSerializableCollection<FlagSaveData> Bestiary { get => this[(int)LibrarySection.Bestiary]; }
+  public BfSerializableCollection<FlagSaveData> Discoveries
+  {
+    get => this[(int)LibrarySection.Discovery];
+  }
+
+  public BfSerializableCollection<FlagSaveData> Bestiary
+  {
+    get => this[(int)LibrarySection.Bestiary];
+  }
+
   public BfSerializableCollection<FlagSaveData> Recipes { get => this[(int)LibrarySection.Recipe]; }
   public BfSerializableCollection<FlagSaveData> Records { get => this[(int)LibrarySection.Record]; }
-  public BfSerializableCollection<FlagSaveData> SeenAreas { get => this[(int)LibrarySection.SeenAreas]; }
+
+  public BfSerializableCollection<FlagSaveData> SeenAreas
+  {
+    get => this[(int)LibrarySection.SeenAreas];
+  }
 
   public LibrarySaveData()
   {

@@ -11,12 +11,16 @@ public partial class ObservableLibrarySaveData : BfObservable
 
   [ObservableProperty]
   private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _discoveries;
+
   [ObservableProperty]
   private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _bestiary;
+
   [ObservableProperty]
   private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _recipes;
+
   [ObservableProperty]
   private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _records;
+
   [ObservableProperty]
   private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _seenAreas;
 

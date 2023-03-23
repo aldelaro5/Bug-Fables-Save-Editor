@@ -3,7 +3,8 @@ using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class MedalShopsStockSaveData : BfSerializableCollection<BfSerializableCollection<BfMedal>>
+public sealed class
+  MedalShopsStockSaveData : BfSerializableCollection<BfSerializableCollection<BfMedal>>
 {
   public enum MedalShop
   {

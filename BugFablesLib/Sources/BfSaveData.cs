@@ -36,9 +36,15 @@ public abstract class BfSaveData : IBfDataContainer
   public IList<IBfSerializable> Data { get; }
 
   public BfSerializableCollection<FlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
-  public BfSerializableCollection<EnemyEncounterSaveData> EnemyEncounters { get; } = new(AtSymbolSeparator);
+
+  public BfSerializableCollection<EnemyEncounterSaveData> EnemyEncounters { get; } =
+    new(AtSymbolSeparator);
+
   public BfSerializableCollection<FlagSaveData> Flags { get; } = new(CommaSeparator);
-  public BfSerializableCollection<FlagstringSaveData> Flagstrings { get; } = new(FlagstringsSeparator);
+
+  public BfSerializableCollection<FlagstringSaveData> Flagstrings { get; } =
+    new(FlagstringsSeparator);
+
   public BfSerializableCollection<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
   public BfSerializableCollection<BfAnimId> Followers { get; } = new(CommaSeparator);
   public GlobalSaveData Global { get; } = new();
@@ -48,7 +54,10 @@ public abstract class BfSaveData : IBfDataContainer
   public BfSerializableCollection<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
   public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();
   public MedalShopsStockSaveData MedalShopsPools { get; } = new();
-  public BfSerializableCollection<PartyMemberSaveData> PartyMembers { get; } = new(AtSymbolSeparator);
+
+  public BfSerializableCollection<PartyMemberSaveData> PartyMembers { get; } =
+    new(AtSymbolSeparator);
+
   public BoardQuestsSaveData Quests { get; } = new();
   public BfSerializableCollection<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
   public BfSerializableCollection<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);

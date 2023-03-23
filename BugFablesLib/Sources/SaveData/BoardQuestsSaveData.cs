@@ -2,7 +2,8 @@
 
 namespace BugFablesLib.SaveData;
 
-public sealed class BoardQuestsSaveData : BfSerializableCollection<BfSerializableCollection<BfQuest>>
+public sealed class
+  BoardQuestsSaveData : BfSerializableCollection<BfSerializableCollection<BfQuest>>
 {
   public enum QuestState
   {

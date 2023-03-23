@@ -1,27 +1,24 @@
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ViewModels;
 
 [ObservableObject]
 public partial class ObservableMedalOnHandSaveData : BfObservable
 {
-  private readonly MedalOnHandSaveData _medalOnHandSaveData;
+  public sealed override MedalOnHandSaveData UnderlyingData { get; }
 
   [ObservableProperty]
   private ObservableBfResource _medal;
 
-  public int MedalEquipTarget
-  {
-    get => _medalOnHandSaveData.MedalEquipTarget;
-    set => SetProperty(_medalOnHandSaveData.MedalEquipTarget, value, _medalOnHandSaveData,
-      (medalOnHandSaveData, n) => medalOnHandSaveData.MedalEquipTarget = n);
-  }
+  public ReactiveProperty<int> MedalEquipTarget { get; }
 
   public ObservableMedalOnHandSaveData(MedalOnHandSaveData medalOnHandSaveData) :
     base(medalOnHandSaveData)
   {
-    _medalOnHandSaveData = medalOnHandSaveData;
+    UnderlyingData = medalOnHandSaveData;
     _medal = new ObservableBfResource(medalOnHandSaveData.Medal);
+    MedalEquipTarget = ReactiveProperty.FromObject(UnderlyingData, data => data.MedalEquipTarget);
   }
 }

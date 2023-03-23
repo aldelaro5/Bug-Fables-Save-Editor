@@ -8,7 +8,7 @@ namespace BugFablesSaveEditor.ViewModels;
 [ObservableObject]
 public partial class ObservableItemsSaveData : BfObservable
 {
-  private readonly ItemsSaveData _itemsQuestsSaveData;
+  public sealed override ItemsSaveData UnderlyingData { get; }
 
   [ObservableProperty]
   private ObservableBfCollection<BfItem, ObservableBfResource> _inventory;
@@ -21,12 +21,12 @@ public partial class ObservableItemsSaveData : BfObservable
 
   public ObservableItemsSaveData(ItemsSaveData itemsSaveData) : base(itemsSaveData)
   {
-    _itemsQuestsSaveData = itemsSaveData;
-    _inventory = new(_itemsQuestsSaveData.Inventory,
+    UnderlyingData = itemsSaveData;
+    _inventory = new(UnderlyingData.Inventory,
       x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
-    _key = new(_itemsQuestsSaveData.KeyItems,
+    _key = new(UnderlyingData.KeyItems,
       x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
-    _stored = new(_itemsQuestsSaveData.Stored,
+    _stored = new(UnderlyingData.Stored,
       x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
   }
 }

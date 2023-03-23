@@ -1,23 +1,16 @@
 using BugFablesLib.SaveData;
-using CommunityToolkit.Mvvm.ComponentModel;
+using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-[ObservableObject]
-public partial class ObservableFlagvarSaveData : BfObservable
+public class ObservableFlagvarSaveData : BfObservable
 {
-  private readonly FlagvarSaveData _flagvarSaveData;
+  public sealed override FlagvarSaveData UnderlyingData { get; }
+  public ReactiveProperty<int> Var { get; }
 
-  public int Str
+  public ObservableFlagvarSaveData(FlagvarSaveData flagvarSaveData) : base(flagvarSaveData)
   {
-    get => _flagvarSaveData.Var;
-    set => SetProperty(_flagvarSaveData.Var, value, _flagvarSaveData,
-      (flagvarSaveData, n) => flagvarSaveData.Var = n);
-  }
-
-  public ObservableFlagvarSaveData(FlagvarSaveData flagvarSaveData) :
-    base(flagvarSaveData)
-  {
-    _flagvarSaveData = flagvarSaveData;
+    UnderlyingData = flagvarSaveData;
+    Var = ReactiveProperty.FromObject(UnderlyingData, data => data.Var);
   }
 }

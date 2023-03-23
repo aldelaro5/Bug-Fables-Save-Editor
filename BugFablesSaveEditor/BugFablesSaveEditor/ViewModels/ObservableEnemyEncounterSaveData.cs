@@ -1,30 +1,20 @@
 using BugFablesLib.SaveData;
-using CommunityToolkit.Mvvm.ComponentModel;
+using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-[ObservableObject]
-public partial class ObservableEnemyEncounterSaveData : BfObservable
+public class ObservableEnemyEncounterSaveData : BfObservable
 {
-  private readonly EnemyEncounterSaveData _enemyEncounterSaveData;
+  public sealed override EnemyEncounterSaveData UnderlyingData { get; }
 
-  public int NbrSeen
-  {
-    get => _enemyEncounterSaveData.NbrSeen;
-    set => SetProperty(_enemyEncounterSaveData.NbrSeen, value, _enemyEncounterSaveData,
-      (enemyEncounterSaveData, n) => enemyEncounterSaveData.NbrSeen = n);
-  }
-
-  public int NbrDefeated
-  {
-    get => _enemyEncounterSaveData.NbrDefeated;
-    set => SetProperty(_enemyEncounterSaveData.NbrDefeated, value, _enemyEncounterSaveData,
-      (enemyEncounterSaveData, n) => enemyEncounterSaveData.NbrDefeated = n);
-  }
+  public ReactiveProperty<int> NbrSeen { get; }
+  public ReactiveProperty<int> NbrDefeated { get; }
 
   public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) :
     base(enemyEncounterSaveData)
   {
-    _enemyEncounterSaveData = enemyEncounterSaveData;
+    UnderlyingData = enemyEncounterSaveData;
+    NbrSeen = ReactiveProperty.FromObject(UnderlyingData, data => data.NbrSeen);
+    NbrDefeated = ReactiveProperty.FromObject(UnderlyingData, data => data.NbrDefeated);
   }
 }

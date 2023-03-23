@@ -3,14 +3,15 @@ using System.Linq;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Humanizer;
+using Reactive.Bindings;
 using static BugFablesLib.SaveData.GlobalSaveData;
 
 namespace BugFablesSaveEditor.ViewModels;
 
 [ObservableObject]
-public partial class ObservableGlobalSaveData : BfObservable
+public sealed partial class ObservableGlobalSaveData : BfObservable
 {
-  private readonly GlobalSaveData _globalSaveData;
+  public override GlobalSaveData UnderlyingData { get; }
 
   [ObservableProperty]
   private ObservableBfResource _currentArea;
@@ -18,115 +19,46 @@ public partial class ObservableGlobalSaveData : BfObservable
   [ObservableProperty]
   private ObservableBfResource _currentMap;
 
-  public string[] SaveProgressIconNames
-  {
-    get => Enum.GetNames(typeof(SaveProgressIcon)).Select(x => x.Humanize(LetterCasing.Title))
-      .ToArray();
-  }
+  public string[] SaveProgressIconNames =>
+    Enum.GetNames(typeof(SaveProgressIcon)).Select(x => x.Humanize(LetterCasing.Title)).ToArray();
 
-  public int BerryCount
-  {
-    get => _globalSaveData.BerryCount;
-    set => SetProperty(_globalSaveData.BerryCount, value, _globalSaveData,
-      (x, y) => x.BerryCount = y);
-  }
-
-  public int Exp
-  {
-    get => _globalSaveData.Exp;
-    set => SetProperty(_globalSaveData.Exp, value, _globalSaveData,
-      (x, y) => x.Exp = y);
-  }
-
-  public int MaxMp
-  {
-    get => _globalSaveData.MaxMp;
-    set => SetProperty(_globalSaveData.MaxMp, value, _globalSaveData,
-      (x, y) => x.MaxMp = y);
-  }
-
-  public int MaxTp
-  {
-    get => _globalSaveData.MaxTp;
-    set => SetProperty(_globalSaveData.MaxTp, value, _globalSaveData,
-      (x, y) => x.MaxTp = y);
-  }
-
-  public int Mp
-  {
-    get => _globalSaveData.Mp;
-    set => SetProperty(_globalSaveData.Mp, value, _globalSaveData,
-      (x, y) => x.Mp = y);
-  }
-
-  public int NbrMaxItemsInventory
-  {
-    get => _globalSaveData.NbrMaxItemsInventory;
-    set => SetProperty(_globalSaveData.NbrMaxItemsInventory, value, _globalSaveData,
-      (x, y) => x.NbrMaxItemsInventory = y);
-  }
-
-  public int NbrMaxItemsStorage
-  {
-    get => _globalSaveData.NbrMaxItemsStorage;
-    set => SetProperty(_globalSaveData.NbrMaxItemsStorage, value, _globalSaveData,
-      (x, y) => x.NbrMaxItemsStorage = y);
-  }
-
-  public int NeededExp
-  {
-    get => _globalSaveData.NeededExp;
-    set => SetProperty(_globalSaveData.NeededExp, value, _globalSaveData,
-      (x, y) => x.NeededExp = y);
-  }
-
-  public int PlayTimeHours
-  {
-    get => _globalSaveData.PlayTimeHours;
-    set => SetProperty(_globalSaveData.PlayTimeHours, value, _globalSaveData,
-      (x, y) => x.PlayTimeHours = y);
-  }
-
-  public int PlayTimeMinutes
-  {
-    get => _globalSaveData.PlayTimeMinutes;
-    set => SetProperty(_globalSaveData.PlayTimeMinutes, value, _globalSaveData,
-      (x, y) => x.PlayTimeMinutes = y);
-  }
-
-  public int PlayTimeSeconds
-  {
-    get => _globalSaveData.PlayTimeSeconds;
-    set => SetProperty(_globalSaveData.PlayTimeSeconds, value, _globalSaveData,
-      (x, y) => x.PlayTimeSeconds = y);
-  }
-
-  public int Rank
-  {
-    get => _globalSaveData.Rank;
-    set => SetProperty(_globalSaveData.Rank, value, _globalSaveData,
-      (x, y) => x.Rank = y);
-  }
-
-  public int LastProgressIcon
-  {
-    get => (int)_globalSaveData.LastProgressIcon;
-    set => SetProperty((int)_globalSaveData.LastProgressIcon, value, _globalSaveData,
-      (x, y) => x.LastProgressIcon = (SaveProgressIcon)y);
-  }
-
-  public int Tp
-  {
-    get => _globalSaveData.Tp;
-    set => SetProperty(_globalSaveData.Tp, value, _globalSaveData,
-      (x, y) => x.Tp = y);
-  }
+  public ReactiveProperty<int> BerryCount { get; }
+  public ReactiveProperty<int> Exp { get; }
+  public ReactiveProperty<int> MaxMp { get; }
+  public ReactiveProperty<int> MaxTp { get; }
+  public ReactiveProperty<int> Mp { get; }
+  public ReactiveProperty<int> NbrMaxItemsInventory { get; }
+  public ReactiveProperty<int> NbrMaxItemsStorage { get; }
+  public ReactiveProperty<int> NeededExp { get; }
+  public ReactiveProperty<int> PlayTimeHours { get; }
+  public ReactiveProperty<int> PlayTimeMinutes { get; }
+  public ReactiveProperty<int> PlayTimeSeconds { get; }
+  public ReactiveProperty<int> Rank { get; }
+  public ReactiveProperty<SaveProgressIcon> LastProgressIcon { get; }
+  public ReactiveProperty<int> Tp { get; }
 
   public ObservableGlobalSaveData(GlobalSaveData globalSaveDatal) :
     base(globalSaveDatal)
   {
-    _globalSaveData = globalSaveDatal;
-    _currentMap = new ObservableBfResource(_globalSaveData.CurrentMap);
-    _currentArea = new ObservableBfResource(_globalSaveData.CurrentArea);
+    UnderlyingData = globalSaveDatal;
+    _currentMap = new ObservableBfResource(UnderlyingData.CurrentMap);
+    _currentArea = new ObservableBfResource(UnderlyingData.CurrentArea);
+    Rank = ReactiveProperty.FromObject(UnderlyingData, data => data.Rank);
+    Exp = ReactiveProperty.FromObject(UnderlyingData, data => data.Exp);
+    NeededExp = ReactiveProperty.FromObject(UnderlyingData, data => data.NeededExp);
+    MaxTp = ReactiveProperty.FromObject(UnderlyingData, data => data.MaxTp);
+    Tp = ReactiveProperty.FromObject(UnderlyingData, data => data.Tp);
+    BerryCount = ReactiveProperty.FromObject(UnderlyingData, data => data.BerryCount);
+    Mp = ReactiveProperty.FromObject(UnderlyingData, data => data.Mp);
+    MaxMp = ReactiveProperty.FromObject(UnderlyingData, data => data.MaxMp);
+    NbrMaxItemsInventory =
+      ReactiveProperty.FromObject(UnderlyingData, data => data.NbrMaxItemsInventory);
+    NbrMaxItemsStorage =
+      ReactiveProperty.FromObject(UnderlyingData, data => data.NbrMaxItemsStorage);
+    PlayTimeHours = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeHours);
+    PlayTimeMinutes = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeMinutes);
+    PlayTimeSeconds = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeSeconds);
+    LastProgressIcon =
+      ReactiveProperty.FromObject(UnderlyingData, data => data.LastProgressIcon);
   }
 }

@@ -9,7 +9,7 @@
              x:CompileBindings="True"
              x:DataType="vm:MainViewModel">
   <UserControl.DataContext>
-    <vm:MainViewModel/>
+    <vm:MainViewModel />
   </UserControl.DataContext>
   <DockPanel>
     <DockPanel>
@@ -37,6 +37,7 @@
         </StackPanel>
         <TabControl HorizontalAlignment="Center" IsEnabled="{Binding SaveInUse}">
           <TabItem Header="Global">
+            <NumericUpDown Value="{Binding SaveData.Global.Exp.Value}" />
           </TabItem>
           <TabItem Header="Party">
           </TabItem>

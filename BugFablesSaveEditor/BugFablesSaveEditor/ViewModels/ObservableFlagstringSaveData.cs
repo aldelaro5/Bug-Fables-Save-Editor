@@ -1,23 +1,17 @@
 using BugFablesLib.SaveData;
-using CommunityToolkit.Mvvm.ComponentModel;
+using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-[ObservableObject]
-public partial class ObservableFlagstringSaveData : BfObservable
+public class ObservableFlagstringSaveData : BfObservable
 {
-  private readonly FlagstringSaveData _flagstringSaveData;
+  public sealed override FlagstringSaveData UnderlyingData { get; }
+  public ReactiveProperty<string> Str { get; }
 
-  public string Str
+  public ObservableFlagstringSaveData(FlagstringSaveData flagstringSaveData) : base(
+    flagstringSaveData)
   {
-    get => _flagstringSaveData.Str;
-    set => SetProperty(_flagstringSaveData.Str, value, _flagstringSaveData,
-      (flagvarSaveData, n) => flagvarSaveData.Str = n);
-  }
-
-  public ObservableFlagstringSaveData(FlagstringSaveData flagstringSaveData) :
-    base(flagstringSaveData)
-  {
-    _flagstringSaveData = flagstringSaveData;
+    UnderlyingData = flagstringSaveData;
+    Str = ReactiveProperty.FromObject(UnderlyingData, data => data.Str);
   }
 }

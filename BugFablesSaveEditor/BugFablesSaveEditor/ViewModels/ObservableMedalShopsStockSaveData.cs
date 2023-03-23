@@ -8,20 +8,21 @@ namespace BugFablesSaveEditor.ViewModels;
 [ObservableObject]
 public partial class ObservableMedalShopsStockSaveData : BfObservable
 {
-  private readonly MedalShopsStockSaveData _itemsQuestsSaveData;
+  public sealed override MedalShopsStockSaveData UnderlyingData { get; }
 
   [ObservableProperty]
   private ObservableBfCollection<BfMedal, ObservableBfResource> _merab;
+
   [ObservableProperty]
   private ObservableBfCollection<BfMedal, ObservableBfResource> _shades;
 
   public ObservableMedalShopsStockSaveData(MedalShopsStockSaveData itemsSaveData) :
     base(itemsSaveData)
   {
-    _itemsQuestsSaveData = itemsSaveData;
-    _merab = new(_itemsQuestsSaveData.Merab,
+    UnderlyingData = itemsSaveData;
+    _merab = new(UnderlyingData.Merab,
       medals => medals.Select(x => new ObservableBfResource(x)).ToList());
-    _shades = new(_itemsQuestsSaveData.Shades,
+    _shades = new(UnderlyingData.Shades,
       medals => medals.Select(x => new ObservableBfResource(x)).ToList());
   }
 }

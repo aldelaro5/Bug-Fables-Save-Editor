@@ -1,27 +1,24 @@
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ViewModels;
 
 [ObservableObject]
 public partial class ObservableMusicSaveData : BfObservable
 {
-  private readonly MusicSaveData _musicSaveData;
+  public override MusicSaveData UnderlyingData { get; }
 
   [ObservableProperty]
   private ObservableBfResource _music;
 
-  public bool Bought
-  {
-    get => _musicSaveData.Bought;
-    set => SetProperty(_musicSaveData.Bought, value, _musicSaveData,
-      (music, n) => music.Bought = n);
-  }
+  public ReactiveProperty<bool> Bought { get; }
 
   public ObservableMusicSaveData(MusicSaveData musicSaveData) :
     base(musicSaveData)
   {
-    _musicSaveData = musicSaveData;
+    UnderlyingData = musicSaveData;
     _music = new ObservableBfResource(musicSaveData.Song);
+    Bought = ReactiveProperty.FromObject(UnderlyingData, data => data.Bought);
   }
 }
