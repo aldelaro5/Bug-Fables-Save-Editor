@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
+using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -16,7 +17,7 @@ public partial class MainViewModel : ObservableObject
   private bool _fileSaved;
 
   [ObservableProperty]
-  private ObservableBfSaveData _saveData;
+  private SaveDataViewModel _saveData;
 
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(CmdSaveFileCommand))]
@@ -31,7 +32,7 @@ public partial class MainViewModel : ObservableObject
 
   public MainViewModel(BfPcSaveData saveData)
   {
-    _saveData = new ObservableBfSaveData(saveData);
+    _saveData = new SaveDataViewModel(saveData);
   }
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
@@ -132,7 +133,7 @@ public partial class MainViewModel : ObservableObject
       var data = File.ReadAllText(path);
       var save = new BfPcSaveData();
       save.LoadFromString(data);
-      SaveData = new ObservableBfSaveData(save);
+      SaveData = new SaveDataViewModel(save);
       CurrentFilePath = path;
       SaveInUse = true;
       _fileSaved = true;

@@ -2,10 +2,10 @@ using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Reactive.Bindings;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public partial class ObservableMedalOnHandSaveData : BfObservable
+public partial class ObservableMedalOnHandSaveData : ObservableModel
 {
   public sealed override MedalOnHandSaveData UnderlyingData { get; }
 

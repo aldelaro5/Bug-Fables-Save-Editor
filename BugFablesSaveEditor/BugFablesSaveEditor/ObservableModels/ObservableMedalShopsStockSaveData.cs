@@ -3,10 +3,10 @@ using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public partial class ObservableMedalShopsStockSaveData : BfObservable
+public partial class ObservableMedalShopsStockSaveData : ObservableModel
 {
   public sealed override MedalShopsStockSaveData UnderlyingData { get; }
 

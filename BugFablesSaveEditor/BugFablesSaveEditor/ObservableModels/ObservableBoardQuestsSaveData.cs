@@ -3,10 +3,10 @@ using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public partial class ObservableBoardQuestsSaveData : BfObservable
+public partial class ObservableBoardQuestsSaveData : ObservableModel
 {
   public sealed override BoardQuestsSaveData UnderlyingData { get; }
 

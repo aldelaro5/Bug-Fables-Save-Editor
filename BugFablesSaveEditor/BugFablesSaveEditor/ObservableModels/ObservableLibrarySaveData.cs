@@ -2,10 +2,10 @@ using System.Linq;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public partial class ObservableLibrarySaveData : BfObservable
+public partial class ObservableLibrarySaveData : ObservableModel
 {
   public sealed override LibrarySaveData UnderlyingData { get; }
 

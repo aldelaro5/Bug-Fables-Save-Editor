@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using BugFablesLib;
 using Reactive.Bindings;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableBfResource : BfObservable
+public class ObservableBfResource : ObservableModel
 {
   public sealed override BfSerializableResource UnderlyingData { get; }
   public ReactiveProperty<int> Id { get; }

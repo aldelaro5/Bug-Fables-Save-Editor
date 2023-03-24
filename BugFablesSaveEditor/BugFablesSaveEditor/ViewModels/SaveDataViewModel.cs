@@ -2,11 +2,12 @@ using System.Linq;
 using BugFablesLib;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
+using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public class ObservableBfSaveData : ObservableObject
+public partial class SaveDataViewModel : ObservableObject
 {
   public readonly BfSaveData _saveData;
 
@@ -24,8 +25,9 @@ public class ObservableBfSaveData : ObservableObject
 
   public ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> Flagvars { get; }
   public ObservableBfCollection<BfAnimId, ObservableBfResource> Followers { get; }
-  public ObservableGlobalSaveData Global { get; }
-  public ObservableHeaderSaveData Header { get; }
+
+  [ObservableProperty]
+  private GlobalViewModel _globalViewModel;
   public ObservableItemsSaveData Items { get; }
   public ObservableLibrarySaveData Library { get; }
   public ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> Medals { get; }
@@ -46,7 +48,7 @@ public class ObservableBfSaveData : ObservableObject
     get;
   }
 
-  public ObservableBfSaveData(BfSaveData saveData)
+  public SaveDataViewModel(BfSaveData saveData)
   {
     _saveData = saveData;
     CrystalBerries = new(_saveData.CrystalBerries,
@@ -70,8 +72,7 @@ public class ObservableBfSaveData : ObservableObject
       cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
     StatBonuses = new(_saveData.StatBonuses,
       cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
-    Global = new(_saveData.Global);
-    Header = new(_saveData.Header);
+    _globalViewModel = new(new(_saveData.Global), new(_saveData.Header));
     Items = new(_saveData.Items);
     Library = new(_saveData.Library);
     MedalShopsPools = new(_saveData.MedalShopsPools);

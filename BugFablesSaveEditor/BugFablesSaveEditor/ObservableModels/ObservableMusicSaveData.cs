@@ -2,10 +2,10 @@ using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Reactive.Bindings;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public partial class ObservableMusicSaveData : BfObservable
+public partial class ObservableMusicSaveData : ObservableModel
 {
   public override MusicSaveData UnderlyingData { get; }
 

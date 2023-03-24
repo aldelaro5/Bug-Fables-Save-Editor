@@ -1,9 +1,10 @@
+using System.Reactive.Linq;
 using BugFablesLib.SaveData;
 using Reactive.Bindings;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableHeaderSaveData : BfObservable
+public class ObservableHeaderSaveData : ObservableModel
 {
   public sealed override HeaderSaveData UnderlyingData { get; }
 

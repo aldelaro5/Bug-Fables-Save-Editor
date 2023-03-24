@@ -6,12 +6,12 @@ using System.ComponentModel;
 using System.Linq;
 using BugFablesLib;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 public class ObservableBfCollection<TSource, TObservable> :
   ObservableCollection<TObservable>, IDisposable
   where TSource : IBfSerializable
-  where TObservable : BfObservable
+  where TObservable : ObservableModel
 {
   private IList<TSource> _underCollection;
 

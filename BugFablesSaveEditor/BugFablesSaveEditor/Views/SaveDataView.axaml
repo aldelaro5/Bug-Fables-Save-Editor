@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.ViewModels"
+             xmlns:ovm="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BugFablesSaveEditor.Views.SaveDataView"
+             x:CompileBindings="True"
+             x:DataType="vm:SaveDataViewModel">
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="vm:GlobalViewModel">
+      <v:GlobalView/>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+  <TabControl HorizontalAlignment="Center">
+    <TabItem Header="Global">
+      <ContentControl Content="{Binding GlobalViewModel}"/>
+    </TabItem>
+    <TabItem Header="Party">
+    </TabItem>
+    <TabItem Header="Stats">
+    </TabItem>
+    <TabItem Header="Quests">
+    </TabItem>
+    <TabItem Header="Items">
+    </TabItem>
+    <TabItem Header="Medals">
+    </TabItem>
+    <TabItem Header="Library">
+    </TabItem>
+    <TabItem Header="Flags">
+    </TabItem>
+    <TabItem Header="Crystal Berries">
+    </TabItem>
+    <TabItem Header="Songs">
+    </TabItem>
+  </TabControl>
+</UserControl>
+

@@ -6,10 +6,10 @@ using Humanizer;
 using Reactive.Bindings;
 using static BugFablesLib.SaveData.StatBonusSaveData;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public partial class ObservableStatsBonusSaveData : BfObservable
+public partial class ObservableStatsBonusSaveData : ObservableModel
 {
   public sealed override StatBonusSaveData UnderlyingData { get; }
 
@@ -20,7 +20,7 @@ public partial class ObservableStatsBonusSaveData : BfObservable
   [ObservableProperty]
   private ObservableBfResource _target;
 
-  public ReactiveProperty<int> Type { get; }
+  public ReactiveProperty<StatBonusType> Type { get; }
   public ReactiveProperty<int> Amount { get; }
 
   public ObservableStatsBonusSaveData(StatBonusSaveData statBonusSaveData) :
@@ -28,7 +28,7 @@ public partial class ObservableStatsBonusSaveData : BfObservable
   {
     UnderlyingData = statBonusSaveData;
     _target = new ObservableBfResource(statBonusSaveData.Target);
-    Type = ReactiveProperty.FromObject(UnderlyingData, data => (int)data.Type);
+    Type = ReactiveProperty.FromObject(UnderlyingData, data => data.Type);
     Amount = ReactiveProperty.FromObject(UnderlyingData, data => data.Amount);
   }
 }

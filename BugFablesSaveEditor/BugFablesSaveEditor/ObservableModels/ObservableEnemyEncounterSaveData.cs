@@ -1,9 +1,9 @@
 using BugFablesLib.SaveData;
 using Reactive.Bindings;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableEnemyEncounterSaveData : BfObservable
+public class ObservableEnemyEncounterSaveData : ObservableModel
 {
   public sealed override EnemyEncounterSaveData UnderlyingData { get; }
 

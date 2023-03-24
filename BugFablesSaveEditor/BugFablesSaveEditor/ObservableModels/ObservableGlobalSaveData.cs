@@ -6,10 +6,10 @@ using Humanizer;
 using Reactive.Bindings;
 using static BugFablesLib.SaveData.GlobalSaveData;
 
-namespace BugFablesSaveEditor.ViewModels;
+namespace BugFablesSaveEditor.ObservableModels;
 
 [ObservableObject]
-public sealed partial class ObservableGlobalSaveData : BfObservable
+public sealed partial class ObservableGlobalSaveData : ObservableModel
 {
   public override GlobalSaveData UnderlyingData { get; }
 
