@@ -35,7 +35,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{ReflectionBinding $parent[DataGrid].DataContext.DeletePartyMemberCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).DeletePartyMemberCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25"
@@ -73,7 +73,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservableBfNamedId">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{ReflectionBinding $parent[DataGrid].DataContext.DeleteFollowerCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).DeleteFollowerCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25"

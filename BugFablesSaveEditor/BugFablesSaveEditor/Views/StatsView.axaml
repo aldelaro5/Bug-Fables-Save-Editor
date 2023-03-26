@@ -96,7 +96,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservableStatsBonusSaveData">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{ReflectionBinding $parent[DataGrid].DataContext.DeleteStatBonusCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25"
@@ -147,7 +147,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservableStatsBonusSaveData">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{ReflectionBinding $parent[DataGrid].DataContext.DeleteStatBonusCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25"
