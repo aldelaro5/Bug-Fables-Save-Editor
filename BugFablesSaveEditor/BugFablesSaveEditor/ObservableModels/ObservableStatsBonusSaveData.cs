@@ -18,7 +18,7 @@ public partial class ObservableStatsBonusSaveData : ObservableModel
     .ToArray();
 
   [ObservableProperty]
-  private ObservableBfResource _target;
+  private ObservableBfNamedId _target;
 
   public ReactiveProperty<StatBonusType> Type { get; }
   public ReactiveProperty<int> Amount { get; }
@@ -27,7 +27,7 @@ public partial class ObservableStatsBonusSaveData : ObservableModel
     base(statBonusSaveData)
   {
     UnderlyingData = statBonusSaveData;
-    _target = new ObservableBfResource(statBonusSaveData.Target);
+    _target = new ObservableBfNamedId(statBonusSaveData.Target);
     Type = ReactiveProperty.FromObject(UnderlyingData, data => data.Type);
     Amount = ReactiveProperty.FromObject(UnderlyingData, data => data.Amount);
   }

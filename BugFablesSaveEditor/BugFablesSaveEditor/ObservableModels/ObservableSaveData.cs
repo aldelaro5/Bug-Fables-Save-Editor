@@ -23,7 +23,7 @@ public class ObservableBfSaveData : ObservableObject
   }
 
   public ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> Flagvars { get; }
-  public ObservableBfCollection<BfAnimId, ObservableBfResource> Followers { get; }
+  public ObservableBfCollection<BfAnimId, ObservableBfNamedId> Followers { get; }
   public ObservableGlobalSaveData Global { get; }
   public ObservableHeaderSaveData Header { get; }
   public ObservableItemsSaveData Items { get; }
@@ -59,7 +59,7 @@ public class ObservableBfSaveData : ObservableObject
     Flagstrings = new(_saveData.Flagstrings,
       cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
     Followers = new(_saveData.Followers,
-      cbs => cbs.Select(x => new ObservableBfResource(x)).ToList());
+      cbs => cbs.Select(x => new ObservableBfNamedId(x)).ToList());
     Medals = new(_saveData.Medals,
       cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
     PartyMembers = new(_saveData.PartyMembers,

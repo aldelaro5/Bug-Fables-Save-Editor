@@ -11,18 +11,18 @@ public partial class ObservableMedalShopsStockSaveData : ObservableModel
   public sealed override MedalShopsStockSaveData UnderlyingData { get; }
 
   [ObservableProperty]
-  private ObservableBfCollection<BfMedal, ObservableBfResource> _merab;
+  private ObservableBfCollection<BfMedal, ObservableBfNamedId> _merab;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfMedal, ObservableBfResource> _shades;
+  private ObservableBfCollection<BfMedal, ObservableBfNamedId> _shades;
 
   public ObservableMedalShopsStockSaveData(MedalShopsStockSaveData itemsSaveData) :
     base(itemsSaveData)
   {
     UnderlyingData = itemsSaveData;
     _merab = new(UnderlyingData.Merab,
-      medals => medals.Select(x => new ObservableBfResource(x)).ToList());
+      medals => medals.Select(x => new ObservableBfNamedId(x)).ToList());
     _shades = new(UnderlyingData.Shades,
-      medals => medals.Select(x => new ObservableBfResource(x)).ToList());
+      medals => medals.Select(x => new ObservableBfNamedId(x)).ToList());
   }
 }

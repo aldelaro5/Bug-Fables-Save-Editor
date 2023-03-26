@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BugFablesLib.Data;
 
-public class BfItem : BfSerializableResource
+public class BfItem : BfSerializableNamedId
 {
-  public override IReadOnlyList<string> AllNames => Names.s_items.AsReadOnly();
+  internal override IReadOnlyList<string> VanillaNames { get => BfVanillaNames.Items; }
 }

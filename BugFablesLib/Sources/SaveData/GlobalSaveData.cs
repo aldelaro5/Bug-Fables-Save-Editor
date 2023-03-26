@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -41,35 +40,35 @@ public sealed class GlobalSaveData : IBfSerializable
     StringBuilder sb = new();
 
     sb.Append(Rank);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Exp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(NeededExp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(MaxTp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Tp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(BerryCount);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(CurrentMap.Id);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(CurrentArea.Id);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Mp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(MaxMp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(NbrMaxItemsInventory);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(NbrMaxItemsStorage);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(PlayTimeHours);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(PlayTimeMinutes);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(PlayTimeSeconds);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append((int)LastProgressIcon);
 
     return sb.ToString();
@@ -77,26 +76,26 @@ public sealed class GlobalSaveData : IBfSerializable
 
   public void Deserialize(string saveLine)
   {
-    string[] data = saveLine.Split(new[] { CommaSeparator }, StringSplitOptions.None);
+    string[] data = saveLine.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
     if (data.Length != 16)
       throw new Exception(nameof(GlobalSaveData) + " is in an invalid format");
 
-    Rank = ParseValueType<int>(data[0], nameof(Rank));
-    Exp = ParseValueType<int>(data[1], nameof(Exp));
-    NeededExp = ParseValueType<int>(data[2], nameof(NeededExp));
-    MaxTp = ParseValueType<int>(data[3], nameof(MaxTp));
-    Tp = ParseValueType<int>(data[4], nameof(Tp));
-    BerryCount = ParseValueType<int>(data[5], nameof(BerryCount));
-    CurrentMap.Id = ParseValueType<int>(data[6], nameof(CurrentMap));
-    CurrentArea.Id = ParseValueType<int>(data[7], nameof(CurrentArea));
-    Mp = ParseValueType<int>(data[8], nameof(Mp));
-    MaxMp = ParseValueType<int>(data[9], nameof(MaxMp));
-    NbrMaxItemsInventory = ParseValueType<int>(data[10], nameof(NbrMaxItemsInventory));
-    NbrMaxItemsStorage = ParseValueType<int>(data[11], nameof(NbrMaxItemsStorage));
-    PlayTimeHours = ParseValueType<int>(data[12], nameof(PlayTimeHours));
-    PlayTimeMinutes = ParseValueType<int>(data[13], nameof(PlayTimeMinutes));
-    PlayTimeSeconds = ParseValueType<int>(data[14], nameof(PlayTimeSeconds));
-    LastProgressIcon = (SaveProgressIcon)ParseValueType<int>(data[15], nameof(LastProgressIcon));
+    Rank = Utils.ParseValueType<int>(data[0], nameof(Rank));
+    Exp = Utils.ParseValueType<int>(data[1], nameof(Exp));
+    NeededExp = Utils.ParseValueType<int>(data[2], nameof(NeededExp));
+    MaxTp = Utils.ParseValueType<int>(data[3], nameof(MaxTp));
+    Tp = Utils.ParseValueType<int>(data[4], nameof(Tp));
+    BerryCount = Utils.ParseValueType<int>(data[5], nameof(BerryCount));
+    CurrentMap.Id = Utils.ParseValueType<int>(data[6], nameof(CurrentMap));
+    CurrentArea.Id = Utils.ParseValueType<int>(data[7], nameof(CurrentArea));
+    Mp = Utils.ParseValueType<int>(data[8], nameof(Mp));
+    MaxMp = Utils.ParseValueType<int>(data[9], nameof(MaxMp));
+    NbrMaxItemsInventory = Utils.ParseValueType<int>(data[10], nameof(NbrMaxItemsInventory));
+    NbrMaxItemsStorage = Utils.ParseValueType<int>(data[11], nameof(NbrMaxItemsStorage));
+    PlayTimeHours = Utils.ParseValueType<int>(data[12], nameof(PlayTimeHours));
+    PlayTimeMinutes = Utils.ParseValueType<int>(data[13], nameof(PlayTimeMinutes));
+    PlayTimeSeconds = Utils.ParseValueType<int>(data[14], nameof(PlayTimeSeconds));
+    LastProgressIcon = (SaveProgressIcon)Utils.ParseValueType<int>(data[15], nameof(LastProgressIcon));
   }
 
   public void ResetToDefault()

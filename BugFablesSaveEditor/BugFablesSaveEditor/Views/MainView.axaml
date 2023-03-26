@@ -10,12 +10,8 @@
              x:CompileBindings="True"
              x:DataType="vm:MainViewModel">
   <UserControl.DataTemplates>
-    <DataTemplate DataType="ovm:ObservableBfResource">
-      <ComboBox Width="200" SelectedIndex="{Binding Id}" Items="{Binding AllResourceNames}" />
-    </DataTemplate>
-
     <DataTemplate DataType="ovm:ObservableFlagSaveData">
-      <CheckBox IsChecked="{Binding Enabled}" />
+      <CheckBox IsChecked="{Binding Enabled.Value}" />
     </DataTemplate>
 
     <DataTemplate DataType="vm:SaveDataViewModel">

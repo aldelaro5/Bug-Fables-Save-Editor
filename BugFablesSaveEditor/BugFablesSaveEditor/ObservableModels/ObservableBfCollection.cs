@@ -8,8 +8,7 @@ using BugFablesLib;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableBfCollection<TSource, TObservable> :
-  ObservableCollection<TObservable>, IDisposable
+public class ObservableBfCollection<TSource, TObservable> : ObservableCollection<TObservable>
   where TSource : IBfSerializable
   where TObservable : ObservableModel
 {
@@ -27,13 +26,10 @@ public class ObservableBfCollection<TSource, TObservable> :
 
   public ObservableBfCollection(Collection<TSource> collection,
                                 Func<Collection<TSource>, IList<TObservable>> creator) :
-    base(creator(collection))
-  {
+    base(creator(collection)) =>
     _underCollection = collection;
-    base.CollectionChanged += OnCollectionChanged;
-  }
 
-  private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+  protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
   {
     var newList = e.NewItems?.Cast<TObservable>().ToList();
     switch (e.Action)
@@ -53,10 +49,6 @@ public class ObservableBfCollection<TSource, TObservable> :
       default:
         throw new ArgumentOutOfRangeException();
     }
-  }
-
-  public void Dispose()
-  {
-    base.CollectionChanged -= OnCollectionChanged;
+    base.OnCollectionChanged(e);
   }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -15,10 +14,10 @@ public sealed class MusicSaveData : IBfSerializable
 
   public void Deserialize(string str)
   {
-    string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
+    string[] data = str.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
 
-    Song.Id = ParseValueType<int>(data[0], nameof(Song));
-    Bought = ParseValueType<int>(data[1], nameof(Bought)) == MusicBought;
+    Song.Id = Utils.ParseValueType<int>(data[0], nameof(Song));
+    Bought = Utils.ParseValueType<int>(data[1], nameof(Bought)) == MusicBought;
   }
 
   public string Serialize()
@@ -26,7 +25,7 @@ public sealed class MusicSaveData : IBfSerializable
     StringBuilder sb = new();
 
     sb.Append(Song.Id);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Bought ? MusicBought : MusicNotBought);
 
     return sb.ToString();

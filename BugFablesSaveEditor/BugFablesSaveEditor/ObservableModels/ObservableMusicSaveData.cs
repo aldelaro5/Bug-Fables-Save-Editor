@@ -10,7 +10,7 @@ public partial class ObservableMusicSaveData : ObservableModel
   public override MusicSaveData UnderlyingData { get; }
 
   [ObservableProperty]
-  private ObservableBfResource _music;
+  private ObservableBfNamedId _music;
 
   public ReactiveProperty<bool> Bought { get; }
 
@@ -18,7 +18,7 @@ public partial class ObservableMusicSaveData : ObservableModel
     base(musicSaveData)
   {
     UnderlyingData = musicSaveData;
-    _music = new ObservableBfResource(musicSaveData.Song);
+    _music = new ObservableBfNamedId(musicSaveData.Song);
     Bought = ReactiveProperty.FromObject(UnderlyingData, data => data.Bought);
   }
 }

@@ -17,8 +17,6 @@ public class App : Application
 
   public override void OnFrameworkInitializationCompleted()
   {
-    Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-    Trace.AutoFlush = true;
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
       desktop.MainWindow = new MainWindow { DataContext = new MainViewModel() };
@@ -29,5 +27,7 @@ public class App : Application
     }
 
     base.OnFrameworkInitializationCompleted();
+    Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+    Trace.AutoFlush = true;
   }
 }

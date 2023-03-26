@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -18,16 +17,16 @@ public class PartyMemberSaveData : IBfSerializable
 
   public void Deserialize(string str)
   {
-    string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
+    string[] data = str.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
 
-    AnimId.Id = ParseValueType<int>(data[0], nameof(AnimId));
-    Hp = ParseValueType<int>(data[1], nameof(Hp));
-    MaxHp = ParseValueType<int>(data[2], nameof(MaxHp));
-    BaseHp = ParseValueType<int>(data[3], nameof(BaseHp));
-    Attack = ParseValueType<int>(data[4], nameof(Attack));
-    BaseAttack = ParseValueType<int>(data[5], nameof(BaseAttack));
-    Defense = ParseValueType<int>(data[6], nameof(Defense));
-    BaseDefense = ParseValueType<int>(data[7], nameof(BaseDefense));
+    AnimId.Id = Utils.ParseValueType<int>(data[0], nameof(AnimId));
+    Hp = Utils.ParseValueType<int>(data[1], nameof(Hp));
+    MaxHp = Utils.ParseValueType<int>(data[2], nameof(MaxHp));
+    BaseHp = Utils.ParseValueType<int>(data[3], nameof(BaseHp));
+    Attack = Utils.ParseValueType<int>(data[4], nameof(Attack));
+    BaseAttack = Utils.ParseValueType<int>(data[5], nameof(BaseAttack));
+    Defense = Utils.ParseValueType<int>(data[6], nameof(Defense));
+    BaseDefense = Utils.ParseValueType<int>(data[7], nameof(BaseDefense));
   }
 
   public string Serialize()
@@ -35,19 +34,19 @@ public class PartyMemberSaveData : IBfSerializable
     StringBuilder sb = new();
 
     sb.Append(AnimId.Id);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Hp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(MaxHp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(BaseHp);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Attack);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(BaseAttack);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Defense);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(BaseDefense);
 
     return sb.ToString();

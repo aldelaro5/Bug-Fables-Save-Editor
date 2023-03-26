@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -11,12 +10,12 @@ public sealed class EnemyEncounterSaveData : IBfSerializable
 
   public void Deserialize(string str)
   {
-    string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
+    string[] data = str.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
     if (data.Length != 2)
       throw new Exception($"Expected 2 fields, but got {data.Length}");
 
-    NbrSeen = ParseValueType<int>(data[0], nameof(NbrSeen));
-    NbrDefeated = ParseValueType<int>(data[1], nameof(NbrDefeated));
+    NbrSeen = Utils.ParseValueType<int>(data[0], nameof(NbrSeen));
+    NbrDefeated = Utils.ParseValueType<int>(data[1], nameof(NbrDefeated));
   }
 
   public string Serialize()
@@ -24,7 +23,7 @@ public sealed class EnemyEncounterSaveData : IBfSerializable
     StringBuilder sb = new();
 
     sb.Append(NbrSeen);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(NbrDefeated);
 
     return sb.ToString();

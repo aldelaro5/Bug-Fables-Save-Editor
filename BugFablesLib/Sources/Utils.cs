@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using BugFablesLib.Data;
 
 namespace BugFablesLib;
 
-internal static class Utils
+public static class Utils
 {
   internal const string CommaSeparator = ",";
   internal const string AtSymbolSeparator = "@";
@@ -24,4 +26,7 @@ internal static class Utils
         $"{fieldName} with the value {str} is not a valid {typeof(T).Name} value");
     }
   }
+
+  public static IReadOnlyList<string> GetAllBfNames<T>(T namedId)
+    where T : BfNamedId => namedId.VanillaNames;
 }

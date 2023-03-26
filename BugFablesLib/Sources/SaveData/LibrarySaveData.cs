@@ -1,6 +1,4 @@
-﻿using static BugFablesLib.Utils;
-
-namespace BugFablesLib.SaveData;
+﻿namespace BugFablesLib.SaveData;
 
 public sealed class
   LibrarySaveData : BfSerializableCollection<BfSerializableCollection<FlagSaveData>>
@@ -36,6 +34,6 @@ public sealed class
   {
     NbrExpectedElements = 5;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableCollection<FlagSaveData>(CommaSeparator));
+      Add(new BfSerializableCollection<FlagSaveData>(Utils.CommaSeparator));
   }
 }

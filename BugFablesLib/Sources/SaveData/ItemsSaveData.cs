@@ -1,5 +1,4 @@
 ﻿using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -24,6 +23,6 @@ public sealed class ItemsSaveData : BfSerializableCollection<BfSerializableColle
   {
     NbrExpectedElements = 3;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableCollection<BfItem>(CommaSeparator));
+      Add(new BfSerializableCollection<BfItem>(Utils.CommaSeparator));
   }
 }

@@ -1,15 +1,20 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:BugFablesSaveEditor.ViewModels"
-             xmlns:observableModels="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:local="clr-namespace:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
              RequestedThemeVariant="Dark">
-  <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
-
-
   <Application.Styles>
     <FluentTheme />
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
   </Application.Styles>
+
+  <Application.DataTemplates>
+    <DataTemplate DataType="ob:ObservableBfNamedId">
+      <ComboBox Items="{Binding AllResourceNames}"
+                SelectedIndex="{Binding Id.Value}"/>
+    </DataTemplate>
+  </Application.DataTemplates>
 </Application>

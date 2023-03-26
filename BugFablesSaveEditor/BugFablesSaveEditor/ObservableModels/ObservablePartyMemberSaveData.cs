@@ -10,7 +10,7 @@ public partial class ObservablePartyMemberSaveData : ObservableModel
   public sealed override PartyMemberSaveData UnderlyingData { get; }
 
   [ObservableProperty]
-  private ObservableBfResource _animId;
+  private ObservableBfNamedId _animId;
 
   public ReactiveProperty<int> Attack { get; }
   public ReactiveProperty<int> BaseAttack { get; }

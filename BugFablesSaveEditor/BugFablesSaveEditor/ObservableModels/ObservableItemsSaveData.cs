@@ -11,22 +11,22 @@ public partial class ObservableItemsSaveData : ObservableModel
   public sealed override ItemsSaveData UnderlyingData { get; }
 
   [ObservableProperty]
-  private ObservableBfCollection<BfItem, ObservableBfResource> _inventory;
+  private ObservableBfCollection<BfItem, ObservableBfNamedId> _inventory;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfItem, ObservableBfResource> _key;
+  private ObservableBfCollection<BfItem, ObservableBfNamedId> _key;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfItem, ObservableBfResource> _stored;
+  private ObservableBfCollection<BfItem, ObservableBfNamedId> _stored;
 
   public ObservableItemsSaveData(ItemsSaveData itemsSaveData) : base(itemsSaveData)
   {
     UnderlyingData = itemsSaveData;
     _inventory = new(UnderlyingData.Inventory,
-      x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
+      x => x.Select(bfItems => new ObservableBfNamedId(bfItems)).ToList());
     _key = new(UnderlyingData.KeyItems,
-      x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
+      x => x.Select(bfItems => new ObservableBfNamedId(bfItems)).ToList());
     _stored = new(UnderlyingData.Stored,
-      x => x.Select(bfItems => new ObservableBfResource(bfItems)).ToList());
+      x => x.Select(bfItems => new ObservableBfNamedId(bfItems)).ToList());
   }
 }

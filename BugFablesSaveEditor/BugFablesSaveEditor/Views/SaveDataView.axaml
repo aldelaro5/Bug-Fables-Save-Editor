@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:BugFablesSaveEditor.ViewModels"
-             xmlns:ovm="clr-namespace:BugFablesSaveEditor.ObservableModels"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.SaveDataView"
@@ -13,12 +12,16 @@
     <DataTemplate DataType="vm:GlobalViewModel">
       <v:GlobalView/>
     </DataTemplate>
+    <DataTemplate DataType="vm:PartyViewModel">
+      <v:PartyView/>
+    </DataTemplate>
   </UserControl.DataTemplates>
   <TabControl HorizontalAlignment="Center">
     <TabItem Header="Global">
       <ContentControl Content="{Binding GlobalViewModel}"/>
     </TabItem>
     <TabItem Header="Party">
+      <ContentControl Content="{Binding PartyViewModel}"/>
     </TabItem>
     <TabItem Header="Stats">
     </TabItem>

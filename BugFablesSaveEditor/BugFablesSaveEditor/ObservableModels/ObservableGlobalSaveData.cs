@@ -14,10 +14,10 @@ public sealed partial class ObservableGlobalSaveData : ObservableModel
   public override GlobalSaveData UnderlyingData { get; }
 
   [ObservableProperty]
-  private ObservableBfResource _currentArea;
+  private ObservableBfNamedId _currentArea;
 
   [ObservableProperty]
-  private ObservableBfResource _currentMap;
+  private ObservableBfNamedId _currentMap;
 
   public string[] SaveProgressIconNames =>
     Enum.GetNames(typeof(SaveProgressIcon)).Select(x => x.Humanize(LetterCasing.Title)).ToArray();
@@ -41,8 +41,8 @@ public sealed partial class ObservableGlobalSaveData : ObservableModel
     base(globalSaveDatal)
   {
     UnderlyingData = globalSaveDatal;
-    _currentMap = new ObservableBfResource(UnderlyingData.CurrentMap);
-    _currentArea = new ObservableBfResource(UnderlyingData.CurrentArea);
+    _currentMap = new ObservableBfNamedId(UnderlyingData.CurrentMap);
+    _currentArea = new ObservableBfNamedId(UnderlyingData.CurrentArea);
     Rank = ReactiveProperty.FromObject(UnderlyingData, data => data.Rank);
     Exp = ReactiveProperty.FromObject(UnderlyingData, data => data.Exp);
     NeededExp = ReactiveProperty.FromObject(UnderlyingData, data => data.NeededExp);

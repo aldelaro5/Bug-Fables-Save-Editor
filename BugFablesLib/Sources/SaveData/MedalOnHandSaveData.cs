@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -12,10 +11,10 @@ public sealed class MedalOnHandSaveData : IBfSerializable
 
   public void Deserialize(string str)
   {
-    string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
+    string[] data = str.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
 
-    Medal.Id = ParseValueType<int>(data[0], nameof(Medal));
-    MedalEquipTarget = ParseValueType<int>(data[1], nameof(MedalEquipTarget));
+    Medal.Id = Utils.ParseValueType<int>(data[0], nameof(Medal));
+    MedalEquipTarget = Utils.ParseValueType<int>(data[1], nameof(MedalEquipTarget));
   }
 
   public string Serialize()
@@ -23,7 +22,7 @@ public sealed class MedalOnHandSaveData : IBfSerializable
     StringBuilder sb = new();
 
     sb.Append(Medal.Id);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(MedalEquipTarget);
 
     return sb.ToString();

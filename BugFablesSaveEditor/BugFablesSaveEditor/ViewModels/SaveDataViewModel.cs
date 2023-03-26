@@ -11,72 +11,45 @@ public partial class SaveDataViewModel : ObservableObject
 {
   public readonly BfSaveData _saveData;
 
-  public ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> CrystalBerries { get; }
-
-  public ObservableBfCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData>
-    EnemyEncounters { get; }
-
-  public ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> Flags { get; }
-
-  public ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> Flagstrings
-  {
-    get;
-  }
-
-  public ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> Flagvars { get; }
-  public ObservableBfCollection<BfAnimId, ObservableBfResource> Followers { get; }
-
   [ObservableProperty]
   private GlobalViewModel _globalViewModel;
-  public ObservableItemsSaveData Items { get; }
-  public ObservableLibrarySaveData Library { get; }
-  public ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> Medals { get; }
-  public ObservableMedalShopsStockSaveData MedalShopsAvailables { get; }
-  public ObservableMedalShopsStockSaveData MedalShopsPools { get; }
 
-  public ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> PartyMembers
-  {
-    get;
-  }
-
-  public ObservableBoardQuestsSaveData Quests { get; }
-  public ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> RegionalFlags { get; }
-  public ObservableBfCollection<MusicSaveData, ObservableMusicSaveData> SamiraSongs { get; }
-
-  public ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> StatBonuses
-  {
-    get;
-  }
+  [ObservableProperty]
+  private PartyViewModel _partyViewModel;
 
   public SaveDataViewModel(BfSaveData saveData)
   {
     _saveData = saveData;
-    CrystalBerries = new(_saveData.CrystalBerries,
+    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> CrystalBerries = new(
+      _saveData.CrystalBerries,
       cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    EnemyEncounters = new(_saveData.EnemyEncounters,
-      cbs => cbs.Select(x => new ObservableEnemyEncounterSaveData(x)).ToList());
-    Flags = new(_saveData.Flags, cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    Flagvars = new(_saveData.Flagvars,
-      cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
-    Flagstrings = new(_saveData.Flagstrings,
-      cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
-    Followers = new(_saveData.Followers,
-      cbs => cbs.Select(x => new ObservableBfResource(x)).ToList());
-    Medals = new(_saveData.Medals,
-      cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
-    PartyMembers = new(_saveData.PartyMembers,
+    ObservableBfCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData>
+      EnemyEncounters = new(_saveData.EnemyEncounters,
+        cbs => cbs.Select(x => new ObservableEnemyEncounterSaveData(x)).ToList());
+    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers = new(_saveData.Followers,
+      cbs => cbs.Select(x => new ObservableBfNamedId(x)).ToList());
+    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(
+      _saveData.PartyMembers,
       cbs => cbs.Select(x => new ObservablePartyMemberSaveData(x)).ToList());
-    RegionalFlags = new(_saveData.RegionalFlags,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    SamiraSongs = new(_saveData.SamiraSongs,
-      cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
-    StatBonuses = new(_saveData.StatBonuses,
-      cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
+    // var Flags = new(_saveData.Flags, cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
+    // var Flagvars = new(_saveData.Flagvars,
+    //   cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
+    // var Flagstrings = new(_saveData.Flagstrings,
+    //   cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
+    // var Medals = new(_saveData.Medals,
+    //   cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
+    // var RegionalFlags = new(_saveData.RegionalFlags,
+    //   cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
+    // var SamiraSongs = new(_saveData.SamiraSongs,
+    //   cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
+    // var StatBonuses = new(_saveData.StatBonuses,
+    //   cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
+    // var Items = new(_saveData.Items);
+    // var Library = new(_saveData.Library);
+    // var MedalShopsPools = new(_saveData.MedalShopsPools);
+    // var MedalShopsAvailables = new(_saveData.MedalShopsAvailables);
+    // var Quests = new(_saveData.Quests);
     _globalViewModel = new(new(_saveData.Global), new(_saveData.Header));
-    Items = new(_saveData.Items);
-    Library = new(_saveData.Library);
-    MedalShopsPools = new(_saveData.MedalShopsPools);
-    MedalShopsAvailables = new(_saveData.MedalShopsAvailables);
-    Quests = new(_saveData.Quests);
+    _partyViewModel = new(partyMembers, followers);
   }
 }

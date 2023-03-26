@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -22,11 +21,11 @@ public sealed class StatBonusSaveData : IBfSerializable
 
   public void Deserialize(string str)
   {
-    string[] data = str.Split(new[] { CommaSeparator }, StringSplitOptions.None);
+    string[] data = str.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
 
-    Type = (StatBonusType)ParseValueType<int>(data[0], nameof(Type));
-    Amount = ParseValueType<int>(data[1], nameof(Amount));
-    Target.Id = ParseValueType<int>(data[2], nameof(Target));
+    Type = (StatBonusType)Utils.ParseValueType<int>(data[0], nameof(Type));
+    Amount = Utils.ParseValueType<int>(data[1], nameof(Amount));
+    Target.Id = Utils.ParseValueType<int>(data[2], nameof(Target));
   }
 
   public string Serialize()
@@ -34,9 +33,9 @@ public sealed class StatBonusSaveData : IBfSerializable
     StringBuilder sb = new();
 
     sb.Append((int)Type);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Amount);
-    sb.Append(CommaSeparator);
+    sb.Append(Utils.CommaSeparator);
     sb.Append(Target.Id);
 
     return sb.ToString();

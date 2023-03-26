@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Text;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib;
 
@@ -35,33 +34,33 @@ public abstract class BfSaveData : IBfDataContainer
 
   public IList<IBfSerializable> Data { get; }
 
-  public BfSerializableCollection<FlagSaveData> CrystalBerries { get; } = new(CommaSeparator);
+  public BfSerializableCollection<FlagSaveData> CrystalBerries { get; } = new(Utils.CommaSeparator);
 
   public BfSerializableCollection<EnemyEncounterSaveData> EnemyEncounters { get; } =
-    new(AtSymbolSeparator);
+    new(Utils.AtSymbolSeparator);
 
-  public BfSerializableCollection<FlagSaveData> Flags { get; } = new(CommaSeparator);
+  public BfSerializableCollection<FlagSaveData> Flags { get; } = new(Utils.CommaSeparator);
 
   public BfSerializableCollection<FlagstringSaveData> Flagstrings { get; } =
     new(FlagstringsSeparator);
 
-  public BfSerializableCollection<FlagvarSaveData> Flagvars { get; } = new(CommaSeparator);
-  public BfSerializableCollection<BfAnimId> Followers { get; } = new(CommaSeparator);
+  public BfSerializableCollection<FlagvarSaveData> Flagvars { get; } = new(Utils.CommaSeparator);
+  public BfSerializableCollection<BfAnimId> Followers { get; } = new(Utils.CommaSeparator);
   public GlobalSaveData Global { get; } = new();
   public HeaderSaveData Header { get; } = new();
   public ItemsSaveData Items { get; } = new();
   public LibrarySaveData Library { get; } = new();
-  public BfSerializableCollection<MedalOnHandSaveData> Medals { get; } = new(AtSymbolSeparator);
+  public BfSerializableCollection<MedalOnHandSaveData> Medals { get; } = new(Utils.AtSymbolSeparator);
   public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();
   public MedalShopsStockSaveData MedalShopsPools { get; } = new();
 
   public BfSerializableCollection<PartyMemberSaveData> PartyMembers { get; } =
-    new(AtSymbolSeparator);
+    new(Utils.AtSymbolSeparator);
 
   public BoardQuestsSaveData Quests { get; } = new();
-  public BfSerializableCollection<FlagSaveData> RegionalFlags { get; } = new(CommaSeparator);
-  public BfSerializableCollection<MusicSaveData> SamiraSongs { get; } = new(AtSymbolSeparator);
-  public BfSerializableCollection<StatBonusSaveData> StatBonuses { get; } = new(AtSymbolSeparator);
+  public BfSerializableCollection<FlagSaveData> RegionalFlags { get; } = new(Utils.CommaSeparator);
+  public BfSerializableCollection<MusicSaveData> SamiraSongs { get; } = new(Utils.AtSymbolSeparator);
+  public BfSerializableCollection<StatBonusSaveData> StatBonuses { get; } = new(Utils.AtSymbolSeparator);
 
   public BfSaveData()
   {

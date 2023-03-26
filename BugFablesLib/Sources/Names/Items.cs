@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace BugFablesLib;
 
-internal static partial class Names
+public static partial class BfVanillaNames
 {
-  internal static readonly List<string> s_items = new()
+  public static IReadOnlyList<string> Items => new[]
   {
     "Crunchy Leaf",
     "Honey Drop",

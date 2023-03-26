@@ -1,5 +1,4 @@
 ﻿using BugFablesLib.Data;
-using static BugFablesLib.Utils;
 
 namespace BugFablesLib.SaveData;
 
@@ -17,9 +16,9 @@ public sealed class
 
   public MedalShopsStockSaveData()
   {
-    ElementSeparator = AtSymbolSeparator;
+    ElementSeparator = Utils.AtSymbolSeparator;
     NbrExpectedElements = 2;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableCollection<BfMedal>(CommaSeparator));
+      Add(new BfSerializableCollection<BfMedal>(Utils.CommaSeparator));
   }
 }
