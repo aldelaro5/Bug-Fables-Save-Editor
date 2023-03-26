@@ -13,6 +13,7 @@ public partial class SaveDataViewModel : ObservableObject
 
   [ObservableProperty]
   private GlobalViewModel _globalViewModel;
+
   [ObservableProperty]
   private PartyViewModel _partyViewModel;
 
@@ -33,18 +34,25 @@ public partial class SaveDataViewModel : ObservableObject
     ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(
       SaveData.PartyMembers,
       cbs => cbs.Select(x => new ObservablePartyMemberSaveData(x)).ToList());
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags, cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(SaveData.Flagvars,
-      cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
-    ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(SaveData.Flagstrings,
-      cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
-    ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(SaveData.Medals,
-      cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(SaveData.RegionalFlags,
+    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags,
       cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<MusicSaveData, ObservableMusicSaveData> samiraSongs = new(SaveData.SamiraSongs,
+    ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(
+      SaveData.Flagvars,
+      cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
+    ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(
+      SaveData.Flagstrings,
+      cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
+    ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(
+      SaveData.Medals,
+      cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
+    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(
+      SaveData.RegionalFlags,
+      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
+    ObservableBfCollection<MusicSaveData, ObservableMusicSaveData> samiraSongs = new(
+      SaveData.SamiraSongs,
       cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
-    ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(SaveData.StatBonuses,
+    ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(
+      SaveData.StatBonuses,
       cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
     ObservableItemsSaveData items = new(SaveData.Items);
     ObservableLibrarySaveData library = new(SaveData.Library);

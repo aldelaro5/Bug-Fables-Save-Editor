@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BugFablesLib;
 using Reactive.Bindings;
+using Reactive.Bindings.TinyLinq;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
@@ -16,6 +17,10 @@ public class ObservableBfNamedId : ObservableModel
   {
     UnderlyingData = namedId;
     Id = ReactiveProperty.FromObject(UnderlyingData, data => data.Id);
-    Id.Subscribe(_ => OnPropertyChanged(nameof(Name)));
+    Id.Subscribe(x =>
+    {
+      if (x >= 0)
+        OnPropertyChanged(nameof(Name));
+    });
   }
 }
