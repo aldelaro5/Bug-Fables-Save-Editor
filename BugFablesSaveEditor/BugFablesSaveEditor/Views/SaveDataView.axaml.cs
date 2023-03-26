@@ -15,4 +15,3 @@ public partial class SaveDataView : UserControl
     AvaloniaXamlLoader.Load(this);
   }
 }
-

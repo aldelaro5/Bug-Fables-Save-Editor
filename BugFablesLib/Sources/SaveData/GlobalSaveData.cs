@@ -95,7 +95,8 @@ public sealed class GlobalSaveData : IBfSerializable
     PlayTimeHours = Utils.ParseValueType<int>(data[12], nameof(PlayTimeHours));
     PlayTimeMinutes = Utils.ParseValueType<int>(data[13], nameof(PlayTimeMinutes));
     PlayTimeSeconds = Utils.ParseValueType<int>(data[14], nameof(PlayTimeSeconds));
-    LastProgressIcon = (SaveProgressIcon)Utils.ParseValueType<int>(data[15], nameof(LastProgressIcon));
+    LastProgressIcon =
+      (SaveProgressIcon)Utils.ParseValueType<int>(data[15], nameof(LastProgressIcon));
   }
 
   public void ResetToDefault()

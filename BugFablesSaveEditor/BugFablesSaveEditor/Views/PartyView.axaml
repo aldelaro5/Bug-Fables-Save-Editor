@@ -27,7 +27,7 @@
             <DataGridTemplateColumn Header="AnimId">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
-                  <ContentControl Content="{Binding AnimId}"/>
+                  <ContentControl Content="{Binding AnimId}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -65,7 +65,7 @@
             <DataGridTemplateColumn Header="AnimId">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservableBfNamedId">
-                  <ContentControl Content="{Binding }"/>
+                  <ContentControl Content="{Binding }" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

@@ -50,7 +50,10 @@ public abstract class BfSaveData : IBfDataContainer
   public HeaderSaveData Header { get; } = new();
   public ItemsSaveData Items { get; } = new();
   public LibrarySaveData Library { get; } = new();
-  public BfSerializableCollection<MedalOnHandSaveData> Medals { get; } = new(Utils.AtSymbolSeparator);
+
+  public BfSerializableCollection<MedalOnHandSaveData> Medals { get; } =
+    new(Utils.AtSymbolSeparator);
+
   public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();
   public MedalShopsStockSaveData MedalShopsPools { get; } = new();
 
@@ -59,8 +62,12 @@ public abstract class BfSaveData : IBfDataContainer
 
   public BoardQuestsSaveData Quests { get; } = new();
   public BfSerializableCollection<FlagSaveData> RegionalFlags { get; } = new(Utils.CommaSeparator);
-  public BfSerializableCollection<MusicSaveData> SamiraSongs { get; } = new(Utils.AtSymbolSeparator);
-  public BfSerializableCollection<StatBonusSaveData> StatBonuses { get; } = new(Utils.AtSymbolSeparator);
+
+  public BfSerializableCollection<MusicSaveData> SamiraSongs { get; } =
+    new(Utils.AtSymbolSeparator);
+
+  public BfSerializableCollection<StatBonusSaveData> StatBonuses { get; } =
+    new(Utils.AtSymbolSeparator);
 
   public BfSaveData()
   {

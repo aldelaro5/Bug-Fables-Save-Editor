@@ -15,7 +15,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="vm:SaveDataViewModel">
-      <v:SaveDataView/>
+      <v:SaveDataView />
     </DataTemplate>
 
   </UserControl.DataTemplates>

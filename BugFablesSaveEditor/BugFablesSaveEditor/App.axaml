@@ -8,14 +8,14 @@
              RequestedThemeVariant="Dark">
   <Application.Styles>
     <FluentTheme />
-    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
   </Application.Styles>
 
   <Application.DataTemplates>
     <DataTemplate DataType="ob:ObservableBfNamedId">
       <ComboBox Items="{Binding AllResourceNames}"
                 SelectedIndex="{Binding Id.Value,
-                FallbackValue=0, TargetNullValue=0}"/>
+                FallbackValue=0, TargetNullValue=0}" />
     </DataTemplate>
   </Application.DataTemplates>
 </Application>

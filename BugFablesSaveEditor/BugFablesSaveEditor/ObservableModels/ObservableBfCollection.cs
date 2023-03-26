@@ -49,6 +49,7 @@ public class ObservableBfCollection<TSource, TObservable> : ObservableCollection
       default:
         throw new ArgumentOutOfRangeException();
     }
+
     base.OnCollectionChanged(e);
   }
 }

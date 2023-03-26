@@ -10,13 +10,13 @@
              x:DataType="vm:SaveDataViewModel">
   <TabControl HorizontalAlignment="Center">
     <TabItem Header="Global">
-      <v:GlobalView DataContext="{Binding GlobalViewModel}"/>
+      <v:GlobalView DataContext="{Binding GlobalViewModel}" />
     </TabItem>
     <TabItem Header="Party">
-      <v:PartyView DataContext="{Binding PartyViewModel}"/>
+      <v:PartyView DataContext="{Binding PartyViewModel}" />
     </TabItem>
     <TabItem Header="Stats">
-      <v:StatsView DataContext="{Binding StatsViewModel}"/>
+      <v:StatsView DataContext="{Binding StatsViewModel}" />
     </TabItem>
     <TabItem Header="Quests">
     </TabItem>
@@ -34,4 +34,3 @@
     </TabItem>
   </TabControl>
 </UserControl>
-

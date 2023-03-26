@@ -44,7 +44,7 @@
             <DataGridTemplateColumn Header="AnimId" IsReadOnly="True">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
-                  <Label VerticalAlignment="Center" Content="{Binding AnimId.Name}"/>
+                  <Label VerticalAlignment="Center" Content="{Binding AnimId.Name}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
