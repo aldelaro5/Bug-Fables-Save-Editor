@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
-using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -55,7 +54,7 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = SaveData._saveData.EncodeToString();
+      var data = SaveData.SaveData.EncodeToString();
       File.WriteAllText(path, data);
       CurrentFilePath = path;
       // await MessageBoxManager.GetMessageBoxStandardWindow("File saved",

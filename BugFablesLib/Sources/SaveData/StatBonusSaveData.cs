@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using BugFablesLib.Data;
 
 namespace BugFablesLib.SaveData;
 
@@ -17,7 +16,7 @@ public sealed class StatBonusSaveData : IBfSerializable
 
   public StatBonusType Type { get; set; }
   public int Amount { get; set; }
-  public BfAnimId Target { get; } = new();
+  public int Target { get; set; }
 
   public void Deserialize(string str)
   {
@@ -25,7 +24,7 @@ public sealed class StatBonusSaveData : IBfSerializable
 
     Type = (StatBonusType)Utils.ParseValueType<int>(data[0], nameof(Type));
     Amount = Utils.ParseValueType<int>(data[1], nameof(Amount));
-    Target.Id = Utils.ParseValueType<int>(data[2], nameof(Target));
+    Target = Utils.ParseValueType<int>(data[2], nameof(Target));
   }
 
   public string Serialize()
@@ -36,7 +35,7 @@ public sealed class StatBonusSaveData : IBfSerializable
     sb.Append(Utils.CommaSeparator);
     sb.Append(Amount);
     sb.Append(Utils.CommaSeparator);
-    sb.Append(Target.Id);
+    sb.Append(Target);
 
     return sb.ToString();
   }
@@ -45,6 +44,6 @@ public sealed class StatBonusSaveData : IBfSerializable
   {
     Type = 0;
     Amount = 0;
-    Target.Id = 0;
+    Target = 0;
   }
 }

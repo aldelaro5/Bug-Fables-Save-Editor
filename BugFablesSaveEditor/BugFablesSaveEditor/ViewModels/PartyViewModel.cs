@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
@@ -16,22 +14,20 @@ public partial class PartyViewModel : ObservableObject
   [ObservableProperty]
   private ObservableBfCollection<BfAnimId, ObservableBfNamedId> _followers;
   [ObservableProperty]
-  private ObservableBfNamedId _newPartyMemberAnimId = new(new BfAnimId {Id = 0});
+  private ObservablePartyMemberSaveData _newPartyMemberAnimId = new(new());
   [ObservableProperty]
-  private ObservableBfNamedId _newFollowerAnimId = new(new BfAnimId {Id = 0});
+  private ObservableBfNamedId _newFollowerAnimId = new(new BfAnimId());
 
   [RelayCommand]
-  private void AddPartyMember(int animId)
+  private void AddPartyMember(ObservablePartyMemberSaveData partyMemberSaveData)
   {
-    PartyMemberSaveData newMember = new() { AnimId = { Id = animId } };
-    PartyMembers.Add(new(newMember));
+    PartyMembers.Add(new(partyMemberSaveData.UnderlyingData));
   }
 
   [RelayCommand]
-  private void AddFollower(int animId)
+  private void AddFollower(ObservableBfNamedId animId)
   {
-    BfAnimId newFollower = new() { Id = animId };
-    Followers.Add(new(newFollower));
+    Followers.Add(new(animId.UnderlyingData));
   }
 
   public PartyViewModel(ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers, ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers)

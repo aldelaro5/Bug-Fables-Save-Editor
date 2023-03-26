@@ -9,47 +9,50 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class SaveDataViewModel : ObservableObject
 {
-  public readonly BfSaveData _saveData;
+  public readonly BfSaveData SaveData;
 
   [ObservableProperty]
   private GlobalViewModel _globalViewModel;
-
   [ObservableProperty]
   private PartyViewModel _partyViewModel;
 
+  [ObservableProperty]
+  private StatsViewModel _statsViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
-    _saveData = saveData;
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> CrystalBerries = new(
-      _saveData.CrystalBerries,
+    SaveData = saveData;
+    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries = new(
+      SaveData.CrystalBerries,
       cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
     ObservableBfCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData>
-      EnemyEncounters = new(_saveData.EnemyEncounters,
+      enemyEncounters = new(SaveData.EnemyEncounters,
         cbs => cbs.Select(x => new ObservableEnemyEncounterSaveData(x)).ToList());
-    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers = new(_saveData.Followers,
+    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers = new(SaveData.Followers,
       cbs => cbs.Select(x => new ObservableBfNamedId(x)).ToList());
     ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(
-      _saveData.PartyMembers,
+      SaveData.PartyMembers,
       cbs => cbs.Select(x => new ObservablePartyMemberSaveData(x)).ToList());
-    // var Flags = new(_saveData.Flags, cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    // var Flagvars = new(_saveData.Flagvars,
-    //   cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
-    // var Flagstrings = new(_saveData.Flagstrings,
-    //   cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
-    // var Medals = new(_saveData.Medals,
-    //   cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
-    // var RegionalFlags = new(_saveData.RegionalFlags,
-    //   cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    // var SamiraSongs = new(_saveData.SamiraSongs,
-    //   cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
-    // var StatBonuses = new(_saveData.StatBonuses,
-    //   cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
-    // var Items = new(_saveData.Items);
-    // var Library = new(_saveData.Library);
-    // var MedalShopsPools = new(_saveData.MedalShopsPools);
-    // var MedalShopsAvailables = new(_saveData.MedalShopsAvailables);
-    // var Quests = new(_saveData.Quests);
-    _globalViewModel = new(new(_saveData.Global), new(_saveData.Header));
+    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags, cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
+    ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(SaveData.Flagvars,
+      cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
+    ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(SaveData.Flagstrings,
+      cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
+    ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(SaveData.Medals,
+      cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
+    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(SaveData.RegionalFlags,
+      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
+    ObservableBfCollection<MusicSaveData, ObservableMusicSaveData> samiraSongs = new(SaveData.SamiraSongs,
+      cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
+    ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(SaveData.StatBonuses,
+      cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
+    ObservableItemsSaveData items = new(SaveData.Items);
+    ObservableLibrarySaveData library = new(SaveData.Library);
+    ObservableMedalShopsStockSaveData medalShopsPools = new(SaveData.MedalShopsPools);
+    ObservableMedalShopsStockSaveData medalShopsAvailables = new(SaveData.MedalShopsAvailables);
+    ObservableBoardQuestsSaveData quests = new(SaveData.Quests);
+    _globalViewModel = new(new(SaveData.Global), new(SaveData.Header));
     _partyViewModel = new(partyMembers, followers);
+    _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
   }
 }

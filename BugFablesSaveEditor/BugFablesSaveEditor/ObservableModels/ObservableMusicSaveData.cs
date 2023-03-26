@@ -4,7 +4,6 @@ using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-[ObservableObject]
 public partial class ObservableMusicSaveData : ObservableModel
 {
   public override MusicSaveData UnderlyingData { get; }

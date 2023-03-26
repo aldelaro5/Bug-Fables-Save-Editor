@@ -8,22 +8,15 @@
              x:Class="BugFablesSaveEditor.Views.SaveDataView"
              x:CompileBindings="True"
              x:DataType="vm:SaveDataViewModel">
-  <UserControl.DataTemplates>
-    <DataTemplate DataType="vm:GlobalViewModel">
-      <v:GlobalView/>
-    </DataTemplate>
-    <DataTemplate DataType="vm:PartyViewModel">
-      <v:PartyView/>
-    </DataTemplate>
-  </UserControl.DataTemplates>
   <TabControl HorizontalAlignment="Center">
     <TabItem Header="Global">
-      <ContentControl Content="{Binding GlobalViewModel}"/>
+      <v:GlobalView DataContext="{Binding GlobalViewModel}"/>
     </TabItem>
     <TabItem Header="Party">
-      <ContentControl Content="{Binding PartyViewModel}"/>
+      <v:PartyView DataContext="{Binding PartyViewModel}"/>
     </TabItem>
     <TabItem Header="Stats">
+      <v:StatsView DataContext="{Binding StatsViewModel}"/>
     </TabItem>
     <TabItem Header="Quests">
     </TabItem>

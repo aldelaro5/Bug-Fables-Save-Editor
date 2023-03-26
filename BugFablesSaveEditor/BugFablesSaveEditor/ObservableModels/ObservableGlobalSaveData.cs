@@ -8,7 +8,6 @@ using static BugFablesLib.SaveData.GlobalSaveData;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-[ObservableObject]
 public sealed partial class ObservableGlobalSaveData : ObservableModel
 {
   public override GlobalSaveData UnderlyingData { get; }

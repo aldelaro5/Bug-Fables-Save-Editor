@@ -4,7 +4,6 @@ using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-[ObservableObject]
 public partial class ObservableMedalOnHandSaveData : ObservableModel
 {
   public sealed override MedalOnHandSaveData UnderlyingData { get; }

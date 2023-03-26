@@ -4,7 +4,6 @@ using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-[ObservableObject]
 public partial class ObservablePartyMemberSaveData : ObservableModel
 {
   public sealed override PartyMemberSaveData UnderlyingData { get; }

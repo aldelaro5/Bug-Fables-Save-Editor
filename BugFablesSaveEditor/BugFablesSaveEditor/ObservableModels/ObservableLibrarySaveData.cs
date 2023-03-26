@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-[ObservableObject]
 public partial class ObservableLibrarySaveData : ObservableModel
 {
   public sealed override LibrarySaveData UnderlyingData { get; }
