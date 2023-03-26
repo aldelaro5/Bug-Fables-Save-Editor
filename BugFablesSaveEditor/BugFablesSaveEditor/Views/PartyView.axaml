@@ -31,6 +31,18 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="35">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
+                  <Button Margin="5,0,0,0" Content="-"
+                          Command="{ReflectionBinding $parent[DataGrid].DataContext.DeletePartyMemberCommand}"
+                          CommandParameter="{Binding }"
+                          HorizontalContentAlignment="Center"
+                          Width="25"
+                          Background="DarkRed" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -54,6 +66,18 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservableBfNamedId">
                   <ContentControl Content="{Binding }"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="35">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservableBfNamedId">
+                  <Button Margin="5,0,0,0" Content="-"
+                          Command="{ReflectionBinding $parent[DataGrid].DataContext.DeleteFollowerCommand}"
+                          CommandParameter="{Binding }"
+                          HorizontalContentAlignment="Center"
+                          Width="25"
+                          Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

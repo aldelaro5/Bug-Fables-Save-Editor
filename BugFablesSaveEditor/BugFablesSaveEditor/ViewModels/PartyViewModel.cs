@@ -11,26 +11,34 @@ public partial class PartyViewModel : ObservableObject
 {
   [ObservableProperty]
   private ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
+
   [ObservableProperty]
   private ObservableBfCollection<BfAnimId, ObservableBfNamedId> _followers;
+
   [ObservableProperty]
   private ObservablePartyMemberSaveData _newPartyMemberAnimId = new(new());
+
   [ObservableProperty]
   private ObservableBfNamedId _newFollowerAnimId = new(new BfAnimId());
 
   [RelayCommand]
-  private void AddPartyMember(ObservablePartyMemberSaveData partyMemberSaveData)
-  {
-    PartyMembers.Add(new(partyMemberSaveData.UnderlyingData));
-  }
+  private void AddPartyMember(ObservablePartyMemberSaveData partyMember) =>
+    PartyMembers.Add(new(partyMember.UnderlyingData));
 
   [RelayCommand]
-  private void AddFollower(ObservableBfNamedId animId)
-  {
-    Followers.Add(new(animId.UnderlyingData));
-  }
+  private void DeletePartyMember(ObservablePartyMemberSaveData partyMember) =>
+    PartyMembers.Remove(partyMember);
 
-  public PartyViewModel(ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers, ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers)
+  [RelayCommand]
+  private void DeleteFollower(ObservableBfNamedId followerAnimId) =>
+    Followers.Remove(followerAnimId);
+
+  [RelayCommand]
+  private void AddFollower(ObservableBfNamedId animId) => Followers.Add(new(animId.UnderlyingData));
+
+  public PartyViewModel(
+    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
+    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers)
   {
     _partyMembers = partyMembers;
     _followers = followers;
