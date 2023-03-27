@@ -26,7 +26,6 @@
     <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData" x:TypeArguments="ob:ObservableMedalOnHandSaveData"/>
     <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:ObservableMusicSaveData"/>
     <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:ObservablePartyMemberSaveData"/>
-    <b:DataGridDnd x:Key="DataGridDndStatBonusSaveData" x:TypeArguments="ob:ObservableStatsBonusSaveData"/>
   </Application.Resources>
 
   <Application.DataTemplates>
