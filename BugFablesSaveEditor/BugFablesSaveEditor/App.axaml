@@ -1,15 +1,33 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:BugFablesSaveEditor.ViewModels"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
-             xmlns:local="clr-namespace:BugFablesSaveEditor"
+             xmlns:b="clr-namespace:BugFablesSaveEditor.Behaviors"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
              RequestedThemeVariant="Dark">
   <Application.Styles>
     <FluentTheme />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+    <Style Selector="DataGrid DataGridRow">
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDragBehavior />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
   </Application.Styles>
+
+  <Application.Resources>
+    <b:DataGridDnd x:Key="DataGridDndBfNamedId" x:TypeArguments="ob:ObservableBfNamedId"/>
+    <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData" x:TypeArguments="ob:ObservableMedalOnHandSaveData"/>
+    <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:ObservableMusicSaveData"/>
+    <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:ObservablePartyMemberSaveData"/>
+    <b:DataGridDnd x:Key="DataGridDndStatBonusSaveData" x:TypeArguments="ob:ObservableStatsBonusSaveData"/>
+  </Application.Resources>
 
   <Application.DataTemplates>
     <DataTemplate DataType="ob:ObservableBfNamedId">
