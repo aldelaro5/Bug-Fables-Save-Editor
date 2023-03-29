@@ -1,5 +1,7 @@
 ﻿using System;
 using Avalonia;
+using Projektanker.Icons.Avalonia;
+using Projektanker.Icons.Avalonia.MaterialDesign;
 
 namespace BugFablesSaveEditor.Desktop;
 
@@ -16,5 +18,7 @@ class Program
   public static AppBuilder BuildAvaloniaApp()
     => AppBuilder.Configure<App>()
       .UsePlatformDetect()
-      .LogToTrace();
+      .LogToTrace()
+      .WithIcons(container => container
+        .Register<MaterialDesignIconProvider>());
 }
