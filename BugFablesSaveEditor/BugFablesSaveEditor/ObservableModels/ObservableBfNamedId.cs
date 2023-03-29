@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using BugFablesLib;
 using Reactive.Bindings;
-using Reactive.Bindings.TinyLinq;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
