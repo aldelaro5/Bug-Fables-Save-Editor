@@ -5,6 +5,8 @@ using Avalonia.Platform.Storage;
 using BugFablesLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MessageBox.Avalonia;
+using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -57,16 +59,16 @@ public partial class MainViewModel : ObservableObject
       var data = SaveData.SaveData.EncodeToString();
       File.WriteAllText(path, data);
       CurrentFilePath = path;
-      // await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
-      //   $"The file was saved successfully at {CurrentFilePath}",
-      //   ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.MainWindow);
-      // _fileSaved = true;
+      await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
+        $"The file was saved successfully at {CurrentFilePath}",
+        ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.MainWindow);
+      _fileSaved = true;
     }
-    catch (Exception /*ex*/)
+    catch (Exception ex)
     {
-      // var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-      //   $"An error occured while saving the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
-      // await msg.ShowDialog(Utils.MainWindow);
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
+        $"An error occured while saving the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
+      await msg.ShowDialog(Utils.MainWindow);
     }
     finally
     {
@@ -80,17 +82,17 @@ public partial class MainViewModel : ObservableObject
   }
 
   [RelayCommand]
-  private /*async*/ void NewFile()
+  private async void NewFile()
   {
     if (SaveInUse && !_fileSaved)
     {
-      // var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use",
-      //   "An unsaved file is currently in use, creating a new file will loose all unsaved changes,\n" +
-      //   "are you sure you want to proceed?",
-      //   ButtonEnum.YesNo, Icon.Warning);
-      // var result = await msg.ShowDialog(Utils.MainWindow);
-      // if (result == ButtonResult.No)
-      //   return;
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use",
+        "An unsaved file is currently in use, creating a new file will loose all unsaved changes,\n" +
+        "are you sure you want to proceed?",
+        ButtonEnum.YesNo, Icon.Warning);
+      var result = await msg.ShowDialog(Utils.MainWindow);
+      if (result == ButtonResult.No)
+        return;
     }
 
     SaveData = new(new BfPcSaveData());
@@ -104,12 +106,12 @@ public partial class MainViewModel : ObservableObject
   {
     if (SaveInUse && !_fileSaved)
     {
-      // var result = await MessageBoxManager.GetMessageBoxStandardWindow("File in use",
-      //   "An unsaved file is currently in use, opening a file will loose all unsaved changes,\n" +
-      //   "are you sure you want to proceed?",
-      //   ButtonEnum.YesNo, Icon.Warning).ShowDialog(Utils.MainWindow);
-      // if (result == ButtonResult.No)
-      //   return;
+      var result = await MessageBoxManager.GetMessageBoxStandardWindow("File in use",
+        "An unsaved file is currently in use, opening a file will loose all unsaved changes,\n" +
+        "are you sure you want to proceed?",
+        ButtonEnum.YesNo, Icon.Warning).ShowDialog(Utils.MainWindow);
+      if (result == ButtonResult.No)
+        return;
     }
 
     FilePickerOpenOptions pickerOpenOptions = new()
@@ -137,11 +139,11 @@ public partial class MainViewModel : ObservableObject
       SaveInUse = true;
       _fileSaved = true;
     }
-    catch (Exception /*ex*/)
+    catch (Exception ex)
     {
-      // var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-      //   $"An error occured while opening the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
-      // await msg.ShowDialog(Utils.MainWindow);
+      var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
+        $"An error occured while opening the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
+      await msg.ShowDialog(Utils.MainWindow);
     }
     finally
     {
