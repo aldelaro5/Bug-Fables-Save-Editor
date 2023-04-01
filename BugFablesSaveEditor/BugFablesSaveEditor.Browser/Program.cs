@@ -10,7 +10,7 @@ using Projektanker.Icons.Avalonia.MaterialDesign;
 internal partial class Program
 {
   private static void Main(string[] args) => BuildAvaloniaApp()
-    .SetupBrowserAppAsync();
+    .StartBrowserAppAsync("out");
 
   public static AppBuilder BuildAvaloniaApp()
     => AppBuilder
