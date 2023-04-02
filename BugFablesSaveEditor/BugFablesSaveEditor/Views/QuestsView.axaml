@@ -2,11 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
-             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              x:DataType="vm:QuestsViewModel"
              x:CompileBindings="True"
@@ -25,47 +22,8 @@
                 Command="{Binding AddOpenQuestCommand}"
                 CommandParameter="{Binding NewOpenQuest}" />
       </StackPanel>
-      <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column"
-                Items="{Binding QuestsSaveData.Opened}" IsReadOnly="True"
-                Classes="draggable"
-                CanUserSortColumns="False" CanUserResizeColumns="True">
-        <i:Interaction.Behaviors>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource DataGridDndBfNamedId}" />
-          </i:BehaviorCollection>
-        </i:Interaction.Behaviors>
-        <DataGrid.Columns>
-          <DataGridTemplateColumn>
-            <DataGridTemplateColumn.Header>
-              <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
-            </DataGridTemplateColumn.Header>
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <ic:Icon FontSize="25" Value="mdi-drag" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn Header="AnimId">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="ob:ObservableBfNamedId">
-                <ContentControl Content="{Binding }" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn Width="35">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="ob:ObservableBfNamedId">
-                <Button Margin="5,0,0,0" Content="-"
-                        Command="{Binding $parent[DataGrid].((vm:QuestsViewModel)DataContext).DeleteOpenQuestCommand}"
-                        CommandParameter="{Binding }"
-                        HorizontalContentAlignment="Center"
-                        Width="25"
-                        Background="DarkRed" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        </DataGrid.Columns>
-      </DataGrid>
+      <c:BfNamedIdDataGrid Items="{Binding QuestsSaveData.Opened}"
+                           DeleteCommand="{Binding DeleteOpenQuestCommand}"/>
     </DockPanel>
     <DockPanel Grid.Column="1" Margin="20,0,0,0">
       <Label DockPanel.Dock="Top" Content="Taken quests" />
@@ -76,47 +34,8 @@
                 Command="{Binding AddTakenQuestCommand}"
                 CommandParameter="{Binding NewTakenQuest}" />
       </StackPanel>
-      <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column"
-                Items="{Binding QuestsSaveData.Taken}" IsReadOnly="True"
-                Classes="draggable"
-                CanUserSortColumns="False" CanUserResizeColumns="True">
-        <i:Interaction.Behaviors>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource DataGridDndBfNamedId}" />
-          </i:BehaviorCollection>
-        </i:Interaction.Behaviors>
-        <DataGrid.Columns>
-          <DataGridTemplateColumn>
-            <DataGridTemplateColumn.Header>
-              <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
-            </DataGridTemplateColumn.Header>
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <ic:Icon FontSize="25" Value="mdi-drag" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn Header="AnimId">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="ob:ObservableBfNamedId">
-                <ContentControl Content="{Binding }" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn Width="35">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="ob:ObservableBfNamedId">
-                <Button Margin="5,0,0,0" Content="-"
-                        Command="{Binding $parent[DataGrid].((vm:QuestsViewModel)DataContext).DeleteTakenQuestCommand}"
-                        CommandParameter="{Binding }"
-                        HorizontalContentAlignment="Center"
-                        Width="25"
-                        Background="DarkRed" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        </DataGrid.Columns>
-      </DataGrid>
+      <c:BfNamedIdDataGrid Items="{Binding QuestsSaveData.Taken}"
+                           DeleteCommand="{Binding DeleteTakenQuestCommand}"/>
     </DockPanel>
     <DockPanel Grid.Column="2" Margin="20,0,0,0">
       <Label DockPanel.Dock="Top" Content="Completed quests" />
@@ -127,47 +46,8 @@
                 Command="{Binding AddCompletedQuestCommand}"
                 CommandParameter="{Binding NewCompletedQuest}" />
       </StackPanel>
-      <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column"
-                Items="{Binding QuestsSaveData.Completed}" IsReadOnly="True"
-                Classes="draggable"
-                CanUserSortColumns="False" CanUserResizeColumns="True">
-        <i:Interaction.Behaviors>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource DataGridDndBfNamedId}" />
-          </i:BehaviorCollection>
-        </i:Interaction.Behaviors>
-        <DataGrid.Columns>
-          <DataGridTemplateColumn>
-            <DataGridTemplateColumn.Header>
-              <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
-            </DataGridTemplateColumn.Header>
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate>
-                <ic:Icon FontSize="25" Value="mdi-drag" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn Header="AnimId">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="ob:ObservableBfNamedId">
-                <ContentControl Content="{Binding }" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          <DataGridTemplateColumn Width="35">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="ob:ObservableBfNamedId">
-                <Button Margin="5,0,0,0" Content="-"
-                        Command="{Binding $parent[DataGrid].((vm:QuestsViewModel)DataContext).DeleteCompletedQuestCommand}"
-                        CommandParameter="{Binding }"
-                        HorizontalContentAlignment="Center"
-                        Width="25"
-                        Background="DarkRed" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        </DataGrid.Columns>
-      </DataGrid>
+      <c:BfNamedIdDataGrid Items="{Binding QuestsSaveData.Completed}"
+                           DeleteCommand="{Binding DeleteCompletedQuestCommand}"/>
     </DockPanel>
   </Grid>
 </UserControl>

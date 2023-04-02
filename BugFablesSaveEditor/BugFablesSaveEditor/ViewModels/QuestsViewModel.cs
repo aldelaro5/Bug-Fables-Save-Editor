@@ -19,6 +19,11 @@ public partial class QuestsViewModel : ObservableObject
   [ObservableProperty]
   private ObservableBfNamedId _newCompletedQuest = new(new BfQuest());
 
+  public QuestsViewModel()
+  {
+    _questsSaveData = new(new());
+  }
+
   public QuestsViewModel(ObservableBoardQuestsSaveData questsSaveData)
   {
     _questsSaveData = questsSaveData;
