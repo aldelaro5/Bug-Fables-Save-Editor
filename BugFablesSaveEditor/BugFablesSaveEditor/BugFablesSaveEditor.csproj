@@ -35,7 +35,6 @@
   <ItemGroup>
     <AvaloniaXaml Remove="Views\MedalsView.axaml" />
     <AvaloniaXaml Remove="Views\SongsView.axaml" />
-    <AvaloniaXaml Remove="Views\ItemsView.axaml" />
     <AvaloniaXaml Remove="Views\LibraryView.axaml" />
     <AvaloniaXaml Remove="Views\CrystalBerriesView.axaml" />
     <AvaloniaXaml Remove="Views\FlagsView.axaml" />
@@ -44,7 +43,6 @@
   <ItemGroup>
     <Compile Remove="Views\MedalsView.axaml.cs" />
     <Compile Remove="Views\SongsView.axaml.cs" />
-    <Compile Remove="Views\ItemsView.axaml.cs" />
     <Compile Remove="Views\LibraryView.axaml.cs" />
     <Compile Remove="Views\CrystalBerriesView.axaml.cs" />
     <Compile Remove="Views\FlagsView.axaml.cs" />

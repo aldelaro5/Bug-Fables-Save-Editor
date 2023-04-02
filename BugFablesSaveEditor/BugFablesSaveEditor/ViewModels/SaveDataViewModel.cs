@@ -23,6 +23,9 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private QuestsViewModel _questsViewModel;
 
+  [ObservableProperty]
+  private ItemsViewModel _itemsViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
@@ -66,5 +69,6 @@ public partial class SaveDataViewModel : ObservableObject
     _partyViewModel = new(partyMembers, followers);
     _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
     _questsViewModel = new QuestsViewModel(quests);
+    _itemsViewModel = new ItemsViewModel(items);
   }
 }

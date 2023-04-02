@@ -22,6 +22,7 @@
       <v:QuestsView DataContext="{Binding QuestsViewModel}" />
     </TabItem>
     <TabItem Header="Items">
+      <v:ItemsView DataContext="{Binding ItemsViewModel}"/>
     </TabItem>
     <TabItem Header="Medals">
     </TabItem>

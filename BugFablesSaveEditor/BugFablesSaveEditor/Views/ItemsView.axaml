@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
              mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:DataType="vm:ItemsViewModel"
              x:CompileBindings="True"
@@ -14,43 +14,40 @@
 
   <Grid ColumnDefinitions="50*,50*,50*">
     <DockPanel Grid.Column="0">
-      <Label DockPanel.Dock="Top" Content="Items" />
+      <Label DockPanel.Dock="Top" Content="Inventory" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                   Orientation="Horizontal">
-        <ComboBox
-          SelectedIndex="{Binding SelectedItemForAdd,
-                                  Converter={StaticResource EnumConverter},
-                                  ConverterParameter={x:Type bf:Item}}"
-          Items="{Binding ItemsNames}" Width="210" />
-        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddItemCommand}" />
+        <ContentControl Content="{Binding NewInventoryItem}"/>
+        <Button Margin="5,0,0,0" Content="Add"
+                Command="{Binding AddInventoryItemCommand}"
+                CommandParameter="{Binding NewInventoryItem}"/>
       </StackPanel>
-      <v:ReorderableCollectionView DataContext="{Binding ItemsVm}" />
+      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Inventory}"
+                           DeleteCommand="{Binding DeleteInventoryItemCommand}"/>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
       <Label DockPanel.Dock="Top" Content="Key items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                   Orientation="Horizontal">
-        <ComboBox
-          SelectedIndex="{Binding SelectedKeyItemForAdd,
-                                  Converter={StaticResource EnumConverter},
-                                  ConverterParameter={x:Type bf:Item}}"
-          Items="{Binding ItemsNames}" Width="210" />
-        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddKeyItemCommand}" />
+        <ContentControl Content="{Binding NewKeyItem}"/>
+        <Button Margin="5,0,0,0" Content="Add"
+                Command="{Binding AddKeyItemCommand}"
+                CommandParameter="{Binding NewKeyItem}"/>
       </StackPanel>
-      <v:ReorderableCollectionView DataContext="{Binding KeyItemsVm}" />
+      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Key}"
+                           DeleteCommand="{Binding DeleteKeyItemCommand}"/>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
       <Label DockPanel.Dock="Top" Content="Stored items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                   Orientation="Horizontal">
-        <ComboBox
-          SelectedIndex="{Binding SelectedStoredItemForAdd,
-                                  Converter={StaticResource EnumConverter},
-                                  ConverterParameter={x:Type bf:Item}}"
-          Items="{Binding ItemsNames}" Width="210" />
-        <Button Margin="5,0,0,0" Content="Add" Command="{Binding AddStoredItemCommand}" />
+        <ContentControl Content="{Binding NewStoredItem}"/>
+        <Button Margin="5,0,0,0" Content="Add"
+                Command="{Binding AddStoredItemCommand}"
+                CommandParameter="{Binding NewStoredItem}"/>
       </StackPanel>
-      <v:ReorderableCollectionView DataContext="{Binding StoredItemsVm}" />
+      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Stored}"
+                           DeleteCommand="{Binding DeleteStoredItemCommand}"/>
     </DockPanel>
   </Grid>
 </UserControl>
