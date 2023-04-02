@@ -90,9 +90,12 @@
           </i:Interaction.Behaviors>
           <DataGrid.Columns>
             <DataGridTemplateColumn>
+              <DataGridTemplateColumn.Header>
+                <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
+              </DataGridTemplateColumn.Header>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                  <ContentControl Width="30" Height="30" />
+                  <ic:Icon FontSize="25" Value="mdi-drag" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
