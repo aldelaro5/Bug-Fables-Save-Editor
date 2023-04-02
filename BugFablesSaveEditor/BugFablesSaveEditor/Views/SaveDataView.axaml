@@ -19,6 +19,7 @@
       <v:StatsView DataContext="{Binding StatsViewModel}" />
     </TabItem>
     <TabItem Header="Quests">
+      <v:QuestsView DataContext="{Binding QuestsViewModel}" />
     </TabItem>
     <TabItem Header="Items">
     </TabItem>

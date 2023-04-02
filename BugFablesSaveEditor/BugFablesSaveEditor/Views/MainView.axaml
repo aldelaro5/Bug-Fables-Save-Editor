@@ -10,14 +10,13 @@
              x:CompileBindings="True"
              x:DataType="vm:MainViewModel">
   <UserControl.DataTemplates>
-    <DataTemplate DataType="ovm:ObservableFlagSaveData">
-      <CheckBox IsChecked="{Binding Enabled.Value}" />
-    </DataTemplate>
-
     <DataTemplate DataType="vm:SaveDataViewModel">
       <v:SaveDataView />
     </DataTemplate>
 
+    <DataTemplate DataType="ovm:ObservableFlagSaveData">
+      <CheckBox IsChecked="{Binding Enabled.Value}" />
+    </DataTemplate>
   </UserControl.DataTemplates>
 
   <UserControl.DataContext>

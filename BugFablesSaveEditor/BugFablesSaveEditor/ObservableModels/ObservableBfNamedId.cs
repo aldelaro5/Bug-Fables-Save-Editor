@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BugFablesLib;
+using BugFablesLib.Data;
 using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
@@ -22,4 +23,8 @@ public class ObservableBfNamedId : ObservableModel
         OnPropertyChanged(nameof(Name));
     });
   }
+
+  public BfQuest ToQuest() => new() { Id = Id.Value };
+  public BfMedal ToMedal() => new() { Id = Id.Value };
+  public BfItem ToItem() => new() { Id = Id.Value };
 }
