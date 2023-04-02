@@ -26,6 +26,9 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private ItemsViewModel _itemsViewModel;
 
+  [ObservableProperty]
+  private MedalsViewModel _medalsViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
@@ -48,7 +51,7 @@ public partial class SaveDataViewModel : ObservableObject
     ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(
       SaveData.Flagstrings,
       cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
-    ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(
+    ObservableBfCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(
       SaveData.Medals,
       cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
     ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(
@@ -70,5 +73,6 @@ public partial class SaveDataViewModel : ObservableObject
     _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
     _questsViewModel = new QuestsViewModel(quests);
     _itemsViewModel = new ItemsViewModel(items);
+    _medalsViewModel = new MedalsViewModel(medals, medalShopsPools, medalShopsAvailables);
   }
 }

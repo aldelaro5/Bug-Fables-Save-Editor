@@ -51,7 +51,7 @@ public abstract class BfSaveData : IBfDataContainer
   public ItemsSaveData Items { get; } = new();
   public LibrarySaveData Library { get; } = new();
 
-  public BfSerializableCollection<MedalOnHandSaveData> Medals { get; } =
+  public BfSerializableCollection<BfMedalOnHandSaveData> Medals { get; } =
     new(Utils.AtSymbolSeparator);
 
   public MedalShopsStockSaveData MedalShopsAvailables { get; } = new();

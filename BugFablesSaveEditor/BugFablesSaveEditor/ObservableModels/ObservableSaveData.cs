@@ -28,7 +28,7 @@ public class ObservableBfSaveData : ObservableObject
   public ObservableHeaderSaveData Header { get; }
   public ObservableItemsSaveData Items { get; }
   public ObservableLibrarySaveData Library { get; }
-  public ObservableBfCollection<MedalOnHandSaveData, ObservableMedalOnHandSaveData> Medals { get; }
+  public ObservableBfCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> Medals { get; }
   public ObservableMedalShopsStockSaveData MedalShopsAvailables { get; }
   public ObservableMedalShopsStockSaveData MedalShopsPools { get; }
 

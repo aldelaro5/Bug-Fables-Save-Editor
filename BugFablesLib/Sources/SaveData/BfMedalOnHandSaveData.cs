@@ -4,7 +4,7 @@ using BugFablesLib.Data;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class MedalOnHandSaveData : IBfSerializable
+public sealed class BfMedalOnHandSaveData : IBfSerializable
 {
   public BfMedal Medal { get; set; } = new();
   public int MedalEquipTarget { get; set; }
