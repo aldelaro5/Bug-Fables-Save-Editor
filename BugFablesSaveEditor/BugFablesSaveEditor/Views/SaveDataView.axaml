@@ -22,10 +22,10 @@
       <v:QuestsView DataContext="{Binding QuestsViewModel}" />
     </TabItem>
     <TabItem Header="Items">
-      <v:ItemsView DataContext="{Binding ItemsViewModel}"/>
+      <v:ItemsView DataContext="{Binding ItemsViewModel}" />
     </TabItem>
     <TabItem Header="Medals">
-      <v:MedalsView DataContext="{Binding MedalsViewModel}"/>
+      <v:MedalsView DataContext="{Binding MedalsViewModel}" />
     </TabItem>
     <TabItem Header="Library">
     </TabItem>
@@ -34,7 +34,7 @@
     <TabItem Header="Crystal Berries">
     </TabItem>
     <TabItem Header="Songs">
-      <v:SongsView DataContext="{Binding SongsViewModel}"/>
+      <v:SongsView DataContext="{Binding SongsViewModel}" />
     </TabItem>
   </TabControl>
 </UserControl>

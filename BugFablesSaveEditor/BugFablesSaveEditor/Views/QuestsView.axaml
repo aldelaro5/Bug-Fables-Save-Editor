@@ -23,7 +23,7 @@
                 CommandParameter="{Binding NewOpenQuest}" />
       </StackPanel>
       <c:BfNamedIdDataGrid Items="{Binding QuestsSaveData.Opened}"
-                           DeleteCommand="{Binding DeleteOpenQuestCommand}"/>
+                           DeleteCommand="{Binding DeleteOpenQuestCommand}" />
     </DockPanel>
     <DockPanel Grid.Column="1" Margin="20,0,0,0">
       <Label DockPanel.Dock="Top" Content="Taken quests" />
@@ -35,7 +35,7 @@
                 CommandParameter="{Binding NewTakenQuest}" />
       </StackPanel>
       <c:BfNamedIdDataGrid Items="{Binding QuestsSaveData.Taken}"
-                           DeleteCommand="{Binding DeleteTakenQuestCommand}"/>
+                           DeleteCommand="{Binding DeleteTakenQuestCommand}" />
     </DockPanel>
     <DockPanel Grid.Column="2" Margin="20,0,0,0">
       <Label DockPanel.Dock="Top" Content="Completed quests" />
@@ -47,7 +47,7 @@
                 CommandParameter="{Binding NewCompletedQuest}" />
       </StackPanel>
       <c:BfNamedIdDataGrid Items="{Binding QuestsSaveData.Completed}"
-                           DeleteCommand="{Binding DeleteCompletedQuestCommand}"/>
+                           DeleteCommand="{Binding DeleteCompletedQuestCommand}" />
     </DockPanel>
   </Grid>
 </UserControl>

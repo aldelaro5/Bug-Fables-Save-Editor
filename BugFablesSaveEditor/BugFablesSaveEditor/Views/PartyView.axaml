@@ -80,7 +80,7 @@
                   CommandParameter="{Binding NewFollowerAnimId}" />
         </StackPanel>
         <c:BfNamedIdDataGrid Items="{Binding Followers}"
-                             DeleteCommand="{Binding DeleteFollowerCommand}"/>
+                             DeleteCommand="{Binding DeleteFollowerCommand}" />
       </DockPanel>
     </DockPanel>
   </DockPanel>

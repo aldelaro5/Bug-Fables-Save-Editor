@@ -34,7 +34,8 @@ public partial class ItemsViewModel : ObservableObject
     ItemsSaveData.Inventory.Add(new(item.ToItem()));
 
   [RelayCommand]
-  private void DeleteInventoryItem(ObservableBfNamedId item) => ItemsSaveData.Inventory.Remove(item);
+  private void DeleteInventoryItem(ObservableBfNamedId item) =>
+    ItemsSaveData.Inventory.Remove(item);
 
   [RelayCommand]
   private void AddKeyItem(ObservableBfNamedId item) =>

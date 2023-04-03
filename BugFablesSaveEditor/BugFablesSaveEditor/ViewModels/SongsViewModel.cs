@@ -19,7 +19,8 @@ public partial class SongsViewModel : ObservableObject
     _musicSaveData = new(new(), _ => new List<ObservableMusicSaveData>());
   }
 
-  public SongsViewModel(ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> musicSaveData)
+  public SongsViewModel(
+    ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> musicSaveData)
   {
     _musicSaveData = musicSaveData;
   }
@@ -32,4 +33,3 @@ public partial class SongsViewModel : ObservableObject
   private void DeleteMusic(ObservableMusicSaveData music) =>
     MusicSaveData.Remove(music);
 }
-
