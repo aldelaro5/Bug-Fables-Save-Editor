@@ -4,7 +4,7 @@ using BugFablesLib.Data;
 
 namespace BugFablesLib.SaveData;
 
-public sealed class MusicSaveData : IBfSerializable
+public sealed class BfMusicSaveData : IBfSerializable
 {
   private const int MusicNotBought = -1;
   private const int MusicBought = 1;

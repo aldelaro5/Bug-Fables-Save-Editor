@@ -29,6 +29,9 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private MedalsViewModel _medalsViewModel;
 
+  [ObservableProperty]
+  private SongsViewModel _songsViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
@@ -57,7 +60,7 @@ public partial class SaveDataViewModel : ObservableObject
     ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(
       SaveData.RegionalFlags,
       cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<MusicSaveData, ObservableMusicSaveData> samiraSongs = new(
+    ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(
       SaveData.SamiraSongs,
       cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
     ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(
@@ -74,5 +77,6 @@ public partial class SaveDataViewModel : ObservableObject
     _questsViewModel = new QuestsViewModel(quests);
     _itemsViewModel = new ItemsViewModel(items);
     _medalsViewModel = new MedalsViewModel(medals, medalShopsPools, medalShopsAvailables);
+    _songsViewModel = new SongsViewModel(samiraSongs);
   }
 }

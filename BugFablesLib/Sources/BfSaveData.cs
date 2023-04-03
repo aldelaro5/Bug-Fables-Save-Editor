@@ -63,7 +63,7 @@ public abstract class BfSaveData : IBfDataContainer
   public BoardQuestsSaveData Quests { get; } = new();
   public BfSerializableCollection<FlagSaveData> RegionalFlags { get; } = new(Utils.CommaSeparator);
 
-  public BfSerializableCollection<MusicSaveData> SamiraSongs { get; } =
+  public BfSerializableCollection<BfMusicSaveData> SamiraSongs { get; } =
     new(Utils.AtSymbolSeparator);
 
   public BfSerializableCollection<StatBonusSaveData> StatBonuses { get; } =

@@ -39,7 +39,7 @@ public class ObservableBfSaveData : ObservableObject
 
   public ObservableBoardQuestsSaveData Quests { get; }
   public ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> RegionalFlags { get; }
-  public ObservableBfCollection<MusicSaveData, ObservableMusicSaveData> SamiraSongs { get; }
+  public ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> SamiraSongs { get; }
 
   public ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> StatBonuses
   {

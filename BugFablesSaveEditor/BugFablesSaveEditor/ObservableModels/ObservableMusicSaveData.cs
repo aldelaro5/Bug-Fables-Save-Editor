@@ -6,14 +6,14 @@ namespace BugFablesSaveEditor.ObservableModels;
 
 public partial class ObservableMusicSaveData : ObservableModel
 {
-  public override MusicSaveData UnderlyingData { get; }
+  public sealed override BfMusicSaveData UnderlyingData { get; }
 
   [ObservableProperty]
   private ObservableBfNamedId _music;
 
   public ReactiveProperty<bool> Bought { get; }
 
-  public ObservableMusicSaveData(MusicSaveData musicSaveData) :
+  public ObservableMusicSaveData(BfMusicSaveData musicSaveData) :
     base(musicSaveData)
   {
     UnderlyingData = musicSaveData;

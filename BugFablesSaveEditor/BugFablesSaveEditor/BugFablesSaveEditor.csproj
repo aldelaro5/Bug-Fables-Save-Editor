@@ -33,14 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaXaml Remove="Views\SongsView.axaml" />
     <AvaloniaXaml Remove="Views\LibraryView.axaml" />
     <AvaloniaXaml Remove="Views\CrystalBerriesView.axaml" />
     <AvaloniaXaml Remove="Views\FlagsView.axaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\SongsView.axaml.cs" />
     <Compile Remove="Views\LibraryView.axaml.cs" />
     <Compile Remove="Views\CrystalBerriesView.axaml.cs" />
     <Compile Remove="Views\FlagsView.axaml.cs" />
