@@ -15,15 +15,14 @@ public partial class ObservableMedalOnHandSaveData : ObservableModel
 
   public ReactiveProperty<int> MedalEquipTarget { get; }
 
-  private readonly IReadOnlyList<string> _medalEquipTargets;
-  public IReadOnlyList<string> MedalEquipTargets => _medalEquipTargets;
+  public IReadOnlyList<string> MedalEquipTargets { get; }
 
   public ObservableMedalOnHandSaveData(BfMedalOnHandSaveData medalOnHandSaveData) :
     base(medalOnHandSaveData)
   {
     UnderlyingData = medalOnHandSaveData;
     _medal = new ObservableBfNamedId(medalOnHandSaveData.Medal);
-    _medalEquipTargets = GenerateMedalEquipTargetsList();
+    MedalEquipTargets = GenerateMedalEquipTargetsList();
     MedalEquipTarget = ReactiveProperty.FromObject(UnderlyingData, data => data.MedalEquipTarget,
       convert: i => i + 2,
       convertBack: i => i - 2);
