@@ -32,6 +32,9 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private SongsViewModel _songsViewModel;
 
+  [ObservableProperty]
+  private CrystalBerriesViewModel _crystalBerriesViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
@@ -78,5 +81,6 @@ public partial class SaveDataViewModel : ObservableObject
     _itemsViewModel = new ItemsViewModel(items);
     _medalsViewModel = new MedalsViewModel(medals, medalShopsPools, medalShopsAvailables);
     _songsViewModel = new SongsViewModel(samiraSongs);
+    _crystalBerriesViewModel = new CrystalBerriesViewModel(crystalBerries);
   }
 }

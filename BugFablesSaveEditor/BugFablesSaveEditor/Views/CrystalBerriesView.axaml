@@ -15,28 +15,29 @@
     <DockPanel DockPanel.Dock="Top">
       <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
       <Button DockPanel.Dock="Right" Margin="5" Content="Toggle All Shown"
-              Command="{Binding ToggleAllFilteredCommand}" />
+              Command="{Binding ToggleAllShownCommand}" />
       <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilter}" />
     </DockPanel>
-    <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerriesFiltered}"
+    <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerriesSaveDataFiltered}"
               CanUserReorderColumns="True" CanUserResizeColumns="True"
               SelectionMode="Extended">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Index" IsReadOnly="True" Binding="{ReflectionBinding Index}" />
+        <DataGridTextColumn Header="Index" IsReadOnly="True"
+                            x:DataType="vm:CrystalBerryViewModel"
+                            Binding="{Binding Index}" />
         <DataGridTemplateColumn Header="Obtained" Width="100">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <CheckBox Margin="30,0,0,0" IsChecked="{ReflectionBinding Obtained}" />
+            <DataTemplate DataType="vm:CrystalBerryViewModel">
+              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTextColumn
-          Binding="{ReflectionBinding Area, Mode=OneWay,
-          Converter={StaticResource EnumDescriptionConverter},
-          ConverterParameter={x:Type bf:Area}}"
-          Header="Area" IsReadOnly="True" Width="160" />
-        <DataGridTextColumn Header="Description" IsReadOnly="True"
-                            Binding="{ReflectionBinding Description}" />
+        <DataGridTextColumn Header="Area" IsReadOnly="True"
+                            x:DataType="vm:CrystalBerryViewModel"
+                            Binding="{Binding Area}" />
+        <DataGridTextColumn Header="Location" IsReadOnly="True"
+                            x:DataType="vm:CrystalBerryViewModel"
+                            Binding="{Binding Location}" />
       </DataGrid.Columns>
     </DataGrid>
   </DockPanel>

@@ -34,13 +34,17 @@
 
   <ItemGroup>
     <AvaloniaXaml Remove="Views\LibraryView.axaml" />
-    <AvaloniaXaml Remove="Views\CrystalBerriesView.axaml" />
     <AvaloniaXaml Remove="Views\FlagsView.axaml" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Views\LibraryView.axaml.cs" />
-    <Compile Remove="Views\CrystalBerriesView.axaml.cs" />
     <Compile Remove="Views\FlagsView.axaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ExtendedData\CrystalBerriesDetails.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

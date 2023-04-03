@@ -32,6 +32,7 @@
     <TabItem Header="Flags">
     </TabItem>
     <TabItem Header="Crystal Berries">
+      <v:CrystalBerriesView DataContext="{Binding CrystalBerriesViewModel}"/>
     </TabItem>
     <TabItem Header="Songs">
       <v:SongsView DataContext="{Binding SongsViewModel}" />
