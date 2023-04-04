@@ -35,6 +35,9 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private CrystalBerriesViewModel _crystalBerriesViewModel;
 
+  [ObservableProperty]
+  private FlagsViewModel _flagsViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
@@ -74,7 +77,6 @@ public partial class SaveDataViewModel : ObservableObject
     ObservableMedalShopsStockSaveData medalShopsPools = new(SaveData.MedalShopsPools);
     ObservableMedalShopsStockSaveData medalShopsAvailables = new(SaveData.MedalShopsAvailables);
     ObservableBoardQuestsSaveData quests = new(SaveData.Quests);
-    _globalViewModel = new(new(SaveData.Global), new(SaveData.Header));
     _partyViewModel = new(partyMembers, followers);
     _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
     _questsViewModel = new QuestsViewModel(quests);
@@ -82,5 +84,7 @@ public partial class SaveDataViewModel : ObservableObject
     _medalsViewModel = new MedalsViewModel(medals, medalShopsPools, medalShopsAvailables);
     _songsViewModel = new SongsViewModel(samiraSongs);
     _crystalBerriesViewModel = new CrystalBerriesViewModel(crystalBerries);
+    _flagsViewModel = new FlagsViewModel(flags, flagvars, flagstrings, regionalFlags);
+    _globalViewModel = new(new(SaveData.Global), new(SaveData.Header));
   }
 }

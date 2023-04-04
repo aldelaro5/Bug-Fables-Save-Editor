@@ -2,6 +2,9 @@ using System;
 using System.Linq;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
+using DynamicData.Binding;
 using Humanizer;
 using Reactive.Bindings;
 using static BugFablesLib.SaveData.GlobalSaveData;
@@ -59,5 +62,11 @@ public sealed partial class ObservableGlobalSaveData : ObservableModel
     PlayTimeSeconds = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeSeconds);
     LastProgressIcon =
       ReactiveProperty.FromObject(UnderlyingData, data => data.LastProgressIcon);
+
+    CurrentArea.Id
+      .WhenValueChanged(x => x.Value)
+      .Subscribe(_ =>
+        WeakReferenceMessenger.Default.Send(
+          new ValueChangedMessage<ObservableBfNamedId>(CurrentArea)));
   }
 }

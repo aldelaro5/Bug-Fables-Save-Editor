@@ -18,20 +18,22 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlags}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding FlagsFiltered}"
+        <DataGrid AutoGenerateColumns="False" Items="{Binding Flags}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                Binding="{ReflectionBinding Index}" />
+                                x:DataType="vm:FlagViewModel"
+                                Binding="{Binding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
+                <DataTemplate DataType="vm:FlagViewModel">
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{ReflectionBinding Description}" />
+                                x:DataType="vm:FlagViewModel"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -42,14 +44,18 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagvars}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding FlagvarsFiltered}"
+        <DataGrid AutoGenerateColumns="False" Items="{Binding Flagvars}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                Binding="{ReflectionBinding Index}" />
-            <DataGridTextColumn Header="Value" Binding="{ReflectionBinding Var}" />
+                                x:DataType="vm:FlagvarViewModel"
+                                Binding="{Binding Index}" />
+            <DataGridTextColumn Header="Value"
+                                x:DataType="vm:FlagvarViewModel"
+                                Binding="{Binding Flag.Var.Value}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{ReflectionBinding Description}" />
+                                x:DataType="vm:FlagvarViewModel"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -61,14 +67,18 @@
           <TextBox VerticalContentAlignment="Center" Margin="5"
                    Text="{Binding TextFilterFlagstrings}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding FlagstringsFiltered}"
+        <DataGrid AutoGenerateColumns="False" Items="{Binding Flagstrings}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                Binding="{ReflectionBinding Index}" />
-            <DataGridTextColumn Header="Value" Binding="{ReflectionBinding Str}" />
+                                x:DataType="vm:FlagstringViewModel"
+                                Binding="{Binding Index}" />
+            <DataGridTextColumn Header="Value"
+                                x:DataType="vm:FlagstringViewModel"
+                                Binding="{Binding Flag.Str.Value}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{ReflectionBinding Description}" />
+                                x:DataType="vm:FlagstringViewModel"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -80,22 +90,24 @@
           <CheckBox DockPanel.Dock="Right" VerticalContentAlignment="Center" Content="Show Unused"
                     IsChecked="{Binding FilterUnusedRegionals}" />
           <TextBox VerticalContentAlignment="Center" Margin="5"
-                   Text="{ReflectionBinding TextFilterRegionals}" />
+                   Text="{Binding TextFilterRegionalFlags}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalsFiltered}"
+        <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalFlags}"
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                Binding="{ReflectionBinding Index}" />
+                                x:DataType="vm:FlagViewModel"
+                                Binding="{Binding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <CheckBox Margin="15,0,0,0" IsChecked="{ReflectionBinding Enabled}" />
+                <DataTemplate DataType="vm:FlagViewModel">
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                Binding="{ReflectionBinding Description}" />
+                                x:DataType="vm:FlagViewModel"
+                                Binding="{Binding Description}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>

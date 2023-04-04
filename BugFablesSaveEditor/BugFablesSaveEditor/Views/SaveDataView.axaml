@@ -30,6 +30,7 @@
     <TabItem Header="Library">
     </TabItem>
     <TabItem Header="Flags">
+      <v:FlagsView DataContext="{Binding FlagsViewModel}"/>
     </TabItem>
     <TabItem Header="Crystal Berries">
       <v:CrystalBerriesView DataContext="{Binding CrystalBerriesViewModel}" />
