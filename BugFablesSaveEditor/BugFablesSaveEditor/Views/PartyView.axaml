@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:PartyViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Views.PartyView">
+  <Design.DataContext>
+    <vm:PartyViewModel />
+  </Design.DataContext>
+
+  <DockPanel HorizontalAlignment="Center">
+    <DockPanel Margin="10,10,30,10" DockPanel.Dock="Left">
+      <DockPanel>
+        <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Party members" />
+        <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
+          <ContentControl Content="{Binding NewPartyMemberAnimId.AnimId}" />
+          <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
+                  Content="Add" Command="{Binding AddPartyMemberCommand}"
+                  CommandParameter="{Binding NewPartyMemberAnimId}" />
+        </StackPanel>
+        <DataGrid Classes="draggable"
+                  AutoGenerateColumns="False"
+                  CanUserSortColumns="False"
+                  CanUserReorderColumns="False"
+                  Items="{Binding PartyMembers}">
+          <i:Interaction.Behaviors>
+            <i:BehaviorCollection>
+              <idd:ContextDropBehavior Handler="{StaticResource DataGridDndPartyMemberSaveData}" />
+            </i:BehaviorCollection>
+          </i:Interaction.Behaviors>
+          <DataGrid.Columns>
+            <DataGridTemplateColumn Width="62">
+              <DataGridTemplateColumn.Header>
+                <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
+              </DataGridTemplateColumn.Header>
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <ic:Icon FontSize="25" Value="mdi-drag" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="AnimId">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
+                  <ContentControl Content="{Binding AnimId}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="35">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
+                  <Button Margin="5,0,0,0" Content="-"
+                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).DeletePartyMemberCommand}"
+                          CommandParameter="{Binding }"
+                          HorizontalContentAlignment="Center"
+                          Width="25" Background="DarkRed" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
+    </DockPanel>
+
+    <DockPanel Margin="30,10,10,10" DockPanel.Dock="Right">
+      <DockPanel>
+        <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Followers" />
+        <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
+          <ContentControl Content="{Binding NewFollowerAnimId}" />
+          <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
+                  Content="Add" Command="{Binding AddFollowerCommand}"
+                  CommandParameter="{Binding NewFollowerAnimId}" />
+        </StackPanel>
+        <c:BfNamedIdDataGrid Items="{Binding Followers}"
+                             DeleteCommand="{Binding DeleteFollowerCommand}" />
+      </DockPanel>
+    </DockPanel>
+  </DockPanel>
+</UserControl>

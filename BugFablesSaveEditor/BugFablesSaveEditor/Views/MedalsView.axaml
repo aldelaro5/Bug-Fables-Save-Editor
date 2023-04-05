@@ -1,0 +1,140 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MedalsViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Views.MedalsView">
+  <Design.DataContext>
+    <vm:MedalsViewModel />
+  </Design.DataContext>
+
+  <TabControl HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+    <TabItem Header="On hand">
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10,0,5">
+          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ContentControl Content="{Binding NewMedalOnHand.Medal}" />
+            <ComboBox
+              SelectedIndex="{Binding NewMedalOnHand.MedalEquipTarget.Value}"
+              Items="{Binding NewMedalOnHand.MedalEquipTargets}" Width="125" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalOnHandCommand}"
+                    CommandParameter="{Binding NewMedalOnHand}" />
+          </StackPanel>
+          <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
+                  Command="{Binding UnequipAllMedalsCommand}" />
+        </StackPanel>
+        <DataGrid Classes="draggable"
+                  AutoGenerateColumns="False"
+                  CanUserSortColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="True"
+                  Items="{Binding MedalOnHandSaveData}">
+          <i:Interaction.Behaviors>
+            <i:BehaviorCollection>
+              <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMedalOnHandSaveData}" />
+            </i:BehaviorCollection>
+          </i:Interaction.Behaviors>
+          <DataGrid.Columns>
+            <DataGridTemplateColumn Width="62">
+              <DataGridTemplateColumn.Header>
+                <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
+              </DataGridTemplateColumn.Header>
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <ic:Icon FontSize="25" Value="mdi-drag" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Medal">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                  <ContentControl Content="{Binding Medal}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Equip">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                  <ComboBox SelectedIndex="{Binding MedalEquipTarget.Value}"
+                            Items="{Binding MedalEquipTargets}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="35">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                  <Button Margin="5,0,0,0" Content="-"
+                          Command="{Binding $parent[DataGrid].((vm:MedalsViewModel)DataContext).DeleteMedalOnHandCommand}"
+                          CommandParameter="{Binding }"
+                          HorizontalContentAlignment="Center"
+                          Width="25" Background="DarkRed" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </DockPanel>
+    </TabItem>
+    <TabItem Header="Shop pools">
+      <Grid ColumnDefinitions="50*,50*">
+        <DockPanel Grid.Column="0">
+          <Label DockPanel.Dock="Top" Content="Merab" />
+          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ContentControl Content="{Binding NewPoolMerabMedal}" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalShopPoolMerabCommand}"
+                    CommandParameter="{Binding NewPoolMerabMedal}" />
+          </StackPanel>
+          <c:BfNamedIdDataGrid Items="{Binding MedalShopsStockPoolSaveData.Merab}"
+                               DeleteCommand="{Binding DeleteMedalShopPoolMerabCommand}" />
+        </DockPanel>
+        <DockPanel Margin="20,0,0,0" Grid.Column="1">
+          <Label DockPanel.Dock="Top" Content="Shades" />
+          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ContentControl Content="{Binding NewPoolShadesMedal}" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalShopPoolShadesCommand}"
+                    CommandParameter="{Binding NewPoolShadesMedal}" />
+          </StackPanel>
+          <c:BfNamedIdDataGrid Items="{Binding MedalShopsStockPoolSaveData.Shades}"
+                               DeleteCommand="{Binding DeleteMedalShopPoolShadesCommand}" />
+        </DockPanel>
+      </Grid>
+    </TabItem>
+    <TabItem Header="Shop available">
+      <Grid ColumnDefinitions="50*,50*">
+        <DockPanel Grid.Column="0">
+          <Label DockPanel.Dock="Top" Content="Merab" />
+          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ContentControl Content="{Binding NewAvailableMerabMedal}" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalShopAvailableMerabCommand}"
+                    CommandParameter="{Binding NewAvailableMerabMedal}" />
+          </StackPanel>
+          <c:BfNamedIdDataGrid Items="{Binding MedalShopsAvailablePoolSaveData.Merab}"
+                               DeleteCommand="{Binding DeleteMedalShopAvailableMerabCommand}" />
+        </DockPanel>
+        <DockPanel Margin="20,0,0,0" Grid.Column="1">
+          <Label DockPanel.Dock="Top" Content="Shades" />
+          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ContentControl Content="{Binding NewAvailableShadesMedal}" />
+            <Button Margin="5,0,0,0" Content="Add"
+                    Command="{Binding AddMedalShopAvailableShadesCommand}"
+                    CommandParameter="{Binding NewAvailableShadesMedal}" />
+          </StackPanel>
+          <c:BfNamedIdDataGrid Items="{Binding MedalShopsAvailablePoolSaveData.Shades}"
+                               DeleteCommand="{Binding DeleteMedalShopAvailableShadesCommand}" />
+        </DockPanel>
+      </Grid>
+    </TabItem>
+  </TabControl>
+</UserControl>

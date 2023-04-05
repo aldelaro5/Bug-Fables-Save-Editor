@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
+             x:DataType="vm:ItemsViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Views.ItemsView">
+  <Design.DataContext>
+    <vm:ItemsViewModel />
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="50*,50*,50*">
+    <DockPanel Grid.Column="0">
+      <Label DockPanel.Dock="Top" Content="Inventory" />
+      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                  Orientation="Horizontal">
+        <ContentControl Content="{Binding NewInventoryItem}" />
+        <Button Margin="5,0,0,0" Content="Add"
+                Command="{Binding AddInventoryItemCommand}"
+                CommandParameter="{Binding NewInventoryItem}" />
+      </StackPanel>
+      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Inventory}"
+                           DeleteCommand="{Binding DeleteInventoryItemCommand}" />
+    </DockPanel>
+    <DockPanel Margin="20,0,0,0" Grid.Column="1">
+      <Label DockPanel.Dock="Top" Content="Key items" />
+      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                  Orientation="Horizontal">
+        <ContentControl Content="{Binding NewKeyItem}" />
+        <Button Margin="5,0,0,0" Content="Add"
+                Command="{Binding AddKeyItemCommand}"
+                CommandParameter="{Binding NewKeyItem}" />
+      </StackPanel>
+      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Key}"
+                           DeleteCommand="{Binding DeleteKeyItemCommand}" />
+    </DockPanel>
+    <DockPanel Margin="20,0,0,0" Grid.Column="2">
+      <Label DockPanel.Dock="Top" Content="Stored items" />
+      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
+                  Orientation="Horizontal">
+        <ContentControl Content="{Binding NewStoredItem}" />
+        <Button Margin="5,0,0,0" Content="Add"
+                Command="{Binding AddStoredItemCommand}"
+                CommandParameter="{Binding NewStoredItem}" />
+      </StackPanel>
+      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Stored}"
+                           DeleteCommand="{Binding DeleteStoredItemCommand}" />
+    </DockPanel>
+  </Grid>
+</UserControl>

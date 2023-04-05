@@ -1,0 +1,150 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="550"
+             x:DataType="vm:GlobalViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Views.GlobalView">
+  <Design.DataContext>
+    <vm:GlobalViewModel />
+  </Design.DataContext>
+
+  <StackPanel HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top"
+              Orientation="Vertical">
+    <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+          <StackPanel Orientation="Vertical">
+            <Label Content="Position in map" />
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="X" />
+              <NumericUpDown Value="{ReflectionBinding HeaderSaveData.PositionX.Value}"
+                             ParsingNumberStyle="Float"
+                             Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Y" />
+              <NumericUpDown Value="{ReflectionBinding HeaderSaveData.PositionY.Value}"
+                             ParsingNumberStyle="Float"
+                             Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Z" />
+              <NumericUpDown Value="{ReflectionBinding HeaderSaveData.PositionZ.Value}"
+                             ParsingNumberStyle="Float"
+                             Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+            <Label Content="Location" />
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Current area" />
+              <ComboBox
+                SelectedIndex="{Binding GlobalSaveData.CurrentArea.Id.Value}"
+                Items="{Binding GlobalSaveData.CurrentArea.AllResourceNames}" Width="200" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Current map" />
+              <ComboBox
+                SelectedIndex="{Binding GlobalSaveData.CurrentMap.Id.Value}"
+                Items="{Binding GlobalSaveData.CurrentMap.AllResourceNames}" Width="200" />
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+          <StackPanel Orientation="Vertical">
+            <Label Margin="0,10,0,0" VerticalContentAlignment="Center" Content="Play time" />
+            <StackPanel Orientation="Horizontal">
+              <NumericUpDown Value="{ReflectionBinding GlobalSaveData.PlayTimeHours.Value}"
+                             Increment="1"
+                             ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+              <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content=":" />
+              <NumericUpDown Value="{ReflectionBinding GlobalSaveData.PlayTimeMinutes.Value}"
+                             Increment="1"
+                             ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+              <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content=":" />
+              <NumericUpDown Value="{ReflectionBinding GlobalSaveData.PlayTimeSeconds.Value}"
+                             Increment="1"
+                             ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Margin="40,10,10,10" Orientation="Vertical">
+            <Label VerticalContentAlignment="Center" Content="Berry count" />
+            <NumericUpDown Width="150" Value="{ReflectionBinding GlobalSaveData.BerryCount.Value}"
+                           Increment="1"
+                           ParsingNumberStyle="Integer" />
+          </StackPanel>
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Margin="75,0,0,0" Orientation="Vertical">
+        <Label Content="Information on the file select screen" />
+        <StackPanel Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Filename" />
+          <TextBox Text="{Binding HeaderSaveData.Filename.Value}" Width="270" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <Label Content="Code icons" Margin="0,5,0,0" />
+          <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+              <CheckBox IsChecked="{Binding HeaderSaveData.IsRuigee.Value}"
+                        Content="RUIGEE" />
+              <CheckBox IsChecked="{Binding HeaderSaveData.IsHardest.Value}"
+                        Content="HARDEST" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <CheckBox IsChecked="{Binding HeaderSaveData.IsFrameone.Value}"
+                        Content="FRAMEONE" />
+              <CheckBox IsChecked="{Binding HeaderSaveData.IsMorefarm.Value}"
+                        Content="MOREFARM" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <CheckBox IsChecked="{Binding HeaderSaveData.IsMystery.Value}"
+                        Content="MYSTERY?" />
+              <CheckBox IsChecked="{Binding HeaderSaveData.IsPushrock.Value}"
+                        Content="PUSHROCK" />
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Rightmost progress icon" />
+          <ComboBox SelectedIndex="{Binding GlobalSaveData.LastProgressIcon.Value}"
+                    Items="{Binding GlobalSaveData.SaveProgressIconNames}" Width="170" />
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
+    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+      <StackPanel Orientation="Vertical">
+        <Label Content="Rank progress" />
+        <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Rank" />
+          <NumericUpDown Value="{ReflectionBinding GlobalSaveData.Rank.Value}"
+                         ShowButtonSpinner="False" Increment="1"
+                         ParsingNumberStyle="Integer" />
+          <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Exploration points" />
+          <NumericUpDown Value="{ReflectionBinding GlobalSaveData.Exp.Value}"
+                         ShowButtonSpinner="False" Increment="1"
+                         ParsingNumberStyle="Integer" />
+          <Label VerticalContentAlignment="Center" Content="/" />
+          <NumericUpDown Value="{ReflectionBinding GlobalSaveData.NeededExp.Value}"
+                         ShowButtonSpinner="False"
+                         Increment="1" ParsingNumberStyle="Integer" />
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Margin="135,0,0,0" Orientation="Vertical">
+        <Label Content="Max amount of items" />
+        <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+          <Label VerticalContentAlignment="Center" Content="Inventory" />
+          <NumericUpDown Value="{ReflectionBinding GlobalSaveData.NbrMaxItemsInventory.Value}"
+                         Increment="1"
+                         ParsingNumberStyle="Integer" />
+          <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Storage" />
+          <NumericUpDown Value="{ReflectionBinding GlobalSaveData.NbrMaxItemsStorage.Value}"
+                         Increment="1"
+                         ParsingNumberStyle="Integer" />
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

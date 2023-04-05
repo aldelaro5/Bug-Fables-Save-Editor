@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.ViewModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+             xmlns:ovm="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BugFablesSaveEditor.Views.MainView"
+             x:CompileBindings="True"
+             x:DataType="vm:MainViewModel">
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="vm:SaveDataViewModel">
+      <v:SaveDataView />
+    </DataTemplate>
+
+    <DataTemplate DataType="ovm:ObservableFlagSaveData">
+      <CheckBox IsChecked="{Binding Enabled.Value}" />
+    </DataTemplate>
+  </UserControl.DataTemplates>
+
+  <UserControl.DataContext>
+    <vm:MainViewModel />
+  </UserControl.DataContext>
+  <DockPanel>
+    <DockPanel>
+      <Menu DockPanel.Dock="Top">
+        <MenuItem Header="File">
+          <MenuItem Command="{Binding NewFileCommand}" Header="New" />
+          <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
+          <MenuItem Command="{Binding CmdSaveFileCommand}" Header="Save as..." />
+          <Separator />
+          <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
+        </MenuItem>
+        <MenuItem Header="Help">
+          <MenuItem Header="About" Click="OnAbout_Click" />
+        </MenuItem>
+      </Menu>
+      <DockPanel>
+        <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Vertical">
+          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}"
+                 HorizontalContentAlignment="Center" />
+          <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Command="{Binding NewFileCommand}" Content="New file" Margin="5" />
+            <Button Command="{Binding OpenFileCommand}" Content="Open file..." Margin="5" />
+            <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." Margin="5" />
+          </StackPanel>
+        </StackPanel>
+        <ContentControl Content="{Binding SaveData}" IsEnabled="{Binding SaveInUse}" />
+      </DockPanel>
+    </DockPanel>
+  </DockPanel>
+</UserControl>
