@@ -28,6 +28,7 @@
       <v:MedalsView DataContext="{Binding MedalsViewModel}" />
     </TabItem>
     <TabItem Header="Library">
+      <v:LibraryView DataContext="{Binding LibraryViewModel}"/>
     </TabItem>
     <TabItem Header="Flags">
       <v:FlagsView DataContext="{Binding FlagsViewModel}"/>

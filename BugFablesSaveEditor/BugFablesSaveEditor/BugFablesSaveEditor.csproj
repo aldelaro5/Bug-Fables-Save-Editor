@@ -31,15 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\BugFablesLib\Sources\BugFablesLib.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaXaml Remove="Views\LibraryView.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Views\LibraryView.axaml.cs" />
-  </ItemGroup>
-
   <ItemGroup>
     <None Update="ExtendedData\CrystalBerriesDetails.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

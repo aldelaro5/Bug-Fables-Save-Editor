@@ -38,6 +38,9 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private FlagsViewModel _flagsViewModel;
 
+  [ObservableProperty]
+  private LibraryViewModel _libraryViewModel;
+
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
@@ -86,5 +89,6 @@ public partial class SaveDataViewModel : ObservableObject
     _crystalBerriesViewModel = new CrystalBerriesViewModel(crystalBerries);
     _flagsViewModel = new FlagsViewModel(flags, flagvars, flagstrings, regionalFlags);
     _globalViewModel = new(new(SaveData.Global), new(SaveData.Header));
+    _libraryViewModel = new(library);
   }
 }
