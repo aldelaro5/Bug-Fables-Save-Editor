@@ -15,7 +15,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="ovm:ObservableFlagSaveData">
-      <CheckBox IsChecked="{Binding Enabled.Value}" />
+      <CheckBox IsChecked="{Binding Enabled}" />
     </DataTemplate>
   </UserControl.DataTemplates>
 

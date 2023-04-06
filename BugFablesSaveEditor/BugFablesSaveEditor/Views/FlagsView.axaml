@@ -27,7 +27,7 @@
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="vm:FlagViewModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -52,7 +52,7 @@
                                 Binding="{Binding Index}" />
             <DataGridTextColumn Header="Value"
                                 x:DataType="vm:FlagvarViewModel"
-                                Binding="{Binding Flag.Var.Value}" />
+                                Binding="{Binding Flag.Var}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
                                 x:DataType="vm:FlagvarViewModel"
                                 Binding="{Binding Description}" />
@@ -75,7 +75,7 @@
                                 Binding="{Binding Index}" />
             <DataGridTextColumn Header="Value"
                                 x:DataType="vm:FlagstringViewModel"
-                                Binding="{Binding Flag.Str.Value}" />
+                                Binding="{Binding Flag.Str}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
                                 x:DataType="vm:FlagstringViewModel"
                                 Binding="{Binding Description}" />
@@ -101,7 +101,7 @@
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="vm:FlagViewModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

@@ -1,5 +1,4 @@
 using BugFablesLib.SaveData;
-using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
@@ -7,14 +6,21 @@ public class ObservableEnemyEncounterSaveData : ObservableModel
 {
   public sealed override EnemyEncounterSaveData UnderlyingData { get; }
 
-  public ReactiveProperty<int> NbrSeen { get; }
-  public ReactiveProperty<int> NbrDefeated { get; }
+  public int NbrSeen
+  {
+    get => UnderlyingData.NbrSeen;
+    set => SetProperty(UnderlyingData.NbrSeen, value, UnderlyingData, (data, i) => data.NbrSeen = i);
+  }
+
+  public int NbrDefeated
+  {
+    get => UnderlyingData.NbrDefeated;
+    set => SetProperty(UnderlyingData.NbrDefeated, value, UnderlyingData, (data, i) => data.NbrDefeated = i);
+  }
 
   public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) :
     base(enemyEncounterSaveData)
   {
     UnderlyingData = enemyEncounterSaveData;
-    NbrSeen = ReactiveProperty.FromObject(UnderlyingData, data => data.NbrSeen);
-    NbrDefeated = ReactiveProperty.FromObject(UnderlyingData, data => data.NbrDefeated);
   }
 }

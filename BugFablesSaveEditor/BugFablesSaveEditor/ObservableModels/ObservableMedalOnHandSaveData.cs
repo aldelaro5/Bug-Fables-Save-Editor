@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
@@ -13,7 +12,12 @@ public partial class ObservableMedalOnHandSaveData : ObservableModel
   [ObservableProperty]
   private ObservableBfNamedId _medal;
 
-  public ReactiveProperty<int> MedalEquipTarget { get; }
+  public int MedalEquipTarget
+  {
+    get => UnderlyingData.MedalEquipTarget + 2;
+    set => SetProperty(UnderlyingData.MedalEquipTarget, value - 2, UnderlyingData,
+      (data, i) => data.MedalEquipTarget = i);
+  }
 
   public IReadOnlyList<string> MedalEquipTargets { get; }
 
@@ -23,9 +27,6 @@ public partial class ObservableMedalOnHandSaveData : ObservableModel
     UnderlyingData = medalOnHandSaveData;
     _medal = new ObservableBfNamedId(medalOnHandSaveData.Medal);
     MedalEquipTargets = GenerateMedalEquipTargetsList();
-    MedalEquipTarget = ReactiveProperty.FromObject(UnderlyingData, data => data.MedalEquipTarget,
-      convert: i => i + 2,
-      convertBack: i => i - 2);
   }
 
   private IReadOnlyList<string> GenerateMedalEquipTargetsList()

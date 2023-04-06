@@ -28,7 +28,7 @@
         <DataGridTemplateColumn Header="Obtained" Width="100">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="vm:CrystalBerryViewModel">
-              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Flag.Enabled}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>

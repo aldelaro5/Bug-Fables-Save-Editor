@@ -18,7 +18,7 @@
     <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
       <ContentControl Content="{Binding NewMusic.Music}" />
-      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding NewMusic.Bought.Value}" />
+      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding NewMusic.Bought}" />
       <Button Margin="5,0,0,0" Content="Add"
               Command="{Binding AddMusicCommand}"
               CommandParameter="{Binding NewMusic}" />
@@ -54,7 +54,7 @@
         <DataGridTemplateColumn Header="AnimId">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:ObservableMusicSaveData">
-              <CheckBox IsChecked="{Binding Bought.Value}" />
+              <CheckBox IsChecked="{Binding Bought}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>

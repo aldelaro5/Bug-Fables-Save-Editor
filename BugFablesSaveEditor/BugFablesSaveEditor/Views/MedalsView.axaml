@@ -23,7 +23,7 @@
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
             <ContentControl Content="{Binding NewMedalOnHand.Medal}" />
             <ComboBox
-              SelectedIndex="{Binding NewMedalOnHand.MedalEquipTarget.Value}"
+              SelectedIndex="{Binding NewMedalOnHand.MedalEquipTarget}"
               Items="{Binding NewMedalOnHand.MedalEquipTargets}" Width="125" />
             <Button Margin="5,0,0,0" Content="Add"
                     Command="{Binding AddMedalOnHandCommand}"
@@ -64,7 +64,7 @@
             <DataGridTemplateColumn Header="Equip">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
-                  <ComboBox SelectedIndex="{Binding MedalEquipTarget.Value}"
+                  <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
                             Items="{Binding MedalEquipTargets}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>

@@ -20,18 +20,18 @@
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="TP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.Tp.Value}" />
+                           Value="{Binding GlobalSaveData.Tp}" />
             <Label VerticalContentAlignment="Center" Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.MaxTp.Value}" />
+                           Value="{Binding GlobalSaveData.MaxTp}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="MP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.Mp.Value}" />
+                           Value="{Binding GlobalSaveData.Mp}" />
             <Label VerticalContentAlignment="Center" Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.MaxMp.Value}" />
+                           Value="{Binding GlobalSaveData.MaxMp}" />
           </StackPanel>
         </StackPanel>
       </DockPanel>
@@ -49,21 +49,21 @@
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="Base HP" Binding="{Binding BaseHp.Value}" Width="75" />
+                                Header="Base HP" Binding="{Binding BaseHp}" Width="75" />
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="HP" Binding="{Binding Hp.Value}" />
+                                Header="HP" Binding="{Binding Hp}" />
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="Max HP" Binding="{Binding MaxHp.Value}" Width="70" />
+                                Header="Max HP" Binding="{Binding MaxHp}" Width="70" />
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="Base Attack" Binding="{Binding BaseAttack.Value}"
+                                Header="Base Attack" Binding="{Binding BaseAttack}"
                                 Width="85" />
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="Attack" Binding="{Binding Attack.Value}" />
+                                Header="Attack" Binding="{Binding Attack}" />
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="Base Defense" Binding="{Binding BaseDefense.Value}"
+                                Header="Base Defense" Binding="{Binding BaseDefense}"
                                 Width="95" />
             <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
-                                Header="Defense" Binding="{Binding Defense.Value}" />
+                                Header="Defense" Binding="{Binding Defense}" />
           </DataGrid.Columns>
         </DataGrid>
       </StackPanel>
@@ -72,10 +72,10 @@
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
         <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding NewPartyStatBonus.Type.Value}"
+          <ComboBox SelectedIndex="{Binding NewPartyStatBonus.Type}"
                     Items="{Binding PartyStatBonusTypeNames}" Width="100" />
           <NumericUpDown ShowButtonSpinner="False"
-                         Value="{Binding NewPartyStatBonus.Amount.Value}" />
+                         Value="{Binding NewPartyStatBonus.Amount}" />
           <Button Command="{Binding AddStatPartyBonusCommand}"
                   CommandParameter="{Binding NewPartyStatBonus}"
                   VerticalContentAlignment="Center"
@@ -90,7 +90,7 @@
                                 IsReadOnly="True" Width="85" />
             <DataGridTextColumn Header="Amount"
                                 x:DataType="ob:ObservableStatsBonusSaveData"
-                                Binding="{Binding Amount.Value}"
+                                Binding="{Binding Amount}"
                                 IsReadOnly="True" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
@@ -123,10 +123,10 @@
       <DockPanel Margin="10,0,0,0">
         <Label DockPanel.Dock="Top" Content="Selected member stats bonuses" />
         <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding NewMemberStatBonus.Type.Value}"
+          <ComboBox SelectedIndex="{Binding NewMemberStatBonus.Type}"
                     Items="{Binding MemberStatBonusTypeNames}" Width="100" />
           <NumericUpDown ShowButtonSpinner="False"
-                         Value="{Binding NewMemberStatBonus.Amount.Value}" />
+                         Value="{Binding NewMemberStatBonus.Amount}" />
           <Button Command="{Binding AddStatPartyMemberBonusCommand}"
                   CommandParameter="{Binding NewMemberStatBonus}"
                   VerticalContentAlignment="Center"
@@ -141,7 +141,7 @@
                                 IsReadOnly="True" Width="85" />
             <DataGridTextColumn Header="Amount"
                                 x:DataType="ob:ObservableStatsBonusSaveData"
-                                Binding="{Binding Amount.Value}"
+                                Binding="{Binding Amount}"
                                 IsReadOnly="True" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>

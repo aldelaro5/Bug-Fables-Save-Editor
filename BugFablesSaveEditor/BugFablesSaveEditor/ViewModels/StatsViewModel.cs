@@ -53,32 +53,32 @@ public partial class StatsViewModel : ObservableObject
     StatBonusTypeNames.Skip(3).ToList();
 
   public int TotalPartyMaxTpBonus => _statsBonuses
-    .Where(x => x.Target.Value == -1 && x.Type.Value == StatBonusSaveData.StatBonusType.TP)
-    .Sum(x => x.Amount.Value);
+    .Where(x => x.Target == -1 && x.Type == StatBonusSaveData.StatBonusType.TP)
+    .Sum(x => x.Amount);
 
   public int TotalPartyMaxMpBonus => _statsBonuses
-    .Where(x => x.Target.Value == -1 && x.Type.Value == StatBonusSaveData.StatBonusType.MP)
-    .Sum(x => x.Amount.Value);
+    .Where(x => x.Target == -1 && x.Type == StatBonusSaveData.StatBonusType.MP)
+    .Sum(x => x.Amount);
 
   public int TotalMemberMaxHpBonus => _statsBonuses
-    .Where(x => x.Target.Value == SelectedPartyMember?.AnimId.Id.Value &&
-                x.Type.Value == StatBonusSaveData.StatBonusType.HP)
-    .Sum(x => x.Amount.Value);
+    .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
+                x.Type == StatBonusSaveData.StatBonusType.HP)
+    .Sum(x => x.Amount);
 
   public int TotalMemberAttackBonus => _statsBonuses
-    .Where(x => x.Target.Value == SelectedPartyMember?.AnimId.Id.Value &&
-                x.Type.Value == StatBonusSaveData.StatBonusType.Attack)
-    .Sum(x => x.Amount.Value);
+    .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
+                x.Type == StatBonusSaveData.StatBonusType.Attack)
+    .Sum(x => x.Amount);
 
   public int TotalMemberDefenseBonus => _statsBonuses
-    .Where(x => x.Target.Value == SelectedPartyMember?.AnimId.Id.Value &&
-                x.Type.Value == StatBonusSaveData.StatBonusType.Defense)
-    .Sum(x => x.Amount.Value);
+    .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
+                x.Type == StatBonusSaveData.StatBonusType.Defense)
+    .Sum(x => x.Amount);
 
   [RelayCommand]
   private void AddStatPartyBonus(ObservableStatsBonusSaveData statsBonusSaveData)
   {
-    statsBonusSaveData.Target.Value = -1;
+    statsBonusSaveData.Target = -1;
     _statsBonuses.Add(new(statsBonusSaveData.UnderlyingData));
     OnPropertyChanged(nameof(TotalPartyMaxMpBonus));
     OnPropertyChanged(nameof(TotalPartyMaxTpBonus));
@@ -87,7 +87,7 @@ public partial class StatsViewModel : ObservableObject
   [RelayCommand(CanExecute = nameof(CanAddPartyMemberBonus))]
   private void AddStatPartyMemberBonus(ObservableStatsBonusSaveData statsBonusSaveData)
   {
-    statsBonusSaveData.Target.Value = SelectedPartyMember!.AnimId.Id.Value;
+    statsBonusSaveData.Target = SelectedPartyMember!.AnimId.Id;
     _statsBonuses.Add(new(statsBonusSaveData.UnderlyingData));
     OnPropertyChanged(nameof(TotalMemberMaxHpBonus));
     OnPropertyChanged(nameof(TotalMemberAttackBonus));
@@ -110,7 +110,7 @@ public partial class StatsViewModel : ObservableObject
     _globalSaveData = globalSaveData;
 
     _statsBonuses.ToObservableChangeSet()
-      .Filter(x => x.Target.Value == -1)
+      .Filter(x => x.Target == -1)
       .ObserveOnUIDispatcher()
       .Bind(out _partyStatBonuses)
       .Subscribe();
@@ -119,7 +119,7 @@ public partial class StatsViewModel : ObservableObject
       .Select(member =>
       {
         return new Func<ObservableStatsBonusSaveData, bool>(statsBonusSaveData =>
-          member?.AnimId.Id.Value == statsBonusSaveData.Target.Value);
+          member?.AnimId.Id == statsBonusSaveData.Target);
       });
 
     _statsBonuses.ToObservableChangeSet()

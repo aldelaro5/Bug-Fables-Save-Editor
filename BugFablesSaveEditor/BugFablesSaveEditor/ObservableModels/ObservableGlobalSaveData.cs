@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using DynamicData.Binding;
 using Humanizer;
-using Reactive.Bindings;
 using static BugFablesLib.SaveData.GlobalSaveData;
 
 namespace BugFablesSaveEditor.ObservableModels;
@@ -24,49 +23,101 @@ public sealed partial class ObservableGlobalSaveData : ObservableModel
   public string[] SaveProgressIconNames =>
     Enum.GetNames(typeof(SaveProgressIcon)).Select(x => x.Humanize(LetterCasing.Title)).ToArray();
 
-  public ReactiveProperty<int> BerryCount { get; }
-  public ReactiveProperty<int> Exp { get; }
-  public ReactiveProperty<int> MaxMp { get; }
-  public ReactiveProperty<int> MaxTp { get; }
-  public ReactiveProperty<int> Mp { get; }
-  public ReactiveProperty<int> NbrMaxItemsInventory { get; }
-  public ReactiveProperty<int> NbrMaxItemsStorage { get; }
-  public ReactiveProperty<int> NeededExp { get; }
-  public ReactiveProperty<int> PlayTimeHours { get; }
-  public ReactiveProperty<int> PlayTimeMinutes { get; }
-  public ReactiveProperty<int> PlayTimeSeconds { get; }
-  public ReactiveProperty<int> Rank { get; }
-  public ReactiveProperty<SaveProgressIcon> LastProgressIcon { get; }
-  public ReactiveProperty<int> Tp { get; }
-
-  public ObservableGlobalSaveData(GlobalSaveData globalSaveDatal) :
-    base(globalSaveDatal)
+  public int BerryCount
   {
-    UnderlyingData = globalSaveDatal;
+    get => UnderlyingData.BerryCount;
+    set => SetProperty(UnderlyingData.BerryCount, value, UnderlyingData, (data, s) => data.BerryCount = s);
+  }
+
+  public int Exp
+  {
+    get => UnderlyingData.Exp;
+    set => SetProperty(UnderlyingData.Exp, value, UnderlyingData, (data, s) => data.Exp = s);
+  }
+
+  public int MaxMp
+  {
+    get => UnderlyingData.MaxMp;
+    set => SetProperty(UnderlyingData.MaxMp, value, UnderlyingData, (data, s) => data.MaxMp = s);
+  }
+
+  public int MaxTp
+  {
+    get => UnderlyingData.MaxTp;
+    set => SetProperty(UnderlyingData.MaxTp, value, UnderlyingData, (data, s) => data.MaxTp = s);
+  }
+
+  public int Mp
+  {
+    get => UnderlyingData.Mp;
+    set => SetProperty(UnderlyingData.Mp, value, UnderlyingData, (data, s) => data.Mp = s);
+  }
+
+  public int NbrMaxItemsInventory
+  {
+    get => UnderlyingData.NbrMaxItemsInventory;
+    set => SetProperty(UnderlyingData.NbrMaxItemsInventory, value, UnderlyingData,
+      (data, s) => data.NbrMaxItemsInventory = s);
+  }
+
+  public int NbrMaxItemsStorage
+  {
+    get => UnderlyingData.NbrMaxItemsStorage;
+    set => SetProperty(UnderlyingData.NbrMaxItemsStorage, value, UnderlyingData,
+      (data, s) => data.NbrMaxItemsStorage = s);
+  }
+
+  public int NeededExp
+  {
+    get => UnderlyingData.NeededExp;
+    set => SetProperty(UnderlyingData.NeededExp, value, UnderlyingData, (data, s) => data.NeededExp = s);
+  }
+
+  public int PlayTimeHours
+  {
+    get => UnderlyingData.PlayTimeHours;
+    set => SetProperty(UnderlyingData.PlayTimeHours, value, UnderlyingData, (data, s) => data.PlayTimeHours = s);
+  }
+
+  public int PlayTimeMinutes
+  {
+    get => UnderlyingData.PlayTimeMinutes;
+    set => SetProperty(UnderlyingData.PlayTimeMinutes, value, UnderlyingData, (data, s) => data.PlayTimeMinutes = s);
+  }
+
+  public int PlayTimeSeconds
+  {
+    get => UnderlyingData.PlayTimeSeconds;
+    set => SetProperty(UnderlyingData.PlayTimeSeconds, value, UnderlyingData, (data, s) => data.PlayTimeSeconds = s);
+  }
+
+  public int Rank
+  {
+    get => UnderlyingData.Rank;
+    set => SetProperty(UnderlyingData.Rank, value, UnderlyingData, (data, s) => data.Rank = s);
+  }
+
+  public SaveProgressIcon LastProgressIcon
+  {
+    get => UnderlyingData.LastProgressIcon;
+    set => SetProperty(UnderlyingData.LastProgressIcon, value, UnderlyingData, (data, s) => data.LastProgressIcon = s);
+  }
+
+  public int Tp
+  {
+    get => UnderlyingData.Tp;
+    set => SetProperty(UnderlyingData.Tp, value, UnderlyingData, (data, s) => data.Tp = s);
+  }
+
+  public ObservableGlobalSaveData(GlobalSaveData globalSaveData) :
+    base(globalSaveData)
+  {
+    UnderlyingData = globalSaveData;
     _currentMap = new ObservableBfNamedId(UnderlyingData.CurrentMap);
     _currentArea = new ObservableBfNamedId(UnderlyingData.CurrentArea);
-    Rank = ReactiveProperty.FromObject(UnderlyingData, data => data.Rank);
-    Exp = ReactiveProperty.FromObject(UnderlyingData, data => data.Exp);
-    NeededExp = ReactiveProperty.FromObject(UnderlyingData, data => data.NeededExp);
-    MaxTp = ReactiveProperty.FromObject(UnderlyingData, data => data.MaxTp);
-    Tp = ReactiveProperty.FromObject(UnderlyingData, data => data.Tp);
-    BerryCount = ReactiveProperty.FromObject(UnderlyingData, data => data.BerryCount);
-    Mp = ReactiveProperty.FromObject(UnderlyingData, data => data.Mp);
-    MaxMp = ReactiveProperty.FromObject(UnderlyingData, data => data.MaxMp);
-    NbrMaxItemsInventory =
-      ReactiveProperty.FromObject(UnderlyingData, data => data.NbrMaxItemsInventory);
-    NbrMaxItemsStorage =
-      ReactiveProperty.FromObject(UnderlyingData, data => data.NbrMaxItemsStorage);
-    PlayTimeHours = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeHours);
-    PlayTimeMinutes = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeMinutes);
-    PlayTimeSeconds = ReactiveProperty.FromObject(UnderlyingData, data => data.PlayTimeSeconds);
-    LastProgressIcon =
-      ReactiveProperty.FromObject(UnderlyingData, data => data.LastProgressIcon);
 
-    CurrentArea.Id
-      .WhenValueChanged(x => x.Value)
-      .Subscribe(_ =>
-        WeakReferenceMessenger.Default.Send(
-          new ValueChangedMessage<ObservableBfNamedId>(CurrentArea)));
+    CurrentArea
+      .WhenValueChanged(x => x.Id)
+      .Subscribe(_ => WeakReferenceMessenger.Default.Send(new ValueChangedMessage<ObservableBfNamedId>(CurrentArea)));
   }
 }

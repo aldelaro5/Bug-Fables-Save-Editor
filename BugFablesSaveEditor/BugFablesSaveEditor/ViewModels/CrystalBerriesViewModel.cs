@@ -77,6 +77,6 @@ public partial class CrystalBerriesViewModel : ObservableObject
   private void ToggleAllShown()
   {
     foreach (var flagSaveData in CrystalBerriesSaveDataFiltered)
-      flagSaveData.Flag.Enabled.Value = !flagSaveData.Flag.Enabled.Value;
+      flagSaveData.Flag.Enabled = !flagSaveData.Flag.Enabled;
   }
 }

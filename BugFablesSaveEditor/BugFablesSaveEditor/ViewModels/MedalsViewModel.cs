@@ -55,7 +55,7 @@ public partial class MedalsViewModel : ObservableObject
   private void UnequipAllMedals()
   {
     foreach (ObservableMedalOnHandSaveData medal in MedalOnHandSaveData)
-      medal.MedalEquipTarget.Value = 0;
+      medal.MedalEquipTarget = 0;
   }
 
   [RelayCommand]

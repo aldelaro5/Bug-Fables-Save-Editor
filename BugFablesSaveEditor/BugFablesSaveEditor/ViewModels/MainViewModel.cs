@@ -116,9 +116,7 @@ public partial class MainViewModel : ObservableObject
 
     FilePickerOpenOptions pickerOpenOptions = new()
     {
-      Title = "Select a Bug Fables save file",
-      AllowMultiple = false,
-      FileTypeFilter = new[] { _saveFileFilter }
+      Title = "Select a Bug Fables save file", AllowMultiple = false, FileTypeFilter = new[] { _saveFileFilter }
     };
     var files =
       await Utils.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);

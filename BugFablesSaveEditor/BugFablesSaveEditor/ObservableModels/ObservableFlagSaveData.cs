@@ -1,16 +1,19 @@
 using BugFablesLib.SaveData;
-using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
 public class ObservableFlagSaveData : ObservableModel
 {
   public sealed override FlagSaveData UnderlyingData { get; }
-  public ReactiveProperty<bool> Enabled { get; }
+
+  public bool Enabled
+  {
+    get => UnderlyingData.Enabled;
+    set => SetProperty(UnderlyingData.Enabled, value, UnderlyingData, (data, b) => data.Enabled = b);
+  }
 
   public ObservableFlagSaveData(FlagSaveData flagSaveData) : base(flagSaveData)
   {
     UnderlyingData = flagSaveData;
-    Enabled = ReactiveProperty.FromObject(UnderlyingData, data => data.Enabled);
   }
 }

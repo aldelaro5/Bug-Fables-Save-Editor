@@ -73,9 +73,7 @@ public partial class LibraryViewModel : ObservableObject
     _observableLibrarySaveData.Discoveries
       .Select((x, i) => new FlagViewModel
       {
-        Index = i,
-        Flag = x,
-        Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
+        Index = i, Flag = x, Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterDiscoveries, x => x.FilterUnusedDiscoveries,
@@ -90,9 +88,7 @@ public partial class LibraryViewModel : ObservableObject
     _observableLibrarySaveData.Bestiary
       .Select((x, i) => new FlagViewModel
       {
-        Index = i,
-        Flag = x,
-        Description = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
+        Index = i, Flag = x, Description = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterBestiary, x => x.FilterUnusedBestiary,
@@ -107,9 +103,7 @@ public partial class LibraryViewModel : ObservableObject
     _observableLibrarySaveData.Recipes
       .Select((x, i) => new FlagViewModel
       {
-        Index = i,
-        Flag = x,
-        Description = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
+        Index = i, Flag = x, Description = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterRecipes, x => x.FilterUnusedRecipes,
@@ -124,9 +118,7 @@ public partial class LibraryViewModel : ObservableObject
     _observableLibrarySaveData.Records
       .Select((x, i) => new FlagViewModel
       {
-        Index = i,
-        Flag = x,
-        Description = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
+        Index = i, Flag = x, Description = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterRecords, x => x.FilterUnusedRecords,
@@ -141,9 +133,7 @@ public partial class LibraryViewModel : ObservableObject
     _observableLibrarySaveData.SeenAreas
       .Select((x, i) => new FlagViewModel
       {
-        Index = i,
-        Flag = x,
-        Description = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""
+        Index = i, Flag = x, Description = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterSeenAreas, x => x.FilterUnusedSeenAreas,
@@ -158,20 +148,24 @@ public partial class LibraryViewModel : ObservableObject
 
   [RelayCommand]
   private void ToggleAllShownDiscoveries() => ToggleAllShown(Discoveries);
+
   [RelayCommand]
   private void ToggleAllShownBestiary() => ToggleAllShown(Bestiary);
+
   [RelayCommand]
   private void ToggleAllShownRecipes() => ToggleAllShown(Recipes);
+
   [RelayCommand]
   private void ToggleAllShownRecords() => ToggleAllShown(Records);
+
   [RelayCommand]
   private void ToggleAllShownSeenAreas() => ToggleAllShown(SeenAreas);
 
   private void ToggleAllShown(ReadOnlyObservableCollection<FlagViewModel> collection)
   {
-    bool newState = collection.Any(x => !x.Flag.Enabled.Value);
+    bool newState = collection.Any(x => !x.Flag.Enabled);
     foreach (FlagViewModel flagVm in collection)
-      flagVm.Flag.Enabled.Value = newState;
+      flagVm.Flag.Enabled = newState;
   }
 
   private Func<FlagViewModel, bool> FlagFilter((string text, bool keepUnused) filter)

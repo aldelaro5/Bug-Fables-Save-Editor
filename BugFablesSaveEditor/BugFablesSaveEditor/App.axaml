@@ -64,7 +64,7 @@
   <Application.DataTemplates>
     <DataTemplate DataType="ob:ObservableBfNamedId">
       <ComboBox Items="{Binding AllResourceNames}"
-                SelectedIndex="{Binding Id.Value,
+                SelectedIndex="{Binding Id,
                 FallbackValue=0, TargetNullValue=0}" />
     </DataTemplate>
   </Application.DataTemplates>

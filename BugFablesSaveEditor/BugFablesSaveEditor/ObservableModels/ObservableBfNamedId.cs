@@ -1,30 +1,33 @@
-using System;
 using System.Collections.Generic;
 using BugFablesLib;
 using BugFablesLib.Data;
-using Reactive.Bindings;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
 public class ObservableBfNamedId : ObservableModel
 {
   public sealed override BfSerializableNamedId UnderlyingData { get; }
-  public ReactiveProperty<int> Id { get; }
+
+  public int Id
+  {
+    get => UnderlyingData.Id;
+    set
+    {
+      // Workaround Avalonia bug:
+      if (value >= 0)
+        SetProperty(UnderlyingData.Id, value, UnderlyingData, (namedId, i) => namedId.Id = i);
+    }
+  }
+
   public string Name => UnderlyingData.Name;
   public IReadOnlyList<string> AllResourceNames => BugFablesLib.Utils.GetAllBfNames(UnderlyingData);
 
   public ObservableBfNamedId(BfSerializableNamedId namedId) : base(namedId)
   {
     UnderlyingData = namedId;
-    Id = ReactiveProperty.FromObject(UnderlyingData, data => data.Id);
-    Id.Subscribe(x =>
-    {
-      if (x >= 0)
-        OnPropertyChanged(nameof(Name));
-    });
   }
 
-  public BfQuest ToQuest() => new() { Id = Id.Value };
-  public BfMedal ToMedal() => new() { Id = Id.Value };
-  public BfItem ToItem() => new() { Id = Id.Value };
+  public BfQuest ToQuest() => new() { Id = Id };
+  public BfMedal ToMedal() => new() { Id = Id };
+  public BfItem ToItem() => new() { Id = Id };
 }

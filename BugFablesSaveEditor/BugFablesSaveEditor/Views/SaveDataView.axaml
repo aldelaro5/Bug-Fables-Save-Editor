@@ -28,10 +28,10 @@
       <v:MedalsView DataContext="{Binding MedalsViewModel}" />
     </TabItem>
     <TabItem Header="Library">
-      <v:LibraryView DataContext="{Binding LibraryViewModel}"/>
+      <v:LibraryView DataContext="{Binding LibraryViewModel}" />
     </TabItem>
     <TabItem Header="Flags">
-      <v:FlagsView DataContext="{Binding FlagsViewModel}"/>
+      <v:FlagsView DataContext="{Binding FlagsViewModel}" />
     </TabItem>
     <TabItem Header="Crystal Berries">
       <v:CrystalBerriesView DataContext="{Binding CrystalBerriesViewModel}" />
