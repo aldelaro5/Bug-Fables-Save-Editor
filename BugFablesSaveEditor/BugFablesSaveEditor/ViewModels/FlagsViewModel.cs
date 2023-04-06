@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -10,7 +11,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using DynamicData;
 using DynamicData.Binding;
-using Reactive.Bindings.Extensions;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -116,7 +116,7 @@ public partial class FlagsViewModel : ObservableRecipient
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagTextFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _flags)
       .Subscribe();
 
@@ -130,7 +130,7 @@ public partial class FlagsViewModel : ObservableRecipient
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagvarTextFilter!))
       .Sort(SortExpressionComparer<FlagvarViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _flagvars)
       .Subscribe();
 
@@ -144,7 +144,7 @@ public partial class FlagsViewModel : ObservableRecipient
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagstringTextFilter!))
       .Sort(SortExpressionComparer<FlagstringViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _flagstrings)
       .Subscribe();
 
@@ -155,7 +155,7 @@ public partial class FlagsViewModel : ObservableRecipient
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(RegionalFlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _regionalFlags)
       .Subscribe();
 

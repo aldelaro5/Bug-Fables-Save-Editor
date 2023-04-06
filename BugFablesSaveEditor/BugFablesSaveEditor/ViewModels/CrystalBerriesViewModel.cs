@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using DynamicData.Binding;
-using Reactive.Bindings.Extensions;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -60,7 +60,7 @@ public partial class CrystalBerriesViewModel : ObservableObject
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(CrystalBerryFilter!))
       .Sort(SortExpressionComparer<CrystalBerryViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _crystalBerriesSaveDataFiltered)
       .Subscribe();
   }

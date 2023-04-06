@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Threading;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using DynamicData.Binding;
-using Reactive.Bindings.Extensions;
-using Reactive.Bindings.TinyLinq;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -111,7 +111,7 @@ public partial class StatsViewModel : ObservableObject
 
     _statsBonuses.ToObservableChangeSet()
       .Filter(x => x.Target == -1)
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _partyStatBonuses)
       .Subscribe();
 
@@ -124,7 +124,7 @@ public partial class StatsViewModel : ObservableObject
 
     _statsBonuses.ToObservableChangeSet()
       .Filter(memberFilter)
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _memberStatBonuses)
       .Subscribe(_ => OnPropertyChanged(nameof(MemberStatBonuses)));
   }

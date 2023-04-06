@@ -2,13 +2,13 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using BugFablesLib;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using DynamicData.Binding;
-using Reactive.Bindings.Extensions;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -81,7 +81,7 @@ public partial class LibraryViewModel : ObservableObject
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _discoveries)
       .Subscribe();
 
@@ -96,7 +96,7 @@ public partial class LibraryViewModel : ObservableObject
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _bestiary)
       .Subscribe();
 
@@ -111,7 +111,7 @@ public partial class LibraryViewModel : ObservableObject
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _recipes)
       .Subscribe();
 
@@ -126,7 +126,7 @@ public partial class LibraryViewModel : ObservableObject
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _records)
       .Subscribe();
 
@@ -141,7 +141,7 @@ public partial class LibraryViewModel : ObservableObject
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
-      .ObserveOnUIDispatcher()
+      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _seenAreas)
       .Subscribe();
   }
