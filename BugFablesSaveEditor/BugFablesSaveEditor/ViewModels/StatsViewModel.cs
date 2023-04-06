@@ -15,7 +15,7 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class StatsViewModel : ObservableObject
 {
-  private readonly ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData>
+  private readonly ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData>
     _statsBonuses;
 
   [ObservableProperty]
@@ -25,7 +25,7 @@ public partial class StatsViewModel : ObservableObject
   private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _memberStatBonuses = null!;
 
   [ObservableProperty]
-  private ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
+  private ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
 
   [ObservableProperty]
   [NotifyPropertyChangedFor(nameof(TotalMemberMaxHpBonus))]
@@ -79,7 +79,7 @@ public partial class StatsViewModel : ObservableObject
   private void AddStatPartyBonus(ObservableStatsBonusSaveData statsBonusSaveData)
   {
     statsBonusSaveData.Target = -1;
-    _statsBonuses.Add(new(statsBonusSaveData.UnderlyingData));
+    _statsBonuses.Add(new(statsBonusSaveData.Model));
     OnPropertyChanged(nameof(TotalPartyMaxMpBonus));
     OnPropertyChanged(nameof(TotalPartyMaxTpBonus));
   }
@@ -88,7 +88,7 @@ public partial class StatsViewModel : ObservableObject
   private void AddStatPartyMemberBonus(ObservableStatsBonusSaveData statsBonusSaveData)
   {
     statsBonusSaveData.Target = SelectedPartyMember!.AnimId.Id;
-    _statsBonuses.Add(new(statsBonusSaveData.UnderlyingData));
+    _statsBonuses.Add(new(statsBonusSaveData.Model));
     OnPropertyChanged(nameof(TotalMemberMaxHpBonus));
     OnPropertyChanged(nameof(TotalMemberAttackBonus));
     OnPropertyChanged(nameof(TotalMemberDefenseBonus));
@@ -100,10 +100,9 @@ public partial class StatsViewModel : ObservableObject
   private void DeleteStatBonus(ObservableStatsBonusSaveData statsBonus) =>
     _statsBonuses.Remove(statsBonus);
 
-  public StatsViewModel(
-    ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statsBonuses,
-    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
-    ObservableGlobalSaveData globalSaveData)
+  public StatsViewModel(ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statsBonuses,
+                        ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
+                        ObservableGlobalSaveData globalSaveData)
   {
     _statsBonuses = statsBonuses;
     _partyMembers = partyMembers;
@@ -131,8 +130,8 @@ public partial class StatsViewModel : ObservableObject
 
   public StatsViewModel()
   {
-    _statsBonuses = new(new(), _ => new List<ObservableStatsBonusSaveData>());
-    _partyMembers = new(new(), _ => new List<ObservablePartyMemberSaveData>());
+    _statsBonuses = new(new(), x => new ObservableStatsBonusSaveData(x));
+    _partyMembers = new(new(), x => new ObservablePartyMemberSaveData(x));
     _globalSaveData = new(new());
   }
 }

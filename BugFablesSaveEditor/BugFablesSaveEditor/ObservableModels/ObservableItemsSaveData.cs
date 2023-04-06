@@ -1,31 +1,27 @@
-using System.Linq;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservableItemsSaveData : ObservableModel
+public partial class ObservableItemsSaveData : ObservableObject
 {
-  public sealed override ItemsSaveData UnderlyingData { get; }
+  public ItemsSaveData Model { get; }
 
   [ObservableProperty]
-  private ObservableBfCollection<BfItem, ObservableBfNamedId> _inventory;
+  private ViewModelCollection<BfItem, ObservableBfNamedId> _inventory;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfItem, ObservableBfNamedId> _key;
+  private ViewModelCollection<BfItem, ObservableBfNamedId> _key;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfItem, ObservableBfNamedId> _stored;
+  private ViewModelCollection<BfItem, ObservableBfNamedId> _stored;
 
-  public ObservableItemsSaveData(ItemsSaveData itemsSaveData) : base(itemsSaveData)
+  public ObservableItemsSaveData(ItemsSaveData itemsSaveData)
   {
-    UnderlyingData = itemsSaveData;
-    _inventory = new(UnderlyingData.Inventory,
-      x => x.Select(bfItems => new ObservableBfNamedId(bfItems)).ToList());
-    _key = new(UnderlyingData.KeyItems,
-      x => x.Select(bfItems => new ObservableBfNamedId(bfItems)).ToList());
-    _stored = new(UnderlyingData.Stored,
-      x => x.Select(bfItems => new ObservableBfNamedId(bfItems)).ToList());
+    Model = itemsSaveData;
+    _inventory = new(Model.Inventory, x => new ObservableBfNamedId(x));
+    _key = new(Model.KeyItems, x => new ObservableBfNamedId(x));
+    _stored = new(Model.Stored, x => new ObservableBfNamedId(x));
   }
 }

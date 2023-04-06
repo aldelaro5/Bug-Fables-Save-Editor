@@ -1,32 +1,27 @@
-using System.Linq;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservableBoardQuestsSaveData : ObservableModel
+public partial class ObservableBoardQuestsSaveData : ObservableObject
 {
-  public sealed override BoardQuestsSaveData UnderlyingData { get; }
+  public BoardQuestsSaveData Model { get; }
 
   [ObservableProperty]
-  private ObservableBfCollection<BfQuest, ObservableBfNamedId> _opened;
+  private ViewModelCollection<BfQuest, ObservableBfNamedId> _opened;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfQuest, ObservableBfNamedId> _taken;
+  private ViewModelCollection<BfQuest, ObservableBfNamedId> _taken;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfQuest, ObservableBfNamedId> _completed;
+  private ViewModelCollection<BfQuest, ObservableBfNamedId> _completed;
 
-  public ObservableBoardQuestsSaveData(BoardQuestsSaveData boardQuestsSaveData) :
-    base(boardQuestsSaveData)
+  public ObservableBoardQuestsSaveData(BoardQuestsSaveData boardQuestsSaveData)
   {
-    UnderlyingData = boardQuestsSaveData;
-    _opened = new(UnderlyingData.Opened,
-      list => list.Select(x => new ObservableBfNamedId(x)).ToList());
-    _taken = new(UnderlyingData.Taken,
-      list => list.Select(x => new ObservableBfNamedId(x)).ToList());
-    _completed = new(UnderlyingData.Completed,
-      list => list.Select(x => new ObservableBfNamedId(x)).ToList());
+    Model = boardQuestsSaveData;
+    _opened = new(Model.Opened, x => new ObservableBfNamedId(x));
+    _taken = new(Model.Taken, x => new ObservableBfNamedId(x));
+    _completed = new(Model.Completed, x => new ObservableBfNamedId(x));
   }
 }

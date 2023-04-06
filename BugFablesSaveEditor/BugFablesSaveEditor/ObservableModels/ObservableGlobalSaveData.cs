@@ -10,9 +10,9 @@ using static BugFablesLib.SaveData.GlobalSaveData;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public sealed partial class ObservableGlobalSaveData : ObservableModel
+public partial class ObservableGlobalSaveData : ObservableObject
 {
-  public override GlobalSaveData UnderlyingData { get; }
+  public GlobalSaveData Model { get; }
 
   [ObservableProperty]
   private ObservableBfNamedId _currentArea;
@@ -25,96 +25,95 @@ public sealed partial class ObservableGlobalSaveData : ObservableModel
 
   public int BerryCount
   {
-    get => UnderlyingData.BerryCount;
-    set => SetProperty(UnderlyingData.BerryCount, value, UnderlyingData, (data, s) => data.BerryCount = s);
+    get => Model.BerryCount;
+    set => SetProperty(Model.BerryCount, value, Model, (data, s) => data.BerryCount = s);
   }
 
   public int Exp
   {
-    get => UnderlyingData.Exp;
-    set => SetProperty(UnderlyingData.Exp, value, UnderlyingData, (data, s) => data.Exp = s);
+    get => Model.Exp;
+    set => SetProperty(Model.Exp, value, Model, (data, s) => data.Exp = s);
   }
 
   public int MaxMp
   {
-    get => UnderlyingData.MaxMp;
-    set => SetProperty(UnderlyingData.MaxMp, value, UnderlyingData, (data, s) => data.MaxMp = s);
+    get => Model.MaxMp;
+    set => SetProperty(Model.MaxMp, value, Model, (data, s) => data.MaxMp = s);
   }
 
   public int MaxTp
   {
-    get => UnderlyingData.MaxTp;
-    set => SetProperty(UnderlyingData.MaxTp, value, UnderlyingData, (data, s) => data.MaxTp = s);
+    get => Model.MaxTp;
+    set => SetProperty(Model.MaxTp, value, Model, (data, s) => data.MaxTp = s);
   }
 
   public int Mp
   {
-    get => UnderlyingData.Mp;
-    set => SetProperty(UnderlyingData.Mp, value, UnderlyingData, (data, s) => data.Mp = s);
+    get => Model.Mp;
+    set => SetProperty(Model.Mp, value, Model, (data, s) => data.Mp = s);
   }
 
   public int NbrMaxItemsInventory
   {
-    get => UnderlyingData.NbrMaxItemsInventory;
-    set => SetProperty(UnderlyingData.NbrMaxItemsInventory, value, UnderlyingData,
+    get => Model.NbrMaxItemsInventory;
+    set => SetProperty(Model.NbrMaxItemsInventory, value, Model,
       (data, s) => data.NbrMaxItemsInventory = s);
   }
 
   public int NbrMaxItemsStorage
   {
-    get => UnderlyingData.NbrMaxItemsStorage;
-    set => SetProperty(UnderlyingData.NbrMaxItemsStorage, value, UnderlyingData,
+    get => Model.NbrMaxItemsStorage;
+    set => SetProperty(Model.NbrMaxItemsStorage, value, Model,
       (data, s) => data.NbrMaxItemsStorage = s);
   }
 
   public int NeededExp
   {
-    get => UnderlyingData.NeededExp;
-    set => SetProperty(UnderlyingData.NeededExp, value, UnderlyingData, (data, s) => data.NeededExp = s);
+    get => Model.NeededExp;
+    set => SetProperty(Model.NeededExp, value, Model, (data, s) => data.NeededExp = s);
   }
 
   public int PlayTimeHours
   {
-    get => UnderlyingData.PlayTimeHours;
-    set => SetProperty(UnderlyingData.PlayTimeHours, value, UnderlyingData, (data, s) => data.PlayTimeHours = s);
+    get => Model.PlayTimeHours;
+    set => SetProperty(Model.PlayTimeHours, value, Model, (data, s) => data.PlayTimeHours = s);
   }
 
   public int PlayTimeMinutes
   {
-    get => UnderlyingData.PlayTimeMinutes;
-    set => SetProperty(UnderlyingData.PlayTimeMinutes, value, UnderlyingData, (data, s) => data.PlayTimeMinutes = s);
+    get => Model.PlayTimeMinutes;
+    set => SetProperty(Model.PlayTimeMinutes, value, Model, (data, s) => data.PlayTimeMinutes = s);
   }
 
   public int PlayTimeSeconds
   {
-    get => UnderlyingData.PlayTimeSeconds;
-    set => SetProperty(UnderlyingData.PlayTimeSeconds, value, UnderlyingData, (data, s) => data.PlayTimeSeconds = s);
+    get => Model.PlayTimeSeconds;
+    set => SetProperty(Model.PlayTimeSeconds, value, Model, (data, s) => data.PlayTimeSeconds = s);
   }
 
   public int Rank
   {
-    get => UnderlyingData.Rank;
-    set => SetProperty(UnderlyingData.Rank, value, UnderlyingData, (data, s) => data.Rank = s);
+    get => Model.Rank;
+    set => SetProperty(Model.Rank, value, Model, (data, s) => data.Rank = s);
   }
 
   public SaveProgressIcon LastProgressIcon
   {
-    get => UnderlyingData.LastProgressIcon;
-    set => SetProperty(UnderlyingData.LastProgressIcon, value, UnderlyingData, (data, s) => data.LastProgressIcon = s);
+    get => Model.LastProgressIcon;
+    set => SetProperty(Model.LastProgressIcon, value, Model, (data, s) => data.LastProgressIcon = s);
   }
 
   public int Tp
   {
-    get => UnderlyingData.Tp;
-    set => SetProperty(UnderlyingData.Tp, value, UnderlyingData, (data, s) => data.Tp = s);
+    get => Model.Tp;
+    set => SetProperty(Model.Tp, value, Model, (data, s) => data.Tp = s);
   }
 
-  public ObservableGlobalSaveData(GlobalSaveData globalSaveData) :
-    base(globalSaveData)
+  public ObservableGlobalSaveData(GlobalSaveData globalSaveData)
   {
-    UnderlyingData = globalSaveData;
-    _currentMap = new ObservableBfNamedId(UnderlyingData.CurrentMap);
-    _currentArea = new ObservableBfNamedId(UnderlyingData.CurrentArea);
+    Model = globalSaveData;
+    _currentMap = new ObservableBfNamedId(Model.CurrentMap);
+    _currentArea = new ObservableBfNamedId(Model.CurrentArea);
 
     CurrentArea
       .WhenValueChanged(x => x.Id)

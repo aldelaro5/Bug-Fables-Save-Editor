@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -50,14 +49,11 @@ public partial class FlagstringViewModel : ObservableObject
 
 public partial class FlagsViewModel : ObservableRecipient
 {
-  private readonly ObservableBfCollection<FlagSaveData, ObservableFlagSaveData>
-    _flagsSaveData;
+  private readonly ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _flagsSaveData;
 
-  private readonly ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData>
-    _flagvarsSaveData;
+  private readonly ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> _flagvarsSaveData;
 
-  private readonly ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData>
-    _flagstringsSaveData;
+  private readonly ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> _flagstringsSaveData;
 
   private readonly ObservableCollection<FlagViewModel>
     _regionalFlagsSaveData;
@@ -91,17 +87,17 @@ public partial class FlagsViewModel : ObservableRecipient
 
   public FlagsViewModel()
   {
-    _flagsSaveData = new(new(), _ => new List<ObservableFlagSaveData>());
-    _flagvarsSaveData = new(new(), _ => new List<ObservableFlagvarSaveData>());
-    _flagstringsSaveData = new(new(), _ => new List<ObservableFlagstringSaveData>());
+    _flagsSaveData = new(new(), x => new ObservableFlagSaveData(x));
+    _flagvarsSaveData = new(new(), x => new ObservableFlagvarSaveData(x));
+    _flagstringsSaveData = new(new(), x => new ObservableFlagstringSaveData(x));
     _regionalFlagsSaveData = new();
   }
 
-  public FlagsViewModel(ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> flags,
-                        ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars,
-                        ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData>
+  public FlagsViewModel(ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flags,
+                        ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars,
+                        ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData>
                           flagstrings,
-                        ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags)
+                        ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags)
   {
     _flagsSaveData = flags;
     _flagvarsSaveData = flagvars;

@@ -1,14 +1,16 @@
 using System;
 using System.Linq;
 using BugFablesLib.SaveData;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Humanizer;
 using static BugFablesLib.SaveData.StatBonusSaveData;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableStatsBonusSaveData : ObservableModel
+public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper
 {
-  public sealed override StatBonusSaveData UnderlyingData { get; }
+  object IModelWrapper.Model { get => Model; }
+  public StatBonusSaveData Model { get; }
 
   public string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
     .Select(x => x.Humanize(LetterCasing.Title))
@@ -18,29 +20,25 @@ public class ObservableStatsBonusSaveData : ObservableModel
 
   public int Target
   {
-    get => UnderlyingData.Target;
-    set => SetProperty(UnderlyingData.Target, value, UnderlyingData, (data, i) => data.Target = i);
+    get => Model.Target;
+    set => SetProperty(Model.Target, value, Model, (data, i) => data.Target = i);
   }
 
   public StatBonusType Type
   {
-    get => UnderlyingData.Type;
+    get => Model.Type;
     set
     {
-      SetProperty(UnderlyingData.Type, value, UnderlyingData, (data, i) => data.Type = i);
+      SetProperty(Model.Type, value, Model, (data, i) => data.Type = i);
       OnPropertyChanged(nameof(TypeName));
     }
   }
 
   public int Amount
   {
-    get => UnderlyingData.Amount;
-    set => SetProperty(UnderlyingData.Amount, value, UnderlyingData, (data, i) => data.Amount = i);
+    get => Model.Amount;
+    set => SetProperty(Model.Amount, value, Model, (data, i) => data.Amount = i);
   }
 
-  public ObservableStatsBonusSaveData(StatBonusSaveData statBonusSaveData) :
-    base(statBonusSaveData)
-  {
-    UnderlyingData = statBonusSaveData;
-  }
+  public ObservableStatsBonusSaveData(StatBonusSaveData statBonusSaveData) => Model = statBonusSaveData;
 }

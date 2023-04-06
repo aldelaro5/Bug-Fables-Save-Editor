@@ -1,4 +1,3 @@
-using System.Linq;
 using BugFablesLib;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
@@ -44,37 +43,26 @@ public partial class SaveDataViewModel : ObservableObject
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries = new(
-      SaveData.CrystalBerries,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData>
-      enemyEncounters = new(SaveData.EnemyEncounters,
-        cbs => cbs.Select(x => new ObservableEnemyEncounterSaveData(x)).ToList());
-    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers = new(SaveData.Followers,
-      cbs => cbs.Select(x => new ObservableBfNamedId(x)).ToList());
-    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(
-      SaveData.PartyMembers,
-      cbs => cbs.Select(x => new ObservablePartyMemberSaveData(x)).ToList());
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(
-      SaveData.Flagvars,
-      cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
-    ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(
-      SaveData.Flagstrings,
-      cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
-    ObservableBfCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(
-      SaveData.Medals,
-      cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(
-      SaveData.RegionalFlags,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(
-      SaveData.SamiraSongs,
-      cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
-    ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(
-      SaveData.StatBonuses,
-      cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
+    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries = new(
+      SaveData.CrystalBerries, x => new ObservableFlagSaveData(x));
+    ViewModelCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData>
+      enemyEncounters = new(SaveData.EnemyEncounters, x => new ObservableEnemyEncounterSaveData(x));
+    ViewModelCollection<BfAnimId, ObservableBfNamedId> followers = new(SaveData.Followers, x => new ObservableBfNamedId(x));
+    ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(
+      SaveData.PartyMembers, x => new ObservablePartyMemberSaveData(x));
+    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags, x => new ObservableFlagSaveData(x));
+    ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(
+      SaveData.Flagvars, x => new ObservableFlagvarSaveData(x));
+    ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(
+      SaveData.Flagstrings, x => new ObservableFlagstringSaveData(x));
+    ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(
+      SaveData.Medals, x => new ObservableMedalOnHandSaveData(x));
+    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(
+      SaveData.RegionalFlags, x => new ObservableFlagSaveData(x));
+    ViewModelCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(
+      SaveData.SamiraSongs, x => new ObservableMusicSaveData(x));
+    ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(
+      SaveData.StatBonuses, x => new ObservableStatsBonusSaveData(x));
     ObservableItemsSaveData items = new(SaveData.Items);
     ObservableLibrarySaveData library = new(SaveData.Library);
     ObservableMedalShopsStockSaveData medalShopsPools = new(SaveData.MedalShopsPools);

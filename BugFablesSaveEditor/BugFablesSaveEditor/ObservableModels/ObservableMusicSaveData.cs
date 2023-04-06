@@ -3,23 +3,23 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservableMusicSaveData : ObservableModel
+public partial class ObservableMusicSaveData : ObservableObject, IModelWrapper
 {
-  public sealed override BfMusicSaveData UnderlyingData { get; }
+  object IModelWrapper.Model { get => Model; }
+  public BfMusicSaveData Model { get; }
 
   [ObservableProperty]
   private ObservableBfNamedId _music;
 
   public bool Bought
   {
-    get => UnderlyingData.Bought;
-    set => SetProperty(UnderlyingData.Bought, value, UnderlyingData, (data, b) => data.Bought = b);
+    get => Model.Bought;
+    set => SetProperty(Model.Bought, value, Model, (data, b) => data.Bought = b);
   }
 
-  public ObservableMusicSaveData(BfMusicSaveData musicSaveData) :
-    base(musicSaveData)
+  public ObservableMusicSaveData(BfMusicSaveData musicSaveData)
   {
-    UnderlyingData = musicSaveData;
+    Model = musicSaveData;
     _music = new ObservableBfNamedId(musicSaveData.Song);
   }
 }

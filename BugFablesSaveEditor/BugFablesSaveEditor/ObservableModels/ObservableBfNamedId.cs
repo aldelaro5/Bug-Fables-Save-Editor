@@ -1,31 +1,30 @@
 using System.Collections.Generic;
 using BugFablesLib;
 using BugFablesLib.Data;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableBfNamedId : ObservableModel
+public class ObservableBfNamedId : ObservableObject, IModelWrapper
 {
-  public sealed override BfSerializableNamedId UnderlyingData { get; }
+  object IModelWrapper.Model { get => Model; }
+  public BfSerializableNamedId Model { get; }
 
   public int Id
   {
-    get => UnderlyingData.Id;
+    get => Model.Id;
     set
     {
-      // Workaround Avalonia bug:
+      // Workaround Avalonia bug https://github.com/AvaloniaUI/Avalonia/issues/10846
       if (value >= 0)
-        SetProperty(UnderlyingData.Id, value, UnderlyingData, (namedId, i) => namedId.Id = i);
+        SetProperty(Model.Id, value, Model, (namedId, i) => namedId.Id = i);
     }
   }
 
-  public string Name => UnderlyingData.Name;
-  public IReadOnlyList<string> AllResourceNames => BugFablesLib.Utils.GetAllBfNames(UnderlyingData);
+  public string Name => Model.Name;
+  public IReadOnlyList<string> AllResourceNames => BugFablesLib.Utils.GetAllBfNames(Model);
 
-  public ObservableBfNamedId(BfSerializableNamedId namedId) : base(namedId)
-  {
-    UnderlyingData = namedId;
-  }
+  public ObservableBfNamedId(BfSerializableNamedId namedId) => Model = namedId;
 
   public BfQuest ToQuest() => new() { Id = Id };
   public BfMedal ToMedal() => new() { Id = Id };

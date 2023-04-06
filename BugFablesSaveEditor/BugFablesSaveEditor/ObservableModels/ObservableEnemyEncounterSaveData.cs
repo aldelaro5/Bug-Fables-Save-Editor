@@ -1,26 +1,24 @@
 using BugFablesLib.SaveData;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableEnemyEncounterSaveData : ObservableModel
+public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper
 {
-  public sealed override EnemyEncounterSaveData UnderlyingData { get; }
+  object IModelWrapper.Model { get => Model; }
+  public EnemyEncounterSaveData Model { get; }
 
   public int NbrSeen
   {
-    get => UnderlyingData.NbrSeen;
-    set => SetProperty(UnderlyingData.NbrSeen, value, UnderlyingData, (data, i) => data.NbrSeen = i);
+    get => Model.NbrSeen;
+    set => SetProperty(Model.NbrSeen, value, Model, (data, i) => data.NbrSeen = i);
   }
 
   public int NbrDefeated
   {
-    get => UnderlyingData.NbrDefeated;
-    set => SetProperty(UnderlyingData.NbrDefeated, value, UnderlyingData, (data, i) => data.NbrDefeated = i);
+    get => Model.NbrDefeated;
+    set => SetProperty(Model.NbrDefeated, value, Model, (data, i) => data.NbrDefeated = i);
   }
 
-  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) :
-    base(enemyEncounterSaveData)
-  {
-    UnderlyingData = enemyEncounterSaveData;
-  }
+  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) => Model = enemyEncounterSaveData;
 }

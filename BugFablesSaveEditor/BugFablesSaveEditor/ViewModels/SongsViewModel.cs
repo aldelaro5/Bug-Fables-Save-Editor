@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,25 +8,25 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class SongsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> _musicSaveData;
+  private ViewModelCollection<BfMusicSaveData, ObservableMusicSaveData> _musicSaveData;
 
   [ObservableProperty]
   private ObservableMusicSaveData _newMusic = new(new BfMusicSaveData());
 
   public SongsViewModel()
   {
-    _musicSaveData = new(new(), _ => new List<ObservableMusicSaveData>());
+    _musicSaveData = new(new(), x => new ObservableMusicSaveData(x));
   }
 
   public SongsViewModel(
-    ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> musicSaveData)
+    ViewModelCollection<BfMusicSaveData, ObservableMusicSaveData> musicSaveData)
   {
     _musicSaveData = musicSaveData;
   }
 
   [RelayCommand]
   private void AddMusic(ObservableMusicSaveData music) =>
-    MusicSaveData.Add(new(music.UnderlyingData));
+    MusicSaveData.Add(new(music.Model));
 
   [RelayCommand]
   private void DeleteMusic(ObservableMusicSaveData music) =>

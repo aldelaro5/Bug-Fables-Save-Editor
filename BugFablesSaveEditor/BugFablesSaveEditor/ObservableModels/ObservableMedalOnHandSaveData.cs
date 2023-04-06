@@ -5,26 +5,26 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservableMedalOnHandSaveData : ObservableModel
+public partial class ObservableMedalOnHandSaveData : ObservableObject, IModelWrapper
 {
-  public sealed override BfMedalOnHandSaveData UnderlyingData { get; }
+  object IModelWrapper.Model { get => Model; }
+  public BfMedalOnHandSaveData Model { get; }
 
   [ObservableProperty]
   private ObservableBfNamedId _medal;
 
   public int MedalEquipTarget
   {
-    get => UnderlyingData.MedalEquipTarget + 2;
-    set => SetProperty(UnderlyingData.MedalEquipTarget, value - 2, UnderlyingData,
+    get => Model.MedalEquipTarget + 2;
+    set => SetProperty(Model.MedalEquipTarget, value - 2, Model,
       (data, i) => data.MedalEquipTarget = i);
   }
 
   public IReadOnlyList<string> MedalEquipTargets { get; }
 
-  public ObservableMedalOnHandSaveData(BfMedalOnHandSaveData medalOnHandSaveData) :
-    base(medalOnHandSaveData)
+  public ObservableMedalOnHandSaveData(BfMedalOnHandSaveData medalOnHandSaveData)
   {
-    UnderlyingData = medalOnHandSaveData;
+    Model = medalOnHandSaveData;
     _medal = new ObservableBfNamedId(medalOnHandSaveData.Medal);
     MedalEquipTargets = GenerateMedalEquipTargetsList();
   }

@@ -4,17 +4,15 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using BugFablesLib;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableBfCollection<TSource, TObservable> : ObservableCollection<TObservable>
-  where TSource : IBfSerializable
-  where TObservable : ObservableModel
+public class ViewModelCollection<TModel, TVm> : ObservableCollection<TVm>
+  where TVm : IModelWrapper
 {
-  private IList<TSource> _underCollection;
+  private IList<TModel> _underCollection;
 
-  public IList<TSource> UnderCollection
+  public IList<TModel> UnderCollection
   {
     get => _underCollection;
     set
@@ -24,18 +22,17 @@ public class ObservableBfCollection<TSource, TObservable> : ObservableCollection
     }
   }
 
-  public ObservableBfCollection(Collection<TSource> collection,
-                                Func<Collection<TSource>, IList<TObservable>> creator) :
-    base(creator(collection)) =>
+  public ViewModelCollection(Collection<TModel> collection, Func<TModel, TVm> creator) :
+    base(collection.Select(creator.Invoke)) =>
     _underCollection = collection;
 
   protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
   {
-    var newList = e.NewItems?.Cast<TObservable>().ToList();
+    var newList = e.NewItems?.Cast<TVm>().ToList();
     switch (e.Action)
     {
       case NotifyCollectionChangedAction.Add:
-        UnderCollection.Insert(e.NewStartingIndex, (TSource)newList![0].UnderlyingData);
+        UnderCollection.Insert(e.NewStartingIndex, (TModel)newList![0].Model);
         break;
       case NotifyCollectionChangedAction.Remove:
         UnderCollection.RemoveAt(e.OldStartingIndex);

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
@@ -10,7 +9,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class MedalsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ObservableBfCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData>
+  private ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData>
     _medalOnHandSaveData;
 
   [ObservableProperty]
@@ -36,13 +35,13 @@ public partial class MedalsViewModel : ObservableObject
 
   public MedalsViewModel()
   {
-    _medalOnHandSaveData = new(new(), _ => new List<ObservableMedalOnHandSaveData>());
+    _medalOnHandSaveData = new(new(), x => new ObservableMedalOnHandSaveData(x));
     _medalShopsStockPoolSaveData = new(new());
     _medalShopsAvailablePoolSaveData = new(new());
   }
 
   public MedalsViewModel(
-    ObservableBfCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData>
+    ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData>
       medalOnHandSaveData, ObservableMedalShopsStockSaveData medalShopsStockPoolSaveData,
     ObservableMedalShopsStockSaveData medalShopsAvailablePoolSaveData)
   {
@@ -60,7 +59,7 @@ public partial class MedalsViewModel : ObservableObject
 
   [RelayCommand]
   private void AddMedalOnHand(ObservableMedalOnHandSaveData medal) =>
-    MedalOnHandSaveData.Add(new(medal.UnderlyingData));
+    MedalOnHandSaveData.Add(new(medal.Model));
 
   [RelayCommand]
   private void DeleteMedalOnHand(ObservableMedalOnHandSaveData medal) =>

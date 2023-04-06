@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -27,7 +26,7 @@ public partial class CrystalBerryViewModel : ObservableObject
 
 public partial class CrystalBerriesViewModel : ObservableObject
 {
-  private readonly ObservableBfCollection<FlagSaveData, ObservableFlagSaveData>
+  private readonly ViewModelCollection<FlagSaveData, ObservableFlagSaveData>
     _crystalBerriesSaveData;
 
   [ObservableProperty]
@@ -39,11 +38,11 @@ public partial class CrystalBerriesViewModel : ObservableObject
 
   public CrystalBerriesViewModel()
   {
-    _crystalBerriesSaveData = new(new(), _ => new List<ObservableFlagSaveData>());
+    _crystalBerriesSaveData = new(new(), x => new ObservableFlagSaveData(x));
   }
 
   public CrystalBerriesViewModel(
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries)
+    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries)
   {
     _crystalBerriesSaveData = crystalBerries;
     _crystalBerriesSaveData

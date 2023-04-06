@@ -1,41 +1,34 @@
-using System.Linq;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservableLibrarySaveData : ObservableModel
+public partial class ObservableLibrarySaveData : ObservableObject
 {
-  public sealed override LibrarySaveData UnderlyingData { get; }
+  public LibrarySaveData Model { get; }
 
   [ObservableProperty]
-  private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _discoveries;
+  private ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _discoveries;
 
   [ObservableProperty]
-  private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _bestiary;
+  private ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _bestiary;
 
   [ObservableProperty]
-  private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _recipes;
+  private ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _recipes;
 
   [ObservableProperty]
-  private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _records;
+  private ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _records;
 
   [ObservableProperty]
-  private ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> _seenAreas;
+  private ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _seenAreas;
 
-  public ObservableLibrarySaveData(LibrarySaveData librarySaveData) :
-    base(librarySaveData)
+  public ObservableLibrarySaveData(LibrarySaveData librarySaveData)
   {
-    UnderlyingData = librarySaveData;
-    _discoveries = new(UnderlyingData.Discoveries,
-      flags => flags.Select(x => new ObservableFlagSaveData(x)).ToList());
-    _bestiary = new(UnderlyingData.Bestiary,
-      flags => flags.Select(x => new ObservableFlagSaveData(x)).ToList());
-    _recipes = new(UnderlyingData.Recipes,
-      flags => flags.Select(x => new ObservableFlagSaveData(x)).ToList());
-    _records = new(UnderlyingData.Records,
-      flags => flags.Select(x => new ObservableFlagSaveData(x)).ToList());
-    _seenAreas = new(UnderlyingData.SeenAreas,
-      flags => flags.Select(x => new ObservableFlagSaveData(x)).ToList());
+    Model = librarySaveData;
+    _discoveries = new(Model.Discoveries, x => new ObservableFlagSaveData(x));
+    _bestiary = new(Model.Bestiary, x => new ObservableFlagSaveData(x));
+    _recipes = new(Model.Recipes, x => new ObservableFlagSaveData(x));
+    _records = new(Model.Records, x => new ObservableFlagSaveData(x));
+    _seenAreas = new(Model.SeenAreas, x => new ObservableFlagSaveData(x));
   }
 }

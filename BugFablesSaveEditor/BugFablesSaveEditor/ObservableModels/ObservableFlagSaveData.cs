@@ -1,19 +1,18 @@
 using BugFablesLib.SaveData;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableFlagSaveData : ObservableModel
+public class ObservableFlagSaveData : ObservableObject, IModelWrapper
 {
-  public sealed override FlagSaveData UnderlyingData { get; }
+  object IModelWrapper.Model { get => Model; }
+  public FlagSaveData Model { get; }
 
   public bool Enabled
   {
-    get => UnderlyingData.Enabled;
-    set => SetProperty(UnderlyingData.Enabled, value, UnderlyingData, (data, b) => data.Enabled = b);
+    get => Model.Enabled;
+    set => SetProperty(Model.Enabled, value, Model, (data, b) => data.Enabled = b);
   }
 
-  public ObservableFlagSaveData(FlagSaveData flagSaveData) : base(flagSaveData)
-  {
-    UnderlyingData = flagSaveData;
-  }
+  public ObservableFlagSaveData(FlagSaveData flagSaveData) => Model = flagSaveData;
 }

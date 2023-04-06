@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
@@ -10,10 +9,10 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class PartyViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
+  private ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfAnimId, ObservableBfNamedId> _followers;
+  private ViewModelCollection<BfAnimId, ObservableBfNamedId> _followers;
 
   [ObservableProperty]
   private ObservablePartyMemberSaveData _newPartyMemberAnimId = new(new());
@@ -23,7 +22,7 @@ public partial class PartyViewModel : ObservableObject
 
   [RelayCommand]
   private void AddPartyMember(ObservablePartyMemberSaveData partyMember) =>
-    PartyMembers.Add(new(partyMember.UnderlyingData));
+    PartyMembers.Add(new(partyMember.Model));
 
   [RelayCommand]
   private void DeletePartyMember(ObservablePartyMemberSaveData partyMember) =>
@@ -34,11 +33,11 @@ public partial class PartyViewModel : ObservableObject
     Followers.Remove(followerAnimId);
 
   [RelayCommand]
-  private void AddFollower(ObservableBfNamedId animId) => Followers.Add(new(animId.UnderlyingData));
+  private void AddFollower(ObservableBfNamedId animId) => Followers.Add(new(animId.Model));
 
   public PartyViewModel(
-    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
-    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers)
+    ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
+    ViewModelCollection<BfAnimId, ObservableBfNamedId> followers)
   {
     _partyMembers = partyMembers;
     _followers = followers;
@@ -46,7 +45,7 @@ public partial class PartyViewModel : ObservableObject
 
   public PartyViewModel()
   {
-    _partyMembers = new(new(), _ => new List<ObservablePartyMemberSaveData>());
-    _followers = new(new(), _ => new List<ObservableBfNamedId>());
+    _partyMembers = new(new(), x => new ObservablePartyMemberSaveData(x));
+    _followers = new(new(), x => new ObservableBfNamedId(x));
   }
 }
