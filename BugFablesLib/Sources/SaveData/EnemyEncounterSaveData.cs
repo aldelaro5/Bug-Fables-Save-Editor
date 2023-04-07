@@ -28,10 +28,4 @@ public sealed class EnemyEncounterSaveData : IBfSerializable
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    NbrDefeated = 0;
-    NbrSeen = 0;
-  }
 }

@@ -30,10 +30,4 @@ public sealed class BfMusicSaveData : IBfSerializable
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    Song.Id = 0;
-    Bought = false;
-  }
 }
