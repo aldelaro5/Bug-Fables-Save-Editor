@@ -14,22 +14,20 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class LibraryViewModel : ObservableObject
 {
-  private readonly ObservableLibrarySaveData _observableLibrarySaveData;
+  [ObservableProperty]
+  private ReadOnlyObservableCollection<FlagViewModel> _discoveries;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _discoveries = null!;
+  private ReadOnlyObservableCollection<FlagViewModel> _bestiary;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _bestiary = null!;
+  private ReadOnlyObservableCollection<FlagViewModel> _recipes;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _recipes = null!;
+  private ReadOnlyObservableCollection<FlagViewModel> _records;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _records = null!;
-
-  [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _seenAreas = null!;
+  private ReadOnlyObservableCollection<FlagViewModel> _seenAreas;
 
   [ObservableProperty]
   private string _textFilterDiscoveries = "";
@@ -61,16 +59,11 @@ public partial class LibraryViewModel : ObservableObject
   [ObservableProperty]
   private bool _filterUnusedSeenAreas;
 
-  public LibraryViewModel()
-  {
-    _observableLibrarySaveData = new(new());
-  }
+  public LibraryViewModel() : this(new(new())) { }
 
   public LibraryViewModel(ObservableLibrarySaveData observableLibrarySaveData)
   {
-    _observableLibrarySaveData = observableLibrarySaveData;
-
-    _observableLibrarySaveData.Discoveries
+    observableLibrarySaveData.Discoveries
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
@@ -85,7 +78,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _discoveries)
       .Subscribe();
 
-    _observableLibrarySaveData.Bestiary
+    observableLibrarySaveData.Bestiary
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
@@ -100,7 +93,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _bestiary)
       .Subscribe();
 
-    _observableLibrarySaveData.Recipes
+    observableLibrarySaveData.Recipes
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
@@ -115,7 +108,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _recipes)
       .Subscribe();
 
-    _observableLibrarySaveData.Records
+    observableLibrarySaveData.Records
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
@@ -130,7 +123,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _records)
       .Subscribe();
 
-    _observableLibrarySaveData.SeenAreas
+    observableLibrarySaveData.SeenAreas
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""

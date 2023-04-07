@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -49,15 +50,6 @@ public partial class FlagstringViewModel : ObservableObject
 
 public partial class FlagsViewModel : ObservableRecipient
 {
-  private readonly ViewModelCollection<FlagSaveData, ObservableFlagSaveData> _flagsSaveData;
-
-  private readonly ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> _flagvarsSaveData;
-
-  private readonly ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> _flagstringsSaveData;
-
-  private readonly ObservableCollection<FlagViewModel>
-    _regionalFlagsSaveData;
-
   [ObservableProperty]
   private ReadOnlyObservableCollection<FlagViewModel> _flags = null!;
 
@@ -85,27 +77,25 @@ public partial class FlagsViewModel : ObservableRecipient
   [ObservableProperty]
   private bool _filterUnusedRegionals;
 
-  public FlagsViewModel()
+  private readonly ObservableCollection<FlagViewModel> _regionalFlagsSaveData;
+
+  public FlagsViewModel() : this(
+    new(new(), x => new ObservableFlagSaveData(x)),
+    new(new(), x => new ObservableFlagvarSaveData(x)),
+    new(new(), x => new ObservableFlagstringSaveData(x)),
+    new(new(), x => new ObservableFlagSaveData(x)))
   {
-    _flagsSaveData = new(new(), x => new ObservableFlagSaveData(x));
-    _flagvarsSaveData = new(new(), x => new ObservableFlagvarSaveData(x));
-    _flagstringsSaveData = new(new(), x => new ObservableFlagstringSaveData(x));
-    _regionalFlagsSaveData = new();
   }
 
   public FlagsViewModel(ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flags,
                         ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars,
-                        ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData>
-                          flagstrings,
+                        ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings,
                         ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags)
   {
-    _flagsSaveData = flags;
-    _flagvarsSaveData = flagvars;
-    _flagstringsSaveData = flagstrings;
     _regionalFlagsSaveData = new(regionalFlags
       .Select((x, i) => new FlagViewModel { Index = i, Flag = x }).ToList());
 
-    _flagsSaveData
+    flags
       .Select((data, i) => new FlagViewModel { Index = i, Flag = data, Description = ExtendedData.FlagsDetails[i] })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlags)
@@ -116,7 +106,7 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flags)
       .Subscribe();
 
-    _flagvarsSaveData
+    flagvars
       .Select((data, i) => new FlagvarViewModel()
       {
         Index = i, Flag = data, Description = ExtendedData.FlagvarsDetails[i]
@@ -130,7 +120,7 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flagvars)
       .Subscribe();
 
-    _flagstringsSaveData
+    flagstrings
       .Select((data, i) => new FlagstringViewModel()
       {
         Index = i, Flag = data, Description = ExtendedData.FlagstringsDetails[i]

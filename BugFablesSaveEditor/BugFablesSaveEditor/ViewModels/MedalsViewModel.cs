@@ -9,8 +9,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class MedalsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData>
-    _medalOnHandSaveData;
+  private ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> _medalOnHandSaveData;
 
   [ObservableProperty]
   private ObservableMedalShopsStockSaveData _medalShopsStockPoolSaveData;

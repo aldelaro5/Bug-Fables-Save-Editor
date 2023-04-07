@@ -26,26 +26,17 @@ public partial class CrystalBerryViewModel : ObservableObject
 
 public partial class CrystalBerriesViewModel : ObservableObject
 {
-  private readonly ViewModelCollection<FlagSaveData, ObservableFlagSaveData>
-    _crystalBerriesSaveData;
-
   [ObservableProperty]
-  private ReadOnlyObservableCollection<CrystalBerryViewModel> _crystalBerriesSaveDataFiltered =
-    null!;
+  private ReadOnlyObservableCollection<CrystalBerryViewModel> _crystalBerriesSaveDataFiltered = null!;
 
   [ObservableProperty]
   private string _textFilter = "";
 
-  public CrystalBerriesViewModel()
-  {
-    _crystalBerriesSaveData = new(new(), x => new ObservableFlagSaveData(x));
-  }
+  public CrystalBerriesViewModel() : this(new(new(), x => new ObservableFlagSaveData((x)))) { }
 
-  public CrystalBerriesViewModel(
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries)
+  public CrystalBerriesViewModel(ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries)
   {
-    _crystalBerriesSaveData = crystalBerries;
-    _crystalBerriesSaveData
+    crystalBerries
       .Select((data, i) => new CrystalBerryViewModel
       {
         Index = i,
