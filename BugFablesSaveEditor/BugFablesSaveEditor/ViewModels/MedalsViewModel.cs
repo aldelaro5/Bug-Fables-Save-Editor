@@ -17,21 +17,6 @@ public partial class MedalsViewModel : ObservableObject
   [ObservableProperty]
   private ObservableMedalShopsStockSaveData _medalShopsAvailablePoolSaveData;
 
-  [ObservableProperty]
-  private ObservableMedalOnHandSaveData _newMedalOnHand = new(new BfMedalOnHandSaveData());
-
-  [ObservableProperty]
-  private ObservableBfNamedId _newPoolMerabMedal = new(new BfMedal());
-
-  [ObservableProperty]
-  private ObservableBfNamedId _newPoolShadesMedal = new(new BfMedal());
-
-  [ObservableProperty]
-  private ObservableBfNamedId _newAvailableMerabMedal = new(new BfMedal());
-
-  [ObservableProperty]
-  private ObservableBfNamedId _newAvailableShadesMedal = new(new BfMedal());
-
   public MedalsViewModel()
   {
     _medalOnHandSaveData = new(new(), x => new ObservableMedalOnHandSaveData(x));
@@ -52,47 +37,7 @@ public partial class MedalsViewModel : ObservableObject
   [RelayCommand]
   private void UnequipAllMedals()
   {
-    foreach (ObservableMedalOnHandSaveData medal in MedalOnHandSaveData)
+    foreach (ObservableMedalOnHandSaveData medal in MedalOnHandSaveData.CollectionView)
       medal.MedalEquipTarget = 0;
   }
-
-  [RelayCommand]
-  private void AddMedalOnHand(ObservableMedalOnHandSaveData medal) =>
-    MedalOnHandSaveData.Add(new(medal.Model));
-
-  [RelayCommand]
-  private void DeleteMedalOnHand(ObservableMedalOnHandSaveData medal) =>
-    MedalOnHandSaveData.Remove(medal);
-
-  [RelayCommand]
-  private void AddMedalShopPoolMerab(ObservableBfNamedId medal) =>
-    MedalShopsStockPoolSaveData.Merab.Add(new(medal.ToMedal()));
-
-  [RelayCommand]
-  private void DeleteMedalShopPoolMerab(ObservableBfNamedId medal) =>
-    MedalShopsStockPoolSaveData.Merab.Remove(medal);
-
-  [RelayCommand]
-  private void AddMedalShopPoolShades(ObservableBfNamedId medal) =>
-    MedalShopsStockPoolSaveData.Shades.Add(new(medal.ToMedal()));
-
-  [RelayCommand]
-  private void DeleteMedalShopPoolShades(ObservableBfNamedId medal) =>
-    MedalShopsStockPoolSaveData.Shades.Remove(medal);
-
-  [RelayCommand]
-  private void AddMedalShopAvailableMerab(ObservableBfNamedId medal) =>
-    MedalShopsAvailablePoolSaveData.Merab.Add(new(medal.ToMedal()));
-
-  [RelayCommand]
-  private void DeleteMedalShopAvailableMerab(ObservableBfNamedId medal) =>
-    MedalShopsAvailablePoolSaveData.Merab.Remove(medal);
-
-  [RelayCommand]
-  private void AddMedalShopAvailableShades(ObservableBfNamedId medal) =>
-    MedalShopsAvailablePoolSaveData.Shades.Add(new(medal.ToMedal()));
-
-  [RelayCommand]
-  private void DeleteMedalShopAvailableShades(ObservableBfNamedId medal) =>
-    MedalShopsAvailablePoolSaveData.Shades.Remove(medal);
 }

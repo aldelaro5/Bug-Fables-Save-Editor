@@ -14,27 +14,6 @@ public partial class PartyViewModel : ObservableObject
   [ObservableProperty]
   private ViewModelCollection<BfAnimId, ObservableBfNamedId> _followers;
 
-  [ObservableProperty]
-  private ObservablePartyMemberSaveData _newPartyMemberAnimId = new(new());
-
-  [ObservableProperty]
-  private ObservableBfNamedId _newFollowerAnimId = new(new BfAnimId());
-
-  [RelayCommand]
-  private void AddPartyMember(ObservablePartyMemberSaveData partyMember) =>
-    PartyMembers.Add(new(partyMember.Model));
-
-  [RelayCommand]
-  private void DeletePartyMember(ObservablePartyMemberSaveData partyMember) =>
-    PartyMembers.Remove(partyMember);
-
-  [RelayCommand]
-  private void DeleteFollower(ObservableBfNamedId followerAnimId) =>
-    Followers.Remove(followerAnimId);
-
-  [RelayCommand]
-  private void AddFollower(ObservableBfNamedId animId) => Followers.Add(new(animId.Model));
-
   public PartyViewModel(
     ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
     ViewModelCollection<BfAnimId, ObservableBfNamedId> followers)

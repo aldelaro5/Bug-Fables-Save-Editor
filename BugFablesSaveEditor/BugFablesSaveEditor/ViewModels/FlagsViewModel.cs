@@ -92,10 +92,10 @@ public partial class FlagsViewModel : ObservableRecipient
                         ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings,
                         ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags)
   {
-    _regionalFlagsSaveData = new(regionalFlags
+    _regionalFlagsSaveData = new(regionalFlags.CollectionView
       .Select((x, i) => new FlagViewModel { Index = i, Flag = x }).ToList());
 
-    flags
+    flags.CollectionView
       .Select((data, i) => new FlagViewModel { Index = i, Flag = data, Description = ExtendedData.FlagsDetails[i] })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlags)
@@ -106,7 +106,7 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flags)
       .Subscribe();
 
-    flagvars
+    flagvars.CollectionView
       .Select((data, i) => new FlagvarViewModel()
       {
         Index = i, Flag = data, Description = ExtendedData.FlagvarsDetails[i]
@@ -120,7 +120,7 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flagvars)
       .Subscribe();
 
-    flagstrings
+    flagstrings.CollectionView
       .Select((data, i) => new FlagstringViewModel()
       {
         Index = i, Flag = data, Description = ExtendedData.FlagstringsDetails[i]

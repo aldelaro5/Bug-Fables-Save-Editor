@@ -36,7 +36,7 @@ public partial class CrystalBerriesViewModel : ObservableObject
 
   public CrystalBerriesViewModel(ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries)
   {
-    crystalBerries
+    crystalBerries.CollectionView
       .Select((data, i) => new CrystalBerryViewModel
       {
         Index = i,

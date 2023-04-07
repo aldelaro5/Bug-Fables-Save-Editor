@@ -38,7 +38,7 @@
       <StackPanel Margin="10,0,0,0" Orientation="Vertical">
         <Label DockPanel.Dock="Top" Content="Party members stats" />
         <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" Height="130"
-                  Items="{Binding PartyMembers}" SelectionMode="Single"
+                  Items="{Binding PartyMembers.CollectionView}" SelectionMode="Single"
                   SelectedItem="{Binding SelectedPartyMember}">
           <DataGrid.Columns>
             <DataGridTemplateColumn Header="AnimId" IsReadOnly="True">

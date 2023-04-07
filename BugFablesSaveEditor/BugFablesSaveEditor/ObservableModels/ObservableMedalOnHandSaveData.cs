@@ -5,9 +5,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservableMedalOnHandSaveData : ObservableObject, IModelWrapper
+public partial class ObservableMedalOnHandSaveData : ObservableObject, IModelWrapper<BfMedalOnHandSaveData>
 {
-  object IModelWrapper.Model { get => Model; }
   public BfMedalOnHandSaveData Model { get; }
 
   [ObservableProperty]

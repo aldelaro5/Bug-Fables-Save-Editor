@@ -3,9 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ObservablePartyMemberSaveData : ObservableObject, IModelWrapper
+public partial class ObservablePartyMemberSaveData : ObservableObject, IModelWrapper<PartyMemberSaveData>
 {
-  object IModelWrapper.Model { get => Model; }
   public PartyMemberSaveData Model { get; }
 
   [ObservableProperty]

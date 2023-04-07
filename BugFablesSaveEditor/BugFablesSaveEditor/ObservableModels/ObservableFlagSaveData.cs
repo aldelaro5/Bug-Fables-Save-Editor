@@ -3,9 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableFlagSaveData : ObservableObject, IModelWrapper
+public class ObservableFlagSaveData : ObservableObject, IModelWrapper<FlagSaveData>
 {
-  object IModelWrapper.Model { get => Model; }
   public FlagSaveData Model { get; }
 
   public bool Enabled

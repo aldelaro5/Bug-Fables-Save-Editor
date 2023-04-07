@@ -7,9 +7,8 @@ using static BugFablesLib.SaveData.StatBonusSaveData;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper
+public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper<StatBonusSaveData>
 {
-  object IModelWrapper.Model { get => Model; }
   public StatBonusSaveData Model { get; }
 
   public string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))

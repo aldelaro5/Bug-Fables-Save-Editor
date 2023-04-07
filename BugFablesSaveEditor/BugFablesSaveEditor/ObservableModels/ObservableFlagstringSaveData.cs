@@ -3,9 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableFlagstringSaveData : ObservableObject, IModelWrapper
+public class ObservableFlagstringSaveData : ObservableObject, IModelWrapper<FlagstringSaveData>
 {
-  object IModelWrapper.Model { get => Model; }
   public FlagstringSaveData Model { get; }
 
   public string Str

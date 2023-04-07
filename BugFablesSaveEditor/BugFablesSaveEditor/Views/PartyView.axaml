@@ -21,16 +21,16 @@
       <DockPanel>
         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Party members" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ContentControl Content="{Binding NewPartyMemberAnimId.AnimId}" />
+          <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
-                  Content="Add" Command="{Binding AddPartyMemberCommand}"
-                  CommandParameter="{Binding NewPartyMemberAnimId}" />
+                  Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
+                  CommandParameter="{Binding PartyMembers.NewViewModel}"/>
         </StackPanel>
         <DataGrid Classes="draggable"
                   AutoGenerateColumns="False"
                   CanUserSortColumns="False"
                   CanUserReorderColumns="False"
-                  Items="{Binding PartyMembers}">
+                  Items="{Binding PartyMembers.CollectionView}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
               <idd:ContextDropBehavior Handler="{StaticResource DataGridDndPartyMemberSaveData}" />
@@ -58,7 +58,7 @@
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).DeletePartyMemberCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).PartyMembers.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25" Background="DarkRed" />
@@ -74,13 +74,13 @@
       <DockPanel>
         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Followers" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ContentControl Content="{Binding NewFollowerAnimId}" />
+          <ContentControl Content="{Binding Followers.NewViewModel}" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
-                  Content="Add" Command="{Binding AddFollowerCommand}"
-                  CommandParameter="{Binding NewFollowerAnimId}" />
+                  Content="Add" Command="{Binding Followers.AddViewModelCommand}"
+                  CommandParameter="{Binding Followers.NewViewModel}"/>
         </StackPanel>
-        <c:BfNamedIdDataGrid Items="{Binding Followers}"
-                             DeleteCommand="{Binding DeleteFollowerCommand}" />
+        <c:BfNamedIdDataGrid Items="{Binding Followers.CollectionView}"
+                             DeleteCommand="{Binding Followers.RemoveViewModelCommand}" />
       </DockPanel>
     </DockPanel>
   </DockPanel>

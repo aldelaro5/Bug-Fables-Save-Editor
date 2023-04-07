@@ -63,7 +63,7 @@ public partial class LibraryViewModel : ObservableObject
 
   public LibraryViewModel(ObservableLibrarySaveData observableLibrarySaveData)
   {
-    observableLibrarySaveData.Discoveries
+    observableLibrarySaveData.Discoveries.CollectionView
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
@@ -78,7 +78,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _discoveries)
       .Subscribe();
 
-    observableLibrarySaveData.Bestiary
+    observableLibrarySaveData.Bestiary.CollectionView
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
@@ -93,7 +93,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _bestiary)
       .Subscribe();
 
-    observableLibrarySaveData.Recipes
+    observableLibrarySaveData.Recipes.CollectionView
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
@@ -108,7 +108,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _recipes)
       .Subscribe();
 
-    observableLibrarySaveData.Records
+    observableLibrarySaveData.Records.CollectionView
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
@@ -123,7 +123,7 @@ public partial class LibraryViewModel : ObservableObject
       .Bind(out _records)
       .Subscribe();
 
-    observableLibrarySaveData.SeenAreas
+    observableLibrarySaveData.SeenAreas.CollectionView
       .Select((x, i) => new FlagViewModel
       {
         Index = i, Flag = x, Description = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""

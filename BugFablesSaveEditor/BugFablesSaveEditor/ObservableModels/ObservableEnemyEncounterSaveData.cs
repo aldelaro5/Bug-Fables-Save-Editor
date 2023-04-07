@@ -3,9 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper
+public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper<EnemyEncounterSaveData>
 {
-  object IModelWrapper.Model { get => Model; }
   public EnemyEncounterSaveData Model { get; }
 
   public int NbrSeen

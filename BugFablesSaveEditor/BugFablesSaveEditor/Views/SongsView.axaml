@@ -17,17 +17,17 @@
   <DockPanel Width="505">
     <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
-      <ContentControl Content="{Binding NewMusic.Music}" />
-      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding NewMusic.Bought}" />
+      <ContentControl Content="{Binding MusicSaveData.NewViewModel.Music}" />
+      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding MusicSaveData.NewViewModel.Bought}" />
       <Button Margin="5,0,0,0" Content="Add"
-              Command="{Binding AddMusicCommand}"
-              CommandParameter="{Binding NewMusic}" />
+              Command="{Binding MusicSaveData.AddViewModelCommand}"
+              CommandParameter="{Binding MusicSaveData.NewViewModel}" />
     </StackPanel>
     <DataGrid Classes="draggable"
               AutoGenerateColumns="False"
               CanUserSortColumns="False"
               CanUserReorderColumns="False"
-              Items="{Binding MusicSaveData}">
+              Items="{Binding MusicSaveData.CollectionView}">
       <i:Interaction.Behaviors>
         <i:BehaviorCollection>
           <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMusicSaveData}" />
@@ -62,7 +62,7 @@
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:ObservableMusicSaveData">
               <Button Margin="5,0,0,0" Content="-"
-                      Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).DeleteMusicCommand}"
+                      Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).MusicSaveData.RemoveViewModelCommand}"
                       CommandParameter="{Binding }"
                       HorizontalContentAlignment="Center"
                       Width="25" Background="DarkRed" />
