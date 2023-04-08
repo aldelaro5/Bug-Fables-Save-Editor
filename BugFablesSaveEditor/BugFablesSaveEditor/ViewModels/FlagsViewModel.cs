@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -79,13 +78,7 @@ public partial class FlagsViewModel : ObservableRecipient
 
   private readonly ObservableCollection<FlagViewModel> _regionalFlagsSaveData;
 
-  public FlagsViewModel() : this(
-    new(new(), x => new ObservableFlagSaveData(x)),
-    new(new(), x => new ObservableFlagvarSaveData(x)),
-    new(new(), x => new ObservableFlagstringSaveData(x)),
-    new(new(), x => new ObservableFlagSaveData(x)))
-  {
-  }
+  public FlagsViewModel() : this(new(new()), new(new()), new(new()), new(new())) { }
 
   public FlagsViewModel(ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flags,
                         ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars,

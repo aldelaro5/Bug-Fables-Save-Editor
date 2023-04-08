@@ -27,9 +27,7 @@ public partial class MainViewModel : ObservableObject
   [ObservableProperty]
   private string _currentFilePath = "No save file, open an existing file or create a new one";
 
-  public MainViewModel() : this(new BfPcSaveData())
-  {
-  }
+  public MainViewModel() : this(new BfPcSaveData()) { }
 
   public MainViewModel(BfPcSaveData saveData)
   {

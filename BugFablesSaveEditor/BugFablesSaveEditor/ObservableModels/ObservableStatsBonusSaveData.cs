@@ -10,6 +10,8 @@ namespace BugFablesSaveEditor.ObservableModels;
 public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper<StatBonusSaveData>
 {
   public StatBonusSaveData Model { get; }
+  public static IModelWrapper<StatBonusSaveData> Factory(StatBonusSaveData model) =>
+    new ObservableStatsBonusSaveData(model);
 
   public string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
     .Select(x => x.Humanize(LetterCasing.Title))

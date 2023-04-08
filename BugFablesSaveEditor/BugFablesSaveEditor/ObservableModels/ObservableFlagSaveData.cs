@@ -6,6 +6,7 @@ namespace BugFablesSaveEditor.ObservableModels;
 public class ObservableFlagSaveData : ObservableObject, IModelWrapper<FlagSaveData>
 {
   public FlagSaveData Model { get; }
+  public static IModelWrapper<FlagSaveData> Factory(FlagSaveData model) => new ObservableFlagSaveData(model);
 
   public bool Enabled
   {

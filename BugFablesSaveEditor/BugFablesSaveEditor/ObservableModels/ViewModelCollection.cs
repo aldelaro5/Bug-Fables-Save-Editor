@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,33 +7,35 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject, IModelWrapper<IList<TModel>>
+public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject, IModelWrapper<Collection<TModel>>
   where TViewModel : IModelWrapper<TModel>
   where TModel : new()
 {
-  private readonly Func<TModel, TViewModel> _viewModelFactory;
   private readonly ObservableCollection<TViewModel> _collection;
 
-  public IList<TModel> Model { get; }
+  public Collection<TModel> Model { get; }
+
+  public static IModelWrapper<Collection<TModel>> Factory(Collection<TModel> model) =>
+    new ViewModelCollection<TModel, TViewModel>(model);
+
   public ReadOnlyObservableCollection<TViewModel> CollectionView { get; }
 
   [ObservableProperty]
   private TViewModel _newViewModel;
 
   [RelayCommand]
-  private void AddViewModel(TViewModel item) => _collection.Add(_viewModelFactory.Invoke(item.Model));
+  private void AddViewModel(TViewModel item) => _collection.Add((TViewModel)TViewModel.Factory(item.Model));
 
   [RelayCommand]
   private void RemoveViewModel(TViewModel item) => _collection.Remove(item);
 
-  public ViewModelCollection(Collection<TModel> collection, Func<TModel, TViewModel> creator)
+  public ViewModelCollection(Collection<TModel> collection)
   {
-    _collection = new(collection.Select(creator.Invoke));
+    _collection = new(collection.Select<TModel, TViewModel>(x => (TViewModel)TViewModel.Factory(x)));
     _collection.CollectionChanged += OnCollectionChanged;
     CollectionView = new(_collection);
-    _viewModelFactory = creator;
     Model = collection;
-    _newViewModel = creator.Invoke(new());
+    _newViewModel = (TViewModel)TViewModel.Factory(new());
   }
 
   private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

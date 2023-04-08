@@ -53,17 +53,17 @@ public class ObservableBfSaveData : ObservableObject
   public ObservableBfSaveData(BfSaveData saveData)
   {
     _saveData = saveData;
-    CrystalBerries = new(_saveData.CrystalBerries, x => new ObservableFlagSaveData(x));
-    EnemyEncounters = new(_saveData.EnemyEncounters, x => new ObservableEnemyEncounterSaveData(x));
-    Flags = new(_saveData.Flags, x => new ObservableFlagSaveData(x));
-    Flagvars = new(_saveData.Flagvars, x => new ObservableFlagvarSaveData(x));
-    Flagstrings = new(_saveData.Flagstrings, x => new ObservableFlagstringSaveData(x));
-    Followers = new(_saveData.Followers, x => new ObservableBfNamedId(x));
-    Medals = new(_saveData.Medals, x => new ObservableMedalOnHandSaveData(x));
-    PartyMembers = new(_saveData.PartyMembers, x => new ObservablePartyMemberSaveData(x));
-    RegionalFlags = new(_saveData.RegionalFlags, x => new ObservableFlagSaveData(x));
-    SamiraSongs = new(_saveData.SamiraSongs, x => new ObservableMusicSaveData(x));
-    StatBonuses = new(_saveData.StatBonuses, x => new ObservableStatsBonusSaveData(x));
+    CrystalBerries = new(_saveData.CrystalBerries);
+    EnemyEncounters = new(_saveData.EnemyEncounters);
+    Flags = new(_saveData.Flags);
+    Flagvars = new(_saveData.Flagvars);
+    Flagstrings = new(_saveData.Flagstrings);
+    Followers = new(_saveData.Followers);
+    Medals = new(_saveData.Medals);
+    PartyMembers = new(_saveData.PartyMembers);
+    RegionalFlags = new(_saveData.RegionalFlags);
+    SamiraSongs = new(_saveData.SamiraSongs);
+    StatBonuses = new(_saveData.StatBonuses);
     Global = new(_saveData.Global);
     Header = new(_saveData.Header);
     Items = new(_saveData.Items);

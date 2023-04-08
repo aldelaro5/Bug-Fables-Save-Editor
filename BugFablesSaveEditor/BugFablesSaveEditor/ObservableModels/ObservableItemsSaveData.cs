@@ -20,8 +20,8 @@ public partial class ObservableItemsSaveData : ObservableObject
   public ObservableItemsSaveData(ItemsSaveData itemsSaveData)
   {
     Model = itemsSaveData;
-    _inventory = new(Model.Inventory, x => new ObservableBfNamedId(x));
-    _key = new(Model.KeyItems, x => new ObservableBfNamedId(x));
-    _stored = new(Model.Stored, x => new ObservableBfNamedId(x));
+    _inventory = new(Model.Inventory);
+    _key = new(Model.KeyItems);
+    _stored = new(Model.Stored);
   }
 }

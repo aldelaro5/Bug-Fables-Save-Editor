@@ -6,6 +6,7 @@ namespace BugFablesSaveEditor.ObservableModels;
 public class ObservableFlagvarSaveData : ObservableObject, IModelWrapper<FlagvarSaveData>
 {
   public FlagvarSaveData Model { get; }
+  public static IModelWrapper<FlagvarSaveData> Factory(FlagvarSaveData model) => new ObservableFlagvarSaveData(model);
 
   public int Var
   {

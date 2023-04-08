@@ -7,6 +7,9 @@ public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper<
 {
   public EnemyEncounterSaveData Model { get; }
 
+  public static IModelWrapper<EnemyEncounterSaveData> Factory(EnemyEncounterSaveData model) =>
+    new ObservableEnemyEncounterSaveData(model);
+
   public int NbrSeen
   {
     get => Model.NbrSeen;
@@ -19,5 +22,6 @@ public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper<
     set => SetProperty(Model.NbrDefeated, value, Model, (data, i) => data.NbrDefeated = i);
   }
 
-  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) => Model = enemyEncounterSaveData;
+  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) =>
+    Model = enemyEncounterSaveData;
 }

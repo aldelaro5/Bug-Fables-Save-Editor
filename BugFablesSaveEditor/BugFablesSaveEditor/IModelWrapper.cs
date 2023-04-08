@@ -1,6 +1,7 @@
 namespace BugFablesSaveEditor;
 
-public interface IModelWrapper<out T>
+public interface IModelWrapper<T>
 {
   public T Model { get; }
+  public static abstract IModelWrapper<T> Factory(T model);
 }

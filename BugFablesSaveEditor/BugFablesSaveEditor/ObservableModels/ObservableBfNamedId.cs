@@ -5,14 +5,20 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ObservableModels;
 
-public class ObservableBfNamedId : ObservableObject, IModelWrapper<BfSerializableNamedId>,
-  IModelWrapper<BfQuest>, IModelWrapper<BfAnimId>, IModelWrapper<BfItem>, IModelWrapper<BfMedal>
+public class ObservableBfNamedId : ObservableObject, IModelWrapper<BfQuest>, IModelWrapper<BfAnimId>,
+  IModelWrapper<BfItem>, IModelWrapper<BfMedal>
 {
   public BfSerializableNamedId Model { get; }
+  private static ObservableBfNamedId Create(BfSerializableNamedId model) => new(model);
+
   BfMedal IModelWrapper<BfMedal>.Model { get => (BfMedal)Model; }
   BfItem IModelWrapper<BfItem>.Model { get => (BfItem)Model; }
   BfAnimId IModelWrapper<BfAnimId>.Model { get => (BfAnimId)Model; }
   BfQuest IModelWrapper<BfQuest>.Model { get => (BfQuest)Model; }
+  public static IModelWrapper<BfAnimId> Factory(BfAnimId model) => Create(model);
+  public static IModelWrapper<BfMedal> Factory(BfMedal model) => Create(model);
+  public static IModelWrapper<BfItem> Factory(BfItem model) => Create(model);
+  public static IModelWrapper<BfQuest> Factory(BfQuest model) => Create(model);
 
   public int Id
   {

@@ -32,7 +32,7 @@ public partial class CrystalBerriesViewModel : ObservableObject
   [ObservableProperty]
   private string _textFilter = "";
 
-  public CrystalBerriesViewModel() : this(new(new(), x => new ObservableFlagSaveData((x)))) { }
+  public CrystalBerriesViewModel() : this(new(new())) { }
 
   public CrystalBerriesViewModel(ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries)
   {

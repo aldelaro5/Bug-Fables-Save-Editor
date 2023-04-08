@@ -20,8 +20,8 @@ public partial class ObservableBoardQuestsSaveData : ObservableObject
   public ObservableBoardQuestsSaveData(BoardQuestsSaveData boardQuestsSaveData)
   {
     Model = boardQuestsSaveData;
-    _opened = new(Model.Opened, x => new ObservableBfNamedId(x));
-    _taken = new(Model.Taken, x => new ObservableBfNamedId(x));
-    _completed = new(Model.Completed, x => new ObservableBfNamedId(x));
+    _opened = new(Model.Opened);
+    _taken = new(Model.Taken);
+    _completed = new(Model.Completed);
   }
 }

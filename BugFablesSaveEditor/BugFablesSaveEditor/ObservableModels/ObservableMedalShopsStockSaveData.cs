@@ -17,7 +17,7 @@ public partial class ObservableMedalShopsStockSaveData : ObservableObject
   public ObservableMedalShopsStockSaveData(MedalShopsStockSaveData itemsSaveData)
   {
     Model = itemsSaveData;
-    _merab = new(Model.Merab, x => new ObservableBfNamedId(x));
-    _shades = new(Model.Shades, x => new ObservableBfNamedId(x));
+    _merab = new(Model.Merab);
+    _shades = new(Model.Shades);
   }
 }

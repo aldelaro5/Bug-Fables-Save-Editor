@@ -6,6 +6,8 @@ namespace BugFablesSaveEditor.ObservableModels;
 public partial class ObservablePartyMemberSaveData : ObservableObject, IModelWrapper<PartyMemberSaveData>
 {
   public PartyMemberSaveData Model { get; }
+  public static IModelWrapper<PartyMemberSaveData> Factory(PartyMemberSaveData model) =>
+    new ObservablePartyMemberSaveData(model);
 
   [ObservableProperty]
   private ObservableBfNamedId _animId;

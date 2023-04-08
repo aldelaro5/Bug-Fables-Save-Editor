@@ -1,4 +1,3 @@
-using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -17,17 +16,11 @@ public partial class MedalsViewModel : ObservableObject
   [ObservableProperty]
   private ObservableMedalShopsStockSaveData _medalShopsAvailablePoolSaveData;
 
-  public MedalsViewModel()
-  {
-    _medalOnHandSaveData = new(new(), x => new ObservableMedalOnHandSaveData(x));
-    _medalShopsStockPoolSaveData = new(new());
-    _medalShopsAvailablePoolSaveData = new(new());
-  }
+  public MedalsViewModel() : this(new(new()), new(new()), new(new())) { }
 
-  public MedalsViewModel(
-    ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData>
-      medalOnHandSaveData, ObservableMedalShopsStockSaveData medalShopsStockPoolSaveData,
-    ObservableMedalShopsStockSaveData medalShopsAvailablePoolSaveData)
+  public MedalsViewModel(ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medalOnHandSaveData,
+                         ObservableMedalShopsStockSaveData medalShopsStockPoolSaveData,
+                         ObservableMedalShopsStockSaveData medalShopsAvailablePoolSaveData)
   {
     _medalOnHandSaveData = medalOnHandSaveData;
     _medalShopsStockPoolSaveData = medalShopsStockPoolSaveData;

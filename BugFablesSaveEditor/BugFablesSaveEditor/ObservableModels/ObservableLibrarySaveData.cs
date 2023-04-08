@@ -25,10 +25,10 @@ public partial class ObservableLibrarySaveData : ObservableObject
   public ObservableLibrarySaveData(LibrarySaveData librarySaveData)
   {
     Model = librarySaveData;
-    _discoveries = new(Model.Discoveries, x => new ObservableFlagSaveData(x));
-    _bestiary = new(Model.Bestiary, x => new ObservableFlagSaveData(x));
-    _recipes = new(Model.Recipes, x => new ObservableFlagSaveData(x));
-    _records = new(Model.Records, x => new ObservableFlagSaveData(x));
-    _seenAreas = new(Model.SeenAreas, x => new ObservableFlagSaveData(x));
+    _discoveries = new(Model.Discoveries);
+    _bestiary = new(Model.Bestiary);
+    _recipes = new(Model.Recipes);
+    _records = new(Model.Records);
+    _seenAreas = new(Model.SeenAreas);
   }
 }

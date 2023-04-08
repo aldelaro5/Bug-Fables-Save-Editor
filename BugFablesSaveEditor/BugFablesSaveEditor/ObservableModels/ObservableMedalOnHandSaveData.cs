@@ -8,6 +8,8 @@ namespace BugFablesSaveEditor.ObservableModels;
 public partial class ObservableMedalOnHandSaveData : ObservableObject, IModelWrapper<BfMedalOnHandSaveData>
 {
   public BfMedalOnHandSaveData Model { get; }
+  public static IModelWrapper<BfMedalOnHandSaveData> Factory(BfMedalOnHandSaveData model) =>
+    new ObservableMedalOnHandSaveData(model);
 
   [ObservableProperty]
   private ObservableBfNamedId _medal;
