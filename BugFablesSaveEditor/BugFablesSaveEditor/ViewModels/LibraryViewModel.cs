@@ -5,7 +5,6 @@ using System.Reactive.Linq;
 using System.Threading;
 using BugFablesLib;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -67,7 +66,9 @@ public partial class LibraryViewModel : ObservableObject
     librarySaveData.Discoveries
       .Select((x, i) => new FlagViewModel
       {
-        Index = i, Flag = new(x), Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
+        Index = i,
+        Flag = new(x),
+        Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterDiscoveries, x => x.FilterUnusedDiscoveries,

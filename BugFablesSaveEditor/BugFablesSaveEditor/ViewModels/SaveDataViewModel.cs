@@ -1,7 +1,4 @@
 using BugFablesLib;
-using BugFablesLib.Data;
-using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;

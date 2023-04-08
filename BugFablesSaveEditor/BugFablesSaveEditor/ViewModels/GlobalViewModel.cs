@@ -82,7 +82,8 @@ public partial class GlobalViewModel : ObservableObject
   public GlobalSaveData.SaveProgressIcon LastProgressIcon
   {
     get => _globalSaveData.LastProgressIcon;
-    set => SetProperty(_globalSaveData.LastProgressIcon, value, _globalSaveData, (data, s) => data.LastProgressIcon = s);
+    set => SetProperty(_globalSaveData.LastProgressIcon, value, _globalSaveData,
+      (data, s) => data.LastProgressIcon = s);
   }
 
   private readonly HeaderSaveData _headerSaveData;

@@ -14,7 +14,7 @@ public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper<Stat
   public static IModelWrapper<StatBonusSaveData> WrapModel(StatBonusSaveData model) =>
     new ObservableStatsBonusSaveData(model);
 
-  public string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
+  private string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
     .Select(x => x.Humanize(LetterCasing.Title))
     .ToArray();
 

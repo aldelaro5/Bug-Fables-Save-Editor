@@ -87,7 +87,8 @@ public partial class FlagsViewModel : ObservableRecipient
       .Select((x, i) => new FlagViewModel { Index = i, Flag = new(x) }).ToList());
 
     flags
-      .Select((data, i) => new FlagViewModel { Index = i, Flag = new(data), Description = ExtendedData.FlagsDetails[i] })
+      .Select((data, i) =>
+        new FlagViewModel { Index = i, Flag = new(data), Description = ExtendedData.FlagsDetails[i] })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlags)
         .Throttle(TimeSpan.FromMilliseconds(250))

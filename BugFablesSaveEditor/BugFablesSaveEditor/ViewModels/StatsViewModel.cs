@@ -39,16 +39,19 @@ public partial class StatsViewModel : ObservableObject
     get => _globalSaveData.Mp;
     set => SetProperty(_globalSaveData.Mp, value, _globalSaveData, (data, s) => data.Mp = s);
   }
+
   public int MaxMp
   {
     get => _globalSaveData.MaxMp;
     set => SetProperty(_globalSaveData.MaxMp, value, _globalSaveData, (data, s) => data.MaxMp = s);
   }
+
   public int Tp
   {
     get => _globalSaveData.Tp;
     set => SetProperty(_globalSaveData.Tp, value, _globalSaveData, (data, s) => data.Tp = s);
   }
+
   public int MaxTp
   {
     get => _globalSaveData.MaxTp;
