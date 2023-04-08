@@ -10,7 +10,7 @@ using Humanizer;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class GlobalViewModel : ObservableObject
+public partial class GlobalViewModel : ObservableObject, IDisposable
 {
   private readonly GlobalSaveData _globalSaveData;
 
@@ -148,6 +148,8 @@ public partial class GlobalViewModel : ObservableObject
     set => SetProperty(_headerSaveData.PositionZ, value, _headerSaveData, (data, s) => data.PositionZ = s);
   }
 
+  private readonly IDisposable _areaChangeDispose;
+
   public GlobalViewModel() : this(new(), new()) { }
 
   public GlobalViewModel(GlobalSaveData globalSaveData,
@@ -157,8 +159,13 @@ public partial class GlobalViewModel : ObservableObject
     _headerSaveData = headerSaveData;
     _currentMap = new ObservableBfNamedId(globalSaveData.CurrentMap);
     _currentArea = new ObservableBfNamedId(globalSaveData.CurrentArea);
-    _currentArea
+    _areaChangeDispose = _currentArea
       .WhenValueChanged(x => x.Id)
       .Subscribe(_ => WeakReferenceMessenger.Default.Send(new ValueChangedMessage<ObservableBfNamedId>(CurrentArea)));
+  }
+
+  public void Dispose()
+  {
+    _areaChangeDispose.Dispose();
   }
 }

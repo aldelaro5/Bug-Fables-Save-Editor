@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -9,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using DynamicData;
+using DynamicData.Aggregation;
 using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -47,7 +49,7 @@ public partial class FlagstringViewModel : ObservableObject
   public string Description { get; init; } = "";
 }
 
-public partial class FlagsViewModel : ObservableRecipient
+public partial class FlagsViewModel : ObservableRecipient, IDisposable
 {
   [ObservableProperty]
   private ReadOnlyObservableCollection<FlagViewModel> _flags;
@@ -76,19 +78,29 @@ public partial class FlagsViewModel : ObservableRecipient
   [ObservableProperty]
   private bool _filterUnusedRegionals;
 
-  private readonly ObservableCollection<FlagViewModel> _regionalFlagsSaveData;
+  [ObservableProperty]
+  private string _regionalArea = "";
+
+  private readonly Collection<FlagViewModel> _regionals;
+
+  private readonly IDisposable _flagsDispose;
+  private readonly IDisposable _flagVarsDispose;
+  private readonly IDisposable _flagStringsDispose;
+  private readonly IDisposable _regionaFlagsDispose;
 
   public FlagsViewModel() : this(new(), new(), new(), new()) { }
 
   public FlagsViewModel(Collection<FlagSaveData> flags, Collection<FlagvarSaveData> flagvars,
                         Collection<FlagstringSaveData> flagstrings, Collection<FlagSaveData> regionalFlags)
   {
-    _regionalFlagsSaveData = new(regionalFlags
-      .Select((x, i) => new FlagViewModel { Index = i, Flag = new(x) }).ToList());
-
-    flags
+    _flagsDispose = flags
       .Select((data, i) =>
-        new FlagViewModel { Index = i, Flag = new(data), Description = ExtendedData.FlagsDetails[i] })
+        new FlagViewModel
+        {
+          Index = i,
+          Flag = new(data),
+          Description = ExtendedData.FlagsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
+        })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlags)
         .Throttle(TimeSpan.FromMilliseconds(250))
@@ -98,10 +110,12 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flags)
       .Subscribe();
 
-    flagvars
+    _flagVarsDispose = flagvars
       .Select((data, i) => new FlagvarViewModel()
       {
-        Index = i, Flag = new(data), Description = ExtendedData.FlagvarsDetails[i]
+        Index = i,
+        Flag = new(data),
+        Description = ExtendedData.FlagvarsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
       })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlagvars)
@@ -112,10 +126,12 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flagvars)
       .Subscribe();
 
-    flagstrings
+    _flagStringsDispose = flagstrings
       .Select((data, i) => new FlagstringViewModel()
       {
-        Index = i, Flag = new(data), Description = ExtendedData.FlagstringsDetails[i]
+        Index = i,
+        Flag = new(data),
+        Description = ExtendedData.FlagstringsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
       })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlagstrings)
@@ -126,10 +142,11 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flagstrings)
       .Subscribe();
 
-    _regionalFlagsSaveData
+    _regionals = new(regionalFlags.Select((x, i) => new FlagViewModel { Index = i, Flag = new(x) }).ToList());
+    _regionaFlagsDispose = _regionals
       .AsObservableChangeSet()
-      .Filter(this.WhenChanged(x => x.TextFilterRegionalFlags, x => x.FilterUnusedRegionals,
-          (_, text, keepUnused) => (text, keepUnused))
+      .Filter(this.WhenChanged(x => x.TextFilterRegionalFlags, x => x.FilterUnusedRegionals, x => RegionalArea,
+          (_, text, keepUnused, _) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(RegionalFlagFilter!))
       .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
@@ -137,22 +154,20 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _regionalFlags)
       .Subscribe();
 
-    WeakReferenceMessenger.Default
-      .Register<FlagsViewModel, ValueChangedMessage<ObservableBfNamedId>>(this,
-        (r, message) =>
-        {
-          if (string.IsNullOrEmpty(message.Value.Name))
-            return;
+    WeakReferenceMessenger.Default.Register<FlagsViewModel, ValueChangedMessage<ObservableBfNamedId>>(this,
+      (r, message) =>
+      {
+        if (string.IsNullOrEmpty(message.Value.Name))
+          return;
 
-          string[] descriptions = ExtendedData.RegionalFlagsDetails[message.Value.Name];
-          foreach (var flagSaveData in r._regionalFlagsSaveData)
-          {
-            if (flagSaveData.Index < descriptions.Length)
-              flagSaveData.Description = descriptions[flagSaveData.Index];
-            else
-              flagSaveData.Description = "";
-          }
-        });
+        foreach (FlagViewModel regional in r._regionals)
+        {
+          var regionalFlagsDetail = ExtendedData.RegionalFlagsDetails[message.Value.Name];
+          regional.Description = regionalFlagsDetail.TryGetValue(regional.Index, out string[]? value) ? value[0] : "";
+        }
+
+        r.RegionalArea = message.Value.Name;
+      });
   }
 
   private Func<FlagViewModel, bool> RegionalFlagFilter((string text, bool keepUnused) filter)
@@ -183,5 +198,14 @@ public partial class FlagsViewModel : ObservableRecipient
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
                  vm.Description.Contains(x, StringComparison.OrdinalIgnoreCase);
+  }
+
+  public void Dispose()
+  {
+    _flagsDispose.Dispose();
+    _flagVarsDispose.Dispose();
+    _flagStringsDispose.Dispose();
+    _regionaFlagsDispose.Dispose();
+    WeakReferenceMessenger.Default.UnregisterAll(this);
   }
 }

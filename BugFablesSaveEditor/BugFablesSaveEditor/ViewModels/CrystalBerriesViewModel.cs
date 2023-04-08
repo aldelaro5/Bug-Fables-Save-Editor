@@ -41,8 +41,8 @@ public partial class CrystalBerriesViewModel : ObservableObject
       {
         Index = i,
         Flag = new(data),
-        Area = ExtendedData.CrystalBerriesDetails[i][0],
-        Location = ExtendedData.CrystalBerriesDetails[i][1],
+        Area = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData1) ? extData1[0] : "",
+        Location = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData2) ? extData2[1] : ""
       })
       .ToObservable()
       .ToObservableChangeSet()

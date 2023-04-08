@@ -130,6 +130,8 @@ public partial class MainViewModel : ObservableObject
       var data = File.ReadAllText(path);
       var save = new BfPcSaveData();
       save.LoadFromString(data);
+      SaveData.GlobalViewModel.Dispose();
+      SaveData.FlagsViewModel.Dispose();
       SaveData = new SaveDataViewModel(save);
       CurrentFilePath = path;
       SaveInUse = true;
