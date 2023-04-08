@@ -43,26 +43,15 @@ public partial class SaveDataViewModel : ObservableObject
   public SaveDataViewModel(BfSaveData saveData)
   {
     SaveData = saveData;
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries = new(SaveData.CrystalBerries);
-    ViewModelCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData> enemyEncounters =
-      new(SaveData.EnemyEncounters);
-    ViewModelCollection<BfAnimId, ObservableBfNamedId> followers = new(SaveData.Followers);
-    ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(SaveData.PartyMembers);
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags);
-    ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(SaveData.Flagvars);
-    ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(SaveData.Flagstrings);
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(SaveData.RegionalFlags);
-    ViewModelCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(SaveData.SamiraSongs);
-    ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(SaveData.StatBonuses);
-    _partyViewModel = new(partyMembers, followers);
-    _statsViewModel = new(statBonuses, partyMembers, SaveData.Global);
-    _questsViewModel = new(SaveData.Quests);
-    _itemsViewModel = new(SaveData.Items);
-    _medalsViewModel = new(SaveData.Medals, SaveData.MedalShopsPools, SaveData.MedalShopsAvailables);
-    _songsViewModel = new(samiraSongs);
-    _crystalBerriesViewModel = new(crystalBerries);
-    _flagsViewModel = new(flags, flagvars, flagstrings, regionalFlags);
-    _globalViewModel = new(SaveData.Global, SaveData.Header);
-    _libraryViewModel = new(SaveData.Library);
+    _partyViewModel = new(saveData.PartyMembers, saveData.Followers);
+    _statsViewModel = new(saveData.StatBonuses, saveData.PartyMembers, saveData.Global);
+    _questsViewModel = new(saveData.Quests);
+    _itemsViewModel = new(saveData.Items);
+    _medalsViewModel = new(saveData.Medals, saveData.MedalShopsPools, saveData.MedalShopsAvailables);
+    _songsViewModel = new(saveData.SamiraSongs);
+    _crystalBerriesViewModel = new(saveData.CrystalBerries);
+    _flagsViewModel = new(saveData.Flags, saveData.Flagvars, saveData.Flagstrings, saveData.RegionalFlags);
+    _globalViewModel = new(saveData.Global, saveData.Header);
+    _libraryViewModel = new(saveData.Library);
   }
 }

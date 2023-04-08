@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
@@ -13,12 +14,12 @@ public partial class PartyViewModel : ObservableObject
   [ObservableProperty]
   private ViewModelCollection<BfAnimId, ObservableBfNamedId> _followers;
 
-  public PartyViewModel() : this(new(new()), new(new())) { }
+  public PartyViewModel() : this(new(), new()) { }
 
-  public PartyViewModel(ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
-                        ViewModelCollection<BfAnimId, ObservableBfNamedId> followers)
+  public PartyViewModel(Collection<PartyMemberSaveData> partyMembers,
+                        Collection<BfAnimId> followers)
   {
-    _partyMembers = partyMembers;
-    _followers = followers;
+    _partyMembers = new(partyMembers);
+    _followers = new(followers);
   }
 }
