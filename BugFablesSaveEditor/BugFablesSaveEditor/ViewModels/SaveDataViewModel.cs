@@ -51,24 +51,18 @@ public partial class SaveDataViewModel : ObservableObject
     ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags);
     ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(SaveData.Flagvars);
     ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(SaveData.Flagstrings);
-    ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(SaveData.Medals);
     ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(SaveData.RegionalFlags);
     ViewModelCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(SaveData.SamiraSongs);
     ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(SaveData.StatBonuses);
-    ObservableItemsSaveData items = new(SaveData.Items);
-    ObservableLibrarySaveData library = new(SaveData.Library);
-    ObservableMedalShopsStockSaveData medalShopsPools = new(SaveData.MedalShopsPools);
-    ObservableMedalShopsStockSaveData medalShopsAvailables = new(SaveData.MedalShopsAvailables);
-    ObservableBoardQuestsSaveData quests = new(SaveData.Quests);
     _partyViewModel = new(partyMembers, followers);
     _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
-    _questsViewModel = new QuestsViewModel(quests);
-    _itemsViewModel = new ItemsViewModel(items);
-    _medalsViewModel = new MedalsViewModel(medals, medalShopsPools, medalShopsAvailables);
+    _questsViewModel = new(SaveData.Quests);
+    _itemsViewModel = new ItemsViewModel(SaveData.Items);
+    _medalsViewModel = new(SaveData.Medals, SaveData.MedalShopsPools, SaveData.MedalShopsAvailables);
     _songsViewModel = new SongsViewModel(samiraSongs);
     _crystalBerriesViewModel = new CrystalBerriesViewModel(crystalBerries);
     _flagsViewModel = new FlagsViewModel(flags, flagvars, flagstrings, regionalFlags);
-    _globalViewModel = new(new(SaveData.Global), new(SaveData.Header));
-    _libraryViewModel = new(library);
+    _globalViewModel = new(SaveData.Global, SaveData.Header);
+    _libraryViewModel = new(SaveData.Library);
   }
 }

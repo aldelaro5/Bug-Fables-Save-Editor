@@ -5,7 +5,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace BugFablesSaveEditor.ObservableModels;
+namespace BugFablesSaveEditor;
 
 public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject, IModelWrapper<Collection<TModel>>
   where TViewModel : IModelWrapper<TModel>

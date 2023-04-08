@@ -1,3 +1,4 @@
+using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -11,12 +12,12 @@ public partial class GlobalViewModel : ObservableObject
   [ObservableProperty]
   private ObservableHeaderSaveData _headerSaveData;
 
-  public GlobalViewModel() : this(new(new()), new(new())) { }
+  public GlobalViewModel() : this(new(), new()) { }
 
-  public GlobalViewModel(ObservableGlobalSaveData globalSaveData,
-                         ObservableHeaderSaveData headerSaveData)
+  public GlobalViewModel(GlobalSaveData globalSaveData,
+                         HeaderSaveData headerSaveData)
   {
-    _globalSaveData = globalSaveData;
-    _headerSaveData = headerSaveData;
+    _globalSaveData = new(globalSaveData);
+    _headerSaveData = new(headerSaveData);
   }
 }

@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,20 +13,28 @@ public partial class MedalsViewModel : ObservableObject
   private ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> _medalOnHandSaveData;
 
   [ObservableProperty]
-  private ObservableMedalShopsStockSaveData _medalShopsStockPoolSaveData;
+  private ViewModelCollection<BfMedal, ObservableBfNamedId> _merabShopPool;
 
   [ObservableProperty]
-  private ObservableMedalShopsStockSaveData _medalShopsAvailablePoolSaveData;
+  private ViewModelCollection<BfMedal, ObservableBfNamedId> _shadesShopPool;
 
-  public MedalsViewModel() : this(new(new()), new(new()), new(new())) { }
+  [ObservableProperty]
+  private ViewModelCollection<BfMedal, ObservableBfNamedId> _merabShopAvailables;
 
-  public MedalsViewModel(ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medalOnHandSaveData,
-                         ObservableMedalShopsStockSaveData medalShopsStockPoolSaveData,
-                         ObservableMedalShopsStockSaveData medalShopsAvailablePoolSaveData)
+  [ObservableProperty]
+  private ViewModelCollection<BfMedal, ObservableBfNamedId> _shadesShopAvailables;
+
+  public MedalsViewModel() : this(new(), new(), new()) { }
+
+  public MedalsViewModel(Collection<BfMedalOnHandSaveData> medalOnHandSaveData,
+                         MedalShopsStockSaveData shopPoolSaveData,
+                         MedalShopsStockSaveData shopAvailableSaveData)
   {
-    _medalOnHandSaveData = medalOnHandSaveData;
-    _medalShopsStockPoolSaveData = medalShopsStockPoolSaveData;
-    _medalShopsAvailablePoolSaveData = medalShopsAvailablePoolSaveData;
+    _medalOnHandSaveData = new(medalOnHandSaveData);
+    _merabShopPool = new(shopPoolSaveData.Merab);
+    _shadesShopPool = new(shopPoolSaveData.Shades);
+    _merabShopAvailables = new(shopAvailableSaveData.Merab);
+    _shadesShopAvailables = new(shopAvailableSaveData.Shades);
   }
 
   [RelayCommand]
