@@ -36,12 +36,11 @@ public partial class CrystalBerriesViewModel : ObservableObject
 
   public CrystalBerriesViewModel(Collection<FlagSaveData> crystalBerries)
   {
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> crystalBerriesCollection = new(crystalBerries);
-    crystalBerriesCollection.CollectionView
+    crystalBerries
       .Select((data, i) => new CrystalBerryViewModel
       {
         Index = i,
-        Flag = data,
+        Flag = new(data),
         Area = ExtendedData.CrystalBerriesDetails[i][0],
         Location = ExtendedData.CrystalBerriesDetails[i][1],
       })

@@ -83,16 +83,11 @@ public partial class FlagsViewModel : ObservableRecipient
   public FlagsViewModel(Collection<FlagSaveData> flags, Collection<FlagvarSaveData> flagvars,
                         Collection<FlagstringSaveData> flagstrings, Collection<FlagSaveData> regionalFlags)
   {
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> flagsCollection = new(flags);
-    ViewModelCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvarsCollection = new(flagvars);
-    ViewModelCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstringsCollection = new(flagstrings);
-    ViewModelCollection<FlagSaveData, ObservableFlagSaveData> regionalFlagsCollection = new(regionalFlags);
+    _regionalFlagsSaveData = new(regionalFlags
+      .Select((x, i) => new FlagViewModel { Index = i, Flag = new(x) }).ToList());
 
-    _regionalFlagsSaveData = new(regionalFlagsCollection.CollectionView
-      .Select((x, i) => new FlagViewModel { Index = i, Flag = x }).ToList());
-
-    flagsCollection.CollectionView
-      .Select((data, i) => new FlagViewModel { Index = i, Flag = data, Description = ExtendedData.FlagsDetails[i] })
+    flags
+      .Select((data, i) => new FlagViewModel { Index = i, Flag = new(data), Description = ExtendedData.FlagsDetails[i] })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlags)
         .Throttle(TimeSpan.FromMilliseconds(250))
@@ -102,10 +97,10 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flags)
       .Subscribe();
 
-    flagvarsCollection.CollectionView
+    flagvars
       .Select((data, i) => new FlagvarViewModel()
       {
-        Index = i, Flag = data, Description = ExtendedData.FlagvarsDetails[i]
+        Index = i, Flag = new(data), Description = ExtendedData.FlagvarsDetails[i]
       })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlagvars)
@@ -116,10 +111,10 @@ public partial class FlagsViewModel : ObservableRecipient
       .Bind(out _flagvars)
       .Subscribe();
 
-    flagstringsCollection.CollectionView
+    flagstrings
       .Select((data, i) => new FlagstringViewModel()
       {
-        Index = i, Flag = data, Description = ExtendedData.FlagstringsDetails[i]
+        Index = i, Flag = new(data), Description = ExtendedData.FlagstringsDetails[i]
       })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlagstrings)
