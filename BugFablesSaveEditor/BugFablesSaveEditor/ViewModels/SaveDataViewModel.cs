@@ -55,13 +55,13 @@ public partial class SaveDataViewModel : ObservableObject
     ViewModelCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(SaveData.SamiraSongs);
     ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(SaveData.StatBonuses);
     _partyViewModel = new(partyMembers, followers);
-    _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
+    _statsViewModel = new(statBonuses, partyMembers, SaveData.Global);
     _questsViewModel = new(SaveData.Quests);
-    _itemsViewModel = new ItemsViewModel(SaveData.Items);
+    _itemsViewModel = new(SaveData.Items);
     _medalsViewModel = new(SaveData.Medals, SaveData.MedalShopsPools, SaveData.MedalShopsAvailables);
-    _songsViewModel = new SongsViewModel(samiraSongs);
-    _crystalBerriesViewModel = new CrystalBerriesViewModel(crystalBerries);
-    _flagsViewModel = new FlagsViewModel(flags, flagvars, flagstrings, regionalFlags);
+    _songsViewModel = new(samiraSongs);
+    _crystalBerriesViewModel = new(crystalBerries);
+    _flagsViewModel = new(flags, flagvars, flagstrings, regionalFlags);
     _globalViewModel = new(SaveData.Global, SaveData.Header);
     _libraryViewModel = new(SaveData.Library);
   }

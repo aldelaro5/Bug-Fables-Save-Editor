@@ -15,13 +15,14 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class StatsViewModel : ObservableObject
 {
+  private readonly GlobalSaveData _globalSaveData;
   private readonly ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> _statsBonuses;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _partyStatBonuses = null!;
+  private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _partyStatBonuses;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _memberStatBonuses = null!;
+  private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _memberStatBonuses;
 
   [ObservableProperty]
   private ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
@@ -33,8 +34,27 @@ public partial class StatsViewModel : ObservableObject
   [NotifyCanExecuteChangedFor(nameof(AddStatPartyMemberBonusCommand))]
   private ObservablePartyMemberSaveData? _selectedPartyMember;
 
-  [ObservableProperty]
-  private ObservableGlobalSaveData _globalSaveData;
+  public int Mp
+  {
+    get => _globalSaveData.Mp;
+    set => SetProperty(_globalSaveData.Mp, value, _globalSaveData, (data, s) => data.Mp = s);
+  }
+  public int MaxMp
+  {
+    get => _globalSaveData.MaxMp;
+    set => SetProperty(_globalSaveData.MaxMp, value, _globalSaveData, (data, s) => data.MaxMp = s);
+  }
+  public int Tp
+  {
+    get => _globalSaveData.Tp;
+    set => SetProperty(_globalSaveData.Tp, value, _globalSaveData, (data, s) => data.Tp = s);
+  }
+  public int MaxTp
+  {
+    get => _globalSaveData.MaxTp;
+    set => SetProperty(_globalSaveData.MaxTp, value, _globalSaveData, (data, s) => data.MaxTp = s);
+  }
+
 
   [ObservableProperty]
   private ObservableStatsBonusSaveData _newPartyStatBonus = new(new StatBonusSaveData());
@@ -96,11 +116,11 @@ public partial class StatsViewModel : ObservableObject
   private void DeleteStatBonus(ObservableStatsBonusSaveData statsBonus) =>
     _statsBonuses.RemoveViewModelCommand.Execute(statsBonus);
 
-  public StatsViewModel() : this(new(new()), new(new()), new(new())) { }
+  public StatsViewModel() : this(new(new()), new(new()), new()) { }
 
   public StatsViewModel(ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statsBonuses,
                         ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
-                        ObservableGlobalSaveData globalSaveData)
+                        GlobalSaveData globalSaveData)
   {
     _statsBonuses = statsBonuses;
     _partyMembers = partyMembers;

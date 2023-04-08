@@ -20,18 +20,18 @@
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="TP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.Tp}" />
+                           Value="{Binding Tp}" />
             <Label VerticalContentAlignment="Center" Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.MaxTp}" />
+                           Value="{Binding MaxTp}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="MP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.Mp}" />
+                           Value="{Binding Mp}" />
             <Label VerticalContentAlignment="Center" Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding GlobalSaveData.MaxMp}" />
+                           Value="{Binding MaxMp}" />
           </StackPanel>
         </StackPanel>
       </DockPanel>
