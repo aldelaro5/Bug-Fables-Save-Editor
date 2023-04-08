@@ -7,7 +7,7 @@ public class ObservableFlagstringSaveData : ObservableObject, IModelWrapper<Flag
 {
   public FlagstringSaveData Model { get; }
 
-  public static IModelWrapper<FlagstringSaveData> Factory(FlagstringSaveData model) =>
+  public static IModelWrapper<FlagstringSaveData> WrapModel(FlagstringSaveData model) =>
     new ObservableFlagstringSaveData(model);
 
   public string Str

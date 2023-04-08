@@ -15,7 +15,7 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
 
   public Collection<TModel> Model { get; }
 
-  public static IModelWrapper<Collection<TModel>> Factory(Collection<TModel> model) =>
+  public static IModelWrapper<Collection<TModel>> WrapModel(Collection<TModel> model) =>
     new ViewModelCollection<TModel, TViewModel>(model);
 
   public ReadOnlyObservableCollection<TViewModel> CollectionView { get; }
@@ -24,18 +24,18 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
   private TViewModel _newViewModel;
 
   [RelayCommand]
-  private void AddViewModel(TViewModel item) => _collection.Add((TViewModel)TViewModel.Factory(item.Model));
+  private void AddViewModel(TViewModel item) => _collection.Add((TViewModel)TViewModel.WrapModel(item.Model));
 
   [RelayCommand]
   private void RemoveViewModel(TViewModel item) => _collection.Remove(item);
 
   public ViewModelCollection(Collection<TModel> collection)
   {
-    _collection = new(collection.Select<TModel, TViewModel>(x => (TViewModel)TViewModel.Factory(x)));
+    _collection = new(collection.Select<TModel, TViewModel>(x => (TViewModel)TViewModel.WrapModel(x)));
     _collection.CollectionChanged += OnCollectionChanged;
     CollectionView = new(_collection);
     Model = collection;
-    _newViewModel = (TViewModel)TViewModel.Factory(new());
+    _newViewModel = (TViewModel)TViewModel.WrapModel(new());
   }
 
   private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

@@ -96,7 +96,7 @@ public partial class StatsViewModel : ObservableObject
   private void DeleteStatBonus(ObservableStatsBonusSaveData statsBonus) =>
     _statsBonuses.RemoveViewModelCommand.Execute(statsBonus);
 
-  public StatsViewModel() : this(new(new()),new(new()),new(new())) { }
+  public StatsViewModel() : this(new(new()), new(new()), new(new())) { }
 
   public StatsViewModel(ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statsBonuses,
                         ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
@@ -106,8 +106,7 @@ public partial class StatsViewModel : ObservableObject
     _partyMembers = partyMembers;
     _globalSaveData = globalSaveData;
 
-    _statsBonuses.CollectionView.
-      ToObservableChangeSet()
+    _statsBonuses.CollectionView.ToObservableChangeSet()
       .Filter(x => x.Target == -1)
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _partyStatBonuses)

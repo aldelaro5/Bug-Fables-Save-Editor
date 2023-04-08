@@ -7,7 +7,7 @@ public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper<
 {
   public EnemyEncounterSaveData Model { get; }
 
-  public static IModelWrapper<EnemyEncounterSaveData> Factory(EnemyEncounterSaveData model) =>
+  public static IModelWrapper<EnemyEncounterSaveData> WrapModel(EnemyEncounterSaveData model) =>
     new ObservableEnemyEncounterSaveData(model);
 
   public int NbrSeen

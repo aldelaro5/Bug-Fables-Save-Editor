@@ -14,6 +14,7 @@ public partial class PartyViewModel : ObservableObject
   private ViewModelCollection<BfAnimId, ObservableBfNamedId> _followers;
 
   public PartyViewModel() : this(new(new()), new(new())) { }
+
   public PartyViewModel(ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
                         ViewModelCollection<BfAnimId, ObservableBfNamedId> followers)
   {

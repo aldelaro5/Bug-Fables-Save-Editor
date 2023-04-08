@@ -15,10 +15,10 @@ public class ObservableBfNamedId : ObservableObject, IModelWrapper<BfQuest>, IMo
   BfItem IModelWrapper<BfItem>.Model { get => (BfItem)Model; }
   BfAnimId IModelWrapper<BfAnimId>.Model { get => (BfAnimId)Model; }
   BfQuest IModelWrapper<BfQuest>.Model { get => (BfQuest)Model; }
-  public static IModelWrapper<BfAnimId> Factory(BfAnimId model) => Create(model);
-  public static IModelWrapper<BfMedal> Factory(BfMedal model) => Create(model);
-  public static IModelWrapper<BfItem> Factory(BfItem model) => Create(model);
-  public static IModelWrapper<BfQuest> Factory(BfQuest model) => Create(model);
+  public static IModelWrapper<BfAnimId> WrapModel(BfAnimId model) => Create(model);
+  public static IModelWrapper<BfMedal> WrapModel(BfMedal model) => Create(model);
+  public static IModelWrapper<BfItem> WrapModel(BfItem model) => Create(model);
+  public static IModelWrapper<BfQuest> WrapModel(BfQuest model) => Create(model);
 
   public int Id
   {

@@ -20,7 +20,7 @@
         <ContentControl Content="{Binding ItemsSaveData.Inventory.NewViewModel}" />
         <Button Margin="5,0,0,0" Content="Add"
                 Command="{Binding ItemsSaveData.Inventory.AddViewModelCommand}"
-                CommandParameter="{Binding ItemsSaveData.Inventory.NewViewModel}"/>
+                CommandParameter="{Binding ItemsSaveData.Inventory.NewViewModel}" />
       </StackPanel>
       <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Inventory.CollectionView}"
                            DeleteCommand="{Binding ItemsSaveData.Inventory.RemoveViewModelCommand}" />

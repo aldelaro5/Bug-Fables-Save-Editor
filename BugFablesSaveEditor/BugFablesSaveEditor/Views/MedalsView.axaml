@@ -129,7 +129,7 @@
             <ContentControl Content="{Binding MedalShopsAvailablePoolSaveData.Shades.NewViewModel}" />
             <Button Margin="5,0,0,0" Content="Add"
                     Command="{Binding MedalShopsAvailablePoolSaveData.Shades.AddViewModelCommand}"
-                    CommandParameter="{Binding MedalShopsAvailablePoolSaveData.Shades.NewViewModel}"/>
+                    CommandParameter="{Binding MedalShopsAvailablePoolSaveData.Shades.NewViewModel}" />
           </StackPanel>
           <c:BfNamedIdDataGrid Items="{Binding MedalShopsAvailablePoolSaveData.Shades.CollectionView}"
                                DeleteCommand="{Binding MedalShopsAvailablePoolSaveData.Shades.RemoveViewModelCommand}" />

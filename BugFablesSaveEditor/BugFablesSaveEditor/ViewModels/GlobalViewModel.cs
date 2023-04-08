@@ -11,7 +11,7 @@ public partial class GlobalViewModel : ObservableObject
   [ObservableProperty]
   private ObservableHeaderSaveData _headerSaveData;
 
-  public GlobalViewModel(): this(new(new()), new(new())) { }
+  public GlobalViewModel() : this(new(new()), new(new())) { }
 
   public GlobalViewModel(ObservableGlobalSaveData globalSaveData,
                          ObservableHeaderSaveData headerSaveData)

@@ -24,7 +24,7 @@
           <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
-                  CommandParameter="{Binding PartyMembers.NewViewModel}"/>
+                  CommandParameter="{Binding PartyMembers.NewViewModel}" />
         </StackPanel>
         <DataGrid Classes="draggable"
                   AutoGenerateColumns="False"
@@ -77,7 +77,7 @@
           <ContentControl Content="{Binding Followers.NewViewModel}" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
                   Content="Add" Command="{Binding Followers.AddViewModelCommand}"
-                  CommandParameter="{Binding Followers.NewViewModel}"/>
+                  CommandParameter="{Binding Followers.NewViewModel}" />
         </StackPanel>
         <c:BfNamedIdDataGrid Items="{Binding Followers.CollectionView}"
                              DeleteCommand="{Binding Followers.RemoveViewModelCommand}" />
