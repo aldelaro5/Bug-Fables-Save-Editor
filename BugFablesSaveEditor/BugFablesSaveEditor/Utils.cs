@@ -6,12 +6,6 @@ namespace BugFablesSaveEditor;
 
 public static class Utils
 {
-  public enum ReorderDirection
-  {
-    Up,
-    Down
-  }
-
   public static Window MainWindow
   {
     get

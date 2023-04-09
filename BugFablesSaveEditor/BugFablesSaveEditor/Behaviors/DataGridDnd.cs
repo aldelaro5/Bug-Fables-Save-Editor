@@ -8,8 +8,16 @@ using Avalonia.Xaml.Interactions.DragAndDrop;
 
 namespace BugFablesSaveEditor.Behaviors;
 
+/// <summary>
+/// A behavior that enables drag and drop between DataGridRows of the same underlying type.
+/// This supports drag and drop between two different DataGrids.
+/// </summary>
+/// <typeparam name="T">The underlying type of the items</typeparam>
 public class DataGridDnd<T> : DropHandlerBase where T : class
 {
+  private const string DraggingUpClassName = "dragging-up";
+  private const string DraggingDownClassName = "dragging-down";
+
   private enum DragDirection
   {
     Up,
@@ -29,40 +37,7 @@ public class DataGridDnd<T> : DropHandlerBase where T : class
     public DragDirection Direction;
   }
 
-  private const string DraggingUpClassName = "dragging-up";
-  private const string DraggingDownClassName = "dragging-down";
-
   private DndData _dnd = new();
-
-  private bool Validate(object? sender, DragEventArgs e, object? sourceContext)
-  {
-    if (_dnd.SrcDataGrid is not { } srcDg ||
-        sender is not DataGrid destDg ||
-        sourceContext is not T src ||
-        srcDg.Items is not IList<T> srcList ||
-        destDg.Items is not IList<T> destList ||
-        destDg.GetVisualAt(e.GetPosition(destDg),
-          v => v.FindDescendantOfType<DataGridCell>() is not null) is not Control
-        {
-          DataContext: T dest
-        } visual)
-    {
-      return false;
-    }
-
-    DataGridCell cell = visual.FindDescendantOfType<DataGridCell>()!;
-    var pos = e.GetPosition(cell);
-
-    _dnd.SrcDataGrid = srcDg;
-    _dnd.DestDataGrid = destDg;
-    _dnd.SrcList = srcList;
-    _dnd.DestList = destList;
-    _dnd.Direction = cell.DesiredSize.Height / 2 > pos.Y ? DragDirection.Up : DragDirection.Down;
-    _dnd.SrcIndex = srcList.IndexOf(src);
-    _dnd.DestIndex = destList.IndexOf(dest);
-
-    return true;
-  }
 
   public override bool Validate(object? sender, DragEventArgs e, object? sourceContext,
                                 object? targetContext, object? state)
@@ -76,7 +51,7 @@ public class DataGridDnd<T> : DropHandlerBase where T : class
     if (!Validate(sender, e, sourceContext))
       return false;
 
-    if (_dnd.SrcDataGrid != _dnd.DestDataGrid && _dnd.Direction == DragDirection.Down)
+    if (!Equals(_dnd.SrcDataGrid, _dnd.DestDataGrid) && _dnd.Direction == DragDirection.Down)
       _dnd.DestIndex++;
     else if (_dnd.SrcIndex > _dnd.DestIndex && _dnd.Direction == DragDirection.Down)
       _dnd.DestIndex++;
@@ -152,6 +127,37 @@ public class DataGridDnd<T> : DropHandlerBase where T : class
     base.Drop(sender, e, sourceContext, targetContext);
     _dnd.SrcDataGrid = null;
   }
+
+  private bool Validate(object? sender, DragEventArgs e, object? sourceContext)
+  {
+    if (_dnd.SrcDataGrid is not { } srcDg ||
+        sender is not DataGrid destDg ||
+        sourceContext is not T src ||
+        srcDg.Items is not IList<T> srcList ||
+        destDg.Items is not IList<T> destList ||
+        destDg.GetVisualAt(e.GetPosition(destDg),
+          v => v.FindDescendantOfType<DataGridCell>() is not null) is not Control
+        {
+          DataContext: T dest
+        } visual)
+    {
+      return false;
+    }
+
+    DataGridCell cell = visual.FindDescendantOfType<DataGridCell>()!;
+    var pos = e.GetPosition(cell);
+
+    _dnd.SrcDataGrid = srcDg;
+    _dnd.DestDataGrid = destDg;
+    _dnd.SrcList = srcList;
+    _dnd.DestList = destList;
+    _dnd.Direction = cell.DesiredSize.Height / 2 > pos.Y ? DragDirection.Up : DragDirection.Down;
+    _dnd.SrcIndex = srcList.IndexOf(src);
+    _dnd.DestIndex = destList.IndexOf(dest);
+
+    return true;
+  }
+
 
   private static void RemoveDraggingClass(DataGrid? dg)
   {

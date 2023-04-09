@@ -9,6 +9,8 @@ namespace BugFablesSaveEditor.Controls;
 
 public partial class BfNamedIdDataGrid : DataGrid, IStyleable
 {
+  Type IStyleable.StyleKey => typeof(DataGrid);
+
   public static readonly DirectProperty<BfNamedIdDataGrid, ICommand> DeleteCommandProperty =
     AvaloniaProperty.RegisterDirect<BfNamedIdDataGrid, ICommand>(
       nameof(DeleteCommand),
@@ -24,10 +26,5 @@ public partial class BfNamedIdDataGrid : DataGrid, IStyleable
     set => SetAndRaise(DeleteCommandProperty, ref _deleteCommand, value);
   }
 
-  Type IStyleable.StyleKey => typeof(DataGrid);
-
-  public BfNamedIdDataGrid()
-  {
-    InitializeComponent();
-  }
+  public BfNamedIdDataGrid() => InitializeComponent();
 }

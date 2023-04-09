@@ -12,10 +12,11 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
-  private readonly FilePickerFileType _saveFileFilter =
-    new("Bug Fables save (.dat)") { Patterns = new[] { "*.dat" } };
-
   private bool _fileSaved;
+  private readonly FilePickerFileType _saveFileFilter = new("Bug Fables save (.dat)")
+  {
+    Patterns = new[] { "*.dat" }
+  };
 
   [ObservableProperty]
   private SaveDataViewModel _saveData;
@@ -29,10 +30,7 @@ public partial class MainViewModel : ObservableObject
 
   public MainViewModel() : this(new BfPcSaveData()) { }
 
-  public MainViewModel(BfPcSaveData saveData)
-  {
-    _saveData = new SaveDataViewModel(saveData);
-  }
+  public MainViewModel(BfPcSaveData saveData) => _saveData = new SaveDataViewModel(saveData);
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
   private async void CmdSaveFile()
@@ -54,8 +52,8 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = SaveData.SaveData.EncodeToString();
-      File.WriteAllText(path, data);
+      string data = SaveData.SaveData.EncodeToString();
+      await File.WriteAllTextAsync(path, data);
       CurrentFilePath = path;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
         $"The file was saved successfully at {CurrentFilePath}",
@@ -74,10 +72,7 @@ public partial class MainViewModel : ObservableObject
     }
   }
 
-  private bool CanSaveFile()
-  {
-    return SaveInUse;
-  }
+  private bool CanSaveFile() => SaveInUse;
 
   [RelayCommand]
   private async void NewFile()
@@ -115,7 +110,9 @@ public partial class MainViewModel : ObservableObject
 
     FilePickerOpenOptions pickerOpenOptions = new()
     {
-      Title = "Select a Bug Fables save file", AllowMultiple = false, FileTypeFilter = new[] { _saveFileFilter }
+      Title = "Select a Bug Fables save file",
+      AllowMultiple = false,
+      FileTypeFilter = new[] { _saveFileFilter }
     };
     var files =
       await Utils.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
@@ -128,7 +125,7 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = File.ReadAllText(path);
+      string data = await File.ReadAllTextAsync(path);
       var save = new BfPcSaveData();
       save.LoadFromString(data);
       SaveData.Dispose();
