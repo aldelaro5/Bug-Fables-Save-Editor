@@ -3,21 +3,24 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.Models;
 
-public partial class FlagvarSaveDataModel : ObservableObject, IFlagViewModel
+public partial class FlagvarSaveDataModel : ObservableObject, IFlagViewModel, IModelWrapper<FlagvarSaveData>
 {
-  private readonly FlagvarSaveData _model;
+  public FlagvarSaveData Model { get; }
 
   [ObservableProperty]
   private int _index;
 
   public int Var
   {
-    get => _model.Var;
-    set => SetProperty(_model.Var, value, _model, (data, s) => data.Var = s);
+    get => Model.Var;
+    set => SetProperty(Model.Var, value, Model, (data, s) => data.Var = s);
   }
 
   [ObservableProperty]
   private string _description1 = "";
+  [ObservableProperty]
+  private string _description2 = "";
 
-  public FlagvarSaveDataModel(FlagvarSaveData flagvarSaveData) => _model = flagvarSaveData;
+  public static IModelWrapper<FlagvarSaveData> WrapModel(FlagvarSaveData model) => new FlagvarSaveDataModel(model);
+  private FlagvarSaveDataModel(FlagvarSaveData flagvarSaveData) => Model = flagvarSaveData;
 }

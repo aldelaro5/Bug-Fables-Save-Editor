@@ -1,14 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive.Linq;
-using System.Threading;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
-using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -17,7 +13,7 @@ public partial class CrystalBerriesViewModel : ObservableObject, IDisposable
   private readonly IDisposable _crystalBerriesDisposable;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagSaveDataModel> _crystalBerriesSaveDataFiltered;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _crystalBerries;
 
   [ObservableProperty]
   private string _textFilter = "";
@@ -26,37 +22,22 @@ public partial class CrystalBerriesViewModel : ObservableObject, IDisposable
 
   public CrystalBerriesViewModel(Collection<FlagSaveData> crystalBerries)
   {
-    _crystalBerriesDisposable = crystalBerries
-      .Select((data, i) => new FlagSaveDataModel(data)
-      {
-        Index = i,
-        Description1 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData1) ? extData1[0] : "",
-        Description2 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData2) ? extData2[1] : ""
-      })
-      .ToObservable()
-      .ToObservableChangeSet()
-      .Filter(this.WhenValueChanged(x => x.TextFilter)
-        .Throttle(TimeSpan.FromMilliseconds(250))
-        .Select(CrystalBerryFilter!))
-      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _crystalBerriesSaveDataFiltered)
-      .Subscribe();
+    var filter = Utils.GetSimpleTextFilterForFlags<FlagSaveDataModel, CrystalBerriesViewModel>(this, x => x.TextFilter);
+    var flagsWithMetaData = crystalBerries.Select((data, i) => new FlagSaveDataModel(data)
+    {
+      Index = i,
+      Description1 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData1) ? extData1[0] : "",
+      Description2 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData2) ? extData2[1] : ""
+    });
+
+    _crystalBerriesDisposable = Utils.ObserveFlagsWithFilterAndSort(flagsWithMetaData, filter, out _crystalBerries);
   }
 
   [RelayCommand]
   private void ToggleAllShown()
   {
-    foreach (var flagSaveData in CrystalBerriesSaveDataFiltered)
+    foreach (var flagSaveData in CrystalBerries)
       flagSaveData.Enabled = !flagSaveData.Enabled;
-  }
-
-  private Func<FlagSaveDataModel, bool> CrystalBerryFilter(string x)
-  {
-    return vm => x == string.Empty ||
-                 vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Description1.Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Description2.Contains(x, StringComparison.OrdinalIgnoreCase);
   }
 
   public void Dispose()
