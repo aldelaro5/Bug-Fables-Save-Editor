@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:CrystalBerriesViewModel"
              x:CompileBindings="True"
@@ -18,26 +19,26 @@
               Command="{Binding ToggleAllShownCommand}" />
       <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilter}" />
     </DockPanel>
-    <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerriesSaveDataFiltered}"
+    <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerries}"
               CanUserReorderColumns="True" CanUserResizeColumns="True"
               SelectionMode="Extended">
       <DataGrid.Columns>
         <DataGridTextColumn Header="Index" IsReadOnly="True"
-                            x:DataType="vm:CrystalBerryViewModel"
+                            x:DataType="m:FlagSaveDataModel"
                             Binding="{Binding Index}" />
         <DataGridTemplateColumn Header="Obtained" Width="100">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="vm:CrystalBerryViewModel">
-              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+            <DataTemplate DataType="m:FlagSaveDataModel">
+              <CheckBox Margin="30,0,0,0" IsChecked="{Binding Enabled}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn Header="Area" IsReadOnly="True"
-                            x:DataType="vm:CrystalBerryViewModel"
-                            Binding="{Binding Area}" />
+                            x:DataType="m:FlagSaveDataModel"
+                            Binding="{Binding Description1}" />
         <DataGridTextColumn Header="Location" IsReadOnly="True"
-                            x:DataType="vm:CrystalBerryViewModel"
-                            Binding="{Binding Location}" />
+                            x:DataType="m:FlagSaveDataModel"
+                            Binding="{Binding Description2}" />
       </DataGrid.Columns>
     </DataGrid>
   </DockPanel>

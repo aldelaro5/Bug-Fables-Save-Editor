@@ -8,8 +8,5 @@ public partial class FlagsDataGrid : DataGrid, IStyleable
 {
   Type IStyleable.StyleKey => typeof(DataGrid);
 
-  public FlagsDataGrid()
-  {
-    InitializeComponent();
-  }
+  public FlagsDataGrid() => InitializeComponent();
 }

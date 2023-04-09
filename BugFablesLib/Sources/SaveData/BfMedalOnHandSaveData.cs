@@ -27,10 +27,4 @@ public sealed class BfMedalOnHandSaveData : IBfSerializable
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    Medal.Id = 0;
-    MedalEquipTarget = 0;
-  }
 }

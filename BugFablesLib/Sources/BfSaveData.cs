@@ -118,6 +118,7 @@ public abstract class BfSaveData : IBfDataContainer
   public void ResetToDefault()
   {
     foreach (var s in Data)
-      s.ResetToDefault();
+    {
+    }
   }
 }

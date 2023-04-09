@@ -20,7 +20,8 @@
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedDiscoveries}" />
             <Button Margin="5" Content="Toggle All Shown"
-                    Command="{Binding ToggleAllShownDiscoveriesCommand}" />
+                    Command="{Binding ToggleAllShownCommand}"
+                    CommandParameter="{Binding Discoveries}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5"
                    Text="{Binding TextFilterDiscoveries}" />
@@ -35,7 +36,8 @@
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedBestiary}" />
             <Button Margin="5" Content="Toggle All Shown"
-                    Command="{Binding ToggleAllShownBestiaryCommand}" />
+                    Command="{Binding ToggleAllShownCommand}"
+                    CommandParameter="{Binding Bestiary}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterBestiary}" />
         </DockPanel>
@@ -49,7 +51,8 @@
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecipes}" />
             <Button Margin="5" Content="Toggle All Shown"
-                    Command="{Binding ToggleAllShownRecipesCommand}" />
+                    Command="{Binding ToggleAllShownCommand}"
+                    CommandParameter="{Binding Recipes}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecipes}" />
         </DockPanel>
@@ -63,7 +66,8 @@
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedRecords}" />
             <Button Margin="5" Content="Toggle All Shown"
-                    Command="{Binding ToggleAllShownRecordsCommand}" />
+                    Command="{Binding ToggleAllShownCommand}"
+                    CommandParameter="{Binding Records}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterRecords}" />
         </DockPanel>
@@ -77,7 +81,8 @@
           <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedSeenAreas}" />
             <Button Margin="5" Content="Toggle All Shown"
-                    Command="{Binding ToggleAllShownSeenAreasCommand}" />
+                    Command="{Binding ToggleAllShownCommand}"
+                    CommandParameter="{Binding SeenAreas}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5"
                    Text="{Binding TextFilterSeenAreas}" />

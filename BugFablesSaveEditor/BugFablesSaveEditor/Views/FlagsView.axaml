@@ -3,6 +3,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:FlagsViewModel"
              x:CompileBindings="True"
@@ -22,18 +23,18 @@
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="vm:FlagViewModel"
+                                x:DataType="m:FlagSaveDataModel"
                                 Binding="{Binding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="vm:FlagViewModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+                <DataTemplate DataType="m:FlagSaveDataModel">
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="vm:FlagViewModel"
-                                Binding="{Binding Description}" />
+                                x:DataType="m:FlagSaveDataModel"
+                                Binding="{Binding Description1}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -48,14 +49,14 @@
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="vm:FlagvarViewModel"
+                                x:DataType="m:FlagvarSaveDataModel"
                                 Binding="{Binding Index}" />
             <DataGridTextColumn Header="Value"
-                                x:DataType="vm:FlagvarViewModel"
-                                Binding="{Binding Flag.Var.Value}" />
+                                x:DataType="m:FlagvarSaveDataModel"
+                                Binding="{Binding Var}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="vm:FlagvarViewModel"
-                                Binding="{Binding Description}" />
+                                x:DataType="m:FlagvarSaveDataModel"
+                                Binding="{Binding Description1}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -71,14 +72,14 @@
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="vm:FlagstringViewModel"
+                                x:DataType="m:FlagstringSaveDataModel"
                                 Binding="{Binding Index}" />
             <DataGridTextColumn Header="Value"
-                                x:DataType="vm:FlagstringViewModel"
-                                Binding="{Binding Flag.Str.Value}" />
+                                x:DataType="m:FlagstringSaveDataModel"
+                                Binding="{Binding Str}" />
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="vm:FlagstringViewModel"
-                                Binding="{Binding Description}" />
+                                x:DataType="m:FlagstringSaveDataModel"
+                                Binding="{Binding Description1}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -96,18 +97,18 @@
                   CanUserReorderColumns="True" CanUserResizeColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="vm:FlagViewModel"
+                                x:DataType="m:FlagSaveDataModel"
                                 Binding="{Binding Index}" />
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="vm:FlagViewModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+                <DataTemplate DataType="m:FlagSaveDataModel">
+                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="vm:FlagViewModel"
-                                Binding="{Binding Description}" />
+                                x:DataType="m:FlagSaveDataModel"
+                                Binding="{Binding Description1}" />
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>

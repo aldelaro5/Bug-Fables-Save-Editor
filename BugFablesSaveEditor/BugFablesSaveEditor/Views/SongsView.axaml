@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
@@ -17,17 +17,17 @@
   <DockPanel Width="505">
     <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
-      <ContentControl Content="{Binding NewMusic.Music}" />
-      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding NewMusic.Bought.Value}" />
+      <ContentControl Content="{Binding MusicSaveData.NewViewModel.Music}" />
+      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding MusicSaveData.NewViewModel.Bought}" />
       <Button Margin="5,0,0,0" Content="Add"
-              Command="{Binding AddMusicCommand}"
-              CommandParameter="{Binding NewMusic}" />
+              Command="{Binding MusicSaveData.AddViewModelCommand}"
+              CommandParameter="{Binding MusicSaveData.NewViewModel}" />
     </StackPanel>
     <DataGrid Classes="draggable"
               AutoGenerateColumns="False"
               CanUserSortColumns="False"
               CanUserReorderColumns="False"
-              Items="{Binding MusicSaveData}">
+              Items="{Binding MusicSaveData.Collection}">
       <i:Interaction.Behaviors>
         <i:BehaviorCollection>
           <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMusicSaveData}" />
@@ -46,23 +46,23 @@
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Header="AnimId">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:ObservableMusicSaveData">
+            <DataTemplate DataType="ob:MusicSaveDataModel">
               <ContentControl Content="{Binding Music}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Header="AnimId">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:ObservableMusicSaveData">
-              <CheckBox IsChecked="{Binding Bought.Value}" />
+            <DataTemplate DataType="ob:MusicSaveDataModel">
+              <CheckBox IsChecked="{Binding Bought}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Width="35">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:ObservableMusicSaveData">
+            <DataTemplate DataType="ob:MusicSaveDataModel">
               <Button Margin="5,0,0,0" Content="-"
-                      Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).DeleteMusicCommand}"
+                      Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).MusicSaveData.RemoveViewModelCommand}"
                       CommandParameter="{Binding }"
                       HorizontalContentAlignment="Center"
                       Width="25" Background="DarkRed" />

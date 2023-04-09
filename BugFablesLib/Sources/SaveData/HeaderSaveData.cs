@@ -61,18 +61,4 @@ public sealed class HeaderSaveData : IBfSerializable
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    PositionX = 0f;
-    PositionY = 0f;
-    PositionZ = 0f;
-    IsRuigee = false;
-    IsHardest = false;
-    IsFrameone = false;
-    IsPushrock = false;
-    IsMorefarm = false;
-    IsMystery = false;
-    Filename = "";
-  }
 }

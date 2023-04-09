@@ -39,11 +39,4 @@ public sealed class StatBonusSaveData : IBfSerializable
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    Type = 0;
-    Amount = 0;
-    Target = 0;
-  }
 }

@@ -12,10 +12,12 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
-  private readonly FilePickerFileType _saveFileFilter =
-    new("Bug Fables save (.dat)") { Patterns = new[] { "*.dat" } };
-
   private bool _fileSaved;
+
+  private readonly FilePickerFileType _saveFileFilter = new("Bug Fables save (.dat)")
+  {
+    Patterns = new[] { "*.dat" }
+  };
 
   [ObservableProperty]
   private SaveDataViewModel _saveData;
@@ -27,14 +29,9 @@ public partial class MainViewModel : ObservableObject
   [ObservableProperty]
   private string _currentFilePath = "No save file, open an existing file or create a new one";
 
-  public MainViewModel() : this(new BfPcSaveData())
-  {
-  }
+  public MainViewModel() : this(new BfPcSaveData()) { }
 
-  public MainViewModel(BfPcSaveData saveData)
-  {
-    _saveData = new SaveDataViewModel(saveData);
-  }
+  public MainViewModel(BfPcSaveData saveData) => _saveData = new SaveDataViewModel(saveData, true);
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
   private async void CmdSaveFile()
@@ -56,8 +53,8 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = SaveData.SaveData.EncodeToString();
-      File.WriteAllText(path, data);
+      string data = SaveData.SaveData.EncodeToString();
+      await File.WriteAllTextAsync(path, data);
       CurrentFilePath = path;
       await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
         $"The file was saved successfully at {CurrentFilePath}",
@@ -76,10 +73,7 @@ public partial class MainViewModel : ObservableObject
     }
   }
 
-  private bool CanSaveFile()
-  {
-    return SaveInUse;
-  }
+  private bool CanSaveFile() => SaveInUse;
 
   [RelayCommand]
   private async void NewFile()
@@ -95,7 +89,8 @@ public partial class MainViewModel : ObservableObject
         return;
     }
 
-    SaveData = new(new BfPcSaveData());
+    SaveData.Dispose();
+    SaveData = new(new BfPcSaveData(), true);
     CurrentFilePath = "New file being created, save it to store it";
     SaveInUse = true;
     _fileSaved = false;
@@ -131,10 +126,11 @@ public partial class MainViewModel : ObservableObject
       if (string.IsNullOrEmpty(path))
         return;
 
-      var data = File.ReadAllText(path);
+      string data = await File.ReadAllTextAsync(path);
       var save = new BfPcSaveData();
       save.LoadFromString(data);
-      SaveData = new SaveDataViewModel(save);
+      SaveData.Dispose();
+      SaveData = new SaveDataViewModel(save, false);
       CurrentFilePath = path;
       SaveInUse = true;
       _fileSaved = true;

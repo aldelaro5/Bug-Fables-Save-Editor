@@ -1,15 +1,18 @@
-using System.Linq;
+using System;
 using BugFablesLib;
-using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class SaveDataViewModel : ObservableObject
+public partial class SaveDataViewModel : ObservableObject, IDisposable
 {
   public readonly BfSaveData SaveData;
+  private const int Nbr11xFlagSlots = 750;
+  private const int Nbr11xFlagvarSlots = 70;
+  private const int NbrRegionalSlots = 100;
+  private const int NbrFlagstringSlots = 15;
+  private const int NbrCrystalBerries = 50;
 
   [ObservableProperty]
   private GlobalViewModel _globalViewModel;
@@ -41,54 +44,48 @@ public partial class SaveDataViewModel : ObservableObject
   [ObservableProperty]
   private LibraryViewModel _libraryViewModel;
 
-  public SaveDataViewModel(BfSaveData saveData)
+  public SaveDataViewModel(BfSaveData saveData, bool newFile)
   {
     SaveData = saveData;
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> crystalBerries = new(
-      SaveData.CrystalBerries,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<EnemyEncounterSaveData, ObservableEnemyEncounterSaveData>
-      enemyEncounters = new(SaveData.EnemyEncounters,
-        cbs => cbs.Select(x => new ObservableEnemyEncounterSaveData(x)).ToList());
-    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers = new(SaveData.Followers,
-      cbs => cbs.Select(x => new ObservableBfNamedId(x)).ToList());
-    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers = new(
-      SaveData.PartyMembers,
-      cbs => cbs.Select(x => new ObservablePartyMemberSaveData(x)).ToList());
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> flags = new(SaveData.Flags,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<FlagvarSaveData, ObservableFlagvarSaveData> flagvars = new(
-      SaveData.Flagvars,
-      cbs => cbs.Select(x => new ObservableFlagvarSaveData(x)).ToList());
-    ObservableBfCollection<FlagstringSaveData, ObservableFlagstringSaveData> flagstrings = new(
-      SaveData.Flagstrings,
-      cbs => cbs.Select(x => new ObservableFlagstringSaveData(x)).ToList());
-    ObservableBfCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> medals = new(
-      SaveData.Medals,
-      cbs => cbs.Select(x => new ObservableMedalOnHandSaveData(x)).ToList());
-    ObservableBfCollection<FlagSaveData, ObservableFlagSaveData> regionalFlags = new(
-      SaveData.RegionalFlags,
-      cbs => cbs.Select(x => new ObservableFlagSaveData(x)).ToList());
-    ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> samiraSongs = new(
-      SaveData.SamiraSongs,
-      cbs => cbs.Select(x => new ObservableMusicSaveData(x)).ToList());
-    ObservableBfCollection<StatBonusSaveData, ObservableStatsBonusSaveData> statBonuses = new(
-      SaveData.StatBonuses,
-      cbs => cbs.Select(x => new ObservableStatsBonusSaveData(x)).ToList());
-    ObservableItemsSaveData items = new(SaveData.Items);
-    ObservableLibrarySaveData library = new(SaveData.Library);
-    ObservableMedalShopsStockSaveData medalShopsPools = new(SaveData.MedalShopsPools);
-    ObservableMedalShopsStockSaveData medalShopsAvailables = new(SaveData.MedalShopsAvailables);
-    ObservableBoardQuestsSaveData quests = new(SaveData.Quests);
-    _partyViewModel = new(partyMembers, followers);
-    _statsViewModel = new(statBonuses, partyMembers, new(SaveData.Global));
-    _questsViewModel = new QuestsViewModel(quests);
-    _itemsViewModel = new ItemsViewModel(items);
-    _medalsViewModel = new MedalsViewModel(medals, medalShopsPools, medalShopsAvailables);
-    _songsViewModel = new SongsViewModel(samiraSongs);
-    _crystalBerriesViewModel = new CrystalBerriesViewModel(crystalBerries);
-    _flagsViewModel = new FlagsViewModel(flags, flagvars, flagstrings, regionalFlags);
-    _globalViewModel = new(new(SaveData.Global), new(SaveData.Header));
-    _libraryViewModel = new(library);
+
+    // Assume that a new file is a 1.1.x save, if we add support for versions, this will be need to be changed
+    if (newFile)
+    {
+      for (int i = 0; i < Nbr11xFlagSlots; i++)
+        SaveData.Flags.Add(new());
+      for (int i = 0; i < Nbr11xFlagvarSlots; i++)
+        SaveData.Flagvars.Add(new());
+      for (int i = 0; i < NbrFlagstringSlots; i++)
+        SaveData.Flagstrings.Add(new());
+      for (int i = 0; i < NbrRegionalSlots; i++)
+        SaveData.RegionalFlags.Add(new());
+      for (int i = 0; i < NbrCrystalBerries; i++)
+        SaveData.CrystalBerries.Add(new());
+    }
+
+    _partyViewModel = new(saveData.PartyMembers, saveData.Followers);
+    _statsViewModel = new(saveData.StatBonuses, saveData.PartyMembers, saveData.Global);
+    _questsViewModel = new(saveData.Quests);
+    _itemsViewModel = new(saveData.Items);
+    _medalsViewModel = new(saveData.Medals, saveData.MedalShopsPools, saveData.MedalShopsAvailables);
+    _songsViewModel = new(saveData.SamiraSongs);
+    _crystalBerriesViewModel = new(saveData.CrystalBerries);
+    _flagsViewModel = new(saveData.Flags, saveData.Flagvars, saveData.Flagstrings, saveData.RegionalFlags);
+    _globalViewModel = new(saveData.Global, saveData.Header);
+    _libraryViewModel = new(saveData.Library);
+  }
+
+  public void Dispose()
+  {
+    GlobalViewModel.Dispose();
+    PartyViewModel.Dispose();
+    StatsViewModel.Dispose();
+    QuestsViewModel.Dispose();
+    ItemsViewModel.Dispose();
+    MedalsViewModel.Dispose();
+    SongsViewModel.Dispose();
+    CrystalBerriesViewModel.Dispose();
+    FlagsViewModel.Dispose();
+    LibraryViewModel.Dispose();
   }
 }

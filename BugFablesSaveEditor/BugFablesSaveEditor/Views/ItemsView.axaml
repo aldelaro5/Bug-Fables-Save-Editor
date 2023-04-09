@@ -17,37 +17,37 @@
       <Label DockPanel.Dock="Top" Content="Inventory" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                   Orientation="Horizontal">
-        <ContentControl Content="{Binding NewInventoryItem}" />
+        <ContentControl Content="{Binding Inventory.NewViewModel}" />
         <Button Margin="5,0,0,0" Content="Add"
-                Command="{Binding AddInventoryItemCommand}"
-                CommandParameter="{Binding NewInventoryItem}" />
+                Command="{Binding Inventory.AddViewModelCommand}"
+                CommandParameter="{Binding Inventory.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Inventory}"
-                           DeleteCommand="{Binding DeleteInventoryItemCommand}" />
+      <c:BfNamedIdDataGrid Items="{Binding Inventory.Collection}"
+                           DeleteCommand="{Binding Inventory.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
       <Label DockPanel.Dock="Top" Content="Key items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                   Orientation="Horizontal">
-        <ContentControl Content="{Binding NewKeyItem}" />
+        <ContentControl Content="{Binding KeyItems.NewViewModel}" />
         <Button Margin="5,0,0,0" Content="Add"
-                Command="{Binding AddKeyItemCommand}"
-                CommandParameter="{Binding NewKeyItem}" />
+                Command="{Binding KeyItems.AddViewModelCommand}"
+                CommandParameter="{Binding KeyItems.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Key}"
-                           DeleteCommand="{Binding DeleteKeyItemCommand}" />
+      <c:BfNamedIdDataGrid Items="{Binding KeyItems.Collection}"
+                           DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
       <Label DockPanel.Dock="Top" Content="Stored items" />
       <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                   Orientation="Horizontal">
-        <ContentControl Content="{Binding NewStoredItem}" />
+        <ContentControl Content="{Binding Stored.NewViewModel}" />
         <Button Margin="5,0,0,0" Content="Add"
-                Command="{Binding AddStoredItemCommand}"
-                CommandParameter="{Binding NewStoredItem}" />
+                Command="{Binding Stored.AddViewModelCommand}"
+                CommandParameter="{Binding Stored.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding ItemsSaveData.Stored}"
-                           DeleteCommand="{Binding DeleteStoredItemCommand}" />
+      <c:BfNamedIdDataGrid Items="{Binding Stored.Collection}"
+                           DeleteCommand="{Binding Stored.RemoveViewModelCommand}" />
     </DockPanel>
   </Grid>
 </UserControl>

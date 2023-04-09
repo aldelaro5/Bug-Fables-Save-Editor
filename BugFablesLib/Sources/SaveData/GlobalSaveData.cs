@@ -98,24 +98,4 @@ public sealed class GlobalSaveData : IBfSerializable
     LastProgressIcon =
       (SaveProgressIcon)Utils.ParseValueType<int>(data[15], nameof(LastProgressIcon));
   }
-
-  public void ResetToDefault()
-  {
-    Rank = 0;
-    Exp = 0;
-    NeededExp = 0;
-    MaxTp = 0;
-    Tp = 0;
-    BerryCount = 0;
-    CurrentMap.Id = 0;
-    CurrentArea.Id = 0;
-    Mp = 0;
-    MaxMp = 0;
-    NbrMaxItemsInventory = 0;
-    NbrMaxItemsStorage = 0;
-    PlayTimeHours = 0;
-    PlayTimeMinutes = 0;
-    PlayTimeSeconds = 0;
-    LastProgressIcon = 0;
-  }
 }

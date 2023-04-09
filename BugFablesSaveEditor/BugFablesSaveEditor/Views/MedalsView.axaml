@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
@@ -21,13 +21,13 @@
       <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10,0,5">
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding NewMedalOnHand.Medal}" />
+            <ContentControl Content="{Binding MedalOnHandSaveData.NewViewModel.Medal}" />
             <ComboBox
-              SelectedIndex="{Binding NewMedalOnHand.MedalEquipTarget.Value}"
-              Items="{Binding NewMedalOnHand.MedalEquipTargets}" Width="125" />
+              SelectedIndex="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTarget}"
+              Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" Width="125" />
             <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding AddMedalOnHandCommand}"
-                    CommandParameter="{Binding NewMedalOnHand}" />
+                    Command="{Binding MedalOnHandSaveData.AddViewModelCommand}"
+                    CommandParameter="{Binding MedalOnHandSaveData.NewViewModel}" />
           </StackPanel>
           <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
                   Command="{Binding UnequipAllMedalsCommand}" />
@@ -37,7 +37,7 @@
                   CanUserSortColumns="False"
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="True"
-                  Items="{Binding MedalOnHandSaveData}">
+                  Items="{Binding MedalOnHandSaveData.Collection}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
               <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMedalOnHandSaveData}" />
@@ -56,24 +56,24 @@
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Header="Medal">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
                   <ContentControl Content="{Binding Medal}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Header="Equip">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
-                  <ComboBox SelectedIndex="{Binding MedalEquipTarget.Value}"
+                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
+                  <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
                             Items="{Binding MedalEquipTargets}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:MedalsViewModel)DataContext).DeleteMedalOnHandCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:MedalsViewModel)DataContext).MedalOnHandSaveData.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25" Background="DarkRed" />
@@ -89,24 +89,24 @@
         <DockPanel Grid.Column="0">
           <Label DockPanel.Dock="Top" Content="Merab" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding NewPoolMerabMedal}" />
+            <ContentControl Content="{Binding MerabShopPool.NewViewModel}" />
             <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding AddMedalShopPoolMerabCommand}"
-                    CommandParameter="{Binding NewPoolMerabMedal}" />
+                    Command="{Binding MerabShopPool.AddViewModelCommand}"
+                    CommandParameter="{Binding MerabShopPool.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MedalShopsStockPoolSaveData.Merab}"
-                               DeleteCommand="{Binding DeleteMedalShopPoolMerabCommand}" />
+          <c:BfNamedIdDataGrid Items="{Binding MerabShopPool.Collection}"
+                               DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
           <Label DockPanel.Dock="Top" Content="Shades" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding NewPoolShadesMedal}" />
+            <ContentControl Content="{Binding ShadesShopPool.NewViewModel}" />
             <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding AddMedalShopPoolShadesCommand}"
-                    CommandParameter="{Binding NewPoolShadesMedal}" />
+                    Command="{Binding ShadesShopPool.AddViewModelCommand}"
+                    CommandParameter="{Binding ShadesShopPool.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MedalShopsStockPoolSaveData.Shades}"
-                               DeleteCommand="{Binding DeleteMedalShopPoolShadesCommand}" />
+          <c:BfNamedIdDataGrid Items="{Binding ShadesShopPool.Collection}"
+                               DeleteCommand="{Binding ShadesShopPool.RemoveViewModelCommand}" />
         </DockPanel>
       </Grid>
     </TabItem>
@@ -115,24 +115,24 @@
         <DockPanel Grid.Column="0">
           <Label DockPanel.Dock="Top" Content="Merab" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding NewAvailableMerabMedal}" />
+            <ContentControl Content="{Binding MerabShopAvailables.NewViewModel}" />
             <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding AddMedalShopAvailableMerabCommand}"
-                    CommandParameter="{Binding NewAvailableMerabMedal}" />
+                    Command="{Binding MerabShopAvailables.AddViewModelCommand}"
+                    CommandParameter="{Binding MerabShopAvailables.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MedalShopsAvailablePoolSaveData.Merab}"
-                               DeleteCommand="{Binding DeleteMedalShopAvailableMerabCommand}" />
+          <c:BfNamedIdDataGrid Items="{Binding MerabShopAvailables.Collection}"
+                               DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
           <Label DockPanel.Dock="Top" Content="Shades" />
           <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding NewAvailableShadesMedal}" />
+            <ContentControl Content="{Binding ShadesShopAvailables.NewViewModel}" />
             <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding AddMedalShopAvailableShadesCommand}"
-                    CommandParameter="{Binding NewAvailableShadesMedal}" />
+                    Command="{Binding ShadesShopAvailables.AddViewModelCommand}"
+                    CommandParameter="{Binding ShadesShopAvailables.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MedalShopsAvailablePoolSaveData.Shades}"
-                               DeleteCommand="{Binding DeleteMedalShopAvailableShadesCommand}" />
+          <c:BfNamedIdDataGrid Items="{Binding ShadesShopAvailables.Collection}"
+                               DeleteCommand="{Binding ShadesShopAvailables.RemoveViewModelCommand}" />
         </DockPanel>
       </Grid>
     </TabItem>

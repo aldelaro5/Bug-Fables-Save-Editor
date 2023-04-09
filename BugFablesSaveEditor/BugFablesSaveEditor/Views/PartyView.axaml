@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
@@ -21,16 +21,16 @@
       <DockPanel>
         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Party members" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ContentControl Content="{Binding NewPartyMemberAnimId.AnimId}" />
+          <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
-                  Content="Add" Command="{Binding AddPartyMemberCommand}"
-                  CommandParameter="{Binding NewPartyMemberAnimId}" />
+                  Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
+                  CommandParameter="{Binding PartyMembers.NewViewModel}" />
         </StackPanel>
         <DataGrid Classes="draggable"
                   AutoGenerateColumns="False"
                   CanUserSortColumns="False"
                   CanUserReorderColumns="False"
-                  Items="{Binding PartyMembers}">
+                  Items="{Binding PartyMembers.Collection}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
               <idd:ContextDropBehavior Handler="{StaticResource DataGridDndPartyMemberSaveData}" />
@@ -49,16 +49,16 @@
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Header="AnimId">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
+                <DataTemplate DataType="ob:PartyMemberSaveDataModel">
                   <ContentControl Content="{Binding AnimId}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
+                <DataTemplate DataType="ob:PartyMemberSaveDataModel">
                   <Button Margin="5,0,0,0" Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).DeletePartyMemberCommand}"
+                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).PartyMembers.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
                           HorizontalContentAlignment="Center"
                           Width="25" Background="DarkRed" />
@@ -74,13 +74,13 @@
       <DockPanel>
         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Content="Followers" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ContentControl Content="{Binding NewFollowerAnimId}" />
+          <ContentControl Content="{Binding Followers.NewViewModel}" />
           <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
-                  Content="Add" Command="{Binding AddFollowerCommand}"
-                  CommandParameter="{Binding NewFollowerAnimId}" />
+                  Content="Add" Command="{Binding Followers.AddViewModelCommand}"
+                  CommandParameter="{Binding Followers.NewViewModel}" />
         </StackPanel>
-        <c:BfNamedIdDataGrid Items="{Binding Followers}"
-                             DeleteCommand="{Binding DeleteFollowerCommand}" />
+        <c:BfNamedIdDataGrid Items="{Binding Followers.Collection}"
+                             DeleteCommand="{Binding Followers.RemoveViewModelCommand}" />
       </DockPanel>
     </DockPanel>
   </DockPanel>

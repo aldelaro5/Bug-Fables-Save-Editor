@@ -8,43 +8,43 @@ namespace BugFablesSaveEditor;
 
 public static class ExtendedData
 {
-  public static IReadOnlyList<string[]> CrystalBerriesDetails { get; }
-  public static IReadOnlyList<string> FlagsDetails { get; }
-  public static IReadOnlyList<string> FlagvarsDetails { get; }
-  public static IReadOnlyList<string> FlagstringsDetails { get; }
-  public static IReadOnlyDictionary<string, string[]> RegionalFlagsDetails { get; }
-
+  public static Dictionary<int, string[]> CrystalBerriesDetails { get; }
+  public static Dictionary<int, string[]> FlagsDetails { get; }
+  public static Dictionary<int, string[]> FlagvarsDetails { get; }
+  public static Dictionary<int, string[]> FlagstringsDetails { get; }
+  public static IReadOnlyDictionary<string, Dictionary<int, string[]>> RegionalFlagsDetails { get; }
 
   static ExtendedData()
   {
-    CrystalBerriesDetails = File
-      .ReadAllLines(
-        $"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv")
-      .Select(x => x.Split(";").Skip(1).ToArray()).ToList();
-
-    FlagsDetails = File
-      .ReadAllLines($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv")
-      .Select(x => x.Split(";")[1]).ToList();
-
-    FlagvarsDetails = File
-      .ReadAllLines($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv")
-      .Select(x => x.Split(";")[1]).ToList();
-
-    FlagstringsDetails = File
-      .ReadAllLines($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv")
-      .Select(x => x.Split(";")[1]).ToList();
+    CrystalBerriesDetails =
+      ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv");
+    FlagsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv");
+    FlagvarsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv");
+    FlagstringsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv");
 
     IReadOnlyList<string> areaNames = BugFablesLib.Utils.GetAllBfNames(new BfArea());
-    var regionals = new Dictionary<string, string[]>();
-    for (int i = 0; i < areaNames.Count; i++)
+    var regionals = new Dictionary<string, Dictionary<int, string[]>>();
+    foreach (var name in areaNames)
     {
-      string name = areaNames[i];
-      string[] data = File
-        .ReadAllLines($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv")
-        .Select(x => x.Split(";")[1]).ToArray();
+      var data = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv");
       regionals.Add(name, data);
     }
 
     RegionalFlagsDetails = regionals;
+  }
+
+  private static Dictionary<int, string[]> ReadFromFile(string file)
+  {
+    string[] fileData = File.ReadAllLines(file);
+    var result = new Dictionary<int, string[]>();
+
+    foreach (string s in fileData)
+    {
+      string[] data = s.Split(';');
+      int index = int.Parse(data[0]);
+      result[index] = data.Skip(1).ToArray();
+    }
+
+    return result;
   }
 }

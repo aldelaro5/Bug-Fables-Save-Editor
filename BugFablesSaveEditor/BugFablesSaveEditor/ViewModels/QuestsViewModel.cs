@@ -1,53 +1,35 @@
+using System;
 using BugFablesLib.Data;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesLib.SaveData;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class QuestsViewModel : ObservableObject
+public partial class QuestsViewModel : ObservableObject, IDisposable
 {
   [ObservableProperty]
-  private ObservableBoardQuestsSaveData _questsSaveData;
+  private ViewModelCollection<BfQuest, BfNamedIdModel> _opened;
 
   [ObservableProperty]
-  private ObservableBfNamedId _newOpenQuest = new(new BfQuest());
+  private ViewModelCollection<BfQuest, BfNamedIdModel> _taken;
 
   [ObservableProperty]
-  private ObservableBfNamedId _newTakenQuest = new(new BfQuest());
+  private ViewModelCollection<BfQuest, BfNamedIdModel> _completed;
 
-  [ObservableProperty]
-  private ObservableBfNamedId _newCompletedQuest = new(new BfQuest());
+  public QuestsViewModel() : this(new()) { }
 
-  public QuestsViewModel()
+  public QuestsViewModel(BoardQuestsSaveData questsSaveData)
   {
-    _questsSaveData = new(new());
+    _opened = new(questsSaveData.Opened);
+    _taken = new(questsSaveData.Taken);
+    _completed = new(questsSaveData.Completed);
   }
 
-  public QuestsViewModel(ObservableBoardQuestsSaveData questsSaveData)
+  public void Dispose()
   {
-    _questsSaveData = questsSaveData;
+    Opened.Dispose();
+    Taken.Dispose();
+    Completed.Dispose();
   }
-
-  [RelayCommand]
-  private void AddOpenQuest(ObservableBfNamedId quest) =>
-    QuestsSaveData.Opened.Add(new(quest.ToQuest()));
-
-  [RelayCommand]
-  private void DeleteOpenQuest(ObservableBfNamedId quest) => QuestsSaveData.Opened.Remove(quest);
-
-  [RelayCommand]
-  private void AddTakenQuest(ObservableBfNamedId quest) =>
-    QuestsSaveData.Taken.Add(new(quest.ToQuest()));
-
-  [RelayCommand]
-  private void DeleteTakenQuest(ObservableBfNamedId quest) => QuestsSaveData.Taken.Remove(quest);
-
-  [RelayCommand]
-  private void AddCompletedQuest(ObservableBfNamedId quest) =>
-    QuestsSaveData.Completed.Add(new(quest.ToQuest()));
-
-  [RelayCommand]
-  private void DeleteCompletedQuest(ObservableBfNamedId quest) =>
-    QuestsSaveData.Completed.Remove(quest);
 }

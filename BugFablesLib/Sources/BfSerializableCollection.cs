@@ -70,10 +70,4 @@ public class BfSerializableCollection<TBfSerializable> : Collection<TBfSerializa
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    foreach (var element in this)
-      element.ResetToDefault();
-  }
 }

@@ -8,5 +8,4 @@ public sealed class FlagSaveData : IBfSerializable
     Enabled = Utils.ParseValueType<bool>(str, nameof(Enabled));
 
   public string Serialize() => Enabled.ToString();
-  public void ResetToDefault() => Enabled = false;
 }

@@ -1,35 +1,25 @@
-using System.Collections.Generic;
+using System;
+using System.Collections.ObjectModel;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class SongsViewModel : ObservableObject
+public partial class SongsViewModel : ObservableObject, IDisposable
 {
   [ObservableProperty]
-  private ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> _musicSaveData;
+  private ViewModelCollection<BfMusicSaveData, MusicSaveDataModel> _musicSaveData;
 
-  [ObservableProperty]
-  private ObservableMusicSaveData _newMusic = new(new BfMusicSaveData());
+  public SongsViewModel() : this(new()) { }
 
-  public SongsViewModel()
+  public SongsViewModel(Collection<BfMusicSaveData> musicSaveData)
   {
-    _musicSaveData = new(new(), _ => new List<ObservableMusicSaveData>());
+    _musicSaveData = new(musicSaveData);
   }
 
-  public SongsViewModel(
-    ObservableBfCollection<BfMusicSaveData, ObservableMusicSaveData> musicSaveData)
+  public void Dispose()
   {
-    _musicSaveData = musicSaveData;
+    MusicSaveData.Dispose();
   }
-
-  [RelayCommand]
-  private void AddMusic(ObservableMusicSaveData music) =>
-    MusicSaveData.Add(new(music.UnderlyingData));
-
-  [RelayCommand]
-  private void DeleteMusic(ObservableMusicSaveData music) =>
-    MusicSaveData.Remove(music);
 }

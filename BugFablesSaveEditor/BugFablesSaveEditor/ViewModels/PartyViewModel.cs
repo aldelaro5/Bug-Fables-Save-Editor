@@ -1,52 +1,32 @@
-using System.Collections.Generic;
+using System;
+using System.Collections.ObjectModel;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class PartyViewModel : ObservableObject
+public partial class PartyViewModel : ObservableObject, IDisposable
 {
   [ObservableProperty]
-  private ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
+  private ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> _partyMembers;
 
   [ObservableProperty]
-  private ObservableBfCollection<BfAnimId, ObservableBfNamedId> _followers;
+  private ViewModelCollection<BfAnimId, BfNamedIdModel> _followers;
 
-  [ObservableProperty]
-  private ObservablePartyMemberSaveData _newPartyMemberAnimId = new(new());
+  public PartyViewModel() : this(new(), new()) { }
 
-  [ObservableProperty]
-  private ObservableBfNamedId _newFollowerAnimId = new(new BfAnimId());
-
-  [RelayCommand]
-  private void AddPartyMember(ObservablePartyMemberSaveData partyMember) =>
-    PartyMembers.Add(new(partyMember.UnderlyingData));
-
-  [RelayCommand]
-  private void DeletePartyMember(ObservablePartyMemberSaveData partyMember) =>
-    PartyMembers.Remove(partyMember);
-
-  [RelayCommand]
-  private void DeleteFollower(ObservableBfNamedId followerAnimId) =>
-    Followers.Remove(followerAnimId);
-
-  [RelayCommand]
-  private void AddFollower(ObservableBfNamedId animId) => Followers.Add(new(animId.UnderlyingData));
-
-  public PartyViewModel(
-    ObservableBfCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> partyMembers,
-    ObservableBfCollection<BfAnimId, ObservableBfNamedId> followers)
+  public PartyViewModel(Collection<PartyMemberSaveData> partyMembers,
+                        Collection<BfAnimId> followers)
   {
-    _partyMembers = partyMembers;
-    _followers = followers;
+    _partyMembers = new(partyMembers);
+    _followers = new(followers);
   }
 
-  public PartyViewModel()
+  public void Dispose()
   {
-    _partyMembers = new(new(), _ => new List<ObservablePartyMemberSaveData>());
-    _followers = new(new(), _ => new List<ObservableBfNamedId>());
+    PartyMembers.Dispose();
+    Followers.Dispose();
   }
 }

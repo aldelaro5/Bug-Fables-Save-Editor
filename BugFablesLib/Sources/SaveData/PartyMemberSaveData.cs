@@ -51,16 +51,4 @@ public class PartyMemberSaveData : IBfSerializable
 
     return sb.ToString();
   }
-
-  public void ResetToDefault()
-  {
-    AnimId.Id = 0;
-    Hp = 0;
-    MaxHp = 0;
-    BaseHp = 0;
-    Attack = 0;
-    BaseAttack = 0;
-    Defense = 0;
-    BaseDefense = 0;
-  }
 }

@@ -3,6 +3,7 @@
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:vm="clr-namespace:BugFablesSaveEditor.ViewModels"
+          xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
           mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
           x:Class="BugFablesSaveEditor.Controls.FlagsDataGrid"
           x:CompileBindings="True"
@@ -13,17 +14,17 @@
           HeadersVisibility="None">
   <DataGrid.Columns>
     <DataGridTextColumn Header="Index" IsReadOnly="True"
-                        x:DataType="vm:FlagViewModel"
+                        x:DataType="m:FlagSaveDataModel"
                         Binding="{Binding Index}" />
     <DataGridTemplateColumn Width="50">
       <DataGridTemplateColumn.CellTemplate>
-        <DataTemplate DataType="vm:FlagViewModel">
-          <CheckBox Margin="15,0,0,0" IsChecked="{Binding Flag.Enabled.Value}" />
+        <DataTemplate DataType="m:FlagSaveDataModel">
+          <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
         </DataTemplate>
       </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>
     <DataGridTextColumn IsReadOnly="True" Width="200"
-                        x:DataType="vm:FlagViewModel"
-                        Binding="{Binding Description}" />
+                        x:DataType="m:FlagSaveDataModel"
+                        Binding="{Binding Description1}" />
   </DataGrid.Columns>
 </DataGrid>
