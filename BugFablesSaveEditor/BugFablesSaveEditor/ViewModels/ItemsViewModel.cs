@@ -1,3 +1,4 @@
+using System;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.Models;
@@ -5,7 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class ItemsViewModel : ObservableObject
+public partial class ItemsViewModel : ObservableObject, IDisposable
 {
   [ObservableProperty]
   private ViewModelCollection<BfItem, BfNamedIdModel> _inventory;
@@ -23,5 +24,12 @@ public partial class ItemsViewModel : ObservableObject
     _inventory = new(itemsSaveData.Inventory);
     _keyItems = new(itemsSaveData.KeyItems);
     _stored = new(itemsSaveData.Stored);
+  }
+
+  public void Dispose()
+  {
+    Inventory.Dispose();
+    KeyItems.Dispose();
+    Stored.Dispose();
   }
 }

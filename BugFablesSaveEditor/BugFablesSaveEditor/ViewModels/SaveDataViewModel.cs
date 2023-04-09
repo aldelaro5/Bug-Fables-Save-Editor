@@ -56,8 +56,14 @@ public partial class SaveDataViewModel : ObservableObject, IDisposable
   public void Dispose()
   {
     GlobalViewModel.Dispose();
+    PartyViewModel.Dispose();
+    StatsViewModel.Dispose();
+    QuestsViewModel.Dispose();
+    ItemsViewModel.Dispose();
+    MedalsViewModel.Dispose();
+    SongsViewModel.Dispose();
+    CrystalBerriesViewModel.Dispose();
     FlagsViewModel.Dispose();
     LibraryViewModel.Dispose();
-    CrystalBerriesViewModel.Dispose();
   }
 }

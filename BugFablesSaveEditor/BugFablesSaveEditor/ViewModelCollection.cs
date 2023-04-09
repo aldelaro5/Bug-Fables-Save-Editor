@@ -18,7 +18,9 @@ namespace BugFablesSaveEditor;
 /// </summary>
 /// <typeparam name="TModel">The model type to wrap, must have a default constructor</typeparam>
 /// <typeparam name="TViewModel">The view model type that wraps TModel</typeparam>
-public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject, IModelWrapper<Collection<TModel>>
+public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
+  IModelWrapper<Collection<TModel>>,
+  IDisposable
   where TViewModel : IModelWrapper<TModel>
   where TModel : new()
 {
@@ -74,5 +76,10 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
       default:
         throw new ArgumentOutOfRangeException();
     }
+  }
+
+  public void Dispose()
+  {
+    Collection.CollectionChanged -= OnCollectionChanged;
   }
 }

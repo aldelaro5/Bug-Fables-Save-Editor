@@ -13,8 +13,10 @@ using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class StatsViewModel : ObservableObject
+public partial class StatsViewModel : ObservableObject, IDisposable
 {
+  private readonly IDisposable _partyMemberStatsBonusesDisposable;
+  private readonly IDisposable _partyStatsBonusesDisposable;
   private readonly GlobalSaveData _globalSaveData;
   private IReadOnlyList<string> StatBonusTypeNames => Enum.GetNames<StatBonusSaveData.StatBonusType>();
   private readonly ViewModelCollection<StatBonusSaveData, StatsBonusSaveDataModel> _statsBonuses;
@@ -102,20 +104,17 @@ public partial class StatsViewModel : ObservableObject
     _partyMembers = new(partyMembers);
     _globalSaveData = globalSaveData;
 
-    _statsBonuses.Collection.ToObservableChangeSet()
+    _partyStatsBonusesDisposable = _statsBonuses.Collection.ToObservableChangeSet()
       .Filter(x => x.Target == -1)
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _partyStatBonuses)
       .Subscribe();
 
     var memberFilter = this.WhenValueChanged(x => x.SelectedPartyMember)
-      .Select(member =>
-      {
-        return new Func<StatsBonusSaveDataModel, bool>(statsBonusSaveData =>
-          member?.AnimId.Id == statsBonusSaveData.Target);
-      });
+      .Where(x => x is not null)
+      .Select(SelectedPartyMemberFilter!);
 
-    _statsBonuses.Collection
+    _partyMemberStatsBonusesDisposable = _statsBonuses.Collection
       .ToObservableChangeSet()
       .Filter(memberFilter)
       .ObserveOn(SynchronizationContext.Current!)
@@ -147,4 +146,16 @@ public partial class StatsViewModel : ObservableObject
   [RelayCommand]
   private void DeleteStatBonus(StatsBonusSaveDataModel statsBonus) =>
     _statsBonuses.RemoveViewModelCommand.Execute(statsBonus);
+
+  private static Func<StatsBonusSaveDataModel, bool> SelectedPartyMemberFilter(PartyMemberSaveDataModel member)
+  {
+    return statsBonusSaveData => member.AnimId.Id == statsBonusSaveData.Target;
+  }
+
+  public void Dispose()
+  {
+    _partyMemberStatsBonusesDisposable.Dispose();
+    _partyStatsBonusesDisposable.Dispose();
+    _statsBonuses.Dispose();
+  }
 }

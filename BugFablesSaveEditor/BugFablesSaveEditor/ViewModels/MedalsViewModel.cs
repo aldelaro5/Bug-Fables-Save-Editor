@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
@@ -7,7 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class MedalsViewModel : ObservableObject
+public partial class MedalsViewModel : ObservableObject, IDisposable
 {
   [ObservableProperty]
   private ViewModelCollection<BfMedalOnHandSaveData, MedalOnHandSaveDataModel> _medalOnHandSaveData;
@@ -42,5 +43,14 @@ public partial class MedalsViewModel : ObservableObject
   {
     foreach (MedalOnHandSaveDataModel medal in MedalOnHandSaveData.Collection)
       medal.MedalEquipTarget = 0;
+  }
+
+  public void Dispose()
+  {
+    MedalOnHandSaveData.Dispose();
+    MerabShopPool.Dispose();
+    ShadesShopPool.Dispose();
+    MerabShopAvailables.Dispose();
+    ShadesShopAvailables.Dispose();
   }
 }

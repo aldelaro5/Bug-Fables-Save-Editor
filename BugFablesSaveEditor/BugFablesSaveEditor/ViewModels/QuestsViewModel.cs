@@ -1,3 +1,4 @@
+using System;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.Models;
@@ -5,7 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class QuestsViewModel : ObservableObject
+public partial class QuestsViewModel : ObservableObject, IDisposable
 {
   [ObservableProperty]
   private ViewModelCollection<BfQuest, BfNamedIdModel> _opened;
@@ -23,5 +24,12 @@ public partial class QuestsViewModel : ObservableObject
     _opened = new(questsSaveData.Opened);
     _taken = new(questsSaveData.Taken);
     _completed = new(questsSaveData.Completed);
+  }
+
+  public void Dispose()
+  {
+    Opened.Dispose();
+    Taken.Dispose();
+    Completed.Dispose();
   }
 }
