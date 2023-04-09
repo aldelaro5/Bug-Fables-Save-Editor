@@ -10,6 +10,7 @@ using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData.Binding;
+using static BugFablesSaveEditor.FilterUtils;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -70,23 +71,23 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
 
   public LibraryViewModel(LibrarySaveData librarySaveData)
   {
-    _discoveriesDisposable = Utils.ObserveFlagsWithFilterAndSort(
+    _discoveriesDisposable = ObserveFlagsWithFilterAndSort(
       WrapFlagsWithMetadata(librarySaveData.Discoveries, BfVanillaNames.Discoveries),
       GetFilter(x => x.TextFilterDiscoveries, x => x.FilterUnusedDiscoveries), out _discoveries);
 
-    _bestiaryDisposable = Utils.ObserveFlagsWithFilterAndSort(
+    _bestiaryDisposable = ObserveFlagsWithFilterAndSort(
       WrapFlagsWithMetadata(librarySaveData.Bestiary, BfVanillaNames.Enemies),
       GetFilter(x => x.TextFilterBestiary, x => x.FilterUnusedBestiary), out _bestiary);
 
-    _recipesDisposable = Utils.ObserveFlagsWithFilterAndSort(
+    _recipesDisposable = ObserveFlagsWithFilterAndSort(
       WrapFlagsWithMetadata(librarySaveData.Recipes, BfVanillaNames.Recipes),
       GetFilter(x => x.TextFilterRecipes, x => x.FilterUnusedRecipes), out _recipes);
 
-    _recordsDisposable = Utils.ObserveFlagsWithFilterAndSort(
+    _recordsDisposable = ObserveFlagsWithFilterAndSort(
       WrapFlagsWithMetadata(librarySaveData.Records, BfVanillaNames.Records),
       GetFilter(x => x.TextFilterRecords, x => x.FilterUnusedRecords), out _records);
 
-    _seenAreasDisposable = Utils.ObserveFlagsWithFilterAndSort(
+    _seenAreasDisposable = ObserveFlagsWithFilterAndSort(
       WrapFlagsWithMetadata(librarySaveData.SeenAreas, BfVanillaNames.Areas),
       GetFilter(x => x.TextFilterSeenAreas, x => x.FilterUnusedSeenAreas), out _seenAreas);
   }
@@ -115,7 +116,7 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
     return this.WhenChanged(filterChange, unusedChange,
         (_, text, keepUnused) => (text, keepUnused))
       .Throttle(TimeSpan.FromMilliseconds(250))
-      .Select(Utils.FlagTextFilterWithUnused!);
+      .Select(FlagTextFilterWithUnused!);
   }
 
   public void Dispose()

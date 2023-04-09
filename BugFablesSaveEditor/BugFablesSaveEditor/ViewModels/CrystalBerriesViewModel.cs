@@ -5,6 +5,7 @@ using BugFablesLib.SaveData;
 using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using static BugFablesSaveEditor.FilterUtils;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -22,7 +23,7 @@ public partial class CrystalBerriesViewModel : ObservableObject, IDisposable
 
   public CrystalBerriesViewModel(Collection<FlagSaveData> crystalBerries)
   {
-    var filter = Utils.GetSimpleTextFilterForFlags<FlagSaveDataModel, CrystalBerriesViewModel>(this, x => x.TextFilter);
+    var filter = GetSimpleTextFilterForFlags<FlagSaveDataModel, CrystalBerriesViewModel>(this, x => x.TextFilter);
     var flagsWithMetaData = crystalBerries.Select((data, i) => new FlagSaveDataModel(data)
     {
       Index = i,
@@ -30,7 +31,7 @@ public partial class CrystalBerriesViewModel : ObservableObject, IDisposable
       Description2 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData2) ? extData2[1] : ""
     });
 
-    _crystalBerriesDisposable = Utils.ObserveFlagsWithFilterAndSort(flagsWithMetaData, filter, out _crystalBerries);
+    _crystalBerriesDisposable = ObserveFlagsWithFilterAndSort(flagsWithMetaData, filter, out _crystalBerries);
   }
 
   [RelayCommand]

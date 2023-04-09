@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using DynamicData.Binding;
+using static BugFablesSaveEditor.FilterUtils;
 
 namespace BugFablesSaveEditor.ViewModels;
 
@@ -76,9 +77,9 @@ public partial class FlagsViewModel : ObservableRecipient, IDisposable
       this.WhenChanged(x => x.TextFilterRegionalFlags, x => x.FilterUnusedRegionals, x => RegionalArea,
           (_, text, keepUnused, _) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
-        .Select(Utils.FlagTextFilterWithUnused!);
+        .Select(FlagTextFilterWithUnused!);
 
-    return Utils.ObserveFlagsWithFilterAndSort(_regionals, regionalFilter, out result);
+    return ObserveFlagsWithFilterAndSort(_regionals, regionalFilter, out result);
   }
 
   private IDisposable SetupAndSubscribeToFlags<TModel, TViewModel>(IEnumerable<TModel> flags,
@@ -90,8 +91,8 @@ public partial class FlagsViewModel : ObservableRecipient, IDisposable
     var flagsWithMetaData =
       flags.Select((data, i) => AssignMetaData((TViewModel)TViewModel.WrapModel(data), i, extendedData));
 
-    return Utils.ObserveFlagsWithFilterAndSort(flagsWithMetaData,
-      Utils.GetSimpleTextFilterForFlags<TViewModel, FlagsViewModel>(this, textFilter),
+    return ObserveFlagsWithFilterAndSort(flagsWithMetaData,
+      GetSimpleTextFilterForFlags<TViewModel, FlagsViewModel>(this, textFilter),
       out result);
   }
 
