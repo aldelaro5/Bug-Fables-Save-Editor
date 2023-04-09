@@ -22,7 +22,7 @@
                 Command="{Binding Inventory.AddViewModelCommand}"
                 CommandParameter="{Binding Inventory.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Inventory.CollectionView}"
+      <c:BfNamedIdDataGrid Items="{Binding Inventory.Collection}"
                            DeleteCommand="{Binding Inventory.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
@@ -34,7 +34,7 @@
                 Command="{Binding KeyItems.AddViewModelCommand}"
                 CommandParameter="{Binding KeyItems.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding KeyItems.CollectionView}"
+      <c:BfNamedIdDataGrid Items="{Binding KeyItems.Collection}"
                            DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
@@ -46,7 +46,7 @@
                 Command="{Binding Stored.AddViewModelCommand}"
                 CommandParameter="{Binding Stored.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Stored.CollectionView}"
+      <c:BfNamedIdDataGrid Items="{Binding Stored.Collection}"
                            DeleteCommand="{Binding Stored.RemoveViewModelCommand}" />
     </DockPanel>
   </Grid>

@@ -27,7 +27,7 @@
               AutoGenerateColumns="False"
               CanUserSortColumns="False"
               CanUserReorderColumns="False"
-              Items="{Binding MusicSaveData.CollectionView}">
+              Items="{Binding MusicSaveData.Collection}">
       <i:Interaction.Behaviors>
         <i:BehaviorCollection>
           <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMusicSaveData}" />

@@ -37,7 +37,7 @@
                   CanUserSortColumns="False"
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="True"
-                  Items="{Binding MedalOnHandSaveData.CollectionView}">
+                  Items="{Binding MedalOnHandSaveData.Collection}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
               <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMedalOnHandSaveData}" />
@@ -94,7 +94,7 @@
                     Command="{Binding MerabShopPool.AddViewModelCommand}"
                     CommandParameter="{Binding MerabShopPool.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MerabShopPool.CollectionView}"
+          <c:BfNamedIdDataGrid Items="{Binding MerabShopPool.Collection}"
                                DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
@@ -105,7 +105,7 @@
                     Command="{Binding ShadesShopPool.AddViewModelCommand}"
                     CommandParameter="{Binding ShadesShopPool.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding ShadesShopPool.CollectionView}"
+          <c:BfNamedIdDataGrid Items="{Binding ShadesShopPool.Collection}"
                                DeleteCommand="{Binding ShadesShopPool.RemoveViewModelCommand}" />
         </DockPanel>
       </Grid>
@@ -120,7 +120,7 @@
                     Command="{Binding MerabShopAvailables.AddViewModelCommand}"
                     CommandParameter="{Binding MerabShopAvailables.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MerabShopAvailables.CollectionView}"
+          <c:BfNamedIdDataGrid Items="{Binding MerabShopAvailables.Collection}"
                                DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}" />
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
@@ -131,7 +131,7 @@
                     Command="{Binding ShadesShopAvailables.AddViewModelCommand}"
                     CommandParameter="{Binding ShadesShopAvailables.NewViewModel}" />
           </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding ShadesShopAvailables.CollectionView}"
+          <c:BfNamedIdDataGrid Items="{Binding ShadesShopAvailables.Collection}"
                                DeleteCommand="{Binding ShadesShopAvailables.RemoveViewModelCommand}" />
         </DockPanel>
       </Grid>

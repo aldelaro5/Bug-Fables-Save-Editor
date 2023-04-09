@@ -40,7 +40,7 @@ public partial class MedalsViewModel : ObservableObject
   [RelayCommand]
   private void UnequipAllMedals()
   {
-    foreach (ObservableMedalOnHandSaveData medal in MedalOnHandSaveData.CollectionView)
+    foreach (ObservableMedalOnHandSaveData medal in MedalOnHandSaveData.Collection)
       medal.MedalEquipTarget = 0;
   }
 }

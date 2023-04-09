@@ -22,7 +22,7 @@
                 Command="{Binding Opened.AddViewModelCommand}"
                 CommandParameter="{Binding Opened.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Opened.CollectionView}"
+      <c:BfNamedIdDataGrid Items="{Binding Opened.Collection}"
                            DeleteCommand="{Binding Opened.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Grid.Column="1" Margin="20,0,0,0">
@@ -34,7 +34,7 @@
                 Command="{Binding Taken.AddViewModelCommand}"
                 CommandParameter="{Binding Taken.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Taken.CollectionView}"
+      <c:BfNamedIdDataGrid Items="{Binding Taken.Collection}"
                            DeleteCommand="{Binding Taken.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Grid.Column="2" Margin="20,0,0,0">
@@ -46,7 +46,7 @@
                 Command="{Binding Completed.AddViewModelCommand}"
                 CommandParameter="{Binding Completed.NewViewModel}" />
       </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Completed.CollectionView}"
+      <c:BfNamedIdDataGrid Items="{Binding Completed.Collection}"
                            DeleteCommand="{Binding Completed.RemoveViewModelCommand}" />
     </DockPanel>
   </Grid>

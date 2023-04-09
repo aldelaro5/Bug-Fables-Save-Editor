@@ -71,25 +71,25 @@ public partial class StatsViewModel : ObservableObject
 
   public IReadOnlyList<string> PartyStatBonusTypeNames => StatBonusTypeNames.Skip(3).ToList();
 
-  public int TotalPartyMaxTpBonus => _statsBonuses.CollectionView
+  public int TotalPartyMaxTpBonus => _statsBonuses.Collection
     .Where(x => x.Target == -1 && x.Type == StatBonusSaveData.StatBonusType.TP)
     .Sum(x => x.Amount);
 
-  public int TotalPartyMaxMpBonus => _statsBonuses.CollectionView
+  public int TotalPartyMaxMpBonus => _statsBonuses.Collection
     .Where(x => x.Target == -1 && x.Type == StatBonusSaveData.StatBonusType.MP)
     .Sum(x => x.Amount);
 
-  public int TotalMemberMaxHpBonus => _statsBonuses.CollectionView
+  public int TotalMemberMaxHpBonus => _statsBonuses.Collection
     .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
                 x.Type == StatBonusSaveData.StatBonusType.HP)
     .Sum(x => x.Amount);
 
-  public int TotalMemberAttackBonus => _statsBonuses.CollectionView
+  public int TotalMemberAttackBonus => _statsBonuses.Collection
     .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
                 x.Type == StatBonusSaveData.StatBonusType.Attack)
     .Sum(x => x.Amount);
 
-  public int TotalMemberDefenseBonus => _statsBonuses.CollectionView
+  public int TotalMemberDefenseBonus => _statsBonuses.Collection
     .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
                 x.Type == StatBonusSaveData.StatBonusType.Defense)
     .Sum(x => x.Amount);
@@ -129,7 +129,7 @@ public partial class StatsViewModel : ObservableObject
     _partyMembers = new(partyMembers);
     _globalSaveData = globalSaveData;
 
-    _statsBonuses.CollectionView.ToObservableChangeSet()
+    _statsBonuses.Collection.ToObservableChangeSet()
       .Filter(x => x.Target == -1)
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _partyStatBonuses)
@@ -142,7 +142,7 @@ public partial class StatsViewModel : ObservableObject
           member?.AnimId.Id == statsBonusSaveData.Target);
       });
 
-    _statsBonuses.CollectionView
+    _statsBonuses.Collection
       .ToObservableChangeSet()
       .Filter(memberFilter)
       .ObserveOn(SynchronizationContext.Current!)
