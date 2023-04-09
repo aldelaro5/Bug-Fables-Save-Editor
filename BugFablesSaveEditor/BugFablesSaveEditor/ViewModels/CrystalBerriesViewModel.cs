@@ -44,19 +44,19 @@ public partial class CrystalBerriesViewModel : ObservableObject, IDisposable
       .Subscribe();
   }
 
+  [RelayCommand]
+  private void ToggleAllShown()
+  {
+    foreach (var flagSaveData in CrystalBerriesSaveDataFiltered)
+      flagSaveData.Enabled = !flagSaveData.Enabled;
+  }
+
   private Func<FlagSaveDataModel, bool> CrystalBerryFilter(string x)
   {
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
                  vm.Description1.Contains(x, StringComparison.OrdinalIgnoreCase) ||
                  vm.Description2.Contains(x, StringComparison.OrdinalIgnoreCase);
-  }
-
-  [RelayCommand]
-  private void ToggleAllShown()
-  {
-    foreach (var flagSaveData in CrystalBerriesSaveDataFiltered)
-      flagSaveData.Enabled = !flagSaveData.Enabled;
   }
 
   public void Dispose()

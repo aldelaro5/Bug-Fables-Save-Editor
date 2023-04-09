@@ -16,6 +16,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class StatsViewModel : ObservableObject
 {
   private readonly GlobalSaveData _globalSaveData;
+  private IReadOnlyList<string> StatBonusTypeNames => Enum.GetNames<StatBonusSaveData.StatBonusType>();
   private readonly ViewModelCollection<StatBonusSaveData, StatsBonusSaveDataModel> _statsBonuses;
 
   [ObservableProperty]
@@ -33,6 +34,12 @@ public partial class StatsViewModel : ObservableObject
   [NotifyPropertyChangedFor(nameof(TotalMemberDefenseBonus))]
   [NotifyCanExecuteChangedFor(nameof(AddStatPartyMemberBonusCommand))]
   private PartyMemberSaveDataModel? _selectedPartyMember;
+
+  [ObservableProperty]
+  private StatsBonusSaveDataModel _newPartyStatBonus = new(new StatBonusSaveData());
+
+  [ObservableProperty]
+  private StatsBonusSaveDataModel _newMemberStatBonus = new(new StatBonusSaveData());
 
   public int Mp
   {
@@ -57,14 +64,6 @@ public partial class StatsViewModel : ObservableObject
     get => _globalSaveData.MaxTp;
     set => SetProperty(_globalSaveData.MaxTp, value, _globalSaveData, (data, s) => data.MaxTp = s);
   }
-
-  [ObservableProperty]
-  private StatsBonusSaveDataModel _newPartyStatBonus = new(new StatBonusSaveData());
-
-  [ObservableProperty]
-  private StatsBonusSaveDataModel _newMemberStatBonus = new(new StatBonusSaveData());
-
-  private IReadOnlyList<string> StatBonusTypeNames => Enum.GetNames<StatBonusSaveData.StatBonusType>();
 
   public IReadOnlyList<string> MemberStatBonusTypeNames => StatBonusTypeNames.Take(3).ToList();
 
@@ -92,31 +91,6 @@ public partial class StatsViewModel : ObservableObject
     .Where(x => x.Target == SelectedPartyMember?.AnimId.Id &&
                 x.Type == StatBonusSaveData.StatBonusType.Defense)
     .Sum(x => x.Amount);
-
-  [RelayCommand]
-  private void AddStatPartyBonus(StatsBonusSaveDataModel statsBonusSaveData)
-  {
-    statsBonusSaveData.Target = -1;
-    _statsBonuses.AddViewModelCommand.Execute(statsBonusSaveData);
-    OnPropertyChanged(nameof(TotalPartyMaxMpBonus));
-    OnPropertyChanged(nameof(TotalPartyMaxTpBonus));
-  }
-
-  [RelayCommand(CanExecute = nameof(CanAddPartyMemberBonus))]
-  private void AddStatPartyMemberBonus(StatsBonusSaveDataModel statsBonusSaveData)
-  {
-    statsBonusSaveData.Target = SelectedPartyMember!.AnimId.Id;
-    _statsBonuses.AddViewModelCommand.Execute(statsBonusSaveData);
-    OnPropertyChanged(nameof(TotalMemberMaxHpBonus));
-    OnPropertyChanged(nameof(TotalMemberAttackBonus));
-    OnPropertyChanged(nameof(TotalMemberDefenseBonus));
-  }
-
-  private bool CanAddPartyMemberBonus() => SelectedPartyMember is not null;
-
-  [RelayCommand]
-  private void DeleteStatBonus(StatsBonusSaveDataModel statsBonus) =>
-    _statsBonuses.RemoveViewModelCommand.Execute(statsBonus);
 
   public StatsViewModel() : this(new(), new(), new()) { }
 
@@ -148,4 +122,29 @@ public partial class StatsViewModel : ObservableObject
       .Bind(out _memberStatBonuses)
       .Subscribe(_ => OnPropertyChanged(nameof(MemberStatBonuses)));
   }
+
+  [RelayCommand]
+  private void AddStatPartyBonus(StatsBonusSaveDataModel statsBonusSaveData)
+  {
+    statsBonusSaveData.Target = -1;
+    _statsBonuses.AddViewModelCommand.Execute(statsBonusSaveData);
+    OnPropertyChanged(nameof(TotalPartyMaxMpBonus));
+    OnPropertyChanged(nameof(TotalPartyMaxTpBonus));
+  }
+
+  [RelayCommand(CanExecute = nameof(CanAddPartyMemberBonus))]
+  private void AddStatPartyMemberBonus(StatsBonusSaveDataModel statsBonusSaveData)
+  {
+    statsBonusSaveData.Target = SelectedPartyMember!.AnimId.Id;
+    _statsBonuses.AddViewModelCommand.Execute(statsBonusSaveData);
+    OnPropertyChanged(nameof(TotalMemberMaxHpBonus));
+    OnPropertyChanged(nameof(TotalMemberAttackBonus));
+    OnPropertyChanged(nameof(TotalMemberDefenseBonus));
+  }
+
+  private bool CanAddPartyMemberBonus() => SelectedPartyMember is not null;
+
+  [RelayCommand]
+  private void DeleteStatBonus(StatsBonusSaveDataModel statsBonus) =>
+    _statsBonuses.RemoveViewModelCommand.Execute(statsBonus);
 }

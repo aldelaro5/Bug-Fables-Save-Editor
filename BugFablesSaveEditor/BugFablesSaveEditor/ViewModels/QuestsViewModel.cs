@@ -16,7 +16,6 @@ public partial class QuestsViewModel : ObservableObject
   [ObservableProperty]
   private ViewModelCollection<BfQuest, BfNamedIdModel> _completed;
 
-
   public QuestsViewModel() : this(new()) { }
 
   public QuestsViewModel(BoardQuestsSaveData questsSaveData)

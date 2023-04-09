@@ -93,6 +93,21 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
       x => x.FilterUnusedSeenAreas, out _seenAreas);
   }
 
+  [RelayCommand]
+  private void ToggleAllShownDiscoveries() => ToggleAllShown(Discoveries);
+
+  [RelayCommand]
+  private void ToggleAllShownBestiary() => ToggleAllShown(Bestiary);
+
+  [RelayCommand]
+  private void ToggleAllShownRecipes() => ToggleAllShown(Recipes);
+
+  [RelayCommand]
+  private void ToggleAllShownRecords() => ToggleAllShown(Records);
+
+  [RelayCommand]
+  private void ToggleAllShownSeenAreas() => ToggleAllShown(SeenAreas);
+
   private List<FlagSaveDataModel> WrapFlagsWithMetadata(Collection<FlagSaveData> data, IReadOnlyList<string> names)
   {
     return data.Select((x, i) => new FlagSaveDataModel(x) { Index = i, Description1 = i < names.Count ? names[i] : "" })
@@ -115,21 +130,6 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
       .Bind(out result)
       .Subscribe();
   }
-
-  [RelayCommand]
-  private void ToggleAllShownDiscoveries() => ToggleAllShown(Discoveries);
-
-  [RelayCommand]
-  private void ToggleAllShownBestiary() => ToggleAllShown(Bestiary);
-
-  [RelayCommand]
-  private void ToggleAllShownRecipes() => ToggleAllShown(Recipes);
-
-  [RelayCommand]
-  private void ToggleAllShownRecords() => ToggleAllShown(Records);
-
-  [RelayCommand]
-  private void ToggleAllShownSeenAreas() => ToggleAllShown(SeenAreas);
 
   private void ToggleAllShown(ReadOnlyObservableCollection<FlagSaveDataModel> collection)
   {
