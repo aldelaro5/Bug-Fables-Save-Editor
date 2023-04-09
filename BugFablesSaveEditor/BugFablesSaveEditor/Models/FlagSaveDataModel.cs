@@ -1,9 +1,10 @@
 using BugFablesLib.SaveData;
+using BugFablesSaveEditor.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.Models;
 
-public partial class FlagSaveDataModel : ObservableObject
+public partial class FlagSaveDataModel : ObservableObject, IFlagViewModel
 {
   private readonly FlagSaveData _model;
 

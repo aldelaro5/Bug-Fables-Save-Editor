@@ -12,8 +12,10 @@ using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class CrystalBerriesViewModel : ObservableObject
+public partial class CrystalBerriesViewModel : ObservableObject, IDisposable
 {
+  private readonly IDisposable _crystalBerriesDisposable;
+
   [ObservableProperty]
   private ReadOnlyObservableCollection<FlagSaveDataModel> _crystalBerriesSaveDataFiltered;
 
@@ -24,7 +26,7 @@ public partial class CrystalBerriesViewModel : ObservableObject
 
   public CrystalBerriesViewModel(Collection<FlagSaveData> crystalBerries)
   {
-    crystalBerries
+    _crystalBerriesDisposable = crystalBerries
       .Select((data, i) => new FlagSaveDataModel(data)
       {
         Index = i,
@@ -55,5 +57,10 @@ public partial class CrystalBerriesViewModel : ObservableObject
   {
     foreach (var flagSaveData in CrystalBerriesSaveDataFiltered)
       flagSaveData.Enabled = !flagSaveData.Enabled;
+  }
+
+  public void Dispose()
+  {
+    _crystalBerriesDisposable.Dispose();
   }
 }

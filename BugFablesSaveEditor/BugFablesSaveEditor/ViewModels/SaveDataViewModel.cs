@@ -57,5 +57,7 @@ public partial class SaveDataViewModel : ObservableObject, IDisposable
   {
     GlobalViewModel.Dispose();
     FlagsViewModel.Dispose();
+    LibraryViewModel.Dispose();
+    CrystalBerriesViewModel.Dispose();
   }
 }

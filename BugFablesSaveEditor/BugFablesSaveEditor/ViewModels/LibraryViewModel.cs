@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reactive.Linq;
 using System.Threading;
 using BugFablesLib;
@@ -13,8 +15,14 @@ using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class LibraryViewModel : ObservableObject
+public partial class LibraryViewModel : ObservableObject, IDisposable
 {
+  private readonly IDisposable _discoveriesDisposable;
+  private readonly IDisposable _bestiaryDisposable;
+  private readonly IDisposable _recipesDisposable;
+  private readonly IDisposable _recordsDisposable;
+  private readonly IDisposable _seenAreasDisposable;
+
   [ObservableProperty]
   private ReadOnlyObservableCollection<FlagSaveDataModel> _discoveries;
 
@@ -64,80 +72,47 @@ public partial class LibraryViewModel : ObservableObject
 
   public LibraryViewModel(LibrarySaveData librarySaveData)
   {
-    librarySaveData.Discoveries
-      .Select((x, i) => new FlagSaveDataModel(x)
-      {
-        Index = i,
-        Description1 = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
-      }).ToList()
-      .AsObservableChangeSet()
-      .Filter(this.WhenChanged(x => x.TextFilterDiscoveries, x => x.FilterUnusedDiscoveries,
-          (_, text, keepUnused) => (text, keepUnused))
-        .Throttle(TimeSpan.FromMilliseconds(250))
-        .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _discoveries)
-      .Subscribe();
+    _discoveriesDisposable = ObserveDataWithFilterAndSort(
+      WrapFlagsWithMetadata(librarySaveData.Discoveries, BfVanillaNames.Discoveries), x => TextFilterDiscoveries,
+      x => x.FilterUnusedDiscoveries, out _discoveries);
 
-    librarySaveData.Bestiary
-      .Select((x, i) => new FlagSaveDataModel(x)
-      {
-        Index = i, Description1 = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
-      }).ToList()
-      .AsObservableChangeSet()
-      .Filter(this.WhenChanged(x => x.TextFilterBestiary, x => x.FilterUnusedBestiary,
-          (_, text, keepUnused) => (text, keepUnused))
-        .Throttle(TimeSpan.FromMilliseconds(250))
-        .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _bestiary)
-      .Subscribe();
+    _bestiaryDisposable = ObserveDataWithFilterAndSort(
+      WrapFlagsWithMetadata(librarySaveData.Bestiary, BfVanillaNames.Enemies), x => TextFilterBestiary,
+      x => x.FilterUnusedBestiary, out _bestiary);
 
-    librarySaveData.Recipes
-      .Select((x, i) => new FlagSaveDataModel(x)
-      {
-        Index = i, Description1 = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
-      }).ToList()
-      .AsObservableChangeSet()
-      .Filter(this.WhenChanged(x => x.TextFilterRecipes, x => x.FilterUnusedRecipes,
-          (_, text, keepUnused) => (text, keepUnused))
-        .Throttle(TimeSpan.FromMilliseconds(250))
-        .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _recipes)
-      .Subscribe();
+    _recipesDisposable = ObserveDataWithFilterAndSort(
+      WrapFlagsWithMetadata(librarySaveData.Recipes, BfVanillaNames.Recipes), x => TextFilterRecipes,
+      x => x.FilterUnusedRecipes, out _recipes);
 
-    librarySaveData.Records
-      .Select((x, i) => new FlagSaveDataModel(x)
-      {
-        Index = i, Description1 = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
-      }).ToList()
-      .AsObservableChangeSet()
-      .Filter(this.WhenChanged(x => x.TextFilterRecords, x => x.FilterUnusedRecords,
-          (_, text, keepUnused) => (text, keepUnused))
-        .Throttle(TimeSpan.FromMilliseconds(250))
-        .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _records)
-      .Subscribe();
+    _recordsDisposable = ObserveDataWithFilterAndSort(
+      WrapFlagsWithMetadata(librarySaveData.Records, BfVanillaNames.Records), x => TextFilterRecords,
+      x => x.FilterUnusedRecords, out _records);
 
-    librarySaveData.SeenAreas
-      .Select((x, i) => new FlagSaveDataModel(x)
-      {
-        Index = i, Description1 = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""
-      }).ToList()
+    _seenAreasDisposable = ObserveDataWithFilterAndSort(
+      WrapFlagsWithMetadata(librarySaveData.SeenAreas, BfVanillaNames.Areas), x => TextFilterSeenAreas,
+      x => x.FilterUnusedSeenAreas, out _seenAreas);
+  }
+
+  private List<FlagSaveDataModel> WrapFlagsWithMetadata(Collection<FlagSaveData> data, IReadOnlyList<string> names)
+  {
+    return data.Select((x, i) => new FlagSaveDataModel(x) { Index = i, Description1 = i < names.Count ? names[i] : "" })
+      .ToList();
+  }
+
+  private IDisposable ObserveDataWithFilterAndSort(List<FlagSaveDataModel> data,
+                                                   Expression<Func<LibraryViewModel, string>> filterChange,
+                                                   Expression<Func<LibraryViewModel, bool>> unusedChange,
+                                                   out ReadOnlyObservableCollection<FlagSaveDataModel> result)
+  {
+    return data
       .AsObservableChangeSet()
-      .Filter(this.WhenChanged(x => x.TextFilterSeenAreas, x => x.FilterUnusedSeenAreas,
+      .Filter(this.WhenChanged(filterChange, unusedChange,
           (_, text, keepUnused) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
       .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _seenAreas)
+      .Bind(out result)
       .Subscribe();
   }
 
@@ -170,5 +145,14 @@ public partial class LibraryViewModel : ObservableObject
                   (vm.Description1 == string.Empty && filter.keepUnused) ||
                   vm.Index.ToString().Contains(filter.text, StringComparison.OrdinalIgnoreCase) ||
                   vm.Description1.Contains(filter.text, StringComparison.OrdinalIgnoreCase));
+  }
+
+  public void Dispose()
+  {
+    _discoveriesDisposable.Dispose();
+    _bestiaryDisposable.Dispose();
+    _recipesDisposable.Dispose();
+    _recordsDisposable.Dispose();
+    _seenAreasDisposable.Dispose();
   }
 }

@@ -1,16 +1,17 @@
 using BugFablesLib.SaveData;
+using BugFablesSaveEditor.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.Models;
 
-public partial class FlagstringSaveDataModel : ObservableObject
+public partial class FlagstringSaveDataModel : ObservableObject, IFlagViewModel
 {
   private readonly FlagstringSaveData _model;
 
   [ObservableProperty]
   private int _index;
 
-  public string Description1 { get; init; } = "";
+  public string Description1 { get; set; } = "";
   public string Str
   {
     get => _model.Str;
