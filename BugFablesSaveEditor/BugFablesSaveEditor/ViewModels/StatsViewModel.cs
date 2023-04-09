@@ -104,7 +104,8 @@ public partial class StatsViewModel : ObservableObject, IDisposable
     _partyMembers = new(partyMembers);
     _globalSaveData = globalSaveData;
 
-    _partyStatsBonusesDisposable = _statsBonuses.Collection.ToObservableChangeSet()
+    _partyStatsBonusesDisposable = _statsBonuses.Collection
+      .ToObservableChangeSet()
       .Filter(x => x.Target == -1)
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _partyStatBonuses)

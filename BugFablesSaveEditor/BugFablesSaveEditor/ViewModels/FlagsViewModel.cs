@@ -16,12 +16,12 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class FlagsViewModel : ObservableRecipient, IDisposable
 {
-  private Collection<FlagSaveDataModel> _regionals;
+  private readonly Collection<FlagSaveDataModel> _regionals;
 
-  private IDisposable _flagsDispose;
+  private readonly IDisposable _flagsDispose;
   private readonly IDisposable _flagVarsDispose;
   private readonly IDisposable _flagStringsDispose;
-  private IDisposable _regionalFlagsDispose;
+  private readonly IDisposable _regionalFlagsDispose;
 
   [ObservableProperty]
   private ReadOnlyObservableCollection<FlagSaveDataModel> _flags;

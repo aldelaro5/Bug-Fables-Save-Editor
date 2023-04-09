@@ -13,10 +13,7 @@ public partial class SongsViewModel : ObservableObject, IDisposable
 
   public SongsViewModel() : this(new()) { }
 
-  public SongsViewModel(Collection<BfMusicSaveData> musicSaveData)
-  {
-    _musicSaveData = new(musicSaveData);
-  }
+  public SongsViewModel(Collection<BfMusicSaveData> musicSaveData) => _musicSaveData = new(musicSaveData);
 
   public void Dispose()
   {
