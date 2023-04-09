@@ -1,17 +1,17 @@
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ObservableModels;
+namespace BugFablesSaveEditor.Models;
 
-public partial class ObservablePartyMemberSaveData : ObservableObject, IModelWrapper<PartyMemberSaveData>
+public partial class PartyMemberSaveDataModel : ObservableObject, IModelWrapper<PartyMemberSaveData>
 {
   public PartyMemberSaveData Model { get; }
 
   public static IModelWrapper<PartyMemberSaveData> WrapModel(PartyMemberSaveData model) =>
-    new ObservablePartyMemberSaveData(model);
+    new PartyMemberSaveDataModel(model);
 
   [ObservableProperty]
-  private ObservableBfNamedId _animId;
+  private BfNamedIdModel _animId;
 
   public int Attack
   {
@@ -55,7 +55,7 @@ public partial class ObservablePartyMemberSaveData : ObservableObject, IModelWra
     set => SetProperty(Model.MaxHp, value, Model, (data, i) => data.MaxHp = i);
   }
 
-  public ObservablePartyMemberSaveData(PartyMemberSaveData partyMemberSaveData)
+  public PartyMemberSaveDataModel(PartyMemberSaveData partyMemberSaveData)
   {
     Model = partyMemberSaveData;
     _animId = new(Model.AnimId);

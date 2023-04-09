@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:StatsViewModel"
@@ -43,26 +43,26 @@
           <DataGrid.Columns>
             <DataGridTemplateColumn Header="AnimId" IsReadOnly="True">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservablePartyMemberSaveData">
+                <DataTemplate DataType="ob:PartyMemberSaveDataModel">
                   <Label VerticalAlignment="Center" Content="{Binding AnimId.Name}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Base HP" Binding="{Binding BaseHp}" Width="75" />
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="HP" Binding="{Binding Hp}" />
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Max HP" Binding="{Binding MaxHp}" Width="70" />
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Base Attack" Binding="{Binding BaseAttack}"
                                 Width="85" />
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Attack" Binding="{Binding Attack}" />
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Base Defense" Binding="{Binding BaseDefense}"
                                 Width="95" />
-            <DataGridTextColumn x:DataType="ob:ObservablePartyMemberSaveData"
+            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Defense" Binding="{Binding Defense}" />
           </DataGrid.Columns>
         </DataGrid>
@@ -85,16 +85,16 @@
                   Items="{Binding PartyStatBonuses}" CanUserSortColumns="True">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"
-                                x:DataType="ob:ObservableStatsBonusSaveData"
+                                x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
                                 IsReadOnly="True" Width="85" />
             <DataGridTextColumn Header="Amount"
-                                x:DataType="ob:ObservableStatsBonusSaveData"
+                                x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableStatsBonusSaveData">
+                <DataTemplate DataType="ob:StatsBonusSaveDataModel">
                   <Button Margin="5,0,0,0" Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
@@ -136,16 +136,16 @@
                   Items="{Binding MemberStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"
-                                x:DataType="ob:ObservableStatsBonusSaveData"
+                                x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
                                 IsReadOnly="True" Width="85" />
             <DataGridTextColumn Header="Amount"
-                                x:DataType="ob:ObservableStatsBonusSaveData"
+                                x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableStatsBonusSaveData">
+                <DataTemplate DataType="ob:StatsBonusSaveDataModel">
                   <Button Margin="5,0,0,0" Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"

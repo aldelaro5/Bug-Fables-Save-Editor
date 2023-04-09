@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
@@ -46,21 +46,21 @@
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Header="AnimId">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:ObservableMusicSaveData">
+            <DataTemplate DataType="ob:MusicSaveDataModel">
               <ContentControl Content="{Binding Music}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Header="AnimId">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:ObservableMusicSaveData">
+            <DataTemplate DataType="ob:MusicSaveDataModel">
               <CheckBox IsChecked="{Binding Bought}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Width="35">
           <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:ObservableMusicSaveData">
+            <DataTemplate DataType="ob:MusicSaveDataModel">
               <Button Margin="5,0,0,0" Content="-"
                       Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).MusicSaveData.RemoveViewModelCommand}"
                       CommandParameter="{Binding }"

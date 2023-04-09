@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -16,23 +16,23 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class StatsViewModel : ObservableObject
 {
   private readonly GlobalSaveData _globalSaveData;
-  private readonly ViewModelCollection<StatBonusSaveData, ObservableStatsBonusSaveData> _statsBonuses;
+  private readonly ViewModelCollection<StatBonusSaveData, StatsBonusSaveDataModel> _statsBonuses;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _partyStatBonuses;
+  private ReadOnlyObservableCollection<StatsBonusSaveDataModel> _partyStatBonuses;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<ObservableStatsBonusSaveData> _memberStatBonuses;
+  private ReadOnlyObservableCollection<StatsBonusSaveDataModel> _memberStatBonuses;
 
   [ObservableProperty]
-  private ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
+  private ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> _partyMembers;
 
   [ObservableProperty]
   [NotifyPropertyChangedFor(nameof(TotalMemberMaxHpBonus))]
   [NotifyPropertyChangedFor(nameof(TotalMemberAttackBonus))]
   [NotifyPropertyChangedFor(nameof(TotalMemberDefenseBonus))]
   [NotifyCanExecuteChangedFor(nameof(AddStatPartyMemberBonusCommand))]
-  private ObservablePartyMemberSaveData? _selectedPartyMember;
+  private PartyMemberSaveDataModel? _selectedPartyMember;
 
   public int Mp
   {
@@ -58,12 +58,11 @@ public partial class StatsViewModel : ObservableObject
     set => SetProperty(_globalSaveData.MaxTp, value, _globalSaveData, (data, s) => data.MaxTp = s);
   }
 
+  [ObservableProperty]
+  private StatsBonusSaveDataModel _newPartyStatBonus = new(new StatBonusSaveData());
 
   [ObservableProperty]
-  private ObservableStatsBonusSaveData _newPartyStatBonus = new(new StatBonusSaveData());
-
-  [ObservableProperty]
-  private ObservableStatsBonusSaveData _newMemberStatBonus = new(new StatBonusSaveData());
+  private StatsBonusSaveDataModel _newMemberStatBonus = new(new StatBonusSaveData());
 
   private IReadOnlyList<string> StatBonusTypeNames => Enum.GetNames<StatBonusSaveData.StatBonusType>();
 
@@ -95,7 +94,7 @@ public partial class StatsViewModel : ObservableObject
     .Sum(x => x.Amount);
 
   [RelayCommand]
-  private void AddStatPartyBonus(ObservableStatsBonusSaveData statsBonusSaveData)
+  private void AddStatPartyBonus(StatsBonusSaveDataModel statsBonusSaveData)
   {
     statsBonusSaveData.Target = -1;
     _statsBonuses.AddViewModelCommand.Execute(statsBonusSaveData);
@@ -104,7 +103,7 @@ public partial class StatsViewModel : ObservableObject
   }
 
   [RelayCommand(CanExecute = nameof(CanAddPartyMemberBonus))]
-  private void AddStatPartyMemberBonus(ObservableStatsBonusSaveData statsBonusSaveData)
+  private void AddStatPartyMemberBonus(StatsBonusSaveDataModel statsBonusSaveData)
   {
     statsBonusSaveData.Target = SelectedPartyMember!.AnimId.Id;
     _statsBonuses.AddViewModelCommand.Execute(statsBonusSaveData);
@@ -116,7 +115,7 @@ public partial class StatsViewModel : ObservableObject
   private bool CanAddPartyMemberBonus() => SelectedPartyMember is not null;
 
   [RelayCommand]
-  private void DeleteStatBonus(ObservableStatsBonusSaveData statsBonus) =>
+  private void DeleteStatBonus(StatsBonusSaveDataModel statsBonus) =>
     _statsBonuses.RemoveViewModelCommand.Execute(statsBonus);
 
   public StatsViewModel() : this(new(), new(), new()) { }
@@ -138,7 +137,7 @@ public partial class StatsViewModel : ObservableObject
     var memberFilter = this.WhenValueChanged(x => x.SelectedPartyMember)
       .Select(member =>
       {
-        return new Func<ObservableStatsBonusSaveData, bool>(statsBonusSaveData =>
+        return new Func<StatsBonusSaveDataModel, bool>(statsBonusSaveData =>
           member?.AnimId.Id == statsBonusSaveData.Target);
       });
 

@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ob="clr-namespace:BugFablesSaveEditor.ObservableModels"
+             xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
@@ -56,14 +56,14 @@
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Header="Medal">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
                   <ContentControl Content="{Binding Medal}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Header="Equip">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
                   <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
                             Items="{Binding MedalEquipTargets}" />
                 </DataTemplate>
@@ -71,7 +71,7 @@
             </DataGridTemplateColumn>
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:ObservableMedalOnHandSaveData">
+                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
                   <Button Margin="5,0,0,0" Content="-"
                           Command="{Binding $parent[DataGrid].((vm:MedalsViewModel)DataContext).MedalOnHandSaveData.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"

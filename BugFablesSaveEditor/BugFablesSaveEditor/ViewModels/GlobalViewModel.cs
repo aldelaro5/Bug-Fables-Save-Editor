@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
@@ -13,12 +13,14 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class GlobalViewModel : ObservableObject, IDisposable
 {
   private readonly GlobalSaveData _globalSaveData;
+  private readonly HeaderSaveData _headerSaveData;
+  private readonly IDisposable _areaChangeDispose;
 
   [ObservableProperty]
-  private ObservableBfNamedId _currentArea;
+  private BfNamedIdModel _currentArea;
 
   [ObservableProperty]
-  private ObservableBfNamedId _currentMap;
+  private BfNamedIdModel _currentMap;
 
   public string[] SaveProgressIconNames =>
     Enum.GetNames(typeof(GlobalSaveData.SaveProgressIcon)).Select(x => x.Humanize(LetterCasing.Title)).ToArray();
@@ -86,8 +88,6 @@ public partial class GlobalViewModel : ObservableObject, IDisposable
       (data, s) => data.LastProgressIcon = s);
   }
 
-  private readonly HeaderSaveData _headerSaveData;
-
   public string Filename
   {
     get => _headerSaveData.Filename;
@@ -148,8 +148,6 @@ public partial class GlobalViewModel : ObservableObject, IDisposable
     set => SetProperty(_headerSaveData.PositionZ, value, _headerSaveData, (data, s) => data.PositionZ = s);
   }
 
-  private readonly IDisposable _areaChangeDispose;
-
   public GlobalViewModel() : this(new(), new()) { }
 
   public GlobalViewModel(GlobalSaveData globalSaveData,
@@ -157,11 +155,11 @@ public partial class GlobalViewModel : ObservableObject, IDisposable
   {
     _globalSaveData = globalSaveData;
     _headerSaveData = headerSaveData;
-    _currentMap = new ObservableBfNamedId(globalSaveData.CurrentMap);
-    _currentArea = new ObservableBfNamedId(globalSaveData.CurrentArea);
+    _currentMap = new BfNamedIdModel(globalSaveData.CurrentMap);
+    _currentArea = new BfNamedIdModel(globalSaveData.CurrentArea);
     _areaChangeDispose = _currentArea
       .WhenValueChanged(x => x.Id)
-      .Subscribe(_ => WeakReferenceMessenger.Default.Send(new ValueChangedMessage<ObservableBfNamedId>(CurrentArea)));
+      .Subscribe(_ => WeakReferenceMessenger.Default.Send(new ValueChangedMessage<BfNamedIdModel>(CurrentArea)));
   }
 
   public void Dispose()

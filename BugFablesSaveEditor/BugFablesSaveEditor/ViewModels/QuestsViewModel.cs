@@ -1,6 +1,6 @@
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -8,13 +8,13 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class QuestsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ViewModelCollection<BfQuest, ObservableBfNamedId> _opened;
+  private ViewModelCollection<BfQuest, BfNamedIdModel> _opened;
 
   [ObservableProperty]
-  private ViewModelCollection<BfQuest, ObservableBfNamedId> _taken;
+  private ViewModelCollection<BfQuest, BfNamedIdModel> _taken;
 
   [ObservableProperty]
-  private ViewModelCollection<BfQuest, ObservableBfNamedId> _completed;
+  private ViewModelCollection<BfQuest, BfNamedIdModel> _completed;
 
 
   public QuestsViewModel() : this(new()) { }

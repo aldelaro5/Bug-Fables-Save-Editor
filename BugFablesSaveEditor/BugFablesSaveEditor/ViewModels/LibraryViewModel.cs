@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Threading;
 using BugFablesLib;
 using BugFablesLib.SaveData;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -15,19 +16,19 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class LibraryViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _discoveries;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _discoveries;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _bestiary;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _bestiary;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _recipes;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _recipes;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _records;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _records;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _seenAreas;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _seenAreas;
 
   [ObservableProperty]
   private string _textFilterDiscoveries = "";
@@ -64,78 +65,77 @@ public partial class LibraryViewModel : ObservableObject
   public LibraryViewModel(LibrarySaveData librarySaveData)
   {
     librarySaveData.Discoveries
-      .Select((x, i) => new FlagViewModel
+      .Select((x, i) => new FlagSaveDataModel(x)
       {
         Index = i,
-        Flag = new(x),
-        Description = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
+        Description1 = i < BfVanillaNames.Discoveries.Count ? BfVanillaNames.Discoveries[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterDiscoveries, x => x.FilterUnusedDiscoveries,
           (_, text, keepUnused) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _discoveries)
       .Subscribe();
 
     librarySaveData.Bestiary
-      .Select((x, i) => new FlagViewModel
+      .Select((x, i) => new FlagSaveDataModel(x)
       {
-        Index = i, Flag = new(x), Description = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
+        Index = i, Description1 = i < BfVanillaNames.Enemies.Count ? BfVanillaNames.Enemies[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterBestiary, x => x.FilterUnusedBestiary,
           (_, text, keepUnused) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _bestiary)
       .Subscribe();
 
     librarySaveData.Recipes
-      .Select((x, i) => new FlagViewModel
+      .Select((x, i) => new FlagSaveDataModel(x)
       {
-        Index = i, Flag = new(x), Description = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
+        Index = i, Description1 = i < BfVanillaNames.Recipes.Count ? BfVanillaNames.Recipes[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterRecipes, x => x.FilterUnusedRecipes,
           (_, text, keepUnused) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _recipes)
       .Subscribe();
 
     librarySaveData.Records
-      .Select((x, i) => new FlagViewModel
+      .Select((x, i) => new FlagSaveDataModel(x)
       {
-        Index = i, Flag = new(x), Description = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
+        Index = i, Description1 = i < BfVanillaNames.Records.Count ? BfVanillaNames.Records[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterRecords, x => x.FilterUnusedRecords,
           (_, text, keepUnused) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _records)
       .Subscribe();
 
     librarySaveData.SeenAreas
-      .Select((x, i) => new FlagViewModel
+      .Select((x, i) => new FlagSaveDataModel(x)
       {
-        Index = i, Flag = new(x), Description = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""
+        Index = i, Description1 = i < BfVanillaNames.Areas.Count ? BfVanillaNames.Areas[i] : ""
       }).ToList()
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterSeenAreas, x => x.FilterUnusedSeenAreas,
           (_, text, keepUnused) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _seenAreas)
       .Subscribe();
@@ -156,19 +156,19 @@ public partial class LibraryViewModel : ObservableObject
   [RelayCommand]
   private void ToggleAllShownSeenAreas() => ToggleAllShown(SeenAreas);
 
-  private void ToggleAllShown(ReadOnlyObservableCollection<FlagViewModel> collection)
+  private void ToggleAllShown(ReadOnlyObservableCollection<FlagSaveDataModel> collection)
   {
-    bool newState = collection.Any(x => !x.Flag.Enabled);
-    foreach (FlagViewModel flagVm in collection)
-      flagVm.Flag.Enabled = newState;
+    bool newState = collection.Any(x => !x.Enabled);
+    foreach (FlagSaveDataModel flagVm in collection)
+      flagVm.Enabled = newState;
   }
 
-  private Func<FlagViewModel, bool> FlagFilter((string text, bool keepUnused) filter)
+  private Func<FlagSaveDataModel, bool> FlagFilter((string text, bool keepUnused) filter)
   {
-    return vm => (filter.keepUnused || vm.Description != string.Empty) &&
+    return vm => (filter.keepUnused || vm.Description1 != string.Empty) &&
                  (filter.text == string.Empty ||
-                  (vm.Description == string.Empty && filter.keepUnused) ||
+                  (vm.Description1 == string.Empty && filter.keepUnused) ||
                   vm.Index.ToString().Contains(filter.text, StringComparison.OrdinalIgnoreCase) ||
-                  vm.Description.Contains(filter.text, StringComparison.OrdinalIgnoreCase));
+                  vm.Description1.Contains(filter.text, StringComparison.OrdinalIgnoreCase));
   }
 }

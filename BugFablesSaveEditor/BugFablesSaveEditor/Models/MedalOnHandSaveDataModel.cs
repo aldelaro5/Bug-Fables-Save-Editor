@@ -3,17 +3,17 @@ using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ObservableModels;
+namespace BugFablesSaveEditor.Models;
 
-public partial class ObservableMedalOnHandSaveData : ObservableObject, IModelWrapper<BfMedalOnHandSaveData>
+public partial class MedalOnHandSaveDataModel : ObservableObject, IModelWrapper<BfMedalOnHandSaveData>
 {
   public BfMedalOnHandSaveData Model { get; }
 
   public static IModelWrapper<BfMedalOnHandSaveData> WrapModel(BfMedalOnHandSaveData model) =>
-    new ObservableMedalOnHandSaveData(model);
+    new MedalOnHandSaveDataModel(model);
 
   [ObservableProperty]
-  private ObservableBfNamedId _medal;
+  private BfNamedIdModel _medal;
 
   public int MedalEquipTarget
   {
@@ -24,10 +24,10 @@ public partial class ObservableMedalOnHandSaveData : ObservableObject, IModelWra
 
   public IReadOnlyList<string> MedalEquipTargets { get; }
 
-  public ObservableMedalOnHandSaveData(BfMedalOnHandSaveData medalOnHandSaveData)
+  public MedalOnHandSaveDataModel(BfMedalOnHandSaveData medalOnHandSaveData)
   {
     Model = medalOnHandSaveData;
-    _medal = new ObservableBfNamedId(medalOnHandSaveData.Medal);
+    _medal = new BfNamedIdModel(medalOnHandSaveData.Medal);
     MedalEquipTargets = GenerateMedalEquipTargetsList();
   }
 

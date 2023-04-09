@@ -3,13 +3,13 @@ using BugFablesLib;
 using BugFablesLib.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ObservableModels;
+namespace BugFablesSaveEditor.Models;
 
-public class ObservableBfNamedId : ObservableObject, IModelWrapper<BfQuest>, IModelWrapper<BfAnimId>,
+public class BfNamedIdModel : ObservableObject, IModelWrapper<BfQuest>, IModelWrapper<BfAnimId>,
   IModelWrapper<BfItem>, IModelWrapper<BfMedal>
 {
-  public BfSerializableNamedId Model { get; }
-  private static ObservableBfNamedId Create(BfSerializableNamedId model) => new(model);
+  private BfSerializableNamedId Model { get; }
+  private static BfNamedIdModel Create(BfSerializableNamedId model) => new(model);
 
   BfMedal IModelWrapper<BfMedal>.Model { get => (BfMedal)Model; }
   BfItem IModelWrapper<BfItem>.Model { get => (BfItem)Model; }
@@ -34,5 +34,5 @@ public class ObservableBfNamedId : ObservableObject, IModelWrapper<BfQuest>, IMo
   public string Name => Model.Name;
   public IReadOnlyList<string> AllResourceNames => BugFablesLib.Utils.GetAllBfNames(Model);
 
-  public ObservableBfNamedId(BfSerializableNamedId namedId) => Model = namedId;
+  public BfNamedIdModel(BfSerializableNamedId namedId) => Model = namedId;
 }

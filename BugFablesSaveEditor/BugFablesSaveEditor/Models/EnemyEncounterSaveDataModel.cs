@@ -1,14 +1,14 @@
 using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BugFablesSaveEditor.ObservableModels;
+namespace BugFablesSaveEditor.Models;
 
-public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper<EnemyEncounterSaveData>
+public class EnemyEncounterSaveDataModel : ObservableObject, IModelWrapper<EnemyEncounterSaveData>
 {
   public EnemyEncounterSaveData Model { get; }
 
   public static IModelWrapper<EnemyEncounterSaveData> WrapModel(EnemyEncounterSaveData model) =>
-    new ObservableEnemyEncounterSaveData(model);
+    new EnemyEncounterSaveDataModel(model);
 
   public int NbrSeen
   {
@@ -22,6 +22,6 @@ public class ObservableEnemyEncounterSaveData : ObservableObject, IModelWrapper<
     set => SetProperty(Model.NbrDefeated, value, Model, (data, i) => data.NbrDefeated = i);
   }
 
-  public ObservableEnemyEncounterSaveData(EnemyEncounterSaveData enemyEncounterSaveData) =>
+  public EnemyEncounterSaveDataModel(EnemyEncounterSaveData enemyEncounterSaveData) =>
     Model = enemyEncounterSaveData;
 }

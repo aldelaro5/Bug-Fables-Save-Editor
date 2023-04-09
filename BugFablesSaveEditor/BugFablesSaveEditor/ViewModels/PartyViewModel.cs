@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -9,10 +9,10 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class PartyViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ViewModelCollection<PartyMemberSaveData, ObservablePartyMemberSaveData> _partyMembers;
+  private ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> _partyMembers;
 
   [ObservableProperty]
-  private ViewModelCollection<BfAnimId, ObservableBfNamedId> _followers;
+  private ViewModelCollection<BfAnimId, BfNamedIdModel> _followers;
 
   public PartyViewModel() : this(new(), new()) { }
 

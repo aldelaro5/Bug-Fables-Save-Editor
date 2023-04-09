@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -10,19 +10,19 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class MedalsViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ViewModelCollection<BfMedalOnHandSaveData, ObservableMedalOnHandSaveData> _medalOnHandSaveData;
+  private ViewModelCollection<BfMedalOnHandSaveData, MedalOnHandSaveDataModel> _medalOnHandSaveData;
 
   [ObservableProperty]
-  private ViewModelCollection<BfMedal, ObservableBfNamedId> _merabShopPool;
+  private ViewModelCollection<BfMedal, BfNamedIdModel> _merabShopPool;
 
   [ObservableProperty]
-  private ViewModelCollection<BfMedal, ObservableBfNamedId> _shadesShopPool;
+  private ViewModelCollection<BfMedal, BfNamedIdModel> _shadesShopPool;
 
   [ObservableProperty]
-  private ViewModelCollection<BfMedal, ObservableBfNamedId> _merabShopAvailables;
+  private ViewModelCollection<BfMedal, BfNamedIdModel> _merabShopAvailables;
 
   [ObservableProperty]
-  private ViewModelCollection<BfMedal, ObservableBfNamedId> _shadesShopAvailables;
+  private ViewModelCollection<BfMedal, BfNamedIdModel> _shadesShopAvailables;
 
   public MedalsViewModel() : this(new(), new(), new()) { }
 
@@ -40,7 +40,7 @@ public partial class MedalsViewModel : ObservableObject
   [RelayCommand]
   private void UnequipAllMedals()
   {
-    foreach (ObservableMedalOnHandSaveData medal in MedalOnHandSaveData.Collection)
+    foreach (MedalOnHandSaveDataModel medal in MedalOnHandSaveData.Collection)
       medal.MedalEquipTarget = 0;
   }
 }

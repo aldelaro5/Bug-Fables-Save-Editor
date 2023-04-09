@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -12,22 +12,10 @@ using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class CrystalBerryViewModel : ObservableObject
-{
-  [ObservableProperty]
-  private int _index;
-
-  [ObservableProperty]
-  private ObservableFlagSaveData _flag = null!;
-
-  public string Area { get; init; } = "";
-  public string Location { get; init; } = "";
-}
-
 public partial class CrystalBerriesViewModel : ObservableObject
 {
   [ObservableProperty]
-  private ReadOnlyObservableCollection<CrystalBerryViewModel> _crystalBerriesSaveDataFiltered;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _crystalBerriesSaveDataFiltered;
 
   [ObservableProperty]
   private string _textFilter = "";
@@ -37,36 +25,35 @@ public partial class CrystalBerriesViewModel : ObservableObject
   public CrystalBerriesViewModel(Collection<FlagSaveData> crystalBerries)
   {
     crystalBerries
-      .Select((data, i) => new CrystalBerryViewModel
+      .Select((data, i) => new FlagSaveDataModel(data)
       {
         Index = i,
-        Flag = new(data),
-        Area = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData1) ? extData1[0] : "",
-        Location = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData2) ? extData2[1] : ""
+        Description1 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData1) ? extData1[0] : "",
+        Description2 = ExtendedData.CrystalBerriesDetails.TryGetValue(i, out string[]? extData2) ? extData2[1] : ""
       })
       .ToObservable()
       .ToObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilter)
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(CrystalBerryFilter!))
-      .Sort(SortExpressionComparer<CrystalBerryViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _crystalBerriesSaveDataFiltered)
       .Subscribe();
   }
 
-  private Func<CrystalBerryViewModel, bool> CrystalBerryFilter(string x)
+  private Func<FlagSaveDataModel, bool> CrystalBerryFilter(string x)
   {
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Area.Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Location.Contains(x, StringComparison.OrdinalIgnoreCase);
+                 vm.Description1.Contains(x, StringComparison.OrdinalIgnoreCase) ||
+                 vm.Description2.Contains(x, StringComparison.OrdinalIgnoreCase);
   }
 
   [RelayCommand]
   private void ToggleAllShown()
   {
     foreach (var flagSaveData in CrystalBerriesSaveDataFiltered)
-      flagSaveData.Flag.Enabled = !flagSaveData.Flag.Enabled;
+      flagSaveData.Enabled = !flagSaveData.Enabled;
   }
 }

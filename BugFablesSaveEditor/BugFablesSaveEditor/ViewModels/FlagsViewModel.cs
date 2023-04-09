@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ObservableModels;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
@@ -13,53 +13,26 @@ using DynamicData.Binding;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class FlagViewModel : ObservableObject
-{
-  [ObservableProperty]
-  private int _index;
-
-  [ObservableProperty]
-  private ObservableFlagSaveData _flag = null!;
-
-  [ObservableProperty]
-  private string _description = "";
-}
-
-public partial class FlagvarViewModel : ObservableObject
-{
-  [ObservableProperty]
-  private int _index;
-
-  [ObservableProperty]
-  private ObservableFlagvarSaveData _flag = null!;
-
-  public string Description { get; init; } = "";
-}
-
-public partial class FlagstringViewModel : ObservableObject
-{
-  [ObservableProperty]
-  private int _index;
-
-  [ObservableProperty]
-  private ObservableFlagstringSaveData _flag = null!;
-
-  public string Description { get; init; } = "";
-}
-
 public partial class FlagsViewModel : ObservableRecipient, IDisposable
 {
-  [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _flags;
+  private readonly Collection<FlagSaveDataModel> _regionals;
+
+  private readonly IDisposable _flagsDispose;
+  private readonly IDisposable _flagVarsDispose;
+  private readonly IDisposable _flagStringsDispose;
+  private readonly IDisposable _regionaFlagsDispose;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagvarViewModel> _flagvars;
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _flags;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagstringViewModel> _flagstrings;
+  private ReadOnlyObservableCollection<FlagvarSaveDataModel> _flagvars;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagViewModel> _regionalFlags;
+  private ReadOnlyObservableCollection<FlagstringSaveDataModel> _flagstrings;
+
+  [ObservableProperty]
+  private ReadOnlyObservableCollection<FlagSaveDataModel> _regionalFlags;
 
   [ObservableProperty]
   private string _textFilterFlags = "";
@@ -79,13 +52,6 @@ public partial class FlagsViewModel : ObservableRecipient, IDisposable
   [ObservableProperty]
   private string _regionalArea = "";
 
-  private readonly Collection<FlagViewModel> _regionals;
-
-  private readonly IDisposable _flagsDispose;
-  private readonly IDisposable _flagVarsDispose;
-  private readonly IDisposable _flagStringsDispose;
-  private readonly IDisposable _regionaFlagsDispose;
-
   public FlagsViewModel() : this(new(), new(), new(), new()) { }
 
   public FlagsViewModel(Collection<FlagSaveData> flags, Collection<FlagvarSaveData> flagvars,
@@ -93,109 +59,106 @@ public partial class FlagsViewModel : ObservableRecipient, IDisposable
   {
     _flagsDispose = flags
       .Select((data, i) =>
-        new FlagViewModel
+        new FlagSaveDataModel(data)
         {
           Index = i,
-          Flag = new(data),
-          Description = ExtendedData.FlagsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
+          Description1 = ExtendedData.FlagsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
         })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlags)
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagTextFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _flags)
       .Subscribe();
 
     _flagVarsDispose = flagvars
-      .Select((data, i) => new FlagvarViewModel()
+      .Select((data, i) => new FlagvarSaveDataModel(data)
       {
         Index = i,
-        Flag = new(data),
-        Description = ExtendedData.FlagvarsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
+        Description1 = ExtendedData.FlagvarsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
       })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlagvars)
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagvarTextFilter!))
-      .Sort(SortExpressionComparer<FlagvarViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagvarSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _flagvars)
       .Subscribe();
 
     _flagStringsDispose = flagstrings
-      .Select((data, i) => new FlagstringViewModel()
+      .Select((data, i) => new FlagstringSaveDataModel(data)
       {
         Index = i,
-        Flag = new(data),
-        Description = ExtendedData.FlagstringsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
+        Description1 = ExtendedData.FlagstringsDetails.TryGetValue(i, out string[]? extData) ? extData[0] : ""
       })
       .AsObservableChangeSet()
       .Filter(this.WhenValueChanged(x => x.TextFilterFlagstrings)
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(FlagstringTextFilter!))
-      .Sort(SortExpressionComparer<FlagstringViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagstringSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _flagstrings)
       .Subscribe();
 
-    _regionals = new(regionalFlags.Select((x, i) => new FlagViewModel { Index = i, Flag = new(x) }).ToList());
+    _regionals = new(regionalFlags.Select((x, i) => new FlagSaveDataModel(x) { Index = i }).ToList());
     _regionaFlagsDispose = _regionals
       .AsObservableChangeSet()
       .Filter(this.WhenChanged(x => x.TextFilterRegionalFlags, x => x.FilterUnusedRegionals, x => RegionalArea,
           (_, text, keepUnused, _) => (text, keepUnused))
         .Throttle(TimeSpan.FromMilliseconds(250))
         .Select(RegionalFlagFilter!))
-      .Sort(SortExpressionComparer<FlagViewModel>.Ascending(x => x.Index))
+      .Sort(SortExpressionComparer<FlagSaveDataModel>.Ascending(x => x.Index))
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _regionalFlags)
       .Subscribe();
 
-    WeakReferenceMessenger.Default.Register<FlagsViewModel, ValueChangedMessage<ObservableBfNamedId>>(this,
+    WeakReferenceMessenger.Default.Register<FlagsViewModel, ValueChangedMessage<BfNamedIdModel>>(this,
       (r, message) =>
       {
         if (string.IsNullOrEmpty(message.Value.Name))
           return;
 
-        foreach (FlagViewModel regional in r._regionals)
+        foreach (FlagSaveDataModel regional in r._regionals)
         {
           var regionalFlagsDetail = ExtendedData.RegionalFlagsDetails[message.Value.Name];
-          regional.Description = regionalFlagsDetail.TryGetValue(regional.Index, out string[]? value) ? value[0] : "";
+          regional.Description1 = regionalFlagsDetail.TryGetValue(regional.Index, out string[]? value) ? value[0] : "";
         }
 
         r.RegionalArea = message.Value.Name;
       });
   }
 
-  private Func<FlagViewModel, bool> RegionalFlagFilter((string text, bool keepUnused) filter)
+  private Func<FlagSaveDataModel, bool> RegionalFlagFilter((string text, bool keepUnused) filter)
   {
-    return vm => (filter.keepUnused || vm.Description != string.Empty) &&
+    return vm => (filter.keepUnused || vm.Description1 != string.Empty) &&
                  (filter.text == string.Empty ||
-                  (vm.Description == string.Empty && filter.keepUnused) ||
+                  (vm.Description1 == string.Empty && filter.keepUnused) ||
                   vm.Index.ToString().Contains(filter.text, StringComparison.OrdinalIgnoreCase) ||
-                  vm.Description.Contains(filter.text, StringComparison.OrdinalIgnoreCase));
+                  vm.Description1.Contains(filter.text, StringComparison.OrdinalIgnoreCase));
   }
 
-  private Func<FlagViewModel, bool> FlagTextFilter(string x)
+  private Func<FlagSaveDataModel, bool> FlagTextFilter(string x)
   {
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Description.Contains(x, StringComparison.OrdinalIgnoreCase);
+                 vm.Description1.Contains(x, StringComparison.OrdinalIgnoreCase);
   }
 
-  private Func<FlagvarViewModel, bool> FlagvarTextFilter(string x)
+  private Func<FlagvarSaveDataModel, bool> FlagvarTextFilter(string x)
   {
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Description.Contains(x, StringComparison.OrdinalIgnoreCase);
+                 vm.Description1.Contains(x, StringComparison.OrdinalIgnoreCase);
   }
 
-  private Func<FlagstringViewModel, bool> FlagstringTextFilter(string x)
+  private Func<FlagstringSaveDataModel, bool> FlagstringTextFilter(string x)
   {
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||
-                 vm.Description.Contains(x, StringComparison.OrdinalIgnoreCase);
+                 vm.Description1.Contains(x, StringComparison.OrdinalIgnoreCase);
   }
 
   public void Dispose()

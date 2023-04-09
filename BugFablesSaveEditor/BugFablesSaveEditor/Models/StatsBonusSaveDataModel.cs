@@ -5,14 +5,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Humanizer;
 using static BugFablesLib.SaveData.StatBonusSaveData;
 
-namespace BugFablesSaveEditor.ObservableModels;
+namespace BugFablesSaveEditor.Models;
 
-public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper<StatBonusSaveData>
+public class StatsBonusSaveDataModel : ObservableObject, IModelWrapper<StatBonusSaveData>
 {
   public StatBonusSaveData Model { get; }
 
   public static IModelWrapper<StatBonusSaveData> WrapModel(StatBonusSaveData model) =>
-    new ObservableStatsBonusSaveData(model);
+    new StatsBonusSaveDataModel(model);
 
   private string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
     .Select(x => x.Humanize(LetterCasing.Title))
@@ -42,5 +42,5 @@ public class ObservableStatsBonusSaveData : ObservableObject, IModelWrapper<Stat
     set => SetProperty(Model.Amount, value, Model, (data, i) => data.Amount = i);
   }
 
-  public ObservableStatsBonusSaveData(StatBonusSaveData statBonusSaveData) => Model = statBonusSaveData;
+  public StatsBonusSaveDataModel(StatBonusSaveData statBonusSaveData) => Model = statBonusSaveData;
 }
