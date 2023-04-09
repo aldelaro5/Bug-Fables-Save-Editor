@@ -1,5 +1,6 @@
 using System;
 using BugFablesLib;
+using BugFablesLib.SaveData;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -7,6 +8,11 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class SaveDataViewModel : ObservableObject, IDisposable
 {
   public readonly BfSaveData SaveData;
+  private const int Nbr11xFlagSlots = 750;
+  private const int Nbr11xFlagvarSlots = 70;
+  private const int NbrRegionalSlots = 100;
+  private const int NbrFlagstringSlots = 15;
+  private const int NbrCrystalBerries = 50;
 
   [ObservableProperty]
   private GlobalViewModel _globalViewModel;
@@ -38,9 +44,25 @@ public partial class SaveDataViewModel : ObservableObject, IDisposable
   [ObservableProperty]
   private LibraryViewModel _libraryViewModel;
 
-  public SaveDataViewModel(BfSaveData saveData)
+  public SaveDataViewModel(BfSaveData saveData, bool newFile)
   {
     SaveData = saveData;
+
+    // Assume that a new file is a 1.1.x save, if we add support for versions, this will be need to be changed
+    if (newFile)
+    {
+      for (int i = 0; i < Nbr11xFlagSlots; i++)
+        SaveData.Flags.Add(new());
+      for (int i = 0; i < Nbr11xFlagvarSlots; i++)
+        SaveData.Flagvars.Add(new());
+      for (int i = 0; i < NbrFlagstringSlots; i++)
+        SaveData.Flagstrings.Add(new());
+      for (int i = 0; i < NbrRegionalSlots; i++)
+        SaveData.RegionalFlags.Add(new());
+      for (int i = 0; i < NbrCrystalBerries; i++)
+        SaveData.CrystalBerries.Add(new());
+    }
+
     _partyViewModel = new(saveData.PartyMembers, saveData.Followers);
     _statsViewModel = new(saveData.StatBonuses, saveData.PartyMembers, saveData.Global);
     _questsViewModel = new(saveData.Quests);

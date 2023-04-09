@@ -3,6 +3,7 @@
 public sealed class
   LibrarySaveData : BfSerializableCollection<BfSerializableCollection<FlagSaveData>>
 {
+  private const int NbrLibrarySectionSlots = 256;
   public enum LibrarySection
   {
     Discovery = 0,
@@ -12,28 +13,21 @@ public sealed class
     SeenAreas
   }
 
-  public BfSerializableCollection<FlagSaveData> Discoveries
-  {
-    get => this[(int)LibrarySection.Discovery];
-  }
-
-  public BfSerializableCollection<FlagSaveData> Bestiary
-  {
-    get => this[(int)LibrarySection.Bestiary];
-  }
-
-  public BfSerializableCollection<FlagSaveData> Recipes { get => this[(int)LibrarySection.Recipe]; }
-  public BfSerializableCollection<FlagSaveData> Records { get => this[(int)LibrarySection.Record]; }
-
-  public BfSerializableCollection<FlagSaveData> SeenAreas
-  {
-    get => this[(int)LibrarySection.SeenAreas];
-  }
+  public BfSerializableCollection<FlagSaveData> Discoveries => this[(int)LibrarySection.Discovery];
+  public BfSerializableCollection<FlagSaveData> Bestiary => this[(int)LibrarySection.Bestiary];
+  public BfSerializableCollection<FlagSaveData> Recipes => this[(int)LibrarySection.Recipe];
+  public BfSerializableCollection<FlagSaveData> Records => this[(int)LibrarySection.Record];
+  public BfSerializableCollection<FlagSaveData> SeenAreas => this[(int)LibrarySection.SeenAreas];
 
   public LibrarySaveData()
   {
     NbrExpectedElements = 5;
     for (int i = 0; i < NbrExpectedElements; i++)
-      Add(new BfSerializableCollection<FlagSaveData>(Utils.CommaSeparator));
+    {
+      BfSerializableCollection<FlagSaveData> newLibrary = new(Utils.CommaSeparator);
+      for (int j = 0; j < NbrLibrarySectionSlots; j++)
+        newLibrary.Add(new());
+      Add(newLibrary);
+    }
   }
 }

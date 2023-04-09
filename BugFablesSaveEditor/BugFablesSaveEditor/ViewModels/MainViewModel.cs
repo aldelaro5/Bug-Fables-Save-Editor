@@ -30,7 +30,7 @@ public partial class MainViewModel : ObservableObject
 
   public MainViewModel() : this(new BfPcSaveData()) { }
 
-  public MainViewModel(BfPcSaveData saveData) => _saveData = new SaveDataViewModel(saveData);
+  public MainViewModel(BfPcSaveData saveData) => _saveData = new SaveDataViewModel(saveData, true);
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
   private async void CmdSaveFile()
@@ -89,7 +89,7 @@ public partial class MainViewModel : ObservableObject
     }
 
     SaveData.Dispose();
-    SaveData = new(new BfPcSaveData());
+    SaveData = new(new BfPcSaveData(), true);
     CurrentFilePath = "New file being created, save it to store it";
     SaveInUse = true;
     _fileSaved = false;
@@ -129,7 +129,7 @@ public partial class MainViewModel : ObservableObject
       var save = new BfPcSaveData();
       save.LoadFromString(data);
       SaveData.Dispose();
-      SaveData = new SaveDataViewModel(save);
+      SaveData = new SaveDataViewModel(save, false);
       CurrentFilePath = path;
       SaveInUse = true;
       _fileSaved = true;
