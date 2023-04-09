@@ -1,5 +1,4 @@
 using BugFablesLib.SaveData;
-using BugFablesSaveEditor.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.Models;
@@ -11,16 +10,14 @@ public partial class FlagvarSaveDataModel : ObservableObject, IFlagViewModel
   [ObservableProperty]
   private int _index;
 
-  [ObservableProperty]
-  private FlagvarSaveDataModel _flag = null!;
-
-  public string Description1 { get; set; } = "";
-
   public int Var
   {
     get => _model.Var;
     set => SetProperty(_model.Var, value, _model, (data, s) => data.Var = s);
   }
+
+  [ObservableProperty]
+  private string _description1 = "";
 
   public FlagvarSaveDataModel(FlagvarSaveData flagvarSaveData) => _model = flagvarSaveData;
 }

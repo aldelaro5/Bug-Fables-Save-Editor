@@ -11,15 +11,6 @@ public class StatsBonusSaveDataModel : ObservableObject, IModelWrapper<StatBonus
 {
   public StatBonusSaveData Model { get; }
 
-  public static IModelWrapper<StatBonusSaveData> WrapModel(StatBonusSaveData model) =>
-    new StatsBonusSaveDataModel(model);
-
-  private string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
-    .Select(x => x.Humanize(LetterCasing.Title))
-    .ToArray();
-
-  public string TypeName => StatBonusTypeNames[(int)Type];
-
   public int Target
   {
     get => Model.Target;
@@ -42,5 +33,14 @@ public class StatsBonusSaveDataModel : ObservableObject, IModelWrapper<StatBonus
     set => SetProperty(Model.Amount, value, Model, (data, i) => data.Amount = i);
   }
 
+  public string TypeName => StatBonusTypeNames[(int)Type];
+
+  public static IModelWrapper<StatBonusSaveData> WrapModel(StatBonusSaveData model) =>
+    new StatsBonusSaveDataModel(model);
+
   public StatsBonusSaveDataModel(StatBonusSaveData statBonusSaveData) => Model = statBonusSaveData;
+
+  private string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))
+    .Select(x => x.Humanize(LetterCasing.Title))
+    .ToArray();
 }

@@ -7,9 +7,6 @@ public partial class PartyMemberSaveDataModel : ObservableObject, IModelWrapper<
 {
   public PartyMemberSaveData Model { get; }
 
-  public static IModelWrapper<PartyMemberSaveData> WrapModel(PartyMemberSaveData model) =>
-    new PartyMemberSaveDataModel(model);
-
   [ObservableProperty]
   private BfNamedIdModel _animId;
 
@@ -55,7 +52,10 @@ public partial class PartyMemberSaveDataModel : ObservableObject, IModelWrapper<
     set => SetProperty(Model.MaxHp, value, Model, (data, i) => data.MaxHp = i);
   }
 
-  public PartyMemberSaveDataModel(PartyMemberSaveData partyMemberSaveData)
+  public static IModelWrapper<PartyMemberSaveData> WrapModel(PartyMemberSaveData model) =>
+    new PartyMemberSaveDataModel(model);
+
+  private PartyMemberSaveDataModel(PartyMemberSaveData partyMemberSaveData)
   {
     Model = partyMemberSaveData;
     _animId = new(Model.AnimId);

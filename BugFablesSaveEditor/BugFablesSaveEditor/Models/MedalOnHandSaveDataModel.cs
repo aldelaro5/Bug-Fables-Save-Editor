@@ -9,9 +9,6 @@ public partial class MedalOnHandSaveDataModel : ObservableObject, IModelWrapper<
 {
   public BfMedalOnHandSaveData Model { get; }
 
-  public static IModelWrapper<BfMedalOnHandSaveData> WrapModel(BfMedalOnHandSaveData model) =>
-    new MedalOnHandSaveDataModel(model);
-
   [ObservableProperty]
   private BfNamedIdModel _medal;
 
@@ -24,7 +21,10 @@ public partial class MedalOnHandSaveDataModel : ObservableObject, IModelWrapper<
 
   public IReadOnlyList<string> MedalEquipTargets { get; }
 
-  public MedalOnHandSaveDataModel(BfMedalOnHandSaveData medalOnHandSaveData)
+  public static IModelWrapper<BfMedalOnHandSaveData> WrapModel(BfMedalOnHandSaveData model) =>
+    new MedalOnHandSaveDataModel(model);
+
+  private MedalOnHandSaveDataModel(BfMedalOnHandSaveData medalOnHandSaveData)
   {
     Model = medalOnHandSaveData;
     _medal = new BfNamedIdModel(medalOnHandSaveData.Medal);

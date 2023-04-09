@@ -9,16 +9,11 @@ public class BfNamedIdModel : ObservableObject, IModelWrapper<BfQuest>, IModelWr
   IModelWrapper<BfItem>, IModelWrapper<BfMedal>
 {
   private BfSerializableNamedId Model { get; }
-  private static BfNamedIdModel Create(BfSerializableNamedId model) => new(model);
 
   BfMedal IModelWrapper<BfMedal>.Model { get => (BfMedal)Model; }
   BfItem IModelWrapper<BfItem>.Model { get => (BfItem)Model; }
   BfAnimId IModelWrapper<BfAnimId>.Model { get => (BfAnimId)Model; }
   BfQuest IModelWrapper<BfQuest>.Model { get => (BfQuest)Model; }
-  public static IModelWrapper<BfAnimId> WrapModel(BfAnimId model) => Create(model);
-  public static IModelWrapper<BfMedal> WrapModel(BfMedal model) => Create(model);
-  public static IModelWrapper<BfItem> WrapModel(BfItem model) => Create(model);
-  public static IModelWrapper<BfQuest> WrapModel(BfQuest model) => Create(model);
 
   public int Id
   {
@@ -34,5 +29,12 @@ public class BfNamedIdModel : ObservableObject, IModelWrapper<BfQuest>, IModelWr
   public string Name => Model.Name;
   public IReadOnlyList<string> AllResourceNames => BugFablesLib.Utils.GetAllBfNames(Model);
 
+  public static IModelWrapper<BfAnimId> WrapModel(BfAnimId model) => Create(model);
+  public static IModelWrapper<BfMedal> WrapModel(BfMedal model) => Create(model);
+  public static IModelWrapper<BfItem> WrapModel(BfItem model) => Create(model);
+  public static IModelWrapper<BfQuest> WrapModel(BfQuest model) => Create(model);
+
   public BfNamedIdModel(BfSerializableNamedId namedId) => Model = namedId;
+
+  private static BfNamedIdModel Create(BfSerializableNamedId model) => new(model);
 }
