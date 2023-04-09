@@ -1,9 +1,10 @@
+using System;
 using BugFablesLib;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
 
-public partial class SaveDataViewModel : ObservableObject
+public partial class SaveDataViewModel : ObservableObject, IDisposable
 {
   public readonly BfSaveData SaveData;
 
@@ -50,5 +51,11 @@ public partial class SaveDataViewModel : ObservableObject
     _flagsViewModel = new(saveData.Flags, saveData.Flagvars, saveData.Flagstrings, saveData.RegionalFlags);
     _globalViewModel = new(saveData.Global, saveData.Header);
     _libraryViewModel = new(saveData.Library);
+  }
+
+  public void Dispose()
+  {
+    GlobalViewModel.Dispose();
+    FlagsViewModel.Dispose();
   }
 }

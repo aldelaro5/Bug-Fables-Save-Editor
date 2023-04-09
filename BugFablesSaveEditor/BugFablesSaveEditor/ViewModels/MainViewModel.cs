@@ -93,6 +93,7 @@ public partial class MainViewModel : ObservableObject
         return;
     }
 
+    SaveData.Dispose();
     SaveData = new(new BfPcSaveData());
     CurrentFilePath = "New file being created, save it to store it";
     SaveInUse = true;
@@ -130,8 +131,7 @@ public partial class MainViewModel : ObservableObject
       var data = File.ReadAllText(path);
       var save = new BfPcSaveData();
       save.LoadFromString(data);
-      SaveData.GlobalViewModel.Dispose();
-      SaveData.FlagsViewModel.Dispose();
+      SaveData.Dispose();
       SaveData = new SaveDataViewModel(save);
       CurrentFilePath = path;
       SaveInUse = true;
