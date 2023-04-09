@@ -94,19 +94,12 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
   }
 
   [RelayCommand]
-  private void ToggleAllShownDiscoveries() => ToggleAllShown(Discoveries);
-
-  [RelayCommand]
-  private void ToggleAllShownBestiary() => ToggleAllShown(Bestiary);
-
-  [RelayCommand]
-  private void ToggleAllShownRecipes() => ToggleAllShown(Recipes);
-
-  [RelayCommand]
-  private void ToggleAllShownRecords() => ToggleAllShown(Records);
-
-  [RelayCommand]
-  private void ToggleAllShownSeenAreas() => ToggleAllShown(SeenAreas);
+  private void ToggleAllShown(ReadOnlyObservableCollection<FlagSaveDataModel> collection)
+  {
+    bool newState = collection.Any(x => !x.Enabled);
+    foreach (FlagSaveDataModel flagVm in collection)
+      flagVm.Enabled = newState;
+  }
 
   private List<FlagSaveDataModel> WrapFlagsWithMetadata(Collection<FlagSaveData> data, IReadOnlyList<string> names)
   {
@@ -129,13 +122,6 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
       .ObserveOn(SynchronizationContext.Current!)
       .Bind(out result)
       .Subscribe();
-  }
-
-  private void ToggleAllShown(ReadOnlyObservableCollection<FlagSaveDataModel> collection)
-  {
-    bool newState = collection.Any(x => !x.Enabled);
-    foreach (FlagSaveDataModel flagVm in collection)
-      flagVm.Enabled = newState;
   }
 
   private Func<FlagSaveDataModel, bool> FlagFilter((string text, bool keepUnused) filter)
