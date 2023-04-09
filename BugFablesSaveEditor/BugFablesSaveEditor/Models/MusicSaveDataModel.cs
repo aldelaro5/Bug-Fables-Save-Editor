@@ -17,6 +17,7 @@ public partial class MusicSaveDataModel : ObservableObject, IModelWrapper<BfMusi
   }
 
   public static IModelWrapper<BfMusicSaveData> WrapModel(BfMusicSaveData model) => new MusicSaveDataModel(model);
+
   private MusicSaveDataModel(BfMusicSaveData musicSaveData)
   {
     Model = musicSaveData;

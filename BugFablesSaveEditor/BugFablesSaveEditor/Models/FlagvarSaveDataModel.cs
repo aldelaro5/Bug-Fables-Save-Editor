@@ -18,6 +18,7 @@ public partial class FlagvarSaveDataModel : ObservableObject, IFlagViewModel, IM
 
   [ObservableProperty]
   private string _description1 = "";
+
   [ObservableProperty]
   private string _description2 = "";
 

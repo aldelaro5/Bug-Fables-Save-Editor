@@ -37,7 +37,7 @@
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedBestiary}" />
             <Button Margin="5" Content="Toggle All Shown"
                     Command="{Binding ToggleAllShownCommand}"
-                    CommandParameter="{Binding Bestiary}"/>
+                    CommandParameter="{Binding Bestiary}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterBestiary}" />
         </DockPanel>
@@ -82,7 +82,7 @@
             <CheckBox Content="Show Unused" IsChecked="{Binding FilterUnusedSeenAreas}" />
             <Button Margin="5" Content="Toggle All Shown"
                     Command="{Binding ToggleAllShownCommand}"
-                    CommandParameter="{Binding SeenAreas}"/>
+                    CommandParameter="{Binding SeenAreas}" />
           </StackPanel>
           <TextBox VerticalContentAlignment="Center" Margin="5"
                    Text="{Binding TextFilterSeenAreas}" />

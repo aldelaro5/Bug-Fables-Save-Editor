@@ -13,6 +13,7 @@ namespace BugFablesSaveEditor.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
   private bool _fileSaved;
+
   private readonly FilePickerFileType _saveFileFilter = new("Bug Fables save (.dat)")
   {
     Patterns = new[] { "*.dat" }

@@ -33,7 +33,7 @@
           </StackPanel>
         </StackPanel>
         <ContentControl IsEnabled="{Binding SaveInUse}">
-          <v:SaveDataView DataContext="{Binding SaveData}"/>
+          <v:SaveDataView DataContext="{Binding SaveData}" />
         </ContentControl>
       </DockPanel>
     </DockPanel>

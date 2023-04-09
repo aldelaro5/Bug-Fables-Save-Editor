@@ -4,6 +4,7 @@ public sealed class
   LibrarySaveData : BfSerializableCollection<BfSerializableCollection<FlagSaveData>>
 {
   private const int NbrLibrarySectionSlots = 256;
+
   public enum LibrarySection
   {
     Discovery = 0,
