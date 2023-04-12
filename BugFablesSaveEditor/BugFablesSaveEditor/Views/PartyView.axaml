@@ -26,11 +26,7 @@
                   Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
                   CommandParameter="{Binding PartyMembers.NewViewModel}" />
         </StackPanel>
-        <DataGrid Classes="draggable"
-                  AutoGenerateColumns="False"
-                  CanUserSortColumns="False"
-                  CanUserReorderColumns="False"
-                  Items="{Binding PartyMembers.Collection}">
+        <DataGrid Classes="draggable" Items="{Binding PartyMembers.Collection}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
               <idd:ContextDropBehavior Handler="{StaticResource DataGridDndPartyMemberSaveData}" />

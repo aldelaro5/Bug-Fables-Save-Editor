@@ -32,12 +32,7 @@
           <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
                   Command="{Binding UnequipAllMedalsCommand}" />
         </StackPanel>
-        <DataGrid Classes="draggable"
-                  AutoGenerateColumns="False"
-                  CanUserSortColumns="False"
-                  CanUserReorderColumns="False"
-                  CanUserResizeColumns="True"
-                  Items="{Binding MedalOnHandSaveData.Collection}">
+        <DataGrid Classes="draggable" Items="{Binding MedalOnHandSaveData.Collection}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
               <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMedalOnHandSaveData}" />

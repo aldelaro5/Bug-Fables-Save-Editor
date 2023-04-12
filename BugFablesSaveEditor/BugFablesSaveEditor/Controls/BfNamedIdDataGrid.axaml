@@ -8,11 +8,7 @@
           x:Class="BugFablesSaveEditor.Controls.BfNamedIdDataGrid"
           x:CompileBindings="True"
           Classes="draggable"
-          AutoGenerateColumns="False"
-          IsReadOnly="True"
-          CanUserSortColumns="False"
-          CanUserReorderColumns="False"
-          CanUserResizeColumns="True">
+          IsReadOnly="True">
   <i:Interaction.Behaviors>
     <i:BehaviorCollection>
       <idd:ContextDropBehavior Handler="{StaticResource DataGridDndBfNamedId}" />

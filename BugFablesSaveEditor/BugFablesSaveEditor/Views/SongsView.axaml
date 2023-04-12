@@ -23,11 +23,7 @@
               Command="{Binding MusicSaveData.AddViewModelCommand}"
               CommandParameter="{Binding MusicSaveData.NewViewModel}" />
     </StackPanel>
-    <DataGrid Classes="draggable"
-              AutoGenerateColumns="False"
-              CanUserSortColumns="False"
-              CanUserReorderColumns="False"
-              Items="{Binding MusicSaveData.Collection}">
+    <DataGrid Classes="draggable" Items="{Binding MusicSaveData.Collection}">
       <i:Interaction.Behaviors>
         <i:BehaviorCollection>
           <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMusicSaveData}" />

@@ -19,9 +19,7 @@
               Command="{Binding ToggleAllShownCommand}" />
       <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilter}" />
     </DockPanel>
-    <DataGrid AutoGenerateColumns="False" Items="{Binding CrystalBerries}"
-              CanUserReorderColumns="True" CanUserResizeColumns="True"
-              SelectionMode="Extended">
+    <DataGrid Items="{Binding CrystalBerries}" SelectionMode="Extended">
       <DataGrid.Columns>
         <DataGridTextColumn Header="Index" IsReadOnly="True"
                             x:DataType="m:FlagSaveDataModel"

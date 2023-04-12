@@ -19,8 +19,7 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlags}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding Flags}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+        <DataGrid Items="{Binding Flags}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
                                 x:DataType="m:FlagSaveDataModel"
@@ -45,8 +44,7 @@
           <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
           <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagvars}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding Flagvars}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+        <DataGrid Items="{Binding Flagvars}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
                                 x:DataType="m:FlagvarSaveDataModel"
@@ -68,8 +66,7 @@
           <TextBox VerticalContentAlignment="Center" Margin="5"
                    Text="{Binding TextFilterFlagstrings}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding Flagstrings}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+        <DataGrid Items="{Binding Flagstrings}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
                                 x:DataType="m:FlagstringSaveDataModel"
@@ -93,8 +90,7 @@
           <TextBox VerticalContentAlignment="Center" Margin="5"
                    Text="{Binding TextFilterRegionalFlags}" />
         </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalFlags}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
+        <DataGrid Items="{Binding RegionalFlags}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Index" IsReadOnly="True"
                                 x:DataType="m:FlagSaveDataModel"

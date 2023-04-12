@@ -37,8 +37,8 @@
       </DockPanel>
       <StackPanel Margin="10,0,0,0" Orientation="Vertical">
         <Label DockPanel.Dock="Top" Content="Party members stats" />
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" Height="130"
-                  Items="{Binding PartyMembers.Collection}" SelectionMode="Single"
+        <DataGrid Height="130" Items="{Binding PartyMembers.Collection}"
+                  SelectionMode="Single"
                   SelectedItem="{Binding SelectedPartyMember}">
           <DataGrid.Columns>
             <DataGridTemplateColumn Header="AnimId" IsReadOnly="True">
@@ -81,8 +81,8 @@
                   VerticalContentAlignment="Center"
                   Content="Add" />
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" SelectionMode="Single"
-                  Items="{Binding PartyStatBonuses}" CanUserSortColumns="True">
+        <DataGrid SelectionMode="Single"
+                  Items="{Binding PartyStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"
                                 x:DataType="ob:StatsBonusSaveDataModel"
@@ -132,8 +132,7 @@
                   VerticalContentAlignment="Center"
                   Content="Add" />
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"
-                  Items="{Binding MemberStatBonuses}">
+        <DataGrid Items="{Binding MemberStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"
                                 x:DataType="ob:StatsBonusSaveDataModel"
