@@ -21,11 +21,6 @@ public partial class AboutView : Window
     Process.Start(processInfo);
   }
 
-  public void OnWikiLink_Click(object sender, PointerPressedEventArgs e)
-  {
-    OpenUrl(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor/wiki");
-  }
-
   public void OnGitHubLink_Click(object sender, PointerPressedEventArgs e)
   {
     OpenUrl(@"https://github.com/aldelaro5/Bug-Fables-Save-Editor");
