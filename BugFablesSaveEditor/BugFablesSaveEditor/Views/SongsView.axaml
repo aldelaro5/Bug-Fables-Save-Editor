@@ -18,8 +18,8 @@
     <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
       <ContentControl Content="{Binding MusicSaveData.NewViewModel.Music}" />
-      <CheckBox Margin="5,0,0,0" Content="Is bought" IsChecked="{Binding MusicSaveData.NewViewModel.Bought}" />
-      <Button Margin="5,0,0,0" Content="Add"
+      <CheckBox Content="Is bought" IsChecked="{Binding MusicSaveData.NewViewModel.Bought}" />
+      <Button Content="Add"
               Command="{Binding MusicSaveData.AddViewModelCommand}"
               CommandParameter="{Binding MusicSaveData.NewViewModel}" />
     </StackPanel>
@@ -57,7 +57,7 @@
         <DataGridTemplateColumn Width="35">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:MusicSaveDataModel">
-              <Button Margin="5,0,0,0" Content="-"
+              <Button Content="-"
                       Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).MusicSaveData.RemoveViewModelCommand}"
                       CommandParameter="{Binding }"
                       Width="25" Background="DarkRed" />

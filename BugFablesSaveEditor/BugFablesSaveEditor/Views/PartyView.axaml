@@ -22,7 +22,7 @@
         <Label DockPanel.Dock="Top" Content="Party members" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
           <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
-          <Button Margin="5,0,0,0" Width="75"
+          <Button Width="75"
                   Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
                   CommandParameter="{Binding PartyMembers.NewViewModel}" />
         </StackPanel>
@@ -53,7 +53,7 @@
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:PartyMemberSaveDataModel">
-                  <Button Margin="5,0,0,0" Content="-"
+                  <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).PartyMembers.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
                           Width="25" Background="DarkRed" />

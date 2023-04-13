@@ -13,12 +13,11 @@
       <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
         <CheckBox Content="Show Unused"
                   IsChecked="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FilterUnused}" />
-        <Button Margin="5" Content="Toggle All Shown"
+        <Button Content="Toggle All Shown"
                 Command="{Binding DataType=vm:LibraryViewModel, Path=ToggleAllShownCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FlagsCollection}" />
       </StackPanel>
-      <TextBox Margin="5"
-               Text="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=TestFilter}" />
+      <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=TestFilter}" />
     </DockPanel>
     <DataGrid HeadersVisibility="None"
               Items="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FlagsCollection}">
@@ -29,7 +28,7 @@
         <DataGridTemplateColumn Width="50">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="m:FlagSaveDataModel">
-              <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+              <CheckBox IsChecked="{Binding Enabled}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>

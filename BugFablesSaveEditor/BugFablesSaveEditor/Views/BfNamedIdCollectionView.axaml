@@ -16,7 +16,7 @@
                 HorizontalAlignment="Center" Orientation="Horizontal">
       <ContentControl
         Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
-      <Button Margin="5,0,0,0" Content="Add"
+      <Button Content="Add"
               Command="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=AddCommand}"
               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
     </StackPanel>
@@ -49,7 +49,7 @@
         <DataGridTemplateColumn Width="35">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:BfNamedIdModel">
-              <Button Margin="5,0,0,0" Content="-"
+              <Button Content="-"
                       Command="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=DeleteCommand}"
                       CommandParameter="{Binding }"
                       Width="25"

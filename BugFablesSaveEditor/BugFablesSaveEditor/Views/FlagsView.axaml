@@ -17,7 +17,7 @@
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
           <Label DockPanel.Dock="Left" Content="Text filter " />
-          <TextBox Margin="5" Text="{Binding TextFilterFlags}" />
+          <TextBox Text="{Binding TextFilterFlags}" />
         </DockPanel>
         <DataGrid Items="{Binding Flags}">
           <DataGrid.Columns>
@@ -27,7 +27,7 @@
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="m:FlagSaveDataModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -42,7 +42,7 @@
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
           <Label DockPanel.Dock="Left" Content="Text filter " />
-          <TextBox Margin="5" Text="{Binding TextFilterFlagvars}" />
+          <TextBox Text="{Binding TextFilterFlagvars}" />
         </DockPanel>
         <DataGrid Items="{Binding Flagvars}">
           <DataGrid.Columns>

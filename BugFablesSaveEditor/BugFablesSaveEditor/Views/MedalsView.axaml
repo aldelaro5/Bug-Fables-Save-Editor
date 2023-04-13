@@ -25,11 +25,11 @@
             <ComboBox
               SelectedIndex="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTarget}"
               Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" Width="125" />
-            <Button Margin="5,0,0,0" Content="Add"
+            <Button Content="Add"
                     Command="{Binding MedalOnHandSaveData.AddViewModelCommand}"
                     CommandParameter="{Binding MedalOnHandSaveData.NewViewModel}" />
           </StackPanel>
-          <Button HorizontalAlignment="Center" Margin="5" Content="Unequip all medals"
+          <Button HorizontalAlignment="Center" Content="Unequip all medals"
                   Command="{Binding UnequipAllMedalsCommand}" />
         </StackPanel>
         <DataGrid Classes="draggable" Items="{Binding MedalOnHandSaveData.Collection}">
@@ -67,7 +67,7 @@
             <DataGridTemplateColumn Width="35">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
-                  <Button Margin="5,0,0,0" Content="-"
+                  <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:MedalsViewModel)DataContext).MedalOnHandSaveData.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
                           Width="25" Background="DarkRed" />
