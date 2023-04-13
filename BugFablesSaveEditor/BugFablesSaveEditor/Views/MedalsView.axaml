@@ -82,52 +82,36 @@
     <TabItem Header="Shop pools">
       <Grid ColumnDefinitions="50*,50*">
         <DockPanel Grid.Column="0">
-          <Label DockPanel.Dock="Top" Content="Merab" />
-          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding MerabShopPool.NewViewModel}" />
-            <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding MerabShopPool.AddViewModelCommand}"
-                    CommandParameter="{Binding MerabShopPool.NewViewModel}" />
-          </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MerabShopPool.Collection}"
-                               DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}" />
+          <c:BfNamedIdCollectionView TitleLabel="Merab"
+                          NamedIdsCollection="{Binding MerabShopPool.Collection}"
+                          AddCommand="{Binding MerabShopPool.AddViewModelCommand}"
+                          NewNamedId="{Binding MerabShopPool.NewViewModel}"
+                          DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}"/>
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
-          <Label DockPanel.Dock="Top" Content="Shades" />
-          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding ShadesShopPool.NewViewModel}" />
-            <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding ShadesShopPool.AddViewModelCommand}"
-                    CommandParameter="{Binding ShadesShopPool.NewViewModel}" />
-          </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding ShadesShopPool.Collection}"
-                               DeleteCommand="{Binding ShadesShopPool.RemoveViewModelCommand}" />
+          <c:BfNamedIdCollectionView TitleLabel="Shades"
+                          NamedIdsCollection="{Binding ShadesShopPool.Collection}"
+                          AddCommand="{Binding ShadesShopPool.AddViewModelCommand}"
+                          NewNamedId="{Binding ShadesShopPool.NewViewModel}"
+                          DeleteCommand="{Binding ShadesShopPool.RemoveViewModelCommand}"/>
         </DockPanel>
       </Grid>
     </TabItem>
     <TabItem Header="Shop available">
       <Grid ColumnDefinitions="50*,50*">
         <DockPanel Grid.Column="0">
-          <Label DockPanel.Dock="Top" Content="Merab" />
-          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding MerabShopAvailables.NewViewModel}" />
-            <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding MerabShopAvailables.AddViewModelCommand}"
-                    CommandParameter="{Binding MerabShopAvailables.NewViewModel}" />
-          </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding MerabShopAvailables.Collection}"
-                               DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}" />
+          <c:BfNamedIdCollectionView TitleLabel="Merab"
+                          NamedIdsCollection="{Binding MerabShopAvailables.Collection}"
+                          AddCommand="{Binding MerabShopAvailables.AddViewModelCommand}"
+                          NewNamedId="{Binding MerabShopAvailables.NewViewModel}"
+                          DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}"/>
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
-          <Label DockPanel.Dock="Top" Content="Shades" />
-          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding ShadesShopAvailables.NewViewModel}" />
-            <Button Margin="5,0,0,0" Content="Add"
-                    Command="{Binding ShadesShopAvailables.AddViewModelCommand}"
-                    CommandParameter="{Binding ShadesShopAvailables.NewViewModel}" />
-          </StackPanel>
-          <c:BfNamedIdDataGrid Items="{Binding ShadesShopAvailables.Collection}"
-                               DeleteCommand="{Binding ShadesShopAvailables.RemoveViewModelCommand}" />
+          <c:BfNamedIdCollectionView TitleLabel="Shades"
+                          NamedIdsCollection="{Binding ShadesShopAvailables.Collection}"
+                          AddCommand="{Binding ShadesShopAvailables.AddViewModelCommand}"
+                          NewNamedId="{Binding ShadesShopAvailables.NewViewModel}"
+                          DeleteCommand="{Binding ShadesShopAvailables.RemoveViewModelCommand}"/>
         </DockPanel>
       </Grid>
     </TabItem>
