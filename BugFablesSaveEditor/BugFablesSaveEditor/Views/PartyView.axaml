@@ -7,7 +7,7 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:PartyViewModel"
              x:CompileBindings="True"
@@ -67,7 +67,7 @@
     </DockPanel>
 
     <DockPanel Margin="30,10,10,10" DockPanel.Dock="Right">
-      <c:BfNamedIdCollectionView TitleLabel="Followers"
+      <v:BfNamedIdCollectionView TitleLabel="Followers"
                       NamedIdsCollection="{Binding Followers.Collection}"
                       AddCommand="{Binding Followers.AddViewModelCommand}"
                       NewNamedId="{Binding Followers.NewViewModel}"

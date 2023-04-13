@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              x:DataType="vm:QuestsViewModel"
              x:CompileBindings="True"
@@ -14,21 +14,21 @@
 
   <Grid ColumnDefinitions="50*,50*,50*">
     <DockPanel Grid.Column="0">
-      <c:BfNamedIdCollectionView TitleLabel="Open Quests"
+      <v:BfNamedIdCollectionView TitleLabel="Open Quests"
                       NamedIdsCollection="{Binding Opened.Collection}"
                       AddCommand="{Binding Opened.AddViewModelCommand}"
                       NewNamedId="{Binding Opened.NewViewModel}"
                       DeleteCommand="{Binding Opened.RemoveViewModelCommand}"/>
     </DockPanel>
     <DockPanel Grid.Column="1" Margin="20,0,0,0">
-      <c:BfNamedIdCollectionView TitleLabel="Taken Quests"
+      <v:BfNamedIdCollectionView TitleLabel="Taken Quests"
                       NamedIdsCollection="{Binding Taken.Collection}"
                       AddCommand="{Binding Taken.AddViewModelCommand}"
                       NewNamedId="{Binding Taken.NewViewModel}"
                       DeleteCommand="{Binding Taken.RemoveViewModelCommand}"/>
     </DockPanel>
     <DockPanel Grid.Column="2" Margin="20,0,0,0">
-      <c:BfNamedIdCollectionView TitleLabel="Completed Quests"
+      <v:BfNamedIdCollectionView TitleLabel="Completed Quests"
                       NamedIdsCollection="{Binding Completed.Collection}"
                       AddCommand="{Binding Completed.AddViewModelCommand}"
                       NewNamedId="{Binding Completed.NewViewModel}"

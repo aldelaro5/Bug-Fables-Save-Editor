@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:DataType="vm:ItemsViewModel"
              x:CompileBindings="True"
@@ -14,21 +14,21 @@
 
   <Grid ColumnDefinitions="50*,50*,50*">
     <DockPanel Grid.Column="0">
-      <c:BfNamedIdCollectionView TitleLabel="Inventory"
+      <v:BfNamedIdCollectionView TitleLabel="Inventory"
                       NamedIdsCollection="{Binding Inventory.Collection}"
                       AddCommand="{Binding Inventory.AddViewModelCommand}"
                       NewNamedId="{Binding Inventory.NewViewModel}"
                       DeleteCommand="{Binding Inventory.RemoveViewModelCommand}"/>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="1">
-      <c:BfNamedIdCollectionView TitleLabel="Key Items"
+      <v:BfNamedIdCollectionView TitleLabel="Key Items"
                       NamedIdsCollection="{Binding KeyItems.Collection}"
                       AddCommand="{Binding KeyItems.AddViewModelCommand}"
                       NewNamedId="{Binding KeyItems.NewViewModel}"
                       DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}"/>
     </DockPanel>
     <DockPanel Margin="20,0,0,0" Grid.Column="2">
-      <c:BfNamedIdCollectionView TitleLabel="Stored Items"
+      <v:BfNamedIdCollectionView TitleLabel="Stored Items"
                       NamedIdsCollection="{Binding Stored.Collection}"
                       AddCommand="{Binding Stored.AddViewModelCommand}"
                       NewNamedId="{Binding Stored.NewViewModel}"

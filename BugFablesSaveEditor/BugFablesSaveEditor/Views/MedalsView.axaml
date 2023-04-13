@@ -4,10 +4,10 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
-             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:MedalsViewModel"
              x:CompileBindings="True"
@@ -82,14 +82,14 @@
     <TabItem Header="Shop pools">
       <Grid ColumnDefinitions="50*,50*">
         <DockPanel Grid.Column="0">
-          <c:BfNamedIdCollectionView TitleLabel="Merab"
+          <v:BfNamedIdCollectionView TitleLabel="Merab"
                           NamedIdsCollection="{Binding MerabShopPool.Collection}"
                           AddCommand="{Binding MerabShopPool.AddViewModelCommand}"
                           NewNamedId="{Binding MerabShopPool.NewViewModel}"
                           DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}"/>
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
-          <c:BfNamedIdCollectionView TitleLabel="Shades"
+          <v:BfNamedIdCollectionView TitleLabel="Shades"
                           NamedIdsCollection="{Binding ShadesShopPool.Collection}"
                           AddCommand="{Binding ShadesShopPool.AddViewModelCommand}"
                           NewNamedId="{Binding ShadesShopPool.NewViewModel}"
@@ -100,14 +100,14 @@
     <TabItem Header="Shop available">
       <Grid ColumnDefinitions="50*,50*">
         <DockPanel Grid.Column="0">
-          <c:BfNamedIdCollectionView TitleLabel="Merab"
+          <v:BfNamedIdCollectionView TitleLabel="Merab"
                           NamedIdsCollection="{Binding MerabShopAvailables.Collection}"
                           AddCommand="{Binding MerabShopAvailables.AddViewModelCommand}"
                           NewNamedId="{Binding MerabShopAvailables.NewViewModel}"
                           DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}"/>
         </DockPanel>
         <DockPanel Margin="20,0,0,0" Grid.Column="1">
-          <c:BfNamedIdCollectionView TitleLabel="Shades"
+          <v:BfNamedIdCollectionView TitleLabel="Shades"
                           NamedIdsCollection="{Binding ShadesShopAvailables.Collection}"
                           AddCommand="{Binding ShadesShopAvailables.AddViewModelCommand}"
                           NewNamedId="{Binding ShadesShopAvailables.NewViewModel}"

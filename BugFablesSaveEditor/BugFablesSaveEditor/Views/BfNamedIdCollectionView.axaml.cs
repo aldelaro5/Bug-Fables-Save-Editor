@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using BugFablesSaveEditor.Models;
 
-namespace BugFablesSaveEditor.Controls;
+namespace BugFablesSaveEditor.Views;
 
 public partial class BfNamedIdCollectionView : UserControl
 {
