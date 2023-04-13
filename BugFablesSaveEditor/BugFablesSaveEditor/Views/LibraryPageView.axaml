@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BugFablesSaveEditor.ViewModels"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
+             xmlns:views="clr-namespace:BugFablesSaveEditor.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BugFablesSaveEditor.Views.LibraryPageView">
+  <DockPanel>
+    <DockPanel DockPanel.Dock="Top">
+      <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+        <CheckBox Content="Show Unused"
+                  IsChecked="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FilterUnused}" />
+        <Button Margin="5" Content="Toggle All Shown"
+                Command="{Binding DataType=vm:LibraryViewModel, Path=ToggleAllShownCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FlagsCollection}" />
+      </StackPanel>
+      <TextBox VerticalContentAlignment="Center" Margin="5"
+               Text="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=TestFilter}" />
+    </DockPanel>
+    <DataGrid HeadersVisibility="None"
+              Items="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FlagsCollection}">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Index" IsReadOnly="True"
+                            x:DataType="m:FlagSaveDataModel"
+                            Binding="{Binding Index}" />
+        <DataGridTemplateColumn Width="50">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate DataType="m:FlagSaveDataModel">
+              <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn IsReadOnly="True" Width="200"
+                            x:DataType="m:FlagSaveDataModel"
+                            Binding="{Binding Description1}" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>
