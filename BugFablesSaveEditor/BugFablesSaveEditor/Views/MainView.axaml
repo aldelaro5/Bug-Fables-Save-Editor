@@ -24,8 +24,7 @@
       </Menu>
       <DockPanel>
         <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Vertical">
-          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}"
-                 HorizontalContentAlignment="Center" />
+          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" />
           <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Command="{Binding NewFileCommand}" Content="New file" Margin="5" />
             <Button Command="{Binding OpenFileCommand}" Content="Open file..." Margin="5" />

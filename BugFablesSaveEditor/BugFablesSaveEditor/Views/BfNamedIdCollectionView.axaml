@@ -14,7 +14,8 @@
            Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=TitleLabel}" />
     <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,5"
                 HorizontalAlignment="Center" Orientation="Horizontal">
-      <ContentControl Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
+      <ContentControl
+        Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
       <Button Margin="5,0,0,0" Content="Add"
               Command="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=AddCommand}"
               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
@@ -51,7 +52,6 @@
               <Button Margin="5,0,0,0" Content="-"
                       Command="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=DeleteCommand}"
                       CommandParameter="{Binding }"
-                      HorizontalContentAlignment="Center"
                       Width="25"
                       Background="DarkRed" />
             </DataTemplate>

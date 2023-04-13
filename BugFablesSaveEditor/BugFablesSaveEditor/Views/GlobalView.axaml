@@ -19,19 +19,19 @@
           <StackPanel Orientation="Vertical">
             <Label Content="Position in map" />
             <StackPanel Orientation="Horizontal">
-              <Label VerticalContentAlignment="Center" Content="X" />
+              <Label Content="X" />
               <NumericUpDown Value="{ReflectionBinding PositionX}"
                              ParsingNumberStyle="Float"
                              Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-              <Label VerticalContentAlignment="Center" Content="Y" />
+              <Label Content="Y" />
               <NumericUpDown Value="{ReflectionBinding PositionY}"
                              ParsingNumberStyle="Float"
                              Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-              <Label VerticalContentAlignment="Center" Content="Z" />
+              <Label Content="Z" />
               <NumericUpDown Value="{ReflectionBinding PositionZ}"
                              ParsingNumberStyle="Float"
                              Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
@@ -40,13 +40,13 @@
           <StackPanel Margin="10,0,0,0" Orientation="Vertical">
             <Label Content="Location" />
             <StackPanel Orientation="Horizontal">
-              <Label VerticalContentAlignment="Center" Content="Current area" />
+              <Label Content="Current area" />
               <ComboBox
                 SelectedIndex="{Binding CurrentArea.Id}"
                 Items="{Binding CurrentArea.AllResourceNames}" Width="200" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-              <Label VerticalContentAlignment="Center" Content="Current map" />
+              <Label Content="Current map" />
               <ComboBox
                 SelectedIndex="{Binding CurrentMap.Id}"
                 Items="{Binding CurrentMap.AllResourceNames}" Width="200" />
@@ -55,23 +55,23 @@
         </StackPanel>
         <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
           <StackPanel Orientation="Vertical">
-            <Label Margin="0,10,0,0" VerticalContentAlignment="Center" Content="Play time" />
+            <Label Margin="0,10,0,0" Content="Play time" />
             <StackPanel Orientation="Horizontal">
               <NumericUpDown Value="{ReflectionBinding PlayTimeHours}"
                              Increment="1"
                              ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-              <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content=":" />
+              <Label Margin="5,0,0,0" Content=":" />
               <NumericUpDown Value="{ReflectionBinding PlayTimeMinutes}"
                              Increment="1"
                              ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-              <Label Margin="5,0,0,0" VerticalContentAlignment="Center" Content=":" />
+              <Label Margin="5,0,0,0" Content=":" />
               <NumericUpDown Value="{ReflectionBinding PlayTimeSeconds}"
                              Increment="1"
                              ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
             </StackPanel>
           </StackPanel>
           <StackPanel Margin="40,10,10,10" Orientation="Vertical">
-            <Label VerticalContentAlignment="Center" Content="Berry count" />
+            <Label Content="Berry count" />
             <NumericUpDown Width="150" Value="{ReflectionBinding BerryCount}"
                            Increment="1"
                            ParsingNumberStyle="Integer" />
@@ -81,7 +81,7 @@
       <StackPanel Margin="75,0,0,0" Orientation="Vertical">
         <Label Content="Information on the file select screen" />
         <StackPanel Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" Content="Filename" />
+          <Label Content="Filename" />
           <TextBox Text="{Binding Filename}" Width="270" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
@@ -108,7 +108,7 @@
           </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" Content="Rightmost progress icon" />
+          <Label Content="Rightmost progress icon" />
           <ComboBox SelectedIndex="{Binding LastProgressIcon}"
                     Items="{Binding SaveProgressIconNames}" Width="170" />
         </StackPanel>
@@ -118,15 +118,15 @@
       <StackPanel Orientation="Vertical">
         <Label Content="Rank progress" />
         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" Content="Rank" />
+          <Label Content="Rank" />
           <NumericUpDown Value="{ReflectionBinding Rank}"
                          ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
-          <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Exploration points" />
+          <Label Margin="10,0,0,0" Content="Exploration points" />
           <NumericUpDown Value="{ReflectionBinding Exp}"
                          ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
-          <Label VerticalContentAlignment="Center" Content="/" />
+          <Label Content="/" />
           <NumericUpDown Value="{ReflectionBinding NeededExp}"
                          ShowButtonSpinner="False"
                          Increment="1" ParsingNumberStyle="Integer" />
@@ -135,11 +135,11 @@
       <StackPanel Margin="135,0,0,0" Orientation="Vertical">
         <Label Content="Max amount of items" />
         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" Content="Inventory" />
+          <Label Content="Inventory" />
           <NumericUpDown Value="{ReflectionBinding NbrMaxItemsInventory}"
                          Increment="1"
                          ParsingNumberStyle="Integer" />
-          <Label Margin="10,0,0,0" VerticalContentAlignment="Center" Content="Storage" />
+          <Label Margin="10,0,0,0" Content="Storage" />
           <NumericUpDown Value="{ReflectionBinding NbrMaxItemsStorage}"
                          Increment="1"
                          ParsingNumberStyle="Integer" />

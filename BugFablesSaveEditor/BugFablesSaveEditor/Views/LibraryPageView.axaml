@@ -9,7 +9,7 @@
              x:Class="BugFablesSaveEditor.Views.LibraryPageView">
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
-      <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
+      <Label DockPanel.Dock="Left" Content="Text filter " />
       <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
         <CheckBox Content="Show Unused"
                   IsChecked="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FilterUnused}" />
@@ -17,7 +17,7 @@
                 Command="{Binding DataType=vm:LibraryViewModel, Path=ToggleAllShownCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FlagsCollection}" />
       </StackPanel>
-      <TextBox VerticalContentAlignment="Center" Margin="5"
+      <TextBox Margin="5"
                Text="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=TestFilter}" />
     </DockPanel>
     <DataGrid HeadersVisibility="None"

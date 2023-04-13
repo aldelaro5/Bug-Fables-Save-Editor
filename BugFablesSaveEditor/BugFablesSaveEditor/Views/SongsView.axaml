@@ -60,7 +60,6 @@
               <Button Margin="5,0,0,0" Content="-"
                       Command="{Binding $parent[DataGrid].((vm:SongsViewModel)DataContext).MusicSaveData.RemoveViewModelCommand}"
                       CommandParameter="{Binding }"
-                      HorizontalContentAlignment="Center"
                       Width="25" Background="DarkRed" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>

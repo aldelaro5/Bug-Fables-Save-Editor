@@ -148,7 +148,6 @@
                   <Button Margin="5,0,0,0" Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
-                          HorizontalContentAlignment="Center"
                           Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
@@ -161,19 +160,16 @@
       <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
         <Label Content="Total selected member bonuses" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max HP" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalMemberMaxHpBonus}" />
+          <Label FontWeight="Bold" Content="Max HP" />
+          <Label FontWeight="Bold" Content="{Binding TotalMemberMaxHpBonus}" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Attack" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalMemberAttackBonus}" />
+          <Label FontWeight="Bold" Content="Attack" />
+          <Label FontWeight="Bold" Content="{Binding TotalMemberAttackBonus}" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Defense" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalMemberDefenseBonus}" />
+          <Label FontWeight="Bold" Content="Defense" />
+          <Label FontWeight="Bold" Content="{Binding TotalMemberDefenseBonus}" />
         </StackPanel>
       </StackPanel>
     </StackPanel>

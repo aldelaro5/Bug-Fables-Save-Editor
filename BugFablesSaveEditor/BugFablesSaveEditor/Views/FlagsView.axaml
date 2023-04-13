@@ -16,8 +16,8 @@
     <TabItem Header="Flags">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlags}" />
+          <Label DockPanel.Dock="Left" Content="Text filter " />
+          <TextBox Margin="5" Text="{Binding TextFilterFlags}" />
         </DockPanel>
         <DataGrid Items="{Binding Flags}">
           <DataGrid.Columns>
@@ -41,8 +41,8 @@
     <TabItem Header="Flagvars">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagvars}" />
+          <Label DockPanel.Dock="Left" Content="Text filter " />
+          <TextBox Margin="5" Text="{Binding TextFilterFlagvars}" />
         </DockPanel>
         <DataGrid Items="{Binding Flagvars}">
           <DataGrid.Columns>
@@ -62,8 +62,8 @@
     <TabItem Header="Flagstrings">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5"
+          <Label DockPanel.Dock="Left" Content="Text filter " />
+          <TextBox Margin="5"
                    Text="{Binding TextFilterFlagstrings}" />
         </DockPanel>
         <DataGrid Items="{Binding Flagstrings}">
@@ -84,10 +84,10 @@
     <TabItem Header="Regionals">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <CheckBox DockPanel.Dock="Right" VerticalContentAlignment="Center" Content="Show Unused"
+          <Label DockPanel.Dock="Left" Content="Text filter " />
+          <CheckBox DockPanel.Dock="Right" Content="Show Unused"
                     IsChecked="{Binding FilterUnusedRegionals}" />
-          <TextBox VerticalContentAlignment="Center" Margin="5"
+          <TextBox Margin="5"
                    Text="{Binding TextFilterRegionalFlags}" />
         </DockPanel>
         <DataGrid Items="{Binding RegionalFlags}">

@@ -9,12 +9,14 @@
     <FluentTheme />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <StyleInclude Source="DndStyles.axaml" />
+    <StyleInclude Source="AlignementsStyles.axaml" />
     <Style Selector="DataGrid">
-      <Setter Property="AutoGenerateColumns" Value="False"/>
-      <Setter Property="CanUserReorderColumns" Value="False"/>
-      <Setter Property="CanUserSortColumns" Value="False"/>
-      <Setter Property="CanUserResizeColumns" Value="True"/>
+      <Setter Property="AutoGenerateColumns" Value="False" />
+      <Setter Property="CanUserReorderColumns" Value="False" />
+      <Setter Property="CanUserSortColumns" Value="False" />
+      <Setter Property="CanUserResizeColumns" Value="True" />
     </Style>
+
   </Application.Styles>
 
   <Application.Resources>

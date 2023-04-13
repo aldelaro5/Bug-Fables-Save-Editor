@@ -22,7 +22,7 @@
         <Label DockPanel.Dock="Top" Content="Party members" />
         <StackPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" Orientation="Horizontal">
           <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
-          <Button Margin="5,0,0,0" Width="75" HorizontalContentAlignment="Center"
+          <Button Margin="5,0,0,0" Width="75"
                   Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
                   CommandParameter="{Binding PartyMembers.NewViewModel}" />
         </StackPanel>
@@ -56,7 +56,6 @@
                   <Button Margin="5,0,0,0" Content="-"
                           Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).PartyMembers.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
-                          HorizontalContentAlignment="Center"
                           Width="25" Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
@@ -68,10 +67,10 @@
 
     <DockPanel Margin="30,10,10,10" DockPanel.Dock="Right">
       <v:BfNamedIdCollectionView TitleLabel="Followers"
-                      NamedIdsCollection="{Binding Followers.Collection}"
-                      AddCommand="{Binding Followers.AddViewModelCommand}"
-                      NewNamedId="{Binding Followers.NewViewModel}"
-                      DeleteCommand="{Binding Followers.RemoveViewModelCommand}"/>
+                                 NamedIdsCollection="{Binding Followers.Collection}"
+                                 AddCommand="{Binding Followers.AddViewModelCommand}"
+                                 NewNamedId="{Binding Followers.NewViewModel}"
+                                 DeleteCommand="{Binding Followers.RemoveViewModelCommand}" />
     </DockPanel>
   </DockPanel>
 </UserControl>

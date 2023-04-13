@@ -14,10 +14,10 @@
 
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
-      <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
+      <Label DockPanel.Dock="Left" Content="Text filter " />
       <Button DockPanel.Dock="Right" Margin="5" Content="Toggle All Shown"
               Command="{Binding ToggleAllShownCommand}" />
-      <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilter}" />
+      <TextBox Margin="5" Text="{Binding TextFilter}" />
     </DockPanel>
     <DataGrid Items="{Binding CrystalBerries}" SelectionMode="Extended">
       <DataGrid.Columns>
