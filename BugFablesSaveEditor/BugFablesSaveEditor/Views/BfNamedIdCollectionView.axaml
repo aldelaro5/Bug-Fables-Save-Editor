@@ -12,14 +12,13 @@
   <DockPanel>
     <Label DockPanel.Dock="Top"
            Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=TitleLabel}" />
-    <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,5"
-                HorizontalAlignment="Center" Orientation="Horizontal">
-      <ContentControl
-        Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
-      <Button Content="Add"
+    <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+      <Button Content="Add" DockPanel.Dock="Right"
               Command="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=AddCommand}"
               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
-    </StackPanel>
+      <ContentControl
+        Content="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NewNamedId}" />
+    </DockPanel>
     <DataGrid Classes="draggable"
               Items="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=NamedIdsCollection}"
               IsReadOnly="True">

@@ -71,16 +71,18 @@
     <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
-        <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding NewPartyStatBonus.Type}"
-                    Items="{Binding PartyStatBonusTypeNames}" Width="100" />
-          <NumericUpDown ShowButtonSpinner="False"
-                         Value="{Binding NewPartyStatBonus.Amount}" />
-          <Button Command="{Binding AddStatPartyBonusCommand}"
+        <DockPanel Margin="5" DockPanel.Dock="Bottom">
+          <Button DockPanel.Dock="Right"
+                  Command="{Binding AddStatPartyBonusCommand}"
                   CommandParameter="{Binding NewPartyStatBonus}"
-                  VerticalContentAlignment="Center"
                   Content="Add" />
-        </StackPanel>
+          <Grid ColumnDefinitions="*,*">
+            <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
+                      Items="{Binding PartyStatBonusTypeNames}" Width="100" />
+            <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
+                           Value="{Binding NewPartyStatBonus.Amount}" />
+          </Grid>
+        </DockPanel>
         <DataGrid SelectionMode="Single"
                   Items="{Binding PartyStatBonuses}">
           <DataGrid.Columns>
@@ -121,16 +123,18 @@
       </StackPanel>
       <DockPanel Margin="10,0,0,0">
         <Label DockPanel.Dock="Top" Content="Selected member stats bonuses" />
-        <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding NewMemberStatBonus.Type}"
-                    Items="{Binding MemberStatBonusTypeNames}" Width="100" />
-          <NumericUpDown ShowButtonSpinner="False"
-                         Value="{Binding NewMemberStatBonus.Amount}" />
-          <Button Command="{Binding AddStatPartyMemberBonusCommand}"
+        <DockPanel Margin="5" DockPanel.Dock="Bottom">
+          <Button DockPanel.Dock="Right"
+                  Command="{Binding AddStatPartyMemberBonusCommand}"
                   CommandParameter="{Binding NewMemberStatBonus}"
-                  VerticalContentAlignment="Center"
                   Content="Add" />
-        </StackPanel>
+          <Grid ColumnDefinitions="*,*">
+            <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
+                      Items="{Binding MemberStatBonusTypeNames}" Width="100" />
+            <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
+                           Value="{Binding NewMemberStatBonus.Amount}" />
+          </Grid>
+        </DockPanel>
         <DataGrid Items="{Binding MemberStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"

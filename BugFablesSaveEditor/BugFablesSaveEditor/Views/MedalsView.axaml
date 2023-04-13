@@ -16,19 +16,22 @@
     <vm:MedalsViewModel />
   </Design.DataContext>
 
-  <TabControl HorizontalAlignment="Center">
+  <TabControl>
     <TabItem Header="On hand">
       <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10,0,5">
-          <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <ContentControl Content="{Binding MedalOnHandSaveData.NewViewModel.Medal}" />
-            <ComboBox
-              SelectedIndex="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTarget}"
-              Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" Width="125" />
-            <Button Content="Add"
+          <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+            <Button Content="Add" DockPanel.Dock="Right"
                     Command="{Binding MedalOnHandSaveData.AddViewModelCommand}"
                     CommandParameter="{Binding MedalOnHandSaveData.NewViewModel}" />
-          </StackPanel>
+            <Grid ColumnDefinitions="*,*">
+              <ContentControl Grid.Column="0"
+                              Content="{Binding MedalOnHandSaveData.NewViewModel.Medal}" />
+              <ComboBox Grid.Column="1"
+                        SelectedIndex="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTarget}"
+                        Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" />
+            </Grid>
+          </DockPanel>
           <Button HorizontalAlignment="Center" Content="Unequip all medals"
                   Command="{Binding UnequipAllMedalsCommand}" />
         </StackPanel>
@@ -79,7 +82,7 @@
       </DockPanel>
     </TabItem>
     <TabItem Header="Shop pools">
-      <Grid ColumnDefinitions="50*,50*">
+      <Grid ColumnDefinitions="*,*">
         <DockPanel Grid.Column="0">
           <v:BfNamedIdCollectionView TitleLabel="Merab"
                                      NamedIdsCollection="{Binding MerabShopPool.Collection}"
