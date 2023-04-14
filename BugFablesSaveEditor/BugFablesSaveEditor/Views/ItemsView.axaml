@@ -12,7 +12,7 @@
     <vm:ItemsViewModel />
   </Design.DataContext>
 
-  <Grid ColumnDefinitions="50*,50*,50*">
+  <Grid ColumnDefinitions="*,*,*">
     <DockPanel Grid.Column="0">
       <v:BfNamedIdCollectionView TitleLabel="Inventory"
                       NamedIdsCollection="{Binding Inventory.Collection}"
@@ -20,14 +20,14 @@
                       NewNamedId="{Binding Inventory.NewViewModel}"
                       DeleteCommand="{Binding Inventory.RemoveViewModelCommand}"/>
     </DockPanel>
-    <DockPanel Margin="20,0,0,0" Grid.Column="1">
+    <DockPanel Grid.Column="1">
       <v:BfNamedIdCollectionView TitleLabel="Key Items"
                       NamedIdsCollection="{Binding KeyItems.Collection}"
                       AddCommand="{Binding KeyItems.AddViewModelCommand}"
                       NewNamedId="{Binding KeyItems.NewViewModel}"
                       DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}"/>
     </DockPanel>
-    <DockPanel Margin="20,0,0,0" Grid.Column="2">
+    <DockPanel Grid.Column="2">
       <v:BfNamedIdCollectionView TitleLabel="Stored Items"
                       NamedIdsCollection="{Binding Stored.Collection}"
                       AddCommand="{Binding Stored.AddViewModelCommand}"

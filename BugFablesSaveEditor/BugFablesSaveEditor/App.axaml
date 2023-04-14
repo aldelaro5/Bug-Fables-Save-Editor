@@ -10,8 +10,11 @@
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <StyleInclude Source="DndStyles.axaml" />
     <StyleInclude Source="AlignementsStyles.axaml" />
-    <Style Selector="Button, CheckBox, Label, ComboBox, TextBox, NumericUpDown">
+    <Style Selector="Button, CheckBox, Label, ComboBox, TextBox, NumericUpDown, DockPanel, StackPanel">
       <Setter Property="Margin" Value="3" />
+    </Style>
+    <Style Selector="NumericUpDown DockPanel, NumericUpDown StackPanel">
+      <Setter Property="Margin" Value="0" />
     </Style>
     <Style Selector="DataGrid">
       <Setter Property="AutoGenerateColumns" Value="False" />

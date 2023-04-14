@@ -16,7 +16,6 @@
     </Style>
     <Style Selector="Button">
       <Setter Property="Width" Value="200" />
-      <Setter Property="Margin" Value="5" />
     </Style>
     <Style Selector=".link > AccessText">
       <Setter Property="Foreground" Value="DeepSkyBlue" />

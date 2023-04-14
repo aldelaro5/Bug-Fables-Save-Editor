@@ -19,7 +19,7 @@
   <TabControl>
     <TabItem Header="On hand">
       <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10,0,5">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical">
           <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
             <Button Content="Add" DockPanel.Dock="Right"
                     Command="{Binding MedalOnHandSaveData.AddViewModelCommand}"
@@ -90,7 +90,7 @@
                                      NewNamedId="{Binding MerabShopPool.NewViewModel}"
                                      DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}" />
         </DockPanel>
-        <DockPanel Margin="20,0,0,0" Grid.Column="1">
+        <DockPanel Grid.Column="1">
           <v:BfNamedIdCollectionView TitleLabel="Shades"
                                      NamedIdsCollection="{Binding ShadesShopPool.Collection}"
                                      AddCommand="{Binding ShadesShopPool.AddViewModelCommand}"
@@ -108,7 +108,7 @@
                                      NewNamedId="{Binding MerabShopAvailables.NewViewModel}"
                                      DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}" />
         </DockPanel>
-        <DockPanel Margin="20,0,0,0" Grid.Column="1">
+        <DockPanel Grid.Column="1">
           <v:BfNamedIdCollectionView TitleLabel="Shades"
                                      NamedIdsCollection="{Binding ShadesShopAvailables.Collection}"
                                      AddCommand="{Binding ShadesShopAvailables.AddViewModelCommand}"

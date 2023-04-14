@@ -18,24 +18,24 @@
         <Label DockPanel.Dock="Top" Content="Party base stats" />
         <StackPanel VerticalAlignment="Center" Orientation="Vertical">
           <StackPanel Orientation="Horizontal">
-            <Label VerticalContentAlignment="Center" Content="TP" Width="30" />
+            <Label Content="TP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
                            Value="{Binding Tp}" />
-            <Label VerticalContentAlignment="Center" Content="/" />
+            <Label Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
                            Value="{Binding MaxTp}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
-            <Label VerticalContentAlignment="Center" Content="MP" Width="30" />
+            <Label Content="MP" Width="30" />
             <NumericUpDown ShowButtonSpinner="False"
                            Value="{Binding Mp}" />
-            <Label VerticalContentAlignment="Center" Content="/" />
+            <Label Content="/" />
             <NumericUpDown ShowButtonSpinner="False"
                            Value="{Binding MaxMp}" />
           </StackPanel>
         </StackPanel>
       </DockPanel>
-      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+      <StackPanel Orientation="Vertical">
         <Label DockPanel.Dock="Top" Content="Party members stats" />
         <DataGrid Height="130" Items="{Binding PartyMembers.Collection}"
                   SelectionMode="Single"
@@ -68,10 +68,10 @@
         </DataGrid>
       </StackPanel>
     </StackPanel>
-    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal">
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
-        <DockPanel Margin="5" DockPanel.Dock="Bottom">
+        <DockPanel DockPanel.Dock="Bottom">
           <Button DockPanel.Dock="Right"
                   Command="{Binding AddStatPartyBonusCommand}"
                   CommandParameter="{Binding NewPartyStatBonus}"
@@ -108,22 +108,20 @@
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
-      <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
+      <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
         <Label Content="Total party bonuses" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max TP" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalPartyMaxTpBonus}" />
+          <Label FontWeight="Bold" Content="Max TP" />
+          <Label FontWeight="Bold" Content="{Binding TotalPartyMaxTpBonus}" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max MP" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalPartyMaxMpBonus}" />
+          <Label FontWeight="Bold" Content="Max MP" />
+          <Label FontWeight="Bold" Content="{Binding TotalPartyMaxMpBonus}" />
         </StackPanel>
       </StackPanel>
-      <DockPanel Margin="10,0,0,0">
+      <DockPanel>
         <Label DockPanel.Dock="Top" Content="Selected member stats bonuses" />
-        <DockPanel Margin="5" DockPanel.Dock="Bottom">
+        <DockPanel DockPanel.Dock="Bottom">
           <Button DockPanel.Dock="Right"
                   Command="{Binding AddStatPartyMemberBonusCommand}"
                   CommandParameter="{Binding NewMemberStatBonus}"
@@ -160,7 +158,7 @@
         </DataGrid>
 
       </DockPanel>
-      <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
+      <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
         <Label Content="Total selected member bonuses" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
           <Label FontWeight="Bold" Content="Max HP" />

@@ -63,8 +63,7 @@
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">
           <Label DockPanel.Dock="Left" Content="Text filter " />
-          <TextBox Margin="5"
-                   Text="{Binding TextFilterFlagstrings}" />
+          <TextBox Text="{Binding TextFilterFlagstrings}" />
         </DockPanel>
         <DataGrid Items="{Binding Flagstrings}">
           <DataGrid.Columns>
@@ -87,8 +86,7 @@
           <Label DockPanel.Dock="Left" Content="Text filter " />
           <CheckBox DockPanel.Dock="Right" Content="Show Unused"
                     IsChecked="{Binding FilterUnusedRegionals}" />
-          <TextBox Margin="5"
-                   Text="{Binding TextFilterRegionalFlags}" />
+          <TextBox Text="{Binding TextFilterRegionalFlags}" />
         </DockPanel>
         <DataGrid Items="{Binding RegionalFlags}">
           <DataGrid.Columns>
@@ -98,7 +96,7 @@
             <DataGridTemplateColumn Header="Value" Width="80">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="m:FlagSaveDataModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
+                  <CheckBox IsChecked="{Binding Enabled}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

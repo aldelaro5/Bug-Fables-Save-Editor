@@ -17,7 +17,7 @@
   </Design.DataContext>
 
   <Grid ColumnDefinitions="*,*">
-    <DockPanel Grid.Column="0" Margin="3">
+    <DockPanel Grid.Column="0">
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party members" />
         <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
@@ -43,7 +43,7 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="AnimId">
+            <DataGridTemplateColumn Header="Name" Width="*">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:PartyMemberSaveDataModel">
                   <ContentControl Content="{Binding AnimId}" />
@@ -64,7 +64,7 @@
         </DataGrid>
       </DockPanel>
     </DockPanel>
-    <DockPanel Grid.Column="1" Margin="3">
+    <DockPanel Grid.Column="1">
       <v:BfNamedIdCollectionView TitleLabel="Followers"
                                  NamedIdsCollection="{Binding Followers.Collection}"
                                  AddCommand="{Binding Followers.AddViewModelCommand}"

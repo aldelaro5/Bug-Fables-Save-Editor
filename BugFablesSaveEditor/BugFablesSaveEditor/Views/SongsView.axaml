@@ -15,7 +15,7 @@
     <vm:SongsViewModel />
   </Design.DataContext>
   <DockPanel>
-    <DockPanel Margin="5" DockPanel.Dock="Bottom">
+    <DockPanel DockPanel.Dock="Bottom">
       <Grid DockPanel.Dock="Right" ColumnDefinitions="*,*">
         <CheckBox Grid.Column="0" Content="Is bought"
                   IsChecked="{Binding MusicSaveData.NewViewModel.Bought}" />
@@ -42,14 +42,14 @@
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTemplateColumn Header="AnimId">
+        <DataGridTemplateColumn Header="Name" Width="*">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:MusicSaveDataModel">
               <ContentControl Content="{Binding Music}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTemplateColumn Header="AnimId">
+        <DataGridTemplateColumn Header="Bought?">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:MusicSaveDataModel">
               <CheckBox IsChecked="{Binding Bought}" />

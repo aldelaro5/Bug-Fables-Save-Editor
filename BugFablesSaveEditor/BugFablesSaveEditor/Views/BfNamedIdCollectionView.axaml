@@ -38,7 +38,7 @@
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTemplateColumn Header="AnimId">
+        <DataGridTemplateColumn Header="Name" Width="*">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:BfNamedIdModel">
               <ContentControl Content="{Binding }" />
