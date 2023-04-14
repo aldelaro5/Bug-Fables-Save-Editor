@@ -1,6 +1,7 @@
 using System;
 using BugFablesLib;
 using BugFablesLib.SaveData;
+using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -63,8 +64,11 @@ public partial class SaveDataViewModel : ObservableObject, IDisposable
         SaveData.CrystalBerries.Add(new());
     }
 
-    _partyViewModel = new(saveData.PartyMembers, saveData.Followers);
-    _statsViewModel = new(saveData.StatBonuses, saveData.PartyMembers, saveData.Global);
+    ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> partyMembersCollection =
+      new(saveData.PartyMembers);
+
+    _partyViewModel = new(partyMembersCollection, saveData.Followers);
+    _statsViewModel = new(saveData.StatBonuses, partyMembersCollection, saveData.Global);
     _questsViewModel = new(saveData.Quests);
     _itemsViewModel = new(saveData.Items);
     _medalsViewModel = new(saveData.Medals, saveData.MedalShopsPools, saveData.MedalShopsAvailables);

@@ -94,14 +94,14 @@ public partial class StatsViewModel : ObservableObject, IDisposable
                 x.Type == StatBonusSaveData.StatBonusType.Defense)
     .Sum(x => x.Amount);
 
-  public StatsViewModel() : this(new(), new(), new()) { }
+  public StatsViewModel() : this(new(), new(new()), new()) { }
 
   public StatsViewModel(Collection<StatBonusSaveData> statsBonuses,
-                        Collection<PartyMemberSaveData> partyMembers,
+                        ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> partyMembers,
                         GlobalSaveData globalSaveData)
   {
     _statsBonuses = new(statsBonuses);
-    _partyMembers = new(partyMembers);
+    _partyMembers = partyMembers;
     _globalSaveData = globalSaveData;
 
     _partyStatsBonusesDisposable = _statsBonuses.Collection
