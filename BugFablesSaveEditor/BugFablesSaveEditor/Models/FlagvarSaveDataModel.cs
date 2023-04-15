@@ -23,5 +23,9 @@ public partial class FlagvarSaveDataModel : ObservableObject, IFlagViewModel, IM
   private string _description2 = "";
 
   public static IModelWrapper<FlagvarSaveData> WrapModel(FlagvarSaveData model) => new FlagvarSaveDataModel(model);
+
+  public static IModelWrapper<FlagvarSaveData> WrapNewModel(FlagvarSaveData model) =>
+    new FlagvarSaveDataModel(new FlagvarSaveData { Var = model.Var });
+
   private FlagvarSaveDataModel(FlagvarSaveData flagvarSaveData) => Model = flagvarSaveData;
 }

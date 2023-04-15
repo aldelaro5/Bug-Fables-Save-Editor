@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -40,6 +41,12 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
   public static IModelWrapper<Collection<TModel>> WrapModel(Collection<TModel> model) =>
     new ViewModelCollection<TModel, TViewModel>(model);
 
+  public static IModelWrapper<Collection<TModel>> WrapNewModel(Collection<TModel> model)
+  {
+    return new ViewModelCollection<TModel, TViewModel>(
+      new(model.Select(x => TViewModel.WrapNewModel(x).Model).ToList()));
+  }
+
   public ViewModelCollection(Collection<TModel> collection)
   {
     Collection = new(collection.Select<TModel, TViewModel>(x => (TViewModel)TViewModel.WrapModel(x)));
@@ -53,7 +60,7 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
   /// </summary>
   /// <param name="item">The view model to add</param>
   [RelayCommand]
-  private void AddViewModel(TViewModel item) => Collection.Add((TViewModel)TViewModel.WrapModel(item.Model));
+  private void AddViewModel(TViewModel item) => Collection.Add((TViewModel)TViewModel.WrapNewModel(item.Model));
 
   /// <summary>
   /// Deletes a view model to the collection which will be propagated to the model collection

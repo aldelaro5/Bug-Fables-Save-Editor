@@ -22,6 +22,9 @@ public class EnemyEncounterSaveDataModel : ObservableObject, IModelWrapper<Enemy
   public static IModelWrapper<EnemyEncounterSaveData> WrapModel(EnemyEncounterSaveData model) =>
     new EnemyEncounterSaveDataModel(model);
 
+  public static IModelWrapper<EnemyEncounterSaveData> WrapNewModel(EnemyEncounterSaveData model) =>
+    WrapModel(new EnemyEncounterSaveData { NbrDefeated = model.NbrDefeated, NbrSeen = model.NbrSeen });
+
   private EnemyEncounterSaveDataModel(EnemyEncounterSaveData enemyEncounterSaveData) =>
     Model = enemyEncounterSaveData;
 }

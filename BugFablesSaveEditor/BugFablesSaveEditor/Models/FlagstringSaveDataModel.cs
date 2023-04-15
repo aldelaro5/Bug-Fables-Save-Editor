@@ -25,5 +25,8 @@ public partial class FlagstringSaveDataModel : ObservableObject, IFlagViewModel,
   public static IModelWrapper<FlagstringSaveData> WrapModel(FlagstringSaveData model) =>
     new FlagstringSaveDataModel(model);
 
+  public static IModelWrapper<FlagstringSaveData> WrapNewModel(FlagstringSaveData model) =>
+    new FlagstringSaveDataModel(new FlagstringSaveData { Str = model.Str });
+
   private FlagstringSaveDataModel(FlagstringSaveData flagstringSaveData) => Model = flagstringSaveData;
 }
