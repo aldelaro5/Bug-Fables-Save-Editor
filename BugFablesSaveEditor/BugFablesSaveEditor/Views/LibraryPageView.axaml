@@ -25,14 +25,14 @@
         <DataGridTextColumn Header="Index" IsReadOnly="True"
                             x:DataType="m:FlagSaveDataModel"
                             Binding="{Binding Index}" />
-        <DataGridTemplateColumn Width="50">
+        <DataGridTemplateColumn>
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="m:FlagSaveDataModel">
               <CheckBox IsChecked="{Binding Enabled}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTextColumn IsReadOnly="True" Width="200"
+        <DataGridTextColumn IsReadOnly="True"
                             x:DataType="m:FlagSaveDataModel"
                             Binding="{Binding Description1}" />
       </DataGrid.Columns>

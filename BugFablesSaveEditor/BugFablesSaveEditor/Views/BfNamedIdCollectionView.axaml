@@ -45,13 +45,12 @@
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTemplateColumn Width="35">
+        <DataGridTemplateColumn>
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="ob:BfNamedIdModel">
               <Button Content="-"
                       Command="{Binding RelativeSource={RelativeSource AncestorType=v:BfNamedIdCollectionView}, Path=DeleteCommand}"
                       CommandParameter="{Binding }"
-                      Width="25"
                       Background="DarkRed" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>

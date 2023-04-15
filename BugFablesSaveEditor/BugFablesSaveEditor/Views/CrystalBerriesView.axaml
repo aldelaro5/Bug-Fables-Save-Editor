@@ -24,7 +24,7 @@
         <DataGridTextColumn Header="Index" IsReadOnly="True"
                             x:DataType="m:FlagSaveDataModel"
                             Binding="{Binding Index}" />
-        <DataGridTemplateColumn Header="Obtained" Width="100">
+        <DataGridTemplateColumn Header="Obtained">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="m:FlagSaveDataModel">
               <CheckBox IsChecked="{Binding Enabled}" />

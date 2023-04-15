@@ -24,7 +24,7 @@
             <DataGridTextColumn Header="Index" IsReadOnly="True"
                                 x:DataType="m:FlagSaveDataModel"
                                 Binding="{Binding Index}" />
-            <DataGridTemplateColumn Header="Value" Width="80">
+            <DataGridTemplateColumn Header="Value">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="m:FlagSaveDataModel">
                   <CheckBox IsChecked="{Binding Enabled}" />
@@ -93,7 +93,7 @@
             <DataGridTextColumn Header="Index" IsReadOnly="True"
                                 x:DataType="m:FlagSaveDataModel"
                                 Binding="{Binding Index}" />
-            <DataGridTemplateColumn Header="Value" Width="80">
+            <DataGridTemplateColumn Header="Value">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="m:FlagSaveDataModel">
                   <CheckBox IsChecked="{Binding Enabled}" />

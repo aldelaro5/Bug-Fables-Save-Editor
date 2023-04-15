@@ -50,13 +50,13 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:PartyMemberSaveDataModel">
                   <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).PartyMembers.RemoveViewModelCommand}"
                           CommandParameter="{Binding }"
-                          Width="25" Background="DarkRed" />
+                          Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
