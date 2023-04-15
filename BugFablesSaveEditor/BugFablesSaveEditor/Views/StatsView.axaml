@@ -74,7 +74,7 @@
                   Content="Add" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
-                      Items="{Binding PartyStatBonusTypeNames}" Width="100" />
+                      Items="{Binding StatBonusTypeNames}" Width="100" />
             <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
                            Value="{Binding NewPartyStatBonus.Amount}" />
           </Grid>
@@ -129,7 +129,7 @@
                   Content="Add" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
-                      Items="{Binding MemberStatBonusTypeNames}" Width="100" />
+                      Items="{Binding StatBonusTypeNames}" Width="100" />
             <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
                            Value="{Binding NewMemberStatBonus.Amount}" />
           </Grid>
