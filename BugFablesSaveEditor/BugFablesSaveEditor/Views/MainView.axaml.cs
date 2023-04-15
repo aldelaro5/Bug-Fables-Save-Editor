@@ -12,7 +12,7 @@ public partial class MainView : UserControl
 
   public async void OnAbout_Click(object sender, RoutedEventArgs e)
   {
-    AboutView view = new() { Width = 500, Height = 350 };
+    AboutView view = new() { Width = 500, Height = 400 };
     await view.ShowDialog(Utils.MainWindow);
   }
 }

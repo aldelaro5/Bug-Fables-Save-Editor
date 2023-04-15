@@ -10,13 +10,13 @@
   <DockPanel>
     <DockPanel DockPanel.Dock="Top">
       <Label DockPanel.Dock="Left" Content="Text filter " />
-      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+      <DockPanel DockPanel.Dock="Right">
         <CheckBox Content="Show Unused"
                   IsChecked="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FilterUnused}" />
         <Button Content="Toggle All Shown"
                 Command="{Binding DataType=vm:LibraryViewModel, Path=ToggleAllShownCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=FlagsCollection}" />
-      </StackPanel>
+      </DockPanel>
       <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType=views:LibraryPageView}, Path=TestFilter}" />
     </DockPanel>
     <DataGrid HeadersVisibility="None"

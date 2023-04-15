@@ -23,14 +23,14 @@
         </MenuItem>
       </Menu>
       <DockPanel>
-        <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Vertical">
-          <Label FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" />
-          <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <DockPanel HorizontalAlignment="Center" DockPanel.Dock="Top">
+          <Label DockPanel.Dock="Top" FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" />
+          <DockPanel HorizontalAlignment="Center">
             <Button Command="{Binding NewFileCommand}" Content="New file" />
             <Button Command="{Binding OpenFileCommand}" Content="Open file..." />
             <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." />
-          </StackPanel>
-        </StackPanel>
+          </DockPanel>
+        </DockPanel>
         <ContentControl IsEnabled="{Binding SaveInUse}">
           <v:SaveDataView DataContext="{Binding SaveData}" />
         </ContentControl>

@@ -2,15 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
         x:Class="BugFablesSaveEditor.Views.AboutView"
-        Width="500"
-        Height="350"
         WindowStartupLocation="CenterOwner"
         Title="About Bug Fables Save Editor"
         Icon="/Assets/icon.png">
   <Window.Styles>
-    <Style Selector="StackPanel, Button">
+    <Style Selector="StackPanel, Button, TextBlock">
       <Setter Property="HorizontalAlignment" Value="Center" />
       <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -42,8 +40,8 @@
           <Label Classes="link" Content="License" PointerPressed="OnLicenseLink_Click" />
         </StackPanel>
         <Label Content="A save editor for the game Bug Fables: The Everlasting Sapling." />
-        <Label Content="Program icon is from in-game assets." />
-        <Label Content="This project is not affiliated with Moonsprout Games." />
+        <TextBlock Text="Program icon is from in-game assets." />
+        <TextBlock Text="This project is not affiliated with Moonsprout Games." />
       </StackPanel>
     </DockPanel>
   </DockPanel>

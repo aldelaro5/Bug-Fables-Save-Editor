@@ -19,8 +19,10 @@
   <TabControl>
     <TabItem Header="On hand">
       <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical">
-          <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+        <DockPanel DockPanel.Dock="Bottom">
+          <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Content="Unequip all medals"
+                  Command="{Binding UnequipAllMedalsCommand}" />
+          <DockPanel HorizontalAlignment="Stretch">
             <Button Content="Add" DockPanel.Dock="Right"
                     Command="{Binding MedalOnHandSaveData.AddViewModelCommand}"
                     CommandParameter="{Binding MedalOnHandSaveData.NewViewModel}" />
@@ -32,9 +34,7 @@
                         Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" />
             </Grid>
           </DockPanel>
-          <Button HorizontalAlignment="Center" Content="Unequip all medals"
-                  Command="{Binding UnequipAllMedalsCommand}" />
-        </StackPanel>
+        </DockPanel>
         <DataGrid Classes="draggable" Items="{Binding MedalOnHandSaveData.Collection}">
           <i:Interaction.Behaviors>
             <i:BehaviorCollection>
