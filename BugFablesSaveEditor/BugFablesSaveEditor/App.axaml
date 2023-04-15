@@ -22,6 +22,9 @@
       <Setter Property="CanUserSortColumns" Value="False" />
       <Setter Property="CanUserResizeColumns" Value="True" />
     </Style>
+    <Style Selector="DataGridColumnHeader TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
 
   </Application.Styles>
 

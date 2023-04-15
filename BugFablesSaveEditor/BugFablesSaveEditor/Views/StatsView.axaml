@@ -4,7 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:DataType="vm:StatsViewModel"
              x:CompileBindings="True"
              x:Class="BugFablesSaveEditor.Views.StatsView">
@@ -45,11 +45,13 @@
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Base HP" Binding="{Binding BaseHp}" Width="75" />
+                                Header="Base HP" Binding="{Binding BaseHp}"
+                                Width="80" />
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="HP" Binding="{Binding Hp}" />
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Max HP" Binding="{Binding MaxHp}" Width="70" />
+                                Header="Max HP" Binding="{Binding MaxHp}"
+                                Width="75" />
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Base Attack" Binding="{Binding BaseAttack}"
                                 Width="85" />
@@ -74,7 +76,7 @@
                   Content="Add" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
-                      Items="{Binding StatBonusTypeNames}" Width="100" />
+                      Items="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
                            Value="{Binding NewPartyStatBonus.Amount}" />
           </Grid>
@@ -85,18 +87,17 @@
             <DataGridTextColumn Header="Type"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
-                                IsReadOnly="True" Width="85" />
+                                IsReadOnly="True" />
             <DataGridTextColumn Header="Amount"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
-            <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:StatsBonusSaveDataModel">
                   <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
-                          Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
@@ -129,7 +130,7 @@
                   Content="Add" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
-                      Items="{Binding StatBonusTypeNames}" Width="100" />
+                      Items="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
                            Value="{Binding NewMemberStatBonus.Amount}" />
           </Grid>
@@ -139,18 +140,17 @@
             <DataGridTextColumn Header="Type"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
-                                IsReadOnly="True" Width="85" />
+                                IsReadOnly="True" />
             <DataGridTextColumn Header="Amount"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
-            <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:StatsBonusSaveDataModel">
                   <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
-                          Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
