@@ -9,9 +9,4 @@ public partial class SaveDataView : UserControl
   {
     InitializeComponent();
   }
-
-  private void InitializeComponent()
-  {
-    AvaloniaXamlLoader.Load(this);
-  }
 }
