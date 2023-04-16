@@ -16,7 +16,7 @@
     <vm:PartyViewModel />
   </Design.DataContext>
 
-  <Grid ColumnDefinitions="*,*">
+  <Grid ColumnDefinitions="*,*" MaxWidth="700">
     <DockPanel Grid.Column="0">
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party members" />

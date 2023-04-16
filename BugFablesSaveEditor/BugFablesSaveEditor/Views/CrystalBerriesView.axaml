@@ -12,7 +12,7 @@
     <vm:CrystalBerriesViewModel />
   </Design.DataContext>
 
-  <DockPanel>
+  <DockPanel MaxWidth="1000">
     <DockPanel DockPanel.Dock="Top">
       <Label DockPanel.Dock="Left" Content="Text filter " />
       <Button DockPanel.Dock="Right" Content="Toggle All Shown"

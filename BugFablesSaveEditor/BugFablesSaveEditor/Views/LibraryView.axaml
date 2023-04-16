@@ -12,7 +12,7 @@
     <vm:LibraryViewModel />
   </Design.DataContext>
 
-  <TabControl HorizontalAlignment="Center">
+  <TabControl>
     <TabItem Header="Discoveries">
       <v:LibraryPageView TestFilter="{Binding TextFilterDiscoveries}"
                          FilterUnused="{Binding FilterUnusedDiscoveries}"

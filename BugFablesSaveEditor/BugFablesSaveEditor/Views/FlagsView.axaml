@@ -12,7 +12,13 @@
     <vm:FlagsViewModel />
   </Design.DataContext>
 
-  <TabControl HorizontalAlignment="Center">
+  <UserControl.Styles>
+    <Style Selector="TabItem > DockPanel">
+      <Setter Property="MaxWidth" Value="1000" />
+    </Style>
+  </UserControl.Styles>
+
+  <TabControl>
     <TabItem Header="Flags">
       <DockPanel>
         <DockPanel DockPanel.Dock="Top">

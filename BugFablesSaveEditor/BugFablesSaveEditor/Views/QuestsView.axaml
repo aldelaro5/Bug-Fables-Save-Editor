@@ -12,7 +12,7 @@
     <vm:QuestsViewModel />
   </Design.DataContext>
 
-  <Grid ColumnDefinitions="*,*,*">
+  <Grid ColumnDefinitions="*,*,*" MaxWidth="1200">
     <DockPanel Grid.Column="0">
       <v:BfNamedIdCollectionView TitleLabel="Open Quests"
                       NamedIdsCollection="{Binding Opened.Collection}"
