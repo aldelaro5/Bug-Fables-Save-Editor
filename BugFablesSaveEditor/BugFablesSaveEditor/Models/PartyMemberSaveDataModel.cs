@@ -55,6 +55,18 @@ public partial class PartyMemberSaveDataModel : ObservableObject, IModelWrapper<
   public static IModelWrapper<PartyMemberSaveData> WrapModel(PartyMemberSaveData model) =>
     new PartyMemberSaveDataModel(model);
 
+  public static IModelWrapper<PartyMemberSaveData> WrapNewModel(PartyMemberSaveData model) =>
+    new PartyMemberSaveDataModel(new PartyMemberSaveData
+    {
+      Attack = model.Attack,
+      BaseAttack = model.BaseAttack,
+      BaseDefense = model.BaseDefense,
+      BaseHp = model.BaseHp,
+      Defense = model.Defense,
+      Hp = model.Hp,
+      MaxHp = model.MaxHp
+    });
+
   private PartyMemberSaveDataModel(PartyMemberSaveData partyMemberSaveData)
   {
     Model = partyMemberSaveData;

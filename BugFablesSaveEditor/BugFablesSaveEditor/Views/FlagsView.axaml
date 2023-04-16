@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:FlagsViewModel"
              x:CompileBindings="True"
@@ -12,106 +13,49 @@
     <vm:FlagsViewModel />
   </Design.DataContext>
 
-  <TabControl HorizontalAlignment="Center">
+  <UserControl.Styles>
+    <Style Selector="TabItem > DockPanel">
+      <Setter Property="MaxWidth" Value="1000" />
+    </Style>
+  </UserControl.Styles>
+
+  <TabControl>
     <TabItem Header="Flags">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlags}" />
-        </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding Flags}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTemplateColumn Header="Value" Width="80">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="m:FlagSaveDataModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlags}" Collection="{Binding Flags}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagSaveDataModel">
+            <CheckBox IsChecked="{Binding Enabled}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Flagvars">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5" Text="{Binding TextFilterFlagvars}" />
-        </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding Flagvars}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagvarSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTextColumn Header="Value"
-                                x:DataType="m:FlagvarSaveDataModel"
-                                Binding="{Binding Var}" />
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagvarSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagvars}" Collection="{Binding Flagvars}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagvarSaveDataModel">
+            <TextBox Text="{Binding Var}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Flagstrings">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <TextBox VerticalContentAlignment="Center" Margin="5"
-                   Text="{Binding TextFilterFlagstrings}" />
-        </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding Flagstrings}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagstringSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTextColumn Header="Value"
-                                x:DataType="m:FlagstringSaveDataModel"
-                                Binding="{Binding Str}" />
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagstringSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagstrings}" Collection="{Binding Flagstrings}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagstringSaveDataModel">
+            <TextBox Text="{Binding Str}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Regionals">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" VerticalContentAlignment="Center" Content="Text filter " />
-          <CheckBox DockPanel.Dock="Right" VerticalContentAlignment="Center" Content="Show Unused"
-                    IsChecked="{Binding FilterUnusedRegionals}" />
-          <TextBox VerticalContentAlignment="Center" Margin="5"
-                   Text="{Binding TextFilterRegionalFlags}" />
-        </DockPanel>
-        <DataGrid AutoGenerateColumns="False" Items="{Binding RegionalFlags}"
-                  CanUserReorderColumns="True" CanUserResizeColumns="True">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTemplateColumn Header="Value" Width="80">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="m:FlagSaveDataModel">
-                  <CheckBox Margin="15,0,0,0" IsChecked="{Binding Enabled}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterRegionalFlags}" Collection="{Binding RegionalFlags}"
+                             FilterUnused="{Binding FilterUnusedRegionals}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagSaveDataModel">
+            <CheckBox IsChecked="{Binding Enabled}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
   </TabControl>
 </UserControl>

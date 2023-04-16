@@ -38,6 +38,14 @@ public class StatsBonusSaveDataModel : ObservableObject, IModelWrapper<StatBonus
   public static IModelWrapper<StatBonusSaveData> WrapModel(StatBonusSaveData model) =>
     new StatsBonusSaveDataModel(model);
 
+  public static IModelWrapper<StatBonusSaveData> WrapNewModel(StatBonusSaveData model) =>
+    new StatsBonusSaveDataModel(new StatBonusSaveData
+    {
+      Target = model.Target,
+      Type = model.Type,
+      Amount = model.Amount
+    });
+
   public StatsBonusSaveDataModel(StatBonusSaveData statBonusSaveData) => Model = statBonusSaveData;
 
   private string[] StatBonusTypeNames => Enum.GetNames(typeof(StatBonusType))

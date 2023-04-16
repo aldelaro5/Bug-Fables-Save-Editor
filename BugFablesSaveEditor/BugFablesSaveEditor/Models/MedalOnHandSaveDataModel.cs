@@ -24,6 +24,10 @@ public partial class MedalOnHandSaveDataModel : ObservableObject, IModelWrapper<
   public static IModelWrapper<BfMedalOnHandSaveData> WrapModel(BfMedalOnHandSaveData model) =>
     new MedalOnHandSaveDataModel(model);
 
+  public static IModelWrapper<BfMedalOnHandSaveData> WrapNewModel(BfMedalOnHandSaveData model) =>
+    new MedalOnHandSaveDataModel(new BfMedalOnHandSaveData
+      { Medal = model.Medal, MedalEquipTarget = model.MedalEquipTarget });
+
   private MedalOnHandSaveDataModel(BfMedalOnHandSaveData medalOnHandSaveData)
   {
     Model = medalOnHandSaveData;

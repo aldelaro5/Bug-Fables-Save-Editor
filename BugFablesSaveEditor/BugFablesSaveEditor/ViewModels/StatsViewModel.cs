@@ -18,7 +18,6 @@ public partial class StatsViewModel : ObservableObject, IDisposable
   private readonly IDisposable _partyMemberStatsBonusesDisposable;
   private readonly IDisposable _partyStatsBonusesDisposable;
   private readonly GlobalSaveData _globalSaveData;
-  private IReadOnlyList<string> StatBonusTypeNames => Enum.GetNames<StatBonusSaveData.StatBonusType>();
   private readonly ViewModelCollection<StatBonusSaveData, StatsBonusSaveDataModel> _statsBonuses;
 
   [ObservableProperty]
@@ -67,9 +66,7 @@ public partial class StatsViewModel : ObservableObject, IDisposable
     set => SetProperty(_globalSaveData.MaxTp, value, _globalSaveData, (data, s) => data.MaxTp = s);
   }
 
-  public IReadOnlyList<string> MemberStatBonusTypeNames => StatBonusTypeNames.Take(3).ToList();
-
-  public IReadOnlyList<string> PartyStatBonusTypeNames => StatBonusTypeNames.Skip(3).ToList();
+  public IReadOnlyList<string> StatBonusTypeNames => Enum.GetNames<StatBonusSaveData.StatBonusType>();
 
   public int TotalPartyMaxTpBonus => _statsBonuses.Collection
     .Where(x => x.Target == -1 && x.Type == StatBonusSaveData.StatBonusType.TP)
@@ -94,14 +91,14 @@ public partial class StatsViewModel : ObservableObject, IDisposable
                 x.Type == StatBonusSaveData.StatBonusType.Defense)
     .Sum(x => x.Amount);
 
-  public StatsViewModel() : this(new(), new(), new()) { }
+  public StatsViewModel() : this(new(), new(new()), new()) { }
 
   public StatsViewModel(Collection<StatBonusSaveData> statsBonuses,
-                        Collection<PartyMemberSaveData> partyMembers,
+                        ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> partyMembers,
                         GlobalSaveData globalSaveData)
   {
     _statsBonuses = new(statsBonuses);
-    _partyMembers = new(partyMembers);
+    _partyMembers = partyMembers;
     _globalSaveData = globalSaveData;
 
     _partyStatsBonusesDisposable = _statsBonuses.Collection

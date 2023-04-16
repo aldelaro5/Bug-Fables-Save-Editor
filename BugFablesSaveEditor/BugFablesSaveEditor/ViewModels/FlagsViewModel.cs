@@ -86,7 +86,7 @@ public partial class FlagsViewModel : ObservableRecipient, IDisposable
                                                                    Dictionary<int, string[]> extendedData,
                                                                    Expression<Func<FlagsViewModel, string>> textFilter,
                                                                    out ReadOnlyObservableCollection<TViewModel> result)
-    where TViewModel : IModelWrapper<TModel>, IFlagViewModel
+    where TViewModel : IModelWrapper<TModel>, IFlagModel
   {
     var flagsWithMetaData =
       flags.Select((data, i) => AssignMetaData((TViewModel)TViewModel.WrapModel(data), i, extendedData));
@@ -111,7 +111,7 @@ public partial class FlagsViewModel : ObservableRecipient, IDisposable
 
   private static TFlagViewModel AssignMetaData<TFlagViewModel>(TFlagViewModel flagViewModel, int index,
                                                                Dictionary<int, string[]> extendedData)
-    where TFlagViewModel : IFlagViewModel
+    where TFlagViewModel : IFlagModel
   {
     flagViewModel.Index = index;
     flagViewModel.Description1 = extendedData.TryGetValue(index, out string[]? extData) ? extData[0] : "";

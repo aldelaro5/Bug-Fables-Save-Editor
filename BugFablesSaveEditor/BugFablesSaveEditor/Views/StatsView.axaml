@@ -4,7 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:DataType="vm:StatsViewModel"
              x:CompileBindings="True"
              x:Class="BugFablesSaveEditor.Views.StatsView">
@@ -12,33 +12,29 @@
     <vm:StatsViewModel />
   </Design.DataContext>
 
-  <DockPanel HorizontalAlignment="Center">
-    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-      <DockPanel>
+  <Grid RowDefinitions="auto,*">
+    <DockPanel Grid.Column="0">
+      <DockPanel DockPanel.Dock="Left">
         <Label DockPanel.Dock="Top" Content="Party base stats" />
-        <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-          <StackPanel Orientation="Horizontal">
-            <Label VerticalContentAlignment="Center" Content="TP" Width="30" />
-            <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding Tp}" />
-            <Label VerticalContentAlignment="Center" Content="/" />
-            <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding MaxTp}" />
-          </StackPanel>
-          <StackPanel Orientation="Horizontal">
-            <Label VerticalContentAlignment="Center" Content="MP" Width="30" />
-            <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding Mp}" />
-            <Label VerticalContentAlignment="Center" Content="/" />
-            <NumericUpDown ShowButtonSpinner="False"
-                           Value="{Binding MaxMp}" />
-          </StackPanel>
-        </StackPanel>
+        <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*" VerticalAlignment="Center">
+          <Label Content="TP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" />
+          <NumericUpDown ShowButtonSpinner="False" Grid.Column="1" Grid.Row="0"
+                         Value="{Binding Tp}" />
+          <Label Content="/" Grid.Column="2" Grid.Row="0" />
+          <NumericUpDown ShowButtonSpinner="False" Grid.Column="3" Grid.Row="0"
+                         Value="{Binding MaxTp}" />
+          <Label Content="MP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" />
+          <NumericUpDown ShowButtonSpinner="False" Grid.Column="1" Grid.Row="1"
+                         Value="{Binding Mp}" />
+          <Label Content="/" Grid.Column="2" Grid.Row="1" />
+          <NumericUpDown ShowButtonSpinner="False" Grid.Column="3" Grid.Row="1"
+                         Value="{Binding MaxMp}" />
+        </Grid>
       </DockPanel>
-      <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+      <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party members stats" />
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" Height="130"
-                  Items="{Binding PartyMembers.Collection}" SelectionMode="Single"
+        <DataGrid MaxHeight="200" Items="{Binding PartyMembers.Collection}"
+                  SelectionMode="Single"
                   SelectedItem="{Binding SelectedPartyMember}">
           <DataGrid.Columns>
             <DataGridTemplateColumn Header="AnimId" IsReadOnly="True">
@@ -49,11 +45,13 @@
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Base HP" Binding="{Binding BaseHp}" Width="75" />
+                                Header="Base HP" Binding="{Binding BaseHp}"
+                                Width="80" />
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="HP" Binding="{Binding Hp}" />
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Max HP" Binding="{Binding MaxHp}" Width="70" />
+                                Header="Max HP" Binding="{Binding MaxHp}"
+                                Width="75" />
             <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
                                 Header="Base Attack" Binding="{Binding BaseAttack}"
                                 Width="85" />
@@ -66,40 +64,40 @@
                                 Header="Defense" Binding="{Binding Defense}" />
           </DataGrid.Columns>
         </DataGrid>
-      </StackPanel>
-    </StackPanel>
-    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-      <DockPanel>
+      </DockPanel>
+    </DockPanel>
+    <Grid ColumnDefinitions="*,*,*,*" Grid.Row="1">
+      <DockPanel Grid.Column="0">
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
-        <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding NewPartyStatBonus.Type}"
-                    Items="{Binding PartyStatBonusTypeNames}" Width="100" />
-          <NumericUpDown ShowButtonSpinner="False"
-                         Value="{Binding NewPartyStatBonus.Amount}" />
-          <Button Command="{Binding AddStatPartyBonusCommand}"
+        <DockPanel DockPanel.Dock="Bottom">
+          <Button DockPanel.Dock="Right"
+                  Command="{Binding AddStatPartyBonusCommand}"
                   CommandParameter="{Binding NewPartyStatBonus}"
-                  VerticalContentAlignment="Center"
                   Content="Add" />
-        </StackPanel>
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True" SelectionMode="Single"
-                  Items="{Binding PartyStatBonuses}" CanUserSortColumns="True">
+          <Grid ColumnDefinitions="*,*">
+            <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
+                      Items="{Binding StatBonusTypeNames}" />
+            <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
+                           Value="{Binding NewPartyStatBonus.Amount}" />
+          </Grid>
+        </DockPanel>
+        <DataGrid SelectionMode="Single"
+                  Items="{Binding PartyStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
-                                IsReadOnly="True" Width="85" />
+                                IsReadOnly="True" />
             <DataGridTextColumn Header="Amount"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
-            <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:StatsBonusSaveDataModel">
-                  <Button Margin="5,0,0,0" Content="-"
+                  <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
-                          HorizontalContentAlignment="Center"
-                          Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
@@ -107,50 +105,52 @@
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
-      <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
-        <Label Content="Total party bonuses" />
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max TP" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalPartyMaxTpBonus}" />
+      <DockPanel Grid.Column="1" HorizontalAlignment="Center">
+        <Label DockPanel.Dock="Top" Content="Total party bonuses" />
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+          <Grid ColumnDefinitions="*,auto" RowDefinitions="*,*">
+            <Grid.Styles>
+              <Style Selector="Label">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+              </Style>
+            </Grid.Styles>
+            <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="Max TP" />
+            <Label Grid.Column="1" Grid.Row="0" FontWeight="Bold" Content="{Binding TotalPartyMaxTpBonus}" />
+            <Label Grid.Column="0" Grid.Row="1" FontWeight="Bold" Content="Max MP" />
+            <Label Grid.Column="1" Grid.Row="1" FontWeight="Bold" Content="{Binding TotalPartyMaxMpBonus}" />
+          </Grid>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max MP" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalPartyMaxMpBonus}" />
-        </StackPanel>
-      </StackPanel>
-      <DockPanel Margin="10,0,0,0">
+      </DockPanel>
+      <DockPanel Grid.Column="2">
         <Label DockPanel.Dock="Top" Content="Selected member stats bonuses" />
-        <StackPanel Margin="10" DockPanel.Dock="Bottom" Orientation="Horizontal">
-          <ComboBox SelectedIndex="{Binding NewMemberStatBonus.Type}"
-                    Items="{Binding MemberStatBonusTypeNames}" Width="100" />
-          <NumericUpDown ShowButtonSpinner="False"
-                         Value="{Binding NewMemberStatBonus.Amount}" />
-          <Button Command="{Binding AddStatPartyMemberBonusCommand}"
+        <DockPanel DockPanel.Dock="Bottom">
+          <Button DockPanel.Dock="Right"
+                  Command="{Binding AddStatPartyMemberBonusCommand}"
                   CommandParameter="{Binding NewMemberStatBonus}"
-                  VerticalContentAlignment="Center"
                   Content="Add" />
-        </StackPanel>
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="True"
-                  Items="{Binding MemberStatBonuses}">
+          <Grid ColumnDefinitions="*,*">
+            <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
+                      Items="{Binding StatBonusTypeNames}" />
+            <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
+                           Value="{Binding NewMemberStatBonus.Amount}" />
+          </Grid>
+        </DockPanel>
+        <DataGrid Items="{Binding MemberStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
-                                IsReadOnly="True" Width="85" />
+                                IsReadOnly="True" />
             <DataGridTextColumn Header="Amount"
                                 x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
-            <DataGridTemplateColumn Width="35">
+            <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:StatsBonusSaveDataModel">
-                  <Button Margin="5,0,0,0" Content="-"
+                  <Button Content="-"
                           Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
                           CommandParameter="{Binding }"
-                          HorizontalContentAlignment="Center"
-                          Width="25"
                           Background="DarkRed" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
@@ -159,24 +159,30 @@
         </DataGrid>
 
       </DockPanel>
-      <StackPanel Margin="5,0,0,0" HorizontalAlignment="Center" Orientation="Vertical">
-        <Label Content="Total selected member bonuses" />
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Max HP" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalMemberMaxHpBonus}" />
+      <DockPanel Grid.Column="3">
+        <Label DockPanel.Dock="Top" Content="Total selected member bonuses" />
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+          <Grid ColumnDefinitions="*,auto" RowDefinitions="*,*,*">
+            <Grid.Styles>
+              <Style Selector="Label">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+              </Style>
+            </Grid.Styles>
+            <Label Grid.Column="0" Grid.Row="0"
+                   FontWeight="Bold" Content="Max HP" />
+            <Label Grid.Column="1" Grid.Row="0"
+                   FontWeight="Bold" Content="{Binding TotalMemberMaxHpBonus}" />
+            <Label Grid.Column="0" Grid.Row="1"
+                   FontWeight="Bold" Content="Attack" />
+            <Label Grid.Column="1" Grid.Row="1"
+                   FontWeight="Bold" Content="{Binding TotalMemberAttackBonus}" />
+            <Label Grid.Column="0" Grid.Row="2"
+                   FontWeight="Bold" Content="Defense" />
+            <Label Grid.Column="1" Grid.Row="2"
+                   FontWeight="Bold" Content="{Binding TotalMemberDefenseBonus}" />
+          </Grid>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Attack" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalMemberAttackBonus}" />
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-          <Label VerticalContentAlignment="Center" FontWeight="Bold" Content="Defense" />
-          <Label VerticalContentAlignment="Center" FontWeight="Bold"
-                 Content="{Binding TotalMemberDefenseBonus}" />
-        </StackPanel>
-      </StackPanel>
-    </StackPanel>
-  </DockPanel>
+      </DockPanel>
+    </Grid>
+  </Grid>
 </UserControl>

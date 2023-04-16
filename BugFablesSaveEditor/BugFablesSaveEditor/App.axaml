@@ -2,63 +2,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:b="clr-namespace:BugFablesSaveEditor.Behaviors"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
-             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
              RequestedThemeVariant="Dark">
   <Application.Styles>
     <FluentTheme />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
-
-    <Style Selector="DataGrid.dragging-up DataGridRow.dragging">
-      <Setter Property="AdornerLayer.Adorner">
-        <Template>
-          <Border BorderThickness="0 2 0 0" BorderBrush="White" />
-        </Template>
-      </Setter>
+    <StyleInclude Source="DndStyles.axaml" />
+    <StyleInclude Source="AlignementsStyles.axaml" />
+    <Style Selector="Button, CheckBox, Label, ComboBox, TextBox, NumericUpDown, DockPanel, StackPanel">
+      <Setter Property="Margin" Value="3" />
+    </Style>
+    <Style Selector="DataGridCell TextBox, DataGridCell DockPanel">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="NumericUpDown DockPanel, NumericUpDown StackPanel">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="DataGrid">
+      <Setter Property="AutoGenerateColumns" Value="False" />
+      <Setter Property="CanUserReorderColumns" Value="False" />
+      <Setter Property="CanUserSortColumns" Value="False" />
+      <Setter Property="CanUserResizeColumns" Value="True" />
+    </Style>
+    <Style Selector="DataGridColumnHeader TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
-    <Style Selector="DataGrid.dragging-down DataGridRow.dragging">
-      <Setter Property="AdornerLayer.Adorner">
-        <Template>
-          <Border BorderThickness="0 0 0 2" BorderBrush="White" />
-        </Template>
-      </Setter>
-    </Style>
-
-    <Style Selector="DataGrid.draggable DataGridRow">
-      <Setter Property="DragDrop.AllowDrop" Value="True" />
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDragBehavior />
-            <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static DragDrop.DragEnterEvent}"
-                                            RoutingStrategies="Bubble">
-              <iac:AddClassAction ClassName="dragging" RemoveIfExists="True" />
-            </iac:RoutedEventTriggerBehavior>
-            <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static DragDrop.DragLeaveEvent}"
-                                            RoutingStrategies="Bubble">
-              <iac:RemoveClassAction ClassName="dragging" />
-            </iac:RoutedEventTriggerBehavior>
-            <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static DragDrop.DropEvent}"
-                                            RoutingStrategies="Bubble">
-              <iac:RemoveClassAction ClassName="dragging" />
-            </iac:RoutedEventTriggerBehavior>
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
-      </Setter>
-    </Style>
   </Application.Styles>
 
   <Application.Resources>
     <b:DataGridDnd x:Key="DataGridDndBfNamedId" x:TypeArguments="ob:BfNamedIdModel" />
-    <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData"
-                   x:TypeArguments="ob:MedalOnHandSaveDataModel" />
+    <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData" x:TypeArguments="ob:MedalOnHandSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:MusicSaveDataModel" />
-    <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData"
-                   x:TypeArguments="ob:PartyMemberSaveDataModel" />
+    <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:PartyMemberSaveDataModel" />
   </Application.Resources>
 
   <Application.DataTemplates>

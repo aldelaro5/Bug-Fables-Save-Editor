@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:c="clr-namespace:BugFablesSaveEditor.Controls"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:DataType="vm:ItemsViewModel"
              x:CompileBindings="True"
@@ -12,42 +12,27 @@
     <vm:ItemsViewModel />
   </Design.DataContext>
 
-  <Grid ColumnDefinitions="50*,50*,50*">
+  <Grid ColumnDefinitions="*,*,*" MaxWidth="1000">
     <DockPanel Grid.Column="0">
-      <Label DockPanel.Dock="Top" Content="Inventory" />
-      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
-                  Orientation="Horizontal">
-        <ContentControl Content="{Binding Inventory.NewViewModel}" />
-        <Button Margin="5,0,0,0" Content="Add"
-                Command="{Binding Inventory.AddViewModelCommand}"
-                CommandParameter="{Binding Inventory.NewViewModel}" />
-      </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Inventory.Collection}"
-                           DeleteCommand="{Binding Inventory.RemoveViewModelCommand}" />
+      <v:BfNamedIdCollectionView TitleLabel="Inventory"
+                                 NamedIdsCollection="{Binding Inventory.Collection}"
+                                 AddCommand="{Binding Inventory.AddViewModelCommand}"
+                                 NewNamedId="{Binding Inventory.NewViewModel}"
+                                 DeleteCommand="{Binding Inventory.RemoveViewModelCommand}" />
     </DockPanel>
-    <DockPanel Margin="20,0,0,0" Grid.Column="1">
-      <Label DockPanel.Dock="Top" Content="Key items" />
-      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
-                  Orientation="Horizontal">
-        <ContentControl Content="{Binding KeyItems.NewViewModel}" />
-        <Button Margin="5,0,0,0" Content="Add"
-                Command="{Binding KeyItems.AddViewModelCommand}"
-                CommandParameter="{Binding KeyItems.NewViewModel}" />
-      </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding KeyItems.Collection}"
-                           DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}" />
+    <DockPanel Grid.Column="1">
+      <v:BfNamedIdCollectionView TitleLabel="Key Items"
+                                 NamedIdsCollection="{Binding KeyItems.Collection}"
+                                 AddCommand="{Binding KeyItems.AddViewModelCommand}"
+                                 NewNamedId="{Binding KeyItems.NewViewModel}"
+                                 DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}" />
     </DockPanel>
-    <DockPanel Margin="20,0,0,0" Grid.Column="2">
-      <Label DockPanel.Dock="Top" Content="Stored items" />
-      <StackPanel Margin="0,10,0,5" HorizontalAlignment="Center" DockPanel.Dock="Bottom"
-                  Orientation="Horizontal">
-        <ContentControl Content="{Binding Stored.NewViewModel}" />
-        <Button Margin="5,0,0,0" Content="Add"
-                Command="{Binding Stored.AddViewModelCommand}"
-                CommandParameter="{Binding Stored.NewViewModel}" />
-      </StackPanel>
-      <c:BfNamedIdDataGrid Items="{Binding Stored.Collection}"
-                           DeleteCommand="{Binding Stored.RemoveViewModelCommand}" />
+    <DockPanel Grid.Column="2">
+      <v:BfNamedIdCollectionView TitleLabel="Stored Items"
+                                 NamedIdsCollection="{Binding Stored.Collection}"
+                                 AddCommand="{Binding Stored.AddViewModelCommand}"
+                                 NewNamedId="{Binding Stored.NewViewModel}"
+                                 DeleteCommand="{Binding Stored.RemoveViewModelCommand}" />
     </DockPanel>
   </Grid>
 </UserControl>

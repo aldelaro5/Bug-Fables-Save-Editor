@@ -15,12 +15,12 @@ public partial class PartyViewModel : ObservableObject, IDisposable
   [ObservableProperty]
   private ViewModelCollection<BfAnimId, BfNamedIdModel> _followers;
 
-  public PartyViewModel() : this(new(), new()) { }
+  public PartyViewModel() : this(new(new()), new()) { }
 
-  public PartyViewModel(Collection<PartyMemberSaveData> partyMembers,
+  public PartyViewModel(ViewModelCollection<PartyMemberSaveData, PartyMemberSaveDataModel> partyMembers,
                         Collection<BfAnimId> followers)
   {
-    _partyMembers = new(partyMembers);
+    _partyMembers = partyMembers;
     _followers = new(followers);
   }
 
