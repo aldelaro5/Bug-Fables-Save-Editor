@@ -49,7 +49,7 @@
     </TabItem>
     <TabItem Header="Regionals">
       <v:FlagsCollectionView TextFilter="{Binding TextFilterRegionalFlags}" Collection="{Binding RegionalFlags}"
-                       FilterUnused="{Binding FilterUnusedRegionals}">
+                             FilterUnused="{Binding FilterUnusedRegionals}">
         <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagSaveDataModel">
             <CheckBox IsChecked="{Binding Enabled}" />

@@ -15,24 +15,24 @@
   <Grid ColumnDefinitions="*,*,*" MaxWidth="1200">
     <DockPanel Grid.Column="0">
       <v:BfNamedIdCollectionView TitleLabel="Open Quests"
-                      NamedIdsCollection="{Binding Opened.Collection}"
-                      AddCommand="{Binding Opened.AddViewModelCommand}"
-                      NewNamedId="{Binding Opened.NewViewModel}"
-                      DeleteCommand="{Binding Opened.RemoveViewModelCommand}"/>
+                                 NamedIdsCollection="{Binding Opened.Collection}"
+                                 AddCommand="{Binding Opened.AddViewModelCommand}"
+                                 NewNamedId="{Binding Opened.NewViewModel}"
+                                 DeleteCommand="{Binding Opened.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Grid.Column="1">
       <v:BfNamedIdCollectionView TitleLabel="Taken Quests"
-                      NamedIdsCollection="{Binding Taken.Collection}"
-                      AddCommand="{Binding Taken.AddViewModelCommand}"
-                      NewNamedId="{Binding Taken.NewViewModel}"
-                      DeleteCommand="{Binding Taken.RemoveViewModelCommand}"/>
+                                 NamedIdsCollection="{Binding Taken.Collection}"
+                                 AddCommand="{Binding Taken.AddViewModelCommand}"
+                                 NewNamedId="{Binding Taken.NewViewModel}"
+                                 DeleteCommand="{Binding Taken.RemoveViewModelCommand}" />
     </DockPanel>
     <DockPanel Grid.Column="2">
       <v:BfNamedIdCollectionView TitleLabel="Completed Quests"
-                      NamedIdsCollection="{Binding Completed.Collection}"
-                      AddCommand="{Binding Completed.AddViewModelCommand}"
-                      NewNamedId="{Binding Completed.NewViewModel}"
-                      DeleteCommand="{Binding Completed.RemoveViewModelCommand}"/>
+                                 NamedIdsCollection="{Binding Completed.Collection}"
+                                 AddCommand="{Binding Completed.AddViewModelCommand}"
+                                 NewNamedId="{Binding Completed.NewViewModel}"
+                                 DeleteCommand="{Binding Completed.RemoveViewModelCommand}" />
     </DockPanel>
   </Grid>
 </UserControl>
