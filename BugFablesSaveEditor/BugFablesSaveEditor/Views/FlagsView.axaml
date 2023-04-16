@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:FlagsViewModel"
              x:CompileBindings="True"
@@ -20,98 +21,41 @@
 
   <TabControl>
     <TabItem Header="Flags">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" Content="Text filter " />
-          <TextBox Text="{Binding TextFilterFlags}" />
-        </DockPanel>
-        <DataGrid Items="{Binding Flags}">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTemplateColumn Header="Value">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="m:FlagSaveDataModel">
-                  <CheckBox IsChecked="{Binding Enabled}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsPageView TextFilter="{Binding TextFilterFlags}" Collection="{Binding Flags}">
+        <v:FlagsPageView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagSaveDataModel">
+            <CheckBox IsChecked="{Binding Enabled}" />
+          </DataTemplate>
+        </v:FlagsPageView.ValueCellTemplate>
+      </v:FlagsPageView>
     </TabItem>
     <TabItem Header="Flagvars">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" Content="Text filter " />
-          <TextBox Text="{Binding TextFilterFlagvars}" />
-        </DockPanel>
-        <DataGrid Items="{Binding Flagvars}">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagvarSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTextColumn Header="Value"
-                                x:DataType="m:FlagvarSaveDataModel"
-                                Binding="{Binding Var}" />
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagvarSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsPageView TextFilter="{Binding TextFilterFlagvars}" Collection="{Binding Flagvars}">
+        <v:FlagsPageView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagvarSaveDataModel">
+            <TextBox Text="{Binding Var}" />
+          </DataTemplate>
+        </v:FlagsPageView.ValueCellTemplate>
+      </v:FlagsPageView>
     </TabItem>
     <TabItem Header="Flagstrings">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" Content="Text filter " />
-          <TextBox Text="{Binding TextFilterFlagstrings}" />
-        </DockPanel>
-        <DataGrid Items="{Binding Flagstrings}">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagstringSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTextColumn Header="Value"
-                                x:DataType="m:FlagstringSaveDataModel"
-                                Binding="{Binding Str}" />
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagstringSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsPageView TextFilter="{Binding TextFilterFlagstrings}" Collection="{Binding Flagstrings}">
+        <v:FlagsPageView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagstringSaveDataModel">
+            <TextBox Text="{Binding Str}" />
+          </DataTemplate>
+        </v:FlagsPageView.ValueCellTemplate>
+      </v:FlagsPageView>
     </TabItem>
     <TabItem Header="Regionals">
-      <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Left" Content="Text filter " />
-          <CheckBox DockPanel.Dock="Right" Content="Show Unused"
-                    IsChecked="{Binding FilterUnusedRegionals}" />
-          <TextBox Text="{Binding TextFilterRegionalFlags}" />
-        </DockPanel>
-        <DataGrid Items="{Binding RegionalFlags}">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Index" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Index}" />
-            <DataGridTemplateColumn Header="Value">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="m:FlagSaveDataModel">
-                  <CheckBox IsChecked="{Binding Enabled}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTextColumn Header="Description" IsReadOnly="True"
-                                x:DataType="m:FlagSaveDataModel"
-                                Binding="{Binding Description1}" />
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:FlagsPageView TextFilter="{Binding TextFilterRegionalFlags}" Collection="{Binding RegionalFlags}"
+                       FilterUnused="{Binding FilterUnusedRegionals}">
+        <v:FlagsPageView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagSaveDataModel">
+            <CheckBox IsChecked="{Binding Enabled}" />
+          </DataTemplate>
+        </v:FlagsPageView.ValueCellTemplate>
+      </v:FlagsPageView>
     </TabItem>
   </TabControl>
 </UserControl>

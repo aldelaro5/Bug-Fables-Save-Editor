@@ -17,7 +17,7 @@ public static class FilterUtils
                                                                       IObservable<Func<TViewModel, bool>> filter,
                                                                       out ReadOnlyObservableCollection<TViewModel>
                                                                         result)
-    where TViewModel : IFlagViewModel
+    where TViewModel : IFlagModel
   {
     return data
       .AsObservableChangeSet()
@@ -30,7 +30,7 @@ public static class FilterUtils
 
   public static IObservable<Func<TFlagViewModel, bool>> GetSimpleTextFilterForFlags<TFlagViewModel, TViewModel>
     (TViewModel viewModel, Expression<Func<TViewModel, string>> filterChange)
-    where TFlagViewModel : IFlagViewModel
+    where TFlagViewModel : IFlagModel
     where TViewModel : INotifyPropertyChanged
   {
     return viewModel.WhenValueChanged(filterChange)
@@ -39,7 +39,7 @@ public static class FilterUtils
   }
 
   private static Func<TFlagViewModel, bool> FlagTextFilter<TFlagViewModel>(string x)
-    where TFlagViewModel : IFlagViewModel
+    where TFlagViewModel : IFlagModel
   {
     return vm => x == string.Empty ||
                  vm.Index.ToString().Contains(x, StringComparison.OrdinalIgnoreCase) ||

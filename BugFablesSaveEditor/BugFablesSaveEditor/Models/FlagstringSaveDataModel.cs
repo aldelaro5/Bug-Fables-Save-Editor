@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BugFablesSaveEditor.Models;
 
-public partial class FlagstringSaveDataModel : ObservableObject, IFlagViewModel, IModelWrapper<FlagstringSaveData>
+public partial class FlagstringSaveDataModel : ObservableObject, IFlagModel, IModelWrapper<FlagstringSaveData>
 {
   public FlagstringSaveData Model { get; }
 
