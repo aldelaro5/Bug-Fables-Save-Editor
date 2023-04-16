@@ -12,27 +12,51 @@
     <vm:QuestsViewModel />
   </Design.DataContext>
 
-  <Grid ColumnDefinitions="*,*,*" MaxWidth="1200">
+  <Grid ColumnDefinitions="*,*,*" MaxWidth="1250">
     <DockPanel Grid.Column="0">
-      <v:BfNamedIdCollectionView TitleLabel="Open Quests"
-                                 NamedIdsCollection="{Binding Opened.Collection}"
-                                 AddCommand="{Binding Opened.AddViewModelCommand}"
-                                 NewNamedId="{Binding Opened.NewViewModel}"
-                                 DeleteCommand="{Binding Opened.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Open Quests"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding Opened.Collection}"
+                                     AddCommand="{Binding Opened.AddViewModelCommand}"
+                                     NewModel="{Binding Opened.NewViewModel}"
+                                     DeleteCommand="{Binding Opened.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding Opened.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
     <DockPanel Grid.Column="1">
-      <v:BfNamedIdCollectionView TitleLabel="Taken Quests"
-                                 NamedIdsCollection="{Binding Taken.Collection}"
-                                 AddCommand="{Binding Taken.AddViewModelCommand}"
-                                 NewNamedId="{Binding Taken.NewViewModel}"
-                                 DeleteCommand="{Binding Taken.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Taken Quests"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding Taken.Collection}"
+                                     AddCommand="{Binding Taken.AddViewModelCommand}"
+                                     NewModel="{Binding Taken.NewViewModel}"
+                                     DeleteCommand="{Binding Taken.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding Taken.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
     <DockPanel Grid.Column="2">
-      <v:BfNamedIdCollectionView TitleLabel="Completed Quests"
-                                 NamedIdsCollection="{Binding Completed.Collection}"
-                                 AddCommand="{Binding Completed.AddViewModelCommand}"
-                                 NewNamedId="{Binding Completed.NewViewModel}"
-                                 DeleteCommand="{Binding Completed.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Completed Quests"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding Completed.Collection}"
+                                     AddCommand="{Binding Completed.AddViewModelCommand}"
+                                     NewModel="{Binding Completed.NewViewModel}"
+                                     DeleteCommand="{Binding Completed.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding Completed.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
   </Grid>
 </UserControl>

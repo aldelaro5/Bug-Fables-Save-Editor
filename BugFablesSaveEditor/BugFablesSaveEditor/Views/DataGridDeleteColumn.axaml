@@ -1,0 +1,17 @@
+<DataGridTemplateColumn xmlns="https://github.com/avaloniaui"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:mvvm="clr-namespace:CommunityToolkit.Mvvm.ComponentModel;assembly=CommunityToolkit.Mvvm"
+                        xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+                        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                        x:Class="BugFablesSaveEditor.Views.DataGridDeleteColumn">
+  <DataGridTemplateColumn.CellTemplate>
+    <DataTemplate DataType="mvvm:ObservableObject">
+      <Button Content="-" Background="DarkRed"
+              Command="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView},
+                Path=DeleteCommand}"
+              CommandParameter="{Binding }" />
+    </DataTemplate>
+  </DataGridTemplateColumn.CellTemplate>
+</DataGridTemplateColumn>

@@ -4,9 +4,6 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
-             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:MedalsViewModel"
@@ -18,102 +15,107 @@
 
   <TabControl>
     <TabItem Header="On hand">
-      <DockPanel MaxWidth="700">
-        <DockPanel DockPanel.Dock="Bottom">
-          <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Content="Unequip all medals"
-                  Command="{Binding UnequipAllMedalsCommand}" />
-          <DockPanel HorizontalAlignment="Stretch">
-            <Button Content="Add" DockPanel.Dock="Right"
-                    Command="{Binding MedalOnHandSaveData.AddViewModelCommand}"
-                    CommandParameter="{Binding MedalOnHandSaveData.NewViewModel}" />
-            <Grid ColumnDefinitions="*,*">
-              <ContentControl Grid.Column="0"
-                              Content="{Binding MedalOnHandSaveData.NewViewModel.Medal}" />
-              <ComboBox Grid.Column="1"
-                        SelectedIndex="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTarget}"
-                        Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" />
-            </Grid>
-          </DockPanel>
-        </DockPanel>
-        <DataGrid Classes="draggable" Items="{Binding MedalOnHandSaveData.Collection}">
-          <i:Interaction.Behaviors>
-            <i:BehaviorCollection>
-              <idd:ContextDropBehavior Handler="{StaticResource DataGridDndMedalOnHandSaveData}" />
-            </i:BehaviorCollection>
-          </i:Interaction.Behaviors>
-          <DataGrid.Columns>
-            <DataGridTemplateColumn Width="62">
-              <DataGridTemplateColumn.Header>
-                <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
-              </DataGridTemplateColumn.Header>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ic:Icon FontSize="25" Value="mdi-drag" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Medal" Width="*">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
-                  <ContentControl Content="{Binding Medal}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Equip" Width="*">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
-                  <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
-                            Items="{Binding MedalEquipTargets}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
-                  <Button Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:MedalsViewModel)DataContext).MedalOnHandSaveData.RemoveViewModelCommand}"
-                          CommandParameter="{Binding }"
-                          Background="DarkRed" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
+      <v:EditableModelCollectionView TitleLabel="" MaxWidth="700"
+                                     DndDropHandler="{StaticResource DataGridDndMedalOnHandSaveData}"
+                                     Collection="{Binding MedalOnHandSaveData.Collection}"
+                                     AddCommand="{Binding MedalOnHandSaveData.AddViewModelCommand}"
+                                     NewModel="{Binding MedalOnHandSaveData.NewViewModel}"
+                                     DeleteCommand="{Binding MedalOnHandSaveData.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Medal" Width="*">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
+                <ContentControl Content="{Binding Medal}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTemplateColumn Header="Equip" Width="*">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="ob:MedalOnHandSaveDataModel">
+                <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
+                          Items="{Binding MedalEquipTargets}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <Grid ColumnDefinitions="*,*,*">
+            <ContentControl Grid.Column="0"
+                            Content="{Binding MedalOnHandSaveData.NewViewModel.Medal}" />
+            <ComboBox Grid.Column="1"
+                      SelectedIndex="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTarget}"
+                      Items="{Binding MedalOnHandSaveData.NewViewModel.MedalEquipTargets}" />
+            <Button Grid.Column="2" HorizontalAlignment="Center" Content="Unequip all medals"
+                    Command="{Binding UnequipAllMedalsCommand}" />
+          </Grid>
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </TabItem>
     <TabItem Header="Shop pools">
       <Grid ColumnDefinitions="*,*" MaxWidth="700">
         <DockPanel Grid.Column="0">
-          <v:BfNamedIdCollectionView TitleLabel="Merab"
-                                     NamedIdsCollection="{Binding MerabShopPool.Collection}"
-                                     AddCommand="{Binding MerabShopPool.AddViewModelCommand}"
-                                     NewNamedId="{Binding MerabShopPool.NewViewModel}"
-                                     DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}" />
+          <v:EditableModelCollectionView TitleLabel="Merab"
+                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                         Collection="{Binding MerabShopPool.Collection}"
+                                         AddCommand="{Binding MerabShopPool.AddViewModelCommand}"
+                                         NewModel="{Binding MerabShopPool.NewViewModel}"
+                                         DeleteCommand="{Binding MerabShopPool.RemoveViewModelCommand}">
+            <v:EditableModelCollectionView.Columns>
+              <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+            </v:EditableModelCollectionView.Columns>
+            <v:EditableModelCollectionView.AddView>
+              <ContentControl Content="{Binding MerabShopPool.NewViewModel}" />
+            </v:EditableModelCollectionView.AddView>
+          </v:EditableModelCollectionView>
         </DockPanel>
         <DockPanel Grid.Column="1">
-          <v:BfNamedIdCollectionView TitleLabel="Shades"
-                                     NamedIdsCollection="{Binding ShadesShopPool.Collection}"
-                                     AddCommand="{Binding ShadesShopPool.AddViewModelCommand}"
-                                     NewNamedId="{Binding ShadesShopPool.NewViewModel}"
-                                     DeleteCommand="{Binding ShadesShopPool.RemoveViewModelCommand}" />
+          <v:EditableModelCollectionView TitleLabel="Shades"
+                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                         Collection="{Binding ShadesShopPool.Collection}"
+                                         AddCommand="{Binding ShadesShopPool.AddViewModelCommand}"
+                                         NewModel="{Binding ShadesShopPool.NewViewModel}"
+                                         DeleteCommand="{Binding ShadesShopPool.RemoveViewModelCommand}">
+            <v:EditableModelCollectionView.Columns>
+              <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+            </v:EditableModelCollectionView.Columns>
+            <v:EditableModelCollectionView.AddView>
+              <ContentControl Content="{Binding ShadesShopPool.NewViewModel}" />
+            </v:EditableModelCollectionView.AddView>
+          </v:EditableModelCollectionView>
         </DockPanel>
       </Grid>
     </TabItem>
     <TabItem Header="Shop available">
       <Grid ColumnDefinitions="*,*" MaxWidth="700">
         <DockPanel Grid.Column="0">
-          <v:BfNamedIdCollectionView TitleLabel="Merab"
-                                     NamedIdsCollection="{Binding MerabShopAvailables.Collection}"
-                                     AddCommand="{Binding MerabShopAvailables.AddViewModelCommand}"
-                                     NewNamedId="{Binding MerabShopAvailables.NewViewModel}"
-                                     DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}" />
+          <v:EditableModelCollectionView TitleLabel="Merab"
+                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                         Collection="{Binding MerabShopAvailables.Collection}"
+                                         AddCommand="{Binding MerabShopAvailables.AddViewModelCommand}"
+                                         NewModel="{Binding MerabShopAvailables.NewViewModel}"
+                                         DeleteCommand="{Binding MerabShopAvailables.RemoveViewModelCommand}">
+            <v:EditableModelCollectionView.Columns>
+              <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+            </v:EditableModelCollectionView.Columns>
+            <v:EditableModelCollectionView.AddView>
+              <ContentControl Content="{Binding MerabShopAvailables.NewViewModel}" />
+            </v:EditableModelCollectionView.AddView>
+          </v:EditableModelCollectionView>
         </DockPanel>
         <DockPanel Grid.Column="1">
-          <v:BfNamedIdCollectionView TitleLabel="Shades"
-                                     NamedIdsCollection="{Binding ShadesShopAvailables.Collection}"
-                                     AddCommand="{Binding ShadesShopAvailables.AddViewModelCommand}"
-                                     NewNamedId="{Binding ShadesShopAvailables.NewViewModel}"
-                                     DeleteCommand="{Binding ShadesShopAvailables.RemoveViewModelCommand}" />
+          <v:EditableModelCollectionView TitleLabel="Shades"
+                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                         Collection="{Binding ShadesShopAvailables.Collection}"
+                                         AddCommand="{Binding ShadesShopAvailables.AddViewModelCommand}"
+                                         NewModel="{Binding ShadesShopAvailables.NewViewModel}"
+                                         DeleteCommand="{Binding ShadesShopAvailables.RemoveViewModelCommand}">
+            <v:EditableModelCollectionView.Columns>
+              <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+            </v:EditableModelCollectionView.Columns>
+            <v:EditableModelCollectionView.AddView>
+              <ContentControl Content="{Binding ShadesShopAvailables.NewViewModel}" />
+            </v:EditableModelCollectionView.AddView>
+          </v:EditableModelCollectionView>
         </DockPanel>
       </Grid>
     </TabItem>

@@ -14,25 +14,49 @@
 
   <Grid ColumnDefinitions="*,*,*" MaxWidth="1000">
     <DockPanel Grid.Column="0">
-      <v:BfNamedIdCollectionView TitleLabel="Inventory"
-                                 NamedIdsCollection="{Binding Inventory.Collection}"
-                                 AddCommand="{Binding Inventory.AddViewModelCommand}"
-                                 NewNamedId="{Binding Inventory.NewViewModel}"
-                                 DeleteCommand="{Binding Inventory.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Inventory"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding Inventory.Collection}"
+                                     AddCommand="{Binding Inventory.AddViewModelCommand}"
+                                     NewModel="{Binding Inventory.NewViewModel}"
+                                     DeleteCommand="{Binding Inventory.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding Inventory.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
     <DockPanel Grid.Column="1">
-      <v:BfNamedIdCollectionView TitleLabel="Key Items"
-                                 NamedIdsCollection="{Binding KeyItems.Collection}"
-                                 AddCommand="{Binding KeyItems.AddViewModelCommand}"
-                                 NewNamedId="{Binding KeyItems.NewViewModel}"
-                                 DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Key Items"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding KeyItems.Collection}"
+                                     AddCommand="{Binding KeyItems.AddViewModelCommand}"
+                                     NewModel="{Binding KeyItems.NewViewModel}"
+                                     DeleteCommand="{Binding KeyItems.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding KeyItems.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
     <DockPanel Grid.Column="2">
-      <v:BfNamedIdCollectionView TitleLabel="Stored Items"
-                                 NamedIdsCollection="{Binding Stored.Collection}"
-                                 AddCommand="{Binding Stored.AddViewModelCommand}"
-                                 NewNamedId="{Binding Stored.NewViewModel}"
-                                 DeleteCommand="{Binding Stored.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Stored Items"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding Stored.Collection}"
+                                     AddCommand="{Binding Stored.AddViewModelCommand}"
+                                     NewModel="{Binding Stored.NewViewModel}"
+                                     DeleteCommand="{Binding Stored.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding Stored.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
   </Grid>
 </UserControl>

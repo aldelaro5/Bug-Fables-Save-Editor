@@ -1,0 +1,17 @@
+<DataGridTemplateColumn xmlns="https://github.com/avaloniaui"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+                        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                        Width="62"
+                        x:Class="BugFablesSaveEditor.Views.DataGridDndIconColumn">
+  <DataGridTemplateColumn.Header>
+    <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
+  </DataGridTemplateColumn.Header>
+  <DataGridTemplateColumn.CellTemplate>
+    <DataTemplate>
+      <ic:Icon FontSize="25" Value="mdi-drag" />
+    </DataTemplate>
+  </DataGridTemplateColumn.CellTemplate>
+</DataGridTemplateColumn>

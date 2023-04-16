@@ -36,6 +36,10 @@
     <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData" x:TypeArguments="ob:MedalOnHandSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:MusicSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:PartyMemberSaveDataModel" />
+
+    <DataTemplate x:Key="BfNamedIdColumnTemplate" DataType="ob:BfNamedIdModel">
+      <ContentControl Content="{Binding }" />
+    </DataTemplate>
   </Application.Resources>
 
   <Application.DataTemplates>

@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+                xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+                xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                x:Class="BugFablesSaveEditor.Views.EditableModelCollectionView">
+  <DockPanel>
+    <Label DockPanel.Dock="Top"
+           Content="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView}, Path=TitleLabel}" />
+    <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+      <Button Content="Add" DockPanel.Dock="Right"
+              Command="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView}, Path=AddCommand}"
+              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView}, Path=NewModel}" />
+      <ContentControl
+        Content="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView}, Path=AddView}" />
+    </DockPanel>
+    <DataGrid x:Name="DataGrid" Classes="draggable" IsReadOnly="True"
+              Items="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView}, Path=Collection}">
+      <i:Interaction.Behaviors>
+        <i:BehaviorCollection>
+          <idd:ContextDropBehavior
+            Handler="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView},
+                              Path=DndDropHandler}" />
+        </i:BehaviorCollection>
+      </i:Interaction.Behaviors>
+    </DataGrid>
+  </DockPanel>
+</UserControl>

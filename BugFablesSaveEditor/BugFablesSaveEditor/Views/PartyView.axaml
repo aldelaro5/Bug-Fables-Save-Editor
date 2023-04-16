@@ -4,9 +4,6 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
-             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:PartyViewModel"
@@ -17,59 +14,40 @@
   </Design.DataContext>
 
   <Grid ColumnDefinitions="*,*" MaxWidth="700">
-    <DockPanel Grid.Column="0">
-      <DockPanel>
-        <Label DockPanel.Dock="Top" Content="Party members" />
-        <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
-          <Button DockPanel.Dock="Right"
-                  Content="Add" Command="{Binding PartyMembers.AddViewModelCommand}"
-                  CommandParameter="{Binding PartyMembers.NewViewModel}" />
-          <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
-        </DockPanel>
-        <DataGrid Classes="draggable" Items="{Binding PartyMembers.Collection}">
-          <i:Interaction.Behaviors>
-            <i:BehaviorCollection>
-              <idd:ContextDropBehavior Handler="{StaticResource DataGridDndPartyMemberSaveData}" />
-            </i:BehaviorCollection>
-          </i:Interaction.Behaviors>
-          <DataGrid.Columns>
-            <DataGridTemplateColumn Width="62">
-              <DataGridTemplateColumn.Header>
-                <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
-              </DataGridTemplateColumn.Header>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <ic:Icon FontSize="25" Value="mdi-drag" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Name" Width="*">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:PartyMemberSaveDataModel">
-                  <ContentControl Content="{Binding AnimId}" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn>
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate DataType="ob:PartyMemberSaveDataModel">
-                  <Button Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:PartyViewModel)DataContext).PartyMembers.RemoveViewModelCommand}"
-                          CommandParameter="{Binding }"
-                          Background="DarkRed" />
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-          </DataGrid.Columns>
-        </DataGrid>
-      </DockPanel>
-    </DockPanel>
+    <v:EditableModelCollectionView Grid.Column="0" TitleLabel="Party Members"
+                                   DndDropHandler="{StaticResource DataGridDndPartyMemberSaveData}"
+                                   Collection="{Binding PartyMembers.Collection}"
+                                   NewModel="{Binding PartyMembers.NewViewModel}"
+                                   AddCommand="{Binding PartyMembers.AddViewModelCommand}"
+                                   DeleteCommand="{Binding PartyMembers.RemoveViewModelCommand}">
+      <v:EditableModelCollectionView.Columns>
+        <DataGridTemplateColumn Header="Name" Width="*">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+              <ContentControl Content="{Binding AnimId}" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </v:EditableModelCollectionView.Columns>
+      <v:EditableModelCollectionView.AddView>
+        <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
+      </v:EditableModelCollectionView.AddView>
+    </v:EditableModelCollectionView>
+
     <DockPanel Grid.Column="1">
-      <v:BfNamedIdCollectionView TitleLabel="Followers"
-                                 NamedIdsCollection="{Binding Followers.Collection}"
-                                 AddCommand="{Binding Followers.AddViewModelCommand}"
-                                 NewNamedId="{Binding Followers.NewViewModel}"
-                                 DeleteCommand="{Binding Followers.RemoveViewModelCommand}" />
+      <v:EditableModelCollectionView TitleLabel="Followers"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     Collection="{Binding Followers.Collection}"
+                                     AddCommand="{Binding Followers.AddViewModelCommand}"
+                                     NewModel="{Binding Followers.NewViewModel}"
+                                     DeleteCommand="{Binding Followers.RemoveViewModelCommand}">
+        <v:EditableModelCollectionView.Columns>
+          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
+        </v:EditableModelCollectionView.Columns>
+        <v:EditableModelCollectionView.AddView>
+          <ContentControl Content="{Binding Followers.NewViewModel}" />
+        </v:EditableModelCollectionView.AddView>
+      </v:EditableModelCollectionView>
     </DockPanel>
   </Grid>
 </UserControl>
