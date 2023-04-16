@@ -3,6 +3,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:LibraryViewModel"
@@ -12,31 +13,42 @@
     <vm:LibraryViewModel />
   </Design.DataContext>
 
+  <UserControl.Resources>
+    <DataTemplate x:Key="FlagCellTemplate" DataType="m:FlagSaveDataModel">
+      <CheckBox IsChecked="{Binding Enabled}" />
+    </DataTemplate>
+  </UserControl.Resources>
+
   <TabControl>
     <TabItem Header="Discoveries">
-      <v:LibraryPageView TestFilter="{Binding TextFilterDiscoveries}"
-                         FilterUnused="{Binding FilterUnusedDiscoveries}"
-                         FlagsCollection="{Binding Discoveries}"/>
+      <v:FlagsCollectionView Collection="{Binding Discoveries}" TextFilter="{Binding TextFilterDiscoveries}"
+                             FilterUnused="{Binding FilterUnusedDiscoveries}"
+                             ValueCellTemplate="{StaticResource FlagCellTemplate}"
+                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Bestiary">
-      <v:LibraryPageView TestFilter="{Binding TextFilterBestiary}"
-                         FilterUnused="{Binding FilterUnusedBestiary}"
-                         FlagsCollection="{Binding Bestiary}"/>
+      <v:FlagsCollectionView Collection="{Binding Bestiary}" TextFilter="{Binding TextFilterBestiary}"
+                             FilterUnused="{Binding FilterUnusedBestiary}"
+                             ValueCellTemplate="{StaticResource FlagCellTemplate}"
+                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Recipes">
-      <v:LibraryPageView TestFilter="{Binding TextFilterRecipes}"
-                         FilterUnused="{Binding FilterUnusedRecipes}"
-                         FlagsCollection="{Binding Recipes}"/>
+      <v:FlagsCollectionView Collection="{Binding Recipes}" TextFilter="{Binding TextFilterRecipes}"
+                             FilterUnused="{Binding FilterUnusedRecipes}"
+                             ValueCellTemplate="{StaticResource FlagCellTemplate}"
+                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Records">
-      <v:LibraryPageView TestFilter="{Binding TextFilterRecords}"
-                         FilterUnused="{Binding FilterUnusedRecords}"
-                         FlagsCollection="{Binding Records}"/>
+      <v:FlagsCollectionView Collection="{Binding Records}" TextFilter="{Binding TextFilterRecords}"
+                             FilterUnused="{Binding FilterUnusedRecords}"
+                             ValueCellTemplate="{StaticResource FlagCellTemplate}"
+                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Seen areas">
-      <v:LibraryPageView TestFilter="{Binding TextFilterSeenAreas}"
-                         FilterUnused="{Binding FilterUnusedSeenAreas}"
-                         FlagsCollection="{Binding SeenAreas}"/>
+      <v:FlagsCollectionView Collection="{Binding SeenAreas}" TextFilter="{Binding TextFilterSeenAreas}"
+                             FilterUnused="{Binding FilterUnusedSeenAreas}"
+                             ValueCellTemplate="{StaticResource FlagCellTemplate}"
+                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
   </TabControl>
 </UserControl>

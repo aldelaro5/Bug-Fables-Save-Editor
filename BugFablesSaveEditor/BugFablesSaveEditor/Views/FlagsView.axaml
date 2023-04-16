@@ -21,41 +21,41 @@
 
   <TabControl>
     <TabItem Header="Flags">
-      <v:FlagsPageView TextFilter="{Binding TextFilterFlags}" Collection="{Binding Flags}">
-        <v:FlagsPageView.ValueCellTemplate>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlags}" Collection="{Binding Flags}">
+        <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagSaveDataModel">
             <CheckBox IsChecked="{Binding Enabled}" />
           </DataTemplate>
-        </v:FlagsPageView.ValueCellTemplate>
-      </v:FlagsPageView>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Flagvars">
-      <v:FlagsPageView TextFilter="{Binding TextFilterFlagvars}" Collection="{Binding Flagvars}">
-        <v:FlagsPageView.ValueCellTemplate>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagvars}" Collection="{Binding Flagvars}">
+        <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagvarSaveDataModel">
             <TextBox Text="{Binding Var}" />
           </DataTemplate>
-        </v:FlagsPageView.ValueCellTemplate>
-      </v:FlagsPageView>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Flagstrings">
-      <v:FlagsPageView TextFilter="{Binding TextFilterFlagstrings}" Collection="{Binding Flagstrings}">
-        <v:FlagsPageView.ValueCellTemplate>
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagstrings}" Collection="{Binding Flagstrings}">
+        <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagstringSaveDataModel">
             <TextBox Text="{Binding Str}" />
           </DataTemplate>
-        </v:FlagsPageView.ValueCellTemplate>
-      </v:FlagsPageView>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Regionals">
-      <v:FlagsPageView TextFilter="{Binding TextFilterRegionalFlags}" Collection="{Binding RegionalFlags}"
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterRegionalFlags}" Collection="{Binding RegionalFlags}"
                        FilterUnused="{Binding FilterUnusedRegionals}">
-        <v:FlagsPageView.ValueCellTemplate>
+        <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagSaveDataModel">
             <CheckBox IsChecked="{Binding Enabled}" />
           </DataTemplate>
-        </v:FlagsPageView.ValueCellTemplate>
-      </v:FlagsPageView>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
   </TabControl>
 </UserControl>

@@ -4,6 +4,7 @@
              xmlns:vm="using:BugFablesSaveEditor.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:CrystalBerriesViewModel"
              x:CompileBindings="True"
@@ -12,32 +13,12 @@
     <vm:CrystalBerriesViewModel />
   </Design.DataContext>
 
-  <DockPanel MaxWidth="1000">
-    <DockPanel DockPanel.Dock="Top">
-      <Label DockPanel.Dock="Left" Content="Text filter " />
-      <Button DockPanel.Dock="Right" Content="Toggle All Shown"
-              Command="{Binding ToggleAllShownCommand}" />
-      <TextBox Text="{Binding TextFilter}" />
-    </DockPanel>
-    <DataGrid Items="{Binding CrystalBerries}" SelectionMode="Extended">
-      <DataGrid.Columns>
-        <DataGridTextColumn Header="Index" IsReadOnly="True"
-                            x:DataType="m:FlagSaveDataModel"
-                            Binding="{Binding Index}" />
-        <DataGridTemplateColumn Header="Obtained">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="m:FlagSaveDataModel">
-              <CheckBox IsChecked="{Binding Enabled}" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <DataGridTextColumn Header="Area" IsReadOnly="True"
-                            x:DataType="m:FlagSaveDataModel"
-                            Binding="{Binding Description1}" />
-        <DataGridTextColumn Header="Location" IsReadOnly="True"
-                            x:DataType="m:FlagSaveDataModel"
-                            Binding="{Binding Description2}" />
-      </DataGrid.Columns>
-    </DataGrid>
-  </DockPanel>
+  <v:FlagsCollectionView Collection="{Binding CrystalBerries}" TextFilter="{Binding TextFilter}"
+                   ToggleAllShownCommand="{Binding ToggleAllShownCommand}" ShowSecondDescription="True">
+    <v:FlagsCollectionView.ValueCellTemplate>
+      <DataTemplate DataType="m:FlagSaveDataModel">
+        <CheckBox IsChecked="{Binding Enabled}" />
+      </DataTemplate>
+    </v:FlagsCollectionView.ValueCellTemplate>
+  </v:FlagsCollectionView>
 </UserControl>
