@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
+             xmlns:local="clr-namespace:BugFablesSaveEditor"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:SongsViewModel"
              x:CompileBindings="True"
@@ -14,35 +15,38 @@
   </Design.DataContext>
 
   <DockPanel MaxWidth="550">
-    <v:EditableModelCollectionView DndDropHandler="{StaticResource DataGridDndMusicSaveData}"
-                                   Collection="{Binding MusicSaveData.Collection}"
-                                   AddCommand="{Binding MusicSaveData.AddViewModelCommand}"
-                                   NewModel="{Binding MusicSaveData.NewViewModel}"
-                                   DeleteCommand="{Binding MusicSaveData.RemoveViewModelCommand}">
-      <v:EditableModelCollectionView.Columns>
-        <DataGridTemplateColumn Header="Name" Width="*">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:MusicSaveDataModel">
-              <ContentControl Content="{Binding Music}" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <DataGridTemplateColumn Header="Bought?">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:MusicSaveDataModel">
-              <CheckBox IsChecked="{Binding Bought}" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-      </v:EditableModelCollectionView.Columns>
+    <v:ViewModelCollectionView DndDropHandler="{StaticResource DataGridDndMusicSaveData}"
+                                   ViewModelCollection="{Binding MusicSaveData}">
+      <v:ViewModelCollectionView.ColumnsTemplate>
+        <local:DataGridColumnsTemplate>
+          <local:DataGridColumns>
+            <DataGridTemplateColumn Header="Name" Width="*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:MusicSaveDataModel">
+                  <ContentControl Content="{Binding Music}"/>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Bought?">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:MusicSaveDataModel">
+                  <CheckBox IsChecked="{Binding Bought}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </local:DataGridColumns>
+        </local:DataGridColumnsTemplate>
+      </v:ViewModelCollectionView.ColumnsTemplate>
 
-      <v:EditableModelCollectionView.AddView>
-        <DockPanel>
-          <CheckBox DockPanel.Dock="Right" Content="Is bought"
-                    IsChecked="{Binding MusicSaveData.NewViewModel.Bought}" />
-          <ContentControl Content="{Binding MusicSaveData.NewViewModel.Music}" />
-        </DockPanel>
-      </v:EditableModelCollectionView.AddView>
-    </v:EditableModelCollectionView>
+      <v:ViewModelCollectionView.AddViewTemplate>
+        <DataTemplate DataType="ob:MusicSaveDataModel">
+          <DockPanel>
+            <CheckBox DockPanel.Dock="Right" Content="Is bought"
+                      IsChecked="{Binding Bought}" />
+            <ContentControl Content="{Binding Music}" />
+          </DockPanel>
+        </DataTemplate>
+      </v:ViewModelCollectionView.AddViewTemplate>
+    </v:ViewModelCollectionView>
   </DockPanel>
 </UserControl>

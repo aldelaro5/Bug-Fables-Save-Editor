@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -19,9 +19,8 @@ namespace BugFablesSaveEditor;
 /// </summary>
 /// <typeparam name="TModel">The model type to wrap, must have a default constructor</typeparam>
 /// <typeparam name="TViewModel">The view model type that wraps TModel</typeparam>
-public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
-  IModelWrapper<Collection<TModel>>,
-  IDisposable
+public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject, IModelWrapper<Collection<TModel>>,
+  IViewModelCollection, IDisposable
   where TViewModel : IModelWrapper<TModel>
   where TModel : new()
 {
@@ -29,14 +28,27 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
   /// The Collection of the ViewModel, this will propagate all changes to the underlying model collection
   /// </summary>
   public ObservableCollection<TViewModel> Collection { get; }
+  ICollection IViewModelCollection.Collection => Collection;
 
   public Collection<TModel> Model { get; }
+
+  [RelayCommand]
+  public void AddViewModel(object item) => Collection.Add((TViewModel)TViewModel.WrapNewModel(((TViewModel)item).Model));
+
+  [RelayCommand]
+  public void RemoveViewModel(object item) => Collection.Remove((TViewModel)item);
 
   /// <summary>
   /// A working object the UI can bind to for potential addition
   /// </summary>
   [ObservableProperty]
   private TViewModel _newViewModel;
+
+  object IViewModelCollection.NewViewModel
+  {
+    get => NewViewModel;
+    set => NewViewModel = (TViewModel)value;
+  }
 
   public static IModelWrapper<Collection<TModel>> WrapModel(Collection<TModel> model) =>
     new ViewModelCollection<TModel, TViewModel>(model);
@@ -54,20 +66,6 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
     Model = collection;
     _newViewModel = (TViewModel)TViewModel.WrapModel(new());
   }
-
-  /// <summary>
-  /// Adds a view model to the collection which will be propagated to the model collection
-  /// </summary>
-  /// <param name="item">The view model to add</param>
-  [RelayCommand]
-  private void AddViewModel(TViewModel item) => Collection.Add((TViewModel)TViewModel.WrapNewModel(item.Model));
-
-  /// <summary>
-  /// Deletes a view model to the collection which will be propagated to the model collection
-  /// </summary>
-  /// <param name="item">The view model to delete</param>
-  [RelayCommand]
-  private void RemoveViewModel(TViewModel item) => Collection.Remove(item);
 
   private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
   {

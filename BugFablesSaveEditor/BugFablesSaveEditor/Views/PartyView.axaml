@@ -5,6 +5,7 @@
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+             xmlns:local="clr-namespace:BugFablesSaveEditor"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:PartyViewModel"
              x:CompileBindings="True"
@@ -14,40 +15,32 @@
   </Design.DataContext>
 
   <Grid ColumnDefinitions="*,*" MaxWidth="700">
-    <v:EditableModelCollectionView Grid.Column="0" TitleLabel="Party Members"
-                                   DndDropHandler="{StaticResource DataGridDndPartyMemberSaveData}"
-                                   Collection="{Binding PartyMembers.Collection}"
-                                   NewModel="{Binding PartyMembers.NewViewModel}"
-                                   AddCommand="{Binding PartyMembers.AddViewModelCommand}"
-                                   DeleteCommand="{Binding PartyMembers.RemoveViewModelCommand}">
-      <v:EditableModelCollectionView.Columns>
-        <DataGridTemplateColumn Header="Name" Width="*">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate DataType="ob:PartyMemberSaveDataModel">
-              <ContentControl Content="{Binding AnimId}" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-      </v:EditableModelCollectionView.Columns>
-      <v:EditableModelCollectionView.AddView>
-        <ContentControl Content="{Binding PartyMembers.NewViewModel.AnimId}" />
-      </v:EditableModelCollectionView.AddView>
-    </v:EditableModelCollectionView>
+    <v:ViewModelCollectionView Grid.Column="0" TitleLabel="Party Members"
+                                   ViewModelCollection="{Binding PartyMembers}"
+                                   DndDropHandler="{StaticResource DataGridDndPartyMemberSaveData}">
+      <v:ViewModelCollectionView.ColumnsTemplate>
+        <local:DataGridColumnsTemplate>
+          <local:DataGridColumns>
+            <DataGridTemplateColumn Header="Name" Width="*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                  <ContentControl Content="{Binding AnimId}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </local:DataGridColumns>
+        </local:DataGridColumnsTemplate>
+      </v:ViewModelCollectionView.ColumnsTemplate>
+      <v:ViewModelCollectionView.AddViewTemplate>
+        <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+          <ContentControl Content="{Binding AnimId}" />
+        </DataTemplate>
+      </v:ViewModelCollectionView.AddViewTemplate>
+    </v:ViewModelCollectionView>
 
-    <DockPanel Grid.Column="1">
-      <v:EditableModelCollectionView TitleLabel="Followers"
-                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     Collection="{Binding Followers.Collection}"
-                                     AddCommand="{Binding Followers.AddViewModelCommand}"
-                                     NewModel="{Binding Followers.NewViewModel}"
-                                     DeleteCommand="{Binding Followers.RemoveViewModelCommand}">
-        <v:EditableModelCollectionView.Columns>
-          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
-        </v:EditableModelCollectionView.Columns>
-        <v:EditableModelCollectionView.AddView>
-          <ContentControl Content="{Binding Followers.NewViewModel}" />
-        </v:EditableModelCollectionView.AddView>
-      </v:EditableModelCollectionView>
-    </DockPanel>
+    <v:ViewModelCollectionView Grid.Column="1" TitleLabel="Followers" ViewModelCollection="{Binding Followers}"
+                                   ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                   DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                   AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
   </Grid>
 </UserControl>

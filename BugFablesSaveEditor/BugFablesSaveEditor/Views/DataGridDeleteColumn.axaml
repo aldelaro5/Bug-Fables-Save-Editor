@@ -8,10 +8,10 @@
                         x:Class="BugFablesSaveEditor.Views.DataGridDeleteColumn">
   <DataGridTemplateColumn.CellTemplate>
     <DataTemplate DataType="mvvm:ObservableObject">
-      <Button Content="-" Background="DarkRed"
-              Command="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView},
-                Path=DeleteCommand}"
-              CommandParameter="{Binding }" />
+      <!-- <Button Content="-" Background="DarkRed" -->
+      <!--         Command="{Binding RelativeSource={RelativeSource AncestorType=v:EditableModelCollectionView}, -->
+      <!--           Path=DeleteCommand}" -->
+      <!--         CommandParameter="{Binding }" /> -->
     </DataTemplate>
   </DataGridTemplateColumn.CellTemplate>
 </DataGridTemplateColumn>

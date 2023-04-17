@@ -14,49 +14,22 @@
 
   <Grid ColumnDefinitions="*,*,*" MaxWidth="1250">
     <DockPanel Grid.Column="0">
-      <v:EditableModelCollectionView TitleLabel="Open Quests"
+      <v:ViewModelCollectionView TitleLabel="Open" ViewModelCollection="{Binding Opened}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
                                      DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     Collection="{Binding Opened.Collection}"
-                                     AddCommand="{Binding Opened.AddViewModelCommand}"
-                                     NewModel="{Binding Opened.NewViewModel}"
-                                     DeleteCommand="{Binding Opened.RemoveViewModelCommand}">
-        <v:EditableModelCollectionView.Columns>
-          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
-        </v:EditableModelCollectionView.Columns>
-        <v:EditableModelCollectionView.AddView>
-          <ContentControl Content="{Binding Opened.NewViewModel}" />
-        </v:EditableModelCollectionView.AddView>
-      </v:EditableModelCollectionView>
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
     </DockPanel>
     <DockPanel Grid.Column="1">
-      <v:EditableModelCollectionView TitleLabel="Taken Quests"
+      <v:ViewModelCollectionView TitleLabel="Taken" ViewModelCollection="{Binding Taken}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
                                      DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     Collection="{Binding Taken.Collection}"
-                                     AddCommand="{Binding Taken.AddViewModelCommand}"
-                                     NewModel="{Binding Taken.NewViewModel}"
-                                     DeleteCommand="{Binding Taken.RemoveViewModelCommand}">
-        <v:EditableModelCollectionView.Columns>
-          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
-        </v:EditableModelCollectionView.Columns>
-        <v:EditableModelCollectionView.AddView>
-          <ContentControl Content="{Binding Taken.NewViewModel}" />
-        </v:EditableModelCollectionView.AddView>
-      </v:EditableModelCollectionView>
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
     </DockPanel>
     <DockPanel Grid.Column="2">
-      <v:EditableModelCollectionView TitleLabel="Completed Quests"
+      <v:ViewModelCollectionView TitleLabel="Completed" ViewModelCollection="{Binding Completed}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
                                      DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     Collection="{Binding Completed.Collection}"
-                                     AddCommand="{Binding Completed.AddViewModelCommand}"
-                                     NewModel="{Binding Completed.NewViewModel}"
-                                     DeleteCommand="{Binding Completed.RemoveViewModelCommand}">
-        <v:EditableModelCollectionView.Columns>
-          <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdColumnTemplate}" />
-        </v:EditableModelCollectionView.Columns>
-        <v:EditableModelCollectionView.AddView>
-          <ContentControl Content="{Binding Completed.NewViewModel}" />
-        </v:EditableModelCollectionView.AddView>
-      </v:EditableModelCollectionView>
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
     </DockPanel>
   </Grid>
 </UserControl>

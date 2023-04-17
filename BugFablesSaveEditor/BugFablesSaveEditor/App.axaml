@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:b="clr-namespace:BugFablesSaveEditor.Behaviors"
+             xmlns:local="clr-namespace:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
              RequestedThemeVariant="Dark">
@@ -37,9 +38,17 @@
     <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:MusicSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:PartyMemberSaveDataModel" />
 
-    <DataTemplate x:Key="BfNamedIdColumnTemplate" DataType="ob:BfNamedIdModel">
-      <ContentControl Content="{Binding }" />
+    <DataTemplate x:Key="BfNamedIdTemplate" DataType="ob:BfNamedIdModel">
+      <ComboBox Items="{Binding AllResourceNames}"
+                SelectedIndex="{Binding Id,
+                FallbackValue=0, TargetNullValue=0}" />
     </DataTemplate>
+
+    <local:DataGridColumnsTemplate x:Key="BfNamedIdOnlyColumnsList">
+      <local:DataGridColumns>
+        <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource BfNamedIdTemplate}" />
+      </local:DataGridColumns>
+    </local:DataGridColumnsTemplate>
   </Application.Resources>
 
   <Application.DataTemplates>

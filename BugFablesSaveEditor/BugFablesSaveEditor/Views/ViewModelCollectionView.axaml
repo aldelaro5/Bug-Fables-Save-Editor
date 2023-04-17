@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+             xmlns:ic="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             xmlns:mvvm="clr-namespace:CommunityToolkit.Mvvm.ComponentModel;assembly=CommunityToolkit.Mvvm"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BugFablesSaveEditor.Views.ViewModelCollectionView">
+  <DockPanel>
+    <Label DockPanel.Dock="Top"
+           Content="{Binding $parent[v:ViewModelCollectionView].TitleLabel}" />
+    <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+      <Button Content="Add" DockPanel.Dock="Right"
+              Command="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.AddViewModelCommand}"
+              CommandParameter="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.NewViewModel}" />
+      <ContentControl ContentTemplate="{Binding $parent[v:ViewModelCollectionView].AddViewTemplate}"
+                      Content="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.NewViewModel}" />
+    </DockPanel>
+    <DataGrid x:Name="DataGrid" Classes="draggable" IsReadOnly="True"
+              Items="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.Collection}">
+      <i:Interaction.Behaviors>
+        <i:BehaviorCollection>
+          <idd:ContextDropBehavior Handler="{Binding $parent[v:ViewModelCollectionView].DndDropHandler}" />
+        </i:BehaviorCollection>
+      </i:Interaction.Behaviors>
+      <DataGrid.Columns>
+        <DataGridTemplateColumn>
+          <DataGridTemplateColumn.Header>
+            <ic:Icon FontSize="22" Value="mdi-swap-vertical" />
+          </DataGridTemplateColumn.Header>
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <ic:Icon FontSize="25" Value="mdi-drag" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn>
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate DataType="mvvm:ObservableObject">
+              <Button Content="-" Background="DarkRed"
+                      Command="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.RemoveViewModelCommand}"
+                      CommandParameter="{Binding }" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>
