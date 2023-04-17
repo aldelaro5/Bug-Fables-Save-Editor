@@ -10,8 +10,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BugFablesSaveEditor.Views.ViewModelCollectionView">
   <DockPanel>
-    <Label DockPanel.Dock="Top"
-           Content="{Binding $parent[v:ViewModelCollectionView].TitleLabel}" />
+    <Label DockPanel.Dock="Top" Content="{Binding $parent[v:ViewModelCollectionView].TitleLabel}"
+           IsVisible="{Binding $parent[v:ViewModelCollectionView].TitleLabel, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
     <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
       <Button Content="Add" DockPanel.Dock="Right"
               Command="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.AddViewModelCommand}"
