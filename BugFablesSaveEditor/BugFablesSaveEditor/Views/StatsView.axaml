@@ -70,15 +70,14 @@
       <DockPanel Grid.Column="0">
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
         <DockPanel DockPanel.Dock="Bottom">
-          <Button DockPanel.Dock="Right"
+          <Button DockPanel.Dock="Right" Content="Add"
                   Command="{Binding AddStatPartyBonusCommand}"
-                  CommandParameter="{Binding NewPartyStatBonus}"
-                  Content="Add" />
+                  CommandParameter="{Binding NewPartyStatBonus}" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
                       Items="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
-                           Value="{Binding NewPartyStatBonus.Amount}" />
+                           Value="{ReflectionBinding NewPartyStatBonus.Amount}" />
           </Grid>
         </DockPanel>
         <DataGrid SelectionMode="Single"
@@ -130,7 +129,7 @@
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
                       Items="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ShowButtonSpinner="False"
-                           Value="{Binding NewMemberStatBonus.Amount}" />
+                           Value="{ReflectionBinding NewMemberStatBonus.Amount}" />
           </Grid>
         </DockPanel>
         <DataGrid Items="{Binding MemberStatBonuses}">
