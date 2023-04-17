@@ -11,139 +11,132 @@
     <vm:GlobalViewModel />
   </Design.DataContext>
 
-  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical">
-    <StackPanel Orientation="Horizontal">
-      <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-          <StackPanel Orientation="Vertical">
-            <Label Content="Position in map" />
-            <StackPanel Orientation="Horizontal">
-              <Label Content="X" />
-              <NumericUpDown Value="{ReflectionBinding PositionX}"
-                             ParsingNumberStyle="Float"
-                             Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-              <Label Content="Y" />
-              <NumericUpDown Value="{ReflectionBinding PositionY}"
-                             ParsingNumberStyle="Float"
-                             Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-              <Label Content="Z" />
-              <NumericUpDown Value="{ReflectionBinding PositionZ}"
-                             ParsingNumberStyle="Float"
-                             Width="125" AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
-            </StackPanel>
-          </StackPanel>
-          <StackPanel Orientation="Vertical">
-            <Label Content="Location" />
-            <StackPanel Orientation="Horizontal">
-              <Label Content="Current area" />
-              <ComboBox
-                SelectedIndex="{Binding CurrentArea.Id}"
-                Items="{Binding CurrentArea.AllResourceNames}" Width="200" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-              <Label Content="Current map" />
-              <ComboBox
-                SelectedIndex="{Binding CurrentMap.Id}"
-                Items="{Binding CurrentMap.AllResourceNames}" Width="200" />
-            </StackPanel>
-          </StackPanel>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-          <StackPanel Orientation="Vertical">
-            <Label Content="Play time" />
-            <StackPanel Orientation="Horizontal">
-              <NumericUpDown Value="{ReflectionBinding PlayTimeHours}"
-                             Increment="1"
-                             ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-              <Label Content=":" />
-              <NumericUpDown Value="{ReflectionBinding PlayTimeMinutes}"
-                             Increment="1"
-                             ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-              <Label Content=":" />
-              <NumericUpDown Value="{ReflectionBinding PlayTimeSeconds}"
-                             Increment="1"
-                             ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
-            </StackPanel>
-          </StackPanel>
-          <StackPanel Orientation="Vertical">
-            <Label Content="Berry count" />
-            <NumericUpDown Width="150" Value="{ReflectionBinding BerryCount}"
-                           Increment="1"
-                           ParsingNumberStyle="Integer" />
-          </StackPanel>
-        </StackPanel>
-      </StackPanel>
-      <StackPanel Orientation="Vertical">
-        <Label Content="Information on the file select screen" />
-        <StackPanel Orientation="Horizontal">
-          <Label Content="Filename" />
-          <TextBox Text="{Binding Filename}" Width="270" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-          <Label Content="Code icons" />
-          <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-              <CheckBox IsChecked="{Binding IsRuigee}"
-                        Content="RUIGEE" />
-              <CheckBox IsChecked="{Binding IsHardest}"
-                        Content="HARDEST" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-              <CheckBox IsChecked="{Binding IsFrameone}"
-                        Content="FRAMEONE" />
-              <CheckBox IsChecked="{Binding IsMorefarm}"
-                        Content="MOREFARM" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-              <CheckBox IsChecked="{Binding IsMystery}"
-                        Content="MYSTERY?" />
-              <CheckBox IsChecked="{Binding IsPushrock}"
-                        Content="PUSHROCK" />
-            </StackPanel>
-          </StackPanel>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-          <Label Content="Rightmost progress icon" />
-          <ComboBox SelectedIndex="{Binding LastProgressIcon}"
-                    Items="{Binding SaveProgressIconNames}" Width="170" />
-        </StackPanel>
-      </StackPanel>
-    </StackPanel>
-    <StackPanel Orientation="Horizontal">
-      <StackPanel Orientation="Vertical">
-        <Label Content="Rank progress" />
-        <StackPanel Orientation="Horizontal">
-          <Label Content="Rank" />
-          <NumericUpDown Value="{ReflectionBinding Rank}"
+  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+    <StackPanel Orientation="Vertical">
+      <Grid RowDefinitions="*,*" ColumnDefinitions="20*,15*,15*,10*">
+        <DockPanel Grid.Row="0" Grid.Column="0">
+          <Label DockPanel.Dock="Left" Content="Filename" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1">
+          <Label DockPanel.Dock="Left" Content="Last progress icon" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2">
+          <Label DockPanel.Dock="Left" Content="Rank progression" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="3">
+          <Label DockPanel.Dock="Left" Content="Berry count" />
+          <Separator />
+        </DockPanel>
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Filename}" />
+        <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding LastProgressIcon}"
+                  Items="{Binding SaveProgressIconNames}" />
+        <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,auto,*">
+          <Label Grid.Column="0" Content="Rank" />
+          <NumericUpDown Grid.Column="1" Value="{ReflectionBinding Rank}"
                          ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
-          <Label Content="Exploration points" />
-          <NumericUpDown Value="{ReflectionBinding Exp}"
+          <Label Grid.Column="2" Content="Exp" />
+          <NumericUpDown Grid.Column="3" Value="{ReflectionBinding Exp}"
                          ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
-          <Label Content="/" />
-          <NumericUpDown Value="{ReflectionBinding NeededExp}"
+          <Label Grid.Column="4" Content="/" />
+          <NumericUpDown Grid.Column="5" Value="{ReflectionBinding NeededExp}"
                          ShowButtonSpinner="False"
                          Increment="1" ParsingNumberStyle="Integer" />
-        </StackPanel>
-      </StackPanel>
-      <StackPanel Orientation="Vertical">
-        <Label Content="Max amount of items" />
-        <StackPanel Orientation="Horizontal">
-          <Label Content="Inventory" />
-          <NumericUpDown Value="{ReflectionBinding NbrMaxItemsInventory}"
+        </Grid>
+        <NumericUpDown Grid.Row="1" Grid.Column="3" Value="{ReflectionBinding BerryCount}"
+                       Increment="1" Margin="20,3,0,3"
+                       ShowButtonSpinner="False"
+                       ParsingNumberStyle="Integer" />
+      </Grid>
+      <Grid RowDefinitions="*,*" ColumnDefinitions="20*,15*,30*">
+        <DockPanel Grid.Row="0" Grid.Column="0">
+          <Label DockPanel.Dock="Left" Content="Current map" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1">
+          <Label DockPanel.Dock="Left" Content="Current area" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2">
+          <Label DockPanel.Dock="Left" Content="Position in map" />
+          <Separator />
+        </DockPanel>
+        <ComboBox Grid.Row="1" Grid.Column="0"
+                  SelectedIndex="{Binding CurrentMap.Id}"
+                  Items="{Binding CurrentMap.AllResourceNames}" />
+        <ComboBox Grid.Row="1" Grid.Column="1"
+                  SelectedIndex="{Binding CurrentArea.Id}"
+                  Items="{Binding CurrentArea.AllResourceNames}" />
+        <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,Auto,*">
+          <Label Grid.Column="0" Content="X" />
+          <NumericUpDown Grid.Column="1" Value="{ReflectionBinding PositionX}"
+                         ParsingNumberStyle="Float"
+                         AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+          <Label Grid.Column="2" Content="Y" />
+          <NumericUpDown Grid.Column="3" Value="{ReflectionBinding PositionY}"
+                         ParsingNumberStyle="Float"
+                         AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+          <Label Grid.Column="4" Content="Z" />
+          <NumericUpDown Grid.Column="5" Value="{ReflectionBinding PositionZ}"
+                         ParsingNumberStyle="Float"
+                         AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+        </Grid>
+      </Grid>
+      <Grid RowDefinitions="*,*" ColumnDefinitions="20*,15*,30*">
+        <DockPanel Grid.Row="0" Grid.Column="0">
+          <Label DockPanel.Dock="Left" Content="Play time" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1">
+          <Label DockPanel.Dock="Left" Content="Max Items" />
+          <Separator />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2">
+          <Label DockPanel.Dock="Left" Content="Code icons" />
+          <Separator />
+        </DockPanel>
+        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,Auto,*,Auto,*" VerticalAlignment="Top">
+          <NumericUpDown Grid.Column="0" Value="{ReflectionBinding PlayTimeHours}"
                          Increment="1"
-                         ParsingNumberStyle="Integer" />
-          <Label Content="Storage" />
-          <NumericUpDown Value="{ReflectionBinding NbrMaxItemsStorage}"
+                         ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+          <Label Grid.Column="1" Content=":" />
+          <NumericUpDown Grid.Column="2" Value="{ReflectionBinding PlayTimeMinutes}"
                          Increment="1"
+                         ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+          <Label Grid.Column="3" Content=":" />
+          <NumericUpDown Grid.Column="4" Value="{ReflectionBinding PlayTimeSeconds}"
+                         Increment="1"
+                         ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="Auto,*" RowDefinitions="*,*">
+          <Label Grid.Row="0" Grid.Column="0" Content="Inventory" HorizontalAlignment="Right" />
+          <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{ReflectionBinding NbrMaxItemsInventory}"
+                         Increment="1" ShowButtonSpinner="False"
                          ParsingNumberStyle="Integer" />
-        </StackPanel>
-      </StackPanel>
+          <Label Grid.Row="1" Grid.Column="0" Content="Storage" HorizontalAlignment="Right" />
+          <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{ReflectionBinding NbrMaxItemsStorage}"
+                         Increment="1" ShowButtonSpinner="False"
+                         ParsingNumberStyle="Integer" />
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="*,*,*" RowDefinitions="*,*">
+          <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding IsRuigee}"
+                    Content="RUIGEE" />
+          <CheckBox Grid.Column="1" Grid.Row="0" IsChecked="{Binding IsHardest}"
+                    Content="HARDEST" />
+          <CheckBox Grid.Column="2" Grid.Row="0" IsChecked="{Binding IsFrameone}"
+                    Content="FRAMEONE" />
+          <CheckBox Grid.Column="0" Grid.Row="1" IsChecked="{Binding IsMorefarm}"
+                    Content="MOREFARM" />
+          <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding IsMystery}"
+                    Content="MYSTERY?" />
+          <CheckBox Grid.Column="2" Grid.Row="1" IsChecked="{Binding IsPushrock}"
+                    Content="PUSHROCK" />
+        </Grid>
+      </Grid>
     </StackPanel>
-  </StackPanel>
+  </ScrollViewer>
 </UserControl>
