@@ -40,9 +40,8 @@
         <DataGridTemplateColumn>
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate DataType="mvvm:ObservableObject">
-              <Button Content="-" Background="DarkRed"
-                      Command="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.RemoveViewModelCommand}"
-                      CommandParameter="{Binding }" />
+              <Button Classes="btn-delete"
+                      Command="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.RemoveViewModelCommand}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>

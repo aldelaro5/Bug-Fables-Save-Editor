@@ -95,10 +95,8 @@
             <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:StatsBonusSaveDataModel">
-                  <Button Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
-                          CommandParameter="{Binding }"
-                          Background="DarkRed" />
+                  <Button Classes="btn-delete"
+                          Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -148,10 +146,8 @@
             <DataGridTemplateColumn>
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:StatsBonusSaveDataModel">
-                  <Button Content="-"
-                          Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}"
-                          CommandParameter="{Binding }"
-                          Background="DarkRed" />
+                  <Button Classes="btn-delete"
+                          Command="{Binding $parent[DataGrid].((vm:StatsViewModel)DataContext).DeleteStatBonusCommand}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

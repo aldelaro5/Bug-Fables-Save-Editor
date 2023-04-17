@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:b="clr-namespace:BugFablesSaveEditor.Behaviors"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
@@ -28,6 +29,11 @@
     </Style>
     <Style Selector="DataGridColumnHeader TextBlock">
       <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Button.btn-delete">
+      <Setter Property="Content" Value="-" />
+      <Setter Property="Background" Value="DarkRed" />
+      <Setter Property="CommandParameter" Value="{Binding DataType=system:Object}" />
     </Style>
 
   </Application.Styles>
