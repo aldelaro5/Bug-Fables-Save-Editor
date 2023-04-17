@@ -16,14 +16,14 @@
 
   <DockPanel MaxWidth="550">
     <v:ViewModelCollectionView DndDropHandler="{StaticResource DataGridDndMusicSaveData}"
-                                   ViewModelCollection="{Binding MusicSaveData}">
+                               ViewModelCollection="{Binding MusicSaveData}">
       <v:ViewModelCollectionView.ColumnsTemplate>
         <local:DataGridColumnsTemplate>
           <local:DataGridColumns>
             <DataGridTemplateColumn Header="Name" Width="*">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:MusicSaveDataModel">
-                  <ContentControl Content="{Binding Music}"/>
+                  <ContentControl Content="{Binding Music}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

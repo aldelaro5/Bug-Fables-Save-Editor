@@ -15,21 +15,21 @@
   <Grid ColumnDefinitions="*,*,*" MaxWidth="1250">
     <DockPanel Grid.Column="0">
       <v:ViewModelCollectionView TitleLabel="Open" ViewModelCollection="{Binding Opened}"
-                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                 ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                 DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                 AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
     </DockPanel>
     <DockPanel Grid.Column="1">
       <v:ViewModelCollectionView TitleLabel="Taken" ViewModelCollection="{Binding Taken}"
-                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                 ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                 DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                 AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
     </DockPanel>
     <DockPanel Grid.Column="2">
       <v:ViewModelCollectionView TitleLabel="Completed" ViewModelCollection="{Binding Completed}"
-                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                 ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                 DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                 AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
     </DockPanel>
   </Grid>
 </UserControl>

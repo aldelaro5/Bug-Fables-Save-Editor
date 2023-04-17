@@ -16,8 +16,8 @@
 
   <Grid ColumnDefinitions="*,*" MaxWidth="700">
     <v:ViewModelCollectionView Grid.Column="0" TitleLabel="Party Members"
-                                   ViewModelCollection="{Binding PartyMembers}"
-                                   DndDropHandler="{StaticResource DataGridDndPartyMemberSaveData}">
+                               ViewModelCollection="{Binding PartyMembers}"
+                               DndDropHandler="{StaticResource DataGridDndPartyMemberSaveData}">
       <v:ViewModelCollectionView.ColumnsTemplate>
         <local:DataGridColumnsTemplate>
           <local:DataGridColumns>
@@ -39,8 +39,8 @@
     </v:ViewModelCollectionView>
 
     <v:ViewModelCollectionView Grid.Column="1" TitleLabel="Followers" ViewModelCollection="{Binding Followers}"
-                                   ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                   DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                   AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                               ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                               DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                               AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
   </Grid>
 </UserControl>

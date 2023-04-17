@@ -5,5 +5,4 @@ namespace BugFablesSaveEditor;
 
 public class DataGridColumns : ObservableCollection<DataGridColumn>
 {
-  
 }

@@ -17,7 +17,7 @@
   <TabControl>
     <TabItem Header="On hand">
       <v:ViewModelCollectionView TitleLabel="" MaxWidth="700" ViewModelCollection="{Binding MedalOnHandSaveData}"
-                                     DndDropHandler="{StaticResource DataGridDndMedalOnHandSaveData}">
+                                 DndDropHandler="{StaticResource DataGridDndMedalOnHandSaveData}">
         <v:ViewModelCollectionView.ColumnsTemplate>
           <local:DataGridColumnsTemplate>
             <local:DataGridColumns>
@@ -58,15 +58,15 @@
       <Grid ColumnDefinitions="*,*" MaxWidth="700">
         <DockPanel Grid.Column="0">
           <v:ViewModelCollectionView TitleLabel="Merab" ViewModelCollection="{Binding MerabShopPool}"
-                                         ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                         AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
         </DockPanel>
         <DockPanel Grid.Column="1">
           <v:ViewModelCollectionView TitleLabel="Shades" ViewModelCollection="{Binding ShadesShopPool}"
-                                         ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                         AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
         </DockPanel>
       </Grid>
     </TabItem>
@@ -74,15 +74,15 @@
       <Grid ColumnDefinitions="*,*" MaxWidth="700">
         <DockPanel Grid.Column="0">
           <v:ViewModelCollectionView TitleLabel="Merab" ViewModelCollection="{Binding MerabShopAvailables}"
-                                         ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                         AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
         </DockPanel>
         <DockPanel Grid.Column="1">
           <v:ViewModelCollectionView TitleLabel="Shades" ViewModelCollection="{Binding ShadesShopAvailables}"
-                                         ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
-                                         DndDropHandler="{StaticResource DataGridDndBfNamedId}"
-                                         AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
         </DockPanel>
       </Grid>
     </TabItem>

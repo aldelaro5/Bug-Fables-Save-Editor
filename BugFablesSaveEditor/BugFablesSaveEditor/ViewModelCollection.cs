@@ -28,12 +28,14 @@ public partial class ViewModelCollection<TModel, TViewModel> : ObservableObject,
   /// The Collection of the ViewModel, this will propagate all changes to the underlying model collection
   /// </summary>
   public ObservableCollection<TViewModel> Collection { get; }
+
   ICollection IViewModelCollection.Collection => Collection;
 
   public Collection<TModel> Model { get; }
 
   [RelayCommand]
-  public void AddViewModel(object item) => Collection.Add((TViewModel)TViewModel.WrapNewModel(((TViewModel)item).Model));
+  public void AddViewModel(object item) =>
+    Collection.Add((TViewModel)TViewModel.WrapNewModel(((TViewModel)item).Model));
 
   [RelayCommand]
   public void RemoveViewModel(object item) => Collection.Remove((TViewModel)item);
