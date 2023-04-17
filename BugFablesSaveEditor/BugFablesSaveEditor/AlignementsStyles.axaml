@@ -17,4 +17,8 @@
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
   </Style>
+  <Style Selector="NumericUpDown">
+    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+  </Style>
 </Styles>
