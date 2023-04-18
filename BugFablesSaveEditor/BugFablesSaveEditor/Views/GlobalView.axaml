@@ -73,17 +73,14 @@
                   Items="{Binding CurrentArea.AllResourceNames}" />
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,Auto,*">
           <Label Grid.Column="0" Content="X" />
-          <NumericUpDown Grid.Column="1" Value="{ReflectionBinding PositionX}"
-                         ParsingNumberStyle="Float"
-                         AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+          <NumericUpDown Grid.Column="1" ParsingNumberStyle="Float"
+                         Value="{ReflectionBinding PositionX}" />
           <Label Grid.Column="2" Content="Y" />
-          <NumericUpDown Grid.Column="3" Value="{ReflectionBinding PositionY}"
-                         ParsingNumberStyle="Float"
-                         AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+          <NumericUpDown Grid.Column="3" ParsingNumberStyle="Float"
+                         Value="{ReflectionBinding PositionY}" />
           <Label Grid.Column="4" Content="Z" />
-          <NumericUpDown Grid.Column="5" Value="{ReflectionBinding PositionZ}"
-                         ParsingNumberStyle="Float"
-                         AllowSpin="True" Increment="1" ShowButtonSpinner="False" />
+          <NumericUpDown Grid.Column="5" ParsingNumberStyle="Float"
+                         Value="{ReflectionBinding PositionZ}" />
         </Grid>
       </Grid>
       <Grid RowDefinitions="*,*" ColumnDefinitions="20*,15*,30*">
@@ -100,27 +97,22 @@
           <Separator />
         </DockPanel>
         <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,Auto,*,Auto,*" VerticalAlignment="Top">
-          <NumericUpDown Grid.Column="0" Value="{ReflectionBinding PlayTimeHours}"
-                         Increment="1"
-                         ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+          <NumericUpDown Grid.Column="0" ParsingNumberStyle="Integer"
+                         Value="{ReflectionBinding PlayTimeHours}" />
           <Label Grid.Column="1" Content=":" />
-          <NumericUpDown Grid.Column="2" Value="{ReflectionBinding PlayTimeMinutes}"
-                         Increment="1"
-                         ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+          <NumericUpDown Grid.Column="2" ParsingNumberStyle="Integer"
+                         Value="{ReflectionBinding PlayTimeMinutes}" />
           <Label Grid.Column="3" Content=":" />
-          <NumericUpDown Grid.Column="4" Value="{ReflectionBinding PlayTimeSeconds}"
-                         Increment="1"
-                         ParsingNumberStyle="Integer" ShowButtonSpinner="False" />
+          <NumericUpDown Grid.Column="4" ParsingNumberStyle="Integer"
+                         Value="{ReflectionBinding PlayTimeSeconds}" />
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="Auto,*" RowDefinitions="*,*">
           <Label Grid.Row="0" Grid.Column="0" Content="Inventory" HorizontalAlignment="Right" />
-          <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{ReflectionBinding NbrMaxItemsInventory}"
-                         Increment="1" ShowButtonSpinner="False"
-                         ParsingNumberStyle="Integer" />
+          <NumericUpDown Grid.Row="0" Grid.Column="1" ParsingNumberStyle="Integer"
+                         Value="{ReflectionBinding NbrMaxItemsInventory}" />
           <Label Grid.Row="1" Grid.Column="0" Content="Storage" HorizontalAlignment="Right" />
-          <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{ReflectionBinding NbrMaxItemsStorage}"
-                         Increment="1" ShowButtonSpinner="False"
-                         ParsingNumberStyle="Integer" />
+          <NumericUpDown Grid.Row="1" Grid.Column="1" ParsingNumberStyle="Integer"
+                         Value="{ReflectionBinding NbrMaxItemsStorage}" />
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="*,*,*" RowDefinitions="*,*">
           <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding IsRuigee}"

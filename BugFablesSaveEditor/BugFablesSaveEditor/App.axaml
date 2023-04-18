@@ -15,11 +15,16 @@
     <Style Selector="Button, CheckBox, Label, ComboBox, TextBox, NumericUpDown, DockPanel, StackPanel">
       <Setter Property="Margin" Value="3" />
     </Style>
-    <Style Selector="DataGridCell TextBox, DataGridCell DockPanel">
+    <Style Selector="DataGridCell TextBox, DataGridCell DockPanel, DataGridCell NumericUpDown">
       <Setter Property="Margin" Value="0" />
     </Style>
     <Style Selector="NumericUpDown DockPanel, NumericUpDown StackPanel">
       <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="NumericUpDown">
+      <Setter Property="AllowSpin" Value="False" />
+      <Setter Property="Increment" Value="1" />
+      <Setter Property="ShowButtonSpinner" Value="False" />
     </Style>
     <Style Selector="DataGrid">
       <Setter Property="AutoGenerateColumns" Value="False" />
