@@ -10,15 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <WasmExtraFilesToDeploy Include="AppBundle\**"/>
+    <WasmExtraFilesToDeploy Include="AppBundle\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.2.23153.2"/>
+    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj"/>
+    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj" />
   </ItemGroup>
 </Project>
