@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -104,7 +103,6 @@ public partial class StatsViewModel : ObservableObject, IDisposable
     _partyStatsBonusesDisposable = _statsBonuses.Collection
       .ToObservableChangeSet()
       .Filter(x => x.Target == -1)
-      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _partyStatBonuses)
       .Subscribe();
 
@@ -115,7 +113,6 @@ public partial class StatsViewModel : ObservableObject, IDisposable
     _partyMemberStatsBonusesDisposable = _statsBonuses.Collection
       .ToObservableChangeSet()
       .Filter(memberFilter)
-      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out _memberStatBonuses)
       .Subscribe(_ => OnPropertyChanged(nameof(MemberStatBonuses)));
   }

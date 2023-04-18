@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reactive.Linq;
-using System.Threading;
 using BugFablesSaveEditor.Models;
 using DynamicData;
 using DynamicData.Binding;
@@ -23,7 +22,6 @@ public static class FilterUtils
       .AsObservableChangeSet()
       .Filter(filter)
       .Sort(SortExpressionComparer<TViewModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
       .Bind(out result)
       .Subscribe();
   }
