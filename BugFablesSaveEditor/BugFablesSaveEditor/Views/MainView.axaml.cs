@@ -13,6 +13,6 @@ public partial class MainView : UserControl
   public async void OnAbout_Click(object sender, RoutedEventArgs e)
   {
     AboutView view = new();
-    await view.ShowDialog(Utils.MainWindow);
+    await view.ShowDialog((MainWindow)Utils.TopLevel);
   }
 }
