@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System;
 using System.Linq;
+using System.Text;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
+using BugFablesSaveEditor.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -40,19 +42,17 @@ public partial class MainViewModel : ObservableObject
       FileTypeChoices = new[] { _saveFileFilter }
     };
 
-    var file = await Utils.MainWindow.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
+    var file = await Utils.TopLevel.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
     if (file is null)
       return;
 
     try
     {
-      string? path = file.TryGetLocalPath();
-      if (string.IsNullOrEmpty(path))
-        return;
-
+      var fileStream = await file.OpenWriteAsync();
       string data = SaveData.SaveData.EncodeToString();
-      await File.WriteAllTextAsync(path, data);
-      CurrentFilePath = path;
+      await fileStream.WriteAsync(Encoding.UTF8.GetBytes(data));
+      CurrentFilePath = file.Name;
+      fileStream.Close();
       // await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
       //   $"The file was saved successfully at {CurrentFilePath}",
       //   ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.MainWindow);
@@ -113,31 +113,35 @@ public partial class MainViewModel : ObservableObject
       FileTypeFilter = new[] { _saveFileFilter }
     };
     var files =
-      await Utils.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
+      await Utils.TopLevel.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
     if (files.Count == 0)
       return;
 
     try
     {
-      string? path = files.First().TryGetLocalPath();
-      if (string.IsNullOrEmpty(path))
+      var fileStream = await files[0].OpenReadAsync();
+      byte[] buffer = new byte[fileStream.Length];
+      int bytesRead = await fileStream.ReadAsync(buffer);
+      if (bytesRead != fileStream.Length || string.IsNullOrEmpty(files[0].Name))
         return;
 
-      string data = await File.ReadAllTextAsync(path);
+      string data = Encoding.UTF8.GetString(buffer);
+      CurrentFilePath = files[0].Name;
+      fileStream.Close();
       var save = new BfPcSaveData();
       save.LoadFromString(data);
       SaveData.Dispose();
       SaveData = new SaveDataViewModel(save, false);
-      CurrentFilePath = path;
       SaveInUse = true;
       //_fileSaved = true;
     }
-    // catch (Exception ex)
-    // {
-    //   var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-    //     $"An error occured while opening the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
-    //   await msg.ShowDialog(Utils.MainWindow);
-    // }
+    catch (Exception ex)
+    {
+      Console.WriteLine(ex.Message);
+      // var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
+      //   $"An error occured while opening the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
+      // await msg.ShowDialog(Utils.MainWindow);
+    }
     finally
     {
       files.First().Dispose();
@@ -145,5 +149,5 @@ public partial class MainViewModel : ObservableObject
   }
 
   [RelayCommand]
-  private void Exit() => Utils.MainWindow.Close();
+  private void Exit() => ((MainWindow)Utils.TopLevel).Close();
 }
