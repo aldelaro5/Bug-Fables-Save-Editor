@@ -5,8 +5,9 @@
         xmlns:views="clr-namespace:BugFablesSaveEditor.Views"
         mc:Ignorable="d" d:DesignWidth="1025" d:DesignHeight="450"
         x:Class="BugFablesSaveEditor.Views.MainWindow"
+        Closing="Window_OnClosing"
         Width="1200"
         Icon="/Assets/icon.png"
         Title="BugFablesSaveEditor">
-  <views:MainView />
+  <views:MainView x:Name="MainView" />
 </Window>

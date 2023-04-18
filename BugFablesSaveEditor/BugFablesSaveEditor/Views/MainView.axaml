@@ -9,32 +9,30 @@
              x:CompileBindings="True"
              x:DataType="vm:MainViewModel">
   <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="File">
+        <MenuItem Command="{Binding NewFileCommand}" Header="New" />
+        <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
+        <MenuItem Command="{Binding CmdSaveFileCommand}" Header="Save as..." />
+        <Separator />
+        <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
+      </MenuItem>
+      <MenuItem Header="Help">
+        <MenuItem Header="About" Click="OnAbout_Click" />
+      </MenuItem>
+    </Menu>
     <DockPanel>
-      <Menu DockPanel.Dock="Top">
-        <MenuItem Header="File">
-          <MenuItem Command="{Binding NewFileCommand}" Header="New" />
-          <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
-          <MenuItem Command="{Binding CmdSaveFileCommand}" Header="Save as..." />
-          <Separator />
-          <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
-        </MenuItem>
-        <MenuItem Header="Help">
-          <MenuItem Header="About" Click="OnAbout_Click" />
-        </MenuItem>
-      </Menu>
-      <DockPanel>
-        <DockPanel HorizontalAlignment="Center" DockPanel.Dock="Top">
-          <Label DockPanel.Dock="Top" FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" />
-          <DockPanel HorizontalAlignment="Center">
-            <Button Command="{Binding NewFileCommand}" Content="New file" />
-            <Button Command="{Binding OpenFileCommand}" Content="Open file..." />
-            <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." />
-          </DockPanel>
+      <DockPanel HorizontalAlignment="Center" DockPanel.Dock="Top">
+        <Label DockPanel.Dock="Top" FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" />
+        <DockPanel HorizontalAlignment="Center">
+          <Button Command="{Binding NewFileCommand}" Content="New file" />
+          <Button Command="{Binding OpenFileCommand}" Content="Open file..." />
+          <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." />
         </DockPanel>
-        <ContentControl IsEnabled="{Binding SaveInUse}">
-          <v:SaveDataView DataContext="{Binding SaveData}" />
-        </ContentControl>
       </DockPanel>
+      <ContentControl IsEnabled="{Binding SaveInUse}">
+        <v:SaveDataView DataContext="{Binding SaveData}" />
+      </ContentControl>
     </DockPanel>
   </DockPanel>
 </UserControl>

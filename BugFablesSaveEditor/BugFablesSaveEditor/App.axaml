@@ -50,9 +50,8 @@
     <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:PartyMemberSaveDataModel" />
 
     <DataTemplate x:Key="BfNamedIdTemplate" DataType="ob:BfNamedIdModel">
-      <ComboBox Items="{Binding AllResourceNames}"
-                SelectedIndex="{Binding Id,
-                FallbackValue=0, TargetNullValue=0}" />
+      <ComboBox Items="{Binding AllResourceNames, FallbackValue={}, TargetNullValue={}}"
+                SelectedIndex="{Binding Id, FallbackValue=0, TargetNullValue=0}" />
     </DataTemplate>
 
     <local:DataGridColumnsTemplate x:Key="BfNamedIdOnlyColumnsList">

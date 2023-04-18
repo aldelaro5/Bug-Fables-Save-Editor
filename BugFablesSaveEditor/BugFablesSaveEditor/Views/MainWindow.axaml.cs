@@ -8,4 +8,7 @@ public partial class MainWindow : Window
   {
     InitializeComponent();
   }
+
+  // Workaround an Avalonia bug where the app could crash on close when rendering certain tabs
+  private void Window_OnClosing(object? sender, WindowClosingEventArgs e) => MainView.DataContext = null;
 }
