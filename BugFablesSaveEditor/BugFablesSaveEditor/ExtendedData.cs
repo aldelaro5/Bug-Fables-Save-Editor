@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,17 +15,17 @@ public static class ExtendedData
 
   static ExtendedData()
   {
-    CrystalBerriesDetails =
-      ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv");
-    FlagsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv");
-    FlagvarsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv");
-    FlagstringsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv");
+    CrystalBerriesDetails = new();
+      //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv");
+    FlagsDetails = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv");
+    FlagvarsDetails = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv");
+    FlagstringsDetails = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv");
 
     IReadOnlyList<string> areaNames = BugFablesLib.Utils.GetAllBfNames(new BfArea());
     var regionals = new Dictionary<string, Dictionary<int, string[]>>();
     foreach (var name in areaNames)
     {
-      var data = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv");
+      Dictionary<int, string[]> data = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv");
       regionals.Add(name, data);
     }
 
