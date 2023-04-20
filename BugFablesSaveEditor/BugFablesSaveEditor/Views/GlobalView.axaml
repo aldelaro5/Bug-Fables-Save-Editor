@@ -35,19 +35,21 @@
                   Items="{Binding SaveProgressIconNames}" />
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,auto,*">
           <Label Grid.Column="0" Content="Rank" />
-          <NumericUpDown Grid.Column="1" Value="{ReflectionBinding Rank}"
+          <NumericUpDown Grid.Column="1" Value="{Binding Rank, Converter={StaticResource NumericUpDownValueConverter}}"
                          ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
           <Label Grid.Column="2" Content="Exp" />
-          <NumericUpDown Grid.Column="3" Value="{ReflectionBinding Exp}"
+          <NumericUpDown Grid.Column="3" Value="{Binding Exp, Converter={StaticResource NumericUpDownValueConverter}}"
                          ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
           <Label Grid.Column="4" Content="/" />
-          <NumericUpDown Grid.Column="5" Value="{ReflectionBinding NeededExp}"
+          <NumericUpDown Grid.Column="5"
+                         Value="{Binding NeededExp, Converter={StaticResource NumericUpDownValueConverter}}"
                          ShowButtonSpinner="False"
                          Increment="1" ParsingNumberStyle="Integer" />
         </Grid>
-        <NumericUpDown Grid.Row="1" Grid.Column="3" Value="{ReflectionBinding BerryCount}"
+        <NumericUpDown Grid.Row="1" Grid.Column="3"
+                       Value="{Binding BerryCount, Converter={StaticResource NumericUpDownValueConverter}}"
                        Increment="1" Margin="20,3,3,3"
                        ShowButtonSpinner="False"
                        ParsingNumberStyle="Integer" />
@@ -74,13 +76,13 @@
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,Auto,*">
           <Label Grid.Column="0" Content="X" />
           <NumericUpDown Grid.Column="1" ParsingNumberStyle="Float"
-                         Value="{ReflectionBinding PositionX}" />
+                         Value="{Binding PositionX, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Grid.Column="2" Content="Y" />
           <NumericUpDown Grid.Column="3" ParsingNumberStyle="Float"
-                         Value="{ReflectionBinding PositionY}" />
+                         Value="{Binding PositionY, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Grid.Column="4" Content="Z" />
           <NumericUpDown Grid.Column="5" ParsingNumberStyle="Float"
-                         Value="{ReflectionBinding PositionZ}" />
+                         Value="{Binding PositionZ, Converter={StaticResource NumericUpDownValueConverter}}" />
         </Grid>
       </Grid>
       <Grid RowDefinitions="*,*" ColumnDefinitions="20*,15*,30*">
@@ -98,21 +100,21 @@
         </DockPanel>
         <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,Auto,*,Auto,*" VerticalAlignment="Top">
           <NumericUpDown Grid.Column="0" ParsingNumberStyle="Integer"
-                         Value="{ReflectionBinding PlayTimeHours}" />
+                         Value="{Binding PlayTimeHours, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Grid.Column="1" Content=":" />
           <NumericUpDown Grid.Column="2" ParsingNumberStyle="Integer"
-                         Value="{ReflectionBinding PlayTimeMinutes}" />
+                         Value="{Binding PlayTimeMinutes, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Grid.Column="3" Content=":" />
           <NumericUpDown Grid.Column="4" ParsingNumberStyle="Integer"
-                         Value="{ReflectionBinding PlayTimeSeconds}" />
+                         Value="{Binding PlayTimeSeconds, Converter={StaticResource NumericUpDownValueConverter}}" />
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="Auto,*" RowDefinitions="*,*">
           <Label Grid.Row="0" Grid.Column="0" Content="Inventory" HorizontalAlignment="Right" />
           <NumericUpDown Grid.Row="0" Grid.Column="1" ParsingNumberStyle="Integer"
-                         Value="{ReflectionBinding NbrMaxItemsInventory}" />
+                         Value="{Binding NbrMaxItemsInventory, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Grid.Row="1" Grid.Column="0" Content="Storage" HorizontalAlignment="Right" />
           <NumericUpDown Grid.Row="1" Grid.Column="1" ParsingNumberStyle="Integer"
-                         Value="{ReflectionBinding NbrMaxItemsStorage}" />
+                         Value="{Binding NbrMaxItemsStorage, Converter={StaticResource NumericUpDownValueConverter}}" />
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="*,*,*" RowDefinitions="*,*">
           <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding IsRuigee}"

@@ -19,16 +19,16 @@
         <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*" VerticalAlignment="Center">
           <Label Content="TP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" />
           <NumericUpDown ParsingNumberStyle="Integer" Grid.Column="1" Grid.Row="0"
-                         Value="{ReflectionBinding Tp}" />
+                         Value="{Binding Tp, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Content="/" Grid.Column="2" Grid.Row="0" />
           <NumericUpDown ParsingNumberStyle="Integer" Grid.Column="3" Grid.Row="0"
-                         Value="{ReflectionBinding MaxTp}" />
+                         Value="{Binding MaxTp, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Content="MP" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" />
           <NumericUpDown ParsingNumberStyle="Integer" Grid.Column="1" Grid.Row="1"
-                         Value="{ReflectionBinding Mp}" />
+                         Value="{Binding Mp, Converter={StaticResource NumericUpDownValueConverter}}" />
           <Label Content="/" Grid.Column="2" Grid.Row="1" />
           <NumericUpDown ParsingNumberStyle="Integer" Grid.Column="3" Grid.Row="1"
-                         Value="{ReflectionBinding MaxMp}" />
+                         Value="{Binding MaxMp, Converter={StaticResource NumericUpDownValueConverter}}" />
         </Grid>
       </DockPanel>
       <DockPanel>
@@ -77,7 +77,7 @@
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
                       Items="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ParsingNumberStyle="Integer"
-                           Value="{ReflectionBinding NewPartyStatBonus.Amount}" />
+                           Value="{Binding NewPartyStatBonus.Amount, Converter={StaticResource NumericUpDownValueConverter}}" />
           </Grid>
         </DockPanel>
         <DataGrid SelectionMode="Single"
@@ -129,7 +129,7 @@
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
                       Items="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ParsingNumberStyle="Integer"
-                           Value="{ReflectionBinding NewMemberStatBonus.Amount}" />
+                           Value="{Binding NewMemberStatBonus.Amount, Converter={StaticResource NumericUpDownValueConverter}}" />
           </Grid>
         </DockPanel>
         <DataGrid Items="{Binding MemberStatBonuses}">

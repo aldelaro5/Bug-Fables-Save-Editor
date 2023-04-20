@@ -33,7 +33,8 @@
       <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagvars}" Collection="{Binding Flagvars}">
         <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagvarSaveDataModel">
-            <NumericUpDown ParsingNumberStyle="Integer" Value="{ReflectionBinding Var}" />
+            <NumericUpDown ParsingNumberStyle="Integer"
+                           Value="{Binding Var, Converter={StaticResource NumericUpDownValueConverter}}" />
           </DataTemplate>
         </v:FlagsCollectionView.ValueCellTemplate>
       </v:FlagsCollectionView>
