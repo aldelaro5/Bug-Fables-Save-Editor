@@ -13,7 +13,7 @@ namespace BugFablesSaveEditor;
 
 internal class PlatformSpecificImpl : IPlatformSpecifics
 {
-  public async Task<string?> SaveFileAsync(BfSaveData saveData)
+  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData)
   {
     FilePickerSaveOptions pickerSaveOptions = new()
     {
@@ -24,7 +24,7 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
 
     var file = await Utils.TopLevel.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
     if (file is null)
-      return null;
+      return new(false, null);
 
     Stream? fileStream = null;
     try
@@ -41,7 +41,7 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
         Icon = Icon.Warning,
         ButtonDefinitions = ButtonEnum.Ok
       });
-      return filePath;
+      return new(true, filePath);
     }
     catch (Exception ex)
     {
@@ -52,7 +52,7 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
         Icon = Icon.Error,
         ButtonDefinitions = ButtonEnum.Ok
       });
-      return null;
+      return new(false, null);
     }
     finally
     {

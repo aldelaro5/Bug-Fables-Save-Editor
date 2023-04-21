@@ -36,11 +36,12 @@ public partial class MainViewModel : ObservableObject
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
   private async void CmdSaveFile()
   {
-    string? newPath = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData);
-    if (newPath is null)
+    var result = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData);
+    if (!result.succeeded)
       return;
 
-    CurrentFilePath = newPath;
+    if (result.newFilePath is not null)
+      CurrentFilePath = result.newFilePath;
     SaveInUse = true;
     _fileSaved = true;
   }
