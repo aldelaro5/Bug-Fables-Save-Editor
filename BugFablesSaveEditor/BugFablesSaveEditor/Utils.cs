@@ -1,11 +1,19 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 
 namespace BugFablesSaveEditor;
 
 public static class Utils
 {
+  public static readonly FilePickerFileType SaveFileFilter = new("Bug Fables save (.dat)")
+  {
+    Patterns = new[] { "*.dat" }
+  };
+
+  public static IPlatformSpecifics PlatformSpecifics { get; set; } = new PlatformSpecificImpl();
+
   public static TopLevel TopLevel
   {
     get
