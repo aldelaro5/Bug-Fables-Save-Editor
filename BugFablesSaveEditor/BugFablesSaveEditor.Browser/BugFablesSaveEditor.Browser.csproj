@@ -9,6 +9,7 @@
     <StripSymbols>true</StripSymbols>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RunAOTCompilation>true</RunAOTCompilation>
+    <WasmEnableSIMD>true</WasmEnableSIMD>
   </PropertyGroup>
 
   <ItemGroup>
