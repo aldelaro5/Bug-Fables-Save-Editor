@@ -58,7 +58,7 @@ public partial class MainViewModel : ObservableObject
         ContentTitle = "File in use",
         ContentMessage = "An unsaved file is currently in use, creating a new file will loose all unsaved changes,\n" +
                          "are you sure you want to proceed?",
-        Icon = Icon.Warning,
+        Icon = Icon.Question,
         ButtonDefinitions = ButtonEnum.YesNo
       });
 
@@ -83,7 +83,7 @@ public partial class MainViewModel : ObservableObject
         ContentTitle = "File in use",
         ContentMessage = "An unsaved file is currently in use, opening a file will loose all unsaved changes,\n" +
                          "are you sure you want to proceed?",
-        Icon = Icon.Warning,
+        Icon = Icon.Question,
         ButtonDefinitions = ButtonEnum.YesNo
       });
 

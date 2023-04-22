@@ -8,6 +8,25 @@ const dotnetRuntime = await dotnet
   .withApplicationArgumentsFromQuery()
   .create();
 
+dotnetRuntime.setModuleImports("main.js",  {
+  ShowMessageBoxAsync: async (title, message, icon, buttonsType) => {
+    const result = await Swal.fire({
+      title: title,
+      text: message,
+      icon: icon,
+      customClass: 'message-box',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showCloseButton: false,
+      showCancelButton: false,
+      showDenyButton: buttonsType === 'yesNo',
+      confirmButtonText: buttonsType === 'yesNo' ? 'Yes' : 'Ok',
+      denyButtonText: 'No',
+    });
+    return result.isConfirmed;
+  },
+});
+
 const config = dotnetRuntime.getConfig();
 
 await dotnetRuntime.runMainAndExit(config.mainAssemblyName, [window.location.search]);
