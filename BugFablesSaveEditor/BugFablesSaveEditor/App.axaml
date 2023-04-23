@@ -4,6 +4,7 @@
              xmlns:b="clr-namespace:BugFablesSaveEditor.Behaviors"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:c="clr-namespace:BugFablesSaveEditor.Converters"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:local="clr-namespace:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
@@ -13,6 +14,7 @@
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     <StyleInclude Source="DndStyles.axaml" />
     <StyleInclude Source="AlignementsStyles.axaml" />
+    <dialogHostAvalonia:DialogHostStyles />
     <Style Selector="Button, CheckBox, Label, ComboBox, TextBox, NumericUpDown, DockPanel, StackPanel">
       <Setter Property="Margin" Value="3" />
     </Style>

@@ -12,6 +12,8 @@ public static class Utils
     Patterns = new[] { "*.dat" }
   };
 
+  public const string DialogSessionName = "Dialog";
+
   public static IPlatformSpecifics PlatformSpecifics { get; set; } = new PlatformSpecificImpl();
 
   public static TopLevel TopLevel

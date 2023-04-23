@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using DialogHostAvalonia;
 
 namespace BugFablesSaveEditor.Views;
 
@@ -12,7 +13,6 @@ public partial class MainView : UserControl
 
   public async void OnAbout_Click(object sender, RoutedEventArgs e)
   {
-    AboutView view = new();
-    await view.ShowDialog((MainWindow)Utils.TopLevel);
+    await DialogHost.Show(new AboutView(), Utils.DialogSessionName);
   }
 }

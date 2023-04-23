@@ -3,10 +3,11 @@ using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using DialogHostAvalonia;
 
 namespace BugFablesSaveEditor.Views;
 
-public partial class AboutView : Window
+public partial class AboutView : UserControl
 {
   public AboutView()
   {
@@ -33,6 +34,6 @@ public partial class AboutView : Window
 
   public void OnOkButton_Click(object sender, RoutedEventArgs e)
   {
-    Close();
+    DialogHost.Close(Utils.DialogSessionName);
   }
 }
