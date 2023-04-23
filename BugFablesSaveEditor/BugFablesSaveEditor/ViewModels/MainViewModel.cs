@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
 using BugFablesSaveEditor.Views;
@@ -136,6 +138,8 @@ public partial class MainViewModel : ObservableObject
     }
   }
 
-  [RelayCommand]
+  [RelayCommand(CanExecute = nameof(CanExit))]
   private void Exit() => ((MainWindow)Utils.TopLevel).Close();
+
+  private bool CanExit() => Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime;
 }
