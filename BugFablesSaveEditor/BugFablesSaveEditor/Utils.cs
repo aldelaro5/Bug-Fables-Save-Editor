@@ -1,31 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Reactive.Linq;
-using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using BugFablesSaveEditor.Models;
-using DynamicData;
-using DynamicData.Binding;
+using Avalonia.Platform.Storage;
 
 namespace BugFablesSaveEditor;
 
 public static class Utils
 {
-  public static Window MainWindow
+  public static readonly FilePickerFileType SaveFileFilter = new("Bug Fables save (.dat)")
+  {
+    Patterns = new[] { "*.dat" }
+  };
+
+  public static IPlatformSpecifics PlatformSpecifics { get; set; } = new PlatformSpecificImpl();
+
+  public static TopLevel TopLevel
   {
     get
     {
       var lifetime = Application.Current?.ApplicationLifetime!;
       if (lifetime is IClassicDesktopStyleApplicationLifetime)
         return ((IClassicDesktopStyleApplicationLifetime)lifetime).MainWindow!;
-      // TODO: Figure out how to do dialogs on browser
-      // if (lifetime is ISingleViewApplicationLifetime singleViewPlatform)
-      //   return ((ISingleViewApplicationLifetime)lifetime).MainView;
+      if (lifetime is ISingleViewApplicationLifetime singleViewPlatform)
+        return TopLevel.GetTopLevel(singleViewPlatform.MainView)!;
       return null!;
     }
   }

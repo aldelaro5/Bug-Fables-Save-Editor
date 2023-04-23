@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
 using BugFablesSaveEditor.Models;
@@ -19,13 +20,25 @@ public static class FilterUtils
                                                                         result)
     where TViewModel : IFlagModel
   {
-    return data
+    var filteredAndSorted = data
       .AsObservableChangeSet()
       .Filter(filter)
-      .Sort(SortExpressionComparer<TViewModel>.Ascending(x => x.Index))
-      .ObserveOn(SynchronizationContext.Current!)
+      .Sort(SortExpressionComparer<TViewModel>.Ascending(x => x.Index));
+
+    filteredAndSorted = ObserveOnSafeThread(filteredAndSorted);
+
+    return filteredAndSorted
       .Bind(out result)
       .Subscribe();
+  }
+
+  public static IObservable<TObservable> ObserveOnSafeThread<TObservable>(
+    IObservable<TObservable> observable)
+  {
+    observable = SynchronizationContext.Current is not null
+      ? observable.ObserveOn(SynchronizationContext.Current)
+      : observable.ObserveOn(Scheduler.CurrentThread);
+    return observable;
   }
 
   public static IObservable<Func<TFlagViewModel, bool>> GetSimpleTextFilterForFlags<TFlagViewModel, TViewModel>

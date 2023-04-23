@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading;
 using BugFablesLib.SaveData;
 using BugFablesSaveEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -101,23 +100,34 @@ public partial class StatsViewModel : ObservableObject, IDisposable
     _partyMembers = partyMembers;
     _globalSaveData = globalSaveData;
 
-    _partyStatsBonusesDisposable = _statsBonuses.Collection
-      .ToObservableChangeSet()
-      .Filter(x => x.Target == -1)
-      .ObserveOn(SynchronizationContext.Current!)
+    _partyStatsBonusesDisposable = SetupFilteredPartyBonuses()
       .Bind(out _partyStatBonuses)
       .Subscribe();
+    _partyMemberStatsBonusesDisposable = SetupFilteredMemberBonuses()
+      .Bind(out _memberStatBonuses)
+      .Subscribe(_ => OnPropertyChanged(nameof(MemberStatBonuses)));
+  }
 
+  private IObservable<IChangeSet<StatsBonusSaveDataModel>> SetupFilteredMemberBonuses()
+  {
     var memberFilter = this.WhenValueChanged(x => x.SelectedPartyMember)
       .Where(x => x is not null)
       .Select(SelectedPartyMemberFilter!);
 
-    _partyMemberStatsBonusesDisposable = _statsBonuses.Collection
+    var filteredMemberBonuses = _statsBonuses.Collection
       .ToObservableChangeSet()
-      .Filter(memberFilter)
-      .ObserveOn(SynchronizationContext.Current!)
-      .Bind(out _memberStatBonuses)
-      .Subscribe(_ => OnPropertyChanged(nameof(MemberStatBonuses)));
+      .Filter(memberFilter);
+
+    return FilterUtils.ObserveOnSafeThread(filteredMemberBonuses);
+  }
+
+  private IObservable<IChangeSet<StatsBonusSaveDataModel>> SetupFilteredPartyBonuses()
+  {
+    var filteredPartyBonuses = _statsBonuses.Collection
+      .ToObservableChangeSet()
+      .Filter(x => x.Target == -1);
+
+    return FilterUtils.ObserveOnSafeThread(filteredPartyBonuses);
   }
 
   [RelayCommand]

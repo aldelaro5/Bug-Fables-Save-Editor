@@ -3,6 +3,7 @@
              xmlns:ob="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:b="clr-namespace:BugFablesSaveEditor.Behaviors"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:c="clr-namespace:BugFablesSaveEditor.Converters"
              xmlns:local="clr-namespace:BugFablesSaveEditor"
              x:Class="BugFablesSaveEditor.App"
              x:CompileBindings="True"
@@ -48,6 +49,8 @@
     <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData" x:TypeArguments="ob:MedalOnHandSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:MusicSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndPartyMemberSaveData" x:TypeArguments="ob:PartyMemberSaveDataModel" />
+
+    <c:NumericUpDownValueConverter x:Key="NumericUpDownValueConverter" />
 
     <DataTemplate x:Key="BfNamedIdTemplate" DataType="ob:BfNamedIdModel">
       <ComboBox Items="{Binding AllResourceNames, FallbackValue={}, TargetNullValue={}}"

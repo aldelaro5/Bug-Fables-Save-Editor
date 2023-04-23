@@ -1,4 +1,8 @@
-﻿/* HTML styles for the splash screen */
+﻿body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* HTML styles for the splash screen */
 
 .highlight {
   color: white;
@@ -43,7 +47,6 @@
   width: 100%;
   color: whitesmoke;
   background: #1b2a4e;
-  font-family: 'Nunito', sans-serif;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -65,3 +68,9 @@
     visibility: collapse;
   }
 }
+
+/*!* Message boxes styles *!*/
+/*.swal2-popup*/
+/*{*/
+/*  font-family: 'cursive', sans-serif;*/
+/*}*/

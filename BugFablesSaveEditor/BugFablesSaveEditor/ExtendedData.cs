@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Avalonia;
+using Avalonia.Platform;
 using BugFablesLib.Data;
 
 namespace BugFablesSaveEditor;
@@ -16,30 +18,38 @@ public static class ExtendedData
 
   static ExtendedData()
   {
-    CrystalBerriesDetails =
-      ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv");
-    FlagsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv");
-    FlagvarsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv");
-    FlagstringsDetails = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv");
+    IAssetLoader loader = AvaloniaLocator.Current.GetRequiredService<IAssetLoader>();
+    string basePath = $"avares://{nameof(BugFablesSaveEditor)}/Assets";
+    CrystalBerriesDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/CrystalBerriesDetails.csv", loader));
+    FlagsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagsDetails.csv", loader));
+    FlagvarsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagvarsDetails.csv", loader));
+    FlagstringsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagstringsDetails.csv", loader));
 
     IReadOnlyList<string> areaNames = BugFablesLib.Utils.GetAllBfNames(new BfArea());
-    var regionals = new Dictionary<string, Dictionary<int, string[]>>();
-    foreach (var name in areaNames)
+    Dictionary<string, Dictionary<int, string[]>> regionals = new();
+    foreach (string name in areaNames)
     {
-      var data = ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv");
+      string fileName = name.Replace('\'', ' ');
+      Dictionary<int, string[]> data =
+        new(ReadFromAssetPath($"{basePath}/ExtendedData/Regionals/{fileName}.csv", loader));
       regionals.Add(name, data);
     }
 
     RegionalFlagsDetails = regionals;
   }
 
-  private static Dictionary<int, string[]> ReadFromFile(string file)
+  private static Dictionary<int, string[]> ReadFromAssetPath(string file, IAssetLoader assetLoader)
   {
-    string[] fileData = File.ReadAllLines(file);
-    var result = new Dictionary<int, string[]>();
+    Stream crystalBerriesDataStream = assetLoader.Open(new Uri(file));
+    StreamReader crystalBerriesDataStreamReader = new(crystalBerriesDataStream);
+    string[] fileData = crystalBerriesDataStreamReader.ReadToEnd().Trim().Split('\n');
+    Dictionary<int, string[]> result = new();
 
     foreach (string s in fileData)
     {
+      if (string.IsNullOrEmpty(s))
+        continue;
+
       string[] data = s.Split(';');
       int index = int.Parse(data[0]);
       result[index] = data.Skip(1).ToArray();

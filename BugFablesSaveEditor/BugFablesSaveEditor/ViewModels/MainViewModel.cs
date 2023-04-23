@@ -1,11 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
+using System.Text;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
+using BugFablesSaveEditor.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -36,41 +36,14 @@ public partial class MainViewModel : ObservableObject
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
   private async void CmdSaveFile()
   {
-    FilePickerSaveOptions pickerSaveOptions = new()
-    {
-      Title = "Select the location to save the file",
-      ShowOverwritePrompt = true,
-      FileTypeChoices = new[] { _saveFileFilter }
-    };
-
-    var file = await Utils.MainWindow.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
-    if (file is null)
+    var result = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData, CurrentFilePath);
+    if (!result.Succeeded)
       return;
 
-    try
-    {
-      string? path = file.TryGetLocalPath();
-      if (string.IsNullOrEmpty(path))
-        return;
-
-      string data = SaveData.SaveData.EncodeToString();
-      await File.WriteAllTextAsync(path, data);
-      CurrentFilePath = path;
-      await MessageBoxManager.GetMessageBoxStandardWindow("File saved",
-        $"The file was saved successfully at {CurrentFilePath}",
-        ButtonEnum.Ok, Icon.Warning).ShowDialog(Utils.MainWindow);
-      _fileSaved = true;
-    }
-    catch (Exception ex)
-    {
-      var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-        $"An error occured while saving the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
-      await msg.ShowDialog(Utils.MainWindow);
-    }
-    finally
-    {
-      file.Dispose();
-    }
+    if (result.NewFilePath is not null)
+      CurrentFilePath = result.NewFilePath;
+    SaveInUse = true;
+    _fileSaved = true;
   }
 
   private bool CanSaveFile() => SaveInUse;
@@ -80,18 +53,22 @@ public partial class MainViewModel : ObservableObject
   {
     if (SaveInUse && !_fileSaved)
     {
-      var msg = MessageBoxManager.GetMessageBoxStandardWindow("File in use",
-        "An unsaved file is currently in use, creating a new file will loose all unsaved changes,\n" +
-        "are you sure you want to proceed?",
-        ButtonEnum.YesNo, Icon.Warning);
-      var result = await msg.ShowDialog(Utils.MainWindow);
+      var result = await Utils.PlatformSpecifics.ShowMessageBoxAsync(new()
+      {
+        ContentTitle = "File in use",
+        ContentMessage = "An unsaved file is currently in use, creating a new file will loose all unsaved changes,\n" +
+                         "are you sure you want to proceed?",
+        Icon = Icon.Question,
+        ButtonDefinitions = ButtonEnum.YesNo
+      });
+
       if (result == ButtonResult.No)
         return;
     }
 
     SaveData.Dispose();
     SaveData = new(new BfPcSaveData(), true);
-    CurrentFilePath = "New file being created, save it to store it";
+    CurrentFilePath = "save0.dat";
     SaveInUse = true;
     _fileSaved = false;
   }
@@ -101,10 +78,15 @@ public partial class MainViewModel : ObservableObject
   {
     if (SaveInUse && !_fileSaved)
     {
-      var result = await MessageBoxManager.GetMessageBoxStandardWindow("File in use",
-        "An unsaved file is currently in use, opening a file will loose all unsaved changes,\n" +
-        "are you sure you want to proceed?",
-        ButtonEnum.YesNo, Icon.Warning).ShowDialog(Utils.MainWindow);
+      var result = await Utils.PlatformSpecifics.ShowMessageBoxAsync(new()
+      {
+        ContentTitle = "File in use",
+        ContentMessage = "An unsaved file is currently in use, opening a file will loose all unsaved changes,\n" +
+                         "are you sure you want to proceed?",
+        Icon = Icon.Question,
+        ButtonDefinitions = ButtonEnum.YesNo
+      });
+
       if (result == ButtonResult.No)
         return;
     }
@@ -116,30 +98,37 @@ public partial class MainViewModel : ObservableObject
       FileTypeFilter = new[] { _saveFileFilter }
     };
     var files =
-      await Utils.MainWindow.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
+      await Utils.TopLevel.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
     if (files.Count == 0)
       return;
 
     try
     {
-      string? path = files.First().TryGetLocalPath();
-      if (string.IsNullOrEmpty(path))
+      var fileStream = await files[0].OpenReadAsync();
+      byte[] buffer = new byte[fileStream.Length];
+      int bytesRead = await fileStream.ReadAsync(buffer);
+      if (bytesRead != fileStream.Length || string.IsNullOrEmpty(files[0].Name))
         return;
 
-      string data = await File.ReadAllTextAsync(path);
+      string data = Encoding.UTF8.GetString(buffer);
+      CurrentFilePath = files[0].Name;
+      fileStream.Close();
       var save = new BfPcSaveData();
       save.LoadFromString(data);
       SaveData.Dispose();
       SaveData = new SaveDataViewModel(save, false);
-      CurrentFilePath = path;
       SaveInUse = true;
       _fileSaved = true;
     }
     catch (Exception ex)
     {
-      var msg = MessageBoxManager.GetMessageBoxStandardWindow("Error opening save file",
-        $"An error occured while opening the save file: {ex.Message}", ButtonEnum.Ok, Icon.Error);
-      await msg.ShowDialog(Utils.MainWindow);
+      await Utils.PlatformSpecifics.ShowMessageBoxAsync(new()
+      {
+        ContentTitle = "Error opening save file",
+        ContentMessage = $"An error occured while opening the save file: {ex.Message}",
+        Icon = Icon.Error,
+        ButtonDefinitions = ButtonEnum.Ok
+      });
     }
     finally
     {
@@ -148,5 +137,5 @@ public partial class MainViewModel : ObservableObject
   }
 
   [RelayCommand]
-  private void Exit() => Utils.MainWindow.Close();
+  private void Exit() => ((MainWindow)Utils.TopLevel).Close();
 }
