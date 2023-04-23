@@ -44,24 +44,48 @@
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Base HP" Binding="{Binding BaseHp}"
-                                Width="80" />
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="HP" Binding="{Binding Hp}" />
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Max HP" Binding="{Binding MaxHp}"
-                                Width="75" />
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Base Attack" Binding="{Binding BaseAttack}"
-                                Width="85" />
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Attack" Binding="{Binding Attack}" />
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Base Defense" Binding="{Binding BaseDefense}"
-                                Width="95" />
-            <DataGridTextColumn x:DataType="ob:PartyMemberSaveDataModel"
-                                Header="Defense" Binding="{Binding Defense}" />
+            <DataGridTemplateColumn Header="Base HP" Width="80">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding BaseHp, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="HP">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding Hp, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Max HP" Width="75">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding MaxHp, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Base Attack" Width="85">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding BaseAttack, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Attack">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding Attack, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Base Defense" Width="95">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding BaseDefense, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Defense">
+              <DataTemplate DataType="ob:PartyMemberSaveDataModel">
+                <NumericUpDown Value="{Binding Defense, Converter={StaticResource NumericUpDownValueConverter}}"
+                               ParsingNumberStyle="Integer" />
+              </DataTemplate>
+            </DataGridTemplateColumn>
           </DataGrid.Columns>
         </DataGrid>
       </DockPanel>
@@ -83,12 +107,10 @@
         <DataGrid SelectionMode="Single"
                   Items="{Binding PartyStatBonuses}">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Type"
-                                x:DataType="ob:StatsBonusSaveDataModel"
+            <DataGridTextColumn Header="Type" x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
                                 IsReadOnly="True" />
-            <DataGridTextColumn Header="Amount"
-                                x:DataType="ob:StatsBonusSaveDataModel"
+            <DataGridTextColumn Header="Amount" x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
             <DataGridTemplateColumn>
@@ -134,12 +156,10 @@
         </DockPanel>
         <DataGrid Items="{Binding MemberStatBonuses}">
           <DataGrid.Columns>
-            <DataGridTextColumn Header="Type"
-                                x:DataType="ob:StatsBonusSaveDataModel"
+            <DataGridTextColumn Header="Type" x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
                                 IsReadOnly="True" />
-            <DataGridTextColumn Header="Amount"
-                                x:DataType="ob:StatsBonusSaveDataModel"
+            <DataGridTextColumn Header="Amount" x:DataType="ob:StatsBonusSaveDataModel"
                                 Binding="{Binding Amount}"
                                 IsReadOnly="True" />
             <DataGridTemplateColumn>
