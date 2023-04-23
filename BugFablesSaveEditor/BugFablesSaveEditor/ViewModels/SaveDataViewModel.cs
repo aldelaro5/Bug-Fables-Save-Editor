@@ -76,7 +76,7 @@ public partial class SaveDataViewModel : ObservableObject, IDisposable
     _crystalBerriesViewModel = new(saveData.CrystalBerries);
     _flagsViewModel = new(saveData.Flags, saveData.Flagvars, saveData.Flagstrings, saveData.RegionalFlags);
     _globalViewModel = new(saveData.Global, saveData.Header);
-    _libraryViewModel = new(saveData.Library);
+    _libraryViewModel = new(saveData.Library, saveData.EnemyEncounters);
   }
 
   public void Dispose()

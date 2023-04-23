@@ -23,7 +23,8 @@
       </DockPanel>
       <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=TextFilter}" />
     </DockPanel>
-    <DataGrid Items="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Collection}">
+    <DataGrid x:Name="DataGrid"
+              Items="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Collection}">
       <DataGrid.Columns>
         <DataGridTextColumn Header="Index" IsReadOnly="True"
                             Binding="{Binding DataType=m:IFlagModel, Path=Index}" />

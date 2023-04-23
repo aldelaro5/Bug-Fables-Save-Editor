@@ -1,9 +1,13 @@
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Styling;
+using DynamicData;
 
 namespace BugFablesSaveEditor.Views;
 
@@ -69,6 +73,24 @@ public partial class FlagsCollectionView : UserControl
     get => _valueCellTemplate;
     set => SetAndRaise(ValueCellTemplateProperty, ref _valueCellTemplate, value);
   }
+
+  private DataGridColumnsTemplate _additionalColumnsTemplate = null!;
+
+  public static readonly DirectProperty<FlagsCollectionView, DataGridColumnsTemplate>
+    AdditionalColumnsTemplateProperty = AvaloniaProperty.RegisterDirect<FlagsCollectionView, DataGridColumnsTemplate>(
+      nameof(AdditionalColumnsTemplate), o => o.AdditionalColumnsTemplate, (o, v) => o.AdditionalColumnsTemplate = v);
+
+  public DataGridColumnsTemplate AdditionalColumnsTemplate
+  {
+    get => _additionalColumnsTemplate;
+    set
+    {
+      SetAndRaise(AdditionalColumnsTemplateProperty, ref _additionalColumnsTemplate, value);
+      var columnsList = (ObservableCollection<DataGridColumn>)((ITemplate)AdditionalColumnsTemplate).Build();
+      DataGrid.Columns.AddRange(columnsList.ToArray());
+    }
+  }
+
 
   private bool _showSecondDescription;
 

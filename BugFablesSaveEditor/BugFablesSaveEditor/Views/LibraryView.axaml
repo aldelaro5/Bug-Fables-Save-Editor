@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:m="clr-namespace:BugFablesSaveEditor.Models"
              xmlns:v="clr-namespace:BugFablesSaveEditor.Views"
+             xmlns:local="clr-namespace:BugFablesSaveEditor"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:LibraryViewModel"
              x:CompileBindings="True"
@@ -30,7 +31,26 @@
       <v:FlagsCollectionView Collection="{Binding Bestiary}" TextFilter="{Binding TextFilterBestiary}"
                              FilterUnused="{Binding FilterUnusedBestiary}"
                              ValueCellTemplate="{StaticResource FlagCellTemplate}"
-                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
+                             ToggleAllShownCommand="{Binding ToggleAllShownCommand}">
+        <v:FlagsCollectionView.AdditionalColumnsTemplate>
+          <local:DataGridColumnsTemplate>
+            <local:DataGridColumns>
+              <DataGridTemplateColumn Header="Seen">
+                <DataTemplate DataType="m:BestiaryEntryModel">
+                  <NumericUpDown Value="{Binding NbrSeen, Converter={StaticResource NumericUpDownValueConverter}}"
+                                 ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer" />
+                </DataTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTemplateColumn Header="Defeated">
+                <DataTemplate DataType="m:BestiaryEntryModel">
+                  <NumericUpDown Value="{Binding NbrDefeated, Converter={StaticResource NumericUpDownValueConverter}}"
+                                 ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer" />
+                </DataTemplate>
+              </DataGridTemplateColumn>
+            </local:DataGridColumns>
+          </local:DataGridColumnsTemplate>
+        </v:FlagsCollectionView.AdditionalColumnsTemplate>
+      </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Recipes">
       <v:FlagsCollectionView Collection="{Binding Recipes}" TextFilter="{Binding TextFilterRecipes}"

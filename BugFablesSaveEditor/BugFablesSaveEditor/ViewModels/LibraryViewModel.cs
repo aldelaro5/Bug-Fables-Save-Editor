@@ -26,7 +26,7 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
   private ReadOnlyObservableCollection<FlagSaveDataModel> _discoveries;
 
   [ObservableProperty]
-  private ReadOnlyObservableCollection<FlagSaveDataModel> _bestiary;
+  private ReadOnlyObservableCollection<BestiaryEntryModel> _bestiary;
 
   [ObservableProperty]
   private ReadOnlyObservableCollection<FlagSaveDataModel> _recipes;
@@ -67,16 +67,16 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
   [ObservableProperty]
   private bool _filterUnusedSeenAreas;
 
-  public LibraryViewModel() : this(new()) { }
+  public LibraryViewModel() : this(new(), new()) { }
 
-  public LibraryViewModel(LibrarySaveData librarySaveData)
+  public LibraryViewModel(LibrarySaveData librarySaveData, Collection<EnemyEncounterSaveData> enemyEncounterSaveData)
   {
     _discoveriesDisposable = ObserveFlagsWithFilterAndSort(
       WrapFlagsWithMetadata(librarySaveData.Discoveries, BfVanillaNames.Discoveries),
       GetFilter(x => x.TextFilterDiscoveries, x => x.FilterUnusedDiscoveries), out _discoveries);
 
     _bestiaryDisposable = ObserveFlagsWithFilterAndSort(
-      WrapFlagsWithMetadata(librarySaveData.Bestiary, BfVanillaNames.Enemies),
+      WrapBestiaryEntryWithMetadata(librarySaveData.Bestiary, enemyEncounterSaveData, BfVanillaNames.Enemies),
       GetFilter(x => x.TextFilterBestiary, x => x.FilterUnusedBestiary), out _bestiary);
 
     _recipesDisposable = ObserveFlagsWithFilterAndSort(
@@ -93,10 +93,11 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
   }
 
   [RelayCommand]
-  private void ToggleAllShown(ReadOnlyObservableCollection<FlagSaveDataModel> collection)
+  private void ToggleAllShown(IEnumerable<FlagSaveDataModel> collection)
   {
-    bool newState = collection.Any(x => !x.Enabled);
-    foreach (FlagSaveDataModel flagVm in collection)
+    var flags = collection.ToList();
+    bool newState = flags.Any(x => !x.Enabled);
+    foreach (FlagSaveDataModel flagVm in flags)
       flagVm.Enabled = newState;
   }
 
@@ -107,6 +108,18 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
     {
       Index = i,
       Description1 = i < names.Count ? names[i] : ""
+    }).ToList();
+  }
+
+  private static IEnumerable<BestiaryEntryModel> WrapBestiaryEntryWithMetadata(Collection<FlagSaveData> flagsData,
+                                                                               Collection<EnemyEncounterSaveData>
+                                                                                 enemyEncounterSaveData,
+                                                                               IReadOnlyList<string> names)
+  {
+    return flagsData.Zip(enemyEncounterSaveData).Select((x, i) => new BestiaryEntryModel(x.First, x.Second)
+    {
+      Index = i,
+      Description1 = i < names.Count ? names[i] : "",
     }).ToList();
   }
 
