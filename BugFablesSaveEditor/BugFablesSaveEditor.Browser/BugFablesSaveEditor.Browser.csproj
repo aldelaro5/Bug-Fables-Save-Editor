@@ -13,19 +13,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <WasmExtraFilesToDeploy Include="AppBundle\app.css" />
-    <WasmExtraFilesToDeploy Include="AppBundle\favicon.ico" />
-    <WasmExtraFilesToDeploy Include="AppBundle\index.html" />
-    <WasmExtraFilesToDeploy Include="AppBundle\Logo.svg" />
-    <WasmExtraFilesToDeploy Include="AppBundle\main.js" />
+    <WasmExtraFilesToDeploy Include="AppBundle\app.css"/>
+    <WasmExtraFilesToDeploy Include="AppBundle\favicon.ico"/>
+    <WasmExtraFilesToDeploy Include="AppBundle\index.html"/>
+    <WasmExtraFilesToDeploy Include="AppBundle\Logo.svg"/>
+    <WasmExtraFilesToDeploy Include="AppBundle\main.js"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.0-preview6" />
+    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)"/>
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.0-preview6"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj" />
+    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj"/>
   </ItemGroup>
 </Project>

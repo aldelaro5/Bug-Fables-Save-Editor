@@ -13,7 +13,7 @@ namespace BugFablesSaveEditor;
 
 internal class PlatformSpecificImpl : IPlatformSpecifics
 {
-  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData)
+  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData, string _)
   {
     FilePickerSaveOptions pickerSaveOptions = new()
     {

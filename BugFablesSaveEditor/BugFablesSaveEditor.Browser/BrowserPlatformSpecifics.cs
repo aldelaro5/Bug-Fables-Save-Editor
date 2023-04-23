@@ -9,9 +9,32 @@ namespace BugFablesSaveEditor.Browser;
 
 public partial class BrowserPlatformSpecifics : IPlatformSpecifics
 {
-  public Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData)
+  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData, string fileName)
   {
-    throw new System.NotImplementedException();
+    try
+    {
+      string dataStr = saveData.EncodeToString();
+      await ShowMessageBoxAsync(new()
+      {
+        ContentTitle = "File saved",
+        ContentMessage = "The save file was encoded successfully. Click Ok to download it",
+        Icon = Icon.Success,
+        ButtonDefinitions = ButtonEnum.Ok
+      });
+      await Task.Run(() => DownloadSaveFileAsync(dataStr, fileName));
+      return new(true, fileName);
+    }
+    catch (Exception ex)
+    {
+      await ShowMessageBoxAsync(new()
+      {
+        ContentTitle = "Error saving save file",
+        ContentMessage = $"An error occured while saving the save file: {ex.Message}",
+        Icon = Icon.Error,
+        ButtonDefinitions = ButtonEnum.Ok
+      });
+      return new(false, null);
+    }
   }
 
   public async Task<ButtonResult> ShowMessageBoxAsync(MessageBoxStandardParams msgBoxParams)
@@ -40,6 +63,9 @@ public partial class BrowserPlatformSpecifics : IPlatformSpecifics
       msgBoxParams.ButtonDefinitions == ButtonEnum.Ok ? ButtonResult.Ok : ButtonResult.Yes;
   }
 
-  [JSImport("ShowMessageBoxAsync", "main.js")]
+  [JSImport(nameof(DownloadSaveFileAsync), "main.js")]
+  private static partial void DownloadSaveFileAsync(string data, string fileName);
+
+  [JSImport(nameof(ShowMessageBoxAsync), "main.js")]
   private static partial Task<bool> ShowMessageBoxAsync(string title, string message, string icon, string buttonsType);
 }

@@ -16,16 +16,19 @@ public static class ExtendedData
   static ExtendedData()
   {
     CrystalBerriesDetails = new();
-      //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv");
-    FlagsDetails = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv");
-    FlagvarsDetails = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv");
-    FlagstringsDetails = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv");
+    //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/CrystalBerriesDetails.csv");
+    FlagsDetails = new(); //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagsDetails.csv");
+    FlagvarsDetails =
+      new(); //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagvarsDetails.csv");
+    FlagstringsDetails =
+      new(); //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/FlagstringsDetails.csv");
 
     IReadOnlyList<string> areaNames = BugFablesLib.Utils.GetAllBfNames(new BfArea());
     var regionals = new Dictionary<string, Dictionary<int, string[]>>();
     foreach (var name in areaNames)
     {
-      Dictionary<int, string[]> data = new();//ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv");
+      Dictionary<int, string[]>
+        data = new(); //ReadFromFile($"{AppDomain.CurrentDomain.BaseDirectory}/ExtendedData/Regionals/{name}.csv");
       regionals.Add(name, data);
     }
 

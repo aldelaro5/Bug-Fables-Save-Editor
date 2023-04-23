@@ -8,7 +8,7 @@ const dotnetRuntime = await dotnet
   .withApplicationArgumentsFromQuery()
   .create();
 
-dotnetRuntime.setModuleImports("main.js",  {
+dotnetRuntime.setModuleImports("main.js", {
   ShowMessageBoxAsync: async (title, message, icon, buttonsType) => {
     const result = await Swal.fire({
       title: title,
@@ -24,6 +24,15 @@ dotnetRuntime.setModuleImports("main.js",  {
       denyButtonText: 'No',
     });
     return result.isConfirmed;
+  },
+  DownloadSaveFileAsync: async (data, fileName) => {
+    const bytes = new TextEncoder().encode(data);
+    const blob = new Blob([bytes], {type: "text/plain;charset=utf-8"});
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(link.href);
   },
 });
 
