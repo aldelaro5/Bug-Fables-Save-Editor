@@ -38,13 +38,13 @@
               <DataGridTemplateColumn Header="Seen">
                 <DataTemplate DataType="m:BestiaryEntryModel">
                   <NumericUpDown Value="{Binding NbrSeen, Converter={StaticResource NumericUpDownValueConverter}}"
-                                 ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer" />
+                                 ParsingNumberStyle="Integer" />
                 </DataTemplate>
               </DataGridTemplateColumn>
               <DataGridTemplateColumn Header="Defeated">
                 <DataTemplate DataType="m:BestiaryEntryModel">
                   <NumericUpDown Value="{Binding NbrDefeated, Converter={StaticResource NumericUpDownValueConverter}}"
-                                 ShowButtonSpinner="False" Increment="1" ParsingNumberStyle="Integer" />
+                                 ParsingNumberStyle="Integer" />
                 </DataTemplate>
               </DataGridTemplateColumn>
             </local:DataGridColumns>

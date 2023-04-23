@@ -36,17 +36,13 @@
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,auto,*">
           <Label Grid.Column="0" Content="Rank" />
           <NumericUpDown Grid.Column="1" Value="{Binding Rank, Converter={StaticResource NumericUpDownValueConverter}}"
-                         ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
           <Label Grid.Column="2" Content="Exp" />
           <NumericUpDown Grid.Column="3" Value="{Binding Exp, Converter={StaticResource NumericUpDownValueConverter}}"
-                         ShowButtonSpinner="False" Increment="1"
                          ParsingNumberStyle="Integer" />
           <Label Grid.Column="4" Content="/" />
-          <NumericUpDown Grid.Column="5"
-                         Value="{Binding NeededExp, Converter={StaticResource NumericUpDownValueConverter}}"
-                         ShowButtonSpinner="False"
-                         Increment="1" ParsingNumberStyle="Integer" />
+          <NumericUpDown Grid.Column="5" ParsingNumberStyle="Integer"
+                         Value="{Binding NeededExp, Converter={StaticResource NumericUpDownValueConverter}}" />
         </Grid>
         <NumericUpDown Grid.Row="1" Grid.Column="3"
                        Value="{Binding BerryCount, Converter={StaticResource NumericUpDownValueConverter}}"
