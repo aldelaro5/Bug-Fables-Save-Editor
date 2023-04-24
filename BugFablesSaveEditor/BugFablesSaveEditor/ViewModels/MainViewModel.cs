@@ -24,7 +24,7 @@ public partial class MainViewModel : ObservableObject
   private SaveDataViewModel _saveData;
 
   [ObservableProperty]
-  [NotifyCanExecuteChangedFor(nameof(CmdSaveFileCommand))]
+  [NotifyCanExecuteChangedFor(nameof(SaveFileCommand))]
   private bool _saveInUse;
 
   [ObservableProperty]
@@ -35,7 +35,7 @@ public partial class MainViewModel : ObservableObject
   public MainViewModel(BfPcSaveData saveData) => _saveData = new SaveDataViewModel(saveData, true);
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
-  private async void CmdSaveFile()
+  private async void SaveFile()
   {
     var result = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData, CurrentFilePath);
     if (!result.Succeeded)

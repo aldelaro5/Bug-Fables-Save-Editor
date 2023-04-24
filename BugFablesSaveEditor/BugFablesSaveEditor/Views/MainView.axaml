@@ -16,7 +16,7 @@
         <MenuItem Header="File">
           <MenuItem Command="{Binding NewFileCommand}" Header="New" />
           <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
-          <MenuItem Command="{Binding CmdSaveFileCommand}" Header="Save as..." />
+          <MenuItem Command="{Binding SaveFileCommand}" Header="Save as..." />
           <Separator />
           <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
         </MenuItem>
@@ -29,8 +29,24 @@
           <Label DockPanel.Dock="Top" FontWeight="SemiBold" FontSize="18" Content="{Binding CurrentFilePath}" />
           <DockPanel HorizontalAlignment="Center">
             <Button Command="{Binding NewFileCommand}" Content="New file" />
-            <Button Command="{Binding OpenFileCommand}" Content="Open file..." />
-            <Button Command="{Binding CmdSaveFileCommand}" Content="Save file..." />
+            <DropDownButton Content="Open file">
+              <DropDownButton.Flyout>
+                <MenuFlyout>
+                  <MenuItem Header="PC format (Steam / GOG / itch.io)..." Command="{Binding OpenFileCommand}" />
+                  <MenuItem Header="PC format (Microsoft Store)..." Command="{Binding OpenFileCommand}" />
+                  <MenuItem Header="Nintendo Switch format..." Command="{Binding OpenFileCommand}" />
+                </MenuFlyout>
+              </DropDownButton.Flyout>
+            </DropDownButton>
+            <DropDownButton IsEnabled="{Binding SaveInUse}" Content="Save file">
+              <DropDownButton.Flyout>
+                <MenuFlyout>
+                  <MenuItem Header="PC format (Steam / GOG / itch.io)..." Command="{Binding SaveFileCommand}" />
+                  <MenuItem Header="PC format (Microsoft Store)..." Command="{Binding SaveFileCommand}" />
+                  <MenuItem Header="Nintendo Switch format..." Command="{Binding SaveFileCommand}" />
+                </MenuFlyout>
+              </DropDownButton.Flyout>
+            </DropDownButton>
           </DockPanel>
         </DockPanel>
         <ContentControl IsEnabled="{Binding SaveInUse}">
