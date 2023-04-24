@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
@@ -112,11 +111,10 @@ public partial class MainViewModel : ObservableObject
       if (bytesRead != fileStream.Length || string.IsNullOrEmpty(files[0].Name))
         return;
 
-      string data = Encoding.UTF8.GetString(buffer);
       CurrentFilePath = files[0].Name;
       fileStream.Close();
       var save = new BfPcSaveData();
-      save.LoadFromString(data);
+      save.LoadFromBytes(buffer);
       SaveData.Dispose();
       SaveData = new SaveDataViewModel(save, false);
       SaveInUse = true;

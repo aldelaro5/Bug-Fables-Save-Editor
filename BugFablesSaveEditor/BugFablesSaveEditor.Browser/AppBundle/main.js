@@ -25,8 +25,8 @@ dotnetRuntime.setModuleImports("main.js", {
     });
     return result.isConfirmed;
   },
-  DownloadSaveFileAsync: async (data, fileName) => {
-    const bytes = new TextEncoder().encode(data);
+  DownloadSaveFileAsync: async (base64Data, fileName) => {
+    const bytes = new Uint8Array(atob(base64Data).split('').map(x => x.charCodeAt(0)))
     const blob = new Blob([bytes], {type: "text/plain;charset=utf-8"});
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);

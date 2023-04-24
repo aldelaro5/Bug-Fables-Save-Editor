@@ -94,14 +94,24 @@ public abstract class BfSaveData : IBfDataContainer
     };
   }
 
-  public virtual void LoadFromString(string data)
+  public virtual void LoadFromBytes(byte[] data)
+  {
+    LoadFromString(Encoding.UTF8.GetString(data));
+  }
+
+  public virtual byte[] EncodeToBytes()
+  {
+    return Encoding.UTF8.GetBytes(EncodeToString());
+  }
+
+  protected void LoadFromString(string data)
   {
     string[] saveSections = data.Split('\n');
     for (int i = 0; i < Data.Count; i++)
       Data[i].Deserialize(saveSections[i]);
   }
 
-  public virtual string EncodeToString()
+  protected string EncodeToString()
   {
     StringBuilder sb = new();
     for (int i = 0; i < Data.Count; i++)
@@ -113,12 +123,5 @@ public abstract class BfSaveData : IBfDataContainer
     }
 
     return sb.ToString();
-  }
-
-  public void ResetToDefault()
-  {
-    foreach (var s in Data)
-    {
-    }
   }
 }

@@ -13,7 +13,7 @@ public partial class BrowserPlatformSpecifics : IPlatformSpecifics
   {
     try
     {
-      string dataStr = saveData.EncodeToString();
+      string dataStr = Convert.ToBase64String(saveData.EncodeToBytes());
       await ShowMessageBoxAsync(new()
       {
         ContentTitle = "File saved",
@@ -64,7 +64,7 @@ public partial class BrowserPlatformSpecifics : IPlatformSpecifics
   }
 
   [JSImport(nameof(DownloadSaveFileAsync), "main.js")]
-  private static partial void DownloadSaveFileAsync(string data, string fileName);
+  private static partial void DownloadSaveFileAsync(string base64Date, string fileName);
 
   [JSImport(nameof(ShowMessageBoxAsync), "main.js")]
   private static partial Task<bool> ShowMessageBoxAsync(string title, string message, string icon, string buttonsType);

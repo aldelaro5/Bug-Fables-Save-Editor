@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
@@ -30,8 +29,8 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
     try
     {
       fileStream = await file.OpenWriteAsync();
-      string data = saveData.EncodeToString();
-      await fileStream.WriteAsync(Encoding.UTF8.GetBytes(data));
+      byte[] data = saveData.EncodeToBytes();
+      await fileStream.WriteAsync(data);
       string filePath = file.Name;
       fileStream.Close();
       await ShowMessageBoxAsync(new()
