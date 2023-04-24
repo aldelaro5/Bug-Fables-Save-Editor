@@ -49,7 +49,10 @@ public class DataGridDnd<T> : DropHandlerBase where T : class
                                object? targetContext, object? state)
   {
     if (!Validate(sender, e, sourceContext))
+    {
+      DataGridDragHandlder.CurrentDndSourceDataGrid = null;
       return false;
+    }
 
     if (!Equals(_dnd.SrcDataGrid, _dnd.DestDataGrid) && _dnd.Direction == DragDirection.Down)
       _dnd.DestIndex++;
@@ -61,14 +64,13 @@ public class DataGridDnd<T> : DropHandlerBase where T : class
     MoveItem(_dnd.SrcList, _dnd.DestList, _dnd.SrcIndex, _dnd.DestIndex);
     _dnd.DestDataGrid.SelectedIndex = _dnd.DestIndex;
     _dnd.DestDataGrid.ScrollIntoView(_dnd.DestList[_dnd.DestIndex], null);
-    _dnd.SrcDataGrid = null;
+    DataGridDragHandlder.CurrentDndSourceDataGrid = null;
     return true;
   }
 
   public override void Enter(object? sender, DragEventArgs e, object? sourceContext,
                              object? targetContext)
   {
-    _dnd.SrcDataGrid ??= sender as DataGrid;
     if (!Validate(sender, e, sourceContext))
     {
       e.DragEffects = DragDropEffects.None;
@@ -125,16 +127,17 @@ public class DataGridDnd<T> : DropHandlerBase where T : class
   {
     RemoveDraggingClass(sender as DataGrid);
     base.Drop(sender, e, sourceContext, targetContext);
-    _dnd.SrcDataGrid = null;
+    DataGridDragHandlder.CurrentDndSourceDataGrid = null;
   }
 
   private bool Validate(object? sender, DragEventArgs e, object? sourceContext)
   {
-    if (_dnd.SrcDataGrid is not { } srcDg ||
+    if (DataGridDragHandlder.CurrentDndSourceDataGrid is not { } srcDg ||
         sender is not DataGrid destDg ||
         sourceContext is not T src ||
         srcDg.Items is not IList<T> srcList ||
         destDg.Items is not IList<T> destList ||
+        srcList.IndexOf(src) == -1 ||
         destDg.GetVisualAt(e.GetPosition(destDg),
           v => v.FindDescendantOfType<DataGridCell>() is not null) is not Control
         {

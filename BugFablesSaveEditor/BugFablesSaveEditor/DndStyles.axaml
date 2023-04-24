@@ -24,7 +24,7 @@
     <Setter Property="(i:Interaction.Behaviors)">
       <i:BehaviorCollectionTemplate>
         <i:BehaviorCollection>
-          <idd:ContextDragBehavior />
+          <idd:ContextDragBehavior Handler="{StaticResource DataGridDragHandlder}" />
           <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static DragDrop.DragEnterEvent}"
                                           RoutingStrategies="Bubble">
             <iac:AddClassAction ClassName="dragging" RemoveIfExists="True" />

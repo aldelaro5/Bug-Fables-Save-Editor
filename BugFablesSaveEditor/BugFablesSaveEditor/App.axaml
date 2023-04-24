@@ -47,6 +47,8 @@
   </Application.Styles>
 
   <Application.Resources>
+    <b:DataGridDragHandlder x:Key="DataGridDragHandlder" />
+
     <b:DataGridDnd x:Key="DataGridDndBfNamedId" x:TypeArguments="ob:BfNamedIdModel" />
     <b:DataGridDnd x:Key="DataGridDndMedalOnHandSaveData" x:TypeArguments="ob:MedalOnHandSaveDataModel" />
     <b:DataGridDnd x:Key="DataGridDndMusicSaveData" x:TypeArguments="ob:MusicSaveDataModel" />
