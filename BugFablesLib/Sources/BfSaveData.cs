@@ -5,8 +5,12 @@ using BugFablesLib.SaveData;
 
 namespace BugFablesLib;
 
-public abstract class BfSaveData : IBfDataContainer
+public class BfSaveData : IBfDataContainer
 {
+  public static BfPcSaveDataFormat PcSaveDataFormat = new();
+  public static BfSwitchSaveDataFormat SwitchSaveDataFormat = new();
+  public static BfXboxPcSaveDataFormat XboxSaveDataFormat = new();
+
   public enum SaveFileSection
   {
     Header = 0,
@@ -94,24 +98,15 @@ public abstract class BfSaveData : IBfDataContainer
     };
   }
 
-  public virtual void LoadFromBytes(byte[] data)
+  public void LoadFromBytes(byte[] data, IBfSaveFileFormat saveFileFormat)
   {
-    LoadFromString(Encoding.UTF8.GetString(data));
-  }
-
-  public virtual byte[] EncodeToBytes()
-  {
-    return Encoding.UTF8.GetBytes(EncodeToString());
-  }
-
-  protected void LoadFromString(string data)
-  {
-    string[] saveSections = data.Split('\n');
+    string saveData = saveFileFormat.DecodeSaveDataFromSaveFile(data);
+    string[] saveSections = saveData.Split('\n');
     for (int i = 0; i < Data.Count; i++)
       Data[i].Deserialize(saveSections[i]);
   }
 
-  protected string EncodeToString()
+  public byte[] EncodeToBytes(IBfSaveFileFormat saveFileFormat)
   {
     StringBuilder sb = new();
     for (int i = 0; i < Data.Count; i++)
@@ -122,6 +117,7 @@ public abstract class BfSaveData : IBfDataContainer
         sb.Append('\n');
     }
 
-    return sb.ToString();
+    string saveData = sb.ToString();
+    return saveFileFormat.EncodeSaveFilesFromSaveData(saveData);
   }
 }

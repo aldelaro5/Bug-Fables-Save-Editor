@@ -27,7 +27,7 @@ public class SaveSectionsTests
     CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
     Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-fr");
     string strBefore = saveLines[(int)section];
-    var sud = new BfPcSaveData().Data[(int)section];
+    var sud = new BfSaveData().Data[(int)section];
     sud.Deserialize(saveLines[(int)section]);
     string strAfter = sud.Serialize();
     Thread.CurrentThread.CurrentCulture = cultureInfo;
@@ -49,7 +49,7 @@ public class SaveSectionsTests
     BfSaveData.SaveFileSection section, string separator)
   {
     string sectionData = saveLines[(int)section];
-    var sud = new BfPcSaveData().Data[(int)section];
+    var sud = new BfSaveData().Data[(int)section];
     // One field too much
     sectionData += $"{separator}0";
     Assert.ThrowsAny<Exception>(() => sud.Deserialize(sectionData));

@@ -9,11 +9,12 @@ namespace BugFablesSaveEditor.Browser;
 
 public partial class BrowserPlatformSpecifics : IPlatformSpecifics
 {
-  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData, string fileName)
+  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData, IBfSaveFileFormat saveFileFormat,
+                                                  string fileName)
   {
     try
     {
-      string dataStr = Convert.ToBase64String(saveData.EncodeToBytes());
+      string dataStr = Convert.ToBase64String(saveData.EncodeToBytes(saveFileFormat));
       await ShowMessageBoxAsync(new()
       {
         ContentTitle = "File saved",

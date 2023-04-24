@@ -2,23 +2,25 @@ using System.IO;
 
 namespace BugFablesLib;
 
-public class BfSwitchSaveData : BfSaveData
+public class BfSwitchSaveDataFormat : IBfSaveFileFormat
 {
   private const int SwitchSaveFileSize = 0x100000;
 
-  public override void LoadFromBytes(byte[] data)
+  internal BfSwitchSaveDataFormat() { }
+
+  public string DecodeSaveDataFromSaveFile(byte[] data)
   {
     BinaryReader reader = new(new MemoryStream(data));
-    LoadFromString(reader.ReadString());
+    string saveData = reader.ReadString();
     reader.Close();
+    return saveData;
   }
 
-  public override byte[] EncodeToBytes()
+  public byte[] EncodeSaveFilesFromSaveData(string saveData)
   {
-    string data = EncodeToString();
     byte[] newSave = new byte[SwitchSaveFileSize];
     BinaryWriter writer = new(new MemoryStream(newSave));
-    writer.Write(data);
+    writer.Write(saveData);
     writer.Close();
     return newSave;
   }

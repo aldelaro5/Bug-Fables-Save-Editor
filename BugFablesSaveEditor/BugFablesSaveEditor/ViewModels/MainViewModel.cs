@@ -20,6 +20,10 @@ public partial class MainViewModel : ObservableObject
     Patterns = new[] { "*.dat" }
   };
 
+  public static BfPcSaveDataFormat PcSaveDataFormat => BfSaveData.PcSaveDataFormat;
+  public static BfXboxPcSaveDataFormat XboxPcSaveDataFormat => BfSaveData.XboxSaveDataFormat;
+  public static BfSwitchSaveDataFormat SwitchSaveDataFormat => BfSaveData.SwitchSaveDataFormat;
+
   [ObservableProperty]
   private SaveDataViewModel _saveData;
 
@@ -30,14 +34,14 @@ public partial class MainViewModel : ObservableObject
   [ObservableProperty]
   private string _currentFilePath = "No save file, open an existing file or create a new one";
 
-  public MainViewModel() : this(new BfPcSaveData()) { }
+  public MainViewModel() : this(new()) { }
 
-  public MainViewModel(BfPcSaveData saveData) => _saveData = new SaveDataViewModel(saveData, true);
+  public MainViewModel(BfSaveData saveData) => _saveData = new SaveDataViewModel(saveData, true);
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
-  private async void SaveFile()
+  private async void SaveFile(IBfSaveFileFormat fileFormat)
   {
-    var result = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData, CurrentFilePath);
+    var result = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData, fileFormat, CurrentFilePath);
     if (!result.Succeeded)
       return;
 
@@ -68,14 +72,14 @@ public partial class MainViewModel : ObservableObject
     }
 
     SaveData.Dispose();
-    SaveData = new(new BfPcSaveData(), true);
+    SaveData = new(new BfSaveData(), true);
     CurrentFilePath = "save0.dat";
     SaveInUse = true;
     _fileSaved = false;
   }
 
   [RelayCommand]
-  private async void OpenFile()
+  private async void OpenFile(IBfSaveFileFormat fileFormat)
   {
     if (SaveInUse && !_fileSaved)
     {
@@ -113,8 +117,8 @@ public partial class MainViewModel : ObservableObject
 
       CurrentFilePath = files[0].Name;
       fileStream.Close();
-      var save = new BfPcSaveData();
-      save.LoadFromBytes(buffer);
+      var save = new BfSaveData();
+      save.LoadFromBytes(buffer, fileFormat);
       SaveData.Dispose();
       SaveData = new SaveDataViewModel(save, false);
       SaveInUse = true;

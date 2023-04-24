@@ -32,18 +32,24 @@
             <DropDownButton Content="Open file">
               <DropDownButton.Flyout>
                 <MenuFlyout>
-                  <MenuItem Header="PC format (Steam / GOG / itch.io)..." Command="{Binding OpenFileCommand}" />
-                  <MenuItem Header="PC format (Microsoft Store)..." Command="{Binding OpenFileCommand}" />
-                  <MenuItem Header="Nintendo Switch format..." Command="{Binding OpenFileCommand}" />
+                  <MenuItem Header="PC format (Steam / GOG / itch.io)..."
+                            Command="{Binding OpenFileCommand}" CommandParameter="{Binding PcSaveDataFormat}" />
+                  <MenuItem Header="PC format (Microsoft Store)..."
+                            Command="{Binding OpenFileCommand}" CommandParameter="{Binding XboxPcSaveDataFormat}" />
+                  <MenuItem Header="Nintendo Switch format..."
+                            Command="{Binding OpenFileCommand}" CommandParameter="{Binding SwitchSaveDataFormat}" />
                 </MenuFlyout>
               </DropDownButton.Flyout>
             </DropDownButton>
             <DropDownButton IsEnabled="{Binding SaveInUse}" Content="Save file">
               <DropDownButton.Flyout>
                 <MenuFlyout>
-                  <MenuItem Header="PC format (Steam / GOG / itch.io)..." Command="{Binding SaveFileCommand}" />
-                  <MenuItem Header="PC format (Microsoft Store)..." Command="{Binding SaveFileCommand}" />
-                  <MenuItem Header="Nintendo Switch format..." Command="{Binding SaveFileCommand}" />
+                  <MenuItem Header="PC format (Steam / GOG / itch.io)..."
+                            Command="{Binding SaveFileCommand}" CommandParameter="{Binding PcSaveDataFormat}" />
+                  <MenuItem Header="PC format (Microsoft Store)..."
+                            Command="{Binding SaveFileCommand}" CommandParameter="{Binding XboxPcSaveDataFormat}" />
+                  <MenuItem Header="Nintendo Switch format..."
+                            Command="{Binding SaveFileCommand}" CommandParameter="{Binding SwitchSaveDataFormat}" />
                 </MenuFlyout>
               </DropDownButton.Flyout>
             </DropDownButton>

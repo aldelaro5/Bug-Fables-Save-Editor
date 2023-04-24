@@ -7,61 +7,63 @@ public class SaveDataTests
   private const string ValidPcSaveFileName = "SaveFiles/PcValidSave.dat";
   private const string ValidSwitchSaveFileName = "SaveFiles/SwitchValidSave.dat";
 
+  private readonly BfSaveData _sud = new();
+
   public static IEnumerable<object[]> AllSavesFormat(bool includeFileNane)
   {
     if (includeFileNane)
     {
-      yield return new object[] { new BfPcSaveData(), ValidPcSaveFileName };
-      yield return new object[] { new BfSwitchSaveData(), ValidSwitchSaveFileName };
+      yield return new object[] { BfSaveData.PcSaveDataFormat, ValidPcSaveFileName };
+      yield return new object[] { BfSaveData.SwitchSaveDataFormat, ValidSwitchSaveFileName };
     }
     else
     {
-      yield return new object[] { new BfPcSaveData() };
-      yield return new object[] { new BfSwitchSaveData() };
+      yield return new object[] { BfSaveData.PcSaveDataFormat };
+      yield return new object[] { BfSaveData.SwitchSaveDataFormat };
     }
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), false)]
-  public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty(BfSaveData saveData)
+  public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty(IBfSaveFileFormat saveFileFormat)
   {
-    Assert.ThrowsAny<Exception>(() => saveData.LoadFromBytes(new byte[] { }));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(new byte[] { }, saveFileFormat));
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), false)]
-  public void LoadFromBytes_ShouldThrow_WhenDataIsInvalid(BfSaveData saveData)
+  public void LoadFromBytes_ShouldThrow_WhenDataIsInvalid(IBfSaveFileFormat saveFileFormat)
   {
     byte[] randomBytes = new byte[1_000_000];
     Random.Shared.NextBytes(randomBytes);
-    Assert.ThrowsAny<Exception>(() => saveData.LoadFromBytes(randomBytes));
+    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(randomBytes, saveFileFormat));
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), true)]
-  public void LoadFromBytes_ShouldLoadFile_WhenDataIsValid(BfSaveData saveData, string fileName)
+  public void LoadFromBytes_ShouldLoadFile_WhenDataIsValid(IBfSaveFileFormat saveFileFormat, string fileName)
   {
-    saveData.LoadFromBytes(File.ReadAllBytes(fileName));
+    _sud.LoadFromBytes(File.ReadAllBytes(fileName), saveFileFormat);
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), true)]
-  public void EncodeToBytes_ShouldNotChangeData_WhenEncodedBack(BfSaveData saveData, string fileName)
+  public void EncodeToBytes_ShouldNotChangeData_WhenEncodedBack(IBfSaveFileFormat saveFileFormat, string fileName)
   {
     byte[] bytesBefore = File.ReadAllBytes(fileName);
-    saveData.LoadFromBytes(bytesBefore);
-    byte[] bytesAfter = saveData.EncodeToBytes();
+    _sud.LoadFromBytes(bytesBefore, saveFileFormat);
+    byte[] bytesAfter = _sud.EncodeToBytes(saveFileFormat);
     Assert.True(bytesBefore.SequenceEqual(bytesAfter));
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), true)]
-  public void EncodeToBytes_ShouldChangeData_WhenEncodedWithChange(BfSaveData saveData, string fileName)
+  public void EncodeToBytes_ShouldChangeData_WhenEncodedWithChange(IBfSaveFileFormat saveFileFormat, string fileName)
   {
     byte[] bytesBefore = File.ReadAllBytes(fileName);
-    saveData.LoadFromBytes(bytesBefore);
-    saveData.Global.Rank = 50;
-    byte[] bytesAfter = saveData.EncodeToBytes();
+    _sud.LoadFromBytes(bytesBefore, saveFileFormat);
+    _sud.Global.Rank = 50;
+    byte[] bytesAfter = _sud.EncodeToBytes(saveFileFormat);
     Assert.False(bytesBefore.SequenceEqual(bytesAfter));
   }
 }

@@ -12,7 +12,7 @@ namespace BugFablesSaveEditor;
 
 internal class PlatformSpecificImpl : IPlatformSpecifics
 {
-  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData, string _)
+  public async Task<SaveFileReturn> SaveFileAsync(BfSaveData saveData, IBfSaveFileFormat saveFileFormat, string _)
   {
     FilePickerSaveOptions pickerSaveOptions = new()
     {
@@ -29,7 +29,7 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
     try
     {
       fileStream = await file.OpenWriteAsync();
-      byte[] data = saveData.EncodeToBytes();
+      byte[] data = saveData.EncodeToBytes(saveFileFormat);
       await fileStream.WriteAsync(data);
       string filePath = file.Name;
       fileStream.Close();
