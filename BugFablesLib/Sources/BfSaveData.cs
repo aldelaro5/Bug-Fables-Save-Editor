@@ -9,7 +9,6 @@ public class BfSaveData : IBfDataContainer
 {
   public static BfPcSaveDataFormat PcSaveDataFormat = new();
   public static BfSwitchSaveDataFormat SwitchSaveDataFormat = new();
-  public static BfXboxPcSaveDataFormat XboxSaveDataFormat = new();
 
   public enum SaveFileSection
   {
@@ -101,7 +100,7 @@ public class BfSaveData : IBfDataContainer
   public void LoadFromBytes(byte[] data, IBfSaveFileFormat saveFileFormat)
   {
     string saveData = saveFileFormat.DecodeSaveDataFromSaveFile(data);
-    string[] saveSections = saveData.Split('\n');
+    string[] saveSections = saveData.Split(Utils.LineSeparator);
     for (int i = 0; i < Data.Count; i++)
       Data[i].Deserialize(saveSections[i]);
   }
@@ -114,7 +113,7 @@ public class BfSaveData : IBfDataContainer
       sb.Append(Data[i].Serialize());
 
       if (i != Data.Count - 1)
-        sb.Append('\n');
+        sb.Append(Utils.LineSeparator);
     }
 
     string saveData = sb.ToString();

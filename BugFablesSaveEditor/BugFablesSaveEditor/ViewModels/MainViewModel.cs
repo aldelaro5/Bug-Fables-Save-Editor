@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -21,8 +22,8 @@ public partial class MainViewModel : ObservableObject
   };
 
   public static BfPcSaveDataFormat PcSaveDataFormat => BfSaveData.PcSaveDataFormat;
-  public static BfXboxPcSaveDataFormat XboxPcSaveDataFormat => BfSaveData.XboxSaveDataFormat;
   public static BfSwitchSaveDataFormat SwitchSaveDataFormat => BfSaveData.SwitchSaveDataFormat;
+  public static BfXboxPcSaveDataFormat XboxPcSaveDataFormat { get; } = new(SelectXboxPcSaveFile);
 
   [ObservableProperty]
   private SaveDataViewModel _saveData;
@@ -100,10 +101,11 @@ public partial class MainViewModel : ObservableObject
     {
       Title = "Select a Bug Fables save file",
       AllowMultiple = false,
-      FileTypeFilter = new[] { _saveFileFilter }
     };
-    var files =
-      await Utils.TopLevel.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
+    if (fileFormat is not BfXboxPcSaveDataFormat)
+      pickerOpenOptions.FileTypeFilter = new[] { _saveFileFilter };
+
+    var files = await Utils.TopLevel.StorageProvider.OpenFilePickerAsync(pickerOpenOptions);
     if (files.Count == 0)
       return;
 
@@ -138,6 +140,11 @@ public partial class MainViewModel : ObservableObject
     {
       files.First().Dispose();
     }
+  }
+
+  private static int SelectXboxPcSaveFile(IList<string> saves)
+  {
+    return 0;
   }
 
   [RelayCommand(CanExecute = nameof(CanExit))]

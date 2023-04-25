@@ -31,6 +31,12 @@
     <None Update="SaveFiles\SwitchValidSave.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SaveFiles\XboxAllValidSaves">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SaveFiles\XboxOnlyFirstValidSaveFile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

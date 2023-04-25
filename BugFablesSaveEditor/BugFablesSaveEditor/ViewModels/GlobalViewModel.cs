@@ -90,8 +90,8 @@ public partial class GlobalViewModel : ObservableObject, IDisposable
 
   public string Filename
   {
-    get => _headerSaveData.Filename;
-    set => SetProperty(_headerSaveData.Filename, value, _headerSaveData, (data, s) => data.Filename = s);
+    get => _headerSaveData.FileName;
+    set => SetProperty(_headerSaveData.FileName, value, _headerSaveData, (data, s) => data.FileName = s);
   }
 
   public bool IsFrameone

@@ -9,6 +9,7 @@ public static class Utils
 {
   internal const string CommaSeparator = ",";
   internal const string AtSymbolSeparator = "@";
+  internal const char LineSeparator = '\n';
 
   internal static T ParseValueType<T>(string str, string fieldName)
     where T : struct, IConvertible

@@ -6,6 +6,8 @@ public class SaveDataTests
 {
   private const string ValidPcSaveFileName = "SaveFiles/PcValidSave.dat";
   private const string ValidSwitchSaveFileName = "SaveFiles/SwitchValidSave.dat";
+  private const string XboxAllValidFileName = "SaveFiles/XboxAllValidSaves";
+  private const string XboxOnlyFirstValidXboxFileName = "SaveFiles/XboxOnlyFirstValidSaveFile";
 
   private readonly BfSaveData _sud = new();
 
@@ -15,11 +17,16 @@ public class SaveDataTests
     {
       yield return new object[] { BfSaveData.PcSaveDataFormat, ValidPcSaveFileName };
       yield return new object[] { BfSaveData.SwitchSaveDataFormat, ValidSwitchSaveFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 0), XboxAllValidFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 1), XboxAllValidFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 2), XboxAllValidFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 0), XboxOnlyFirstValidXboxFileName };
     }
     else
     {
       yield return new object[] { BfSaveData.PcSaveDataFormat };
       yield return new object[] { BfSaveData.SwitchSaveDataFormat };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 0) };
     }
   }
 
@@ -65,5 +72,19 @@ public class SaveDataTests
     _sud.Global.Rank = 50;
     byte[] bytesAfter = _sud.EncodeToBytes(saveFileFormat);
     Assert.False(bytesBefore.SequenceEqual(bytesAfter));
+  }
+
+  [Theory]
+  [InlineData(-1)]
+  [InlineData(4)]
+  public void XboxPcSaveDataFormat_ShouldThrow_WhenCallbackReturnsAnInvalidIndex(int index)
+  {
+    Assert.ThrowsAny<Exception>(() =>
+    {
+      BfXboxPcSaveDataFormat format = new(_ => index);
+      byte[] bytes = File.ReadAllBytes(XboxAllValidFileName);
+      _sud.LoadFromBytes(bytes, format);
+      _sud.EncodeToBytes(format);
+    });
   }
 }

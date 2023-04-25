@@ -6,7 +6,7 @@ namespace BugFablesLib.SaveData;
 
 public sealed class HeaderSaveData : IBfSerializable
 {
-  public string Filename { get; set; } = "";
+  public string FileName { get; set; } = "";
   public bool IsFrameone { get; set; }
   public bool IsHardest { get; set; }
   public bool IsMorefarm { get; set; }
@@ -32,7 +32,7 @@ public sealed class HeaderSaveData : IBfSerializable
     IsPushrock = Utils.ParseValueType<bool>(data[6], nameof(IsPushrock));
     IsMorefarm = Utils.ParseValueType<bool>(data[7], nameof(IsMorefarm));
     IsMystery = Utils.ParseValueType<bool>(data[8], nameof(IsMystery));
-    Filename = data[9];
+    FileName = data[9];
   }
 
   public string Serialize()
@@ -57,7 +57,7 @@ public sealed class HeaderSaveData : IBfSerializable
     sb.Append(Utils.CommaSeparator);
     sb.Append(IsMystery);
     sb.Append(Utils.CommaSeparator);
-    sb.Append(Filename);
+    sb.Append(FileName);
 
     return sb.ToString();
   }
