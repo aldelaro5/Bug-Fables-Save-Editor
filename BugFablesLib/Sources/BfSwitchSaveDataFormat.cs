@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BugFablesLib;
 
@@ -8,20 +9,20 @@ public class BfSwitchSaveDataFormat : IBfSaveFileFormat
 
   internal BfSwitchSaveDataFormat() { }
 
-  public string DecodeSaveDataFromSaveFile(byte[] data)
+  public Task<string> DecodeSaveDataFromSaveFile(byte[] data)
   {
     BinaryReader reader = new(new MemoryStream(data));
     string saveData = reader.ReadString();
     reader.Close();
-    return saveData;
+    return Task.FromResult(saveData);
   }
 
-  public byte[] EncodeSaveFilesFromSaveData(string saveData)
+  public Task<byte[]> EncodeSaveFilesFromSaveData(string saveData)
   {
     byte[] newSave = new byte[SwitchSaveFileSize];
     BinaryWriter writer = new(new MemoryStream(newSave));
     writer.Write(saveData);
     writer.Close();
-    return newSave;
+    return Task.FromResult(newSave);
   }
 }

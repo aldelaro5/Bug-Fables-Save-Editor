@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using BugFablesLib.Data;
 using BugFablesLib.SaveData;
 
@@ -97,15 +98,15 @@ public class BfSaveData : IBfDataContainer
     };
   }
 
-  public void LoadFromBytes(byte[] data, IBfSaveFileFormat saveFileFormat)
+  public async Task LoadFromBytes(byte[] data, IBfSaveFileFormat saveFileFormat)
   {
-    string saveData = saveFileFormat.DecodeSaveDataFromSaveFile(data);
+    string saveData = await saveFileFormat.DecodeSaveDataFromSaveFile(data);
     string[] saveSections = saveData.Split(Utils.LineSeparator);
     for (int i = 0; i < Data.Count; i++)
       Data[i].Deserialize(saveSections[i]);
   }
 
-  public byte[] EncodeToBytes(IBfSaveFileFormat saveFileFormat)
+  public async Task<byte[]> EncodeToBytes(IBfSaveFileFormat saveFileFormat)
   {
     StringBuilder sb = new();
     for (int i = 0; i < Data.Count; i++)
@@ -117,6 +118,6 @@ public class BfSaveData : IBfDataContainer
     }
 
     string saveData = sb.ToString();
-    return saveFileFormat.EncodeSaveFilesFromSaveData(saveData);
+    return await saveFileFormat.EncodeSaveFilesFromSaveData(saveData);
   }
 }

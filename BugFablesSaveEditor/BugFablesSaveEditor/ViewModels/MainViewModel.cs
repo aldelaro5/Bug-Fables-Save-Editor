@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
@@ -8,6 +8,7 @@ using BugFablesLib;
 using BugFablesSaveEditor.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DialogHostAvalonia;
 using MessageBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.ViewModels;
@@ -31,6 +32,9 @@ public partial class MainViewModel : ObservableObject
   [ObservableProperty]
   [NotifyCanExecuteChangedFor(nameof(SaveFileCommand))]
   private bool _saveInUse;
+
+  [ObservableProperty]
+  private bool _editingXboxSave;
 
   [ObservableProperty]
   private string _currentFilePath = "No save file, open an existing file or create a new one";
@@ -76,6 +80,7 @@ public partial class MainViewModel : ObservableObject
     SaveData = new(new BfSaveData(), true);
     CurrentFilePath = "save0.dat";
     SaveInUse = true;
+    EditingXboxSave = false;
     _fileSaved = false;
   }
 
@@ -100,7 +105,7 @@ public partial class MainViewModel : ObservableObject
     FilePickerOpenOptions pickerOpenOptions = new()
     {
       Title = "Select a Bug Fables save file",
-      AllowMultiple = false,
+      AllowMultiple = false
     };
     if (fileFormat is not BfXboxPcSaveDataFormat)
       pickerOpenOptions.FileTypeFilter = new[] { _saveFileFilter };
@@ -120,10 +125,11 @@ public partial class MainViewModel : ObservableObject
       CurrentFilePath = files[0].Name;
       fileStream.Close();
       var save = new BfSaveData();
-      save.LoadFromBytes(buffer, fileFormat);
+      await save.LoadFromBytes(buffer, fileFormat);
       SaveData.Dispose();
       SaveData = new SaveDataViewModel(save, false);
       SaveInUse = true;
+      EditingXboxSave = fileFormat is BfXboxPcSaveDataFormat;
       _fileSaved = true;
     }
     catch (Exception ex)
@@ -142,9 +148,12 @@ public partial class MainViewModel : ObservableObject
     }
   }
 
-  private static int SelectXboxPcSaveFile(IList<string> saves)
+  private static async Task<int> SelectXboxPcSaveFile(string[] fileNames)
   {
-    return 0;
+    XboxFileSelectViewModel viewModel = new(fileNames);
+    XboxFileSelectView view = new() { DataContext = viewModel };
+    await DialogHost.Show(view, Utils.DialogSessionName);
+    return viewModel.ResultIndex;
   }
 
   [RelayCommand(CanExecute = nameof(CanExit))]

@@ -8,6 +8,7 @@ public class SaveDataTests
   private const string ValidSwitchSaveFileName = "SaveFiles/SwitchValidSave.dat";
   private const string XboxAllValidFileName = "SaveFiles/XboxAllValidSaves";
   private const string XboxOnlyFirstValidXboxFileName = "SaveFiles/XboxOnlyFirstValidSaveFile";
+  private const string XboxMiddleSaveBlankFileName = "SaveFiles/XboxMiddleSaveBlank";
 
   private readonly BfSaveData _sud = new();
 
@@ -17,16 +18,18 @@ public class SaveDataTests
     {
       yield return new object[] { BfSaveData.PcSaveDataFormat, ValidPcSaveFileName };
       yield return new object[] { BfSaveData.SwitchSaveDataFormat, ValidSwitchSaveFileName };
-      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 0), XboxAllValidFileName };
-      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 1), XboxAllValidFileName };
-      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 2), XboxAllValidFileName };
-      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 0), XboxOnlyFirstValidXboxFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(0)), XboxAllValidFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(1)), XboxAllValidFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(2)), XboxAllValidFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(0)), XboxOnlyFirstValidXboxFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(0)), XboxMiddleSaveBlankFileName };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(2)), XboxMiddleSaveBlankFileName };
     }
     else
     {
       yield return new object[] { BfSaveData.PcSaveDataFormat };
       yield return new object[] { BfSaveData.SwitchSaveDataFormat };
-      yield return new object[] { new BfXboxPcSaveDataFormat(_ => 0) };
+      yield return new object[] { new BfXboxPcSaveDataFormat(_ => Task.FromResult(0)) };
     }
   }
 
@@ -34,7 +37,7 @@ public class SaveDataTests
   [MemberData(nameof(AllSavesFormat), false)]
   public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty(IBfSaveFileFormat saveFileFormat)
   {
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(new byte[] { }, saveFileFormat));
+    Assert.ThrowsAnyAsync<Exception>(async () => await _sud.LoadFromBytes(Array.Empty<byte>(), saveFileFormat));
   }
 
   [Theory]
@@ -43,48 +46,50 @@ public class SaveDataTests
   {
     byte[] randomBytes = new byte[1_000_000];
     Random.Shared.NextBytes(randomBytes);
-    Assert.ThrowsAny<Exception>(() => _sud.LoadFromBytes(randomBytes, saveFileFormat));
+    Assert.ThrowsAnyAsync<Exception>(async () => await _sud.LoadFromBytes(randomBytes, saveFileFormat));
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), true)]
-  public void LoadFromBytes_ShouldLoadFile_WhenDataIsValid(IBfSaveFileFormat saveFileFormat, string fileName)
+  public async void LoadFromBytes_ShouldLoadFile_WhenDataIsValid(IBfSaveFileFormat saveFileFormat, string fileName)
   {
-    _sud.LoadFromBytes(File.ReadAllBytes(fileName), saveFileFormat);
+    await _sud.LoadFromBytes(await File.ReadAllBytesAsync(fileName), saveFileFormat);
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), true)]
-  public void EncodeToBytes_ShouldNotChangeData_WhenEncodedBack(IBfSaveFileFormat saveFileFormat, string fileName)
+  public async void EncodeToBytes_ShouldNotChangeData_WhenEncodedBack(IBfSaveFileFormat saveFileFormat, string fileName)
   {
-    byte[] bytesBefore = File.ReadAllBytes(fileName);
-    _sud.LoadFromBytes(bytesBefore, saveFileFormat);
-    byte[] bytesAfter = _sud.EncodeToBytes(saveFileFormat);
+    byte[] bytesBefore = await File.ReadAllBytesAsync(fileName);
+    await _sud.LoadFromBytes(bytesBefore, saveFileFormat);
+    byte[] bytesAfter = await _sud.EncodeToBytes(saveFileFormat);
     Assert.True(bytesBefore.SequenceEqual(bytesAfter));
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), true)]
-  public void EncodeToBytes_ShouldChangeData_WhenEncodedWithChange(IBfSaveFileFormat saveFileFormat, string fileName)
+  public async void EncodeToBytes_ShouldChangeData_WhenEncodedWithChange(
+    IBfSaveFileFormat saveFileFormat, string fileName)
   {
-    byte[] bytesBefore = File.ReadAllBytes(fileName);
-    _sud.LoadFromBytes(bytesBefore, saveFileFormat);
+    byte[] bytesBefore = await File.ReadAllBytesAsync(fileName);
+    await _sud.LoadFromBytes(bytesBefore, saveFileFormat);
     _sud.Global.Rank = 50;
-    byte[] bytesAfter = _sud.EncodeToBytes(saveFileFormat);
+    byte[] bytesAfter = await _sud.EncodeToBytes(saveFileFormat);
     Assert.False(bytesBefore.SequenceEqual(bytesAfter));
   }
 
   [Theory]
   [InlineData(-1)]
   [InlineData(4)]
+  [InlineData(1)]
   public void XboxPcSaveDataFormat_ShouldThrow_WhenCallbackReturnsAnInvalidIndex(int index)
   {
-    Assert.ThrowsAny<Exception>(() =>
+    Assert.ThrowsAnyAsync<Exception>(async () =>
     {
-      BfXboxPcSaveDataFormat format = new(_ => index);
-      byte[] bytes = File.ReadAllBytes(XboxAllValidFileName);
-      _sud.LoadFromBytes(bytes, format);
-      _sud.EncodeToBytes(format);
+      BfXboxPcSaveDataFormat format = new(_ => Task.FromResult(index));
+      byte[] bytes = await File.ReadAllBytesAsync(XboxMiddleSaveBlankFileName);
+      await _sud.LoadFromBytes(bytes, format);
+      await _sud.EncodeToBytes(format);
     });
   }
 }

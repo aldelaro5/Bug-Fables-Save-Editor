@@ -46,7 +46,7 @@
                 <MenuFlyout>
                   <MenuItem Header="PC format (Steam / GOG / itch.io)..."
                             Command="{Binding SaveFileCommand}" CommandParameter="{Binding PcSaveDataFormat}" />
-                  <MenuItem Header="PC format (Microsoft Store)..."
+                  <MenuItem Header="PC format (Microsoft Store)..." IsEnabled="{Binding EditingXboxSave}"
                             Command="{Binding SaveFileCommand}" CommandParameter="{Binding XboxPcSaveDataFormat}" />
                   <MenuItem Header="Nintendo Switch format..."
                             Command="{Binding SaveFileCommand}" CommandParameter="{Binding SwitchSaveDataFormat}" />

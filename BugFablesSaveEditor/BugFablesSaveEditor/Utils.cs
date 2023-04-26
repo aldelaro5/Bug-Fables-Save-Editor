@@ -14,6 +14,10 @@ public static class Utils
 
   public const string DialogSessionName = "Dialog";
 
+  public const string MessageXboxSave =
+    "Place the file at the same location that you retrieved it making sure the filename match the existing one.\n" +
+    "When the game will boot, all save files whose names do not match the existing ones will be deleted.";
+
   public static IPlatformSpecifics PlatformSpecifics { get; set; } = new PlatformSpecificImpl();
 
   public static TopLevel TopLevel

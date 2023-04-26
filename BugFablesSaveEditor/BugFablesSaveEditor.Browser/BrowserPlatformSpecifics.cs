@@ -14,11 +14,12 @@ public partial class BrowserPlatformSpecifics : IPlatformSpecifics
   {
     try
     {
-      string dataStr = Convert.ToBase64String(saveData.EncodeToBytes(saveFileFormat));
+      string dataStr = Convert.ToBase64String(await saveData.EncodeToBytes(saveFileFormat));
       await ShowMessageBoxAsync(new()
       {
         ContentTitle = "File saved",
-        ContentMessage = "The save file was encoded successfully. Click Ok to download it",
+        ContentMessage = "The save file was encoded successfully. Click Ok to download it. " +
+                         $"{(saveFileFormat is BfXboxPcSaveDataFormat ? Utils.MessageXboxSave : "")}",
         Icon = Icon.Success,
         ButtonDefinitions = ButtonEnum.Ok
       });

@@ -37,6 +37,9 @@
     <None Update="SaveFiles\XboxOnlyFirstValidSaveFile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SaveFiles\XboxMiddleSaveBlank">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

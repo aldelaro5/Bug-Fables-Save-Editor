@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 
 namespace BugFablesLib;
 
@@ -6,8 +7,11 @@ public class BfPcSaveDataFormat : IBfSaveFileFormat
 {
   internal BfPcSaveDataFormat() { }
 
-  public string DecodeSaveDataFromSaveFile(byte[] data) => XorData(Encoding.UTF8.GetString(data));
-  public byte[] EncodeSaveFilesFromSaveData(string saveData) => Encoding.UTF8.GetBytes(XorData(saveData));
+  public Task<string> DecodeSaveDataFromSaveFile(byte[] data) =>
+    Task.FromResult(XorData(Encoding.UTF8.GetString(data)));
+
+  public Task<byte[]> EncodeSaveFilesFromSaveData(string saveData) =>
+    Task.FromResult(Encoding.UTF8.GetBytes(XorData(saveData)));
 
   private string XorData(string data)
   {

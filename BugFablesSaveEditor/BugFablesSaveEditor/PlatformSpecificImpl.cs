@@ -17,9 +17,11 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
     FilePickerSaveOptions pickerSaveOptions = new()
     {
       Title = "Select the location to save the file",
-      ShowOverwritePrompt = true,
-      FileTypeChoices = new[] { Utils.SaveFileFilter }
+      ShowOverwritePrompt = true
     };
+
+    if (saveFileFormat is not BfXboxPcSaveDataFormat)
+      pickerSaveOptions.FileTypeChoices = new[] { Utils.SaveFileFilter };
 
     var file = await Utils.TopLevel.StorageProvider.SaveFilePickerAsync(pickerSaveOptions);
     if (file is null)
@@ -29,14 +31,16 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
     try
     {
       fileStream = await file.OpenWriteAsync();
-      byte[] data = saveData.EncodeToBytes(saveFileFormat);
+      byte[] data = await saveData.EncodeToBytes(saveFileFormat);
       await fileStream.WriteAsync(data);
       string filePath = file.Name;
       fileStream.Close();
       await ShowMessageBoxAsync(new()
       {
         ContentTitle = "File saved",
-        ContentMessage = $"The file was saved successfully at {filePath}",
+        ContentMessage =
+          $"The file was saved successfully at {filePath} " +
+          $"\n{(saveFileFormat is BfXboxPcSaveDataFormat ? Utils.MessageXboxSave : "")}",
         Icon = Icon.Warning,
         ButtonDefinitions = ButtonEnum.Ok
       });

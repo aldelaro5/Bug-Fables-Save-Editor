@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace BugFablesLib;
 
 public interface IBfSaveFileFormat
 {
-  internal string DecodeSaveDataFromSaveFile(byte[] data);
-  internal byte[] EncodeSaveFilesFromSaveData(string saveData);
+  internal Task<string> DecodeSaveDataFromSaveFile(byte[] data);
+  internal Task<byte[]> EncodeSaveFilesFromSaveData(string saveData);
 }
