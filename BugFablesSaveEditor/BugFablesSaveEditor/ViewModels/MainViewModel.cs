@@ -15,6 +15,7 @@ namespace BugFablesSaveEditor.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
+  private const string DefaultFileMessage = "No save file, open an existing file or create a new one";
   private bool _fileSaved;
 
   private readonly FilePickerFileType _saveFileFilter = new("Bug Fables save (.dat)")
@@ -37,7 +38,7 @@ public partial class MainViewModel : ObservableObject
   private bool _editingXboxSave;
 
   [ObservableProperty]
-  private string _currentFilePath = "No save file, open an existing file or create a new one";
+  private string _currentFilePath = DefaultFileMessage;
 
   public MainViewModel() : this(new()) { }
 
@@ -134,6 +135,8 @@ public partial class MainViewModel : ObservableObject
     }
     catch (Exception ex)
     {
+      CurrentFilePath = DefaultFileMessage;
+      SaveInUse = false;
       await Utils.PlatformSpecifics.ShowMessageBoxAsync(new()
       {
         ContentTitle = "Error opening save file",
