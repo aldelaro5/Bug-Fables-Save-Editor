@@ -27,7 +27,24 @@ public class BfNamedIdModel : ObservableObject, IModelWrapper<BfQuest>, IModelWr
     }
   }
 
-  public string Name => Model.Name;
+  public string Name
+  {
+    get
+    {
+      if (Model is BfAnimId)
+      {
+        return Model.Name switch
+        {
+          "Bee" => "Vi",
+          "Beetle" => "Kabbu",
+          "Moth" => "Leif",
+          _ => Model.Name
+        };
+      }
+
+      return Model.Name;
+    }
+  }
 
   public IReadOnlyList<string> AllResourceNames
   {

@@ -40,7 +40,7 @@
             <DataGridTemplateColumn Header="AnimId" IsReadOnly="True">
               <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate DataType="ob:PartyMemberSaveDataModel">
-                  <Label VerticalAlignment="Center" Content="{Binding AnimId.Name}" />
+                  <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="{Binding AnimId.Name}" />
                 </DataTemplate>
               </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -127,16 +127,22 @@
       <DockPanel Grid.Column="1" HorizontalAlignment="Center">
         <Label DockPanel.Dock="Top" Content="Total party bonuses" />
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-          <Grid ColumnDefinitions="*,auto" RowDefinitions="*,*">
+          <Grid ColumnDefinitions="*,auto" RowDefinitions="*,*,*,*,*">
             <Grid.Styles>
               <Style Selector="Label">
                 <Setter Property="HorizontalAlignment" Value="Right" />
               </Style>
             </Grid.Styles>
-            <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="Max TP" />
-            <Label Grid.Column="1" Grid.Row="0" FontWeight="Bold" Content="{Binding TotalPartyMaxTpBonus}" />
-            <Label Grid.Column="0" Grid.Row="1" FontWeight="Bold" Content="Max MP" />
-            <Label Grid.Column="1" Grid.Row="1" FontWeight="Bold" Content="{Binding TotalPartyMaxMpBonus}" />
+            <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="Max HP" />
+            <Label Grid.Column="1" Grid.Row="0" FontWeight="Bold" Content="{Binding TotalPartyMaxHpBonus}" />
+            <Label Grid.Column="0" Grid.Row="1" FontWeight="Bold" Content="Attack" />
+            <Label Grid.Column="1" Grid.Row="1" FontWeight="Bold" Content="{Binding TotalPartyAttackBonus}" />
+            <Label Grid.Column="0" Grid.Row="2" FontWeight="Bold" Content="Defense" />
+            <Label Grid.Column="1" Grid.Row="2" FontWeight="Bold" Content="{Binding TotalPartyDefenseBonus}" />
+            <Label Grid.Column="0" Grid.Row="3" FontWeight="Bold" Content="Max TP" />
+            <Label Grid.Column="1" Grid.Row="3" FontWeight="Bold" Content="{Binding TotalPartyMaxTpBonus}" />
+            <Label Grid.Column="0" Grid.Row="4" FontWeight="Bold" Content="Max MP" />
+            <Label Grid.Column="1" Grid.Row="4" FontWeight="Bold" Content="{Binding TotalPartyMaxMpBonus}" />
           </Grid>
         </StackPanel>
       </DockPanel>
@@ -177,24 +183,22 @@
       <DockPanel Grid.Column="3">
         <Label DockPanel.Dock="Top" Content="Total selected member bonuses" />
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-          <Grid ColumnDefinitions="*,auto" RowDefinitions="*,*,*">
+          <Grid ColumnDefinitions="*,auto" RowDefinitions="*,*,*,*,*">
             <Grid.Styles>
               <Style Selector="Label">
                 <Setter Property="HorizontalAlignment" Value="Right" />
               </Style>
             </Grid.Styles>
-            <Label Grid.Column="0" Grid.Row="0"
-                   FontWeight="Bold" Content="Max HP" />
-            <Label Grid.Column="1" Grid.Row="0"
-                   FontWeight="Bold" Content="{Binding TotalMemberMaxHpBonus}" />
-            <Label Grid.Column="0" Grid.Row="1"
-                   FontWeight="Bold" Content="Attack" />
-            <Label Grid.Column="1" Grid.Row="1"
-                   FontWeight="Bold" Content="{Binding TotalMemberAttackBonus}" />
-            <Label Grid.Column="0" Grid.Row="2"
-                   FontWeight="Bold" Content="Defense" />
-            <Label Grid.Column="1" Grid.Row="2"
-                   FontWeight="Bold" Content="{Binding TotalMemberDefenseBonus}" />
+            <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="Max HP" />
+            <Label Grid.Column="1" Grid.Row="0" FontWeight="Bold" Content="{Binding TotalMemberMaxHpBonus}" />
+            <Label Grid.Column="0" Grid.Row="1" FontWeight="Bold" Content="Attack" />
+            <Label Grid.Column="1" Grid.Row="1" FontWeight="Bold" Content="{Binding TotalMemberAttackBonus}" />
+            <Label Grid.Column="0" Grid.Row="2" FontWeight="Bold" Content="Defense" />
+            <Label Grid.Column="1" Grid.Row="2" FontWeight="Bold" Content="{Binding TotalMemberDefenseBonus}" />
+            <Label Grid.Column="0" Grid.Row="3" FontWeight="Bold" Content="Max TP" />
+            <Label Grid.Column="1" Grid.Row="3" FontWeight="Bold" Content="{Binding TotalMemberTpBonus}" />
+            <Label Grid.Column="0" Grid.Row="4" FontWeight="Bold" Content="Max MP" />
+            <Label Grid.Column="1" Grid.Row="4" FontWeight="Bold" Content="{Binding TotalMemberMpBonus}" />
           </Grid>
         </StackPanel>
       </DockPanel>
