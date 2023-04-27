@@ -20,7 +20,7 @@
                       Content="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.NewViewModel}" />
     </DockPanel>
     <DataGrid x:Name="DataGrid" Classes="draggable" IsReadOnly="True"
-              Items="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.Collection}">
+              ItemsSource="{Binding $parent[v:ViewModelCollectionView].ViewModelCollection.Collection}">
       <i:Interaction.Behaviors>
         <i:BehaviorCollection>
           <idd:ContextDropBehavior Handler="{Binding $parent[v:ViewModelCollectionView].DndDropHandler}" />

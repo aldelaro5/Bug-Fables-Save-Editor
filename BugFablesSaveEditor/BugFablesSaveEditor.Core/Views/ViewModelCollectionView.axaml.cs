@@ -54,7 +54,7 @@ public partial class ViewModelCollectionView : UserControl
     set
     {
       SetAndRaise(ColumnsTemplateProperty, ref _columnsTemplate, value);
-      var columnsList = (ObservableCollection<DataGridColumn>)((ITemplate)ColumnsTemplate).Build();
+      var columnsList = (ObservableCollection<DataGridColumn>)((ITemplate)ColumnsTemplate).Build()!;
       DataGrid.Columns.AddRange(columnsList.ToArray());
       DataGrid.Columns[1].DisplayIndex = DataGrid.Columns.Count - 1;
     }

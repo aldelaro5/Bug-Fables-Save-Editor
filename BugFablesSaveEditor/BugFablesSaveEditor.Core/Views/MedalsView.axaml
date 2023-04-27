@@ -32,7 +32,7 @@
                 <DataGridTemplateColumn.CellTemplate>
                   <DataTemplate DataType="m:MedalOnHandSaveDataModel">
                     <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
-                              Items="{Binding MedalEquipTargets}" />
+                              ItemsSource="{Binding MedalEquipTargets}" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
               </DataGridTemplateColumn>
@@ -46,7 +46,7 @@
                               Content="{Binding Medal}" />
               <ComboBox Grid.Column="1"
                         SelectedIndex="{Binding MedalEquipTarget}"
-                        Items="{Binding MedalEquipTargets}" />
+                        ItemsSource="{Binding MedalEquipTargets}" />
               <Button Grid.Column="2" HorizontalAlignment="Center" Content="Unequip all medals"
                       Command="{Binding $parent[v:MedalsView].((vm:MedalsViewModel)DataContext).UnequipAllMedalsCommand}" />
             </Grid>

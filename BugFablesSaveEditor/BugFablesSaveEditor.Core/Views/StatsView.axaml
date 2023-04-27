@@ -33,7 +33,7 @@
       </DockPanel>
       <DockPanel>
         <Label DockPanel.Dock="Top" Content="Party members stats" />
-        <DataGrid MaxHeight="200" Items="{Binding PartyMembers.Collection}"
+        <DataGrid MaxHeight="200" ItemsSource="{Binding PartyMembers.Collection}"
                   SelectionMode="Single"
                   SelectedItem="{Binding SelectedPartyMember}">
           <DataGrid.Columns>
@@ -100,13 +100,12 @@
                   CommandParameter="{Binding NewPartyStatBonus}" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewPartyStatBonus.Type}"
-                      Items="{Binding StatBonusTypeNames}" />
+                      ItemsSource="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ParsingNumberStyle="Integer"
                            Value="{Binding NewPartyStatBonus.Amount, Converter={StaticResource NumericUpDownValueConverter}}" />
           </Grid>
         </DockPanel>
-        <DataGrid SelectionMode="Single"
-                  Items="{Binding PartyStatBonuses}">
+        <DataGrid SelectionMode="Single" ItemsSource="{Binding PartyStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type" x:DataType="m:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
@@ -156,12 +155,12 @@
                   Content="Add" />
           <Grid ColumnDefinitions="*,*">
             <ComboBox Grid.Column="0" SelectedIndex="{Binding NewMemberStatBonus.Type}"
-                      Items="{Binding StatBonusTypeNames}" />
+                      ItemsSource="{Binding StatBonusTypeNames}" />
             <NumericUpDown Grid.Column="1" ParsingNumberStyle="Integer"
                            Value="{Binding NewMemberStatBonus.Amount, Converter={StaticResource NumericUpDownValueConverter}}" />
           </Grid>
         </DockPanel>
-        <DataGrid Items="{Binding MemberStatBonuses}">
+        <DataGrid ItemsSource="{Binding MemberStatBonuses}">
           <DataGrid.Columns>
             <DataGridTextColumn Header="Type" x:DataType="m:StatsBonusSaveDataModel"
                                 Binding="{Binding TypeName}"
