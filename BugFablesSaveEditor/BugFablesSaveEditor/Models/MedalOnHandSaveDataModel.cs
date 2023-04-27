@@ -39,6 +39,9 @@ public partial class MedalOnHandSaveDataModel : ObservableObject, IModelWrapper<
   {
     var list = new List<string> { "Unequipped", "Party" };
     list.AddRange(BugFablesLib.Utils.GetAllBfNames(new BfAnimId()));
+    list[2] = "Vi";
+    list[3] = "Kabbu";
+    list[4] = "Leif";
     return list;
   }
 }

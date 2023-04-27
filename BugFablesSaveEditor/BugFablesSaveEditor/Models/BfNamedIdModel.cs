@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BugFablesLib;
 using BugFablesLib.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -27,7 +28,22 @@ public class BfNamedIdModel : ObservableObject, IModelWrapper<BfQuest>, IModelWr
   }
 
   public string Name => Model.Name;
-  public IReadOnlyList<string> AllResourceNames => BugFablesLib.Utils.GetAllBfNames(Model);
+
+  public IReadOnlyList<string> AllResourceNames
+  {
+    get
+    {
+      var names = BugFablesLib.Utils.GetAllBfNames(Model).ToList();
+      if (Model is BfAnimId)
+      {
+        names[0] = "Vi";
+        names[1] = "Kabbu";
+        names[2] = "Leif";
+      }
+
+      return names;
+    }
+  }
 
   public static IModelWrapper<BfAnimId> WrapModel(BfAnimId model) => Create(model);
   public static IModelWrapper<BfMedal> WrapModel(BfMedal model) => Create(model);
