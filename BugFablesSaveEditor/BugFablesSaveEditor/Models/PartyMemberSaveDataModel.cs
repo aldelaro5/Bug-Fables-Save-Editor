@@ -64,7 +64,8 @@ public partial class PartyMemberSaveDataModel : ObservableObject, IModelWrapper<
       BaseHp = model.BaseHp,
       Defense = model.Defense,
       Hp = model.Hp,
-      MaxHp = model.MaxHp
+      MaxHp = model.MaxHp,
+      AnimId = { Id = model.AnimId.Id }
     });
 
   private PartyMemberSaveDataModel(PartyMemberSaveData partyMemberSaveData)
