@@ -14,7 +14,8 @@
   </Design.DataContext>
 
   <v:FlagsCollectionView Collection="{Binding CrystalBerries}" TextFilter="{Binding TextFilter}"
-                         ToggleAllShownCommand="{Binding ToggleAllShownCommand}" ShowSecondDescription="True">
+                         ToggleAllShownCommand="{Binding ToggleAllShownCommand}" ShowSecondDescription="True"
+                         Description1Header="Area" Description2Header="Location">
     <v:FlagsCollectionView.ValueCellTemplate>
       <DataTemplate DataType="m:FlagSaveDataModel">
         <CheckBox IsChecked="{Binding Enabled}" />

@@ -84,7 +84,7 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
       GetFilter(x => x.TextFilterRecipes, x => x.FilterUnusedRecipes), out _recipes);
 
     _recordsDisposable = ObserveFlagsWithFilterAndSort(
-      WrapFlagsWithMetadata(librarySaveData.Records, BfVanillaNames.Records),
+      WrapFlagsWithMetadata(librarySaveData.Records, BfVanillaNames.Records, BfVanillaNames.RecordsDescriptions),
       GetFilter(x => x.TextFilterRecords, x => x.FilterUnusedRecords), out _records);
 
     _seenAreasDisposable = ObserveFlagsWithFilterAndSort(
@@ -102,12 +102,14 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
   }
 
   private static IEnumerable<FlagSaveDataModel> WrapFlagsWithMetadata(Collection<FlagSaveData> data,
-                                                                      IReadOnlyList<string> names)
+                                                                      IReadOnlyList<string> names,
+                                                                      IReadOnlyList<string>? descriptions = null)
   {
     return data.Select((x, i) => new FlagSaveDataModel(x)
     {
       Index = i,
-      Description1 = i < names.Count ? names[i] : ""
+      Description1 = i < names.Count ? names[i] : "",
+      Description2 = descriptions is not null && i < descriptions.Count ? descriptions[i] : ""
     }).ToList();
   }
 
@@ -119,7 +121,7 @@ public partial class LibraryViewModel : ObservableObject, IDisposable
     return flagsData.Zip(enemyEncounterSaveData).Select((x, i) => new BestiaryEntryModel(x.First, x.Second)
     {
       Index = i,
-      Description1 = i < names.Count ? names[i] : "",
+      Description1 = i < names.Count ? names[i] : ""
     }).ToList();
   }
 

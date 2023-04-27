@@ -62,6 +62,30 @@ public partial class FlagsCollectionView : UserControl
     set => SetAndRaise(CollectionProperty, ref _collection, value);
   }
 
+  private string _description1Header = "";
+
+  public static readonly DirectProperty<FlagsCollectionView, string> Description1HeaderProperty =
+    AvaloniaProperty.RegisterDirect<FlagsCollectionView, string>(
+      nameof(Description1Header), o => o.Description1Header, (o, v) => o.Description1Header = v);
+
+  public string Description1Header
+  {
+    get => _description1Header;
+    set => SetAndRaise(Description1HeaderProperty, ref _description1Header, value);
+  }
+
+  private string _description2Header = "";
+
+  public static readonly DirectProperty<FlagsCollectionView, string> Description2HeaderProperty =
+    AvaloniaProperty.RegisterDirect<FlagsCollectionView, string>(
+      nameof(Description2Header), o => o.Description2Header, (o, v) => o.Description2Header = v);
+
+  public string Description2Header
+  {
+    get => _description2Header;
+    set => SetAndRaise(Description2HeaderProperty, ref _description2Header, value);
+  }
+
   private IDataTemplate _valueCellTemplate = null!;
 
   public static readonly DirectProperty<FlagsCollectionView, IDataTemplate> ValueCellTemplateProperty =

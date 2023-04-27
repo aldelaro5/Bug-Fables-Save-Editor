@@ -31,13 +31,16 @@
         <DataGridTemplateColumn Header="Value"
                                 CellTemplate="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
                                                                  Path=ValueCellTemplate}" />
-        <DataGridTextColumn Header="Description" IsReadOnly="True"
-                            x:DataType="m:IFlagModel"
-                            Binding="{Binding DataType=m:IFlagModel, Path=Description1}" />
-        <DataGridTextColumn Header="Area" IsReadOnly="True" x:DataType="m:IFlagModel"
-                            IsVisible="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
+        <DataGridTextColumn
+          Header="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Description1Header}"
+          x:DataType="m:IFlagModel" IsReadOnly="True"
+          Binding="{Binding DataType=m:IFlagModel, Path=Description1}" />
+        <DataGridTextColumn
+          Header="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Description2Header}"
+          IsReadOnly="True" x:DataType="m:IFlagModel"
+          IsVisible="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
                               Path=ShowSecondDescription}"
-                            Binding="{Binding DataType=m:IFlagModel, Path=Description2}" />
+          Binding="{Binding DataType=m:IFlagModel, Path=Description2}" />
       </DataGrid.Columns>
     </DataGrid>
   </DockPanel>

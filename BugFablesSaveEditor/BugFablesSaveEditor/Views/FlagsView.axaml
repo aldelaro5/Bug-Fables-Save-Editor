@@ -21,7 +21,9 @@
 
   <TabControl>
     <TabItem Header="Flags">
-      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlags}" Collection="{Binding Flags}">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlags}"
+                             Description1Header="Description"
+                             Collection="{Binding Flags}">
         <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagSaveDataModel">
             <CheckBox IsChecked="{Binding Enabled}" />
@@ -30,7 +32,9 @@
       </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Flagvars">
-      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagvars}" Collection="{Binding Flagvars}">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagvars}"
+                             Description1Header="Description"
+                             Collection="{Binding Flagvars}">
         <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagvarSaveDataModel">
             <NumericUpDown ParsingNumberStyle="Integer"
@@ -40,7 +44,9 @@
       </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Flagstrings">
-      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagstrings}" Collection="{Binding Flagstrings}">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagstrings}"
+                             Description1Header="Description"
+                             Collection="{Binding Flagstrings}">
         <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagstringSaveDataModel">
             <TextBox Text="{Binding Str}" />
@@ -49,7 +55,9 @@
       </v:FlagsCollectionView>
     </TabItem>
     <TabItem Header="Regionals">
-      <v:FlagsCollectionView TextFilter="{Binding TextFilterRegionalFlags}" Collection="{Binding RegionalFlags}"
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterRegionalFlags}"
+                             Description1Header="Description"
+                             Collection="{Binding RegionalFlags}"
                              FilterUnused="{Binding FilterUnusedRegionals}">
         <v:FlagsCollectionView.ValueCellTemplate>
           <DataTemplate DataType="m:FlagSaveDataModel">

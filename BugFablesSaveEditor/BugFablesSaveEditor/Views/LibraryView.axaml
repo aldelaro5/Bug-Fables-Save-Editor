@@ -23,12 +23,14 @@
   <TabControl>
     <TabItem Header="Discoveries">
       <v:FlagsCollectionView Collection="{Binding Discoveries}" TextFilter="{Binding TextFilterDiscoveries}"
+                             Description1Header="Name"
                              FilterUnused="{Binding FilterUnusedDiscoveries}"
                              ValueCellTemplate="{StaticResource FlagCellTemplate}"
                              ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Bestiary">
       <v:FlagsCollectionView Collection="{Binding Bestiary}" TextFilter="{Binding TextFilterBestiary}"
+                             Description1Header="Enemy Name"
                              FilterUnused="{Binding FilterUnusedBestiary}"
                              ValueCellTemplate="{StaticResource FlagCellTemplate}"
                              ToggleAllShownCommand="{Binding ToggleAllShownCommand}">
@@ -54,18 +56,21 @@
     </TabItem>
     <TabItem Header="Recipes">
       <v:FlagsCollectionView Collection="{Binding Recipes}" TextFilter="{Binding TextFilterRecipes}"
+                             Description1Header="Item Name"
                              FilterUnused="{Binding FilterUnusedRecipes}"
                              ValueCellTemplate="{StaticResource FlagCellTemplate}"
                              ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Records">
       <v:FlagsCollectionView Collection="{Binding Records}" TextFilter="{Binding TextFilterRecords}"
-                             FilterUnused="{Binding FilterUnusedRecords}"
+                             FilterUnused="{Binding FilterUnusedRecords}" ShowSecondDescription="True"
+                             Description1Header="Name" Description2Header="Description"
                              ValueCellTemplate="{StaticResource FlagCellTemplate}"
                              ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
     </TabItem>
     <TabItem Header="Seen areas">
       <v:FlagsCollectionView Collection="{Binding SeenAreas}" TextFilter="{Binding TextFilterSeenAreas}"
+                             Description1Header="Name"
                              FilterUnused="{Binding FilterUnusedSeenAreas}"
                              ValueCellTemplate="{StaticResource FlagCellTemplate}"
                              ToggleAllShownCommand="{Binding ToggleAllShownCommand}" />
