@@ -1,4 +1,4 @@
-name: .NET-Draft-Release
+name: .NET-Draft-Release-Desktop
 
 on:
   workflow_dispatch:
