@@ -34,13 +34,13 @@ jobs:
     - name: Move to project folder
       run: cd BugFablesSaveEditor/BugFablesSaveEditor.Desktop/
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet BugFablesSaveEditor.Desktop.csproj restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build BugFablesSaveEditor.Desktop.csproj --no-restore
     - name: Test
-      run: dotnet test --no-build
+      run: dotnet test BugFablesSaveEditor.Desktop.csproj --no-build
     - name: Publish
-      run: dotnet publish -c Release -o publish -r ${{ matrix.rid }}
+      run: dotnet publish BugFablesSaveEditor.Desktop.csproj -c Release -o publish -r ${{ matrix.rid }}
     - name: Prepare Publish Directory
       run: |
         cp ../../LICENSE publish
