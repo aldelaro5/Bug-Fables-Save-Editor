@@ -29,6 +29,8 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 7.0.x
+    - name: Install wasm-tools
+      run: dotnet workload install wasm-tools wasm-experimental
     - name: Move to project folder
       run: cd BugFablesSaveEditor/BugFablesSaveEditor.Desktop/
     - name: Restore dependencies
