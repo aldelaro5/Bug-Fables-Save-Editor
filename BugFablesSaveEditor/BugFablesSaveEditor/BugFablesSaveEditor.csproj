@@ -16,11 +16,11 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.0-preview6"/>
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)"/>
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)"/>
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.0-preview6"/>
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="$(AvaloniaVersion)"/>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0"/>
     <PackageReference Include="DialogHost.Avalonia" Version="0.7.2"/>
     <PackageReference Include="DynamicData" Version="7.13.5"/>

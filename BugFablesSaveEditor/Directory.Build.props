@@ -3,4 +3,10 @@
     <Nullable>enable</Nullable>
     <AvaloniaVersion>11.0.0-preview6</AvaloniaVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Projektanker.Icons.Avalonia.MaterialDesign" />
+    <TrimmerRootAssembly Include="Projektanker.Icons.Avalonia" />
+    <TrimmerRootAssembly Include="MessageBox.Avalonia" />
+  </ItemGroup>
 </Project>

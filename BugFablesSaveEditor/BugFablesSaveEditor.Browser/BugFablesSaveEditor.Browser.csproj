@@ -5,9 +5,11 @@
     <WasmMainJSPath>AppBundle\main.js</WasmMainJSPath>
     <OutputType>Exe</OutputType>
     <WarningLevel>7</WarningLevel>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ILLinkTreatWarningsAsErrors>false</ILLinkTreatWarningsAsErrors>
     <StripSymbols>true</StripSymbols>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <MSBuildEnableWorkloadResolver>true</MSBuildEnableWorkloadResolver>
     <RunAOTCompilation>true</RunAOTCompilation>
     <WasmEnableSIMD>true</WasmEnableSIMD>
   </PropertyGroup>
@@ -22,10 +24,11 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.0-preview6"/>
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BugFablesLib\Sources\BugFablesLib.csproj"/>
     <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj"/>
   </ItemGroup>
 </Project>

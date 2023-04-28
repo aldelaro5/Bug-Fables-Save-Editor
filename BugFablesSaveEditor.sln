@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		README.md = README.md
+		BugFablesSaveEditor\Directory.Build.props = BugFablesSaveEditor\Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib.Tests", "BugFablesLib\Tests\BugFablesLib.Tests.csproj", "{47D31870-73DA-4522-B394-946EB4FDEA6F}"
