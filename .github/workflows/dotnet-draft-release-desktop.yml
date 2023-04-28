@@ -12,6 +12,9 @@ on:
         type: boolean
         default: false
 
+env:
+  PROJECT_PATH: ./BugFablesSaveEditor/BugFablesSaveEditor.Desktop
+
 jobs:
   build:
     strategy:
@@ -36,19 +39,20 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 7.0.x
-      - name: Install wasm-tools
-        run: dotnet workload install wasm-tools wasm-experimental
-      - name: Move to project folder
-        run: cd BugFablesSaveEditor/BugFablesSaveEditor.Desktop/
       - name: Restore dependencies
+        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet restore
       - name: Build
+        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build --no-restore
       - name: Test
+        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet test --no-build
       - name: Publish
+        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet publish -c Release -o publish -r ${{ matrix.rid }}
       - name: Prepare Publish Directory
+        working-directory: ${{ env.PROJECT_PATH }}
         run: |
           cp ../../LICENSE publish
           cp ../../README.md publish
@@ -56,13 +60,13 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           filename: ${{ github.event.repository.name }}-${{ matrix.buildName }}.zip
-          directory: publish
+          directory: ${{ env.PROJECT_PATH }}/publish
           exclusions: '*.pdb *.dbg'
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: ${{ github.event.repository.name }}-${{ matrix.buildName }}
-          path: publish/${{ github.event.repository.name }}-${{ matrix.buildName }}.zip
+          path: ${{ env.PROJECT_PATH }}/publish/${{ github.event.repository.name }}-${{ matrix.buildName }}.zip
           if-no-files-found: error
 
   release:
