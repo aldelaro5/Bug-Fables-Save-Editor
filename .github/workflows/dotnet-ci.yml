@@ -57,3 +57,4 @@ jobs:
             ${{ env.PROJECT_PATH }}/publish
             !${{ env.PROJECT_PATH }}/publish/*.pdb
             !${{ env.PROJECT_PATH }}/publish/*.dbg
+            !${{ env.PROJECT_PATH }}/publish/*.dwarf

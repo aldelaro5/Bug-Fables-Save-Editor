@@ -61,7 +61,7 @@ jobs:
         with:
           filename: ${{ github.event.repository.name }}-${{ matrix.buildName }}.zip
           directory: ${{ env.PROJECT_PATH }}/publish
-          exclusions: '*.pdb *.dbg'
+          exclusions: '*.pdb *.dbg *.dwarf'
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
