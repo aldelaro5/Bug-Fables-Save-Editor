@@ -24,9 +24,6 @@ jobs:
           - os: windows-latest
             rid: win-x64
             buildName: Windows
-          - os: macos-latest
-            rid: osx-x64
-            buildName: Mac-OS
           - os: ubuntu-latest
             rid: linux-x64
             buildName: Linux
@@ -61,7 +58,7 @@ jobs:
         with:
           filename: ${{ github.event.repository.name }}-${{ matrix.buildName }}.zip
           directory: ${{ env.PROJECT_PATH }}/publish
-          exclusions: '*.pdb *.dbg *.dwarf'
+          exclusions: '*.pdb *.dbg'
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.0
         with:

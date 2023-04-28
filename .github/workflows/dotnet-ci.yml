@@ -17,9 +17,6 @@ jobs:
           - os: windows-latest
             rid: win-x64
             buildName: Windows
-          - os: macos-latest
-            rid: osx-x64
-            buildName: Mac-OS
           - os: ubuntu-latest
             rid: linux-x64
             buildName: Linux
@@ -57,4 +54,3 @@ jobs:
             ${{ env.PROJECT_PATH }}/publish
             !${{ env.PROJECT_PATH }}/publish/*.pdb
             !${{ env.PROJECT_PATH }}/publish/*.dbg
-            !${{ env.PROJECT_PATH }}/publish/*.dwarf
