@@ -68,6 +68,9 @@ jobs:
 
   release:
     needs: build
+    concurrency:
+          group: "draft-release"
+          cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
