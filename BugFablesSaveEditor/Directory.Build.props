@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <TrimmerRootAssembly Include="Projektanker.Icons.Avalonia.MaterialDesign"/>
-    <TrimmerRootAssembly Include="Projektanker.Icons.Avalonia"/>
     <TrimmerRootAssembly Include="MessageBox.Avalonia"/>
   </ItemGroup>
 </Project>
