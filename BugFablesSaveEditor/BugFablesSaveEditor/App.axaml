@@ -43,6 +43,9 @@
       <Setter Property="Background" Value="DarkRed" />
       <Setter Property="CommandParameter" Value="{Binding DataType=system:Object}" />
     </Style>
+    <Style Selector="GridSplitter Border">
+      <Setter Property="Height" Value="3" />
+    </Style>
 
   </Application.Styles>
 

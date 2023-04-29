@@ -12,8 +12,8 @@
     <vm:StatsViewModel />
   </Design.DataContext>
 
-  <Grid RowDefinitions="auto,*">
-    <DockPanel Grid.Column="0">
+  <Grid RowDefinitions="auto,auto,*">
+    <DockPanel Grid.Row="0">
       <DockPanel DockPanel.Dock="Left">
         <Label DockPanel.Dock="Top" Content="Party base stats" />
         <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*" VerticalAlignment="Center">
@@ -90,7 +90,8 @@
         </DataGrid>
       </DockPanel>
     </DockPanel>
-    <Grid ColumnDefinitions="*,*,*,*" Grid.Row="1">
+    <GridSplitter Grid.Row="1" Background="White" ResizeDirection="Rows" />
+    <Grid ColumnDefinitions="*,*,*,*" Grid.Row="2">
       <DockPanel Grid.Column="0">
         <Label DockPanel.Dock="Top" Content="Party stats bonuses" />
         <DockPanel DockPanel.Dock="Bottom">
