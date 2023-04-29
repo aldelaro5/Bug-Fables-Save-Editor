@@ -19,13 +19,10 @@ jobs:
       - name: Install wasm-tools
         run: dotnet workload install wasm-tools wasm-experimental
       - name: Restore dependencies
-        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet restore
       - name: Build
-        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build --no-restore
       - name: Test
-        working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet test --no-build
       - name: Publish
         working-directory: ${{ env.PROJECT_PATH }}
