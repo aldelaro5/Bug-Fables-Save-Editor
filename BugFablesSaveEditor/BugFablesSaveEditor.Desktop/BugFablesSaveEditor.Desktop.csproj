@@ -8,6 +8,7 @@
     <PublishAot>true</PublishAot>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <StripSymbols>true</StripSymbols>
+    <AssemblyName>BugFablesSaveEditor</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,6 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj"/>
+    <ProjectReference Include="..\BugFablesSaveEditor.Core\BugFablesSaveEditor.Core.csproj"/>
   </ItemGroup>
 </Project>

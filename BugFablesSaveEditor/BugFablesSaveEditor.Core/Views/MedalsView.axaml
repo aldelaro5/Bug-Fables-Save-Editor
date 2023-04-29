@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.Core.ViewModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Core.Views"
+             xmlns:local="clr-namespace:BugFablesSaveEditor.Core"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Core.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MedalsViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Core.Views.MedalsView">
+  <Design.DataContext>
+    <vm:MedalsViewModel />
+  </Design.DataContext>
+
+  <TabControl>
+    <TabItem Header="On hand">
+      <v:ViewModelCollectionView TitleLabel="" MaxWidth="700" ViewModelCollection="{Binding MedalOnHandSaveData}"
+                                 DndDropHandler="{StaticResource DataGridDndMedalOnHandSaveData}">
+        <v:ViewModelCollectionView.ColumnsTemplate>
+          <local:DataGridColumnsTemplate>
+            <local:DataGridColumns>
+              <DataGridTemplateColumn Header="Medal" Width="*">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate DataType="m:MedalOnHandSaveDataModel">
+                    <ContentControl Content="{Binding Medal}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+              <DataGridTemplateColumn Header="Equip" Width="*">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate DataType="m:MedalOnHandSaveDataModel">
+                    <ComboBox SelectedIndex="{Binding MedalEquipTarget}"
+                              Items="{Binding MedalEquipTargets}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+            </local:DataGridColumns>
+          </local:DataGridColumnsTemplate>
+        </v:ViewModelCollectionView.ColumnsTemplate>
+        <v:ViewModelCollectionView.AddViewTemplate>
+          <DataTemplate DataType="m:MedalOnHandSaveDataModel">
+            <Grid ColumnDefinitions="*,*,*">
+              <ContentControl Grid.Column="0"
+                              Content="{Binding Medal}" />
+              <ComboBox Grid.Column="1"
+                        SelectedIndex="{Binding MedalEquipTarget}"
+                        Items="{Binding MedalEquipTargets}" />
+              <Button Grid.Column="2" HorizontalAlignment="Center" Content="Unequip all medals"
+                      Command="{Binding $parent[v:MedalsView].((vm:MedalsViewModel)DataContext).UnequipAllMedalsCommand}" />
+            </Grid>
+          </DataTemplate>
+        </v:ViewModelCollectionView.AddViewTemplate>
+      </v:ViewModelCollectionView>
+    </TabItem>
+    <TabItem Header="Shop pools">
+      <Grid ColumnDefinitions="*,*" MaxWidth="700">
+        <DockPanel Grid.Column="0">
+          <v:ViewModelCollectionView TitleLabel="Merab" ViewModelCollection="{Binding MerabShopPool}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+          <v:ViewModelCollectionView TitleLabel="Shades" ViewModelCollection="{Binding ShadesShopPool}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+        </DockPanel>
+      </Grid>
+    </TabItem>
+    <TabItem Header="Shop available">
+      <Grid ColumnDefinitions="*,*" MaxWidth="700">
+        <DockPanel Grid.Column="0">
+          <v:ViewModelCollectionView TitleLabel="Merab" ViewModelCollection="{Binding MerabShopAvailables}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+          <v:ViewModelCollectionView TitleLabel="Shades" ViewModelCollection="{Binding ShadesShopAvailables}"
+                                     ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                     DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                     AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+        </DockPanel>
+      </Grid>
+    </TabItem>
+  </TabControl>
+</UserControl>

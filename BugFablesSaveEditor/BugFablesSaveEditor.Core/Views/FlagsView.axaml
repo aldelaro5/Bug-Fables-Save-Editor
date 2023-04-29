@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.Core.ViewModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Core.Views"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Core.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:FlagsViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Core.Views.FlagsView">
+  <Design.DataContext>
+    <vm:FlagsViewModel />
+  </Design.DataContext>
+
+  <UserControl.Styles>
+    <Style Selector="TabItem > DockPanel">
+      <Setter Property="MaxWidth" Value="1000" />
+    </Style>
+  </UserControl.Styles>
+
+  <TabControl>
+    <TabItem Header="Flags">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlags}"
+                             Description1Header="Description"
+                             Collection="{Binding Flags}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagSaveDataModel">
+            <CheckBox IsChecked="{Binding Enabled}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
+    </TabItem>
+    <TabItem Header="Flagvars">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagvars}"
+                             Description1Header="Description"
+                             Collection="{Binding Flagvars}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagvarSaveDataModel">
+            <NumericUpDown ParsingNumberStyle="Integer"
+                           Value="{Binding Var, Converter={StaticResource NumericUpDownValueConverter}}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
+    </TabItem>
+    <TabItem Header="Flagstrings">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterFlagstrings}"
+                             Description1Header="Description"
+                             Collection="{Binding Flagstrings}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagstringSaveDataModel">
+            <TextBox Text="{Binding Str}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
+    </TabItem>
+    <TabItem Header="Regionals">
+      <v:FlagsCollectionView TextFilter="{Binding TextFilterRegionalFlags}"
+                             Description1Header="Description"
+                             Collection="{Binding RegionalFlags}"
+                             FilterUnused="{Binding FilterUnusedRegionals}">
+        <v:FlagsCollectionView.ValueCellTemplate>
+          <DataTemplate DataType="m:FlagSaveDataModel">
+            <CheckBox IsChecked="{Binding Enabled}" />
+          </DataTemplate>
+        </v:FlagsCollectionView.ValueCellTemplate>
+      </v:FlagsCollectionView>
+    </TabItem>
+  </TabControl>
+</UserControl>

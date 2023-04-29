@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib.Tests", "BugFa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesLib", "BugFablesLib\Sources\BugFablesLib.csproj", "{0C78F65B-E5DD-4185-A21A-A56D95C7BD89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesSaveEditor", "BugFablesSaveEditor\BugFablesSaveEditor\BugFablesSaveEditor.csproj", "{BC0F8FE3-3980-4A04-BD1F-CDB06D1B60BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesSaveEditor.Core", "BugFablesSaveEditor\BugFablesSaveEditor.Core\BugFablesSaveEditor.Core.csproj", "{BC0F8FE3-3980-4A04-BD1F-CDB06D1B60BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugFablesSaveEditor.Desktop", "BugFablesSaveEditor\BugFablesSaveEditor.Desktop\BugFablesSaveEditor.Desktop.csproj", "{EE9AF9CA-E7D8-489C-B4E4-7ECA93D59022}"
 EndProject

@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using BugFablesSaveEditor.Core;
 using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.MaterialDesign;
 

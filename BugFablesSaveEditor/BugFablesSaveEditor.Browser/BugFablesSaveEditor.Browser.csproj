@@ -12,6 +12,7 @@
     <MSBuildEnableWorkloadResolver>true</MSBuildEnableWorkloadResolver>
     <RunAOTCompilation>true</RunAOTCompilation>
     <WasmEnableSIMD>true</WasmEnableSIMD>
+    <AssemblyName>BugFablesSaveEditor</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BugFablesLib\Sources\BugFablesLib.csproj"/>
-    <ProjectReference Include="..\BugFablesSaveEditor\BugFablesSaveEditor.csproj"/>
+    <ProjectReference Include="..\BugFablesSaveEditor.Core\BugFablesSaveEditor.Core.csproj"/>
   </ItemGroup>
 </Project>

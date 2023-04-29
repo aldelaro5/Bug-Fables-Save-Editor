@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.Core.ViewModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Core.Views"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
+             x:DataType="vm:ItemsViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Core.Views.ItemsView">
+  <Design.DataContext>
+    <vm:ItemsViewModel />
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="*,*,*" MaxWidth="1000">
+    <DockPanel Grid.Column="0">
+      <v:ViewModelCollectionView TitleLabel="Inventory" ViewModelCollection="{Binding Inventory}"
+                                 ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                 DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                 AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+    </DockPanel>
+    <DockPanel Grid.Column="1">
+      <v:ViewModelCollectionView TitleLabel="Key Items" ViewModelCollection="{Binding KeyItems}"
+                                 ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                 DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                 AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+    </DockPanel>
+    <DockPanel Grid.Column="2">
+      <v:ViewModelCollectionView TitleLabel="Stored Items" ViewModelCollection="{Binding Stored}"
+                                 ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                                 DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                                 AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+    </DockPanel>
+  </Grid>
+</UserControl>

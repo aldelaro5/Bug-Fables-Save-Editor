@@ -2,12 +2,13 @@
 using Avalonia;
 using Avalonia.Browser;
 using Avalonia.Fonts.Inter;
-using BugFablesSaveEditor;
-using BugFablesSaveEditor.Browser;
+using BugFablesSaveEditor.Core;
 using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.MaterialDesign;
 
 [assembly: SupportedOSPlatform("browser")]
+
+namespace BugFablesSaveEditor.Browser;
 
 internal class Program
 {

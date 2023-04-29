@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.Core.ViewModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Core.Views"
+             xmlns:local="clr-namespace:BugFablesSaveEditor.Core"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Core.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:PartyViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Core.Views.PartyView">
+  <Design.DataContext>
+    <vm:PartyViewModel />
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="*,*" MaxWidth="700">
+    <v:ViewModelCollectionView Grid.Column="0" TitleLabel="Party Members"
+                               ViewModelCollection="{Binding PartyMembers}"
+                               DndDropHandler="{StaticResource DataGridDndPartyMemberSaveData}">
+      <v:ViewModelCollectionView.ColumnsTemplate>
+        <local:DataGridColumnsTemplate>
+          <local:DataGridColumns>
+            <DataGridTemplateColumn Header="Name" Width="*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="m:PartyMemberSaveDataModel">
+                  <ContentControl Content="{Binding AnimId}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </local:DataGridColumns>
+        </local:DataGridColumnsTemplate>
+      </v:ViewModelCollectionView.ColumnsTemplate>
+      <v:ViewModelCollectionView.AddViewTemplate>
+        <DataTemplate DataType="m:PartyMemberSaveDataModel">
+          <ContentControl Content="{Binding AnimId}" />
+        </DataTemplate>
+      </v:ViewModelCollectionView.AddViewTemplate>
+    </v:ViewModelCollectionView>
+
+    <v:ViewModelCollectionView Grid.Column="1" TitleLabel="Followers" ViewModelCollection="{Binding Followers}"
+                               ColumnsTemplate="{StaticResource BfNamedIdOnlyColumnsList}"
+                               DndDropHandler="{StaticResource DataGridDndBfNamedId}"
+                               AddViewTemplate="{StaticResource BfNamedIdTemplate}" />
+  </Grid>
+</UserControl>

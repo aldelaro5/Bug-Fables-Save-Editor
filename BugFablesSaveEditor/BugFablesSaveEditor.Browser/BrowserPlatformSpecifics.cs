@@ -2,8 +2,10 @@ using System;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using BugFablesLib;
+using BugFablesSaveEditor.Core;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
+using Utils = BugFablesSaveEditor.Core.Utils;
 
 namespace BugFablesSaveEditor.Browser;
 

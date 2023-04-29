@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Core.Views"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Core.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Core.Views.FlagsCollectionView">
+  <DockPanel>
+    <DockPanel DockPanel.Dock="Top">
+      <Label DockPanel.Dock="Left" Content="Text filter " />
+      <DockPanel DockPanel.Dock="Right">
+        <CheckBox Content="Show Unused"
+                  IsVisible="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
+                                      Path=FilterUnused, Converter={x:Static ObjectConverters.IsNotNull}}"
+                  IsChecked="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=FilterUnused}" />
+        <Button Content="Toggle All Shown"
+                IsVisible="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
+                                    Path=ToggleAllShownCommand, Converter={x:Static ObjectConverters.IsNotNull}}"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=ToggleAllShownCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Collection}" />
+      </DockPanel>
+      <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=TextFilter}" />
+    </DockPanel>
+    <DataGrid x:Name="DataGrid"
+              Items="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Collection}">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Index" IsReadOnly="True"
+                            Binding="{Binding DataType=m:IFlagModel, Path=Index}" />
+        <DataGridTemplateColumn Header="Value"
+                                CellTemplate="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
+                                                                 Path=ValueCellTemplate}" />
+        <DataGridTextColumn
+          Header="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Description1Header}"
+          x:DataType="m:IFlagModel" IsReadOnly="True"
+          Binding="{Binding DataType=m:IFlagModel, Path=Description1}" />
+        <DataGridTextColumn
+          Header="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Description2Header}"
+          IsReadOnly="True" x:DataType="m:IFlagModel"
+          IsVisible="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView},
+                              Path=ShowSecondDescription}"
+          Binding="{Binding DataType=m:IFlagModel, Path=Description2}" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>

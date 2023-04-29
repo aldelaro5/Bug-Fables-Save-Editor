@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BugFablesSaveEditor.Core.ViewModels"
+             xmlns:v="clr-namespace:BugFablesSaveEditor.Core.Views"
+             xmlns:local="clr-namespace:BugFablesSaveEditor.Core"
+             xmlns:m="clr-namespace:BugFablesSaveEditor.Core.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:SongsViewModel"
+             x:CompileBindings="True"
+             x:Class="BugFablesSaveEditor.Core.Views.SongsView">
+  <Design.DataContext>
+    <vm:SongsViewModel />
+  </Design.DataContext>
+
+  <DockPanel MaxWidth="550">
+    <v:ViewModelCollectionView DndDropHandler="{StaticResource DataGridDndMusicSaveData}"
+                               ViewModelCollection="{Binding MusicSaveData}">
+      <v:ViewModelCollectionView.ColumnsTemplate>
+        <local:DataGridColumnsTemplate>
+          <local:DataGridColumns>
+            <DataGridTemplateColumn Header="Name" Width="*">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="m:MusicSaveDataModel">
+                  <ContentControl Content="{Binding Music}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Bought?">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate DataType="m:MusicSaveDataModel">
+                  <CheckBox IsChecked="{Binding Bought}" />
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </local:DataGridColumns>
+        </local:DataGridColumnsTemplate>
+      </v:ViewModelCollectionView.ColumnsTemplate>
+
+      <v:ViewModelCollectionView.AddViewTemplate>
+        <DataTemplate DataType="m:MusicSaveDataModel">
+          <DockPanel>
+            <CheckBox DockPanel.Dock="Right" Content="Is bought"
+                      IsChecked="{Binding Bought}" />
+            <ContentControl Content="{Binding Music}" />
+          </DockPanel>
+        </DataTemplate>
+      </v:ViewModelCollectionView.AddViewTemplate>
+    </v:ViewModelCollectionView>
+  </DockPanel>
+</UserControl>
