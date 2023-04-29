@@ -35,7 +35,7 @@ BEFORE USAGE. While the editor has been tested, loss of data or breaking your sa
 
 ## Browser Version
 
-The browser version is publicly available [here](http(s)://aldelaro5.github.io/Bug-Fables-Save-Editor). While most of it
+The browser version is publicly available [here](https://aldelaro5.github.io/Bug-Fables-Save-Editor). While most of it
 is functionally equivalent to the desktop version, there are some differences:
 
 - It is not possible to select the path to save the file as the file is downloaded through your browser's downloading
