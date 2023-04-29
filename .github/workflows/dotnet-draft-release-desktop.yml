@@ -19,7 +19,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         include:
           - os: windows-latest
             rid: win-x64
