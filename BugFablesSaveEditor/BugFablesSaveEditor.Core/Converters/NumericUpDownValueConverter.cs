@@ -4,6 +4,7 @@ using Avalonia.Data.Converters;
 
 namespace BugFablesSaveEditor.Core.Converters;
 
+// Workaround for Avalonia bug https://github.com/AvaloniaUI/Avalonia/issues/10793
 public class NumericUpDownValueConverter : IValueConverter
 {
   public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
