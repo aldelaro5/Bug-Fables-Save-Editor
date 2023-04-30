@@ -14,7 +14,6 @@
     <WasmEnableSIMD>true</WasmEnableSIMD>
     <AssemblyName>BugFablesSaveEditor</AssemblyName>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

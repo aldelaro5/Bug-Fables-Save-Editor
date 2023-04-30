@@ -28,12 +28,12 @@ jobs:
         working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet publish -c Release
       - name: Prepare AppBundle Directory
-        working-directory: ${{ env.PROJECT_PATH }}/bin/Release/AppBundle
+        working-directory: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
         run: rm *.map
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ${{ env.PROJECT_PATH }}/bin/Release/AppBundle
+          path: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm  /AppBundle
 
 #  deploy:
 #    needs: build
