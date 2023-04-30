@@ -36,6 +36,8 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 7.0.x
+      - name: Install wasm-tools
+        run: dotnet workload install wasm-tools wasm-experimental
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
