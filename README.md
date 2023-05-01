@@ -36,7 +36,7 @@ BEFORE USAGE. While the editor has been tested, loss of data or breaking your sa
 ## Browser Version
 
 The browser version is publicly available [here](https://aldelaro5.github.io/Bug-Fables-Save-Editor). While most of it
-is functionally equivalent to the desktop version, there are some differences:
+is functionally equivalent to the desktop version, there are some differences and known issues:
 
 - It is not possible to select the path to save the file as the file is downloaded through your browser's downloading
   system with the same filename. This restriction may be lifted in future versions.
@@ -44,6 +44,7 @@ is functionally equivalent to the desktop version, there are some differences:
   resizing again by any amount until it gets unstuck.
 - The dialog messages are delivered using a JavaScript library instead of window pop-up as doing so is not supported on
   browsers
+- Using the scroll wheel on dropdown menu doesn't work. You have to use the scrollbar that appears.
 
 ## Desktop Version Installation
 
