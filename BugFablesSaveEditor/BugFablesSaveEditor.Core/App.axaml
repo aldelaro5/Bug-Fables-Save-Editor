@@ -60,7 +60,7 @@
     <conv:NumericUpDownValueConverter x:Key="NumericUpDownValueConverter" />
 
     <DataTemplate x:Key="BfNamedIdTemplate" DataType="m:BfNamedIdModel">
-      <ComboBox Items="{Binding AllResourceNames, FallbackValue={}, TargetNullValue={}}"
+      <ComboBox ItemsSource="{Binding AllResourceNames, FallbackValue={}, TargetNullValue={}}"
                 SelectedIndex="{Binding Id, FallbackValue=0, TargetNullValue=0}" />
     </DataTemplate>
 
@@ -73,7 +73,7 @@
 
   <Application.DataTemplates>
     <DataTemplate DataType="m:BfNamedIdModel">
-      <ComboBox Items="{Binding AllResourceNames}"
+      <ComboBox ItemsSource="{Binding AllResourceNames}"
                 SelectedIndex="{Binding Id,
                 FallbackValue=0, TargetNullValue=0}" />
     </DataTemplate>

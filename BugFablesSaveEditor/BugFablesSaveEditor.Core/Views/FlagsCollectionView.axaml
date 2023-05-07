@@ -24,7 +24,7 @@
       <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=TextFilter}" />
     </DockPanel>
     <DataGrid x:Name="DataGrid"
-              Items="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Collection}">
+              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=v:FlagsCollectionView}, Path=Collection}">
       <DataGrid.Columns>
         <DataGridTextColumn Header="Index" IsReadOnly="True"
                             Binding="{Binding DataType=m:IFlagModel, Path=Index}" />

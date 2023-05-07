@@ -110,7 +110,7 @@ public partial class FlagsCollectionView : UserControl
     set
     {
       SetAndRaise(AdditionalColumnsTemplateProperty, ref _additionalColumnsTemplate, value);
-      var columnsList = (ObservableCollection<DataGridColumn>)((ITemplate)AdditionalColumnsTemplate).Build();
+      var columnsList = (ObservableCollection<DataGridColumn>)((ITemplate)AdditionalColumnsTemplate).Build()!;
       DataGrid.Columns.AddRange(columnsList.ToArray());
     }
   }

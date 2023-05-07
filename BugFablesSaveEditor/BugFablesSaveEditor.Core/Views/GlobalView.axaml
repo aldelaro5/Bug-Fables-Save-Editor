@@ -32,7 +32,7 @@
         </DockPanel>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Filename}" />
         <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding LastProgressIcon}"
-                  Items="{Binding SaveProgressIconNames}" />
+                  ItemsSource="{Binding SaveProgressIconNames}" />
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,auto,*">
           <Label Grid.Column="0" Content="Rank" />
           <NumericUpDown Grid.Column="1" Value="{Binding Rank, Converter={StaticResource NumericUpDownValueConverter}}"
@@ -65,10 +65,10 @@
         </DockPanel>
         <ComboBox Grid.Row="1" Grid.Column="0"
                   SelectedIndex="{Binding CurrentMap.Id}"
-                  Items="{Binding CurrentMap.AllResourceNames}" />
+                  ItemsSource="{Binding CurrentMap.AllResourceNames}" />
         <ComboBox Grid.Row="1" Grid.Column="1"
                   SelectedIndex="{Binding CurrentArea.Id}"
-                  Items="{Binding CurrentArea.AllResourceNames}" />
+                  ItemsSource="{Binding CurrentArea.AllResourceNames}" />
         <Grid Grid.Row="1" Grid.Column="2" ColumnDefinitions="Auto,*,Auto,*,Auto,*">
           <Label Grid.Column="0" Content="X" />
           <NumericUpDown Grid.Column="1" ParsingNumberStyle="Float"

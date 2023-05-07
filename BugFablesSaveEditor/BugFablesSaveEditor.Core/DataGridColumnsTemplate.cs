@@ -12,5 +12,5 @@ public class DataGridColumnsTemplate : ITemplate
   [TemplateContent(TemplateResultType = typeof(ObservableCollection<DataGridColumn>))]
   public object? Content { get; set; }
 
-  object ITemplate.Build() => TemplateContent.Load<ObservableCollection<DataGridColumn>>(Content).Result;
+  object? ITemplate.Build() => TemplateContent.Load<ObservableCollection<DataGridColumn>>(Content)?.Result;
 }

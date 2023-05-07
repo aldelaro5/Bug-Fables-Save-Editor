@@ -40,7 +40,10 @@ public static class ExtendedData
 
   private static Dictionary<int, string[]> ReadFromAssetPath(string file, IAssetLoader assetLoader)
   {
+    // See https://github.com/AvaloniaUI/Avalonia/discussions/11150
+#pragma warning disable CS0618
     Stream crystalBerriesDataStream = assetLoader.Open(new Uri(file));
+#pragma warning restore CS0618
     StreamReader crystalBerriesDataStreamReader = new(crystalBerriesDataStream);
     string[] fileData = crystalBerriesDataStreamReader.ReadToEnd().Trim().Split('\n');
     Dictionary<int, string[]> result = new();
