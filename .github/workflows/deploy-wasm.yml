@@ -18,6 +18,8 @@ jobs:
           dotnet-version: 7.0.x
       - name: Install wasm-tools
         run: dotnet workload install wasm-tools wasm-experimental
+      - name: Install DotNetCompress
+        run: dotnet tool install --global DotNetCompress
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
@@ -30,6 +32,8 @@ jobs:
       - name: Prepare AppBundle Directory
         working-directory: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
         run: rm *.map
+      - name: Compress Output
+        run: DotNetCompress -d ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle -p --format gz
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
