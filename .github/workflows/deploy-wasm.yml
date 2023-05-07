@@ -33,7 +33,7 @@ jobs:
         working-directory: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
         run: rm *.map
       - name: Compress Output
-        run: DotNetCompress -d ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle -p --format gz
+        run: DotNetCompress -d ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle --format gz
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
