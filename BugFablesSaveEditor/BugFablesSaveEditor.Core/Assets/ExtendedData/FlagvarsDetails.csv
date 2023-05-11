@@ -30,12 +30,12 @@
 29;Flower Journey high score
 30;Prize medal: Berry Finder, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 31;Prize medal: Block Heal, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-32;Whack-A-Worm high score 
+32;Whack-A-Worm high score
 33;Prize medal: Hard Charge, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 34;Prize medal: Enfeeble, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 35;Number of crystal turned in to Doppel by completing a bounty
 36;Prize medal: Reverse Toxin, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-37;TEMP? (used on DoClock and event 154)
+37;Venus's healing price in berries
 38;Number of completed Cave of Trials run
 39;Current streak count of completed Cave of Trials run
 40;Number of battles fought
@@ -47,7 +47,7 @@
 46;Prize medal: TP Core, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 47;Number of quests completed (excluding the main story ones)
 48;Prize medal: Heavy Throw, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-49;UNUSED
+49;Amount of Clear Waters given during the course of the Hydration Crisis quest
 50;Last generated price for a Longleg Summoner (0 if the last price generated was bought OR there was no price generated yet)
 51;Prize medal: Random Start, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 52;Prize medal: Reflection, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
@@ -57,13 +57,13 @@
 56;Item ID of the ribbon that Chompy has on (0 if no ribbon)
 57;Prize medal: HP Plus, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 58;Number of Bad Books given to Reeves at the Ant Palace library
-59;UNUSED
+59;Amount of high scores obtained at the Termacade
 60;UNUSED
 61;Prize medal: Antlion Jaws, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 62;Number of items bought from Yale at Metal Island
-63;Prize medal: Miracle Matter, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
+63;Prize medal: Miracle Matter (Broodmother), 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 64;Prize medal: Triumph Buzz, 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
-65;UNUSED
+65;Prize medal: Miracle Matter (Wasp King), 0 = not available, 1 = available from Artis, 2 = available from the caravan, 3 = obtained
 66;Amount of medals bought at Shades's medals shop
 67;Seed used in MYSTERY?, 0 if not using MYSTERY?
 68;UNUSED
