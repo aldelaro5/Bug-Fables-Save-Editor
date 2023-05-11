@@ -1,11 +1,11 @@
 <Project>
   <PropertyGroup>
     <Nullable>enable</Nullable>
-    <AvaloniaVersion>11.0.0-preview7</AvaloniaVersion>
+    <AvaloniaVersion>11.0.0-preview8</AvaloniaVersion>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <TrimmerRootAssembly Include="Projektanker.Icons.Avalonia.MaterialDesign"/>
+    <TrimmerRootAssembly Include="Projektanker.Icons.Avalonia.MaterialDesign" />
   </ItemGroup>
 </Project>
