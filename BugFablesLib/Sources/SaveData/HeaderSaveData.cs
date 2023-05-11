@@ -20,12 +20,16 @@ public sealed class HeaderSaveData : IBfSerializable
   public void Deserialize(string str)
   {
     string[] data = str.Split(new[] { Utils.CommaSeparator }, StringSplitOptions.None);
-    if (data.Length != 10)
+    // Only the first 3 fields for demo saves
+    if (data.Length != 10 && data.Length != 3)
       throw new Exception(nameof(HeaderSaveData) + " is in an invalid format");
 
     PositionX = Utils.ParseValueType<float>(data[0], nameof(PositionX));
     PositionY = Utils.ParseValueType<float>(data[1], nameof(PositionY));
     PositionZ = Utils.ParseValueType<float>(data[2], nameof(PositionZ));
+    if (data.Length == 3)
+      return;
+
     IsRuigee = Utils.ParseValueType<bool>(data[3], nameof(IsRuigee));
     IsHardest = Utils.ParseValueType<bool>(data[4], nameof(IsHardest));
     IsFrameone = Utils.ParseValueType<bool>(data[5], nameof(IsFrameone));
