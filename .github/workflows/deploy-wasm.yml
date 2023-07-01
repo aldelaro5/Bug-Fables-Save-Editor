@@ -34,25 +34,17 @@ jobs:
         run: rm *.map
       - name: Compress Output
         run: DotNetCompress -d ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle --format gz
-      - name: Archive artifact
+      - name: Fix permissions
         shell: sh
-        if: runner.os == 'Linux'
         run: |
-          chmod -c -R +rX "$INPUT_PATH" |
+          chmod -c -R +rX "${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle" |
           while read line; do
               echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
-          tar \
-            --dereference --hard-dereference \
-            --directory "$INPUT_PATH" \
-            -cvf "./artifact.tar" \
-            .
-        env:
-          INPUT_PATH: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./artifact.tar
+          path: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
 
   deploy:
     needs: build
