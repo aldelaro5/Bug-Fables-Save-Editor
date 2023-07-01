@@ -46,7 +46,7 @@ jobs:
             --dereference --hard-dereference \
             --directory "$INPUT_PATH" \
             -cvf "$RUNNER_TEMP/artifact.tar" \
-            $INPUT_PATH
+            .
         env:
           INPUT_PATH: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
       - name: Upload artifact
