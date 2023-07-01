@@ -45,14 +45,14 @@ jobs:
           tar \
             --dereference --hard-dereference \
             --directory "$INPUT_PATH" \
-            -cvf "$RUNNER_TEMP/artifact.tar" \
+            -cvf "./artifact.tar" \
             .
         env:
           INPUT_PATH: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: $RUNNER_TEMP/artifact.tar
+          path: ./artifact.tar
 
   deploy:
     needs: build
