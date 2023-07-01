@@ -15,25 +15,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**"/>
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)"/>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="$(AvaloniaVersion)"/>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0"/>
-    <PackageReference Include="DialogHost.Avalonia" Version="0.7.3"/>
-    <PackageReference Include="DynamicData" Version="7.13.5"/>
-    <PackageReference Include="Humanizer.Core" Version="2.14.1"/>
-    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-prev7.0"/>
-    <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="6.6.0-preview6"/>
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="DialogHost.Avalonia" Version="0.7.4" />
+    <PackageReference Include="DynamicData" Version="7.14.2" />
+    <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-rc1-1" />
+    <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="6.6.0-rc1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BugFablesLib\Sources\BugFablesLib.csproj"/>
+    <ProjectReference Include="..\..\BugFablesLib\Sources\BugFablesLib.csproj" />
   </ItemGroup>
 </Project>

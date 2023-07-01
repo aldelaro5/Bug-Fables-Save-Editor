@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Versioning;
 using Avalonia;
 using Avalonia.Browser;
-using Avalonia.Fonts.Inter;
 using BugFablesSaveEditor.Core;
 using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.MaterialDesign;
@@ -19,9 +18,11 @@ internal class Program
   }
 
   public static AppBuilder BuildAvaloniaApp()
-    => AppBuilder
+  {
+    IconProvider.Current.Register<MaterialDesignIconProvider>();
+
+    return AppBuilder
       .Configure<App>()
-      .WithInterFont()
-      .WithIcons(container => container
-        .Register<MaterialDesignIconProvider>());
+      .WithInterFont();
+  }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using BugFablesLib;
 using BugFablesLib.Data;
@@ -19,12 +20,7 @@ public class BfNamedIdModel : ObservableObject, IModelWrapper<BfQuest>, IModelWr
   public int Id
   {
     get => Model.Id;
-    set
-    {
-      // Workaround Avalonia bug https://github.com/AvaloniaUI/Avalonia/issues/10846
-      if (value >= 0)
-        SetProperty(Model.Id, value, Model, (namedId, i) => namedId.Id = i);
-    }
+    set => SetProperty(Model.Id, value, Model, (namedId, i) => namedId.Id = i);
   }
 
   public string Name

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Avalonia;
 using Avalonia.Platform;
 using BugFablesLib.Data;
 
@@ -18,32 +17,27 @@ public static class ExtendedData
 
   static ExtendedData()
   {
-    IAssetLoader loader = AvaloniaLocator.Current.GetRequiredService<IAssetLoader>();
     string basePath = $"avares://{typeof(App).Assembly.GetName().Name}/Assets";
-    CrystalBerriesDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/CrystalBerriesDetails.csv", loader));
-    FlagsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagsDetails.csv", loader));
-    FlagvarsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagvarsDetails.csv", loader));
-    FlagstringsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagstringsDetails.csv", loader));
+    CrystalBerriesDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/CrystalBerriesDetails.csv"));
+    FlagsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagsDetails.csv"));
+    FlagvarsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagvarsDetails.csv"));
+    FlagstringsDetails = new(ReadFromAssetPath($"{basePath}/ExtendedData/FlagstringsDetails.csv"));
 
     IReadOnlyList<string> areaNames = BugFablesLib.Utils.GetAllBfNames(new BfArea());
     Dictionary<string, Dictionary<int, string[]>> regionals = new();
     foreach (string name in areaNames)
     {
       string fileName = name.Replace('\'', ' ');
-      Dictionary<int, string[]> data =
-        new(ReadFromAssetPath($"{basePath}/ExtendedData/Regionals/{fileName}.csv", loader));
+      Dictionary<int, string[]> data = new(ReadFromAssetPath($"{basePath}/ExtendedData/Regionals/{fileName}.csv"));
       regionals.Add(name, data);
     }
 
     RegionalFlagsDetails = regionals;
   }
 
-  private static Dictionary<int, string[]> ReadFromAssetPath(string file, IAssetLoader assetLoader)
+  private static Dictionary<int, string[]> ReadFromAssetPath(string file)
   {
-    // See https://github.com/AvaloniaUI/Avalonia/discussions/11150
-#pragma warning disable CS0618
-    Stream crystalBerriesDataStream = assetLoader.Open(new Uri(file));
-#pragma warning restore CS0618
+    Stream crystalBerriesDataStream = AssetLoader.Open(new Uri(file));
     StreamReader crystalBerriesDataStreamReader = new(crystalBerriesDataStream);
     string[] fileData = crystalBerriesDataStreamReader.ReadToEnd().Trim().Split('\n');
     Dictionary<int, string[]> result = new();
