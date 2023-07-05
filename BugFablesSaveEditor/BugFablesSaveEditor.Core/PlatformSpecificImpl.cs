@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
-using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Core;
 
@@ -65,6 +66,6 @@ internal class PlatformSpecificImpl : IPlatformSpecifics
 
   public async Task<ButtonResult> ShowMessageBoxAsync(MessageBoxStandardParams msgBoxParams)
   {
-    return await MessageBoxManager.GetMessageBoxStandardWindow(msgBoxParams).ShowDialog((Window)Utils.TopLevel);
+    return await MessageBoxManager.GetMessageBoxStandard(msgBoxParams).ShowWindowDialogAsync((Window)Utils.TopLevel);
   }
 }

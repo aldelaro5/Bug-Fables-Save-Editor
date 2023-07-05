@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DialogHostAvalonia;
 using MessageBox.Avalonia.Enums;
+using MsBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Core.ViewModels;
 

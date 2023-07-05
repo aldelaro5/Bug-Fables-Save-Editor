@@ -5,6 +5,7 @@ using BugFablesLib;
 using BugFablesSaveEditor.Core;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
+using MsBox.Avalonia.Enums;
 using Utils = BugFablesSaveEditor.Core.Utils;
 
 namespace BugFablesSaveEditor.Browser;
