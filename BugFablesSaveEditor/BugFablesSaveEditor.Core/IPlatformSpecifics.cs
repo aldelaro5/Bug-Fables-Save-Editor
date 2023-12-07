@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using BugFablesLib;
-using MessageBox.Avalonia.DTO;
+using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Core;

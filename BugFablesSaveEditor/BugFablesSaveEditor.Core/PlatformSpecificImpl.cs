@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using BugFablesLib;
-using MessageBox.Avalonia.DTO;
-using MessageBox.Avalonia.Enums;
 using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Core;

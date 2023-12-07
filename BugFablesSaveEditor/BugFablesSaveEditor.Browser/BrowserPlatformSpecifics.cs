@@ -3,8 +3,7 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using BugFablesLib;
 using BugFablesSaveEditor.Core;
-using MessageBox.Avalonia.DTO;
-using MessageBox.Avalonia.Enums;
+using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Enums;
 using Utils = BugFablesSaveEditor.Core.Utils;
 
@@ -26,7 +25,7 @@ public partial class BrowserPlatformSpecifics : IPlatformSpecifics
         Icon = Icon.Success,
         ButtonDefinitions = ButtonEnum.Ok
       });
-      await Task.Run(() => DownloadSaveFileAsync(dataStr, fileName));
+      DownloadSaveFileAsync(dataStr, fileName);
       return new(true, fileName);
     }
     catch (Exception ex)

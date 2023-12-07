@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>11</LangVersion>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <LangVersion>default</LangVersion>
     <Nullable>enable</Nullable>
     <WarningLevel>7</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <PublishAot>true</PublishAot>
     <StripSymbols>true</StripSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+    <PublishAot>true</PublishAot>
   </PropertyGroup>
 </Project>

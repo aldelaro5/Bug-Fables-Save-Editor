@@ -35,18 +35,18 @@ public class SaveDataTests
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), false)]
-  public void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty(IBfSaveFileFormat saveFileFormat)
+  public async void LoadFromBytes_ShouldThrow_WhenFileDataIsEmpty(IBfSaveFileFormat saveFileFormat)
   {
-    Assert.ThrowsAnyAsync<Exception>(async () => await _sud.LoadFromBytes(Array.Empty<byte>(), saveFileFormat));
+    await Assert.ThrowsAnyAsync<Exception>(async () => await _sud.LoadFromBytes(Array.Empty<byte>(), saveFileFormat));
   }
 
   [Theory]
   [MemberData(nameof(AllSavesFormat), false)]
-  public void LoadFromBytes_ShouldThrow_WhenDataIsInvalid(IBfSaveFileFormat saveFileFormat)
+  public async void LoadFromBytes_ShouldThrow_WhenDataIsInvalid(IBfSaveFileFormat saveFileFormat)
   {
     byte[] randomBytes = new byte[1_000_000];
     Random.Shared.NextBytes(randomBytes);
-    Assert.ThrowsAnyAsync<Exception>(async () => await _sud.LoadFromBytes(randomBytes, saveFileFormat));
+    await Assert.ThrowsAnyAsync<Exception>(async () => await _sud.LoadFromBytes(randomBytes, saveFileFormat));
   }
 
   [Theory]
@@ -82,9 +82,9 @@ public class SaveDataTests
   [InlineData(-1)]
   [InlineData(4)]
   [InlineData(1)]
-  public void XboxPcSaveDataFormat_ShouldThrow_WhenCallbackReturnsAnInvalidIndex(int index)
+  public async void XboxPcSaveDataFormat_ShouldThrow_WhenCallbackReturnsAnInvalidIndex(int index)
   {
-    Assert.ThrowsAnyAsync<Exception>(async () =>
+    await Assert.ThrowsAnyAsync<Exception>(async () =>
     {
       BfXboxPcSaveDataFormat format = new(_ => Task.FromResult(index));
       byte[] bytes = await File.ReadAllBytesAsync(XboxMiddleSaveBlankFileName);

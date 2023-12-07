@@ -15,7 +15,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
       - name: Install wasm-tools
         run: dotnet workload install wasm-tools wasm-experimental
       - name: Install DotNetCompress
@@ -28,7 +28,7 @@ jobs:
         run: dotnet test --no-build
       - name: Publish
         working-directory: ${{ env.PROJECT_PATH }}
-        run: dotnet publish -c Release
+        run: dotnet publish -f net8.0
       - name: Prepare AppBundle Directory
         working-directory: ${{ env.PROJECT_PATH }}/bin/Release/browser-wasm/AppBundle
         run: rm *.map

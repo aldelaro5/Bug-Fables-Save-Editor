@@ -9,7 +9,6 @@ using BugFablesSaveEditor.Core.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DialogHostAvalonia;
-using MessageBox.Avalonia.Enums;
 using MsBox.Avalonia.Enums;
 
 namespace BugFablesSaveEditor.Core.ViewModels;
@@ -46,7 +45,7 @@ public partial class MainViewModel : ObservableObject
   public MainViewModel(BfSaveData saveData) => _saveData = new SaveDataViewModel(saveData, true);
 
   [RelayCommand(CanExecute = nameof(CanSaveFile))]
-  private async void SaveFile(IBfSaveFileFormat fileFormat)
+  private async Task SaveFile(IBfSaveFileFormat fileFormat)
   {
     var result = await Utils.PlatformSpecifics.SaveFileAsync(SaveData.SaveData, fileFormat, CurrentFilePath);
     if (!result.Succeeded)
@@ -61,7 +60,7 @@ public partial class MainViewModel : ObservableObject
   private bool CanSaveFile() => SaveInUse;
 
   [RelayCommand]
-  private async void NewFile()
+  private async Task NewFile()
   {
     if (SaveInUse && !_fileSaved)
     {
@@ -87,7 +86,7 @@ public partial class MainViewModel : ObservableObject
   }
 
   [RelayCommand]
-  private async void OpenFile(IBfSaveFileFormat fileFormat)
+  private async Task OpenFile(IBfSaveFileFormat fileFormat)
   {
     if (SaveInUse && !_fileSaved)
     {
