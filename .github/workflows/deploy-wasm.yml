@@ -15,9 +15,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x
+          dotnet-version:
+            8.0.x
       - name: Install wasm-tools
-        run: dotnet workload install wasm-tools wasm-tools-net7
+        run: dotnet workload install wasm-tools-net7 wasm-experimental
       - name: Install DotNetCompress
         run: dotnet tool install --global DotNetCompress
       - name: Restore dependencies
