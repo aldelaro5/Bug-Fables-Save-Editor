@@ -30,7 +30,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Install wasm-tools
-        run: dotnet workload install wasm-tools wasm-experimental
+        run: dotnet workload restore
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
