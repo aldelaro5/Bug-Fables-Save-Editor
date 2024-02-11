@@ -17,7 +17,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Install wasm-tools
-        run: dotnet workload restore
+        run: dotnet workload install wasm-tools wasm-tools-net7
       - name: Install DotNetCompress
         run: dotnet tool install --global DotNetCompress
       - name: Restore dependencies
