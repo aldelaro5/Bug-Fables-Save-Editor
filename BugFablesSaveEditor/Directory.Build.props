@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <Nullable>enable</Nullable>
-    <AvaloniaVersion>11.0.9</AvaloniaVersion>
+    <AvaloniaVersion>11.0.11</AvaloniaVersion>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
 
