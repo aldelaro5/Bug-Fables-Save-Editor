@@ -15,8 +15,22 @@
       <Menu DockPanel.Dock="Top">
         <MenuItem Header="File">
           <MenuItem Command="{Binding NewFileCommand}" Header="New" />
-          <MenuItem Command="{Binding OpenFileCommand}" Header="Open..." />
-          <MenuItem Command="{Binding SaveFileCommand}" Header="Save as..." />
+          <MenuItem Header="Open">
+            <MenuItem Header="PC format (Steam / GOG / itch.io)..."
+                      Command="{Binding OpenFileCommand}" CommandParameter="{Binding PcSaveDataFormat}" />
+            <MenuItem Header="PC format (Microsoft Store)..."
+                      Command="{Binding OpenFileCommand}" CommandParameter="{Binding XboxPcSaveDataFormat}" />
+            <MenuItem Header="Nintendo Switch format..."
+                      Command="{Binding OpenFileCommand}" CommandParameter="{Binding SwitchSaveDataFormat}" />
+          </MenuItem>
+          <MenuItem Header="Save as">
+            <MenuItem Header="PC format (Steam / GOG / itch.io)..."
+                      Command="{Binding SaveFileCommand}" CommandParameter="{Binding PcSaveDataFormat}" />
+            <MenuItem Header="PC format (Microsoft Store)..." IsEnabled="{Binding EditingXboxSave}"
+                      Command="{Binding SaveFileCommand}" CommandParameter="{Binding XboxPcSaveDataFormat}" />
+            <MenuItem Header="Nintendo Switch format..."
+                      Command="{Binding SaveFileCommand}" CommandParameter="{Binding SwitchSaveDataFormat}" />
+          </MenuItem>
           <Separator />
           <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
         </MenuItem>
