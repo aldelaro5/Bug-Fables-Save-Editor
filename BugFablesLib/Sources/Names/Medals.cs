@@ -85,6 +85,17 @@ public static partial class BfVanillaNames
     "Luckier Day",
     "First Plating",
     "Seedling Affinity",
-    "Berry Finder"
+    "Berry Finder",
+    "Royal Calling",
+    "Bad Dreams",
+    "Bait Hook",
+    "Holo Cloak",
+    "Pip Finder",
+    "We Owe Ya!",
+    "Ambusher",
+    "Last Wind",
+    "Item Recycler",
+    "Bomb Master",
+    "Helper Boost"
   };
 }
