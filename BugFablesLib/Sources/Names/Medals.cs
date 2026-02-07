@@ -77,6 +77,7 @@ public static partial class BfVanillaNames
     "Miracle Matter",
     "Victory Buzz",
     "Triumph Buzz",
+    "Ambusher",
     "Crazy Prepared",
     "Life Cast",
     "Hard Charge",
